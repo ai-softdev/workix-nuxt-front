@@ -1,0 +1,238 @@
+{
+  "resolvedId": "D:/projects/nuxt/workix-nuxt-front/components/UI/TheCheckbox.vue",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "<template>\n  <label class=\"container mt-4 w-[250px]\">\n    <span class=\"text-black dark:text-white\" v-if=\"t !== 'checkboxChat'\">{{ item?.name }}</span>\n    <span class=\"text-black dark:text-white\" v-else>{{$t('Показать имя отправителя')}}</span>\n    <input  v-if=\"t !== 'checkboxChat'\"\n      type=\"checkbox\"\n      @change=\"item.value = !item.value\"\n      :checked=\"item.value\"\n            v-bind=\"$attrs\"\n    >\n    <input v-else\n           type=\"checkbox\"\n           @change=\"chat.checkboxForwarded = !chat.checkboxForwarded\"\n           :checked=\"chat.checkboxForwarded\"\n    >\n    <span class=\"checkmark\"></span>\n  </label>\n</template>\n\n<script setup lang=\"ts\">\nimport {useChat} from \"~/stores/chat\";\ndefineProps({\n  item: {\n    type: Object,\n    default: () => {\n    }\n  },\n  check: {\n    type: Boolean,\n    default: true\n  },\n  t: {\n    type: String,\n    default: ''\n  }\n})\n\nconst chat = useChat()\n\n\n</script>\n\n<style scoped>\n/* Customize the label (the container) */\n.container {\n  display: block;\n  position: relative;\n  padding-left: 35px;\n  margin-bottom: 12px;\n  cursor: pointer;\n  font-size: 16px;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n/* Hide the browser's default checkbox */\n.container input {\n  position: absolute;\n  opacity: 0;\n  cursor: pointer;\n  height: 0;\n  width: 0;\n}\n\n/* Create a custom checkbox */\n.checkmark {\n  position: absolute;\n  top: 0;\n  left: 0;\n  height: 25px;\n  width: 25px;\n  background-color: #eee;\n}\n\n/* On mouse-over, add a grey background color */\n.container input ~ .checkmark {\n  border: 1px solid #2988c8;\n  border-radius: 5px;\n  transition: 0.3s ease-in-out;\n}\n\n.container:hover input ~ .checkmark {\n  background-color: #3498db;\n}\n\n/* When the checkbox is checked, add a blue background */\n.container input:checked ~ .checkmark {\n  background-color: #2988c8;\n}\n\n/* Create the checkmark/indicator (hidden when not checked) */\n.checkmark:after {\n  content: \"\";\n  position: absolute;\n  display: none;\n}\n\n/* Show the checkmark when checked */\n.container input:checked ~ .checkmark:after {\n  display: block;\n}\n\n/* Style the checkmark/indicator */\n.container .checkmark:after {\n  left: 9px;\n  top: 5px;\n  width: 5px;\n  height: 10px;\n  border: solid white;\n  border-width: 0 3px 3px 0;\n  -webkit-transform: rotate(45deg);\n  -ms-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n</style>",
+      "start": 1741331324069,
+      "end": 1741331324217,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1741331324217,
+      "end": 1741331324217,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1741331324217,
+      "end": 1741331324217,
+      "order": "pre"
+    },
+    {
+      "name": "unplugin-vue-i18n",
+      "start": 1741331324217,
+      "end": 1741331324217,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1741331324217,
+      "end": 1741331324217,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1741331324217,
+      "end": 1741331324217,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1741331324217,
+      "end": 1741331324217,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1741331324217,
+      "end": 1741331324217,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1741331324217,
+      "end": 1741331324217,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "result": "import _sfc_main from \"D:/projects/nuxt/workix-nuxt-front/components/UI/TheCheckbox.vue?vue&type=script&setup=true&lang.ts\";\nexport * from \"D:/projects/nuxt/workix-nuxt-front/components/UI/TheCheckbox.vue?vue&type=script&setup=true&lang.ts\";\nimport \"D:/projects/nuxt/workix-nuxt-front/components/UI/TheCheckbox.vue?vue&type=style&index=0&scoped=fc64ac97&lang.css\";\nimport _export_sfc from \"\\0plugin-vue:export-helper\";\nexport default /* @__PURE__ */ _export_sfc(_sfc_main, [[\"__scopeId\", \"data-v-fc64ac97\"]]);\n",
+      "start": 1741331324217,
+      "end": 1741331324230,
+      "order": "normal",
+      "sourcemaps": {
+        "mappings": ""
+      }
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1741331324231,
+      "end": 1741331324231,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1741331324231,
+      "end": 1741331324231,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1741331324231,
+      "end": 1741331324231,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:chunk-error",
+      "start": 1741331324231,
+      "end": 1741331324231,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1741331324231,
+      "end": 1741331324231,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1741331324231,
+      "end": 1741331324231,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1741331324231,
+      "end": 1741331324231,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1741331324231,
+      "end": 1741331324231,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1741331324231,
+      "end": 1741331324231,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1741331324231,
+      "end": 1741331324231,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1741331324231,
+      "end": 1741331324231,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1741331324231,
+      "end": 1741331324231,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1741331324231,
+      "end": 1741331324231,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1741331324231,
+      "end": 1741331324231,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1741331324231,
+      "end": 1741331324231,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1741331324231,
+      "end": 1741331324231,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-macros-transform",
+      "start": 1741331324232,
+      "end": 1741331324232,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-resource",
+      "start": 1741331324232,
+      "end": 1741331324232,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-meta-deprecation",
+      "start": 1741331324232,
+      "end": 1741331324232,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1741331324235,
+      "end": 1741331324235,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1741331324235,
+      "end": 1741331324235,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1741331324235,
+      "end": 1741331324235,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:runtime-paths-dep",
+      "start": 1741331324236,
+      "end": 1741331324236,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:route-injection-plugin",
+      "start": 1741331324236,
+      "end": 1741331324236,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1741331324236,
+      "end": 1741331324236,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1741331324236,
+      "end": 1741331324236,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1741331324236,
+      "end": 1741331324236,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1741331324236,
+      "end": 1741331324236,
+      "order": "normal"
+    }
+  ]
+}
