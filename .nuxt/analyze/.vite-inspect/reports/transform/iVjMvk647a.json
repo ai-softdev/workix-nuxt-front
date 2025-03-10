@@ -4,44 +4,44 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { unref as _unref, createVNode as _createVNode, createElementVNode as _createElementVNode, withModifiers as _withModifiers, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\"\n\nconst _hoisted_1 = { class: \"flex justify-center gap-x-4 w-full mx-auto items-center\" }\nconst _hoisted_2 = { class: \"max-[800px]:hidden\" }\nconst _hoisted_3 = /*#__PURE__*/_createElementVNode(\"svg\", {\n  class: \"dark:fill-white fill-black\",\n  width: \"40px\",\n  height: \"40px\",\n  viewBox: \"0 0 24 24\",\n  id: \"qr-code-scan-2\",\n  \"data-name\": \"Flat Color\",\n  xmlns: \"http://www.w3.org/2000/svg\"\n}, [\n  /*#__PURE__*/_createElementVNode(\"path\", {\n    d: \"M10,15v2a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V15a1,1,0,0,1,1-1H9A1,1,0,0,1,10,15Zm7-9H15a1,1,0,0,0-1,1V9a1,1,0,0,0,1,1h2a1,1,0,0,0,1-1V7A1,1,0,0,0,17,6Zm0,6H13a1,1,0,0,0-1,1v4a1,1,0,0,0,1,1h4a1,1,0,0,0,1-1V13A1,1,0,0,0,17,12ZM12,7a1,1,0,0,0-1-1H7A1,1,0,0,0,6,7v4a1,1,0,0,0,1,1h4a1,1,0,0,0,1-1Z\",\n    style: {\"fill\":\"rgb(44, 169, 188)\",\"stroke-width\":\"1.2\"}\n  }),\n  /*#__PURE__*/_createElementVNode(\"path\", { d: \"M3,9A1,1,0,0,1,2,8V4A2,2,0,0,1,4,2H8A1,1,0,0,1,8,4H4V8A1,1,0,0,1,3,9ZM22,8V4a2,2,0,0,0-2-2H16a1,1,0,0,0,0,2h4V8a1,1,0,0,0,2,0ZM9,21a1,1,0,0,0-1-1H4V16a1,1,0,0,0-2,0v4a2,2,0,0,0,2,2H8A1,1,0,0,0,9,21Zm13-1V16a1,1,0,0,0-2,0v4H16a1,1,0,0,0,0,2h4A2,2,0,0,0,22,20Z\" })\n], -1)\nconst _hoisted_4 = [\n  _hoisted_3\n]\n\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\nimport ScanAnimation from \"~/components/Storage/UI/ScanAnimation.vue\";\nimport {useStorageStore} from \"~/stores/storage\";\nimport { handleSearch } from \"~/hooks/ElemUI\";\nimport { useRoute } from \"vue-router\";\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'StorageHeader',\n  setup(__props) {\n\nconst storageStore = useStorageStore()\nconst modeInput = ref('')\nconst route = useRoute()\n  \nreturn (_ctx: any,_cache: any) => {\n  return (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n    _createElementVNode(\"form\", {\n      onSubmit: _cache[4] || (_cache[4] = _withModifiers(() => {}, [\"prevent\"])),\n      class: \"w-full flex items-center justify-center gap-x-4\"\n    }, [\n      _createVNode(TheSearch, {\n        mode: _unref(modeInput),\n        onFocusout: _cache[0] || (_cache[0] = ($event: any) => (modeInput.value = '')),\n        onSearch: _cache[1] || (_cache[1] = ($event: any) => (_unref(storageStore).searchGoods.trim() !== '' && _unref(route).path === '/base/storage' ? _unref(storageStore).loadAllListSearch({search: _unref(storageStore).searchGoods}) : _unref(storageStore).loadStorageSubCategory({slug: _unref(route).params.slug, search: _unref(storageStore).searchGoods}))),\n        modelValue: _unref(storageStore).searchGoods,\n        \"onUpdate:modelValue\": _cache[2] || (_cache[2] = ($event: any) => ((_unref(storageStore).searchGoods) = $event)),\n        class: \"!w-6/12\",\n        type: \"text\",\n        ref: \"scan\"\n      }, null, 8, [\"mode\", \"modelValue\"]),\n      _createElementVNode(\"div\", _hoisted_2, [\n        _createVNode(ScanAnimation, {\n          onOnScan: _cache[3] || (_cache[3] = ($event: any) => (modeInput.value = 'scan')),\n          mode: _unref(modeInput)\n        }, null, 8, [\"mode\"])\n      ])\n    ], 32),\n    _createElementVNode(\"button\", {\n      class: \"max-[800px]:block hidden\",\n      onClick: _cache[5] || (_cache[5] = ($event: any) => (_ctx.$emit('openStreamSearch')))\n    }, _hoisted_4)\n  ]))\n}\n}\n\n})",
-      "start": 1741331323008,
-      "end": 1741331323008
+      "start": 1741373245065,
+      "end": 1741373245065
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1741331323008,
-      "end": 1741331323008,
+      "start": 1741373245066,
+      "end": 1741373245066,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1741331323008,
-      "end": 1741331323008,
+      "start": 1741373245066,
+      "end": 1741373245066,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1741331323008,
-      "end": 1741331323008,
+      "start": 1741373245066,
+      "end": 1741373245066,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1741331323008,
-      "end": 1741331323008,
+      "start": 1741373245066,
+      "end": 1741373245066,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1741331323008,
-      "end": 1741331323008,
+      "start": 1741373245066,
+      "end": 1741373245066,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, createVNode as _createVNode, createElementVNode as _createElementVNode, withModifiers as _withModifiers, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\";\nconst _hoisted_1 = { class: \"flex justify-center gap-x-4 w-full mx-auto items-center\" };\nconst _hoisted_2 = { class: \"max-[800px]:hidden\" };\nconst _hoisted_3 = /* @__PURE__ */ _createElementVNode(\"svg\", {\n  class: \"dark:fill-white fill-black\",\n  width: \"40px\",\n  height: \"40px\",\n  viewBox: \"0 0 24 24\",\n  id: \"qr-code-scan-2\",\n  \"data-name\": \"Flat Color\",\n  xmlns: \"http://www.w3.org/2000/svg\"\n}, [\n  /* @__PURE__ */ _createElementVNode(\"path\", {\n    d: \"M10,15v2a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V15a1,1,0,0,1,1-1H9A1,1,0,0,1,10,15Zm7-9H15a1,1,0,0,0-1,1V9a1,1,0,0,0,1,1h2a1,1,0,0,0,1-1V7A1,1,0,0,0,17,6Zm0,6H13a1,1,0,0,0-1,1v4a1,1,0,0,0,1,1h4a1,1,0,0,0,1-1V13A1,1,0,0,0,17,12ZM12,7a1,1,0,0,0-1-1H7A1,1,0,0,0,6,7v4a1,1,0,0,0,1,1h4a1,1,0,0,0,1-1Z\",\n    style: { \"fill\": \"rgb(44, 169, 188)\", \"stroke-width\": \"1.2\" }\n  }),\n  /* @__PURE__ */ _createElementVNode(\"path\", { d: \"M3,9A1,1,0,0,1,2,8V4A2,2,0,0,1,4,2H8A1,1,0,0,1,8,4H4V8A1,1,0,0,1,3,9ZM22,8V4a2,2,0,0,0-2-2H16a1,1,0,0,0,0,2h4V8a1,1,0,0,0,2,0ZM9,21a1,1,0,0,0-1-1H4V16a1,1,0,0,0-2,0v4a2,2,0,0,0,2,2H8A1,1,0,0,0,9,21Zm13-1V16a1,1,0,0,0-2,0v4H16a1,1,0,0,0,0,2h4A2,2,0,0,0,22,20Z\" })\n], -1);\nconst _hoisted_4 = [\n  _hoisted_3\n];\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\nimport ScanAnimation from \"~/components/Storage/UI/ScanAnimation.vue\";\nimport { useStorageStore } from \"~/stores/storage\";\nimport { useRoute } from \"vue-router\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"StorageHeader\",\n  setup(__props) {\n    const storageStore = useStorageStore();\n    const modeInput = ref(\"\");\n    const route = useRoute();\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n        _createElementVNode(\"form\", {\n          onSubmit: _cache[4] || (_cache[4] = _withModifiers(() => {\n          }, [\"prevent\"])),\n          class: \"w-full flex items-center justify-center gap-x-4\"\n        }, [\n          _createVNode(TheSearch, {\n            mode: _unref(modeInput),\n            onFocusout: _cache[0] || (_cache[0] = ($event) => modeInput.value = \"\"),\n            onSearch: _cache[1] || (_cache[1] = ($event) => _unref(storageStore).searchGoods.trim() !== \"\" && _unref(route).path === \"/base/storage\" ? _unref(storageStore).loadAllListSearch({ search: _unref(storageStore).searchGoods }) : _unref(storageStore).loadStorageSubCategory({ slug: _unref(route).params.slug, search: _unref(storageStore).searchGoods })),\n            modelValue: _unref(storageStore).searchGoods,\n            \"onUpdate:modelValue\": _cache[2] || (_cache[2] = ($event) => _unref(storageStore).searchGoods = $event),\n            class: \"!w-6/12\",\n            type: \"text\",\n            ref: \"scan\"\n          }, null, 8, [\"mode\", \"modelValue\"]),\n          _createElementVNode(\"div\", _hoisted_2, [\n            _createVNode(ScanAnimation, {\n              onOnScan: _cache[3] || (_cache[3] = ($event) => modeInput.value = \"scan\"),\n              mode: _unref(modeInput)\n            }, null, 8, [\"mode\"])\n          ])\n        ], 32),\n        _createElementVNode(\"button\", {\n          class: \"max-[800px]:block hidden\",\n          onClick: _cache[5] || (_cache[5] = ($event) => _ctx.$emit(\"openStreamSearch\"))\n        }, _hoisted_4)\n      ]);\n    };\n  }\n});\n",
-      "start": 1741331323008,
-      "end": 1741331323469,
+      "start": 1741373245066,
+      "end": 1741373245353,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -57,141 +57,141 @@
     },
     {
       "name": "vite:json",
-      "start": 1741331323469,
-      "end": 1741331323469,
+      "start": 1741373245353,
+      "end": 1741373245353,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1741331323469,
-      "end": 1741331323469,
+      "start": 1741373245353,
+      "end": 1741373245353,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1741331323470,
-      "end": 1741331323470,
+      "start": 1741373245353,
+      "end": 1741373245353,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1741331323470,
-      "end": 1741331323470,
+      "start": 1741373245353,
+      "end": 1741373245353,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1741331323470,
-      "end": 1741331323470,
+      "start": 1741373245354,
+      "end": 1741373245354,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1741331323471,
-      "end": 1741331323471,
+      "start": 1741373245354,
+      "end": 1741373245354,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1741331323471,
-      "end": 1741331323471,
+      "start": 1741373245354,
+      "end": 1741373245354,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1741331323472,
-      "end": 1741331323472,
+      "start": 1741373245355,
+      "end": 1741373245355,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1741331323472,
-      "end": 1741331323472,
+      "start": 1741373245355,
+      "end": 1741373245356,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1741331323473,
-      "end": 1741331323473,
+      "start": 1741373245356,
+      "end": 1741373245356,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1741331323473,
-      "end": 1741331323473,
+      "start": 1741373245356,
+      "end": 1741373245356,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1741331323473,
-      "end": 1741331323473,
+      "start": 1741373245356,
+      "end": 1741373245356,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1741331323473,
-      "end": 1741331323473,
+      "start": 1741373245356,
+      "end": 1741373245356,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1741331323473,
-      "end": 1741331323473,
+      "start": 1741373245356,
+      "end": 1741373245356,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1741331323473,
-      "end": 1741331323474,
+      "start": 1741373245356,
+      "end": 1741373245357,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1741331323474,
-      "end": 1741331323474,
+      "start": 1741373245357,
+      "end": 1741373245357,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1741331323474,
-      "end": 1741331323474,
+      "start": 1741373245357,
+      "end": 1741373245357,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1741331323474,
-      "end": 1741331323474,
+      "start": 1741373245357,
+      "end": 1741373245357,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1741331323475,
-      "end": 1741331323475,
+      "start": 1741373245358,
+      "end": 1741373245358,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1741331323476,
-      "end": 1741331323476,
+      "start": 1741373245359,
+      "end": 1741373245359,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1741331323478,
-      "end": 1741331323478,
+      "start": 1741373245360,
+      "end": 1741373245360,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1741331323479,
-      "end": 1741331323479,
+      "start": 1741373245360,
+      "end": 1741373245360,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, createVNode as _createVNode, createElementVNode as _createElementVNode, withModifiers as _withModifiers, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\";\nconst _hoisted_1 = { class: \"flex justify-center gap-x-4 w-full mx-auto items-center\" };\nconst _hoisted_2 = { class: \"max-[800px]:hidden\" };\nconst _hoisted_3 = /* @__PURE__ */ _createElementVNode(\"svg\", {\n  class: \"dark:fill-white fill-black\",\n  width: \"40px\",\n  height: \"40px\",\n  viewBox: \"0 0 24 24\",\n  id: \"qr-code-scan-2\",\n  \"data-name\": \"Flat Color\",\n  xmlns: \"http://www.w3.org/2000/svg\"\n}, [\n  /* @__PURE__ */ _createElementVNode(\"path\", {\n    d: \"M10,15v2a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V15a1,1,0,0,1,1-1H9A1,1,0,0,1,10,15Zm7-9H15a1,1,0,0,0-1,1V9a1,1,0,0,0,1,1h2a1,1,0,0,0,1-1V7A1,1,0,0,0,17,6Zm0,6H13a1,1,0,0,0-1,1v4a1,1,0,0,0,1,1h4a1,1,0,0,0,1-1V13A1,1,0,0,0,17,12ZM12,7a1,1,0,0,0-1-1H7A1,1,0,0,0,6,7v4a1,1,0,0,0,1,1h4a1,1,0,0,0,1-1Z\",\n    style: { \"fill\": \"rgb(44, 169, 188)\", \"stroke-width\": \"1.2\" }\n  }),\n  /* @__PURE__ */ _createElementVNode(\"path\", { d: \"M3,9A1,1,0,0,1,2,8V4A2,2,0,0,1,4,2H8A1,1,0,0,1,8,4H4V8A1,1,0,0,1,3,9ZM22,8V4a2,2,0,0,0-2-2H16a1,1,0,0,0,0,2h4V8a1,1,0,0,0,2,0ZM9,21a1,1,0,0,0-1-1H4V16a1,1,0,0,0-2,0v4a2,2,0,0,0,2,2H8A1,1,0,0,0,9,21Zm13-1V16a1,1,0,0,0-2,0v4H16a1,1,0,0,0,0,2h4A2,2,0,0,0,22,20Z\" })\n], -1);\nconst _hoisted_4 = [\n  _hoisted_3\n];\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\nimport ScanAnimation from \"~/components/Storage/UI/ScanAnimation.vue\";\nimport { useStorageStore } from \"~/stores/storage\";\nimport { useRoute } from \"vue-router\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"StorageHeader\",\n  setup(__props) {\n    const storageStore = useStorageStore();\n    const modeInput = ref(\"\");\n    const route = useRoute();\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n        _createElementVNode(\"form\", {\n          onSubmit: _cache[4] || (_cache[4] = _withModifiers(() => {\n          }, [\"prevent\"])),\n          class: \"w-full flex items-center justify-center gap-x-4\"\n        }, [\n          _createVNode(TheSearch, {\n            mode: _unref(modeInput),\n            onFocusout: _cache[0] || (_cache[0] = ($event) => modeInput.value = \"\"),\n            onSearch: _cache[1] || (_cache[1] = ($event) => _unref(storageStore).searchGoods.trim() !== \"\" && _unref(route).path === \"/base/storage\" ? _unref(storageStore).loadAllListSearch({ search: _unref(storageStore).searchGoods }) : _unref(storageStore).loadStorageSubCategory({ slug: _unref(route).params.slug, search: _unref(storageStore).searchGoods })),\n            modelValue: _unref(storageStore).searchGoods,\n            \"onUpdate:modelValue\": _cache[2] || (_cache[2] = ($event) => _unref(storageStore).searchGoods = $event),\n            class: \"!w-6/12\",\n            type: \"text\",\n            ref: \"scan\"\n          }, null, 8, [\"mode\", \"modelValue\"]),\n          _createElementVNode(\"div\", _hoisted_2, [\n            _createVNode(ScanAnimation, {\n              onOnScan: _cache[3] || (_cache[3] = ($event) => modeInput.value = \"scan\"),\n              mode: _unref(modeInput)\n            }, null, 8, [\"mode\"])\n          ])\n        ], 32),\n        _createElementVNode(\"button\", {\n          class: \"max-[800px]:block hidden\",\n          onClick: _cache[5] || (_cache[5] = ($event) => _ctx.$emit(\"openStreamSearch\"))\n        }, _hoisted_4)\n      ]);\n    };\n  }\n});\n",
-      "start": 1741331323480,
-      "end": 1741331323488,
+      "start": 1741373245361,
+      "end": 1741373245377,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -204,50 +204,50 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1741331323489,
-      "end": 1741331323489,
+      "start": 1741373245377,
+      "end": 1741373245377,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1741331323489,
-      "end": 1741331323489,
+      "start": 1741373245378,
+      "end": 1741373245378,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1741331323489,
-      "end": 1741331323489,
+      "start": 1741373245378,
+      "end": 1741373245378,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1741331323490,
-      "end": 1741331323490,
+      "start": 1741373245379,
+      "end": 1741373245379,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1741331323491,
-      "end": 1741331323491,
+      "start": 1741373245380,
+      "end": 1741373245380,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1741331323491,
-      "end": 1741331323491,
+      "start": 1741373245381,
+      "end": 1741373245381,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1741331323492,
-      "end": 1741331323492,
+      "start": 1741373245382,
+      "end": 1741373245382,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1741331323492,
-      "end": 1741331323492,
+      "start": 1741373245382,
+      "end": 1741373245382,
       "order": "normal"
     }
   ]

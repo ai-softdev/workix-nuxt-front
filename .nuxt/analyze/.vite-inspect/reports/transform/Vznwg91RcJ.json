@@ -4,232 +4,232 @@
     {
       "name": "vite:load-fallback",
       "result": "import { createPinia, setActivePinia } from \"pinia\";\nimport { defineNuxtPlugin } from \"#app\";\nconst plugin = defineNuxtPlugin((nuxtApp) => {\n  const pinia = createPinia();\n  nuxtApp.vueApp.use(pinia);\n  setActivePinia(pinia);\n  if (process.server) {\n    nuxtApp.payload.pinia = pinia.state.value;\n  } else if (nuxtApp.payload && nuxtApp.payload.pinia) {\n    pinia.state.value = nuxtApp.payload.pinia;\n  }\n  return {\n    provide: {\n      pinia\n    }\n  };\n});\nexport default plugin;\n",
-      "start": 1741331314344,
-      "end": 1741331314708,
+      "start": 1741373234131,
+      "end": 1741373234625,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1741331314708,
-      "end": 1741331314708,
+      "start": 1741373234625,
+      "end": 1741373234625,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1741331314708,
-      "end": 1741331314708,
+      "start": 1741373234625,
+      "end": 1741373234625,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1741331314708,
-      "end": 1741331314708,
+      "start": 1741373234625,
+      "end": 1741373234625,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1741331314708,
-      "end": 1741331314708,
+      "start": 1741373234625,
+      "end": 1741373234625,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1741331314708,
-      "end": 1741331314708,
+      "start": 1741373234625,
+      "end": 1741373234625,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1741331314708,
-      "end": 1741331314708,
+      "start": 1741373234625,
+      "end": 1741373234625,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1741331314708,
-      "end": 1741331314708,
+      "start": 1741373234625,
+      "end": 1741373234625,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1741331314708,
-      "end": 1741331314708,
+      "start": 1741373234625,
+      "end": 1741373234625,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1741331314708,
-      "end": 1741331314708,
+      "start": 1741373234625,
+      "end": 1741373234625,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1741331314708,
-      "end": 1741331314708,
+      "start": 1741373234625,
+      "end": 1741373234625,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1741331314708,
-      "end": 1741331314708,
+      "start": 1741373234626,
+      "end": 1741373234626,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1741331314708,
-      "end": 1741331314709,
+      "start": 1741373234626,
+      "end": 1741373234626,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1741331314709,
-      "end": 1741331314709,
+      "start": 1741373234626,
+      "end": 1741373234626,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1741331314709,
-      "end": 1741331314709,
+      "start": 1741373234626,
+      "end": 1741373234626,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1741331314709,
-      "end": 1741331314709,
+      "start": 1741373234626,
+      "end": 1741373234626,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1741331314709,
-      "end": 1741331314709,
+      "start": 1741373234626,
+      "end": 1741373234626,
       "order": "normal"
     },
     {
       "name": "vite:define",
       "result": "import { createPinia, setActivePinia } from \"pinia\";\nimport { defineNuxtPlugin } from \"#app\";\nconst plugin = defineNuxtPlugin((nuxtApp) => {\n  const pinia = createPinia();\n  nuxtApp.vueApp.use(pinia);\n  setActivePinia(pinia);\n  if (false) {\n    nuxtApp.payload.pinia = pinia.state.value;\n  } else if (nuxtApp.payload && nuxtApp.payload.pinia) {\n    pinia.state.value = nuxtApp.payload.pinia;\n  }\n  return {\n    provide: {\n      pinia\n    }\n  };\n});\nexport default plugin;\n",
-      "start": 1741331314709,
-      "end": 1741331314779,
+      "start": 1741373234626,
+      "end": 1741373234747,
       "order": "normal",
       "sourcemaps": null
     },
     {
       "name": "vite:css-post",
-      "start": 1741331314779,
-      "end": 1741331314779,
+      "start": 1741373234748,
+      "end": 1741373234748,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1741331314779,
-      "end": 1741331314779,
+      "start": 1741373234748,
+      "end": 1741373234748,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1741331314779,
-      "end": 1741331314779,
+      "start": 1741373234748,
+      "end": 1741373234748,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1741331314779,
-      "end": 1741331314779,
+      "start": 1741373234748,
+      "end": 1741373234748,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1741331314779,
-      "end": 1741331314780,
+      "start": 1741373234749,
+      "end": 1741373234749,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1741331314780,
-      "end": 1741331314780,
+      "start": 1741373234749,
+      "end": 1741373234749,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1741331314780,
-      "end": 1741331314780,
+      "start": 1741373234749,
+      "end": 1741373234749,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1741331314780,
-      "end": 1741331314780,
+      "start": 1741373234749,
+      "end": 1741373234749,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1741331314780,
-      "end": 1741331314781,
+      "start": 1741373234749,
+      "end": 1741373234749,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1741331314781,
-      "end": 1741331314781,
+      "start": 1741373234749,
+      "end": 1741373234749,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1741331314781,
-      "end": 1741331314781,
+      "start": 1741373234749,
+      "end": 1741373234749,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1741331314781,
-      "end": 1741331314781,
+      "start": 1741373234750,
+      "end": 1741373234750,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1741331314783,
-      "end": 1741331314785,
+      "start": 1741373234753,
+      "end": 1741373234753,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1741331314787,
-      "end": 1741331314787,
+      "start": 1741373234754,
+      "end": 1741373234754,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1741331314790,
-      "end": 1741331314790,
+      "start": 1741373234755,
+      "end": 1741373234755,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1741331314790,
-      "end": 1741331314790,
+      "start": 1741373234755,
+      "end": 1741373234755,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1741331314790,
-      "end": 1741331314790,
+      "start": 1741373234755,
+      "end": 1741373234755,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1741331314790,
-      "end": 1741331314790,
+      "start": 1741373234755,
+      "end": 1741373234755,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1741331314790,
-      "end": 1741331314790,
+      "start": 1741373234755,
+      "end": 1741373234755,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1741331314790,
-      "end": 1741331314790,
+      "start": 1741373234755,
+      "end": 1741373234755,
       "order": "normal"
     }
   ]

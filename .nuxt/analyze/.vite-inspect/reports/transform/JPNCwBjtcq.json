@@ -4,44 +4,44 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { unref as _unref, openBlock as _openBlock, createElementBlock as _createElementBlock, createCommentVNode as _createCommentVNode, resolveComponent as _resolveComponent, createVNode as _createVNode, createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, withCtx as _withCtx, createBlock as _createBlock, withModifiers as _withModifiers, createTextVNode as _createTextVNode, isRef as _isRef } from \"vue\"\n\nconst _hoisted_1 = { class: \"flex max-[800px]:flex-wrap justify-between max-[800px]:h-full gap-y-10 gap-x-6\" }\nconst _hoisted_2 = { key: 0 }\nconst _hoisted_3 = { class: \"w-4/12 max-lg:w-5/12 max-[800px]:w-full\" }\nconst _hoisted_4 = { class: \"w-full flex flex-col gap-y-2\" }\nconst _hoisted_5 = { class: \"flex justify-between items-center\" }\nconst _hoisted_6 = { class: \"flex items-center gap-x-4 mb-4\" }\nconst _hoisted_7 = { key: 0 }\nconst _hoisted_8 = /*#__PURE__*/_createElementVNode(\"svg\", {\n  width: \"15px\",\n  height: \"15px\",\n  viewBox: \"0 0 24 24\",\n  fill: \"none\"\n}, [\n  /*#__PURE__*/_createElementVNode(\"path\", {\n    class: \"dark:stroke-white stroke-black\",\n    d: \"M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5\",\n    \"stroke-width\": \"2\",\n    \"stroke-linecap\": \"round\"\n  })\n], -1)\nconst _hoisted_9 = [\n  _hoisted_8\n]\nconst _hoisted_10 = { key: 2 }\nconst _hoisted_11 = /*#__PURE__*/_createElementVNode(\"svg\", {\n  width: \"15px\",\n  height: \"15px\",\n  viewBox: \"0 0 24 24\",\n  fill: \"none\"\n}, [\n  /*#__PURE__*/_createElementVNode(\"path\", {\n    class: \"dark:stroke-white stroke-black\",\n    d: \"M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5\",\n    \"stroke-width\": \"2\",\n    \"stroke-linecap\": \"round\"\n  })\n], -1)\nconst _hoisted_12 = [\n  _hoisted_11\n]\nconst _hoisted_13 = { key: 0 }\nconst _hoisted_14 = { key: 1 }\n\nimport TheContentBlock from \"~/components/UI/TheContentBlock.vue\";\nimport {useRoute} from \"vue-router\";\nimport {viewSelect} from \"~/hooks/ElemUI\";\nimport {QrcodeStream} from \"vue-qrcode-reader\";\nimport {useStorageStore} from \"~/stores/storage\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nimport TheBreadcrumbs from \"~/components/UI/TheBreadcrumbs.vue\";\nimport type {IScannedBarcode} from \"~/types/storage\";\n\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'storage',\n  setup(__props) {\n\nconst route = useRoute()\nconst storageStore = useStorageStore()\nconst scanning = ref('')\nconst selected = ref(viewSelect[0])\nconst inWidth = ref()\nconst scannedBarcode = ref<IScannedBarcode | null>(null)\nconst onDecode = (value: any) => {\n  scannedBarcode.value = value\n  storageStore.searchGoods = value\n  storageStore.loadAllListSearch({search: JSON.stringify(storageStore.searchGoods[0].rawValue)})\n  console.log(storageStore.searchGoods);\n  \n  storageStore.streaming = false\n}\n\nonMounted(() => {\n  inWidth.value = window.innerWidth\n  storageStore.loadStorageCategoryList()\n});\n\nonUpdated(() => {\n  if(route.path === `/base/storage`) {\n    storageStore.loadAllList()\n  }\n})\n\n\nreturn (_ctx: any,_cache: any) => {\n  const _component_StorageNav = _resolveComponent(\"StorageNav\")!\n  const _component_StorageHeader = _resolveComponent(\"StorageHeader\")!\n  const _component_UIcon = _resolveComponent(\"UIcon\")!\n  const _component_USelectMenu = _resolveComponent(\"USelectMenu\")!\n  const _component_StorageContent = _resolveComponent(\"StorageContent\")!\n  const _component_NuxtPage = _resolveComponent(\"NuxtPage\")!\n\n  return (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n    (_unref(inWidth) <= 800)\n      ? (_openBlock(), _createElementBlock(\"div\", _hoisted_2))\n      : _createCommentVNode(\"\", true),\n    _createElementVNode(\"div\", _hoisted_3, [\n      _createVNode(_component_StorageNav)\n    ]),\n    _createElementVNode(\"div\", _hoisted_4, [\n      _createVNode(TheContentBlock, {\n        onScroll: _cache[2] || (_cache[2] = _withModifiers(() => {}, [\"prevent\"])),\n        onWheel: _cache[3] || (_cache[3] = _withModifiers(() => {}, [\"prevent\"])),\n        onTouch: _cache[4] || (_cache[4] = _withModifiers(() => {}, [\"prevent\"]))\n      }, {\n        default: _withCtx(() => [\n          _createVNode(_component_StorageHeader, {\n            ref: _unref(storageStore).scan,\n            onOpenStreamSearch: _cache[0] || (_cache[0] = ($event: any) => (_unref(storageStore).streaming = true))\n          }, null, 512),\n          (_unref(storageStore).streaming)\n            ? (_openBlock(), _createBlock(TheModal, {\n                key: 0,\n                type: \"resize\",\n                onShowModal: _cache[1] || (_cache[1] = ($event: any) => {_unref(storageStore).streaming = false; scannedBarcode.value = null})\n              }, {\n                default: _withCtx(() => [\n                  _createElementVNode(\"p\", null, _toDisplayString(_unref(scannedBarcode) ? JSON.stringify(_unref(scannedBarcode)[0].rawValue) : 'not working'), 1),\n                  _createVNode(_unref(QrcodeStream), {\n                    onDetect: onDecode,\n                    formats: ['qr_code', 'aztec', 'code_128', 'code_39', 'code_93', 'databar', 'codabar', 'linear_codes', 'micro_qr_code', 'databar_expanded', 'ean_13', 'ean_8','itf']\n                  })\n                ]),\n                _: 1\n              }))\n            : _createCommentVNode(\"\", true)\n        ]),\n        _: 1\n      }),\n      _createVNode(TheContentBlock, { class: \"w-full\" }, {\n        default: _withCtx(() => [\n          _createElementVNode(\"div\", _hoisted_5, [\n            _createElementVNode(\"div\", _hoisted_6, [\n              _createVNode(TheBreadcrumbs, {\n                \"breadcrumb-link\": _unref(route).path === `/base/storage/${_unref(route).params.slug}` || _unref(route).path === `/base/storage/${_unref(route).params.slug}/${_unref(route).params.nestedSlug}` ?`/base/storage` : ''\n              }, {\n                default: _withCtx(() => [\n                  _createTextVNode(_toDisplayString(_ctx.$t('Главная')), 1)\n                ]),\n                _: 1\n              }, 8, [\"breadcrumb-link\"]),\n              (_unref(route).path === `/base/storage/${_unref(route).params.slug}` || _unref(route).path === `/base/storage/${_unref(route).params.slug}/${_unref(route).params.nestedSlug}`)\n                ? (_openBlock(), _createElementBlock(\"div\", _hoisted_7, _hoisted_9))\n                : _createCommentVNode(\"\", true),\n              (_unref(route).path === `/base/storage/${_unref(route).params.slug}` || _unref(route).path === `/base/storage/${_unref(route).params.slug}/${_unref(route).params.nestedSlug}`)\n                ? (_openBlock(), _createBlock(TheBreadcrumbs, {\n                    key: 1,\n                    \"breadcrumb-link\": _unref(route).path === `/base/storage/${_unref(route).params.slug}/${_unref(route).params.nestedSlug}`?`/base/storage/${_unref(route).params.slug}`: ''\n                  }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(_toDisplayString(_unref(storageStore).currentCategory.name ? _unref(storageStore).currentCategory.name : _unref(storageStore).storageItem.name), 1)\n                    ]),\n                    _: 1\n                  }, 8, [\"breadcrumb-link\"]))\n                : _createCommentVNode(\"\", true),\n              (_unref(route).path === `/base/storage/${_unref(route).params.slug}/${_unref(route).params.nestedSlug}`)\n                ? (_openBlock(), _createElementBlock(\"div\", _hoisted_10, _hoisted_12))\n                : _createCommentVNode(\"\", true),\n              (_unref(route).path === `/base/storage/${_unref(route).params.slug}/${_unref(route).params.nestedSlug}`)\n                ? (_openBlock(), _createBlock(TheBreadcrumbs, { key: 3 }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(_toDisplayString(_unref(route).params.nestedSlug), 1)\n                    ]),\n                    _: 1\n                  }))\n                : _createCommentVNode(\"\", true)\n            ]),\n            _createElementVNode(\"div\", null, [\n              _createVNode(_component_USelectMenu, {\n                modelValue: _unref(selected),\n                \"onUpdate:modelValue\": _cache[5] || (_cache[5] = ($event: any) => (_isRef(selected) ? (selected).value = $event : null)),\n                options: _unref(viewSelect)\n              }, {\n                label: _withCtx(() => [\n                  _createVNode(_component_UIcon, {\n                    name: _unref(selected).icon,\n                    class: \"w-4 h-4\"\n                  }, null, 8, [\"name\"]),\n                  _createTextVNode(\" \" + _toDisplayString(_unref(selected).label), 1)\n                ]),\n                _: 1\n              }, 8, [\"modelValue\", \"options\"])\n            ])\n          ]),\n          (!_unref(route).params.slug)\n            ? (_openBlock(), _createElementBlock(\"div\", _hoisted_13, [\n                _createVNode(_component_StorageContent)\n              ]))\n            : (_openBlock(), _createElementBlock(\"div\", _hoisted_14, [\n                _createVNode(_component_NuxtPage)\n              ]))\n        ]),\n        _: 1\n      })\n    ])\n  ]))\n}\n}\n\n})",
-      "start": 1741331320944,
-      "end": 1741331320944
+      "start": 1741373241796,
+      "end": 1741373241796
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1741331320944,
-      "end": 1741331320944,
+      "start": 1741373241796,
+      "end": 1741373241796,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1741331320944,
-      "end": 1741331320944,
+      "start": 1741373241796,
+      "end": 1741373241796,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1741331320944,
-      "end": 1741331320944,
+      "start": 1741373241796,
+      "end": 1741373241796,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1741331320944,
-      "end": 1741331320944,
+      "start": 1741373241796,
+      "end": 1741373241796,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1741331320944,
-      "end": 1741331320944,
+      "start": 1741373241796,
+      "end": 1741373241796,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, openBlock as _openBlock, createElementBlock as _createElementBlock, createCommentVNode as _createCommentVNode, resolveComponent as _resolveComponent, createVNode as _createVNode, createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, withCtx as _withCtx, createBlock as _createBlock, withModifiers as _withModifiers, createTextVNode as _createTextVNode, isRef as _isRef } from \"vue\";\nconst _hoisted_1 = { class: \"flex max-[800px]:flex-wrap justify-between max-[800px]:h-full gap-y-10 gap-x-6\" };\nconst _hoisted_2 = { key: 0 };\nconst _hoisted_3 = { class: \"w-4/12 max-lg:w-5/12 max-[800px]:w-full\" };\nconst _hoisted_4 = { class: \"w-full flex flex-col gap-y-2\" };\nconst _hoisted_5 = { class: \"flex justify-between items-center\" };\nconst _hoisted_6 = { class: \"flex items-center gap-x-4 mb-4\" };\nconst _hoisted_7 = { key: 0 };\nconst _hoisted_8 = /* @__PURE__ */ _createElementVNode(\"svg\", {\n  width: \"15px\",\n  height: \"15px\",\n  viewBox: \"0 0 24 24\",\n  fill: \"none\"\n}, [\n  /* @__PURE__ */ _createElementVNode(\"path\", {\n    class: \"dark:stroke-white stroke-black\",\n    d: \"M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5\",\n    \"stroke-width\": \"2\",\n    \"stroke-linecap\": \"round\"\n  })\n], -1);\nconst _hoisted_9 = [\n  _hoisted_8\n];\nconst _hoisted_10 = { key: 2 };\nconst _hoisted_11 = /* @__PURE__ */ _createElementVNode(\"svg\", {\n  width: \"15px\",\n  height: \"15px\",\n  viewBox: \"0 0 24 24\",\n  fill: \"none\"\n}, [\n  /* @__PURE__ */ _createElementVNode(\"path\", {\n    class: \"dark:stroke-white stroke-black\",\n    d: \"M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5\",\n    \"stroke-width\": \"2\",\n    \"stroke-linecap\": \"round\"\n  })\n], -1);\nconst _hoisted_12 = [\n  _hoisted_11\n];\nconst _hoisted_13 = { key: 0 };\nconst _hoisted_14 = { key: 1 };\nimport TheContentBlock from \"~/components/UI/TheContentBlock.vue\";\nimport { useRoute } from \"vue-router\";\nimport { viewSelect } from \"~/hooks/ElemUI\";\nimport { QrcodeStream } from \"vue-qrcode-reader\";\nimport { useStorageStore } from \"~/stores/storage\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nimport TheBreadcrumbs from \"~/components/UI/TheBreadcrumbs.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"storage\",\n  setup(__props) {\n    const route = useRoute();\n    const storageStore = useStorageStore();\n    const scanning = ref(\"\");\n    const selected = ref(viewSelect[0]);\n    const inWidth = ref();\n    const scannedBarcode = ref(null);\n    const onDecode = (value) => {\n      scannedBarcode.value = value;\n      storageStore.searchGoods = value;\n      storageStore.loadAllListSearch({ search: JSON.stringify(storageStore.searchGoods[0].rawValue) });\n      console.log(storageStore.searchGoods);\n      storageStore.streaming = false;\n    };\n    onMounted(() => {\n      inWidth.value = window.innerWidth;\n      storageStore.loadStorageCategoryList();\n    });\n    onUpdated(() => {\n      if (route.path === `/base/storage`) {\n        storageStore.loadAllList();\n      }\n    });\n    return (_ctx, _cache) => {\n      const _component_StorageNav = _resolveComponent(\"StorageNav\");\n      const _component_StorageHeader = _resolveComponent(\"StorageHeader\");\n      const _component_UIcon = _resolveComponent(\"UIcon\");\n      const _component_USelectMenu = _resolveComponent(\"USelectMenu\");\n      const _component_StorageContent = _resolveComponent(\"StorageContent\");\n      const _component_NuxtPage = _resolveComponent(\"NuxtPage\");\n      return _openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n        _unref(inWidth) <= 800 ? (_openBlock(), _createElementBlock(\"div\", _hoisted_2)) : _createCommentVNode(\"\", true),\n        _createElementVNode(\"div\", _hoisted_3, [\n          _createVNode(_component_StorageNav)\n        ]),\n        _createElementVNode(\"div\", _hoisted_4, [\n          _createVNode(TheContentBlock, {\n            onScroll: _cache[2] || (_cache[2] = _withModifiers(() => {\n            }, [\"prevent\"])),\n            onWheel: _cache[3] || (_cache[3] = _withModifiers(() => {\n            }, [\"prevent\"])),\n            onTouch: _cache[4] || (_cache[4] = _withModifiers(() => {\n            }, [\"prevent\"]))\n          }, {\n            default: _withCtx(() => [\n              _createVNode(_component_StorageHeader, {\n                ref: _unref(storageStore).scan,\n                onOpenStreamSearch: _cache[0] || (_cache[0] = ($event) => _unref(storageStore).streaming = true)\n              }, null, 512),\n              _unref(storageStore).streaming ? (_openBlock(), _createBlock(TheModal, {\n                key: 0,\n                type: \"resize\",\n                onShowModal: _cache[1] || (_cache[1] = ($event) => {\n                  _unref(storageStore).streaming = false;\n                  scannedBarcode.value = null;\n                })\n              }, {\n                default: _withCtx(() => [\n                  _createElementVNode(\"p\", null, _toDisplayString(_unref(scannedBarcode) ? JSON.stringify(_unref(scannedBarcode)[0].rawValue) : \"not working\"), 1),\n                  _createVNode(_unref(QrcodeStream), {\n                    onDetect: onDecode,\n                    formats: [\"qr_code\", \"aztec\", \"code_128\", \"code_39\", \"code_93\", \"databar\", \"codabar\", \"linear_codes\", \"micro_qr_code\", \"databar_expanded\", \"ean_13\", \"ean_8\", \"itf\"]\n                  })\n                ]),\n                _: 1\n              })) : _createCommentVNode(\"\", true)\n            ]),\n            _: 1\n          }),\n          _createVNode(TheContentBlock, { class: \"w-full\" }, {\n            default: _withCtx(() => [\n              _createElementVNode(\"div\", _hoisted_5, [\n                _createElementVNode(\"div\", _hoisted_6, [\n                  _createVNode(TheBreadcrumbs, {\n                    \"breadcrumb-link\": _unref(route).path === `/base/storage/${_unref(route).params.slug}` || _unref(route).path === `/base/storage/${_unref(route).params.slug}/${_unref(route).params.nestedSlug}` ? `/base/storage` : \"\"\n                  }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Главная\")), 1)\n                    ]),\n                    _: 1\n                  }, 8, [\"breadcrumb-link\"]),\n                  _unref(route).path === `/base/storage/${_unref(route).params.slug}` || _unref(route).path === `/base/storage/${_unref(route).params.slug}/${_unref(route).params.nestedSlug}` ? (_openBlock(), _createElementBlock(\"div\", _hoisted_7, _hoisted_9)) : _createCommentVNode(\"\", true),\n                  _unref(route).path === `/base/storage/${_unref(route).params.slug}` || _unref(route).path === `/base/storage/${_unref(route).params.slug}/${_unref(route).params.nestedSlug}` ? (_openBlock(), _createBlock(TheBreadcrumbs, {\n                    key: 1,\n                    \"breadcrumb-link\": _unref(route).path === `/base/storage/${_unref(route).params.slug}/${_unref(route).params.nestedSlug}` ? `/base/storage/${_unref(route).params.slug}` : \"\"\n                  }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(_toDisplayString(_unref(storageStore).currentCategory.name ? _unref(storageStore).currentCategory.name : _unref(storageStore).storageItem.name), 1)\n                    ]),\n                    _: 1\n                  }, 8, [\"breadcrumb-link\"])) : _createCommentVNode(\"\", true),\n                  _unref(route).path === `/base/storage/${_unref(route).params.slug}/${_unref(route).params.nestedSlug}` ? (_openBlock(), _createElementBlock(\"div\", _hoisted_10, _hoisted_12)) : _createCommentVNode(\"\", true),\n                  _unref(route).path === `/base/storage/${_unref(route).params.slug}/${_unref(route).params.nestedSlug}` ? (_openBlock(), _createBlock(TheBreadcrumbs, { key: 3 }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(_toDisplayString(_unref(route).params.nestedSlug), 1)\n                    ]),\n                    _: 1\n                  })) : _createCommentVNode(\"\", true)\n                ]),\n                _createElementVNode(\"div\", null, [\n                  _createVNode(_component_USelectMenu, {\n                    modelValue: _unref(selected),\n                    \"onUpdate:modelValue\": _cache[5] || (_cache[5] = ($event) => _isRef(selected) ? selected.value = $event : null),\n                    options: _unref(viewSelect)\n                  }, {\n                    label: _withCtx(() => [\n                      _createVNode(_component_UIcon, {\n                        name: _unref(selected).icon,\n                        class: \"w-4 h-4\"\n                      }, null, 8, [\"name\"]),\n                      _createTextVNode(\" \" + _toDisplayString(_unref(selected).label), 1)\n                    ]),\n                    _: 1\n                  }, 8, [\"modelValue\", \"options\"])\n                ])\n              ]),\n              !_unref(route).params.slug ? (_openBlock(), _createElementBlock(\"div\", _hoisted_13, [\n                _createVNode(_component_StorageContent)\n              ])) : (_openBlock(), _createElementBlock(\"div\", _hoisted_14, [\n                _createVNode(_component_NuxtPage)\n              ]))\n            ]),\n            _: 1\n          })\n        ])\n      ]);\n    };\n  }\n});\n",
-      "start": 1741331320944,
-      "end": 1741331321666,
+      "start": 1741373241796,
+      "end": 1741373243292,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -57,141 +57,141 @@
     },
     {
       "name": "vite:json",
-      "start": 1741331321666,
-      "end": 1741331321666,
+      "start": 1741373243292,
+      "end": 1741373243292,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1741331321666,
-      "end": 1741331321666,
+      "start": 1741373243292,
+      "end": 1741373243292,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1741331321666,
-      "end": 1741331321666,
+      "start": 1741373243292,
+      "end": 1741373243292,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1741331321666,
-      "end": 1741331321666,
+      "start": 1741373243292,
+      "end": 1741373243292,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1741331321666,
-      "end": 1741331321666,
+      "start": 1741373243292,
+      "end": 1741373243292,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1741331321666,
-      "end": 1741331321666,
+      "start": 1741373243292,
+      "end": 1741373243292,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1741331321666,
-      "end": 1741331321666,
+      "start": 1741373243293,
+      "end": 1741373243293,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1741331321666,
-      "end": 1741331321667,
+      "start": 1741373243293,
+      "end": 1741373243293,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1741331321667,
-      "end": 1741331321667,
+      "start": 1741373243293,
+      "end": 1741373243293,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1741331321667,
-      "end": 1741331321667,
+      "start": 1741373243293,
+      "end": 1741373243293,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1741331321667,
-      "end": 1741331321667,
+      "start": 1741373243293,
+      "end": 1741373243293,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1741331321667,
-      "end": 1741331321667,
+      "start": 1741373243293,
+      "end": 1741373243293,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1741331321667,
-      "end": 1741331321667,
+      "start": 1741373243293,
+      "end": 1741373243293,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1741331321667,
-      "end": 1741331321667,
+      "start": 1741373243293,
+      "end": 1741373243293,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1741331321667,
-      "end": 1741331321667,
+      "start": 1741373243293,
+      "end": 1741373243293,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1741331321667,
-      "end": 1741331321667,
+      "start": 1741373243293,
+      "end": 1741373243293,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1741331321667,
-      "end": 1741331321667,
+      "start": 1741373243294,
+      "end": 1741373243294,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1741331321667,
-      "end": 1741331321667,
+      "start": 1741373243294,
+      "end": 1741373243294,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1741331321667,
-      "end": 1741331321667,
+      "start": 1741373243294,
+      "end": 1741373243294,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1741331321667,
-      "end": 1741331321667,
+      "start": 1741373243294,
+      "end": 1741373243294,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1741331321667,
-      "end": 1741331321667,
+      "start": 1741373243294,
+      "end": 1741373243294,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1741331321667,
-      "end": 1741331321667,
+      "start": 1741373243294,
+      "end": 1741373243294,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref, onMounted, onUpdated } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, openBlock as _openBlock, createElementBlock as _createElementBlock, createCommentVNode as _createCommentVNode, resolveComponent as _resolveComponent, createVNode as _createVNode, createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, withCtx as _withCtx, createBlock as _createBlock, withModifiers as _withModifiers, createTextVNode as _createTextVNode, isRef as _isRef } from \"vue\";\nconst _hoisted_1 = { class: \"flex max-[800px]:flex-wrap justify-between max-[800px]:h-full gap-y-10 gap-x-6\" };\nconst _hoisted_2 = { key: 0 };\nconst _hoisted_3 = { class: \"w-4/12 max-lg:w-5/12 max-[800px]:w-full\" };\nconst _hoisted_4 = { class: \"w-full flex flex-col gap-y-2\" };\nconst _hoisted_5 = { class: \"flex justify-between items-center\" };\nconst _hoisted_6 = { class: \"flex items-center gap-x-4 mb-4\" };\nconst _hoisted_7 = { key: 0 };\nconst _hoisted_8 = /* @__PURE__ */ _createElementVNode(\"svg\", {\n  width: \"15px\",\n  height: \"15px\",\n  viewBox: \"0 0 24 24\",\n  fill: \"none\"\n}, [\n  /* @__PURE__ */ _createElementVNode(\"path\", {\n    class: \"dark:stroke-white stroke-black\",\n    d: \"M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5\",\n    \"stroke-width\": \"2\",\n    \"stroke-linecap\": \"round\"\n  })\n], -1);\nconst _hoisted_9 = [\n  _hoisted_8\n];\nconst _hoisted_10 = { key: 2 };\nconst _hoisted_11 = /* @__PURE__ */ _createElementVNode(\"svg\", {\n  width: \"15px\",\n  height: \"15px\",\n  viewBox: \"0 0 24 24\",\n  fill: \"none\"\n}, [\n  /* @__PURE__ */ _createElementVNode(\"path\", {\n    class: \"dark:stroke-white stroke-black\",\n    d: \"M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5\",\n    \"stroke-width\": \"2\",\n    \"stroke-linecap\": \"round\"\n  })\n], -1);\nconst _hoisted_12 = [\n  _hoisted_11\n];\nconst _hoisted_13 = { key: 0 };\nconst _hoisted_14 = { key: 1 };\nimport TheContentBlock from \"~/components/UI/TheContentBlock.vue\";\nimport { useRoute } from \"vue-router\";\nimport { viewSelect } from \"~/hooks/ElemUI\";\nimport { QrcodeStream } from \"vue-qrcode-reader\";\nimport { useStorageStore } from \"~/stores/storage\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nimport TheBreadcrumbs from \"~/components/UI/TheBreadcrumbs.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"storage\",\n  setup(__props) {\n    const route = useRoute();\n    const storageStore = useStorageStore();\n    const scanning = ref(\"\");\n    const selected = ref(viewSelect[0]);\n    const inWidth = ref();\n    const scannedBarcode = ref(null);\n    const onDecode = (value) => {\n      scannedBarcode.value = value;\n      storageStore.searchGoods = value;\n      storageStore.loadAllListSearch({ search: JSON.stringify(storageStore.searchGoods[0].rawValue) });\n      console.log(storageStore.searchGoods);\n      storageStore.streaming = false;\n    };\n    onMounted(() => {\n      inWidth.value = window.innerWidth;\n      storageStore.loadStorageCategoryList();\n    });\n    onUpdated(() => {\n      if (route.path === `/base/storage`) {\n        storageStore.loadAllList();\n      }\n    });\n    return (_ctx, _cache) => {\n      const _component_StorageNav = _resolveComponent(\"StorageNav\");\n      const _component_StorageHeader = _resolveComponent(\"StorageHeader\");\n      const _component_UIcon = _resolveComponent(\"UIcon\");\n      const _component_USelectMenu = _resolveComponent(\"USelectMenu\");\n      const _component_StorageContent = _resolveComponent(\"StorageContent\");\n      const _component_NuxtPage = _resolveComponent(\"NuxtPage\");\n      return _openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n        _unref(inWidth) <= 800 ? (_openBlock(), _createElementBlock(\"div\", _hoisted_2)) : _createCommentVNode(\"\", true),\n        _createElementVNode(\"div\", _hoisted_3, [\n          _createVNode(_component_StorageNav)\n        ]),\n        _createElementVNode(\"div\", _hoisted_4, [\n          _createVNode(TheContentBlock, {\n            onScroll: _cache[2] || (_cache[2] = _withModifiers(() => {\n            }, [\"prevent\"])),\n            onWheel: _cache[3] || (_cache[3] = _withModifiers(() => {\n            }, [\"prevent\"])),\n            onTouch: _cache[4] || (_cache[4] = _withModifiers(() => {\n            }, [\"prevent\"]))\n          }, {\n            default: _withCtx(() => [\n              _createVNode(_component_StorageHeader, {\n                ref: _unref(storageStore).scan,\n                onOpenStreamSearch: _cache[0] || (_cache[0] = ($event) => _unref(storageStore).streaming = true)\n              }, null, 512),\n              _unref(storageStore).streaming ? (_openBlock(), _createBlock(TheModal, {\n                key: 0,\n                type: \"resize\",\n                onShowModal: _cache[1] || (_cache[1] = ($event) => {\n                  _unref(storageStore).streaming = false;\n                  scannedBarcode.value = null;\n                })\n              }, {\n                default: _withCtx(() => [\n                  _createElementVNode(\"p\", null, _toDisplayString(_unref(scannedBarcode) ? JSON.stringify(_unref(scannedBarcode)[0].rawValue) : \"not working\"), 1),\n                  _createVNode(_unref(QrcodeStream), {\n                    onDetect: onDecode,\n                    formats: [\"qr_code\", \"aztec\", \"code_128\", \"code_39\", \"code_93\", \"databar\", \"codabar\", \"linear_codes\", \"micro_qr_code\", \"databar_expanded\", \"ean_13\", \"ean_8\", \"itf\"]\n                  })\n                ]),\n                _: 1\n              })) : _createCommentVNode(\"\", true)\n            ]),\n            _: 1\n          }),\n          _createVNode(TheContentBlock, { class: \"w-full\" }, {\n            default: _withCtx(() => [\n              _createElementVNode(\"div\", _hoisted_5, [\n                _createElementVNode(\"div\", _hoisted_6, [\n                  _createVNode(TheBreadcrumbs, {\n                    \"breadcrumb-link\": _unref(route).path === `/base/storage/${_unref(route).params.slug}` || _unref(route).path === `/base/storage/${_unref(route).params.slug}/${_unref(route).params.nestedSlug}` ? `/base/storage` : \"\"\n                  }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Главная\")), 1)\n                    ]),\n                    _: 1\n                  }, 8, [\"breadcrumb-link\"]),\n                  _unref(route).path === `/base/storage/${_unref(route).params.slug}` || _unref(route).path === `/base/storage/${_unref(route).params.slug}/${_unref(route).params.nestedSlug}` ? (_openBlock(), _createElementBlock(\"div\", _hoisted_7, _hoisted_9)) : _createCommentVNode(\"\", true),\n                  _unref(route).path === `/base/storage/${_unref(route).params.slug}` || _unref(route).path === `/base/storage/${_unref(route).params.slug}/${_unref(route).params.nestedSlug}` ? (_openBlock(), _createBlock(TheBreadcrumbs, {\n                    key: 1,\n                    \"breadcrumb-link\": _unref(route).path === `/base/storage/${_unref(route).params.slug}/${_unref(route).params.nestedSlug}` ? `/base/storage/${_unref(route).params.slug}` : \"\"\n                  }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(_toDisplayString(_unref(storageStore).currentCategory.name ? _unref(storageStore).currentCategory.name : _unref(storageStore).storageItem.name), 1)\n                    ]),\n                    _: 1\n                  }, 8, [\"breadcrumb-link\"])) : _createCommentVNode(\"\", true),\n                  _unref(route).path === `/base/storage/${_unref(route).params.slug}/${_unref(route).params.nestedSlug}` ? (_openBlock(), _createElementBlock(\"div\", _hoisted_10, _hoisted_12)) : _createCommentVNode(\"\", true),\n                  _unref(route).path === `/base/storage/${_unref(route).params.slug}/${_unref(route).params.nestedSlug}` ? (_openBlock(), _createBlock(TheBreadcrumbs, { key: 3 }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(_toDisplayString(_unref(route).params.nestedSlug), 1)\n                    ]),\n                    _: 1\n                  })) : _createCommentVNode(\"\", true)\n                ]),\n                _createElementVNode(\"div\", null, [\n                  _createVNode(_component_USelectMenu, {\n                    modelValue: _unref(selected),\n                    \"onUpdate:modelValue\": _cache[5] || (_cache[5] = ($event) => _isRef(selected) ? selected.value = $event : null),\n                    options: _unref(viewSelect)\n                  }, {\n                    label: _withCtx(() => [\n                      _createVNode(_component_UIcon, {\n                        name: _unref(selected).icon,\n                        class: \"w-4 h-4\"\n                      }, null, 8, [\"name\"]),\n                      _createTextVNode(\" \" + _toDisplayString(_unref(selected).label), 1)\n                    ]),\n                    _: 1\n                  }, 8, [\"modelValue\", \"options\"])\n                ])\n              ]),\n              !_unref(route).params.slug ? (_openBlock(), _createElementBlock(\"div\", _hoisted_13, [\n                _createVNode(_component_StorageContent)\n              ])) : (_openBlock(), _createElementBlock(\"div\", _hoisted_14, [\n                _createVNode(_component_NuxtPage)\n              ]))\n            ]),\n            _: 1\n          })\n        ])\n      ]);\n    };\n  }\n});\n",
-      "start": 1741331321667,
-      "end": 1741331321673,
+      "start": 1741373243295,
+      "end": 1741373243303,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -204,15 +204,15 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1741331321673,
-      "end": 1741331321673,
+      "start": 1741373243303,
+      "end": 1741373243303,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
       "result": "\nconst __nuxt_page_meta = null\nexport default __nuxt_page_meta\n",
-      "start": 1741331321673,
-      "end": 1741331321674,
+      "start": 1741373243306,
+      "end": 1741373243306,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -225,38 +225,38 @@
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1741331321674,
-      "end": 1741331321674,
+      "start": 1741373243307,
+      "end": 1741373243307,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1741331321674,
-      "end": 1741331321674,
+      "start": 1741373243307,
+      "end": 1741373243307,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1741331321675,
-      "end": 1741331321675,
+      "start": 1741373243307,
+      "end": 1741373243307,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1741331321675,
-      "end": 1741331321675,
+      "start": 1741373243307,
+      "end": 1741373243307,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1741331321675,
-      "end": 1741331321675,
+      "start": 1741373243307,
+      "end": 1741373243307,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1741331321675,
-      "end": 1741331321675,
+      "start": 1741373243307,
+      "end": 1741373243307,
       "order": "normal"
     }
   ]
