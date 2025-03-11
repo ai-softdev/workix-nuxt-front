@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { unref as _unref } from \"vue\"\nimport { ssrRenderClass as _ssrRenderClass, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\"\n\nimport {useChat} from \"~/stores/chat\";\nimport {clearTimer} from \"~/hooks/ElemUI\";\nimport useRecorder from \"~/hooks/Recordings\";\nconst threshold = 500\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'ChatVoiceContent',\n  __ssrInlineRender: true,\n  setup(__props) {\n\nconst chat = useChat()\nconst isLongClick = ref(false)\nconst recorder = useRecorder()\nconst startClick = () => {\n  chat.voiceTimer = 0\n  chat.clickerTimeout = null\n  increaseTime()\n}\nconst increaseTime = () => {\n  chat.clickerTimeout = setTimeout(() => {\n    chat.recordingVoice = true\n    chat.voiceTimer++\n    increaseTime()\n  }, 200)\n}\nconst endClick = () => {\n  recorder.createWaveSurfer()\n  recorder.recButton()\n  clearTimer(chat.recordingVoice = false, chat.clickerTimeout)\n  isLongClick.value = chat.voiceTimer >= threshold / 1000\n  if (!isLongClick.value) {\n\n    setTimeout(() => {\n      chat.showVoiceInfo = true\n    }, 0)\n    setTimeout(() => {\n      chat.showVoiceInfo = false\n    }, 3000)\n  }\n}\n\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  _push(`<div${\n    _ssrRenderAttrs(_attrs)\n  } data-v-fa4f1502><div class=\"absolute\" id=\"mic\" data-v-fa4f1502></div><div class=\"${\n    _ssrRenderClass([{'rounded-full pt-1 px-1 bg-blueSemiLight' : _unref(chat).recordingVoice}, \"absolute right-2 bottom-0.5 transition-all\"])\n  }\" data-v-fa4f1502><button data-v-fa4f1502><svg class=\"${\n    _ssrRenderClass([{'fill-white hover:!fill-white' : _unref(chat).recordingVoice}, \"fill-gray-500 dark:hover:fill-gray-300 hover:fill-gray-700 transition-all\"])\n  }\" width=\"35px\" height=\"35px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" data-v-fa4f1502><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 4.5C10.314 4.5 9 5.80455 9 7.35V12.15C9 13.6955 10.314 15 12 15C13.686 15 15 13.6955 15 12.15L15 7.35C15 5.80455 13.686 4.5 12 4.5ZM7.5 7.35C7.5 4.919 9.54387 3 12 3C14.4561 3 16.5 4.919 16.5 7.35L16.5 12.15C16.5 14.581 14.4561 16.5 12 16.5C9.54387 16.5 7.5 14.581 7.5 12.15V7.35ZM6.75 12.75C6.75 15.1443 9.0033 17.25 12 17.25C14.9967 17.25 17.25 15.1443 17.25 12.75H18.75C18.75 15.9176 16.0499 18.3847 12.75 18.7129V21H11.25V18.7129C7.95007 18.3847 5.25 15.9176 5.25 12.75H6.75Z\" data-v-fa4f1502></path></svg></button><audio data-v-fa4f1502></audio></div></div>`)\n}\n}\n\n})",
-      "start": 1741685626949,
-      "end": 1741685626949,
+      "start": 1741686142568,
+      "end": 1741686142568,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1741685626949,
-      "end": 1741685626949,
+      "start": 1741686142568,
+      "end": 1741686142568,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1741685626949,
-      "end": 1741685626949,
+      "start": 1741686142568,
+      "end": 1741686142568,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1741685626949,
-      "end": 1741685626949,
+      "start": 1741686142568,
+      "end": 1741686142568,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1741685626949,
-      "end": 1741685626949,
+      "start": 1741686142568,
+      "end": 1741686142568,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1741685626949,
-      "end": 1741685626949,
+      "start": 1741686142568,
+      "end": 1741686142568,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1741685626949,
-      "end": 1741685626949,
+      "start": 1741686142568,
+      "end": 1741686142568,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1741685626949,
-      "end": 1741685626949,
+      "start": 1741686142568,
+      "end": 1741686142568,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1741685626949,
-      "end": 1741685626949,
+      "start": 1741686142568,
+      "end": 1741686142568,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref } from \"vue\";\nimport { ssrRenderClass as _ssrRenderClass, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport { useChat } from \"~/stores/chat\";\nimport { clearTimer } from \"~/hooks/ElemUI\";\nimport useRecorder from \"~/hooks/Recordings\";\nconst threshold = 500;\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ChatVoiceContent\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const chat = useChat();\n    const isLongClick = ref(false);\n    const recorder = useRecorder();\n    const startClick = () => {\n      chat.voiceTimer = 0;\n      chat.clickerTimeout = null;\n      increaseTime();\n    };\n    const increaseTime = () => {\n      chat.clickerTimeout = setTimeout(() => {\n        chat.recordingVoice = true;\n        chat.voiceTimer++;\n        increaseTime();\n      }, 200);\n    };\n    const endClick = () => {\n      recorder.createWaveSurfer();\n      recorder.recButton();\n      clearTimer(chat.recordingVoice = false, chat.clickerTimeout);\n      isLongClick.value = chat.voiceTimer >= threshold / 1e3;\n      if (!isLongClick.value) {\n        setTimeout(() => {\n          chat.showVoiceInfo = true;\n        }, 0);\n        setTimeout(() => {\n          chat.showVoiceInfo = false;\n        }, 3e3);\n      }\n    };\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)} data-v-fa4f1502><div class=\"absolute\" id=\"mic\" data-v-fa4f1502></div><div class=\"${_ssrRenderClass([{ \"rounded-full pt-1 px-1 bg-blueSemiLight\": _unref(chat).recordingVoice }, \"absolute right-2 bottom-0.5 transition-all\"])}\" data-v-fa4f1502><button data-v-fa4f1502><svg class=\"${_ssrRenderClass([{ \"fill-white hover:!fill-white\": _unref(chat).recordingVoice }, \"fill-gray-500 dark:hover:fill-gray-300 hover:fill-gray-700 transition-all\"])}\" width=\"35px\" height=\"35px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" data-v-fa4f1502><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 4.5C10.314 4.5 9 5.80455 9 7.35V12.15C9 13.6955 10.314 15 12 15C13.686 15 15 13.6955 15 12.15L15 7.35C15 5.80455 13.686 4.5 12 4.5ZM7.5 7.35C7.5 4.919 9.54387 3 12 3C14.4561 3 16.5 4.919 16.5 7.35L16.5 12.15C16.5 14.581 14.4561 16.5 12 16.5C9.54387 16.5 7.5 14.581 7.5 12.15V7.35ZM6.75 12.75C6.75 15.1443 9.0033 17.25 12 17.25C14.9967 17.25 17.25 15.1443 17.25 12.75H18.75C18.75 15.9176 16.0499 18.3847 12.75 18.7129V21H11.25V18.7129C7.95007 18.3847 5.25 15.9176 5.25 12.75H6.75Z\" data-v-fa4f1502></path></svg></button><audio data-v-fa4f1502></audio></div></div>`);\n    };\n  }\n});\n",
-      "start": 1741685626949,
-      "end": 1741685627462,
+      "start": 1741686142568,
+      "end": 1741686144082,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -86,171 +86,171 @@
     },
     {
       "name": "vite:json",
-      "start": 1741685627463,
-      "end": 1741685627463,
+      "start": 1741686144083,
+      "end": 1741686144083,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1741685627463,
-      "end": 1741685627463,
+      "start": 1741686144083,
+      "end": 1741686144083,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1741685627464,
-      "end": 1741685627464,
+      "start": 1741686144083,
+      "end": 1741686144083,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1741685627464,
-      "end": 1741685627464,
+      "start": 1741686144083,
+      "end": 1741686144083,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1741685627464,
-      "end": 1741685627464,
+      "start": 1741686144084,
+      "end": 1741686144084,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1741685627464,
-      "end": 1741685627464,
+      "start": 1741686144084,
+      "end": 1741686144084,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1741685627465,
-      "end": 1741685627465,
+      "start": 1741686144084,
+      "end": 1741686144084,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1741685627465,
-      "end": 1741685627465,
+      "start": 1741686144084,
+      "end": 1741686144084,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1741685627465,
-      "end": 1741685627465,
+      "start": 1741686144085,
+      "end": 1741686144085,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1741685627466,
-      "end": 1741685627466,
+      "start": 1741686144085,
+      "end": 1741686144086,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1741685627467,
-      "end": 1741685627472,
+      "start": 1741686144087,
+      "end": 1741686144091,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1741685627476,
-      "end": 1741685627476,
+      "start": 1741686144091,
+      "end": 1741686144092,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1741685627477,
-      "end": 1741685627477,
+      "start": 1741686144092,
+      "end": 1741686144092,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1741685627477,
-      "end": 1741685627477,
+      "start": 1741686144092,
+      "end": 1741686144092,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1741685627482,
-      "end": 1741685627482,
+      "start": 1741686144092,
+      "end": 1741686144092,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1741685627485,
-      "end": 1741685627485,
+      "start": 1741686144092,
+      "end": 1741686144092,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1741685627485,
-      "end": 1741685627485,
+      "start": 1741686144092,
+      "end": 1741686144092,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1741685627485,
-      "end": 1741685627485,
+      "start": 1741686144092,
+      "end": 1741686144092,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1741685627485,
-      "end": 1741685627486,
+      "start": 1741686144092,
+      "end": 1741686144092,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1741685627486,
-      "end": 1741685627486,
+      "start": 1741686144092,
+      "end": 1741686144093,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1741685627486,
-      "end": 1741685627486,
+      "start": 1741686144092,
+      "end": 1741686144093,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1741685627488,
-      "end": 1741685627488,
+      "start": 1741686144093,
+      "end": 1741686144093,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1741685627488,
-      "end": 1741685627488,
+      "start": 1741686144093,
+      "end": 1741686144093,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1741685627490,
-      "end": 1741685627490,
+      "start": 1741686144093,
+      "end": 1741686144094,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1741685627490,
-      "end": 1741685627490,
+      "start": 1741686144093,
+      "end": 1741686144094,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1741685627490,
-      "end": 1741685627490,
+      "start": 1741686144094,
+      "end": 1741686144094,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1741685627490,
-      "end": 1741685627491,
+      "start": 1741686144094,
+      "end": 1741686144094,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref } from \"vue\";\nimport { ssrRenderClass as _ssrRenderClass, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport { useChat } from \"~/stores/chat\";\nimport { clearTimer } from \"~/hooks/ElemUI\";\nimport useRecorder from \"~/hooks/Recordings\";\nconst threshold = 500;\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ChatVoiceContent\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const chat = useChat();\n    const isLongClick = ref(false);\n    const recorder = useRecorder();\n    const startClick = () => {\n      chat.voiceTimer = 0;\n      chat.clickerTimeout = null;\n      increaseTime();\n    };\n    const increaseTime = () => {\n      chat.clickerTimeout = setTimeout(() => {\n        chat.recordingVoice = true;\n        chat.voiceTimer++;\n        increaseTime();\n      }, 200);\n    };\n    const endClick = () => {\n      recorder.createWaveSurfer();\n      recorder.recButton();\n      clearTimer(chat.recordingVoice = false, chat.clickerTimeout);\n      isLongClick.value = chat.voiceTimer >= threshold / 1e3;\n      if (!isLongClick.value) {\n        setTimeout(() => {\n          chat.showVoiceInfo = true;\n        }, 0);\n        setTimeout(() => {\n          chat.showVoiceInfo = false;\n        }, 3e3);\n      }\n    };\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)} data-v-fa4f1502><div class=\"absolute\" id=\"mic\" data-v-fa4f1502></div><div class=\"${_ssrRenderClass([{ \"rounded-full pt-1 px-1 bg-blueSemiLight\": _unref(chat).recordingVoice }, \"absolute right-2 bottom-0.5 transition-all\"])}\" data-v-fa4f1502><button data-v-fa4f1502><svg class=\"${_ssrRenderClass([{ \"fill-white hover:!fill-white\": _unref(chat).recordingVoice }, \"fill-gray-500 dark:hover:fill-gray-300 hover:fill-gray-700 transition-all\"])}\" width=\"35px\" height=\"35px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" data-v-fa4f1502><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 4.5C10.314 4.5 9 5.80455 9 7.35V12.15C9 13.6955 10.314 15 12 15C13.686 15 15 13.6955 15 12.15L15 7.35C15 5.80455 13.686 4.5 12 4.5ZM7.5 7.35C7.5 4.919 9.54387 3 12 3C14.4561 3 16.5 4.919 16.5 7.35L16.5 12.15C16.5 14.581 14.4561 16.5 12 16.5C9.54387 16.5 7.5 14.581 7.5 12.15V7.35ZM6.75 12.75C6.75 15.1443 9.0033 17.25 12 17.25C14.9967 17.25 17.25 15.1443 17.25 12.75H18.75C18.75 15.9176 16.0499 18.3847 12.75 18.7129V21H11.25V18.7129C7.95007 18.3847 5.25 15.9176 5.25 12.75H6.75Z\" data-v-fa4f1502></path></svg></button><audio data-v-fa4f1502></audio></div></div>`);\n    };\n  }\n});\n",
-      "start": 1741685627495,
-      "end": 1741685627499,
+      "start": 1741686144094,
+      "end": 1741686144113,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -264,8 +264,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref } from \"vue\";\nimport { ssrRenderClass as _ssrRenderClass, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport { useChat } from \"~/stores/chat\";\nimport { clearTimer } from \"~/hooks/ElemUI\";\nimport useRecorder from \"~/hooks/Recordings\";\nconst threshold = 500;\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ChatVoiceContent\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const chat = useChat();\n    const isLongClick = ref(false);\n    const recorder = useRecorder();\n    const startClick = () => {\n      chat.voiceTimer = 0;\n      chat.clickerTimeout = null;\n      increaseTime();\n    };\n    const increaseTime = () => {\n      chat.clickerTimeout = setTimeout(() => {\n        chat.recordingVoice = true;\n        chat.voiceTimer++;\n        increaseTime();\n      }, 200);\n    };\n    const endClick = () => {\n      recorder.createWaveSurfer();\n      recorder.recButton();\n      clearTimer(chat.recordingVoice = false, chat.clickerTimeout);\n      isLongClick.value = chat.voiceTimer >= threshold / 1e3;\n      if (!isLongClick.value) {\n        setTimeout(() => {\n          chat.showVoiceInfo = true;\n        }, 0);\n        setTimeout(() => {\n          chat.showVoiceInfo = false;\n        }, 3e3);\n      }\n    };\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)} data-v-fa4f1502><div class=\"absolute\" id=\"mic\" data-v-fa4f1502></div><div class=\"${_ssrRenderClass([{ \"rounded-full pt-1 px-1 bg-blueSemiLight\": _unref(chat).recordingVoice }, \"absolute right-2 bottom-0.5 transition-all\"])}\" data-v-fa4f1502><button data-v-fa4f1502><svg class=\"${_ssrRenderClass([{ \"fill-white hover:!fill-white\": _unref(chat).recordingVoice }, \"fill-gray-500 dark:hover:fill-gray-300 hover:fill-gray-700 transition-all\"])}\" width=\"35px\" height=\"35px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" data-v-fa4f1502><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 4.5C10.314 4.5 9 5.80455 9 7.35V12.15C9 13.6955 10.314 15 12 15C13.686 15 15 13.6955 15 12.15L15 7.35C15 5.80455 13.686 4.5 12 4.5ZM7.5 7.35C7.5 4.919 9.54387 3 12 3C14.4561 3 16.5 4.919 16.5 7.35L16.5 12.15C16.5 14.581 14.4561 16.5 12 16.5C9.54387 16.5 7.5 14.581 7.5 12.15V7.35ZM6.75 12.75C6.75 15.1443 9.0033 17.25 12 17.25C14.9967 17.25 17.25 15.1443 17.25 12.75H18.75C18.75 15.9176 16.0499 18.3847 12.75 18.7129V21H11.25V18.7129C7.95007 18.3847 5.25 15.9176 5.25 12.75H6.75Z\" data-v-fa4f1502></path></svg></button><audio data-v-fa4f1502></audio></div></div>`);\n    };\n  }\n});\n",
-      "start": 1741685627495,
-      "end": 1741685627499,
+      "start": 1741686144094,
+      "end": 1741686144113,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -278,56 +278,56 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1741685627499,
-      "end": 1741685627499,
+      "start": 1741686144113,
+      "end": 1741686144113,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1741685627499,
-      "end": 1741685627499,
+      "start": 1741686144113,
+      "end": 1741686144113,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1741685627499,
-      "end": 1741685627499,
+      "start": 1741686144113,
+      "end": 1741686144113,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1741685627499,
-      "end": 1741685627499,
+      "start": 1741686144113,
+      "end": 1741686144113,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1741685627499,
-      "end": 1741685627500,
+      "start": 1741686144114,
+      "end": 1741686144115,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1741685627500,
-      "end": 1741685627500,
+      "start": 1741686144115,
+      "end": 1741686144115,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1741685627501,
-      "end": 1741685627501,
+      "start": 1741686144116,
+      "end": 1741686144117,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1741685627501,
-      "end": 1741685627501,
+      "start": 1741686144117,
+      "end": 1741686144118,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1741685627501,
-      "end": 1741685627501,
+      "start": 1741686144118,
+      "end": 1741686144118,
       "order": "normal"
     }
   ]

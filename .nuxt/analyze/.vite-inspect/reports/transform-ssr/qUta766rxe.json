@@ -4,63 +4,63 @@
     {
       "name": "vite:load-fallback",
       "result": "import {defineStore, type PiniaCustomProperties} from \"pinia\";\nimport axios from \"~/composables/axios\";\nimport {toast} from \"vue3-toastify\";\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\n\nexport const useDocumentStore = defineStore('document-store', {\n\n  state: () => ({\n    documentList: {},\n    documentItem: {},\n    userList: ref({}),\n    createChainForm: [],\n    showDepartment: [],\n    showUsersNode: [],\n    chainSchedule: {},\n    createForm: {\n      title: '',\n      description: '',\n      file: '',\n      src: '',\n      receiver_id: ''\n    },\n    draggableUser: null,\n    showContext: null,\n    showContextDepartment: null,\n    showWarn: false,\n    showCreateDoc: false,\n    showRejectedWarn: false\n  }),\n  getters: {\n    get_all_document: (state) => state.documentList\n  },\n  actions: {\n    async docSign(params: { id: number, second_password: string | number }): Promise<void> {\n      await axios.patch(`document/sign/${params.id}`, {\n        second_password: params.second_password\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        toast.success('Доступ разрешен', {autoClose: 1000, theme: 'auto'})\n      })\n    },\n    async loadAllDocument(params: { page: number, limit: number, type?: any }): Promise<void> {\n      await axios.get(`document/document-list${params.type ? '/' + params.type : ''}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        this.documentList = res.data\n      })\n    },\n\n    async loadDocument(params: { slug: string[] | string}): Promise<void> {\n      await axios.get(`document/${params.slug}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        this.documentItem = res.data\n\n      })\n    },\n\n    async docCreate(params: { title: any, description: any, receiver_id: any, file: any }): Promise<void> {\n      let fd = new FormData()\n      fd.set('title', params.title)\n      fd.set('description', params.description)\n      fd.set('receiver_id', params.receiver_id)\n      if (typeof params.file !== 'string') {\n        fd.set('file', params.file)\n      }\n      await axios.post(`document/create`, fd, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        toast.success('Документ создан', {autoClose: 1000, theme: 'auto'})\n        this.loadAllDocument({ page: 1, limit: 10})\n        this.showCreateDoc = false\n      })\n    },\n\n    async docUpdate(params: { title?: any, description?: any, users: any, id: any }): Promise<void> {\n      let fd = new FormData()\n      // fd.set('users', params.users)\n      // fd.set('title', params.title)\n      // fd.set('description', params.description)\n      await axios.patch(`document/update/${params.id}`, {\n        title: params.title,\n        description: params.description,\n        users: params.users,\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        toast.success('Успешный запуск', {autoClose: 1000, theme: 'auto'})\n      })\n    },\n\n    async docDelete(params: { slug: string[] | string }) {\n      await axios.delete(`document/delete/${params.slug}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        toast.success('Успешно удалён', {theme: 'auto', autoClose: 1000})\n\n      })\n    }\n  }\n})",
-      "start": 1741685620851,
-      "end": 1741685622865,
+      "start": 1741686139002,
+      "end": 1741686140111,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1741685622865,
-      "end": 1741685622865,
+      "start": 1741686140111,
+      "end": 1741686140111,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1741685622865,
-      "end": 1741685622865,
+      "start": 1741686140111,
+      "end": 1741686140111,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1741685622865,
-      "end": 1741685622865,
+      "start": 1741686140111,
+      "end": 1741686140111,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1741685622865,
-      "end": 1741685622865,
+      "start": 1741686140111,
+      "end": 1741686140111,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1741685622865,
-      "end": 1741685622865,
+      "start": 1741686140111,
+      "end": 1741686140111,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1741685622865,
-      "end": 1741685622865,
+      "start": 1741686140111,
+      "end": 1741686140111,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1741685622865,
-      "end": 1741685622865,
+      "start": 1741686140111,
+      "end": 1741686140111,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1741685622866,
-      "end": 1741685622866,
+      "start": 1741686140111,
+      "end": 1741686140111,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineStore } from \"pinia\";\nimport axios from \"~/composables/axios\";\nimport { toast } from \"vue3-toastify\";\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\nexport const useDocumentStore = defineStore(\"document-store\", {\n  state: () => ({\n    documentList: {},\n    documentItem: {},\n    userList: ref({}),\n    createChainForm: [],\n    showDepartment: [],\n    showUsersNode: [],\n    chainSchedule: {},\n    createForm: {\n      title: \"\",\n      description: \"\",\n      file: \"\",\n      src: \"\",\n      receiver_id: \"\"\n    },\n    draggableUser: null,\n    showContext: null,\n    showContextDepartment: null,\n    showWarn: false,\n    showCreateDoc: false,\n    showRejectedWarn: false\n  }),\n  getters: {\n    get_all_document: (state) => state.documentList\n  },\n  actions: {\n    async docSign(params) {\n      await axios.patch(`document/sign/${params.id}`, {\n        second_password: params.second_password\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        toast.success(\"Доступ разрешен\", { autoClose: 1e3, theme: \"auto\" });\n      });\n    },\n    async loadAllDocument(params) {\n      await axios.get(`document/document-list${params.type ? \"/\" + params.type : \"\"}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.documentList = res.data;\n      });\n    },\n    async loadDocument(params) {\n      await axios.get(`document/${params.slug}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.documentItem = res.data;\n      });\n    },\n    async docCreate(params) {\n      let fd = new FormData();\n      fd.set(\"title\", params.title);\n      fd.set(\"description\", params.description);\n      fd.set(\"receiver_id\", params.receiver_id);\n      if (typeof params.file !== \"string\") {\n        fd.set(\"file\", params.file);\n      }\n      await axios.post(`document/create`, fd, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        toast.success(\"Документ создан\", { autoClose: 1e3, theme: \"auto\" });\n        this.loadAllDocument({ page: 1, limit: 10 });\n        this.showCreateDoc = false;\n      });\n    },\n    async docUpdate(params) {\n      let fd = new FormData();\n      await axios.patch(`document/update/${params.id}`, {\n        title: params.title,\n        description: params.description,\n        users: params.users\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        toast.success(\"Успешный запуск\", { autoClose: 1e3, theme: \"auto\" });\n      });\n    },\n    async docDelete(params) {\n      await axios.delete(`document/delete/${params.slug}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        toast.success(\"Успешно удалён\", { theme: \"auto\", autoClose: 1e3 });\n      });\n    }\n  }\n});\n",
-      "start": 1741685622866,
-      "end": 1741685623777,
+      "start": 1741686140111,
+      "end": 1741686141692,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -76,173 +76,173 @@
     },
     {
       "name": "vite:json",
-      "start": 1741685623778,
-      "end": 1741685623778,
+      "start": 1741686141693,
+      "end": 1741686141693,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1741685623778,
-      "end": 1741685623778,
+      "start": 1741686141693,
+      "end": 1741686141693,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1741685623778,
-      "end": 1741685623778,
+      "start": 1741686141693,
+      "end": 1741686141693,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1741685623778,
-      "end": 1741685623778,
+      "start": 1741686141693,
+      "end": 1741686141693,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1741685623778,
-      "end": 1741685623779,
+      "start": 1741686141693,
+      "end": 1741686141693,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1741685623778,
-      "end": 1741685623779,
+      "start": 1741686141693,
+      "end": 1741686141693,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1741685623779,
-      "end": 1741685623779,
+      "start": 1741686141694,
+      "end": 1741686141694,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1741685623779,
-      "end": 1741685623779,
+      "start": 1741686141694,
+      "end": 1741686141694,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1741685623780,
-      "end": 1741685623780,
+      "start": 1741686141695,
+      "end": 1741686141695,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1741685623780,
-      "end": 1741685623781,
+      "start": 1741686141695,
+      "end": 1741686141695,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1741685623781,
-      "end": 1741685623783,
+      "start": 1741686141695,
+      "end": 1741686141697,
       "order": "normal"
     },
     {
       "name": "vite:define",
       "result": "import { defineStore } from \"pinia\";\nimport axios from \"~/composables/axios\";\nimport { toast } from \"vue3-toastify\";\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\nexport const useDocumentStore = defineStore(\"document-store\", {\n  state: () => ({\n    documentList: {},\n    documentItem: {},\n    userList: ref({}),\n    createChainForm: [],\n    showDepartment: [],\n    showUsersNode: [],\n    chainSchedule: {},\n    createForm: {\n      title: \"\",\n      description: \"\",\n      file: \"\",\n      src: \"\",\n      receiver_id: \"\"\n    },\n    draggableUser: null,\n    showContext: null,\n    showContextDepartment: null,\n    showWarn: false,\n    showCreateDoc: false,\n    showRejectedWarn: false\n  }),\n  getters: {\n    get_all_document: (state) => state.documentList\n  },\n  actions: {\n    async docSign(params) {\n      await axios.patch(`document/sign/${params.id}`, {\n        second_password: params.second_password\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        toast.success(\"Доступ разрешен\", { autoClose: 1e3, theme: \"auto\" });\n      });\n    },\n    async loadAllDocument(params) {\n      await axios.get(`document/document-list${params.type ? \"/\" + params.type : \"\"}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.documentList = res.data;\n      });\n    },\n    async loadDocument(params) {\n      await axios.get(`document/${params.slug}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.documentItem = res.data;\n      });\n    },\n    async docCreate(params) {\n      let fd = new FormData();\n      fd.set(\"title\", params.title);\n      fd.set(\"description\", params.description);\n      fd.set(\"receiver_id\", params.receiver_id);\n      if (typeof params.file !== \"string\") {\n        fd.set(\"file\", params.file);\n      }\n      await axios.post(`document/create`, fd, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        toast.success(\"Документ создан\", { autoClose: 1e3, theme: \"auto\" });\n        this.loadAllDocument({ page: 1, limit: 10 });\n        this.showCreateDoc = false;\n      });\n    },\n    async docUpdate(params) {\n      let fd = new FormData();\n      await axios.patch(`document/update/${params.id}`, {\n        title: params.title,\n        description: params.description,\n        users: params.users\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        toast.success(\"Успешный запуск\", { autoClose: 1e3, theme: \"auto\" });\n      });\n    },\n    async docDelete(params) {\n      await axios.delete(`document/delete/${params.slug}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        toast.success(\"Успешно удалён\", { theme: \"auto\", autoClose: 1e3 });\n      });\n    }\n  }\n});\n",
-      "start": 1741685623783,
-      "end": 1741685624512,
+      "start": 1741686141697,
+      "end": 1741686141953,
       "order": "normal",
       "sourcemaps": "{\n  \"version\": 3,\n  \"sources\": [\"D:/projects/nuxt/workix-nuxt-front/stores/documents.ts\"],\n  \"sourcesContent\": [\"import { defineStore } from \\\"pinia\\\";\\nimport axios from \\\"~/composables/axios\\\";\\nimport { toast } from \\\"vue3-toastify\\\";\\nimport nuxtStorage from \\\"nuxt-storage/nuxt-storage\\\";\\nexport const useDocumentStore = defineStore(\\\"document-store\\\", {\\n  state: () => ({\\n    documentList: {},\\n    documentItem: {},\\n    userList: ref({}),\\n    createChainForm: [],\\n    showDepartment: [],\\n    showUsersNode: [],\\n    chainSchedule: {},\\n    createForm: {\\n      title: \\\"\\\",\\n      description: \\\"\\\",\\n      file: \\\"\\\",\\n      src: \\\"\\\",\\n      receiver_id: \\\"\\\"\\n    },\\n    draggableUser: null,\\n    showContext: null,\\n    showContextDepartment: null,\\n    showWarn: false,\\n    showCreateDoc: false,\\n    showRejectedWarn: false\\n  }),\\n  getters: {\\n    get_all_document: (state) => state.documentList\\n  },\\n  actions: {\\n    async docSign(params) {\\n      await axios.patch(`document/sign/${params.id}`, {\\n        second_password: params.second_password\\n      }, {\\n        headers: {\\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\\\"token\\\")}`\\n        }\\n      }).then((res) => {\\n        toast.success(\\\"Доступ разрешен\\\", { autoClose: 1e3, theme: \\\"auto\\\" });\\n      });\\n    },\\n    async loadAllDocument(params) {\\n      await axios.get(`document/document-list${params.type ? \\\"/\\\" + params.type : \\\"\\\"}`, {\\n        headers: {\\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\\\"token\\\")}`\\n        }\\n      }).then((res) => {\\n        this.documentList = res.data;\\n      });\\n    },\\n    async loadDocument(params) {\\n      await axios.get(`document/${params.slug}`, {\\n        headers: {\\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\\\"token\\\")}`\\n        }\\n      }).then((res) => {\\n        this.documentItem = res.data;\\n      });\\n    },\\n    async docCreate(params) {\\n      let fd = new FormData();\\n      fd.set(\\\"title\\\", params.title);\\n      fd.set(\\\"description\\\", params.description);\\n      fd.set(\\\"receiver_id\\\", params.receiver_id);\\n      if (typeof params.file !== \\\"string\\\") {\\n        fd.set(\\\"file\\\", params.file);\\n      }\\n      await axios.post(`document/create`, fd, {\\n        headers: {\\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\\\"token\\\")}`\\n        }\\n      }).then((res) => {\\n        toast.success(\\\"Документ создан\\\", { autoClose: 1e3, theme: \\\"auto\\\" });\\n        this.loadAllDocument({ page: 1, limit: 10 });\\n        this.showCreateDoc = false;\\n      });\\n    },\\n    async docUpdate(params) {\\n      let fd = new FormData();\\n      await axios.patch(`document/update/${params.id}`, {\\n        title: params.title,\\n        description: params.description,\\n        users: params.users\\n      }, {\\n        headers: {\\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\\\"token\\\")}`\\n        }\\n      }).then((res) => {\\n        toast.success(\\\"Успешный запуск\\\", { autoClose: 1e3, theme: \\\"auto\\\" });\\n      });\\n    },\\n    async docDelete(params) {\\n      await axios.delete(`document/delete/${params.slug}`, {\\n        headers: {\\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\\\"token\\\")}`\\n        }\\n      }).then((res) => {\\n        toast.success(\\\"Успешно удалён\\\", { theme: \\\"auto\\\", autoClose: 1e3 });\\n      });\\n    }\\n  }\\n});\\n\"],\n  \"mappings\": \"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\",\n  \"names\": []\n}\n"
     },
     {
       "name": "vite:css-post",
-      "start": 1741685624512,
-      "end": 1741685624512,
+      "start": 1741686141954,
+      "end": 1741686141954,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1741685624512,
-      "end": 1741685624512,
+      "start": 1741686141955,
+      "end": 1741686141955,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1741685624512,
-      "end": 1741685624512,
+      "start": 1741686141955,
+      "end": 1741686141955,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1741685624513,
-      "end": 1741685624513,
+      "start": 1741686141956,
+      "end": 1741686141956,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1741685624513,
-      "end": 1741685624520,
+      "start": 1741686141957,
+      "end": 1741686141957,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1741685624520,
-      "end": 1741685624520,
+      "start": 1741686141958,
+      "end": 1741686141958,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1741685624521,
-      "end": 1741685624521,
+      "start": 1741686141960,
+      "end": 1741686141960,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1741685624521,
-      "end": 1741685624531,
+      "start": 1741686141961,
+      "end": 1741686141961,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1741685624521,
-      "end": 1741685624531,
+      "start": 1741686141961,
+      "end": 1741686141961,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1741685624532,
-      "end": 1741685624532,
+      "start": 1741686141962,
+      "end": 1741686141962,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1741685624532,
-      "end": 1741685624532,
+      "start": 1741686141962,
+      "end": 1741686141962,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1741685624533,
-      "end": 1741685624533,
+      "start": 1741686141962,
+      "end": 1741686141963,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1741685624533,
-      "end": 1741685624534,
+      "start": 1741686141962,
+      "end": 1741686141963,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1741685624534,
-      "end": 1741685624534,
+      "start": 1741686141963,
+      "end": 1741686141963,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1741685624534,
-      "end": 1741685624534,
+      "start": 1741686141963,
+      "end": 1741686141963,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref } from 'vue';\nimport { defineStore } from \"pinia\";\nimport axios from \"~/composables/axios\";\nimport { toast } from \"vue3-toastify\";\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\nexport const useDocumentStore = defineStore(\"document-store\", {\n  state: () => ({\n    documentList: {},\n    documentItem: {},\n    userList: ref({}),\n    createChainForm: [],\n    showDepartment: [],\n    showUsersNode: [],\n    chainSchedule: {},\n    createForm: {\n      title: \"\",\n      description: \"\",\n      file: \"\",\n      src: \"\",\n      receiver_id: \"\"\n    },\n    draggableUser: null,\n    showContext: null,\n    showContextDepartment: null,\n    showWarn: false,\n    showCreateDoc: false,\n    showRejectedWarn: false\n  }),\n  getters: {\n    get_all_document: (state) => state.documentList\n  },\n  actions: {\n    async docSign(params) {\n      await axios.patch(`document/sign/${params.id}`, {\n        second_password: params.second_password\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        toast.success(\"Доступ разрешен\", { autoClose: 1e3, theme: \"auto\" });\n      });\n    },\n    async loadAllDocument(params) {\n      await axios.get(`document/document-list${params.type ? \"/\" + params.type : \"\"}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.documentList = res.data;\n      });\n    },\n    async loadDocument(params) {\n      await axios.get(`document/${params.slug}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.documentItem = res.data;\n      });\n    },\n    async docCreate(params) {\n      let fd = new FormData();\n      fd.set(\"title\", params.title);\n      fd.set(\"description\", params.description);\n      fd.set(\"receiver_id\", params.receiver_id);\n      if (typeof params.file !== \"string\") {\n        fd.set(\"file\", params.file);\n      }\n      await axios.post(`document/create`, fd, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        toast.success(\"Документ создан\", { autoClose: 1e3, theme: \"auto\" });\n        this.loadAllDocument({ page: 1, limit: 10 });\n        this.showCreateDoc = false;\n      });\n    },\n    async docUpdate(params) {\n      let fd = new FormData();\n      await axios.patch(`document/update/${params.id}`, {\n        title: params.title,\n        description: params.description,\n        users: params.users\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        toast.success(\"Успешный запуск\", { autoClose: 1e3, theme: \"auto\" });\n      });\n    },\n    async docDelete(params) {\n      await axios.delete(`document/delete/${params.slug}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        toast.success(\"Успешно удалён\", { theme: \"auto\", autoClose: 1e3 });\n      });\n    }\n  }\n});\n",
-      "start": 1741685624535,
-      "end": 1741685624538,
+      "start": 1741686141965,
+      "end": 1741686141971,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -256,8 +256,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref } from 'vue';\nimport { defineStore } from \"pinia\";\nimport axios from \"~/composables/axios\";\nimport { toast } from \"vue3-toastify\";\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\nexport const useDocumentStore = defineStore(\"document-store\", {\n  state: () => ({\n    documentList: {},\n    documentItem: {},\n    userList: ref({}),\n    createChainForm: [],\n    showDepartment: [],\n    showUsersNode: [],\n    chainSchedule: {},\n    createForm: {\n      title: \"\",\n      description: \"\",\n      file: \"\",\n      src: \"\",\n      receiver_id: \"\"\n    },\n    draggableUser: null,\n    showContext: null,\n    showContextDepartment: null,\n    showWarn: false,\n    showCreateDoc: false,\n    showRejectedWarn: false\n  }),\n  getters: {\n    get_all_document: (state) => state.documentList\n  },\n  actions: {\n    async docSign(params) {\n      await axios.patch(`document/sign/${params.id}`, {\n        second_password: params.second_password\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        toast.success(\"Доступ разрешен\", { autoClose: 1e3, theme: \"auto\" });\n      });\n    },\n    async loadAllDocument(params) {\n      await axios.get(`document/document-list${params.type ? \"/\" + params.type : \"\"}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.documentList = res.data;\n      });\n    },\n    async loadDocument(params) {\n      await axios.get(`document/${params.slug}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.documentItem = res.data;\n      });\n    },\n    async docCreate(params) {\n      let fd = new FormData();\n      fd.set(\"title\", params.title);\n      fd.set(\"description\", params.description);\n      fd.set(\"receiver_id\", params.receiver_id);\n      if (typeof params.file !== \"string\") {\n        fd.set(\"file\", params.file);\n      }\n      await axios.post(`document/create`, fd, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        toast.success(\"Документ создан\", { autoClose: 1e3, theme: \"auto\" });\n        this.loadAllDocument({ page: 1, limit: 10 });\n        this.showCreateDoc = false;\n      });\n    },\n    async docUpdate(params) {\n      let fd = new FormData();\n      await axios.patch(`document/update/${params.id}`, {\n        title: params.title,\n        description: params.description,\n        users: params.users\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        toast.success(\"Успешный запуск\", { autoClose: 1e3, theme: \"auto\" });\n      });\n    },\n    async docDelete(params) {\n      await axios.delete(`document/delete/${params.slug}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        toast.success(\"Успешно удалён\", { theme: \"auto\", autoClose: 1e3 });\n      });\n    }\n  }\n});\n",
-      "start": 1741685624535,
-      "end": 1741685624538,
+      "start": 1741686141965,
+      "end": 1741686141971,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -270,56 +270,56 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1741685624539,
-      "end": 1741685624539,
+      "start": 1741686141972,
+      "end": 1741686141972,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1741685624539,
-      "end": 1741685624539,
+      "start": 1741686141972,
+      "end": 1741686141972,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1741685624539,
-      "end": 1741685624539,
+      "start": 1741686141973,
+      "end": 1741686141973,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1741685624539,
-      "end": 1741685624539,
+      "start": 1741686141973,
+      "end": 1741686141973,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1741685624539,
-      "end": 1741685624539,
+      "start": 1741686141974,
+      "end": 1741686141974,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1741685624540,
-      "end": 1741685624540,
+      "start": 1741686141974,
+      "end": 1741686141975,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1741685624540,
-      "end": 1741685624541,
+      "start": 1741686141975,
+      "end": 1741686141976,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1741685624542,
-      "end": 1741685624542,
+      "start": 1741686141981,
+      "end": 1741686141981,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1741685624543,
-      "end": 1741685624543,
+      "start": 1741686141984,
+      "end": 1741686141984,
       "order": "normal"
     }
   ]
