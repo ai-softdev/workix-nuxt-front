@@ -4,63 +4,63 @@
     {
       "name": "vite:load-fallback",
       "result": "import {defineStore} from \"pinia\";\nimport axios from \"~/composables/axios\";\nimport {toast} from \"vue3-toastify\";\nimport {useUserStore} from \"~/stores/users\";\nimport type {Router} from \"vue-router\";\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\nimport {isDevelopment, isProduction} from \"std-env\";\n\ninterface IUser {\n  user: object | unknown\n}\n\nexport const useAuthStore = defineStore('authUser', {\n  state: () => ({\n    current_user: {\n      id: null,\n      email: '',\n      password: '',\n      date_of_birth: '',\n      first_name: '',\n      last_name: '',\n      company_id: '',\n      phone: '',\n      photo: '',\n      position: '',\n      role: {},\n      status: '',\n      passport: '',\n      salary: {},\n      permissions: []\n    },\n    user: {} as IUser,\n    user_worker: {} as IUser,\n    permissions: [],\n    exam_active: false,\n    openNotification: false,\n    openSettings: false,\n    my_scroll: 0,\n    activeNav: false,\n  }),\n  getters: {\n    get_current_user(current_user) {\n      return this.current_user\n    },\n    get_user(user){\n      return this.user\n    },\n    get_server_domain(){\n      return 'https://api-buildwithus.ai-softdev.com'\n    }\n  },\n  actions: {\n    async authorize(params: { email: any, password: any }, router: Router) {\n      await axios.post('auth/login', {\n        email: params.email,\n        password: params.password,\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(response => {\n        nuxtStorage.localStorage.setData('token', response.data.access, isProduction ? 30 : 1200)\n        this.loadCurrentUser()\n        router.push('/base/companies').then(e=>{\n          toast.success('Успешная авторизация', {autoClose: 1500, theme: 'auto'},)\n        })\n      }).catch(e => {\n        router.push('/')\n        toast.error('Неверный логин или пароль', {autoClose: 1500, theme: \"auto\"})\n      })\n    },\n\n    async loadCurrentUserWorker() {\n      await axios.get('user/current-user-worker', {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        this.user_worker = res.data;\n      })\n    },\n\n    async loadCurrentUser() {\n     await axios.get('user/current-user', {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(response => {\n        this.user = response.data\n      })\n    },\n    async update_my(params: { user: any}) {\n      let fd = new FormData();\n      const originalUser = this.user\n      if(params.user.first_name !== originalUser.first_name) {\n        fd.set('first_name', params.user.first_name)\n      }\n      if(params.user.last_name !== originalUser.last_name) {\n        fd.set('last_name', params.user.last_name)\n      }\n      if(params.user.phone !== originalUser.phone) {\n        fd.set('phone', params.user.phone)\n      }\n      if(params.user.password !== originalUser.password) {\n        fd.set('password', params.user.password)\n      }\n      if(params.user.salary !== originalUser.salary) {\n        fd.set('salary', params.user.salary)\n      }\n      if(params.user.email !== originalUser.email) {\n        fd.set('email', params.user.email)\n      }\n      if(params.user.date_of_birth !== originalUser.date_of_birth) {\n        fd.set('date_of_birth', params.user.date_of_birth)\n      }\n      if(params.user.passport !== originalUser.passport) {\n        fd.set('password', params.user.password)\n      }\n      if(params.user.department_id !== originalUser.department_id) {\n        fd.set('department_id', params.user.department_id)\n      }\n      if(params.user.position.id !== originalUser.position.id) {\n        fd.set('position', params.user.position.id)\n      }\n      if (params.update_type !== 'current-user' && params.user.permissions_ids !== originalUser.permissions_id) {\n        fd.set('permissions_ids', params.permissions_ids)\n      }\n      if (params.update_type !== 'current-user' && params.user.role_id !== originalUser.role_id) {\n        fd.set('role_id', params.user.role_id)\n\n      }\n      if (typeof params.user.photo === 'string' && params.user.photo !== originalUser.photo) {\n        fd.set('photo', params.user.photo)\n      }\n      await axios.patch(`user/current-user`, fd, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(response => {\n        this.user = response.data\n        toast.success('Данные успешно обновлены', {autoClose: 1500, theme: 'auto'})\n      }).catch(e => {\n        toast.error(e, {autoClose: 1500, theme: 'auto'})\n      })\n    }\n  },\n})",
-      "start": 1741684402028,
-      "end": 1741684402302,
+      "start": 1741685617537,
+      "end": 1741685618751,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1741684402302,
-      "end": 1741684402302,
+      "start": 1741685618751,
+      "end": 1741685618751,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1741684402302,
-      "end": 1741684402302,
+      "start": 1741685618751,
+      "end": 1741685618751,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1741684402302,
-      "end": 1741684402302,
+      "start": 1741685618751,
+      "end": 1741685618751,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1741684402302,
-      "end": 1741684402302,
+      "start": 1741685618751,
+      "end": 1741685618751,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1741684402302,
-      "end": 1741684402302,
+      "start": 1741685618751,
+      "end": 1741685618751,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1741684402302,
-      "end": 1741684402302,
+      "start": 1741685618751,
+      "end": 1741685618751,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1741684402302,
-      "end": 1741684402302,
+      "start": 1741685618751,
+      "end": 1741685618751,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1741684402302,
-      "end": 1741684402302,
+      "start": 1741685618751,
+      "end": 1741685618751,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineStore } from \"pinia\";\nimport axios from \"~/composables/axios\";\nimport { toast } from \"vue3-toastify\";\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\nimport { isProduction } from \"std-env\";\nexport const useAuthStore = defineStore(\"authUser\", {\n  state: () => ({\n    current_user: {\n      id: null,\n      email: \"\",\n      password: \"\",\n      date_of_birth: \"\",\n      first_name: \"\",\n      last_name: \"\",\n      company_id: \"\",\n      phone: \"\",\n      photo: \"\",\n      position: \"\",\n      role: {},\n      status: \"\",\n      passport: \"\",\n      salary: {},\n      permissions: []\n    },\n    user: {},\n    user_worker: {},\n    permissions: [],\n    exam_active: false,\n    openNotification: false,\n    openSettings: false,\n    my_scroll: 0,\n    activeNav: false\n  }),\n  getters: {\n    get_current_user(current_user) {\n      return this.current_user;\n    },\n    get_user(user) {\n      return this.user;\n    },\n    get_server_domain() {\n      return \"https://api-buildwithus.ai-softdev.com\";\n    }\n  },\n  actions: {\n    async authorize(params, router) {\n      await axios.post(\"auth/login\", {\n        email: params.email,\n        password: params.password\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((response) => {\n        nuxtStorage.localStorage.setData(\"token\", response.data.access, isProduction ? 30 : 1200);\n        this.loadCurrentUser();\n        router.push(\"/base/companies\").then((e) => {\n          toast.success(\"Успешная авторизация\", { autoClose: 1500, theme: \"auto\" });\n        });\n      }).catch((e) => {\n        router.push(\"/\");\n        toast.error(\"Неверный логин или пароль\", { autoClose: 1500, theme: \"auto\" });\n      });\n    },\n    async loadCurrentUserWorker() {\n      await axios.get(\"user/current-user-worker\", {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.user_worker = res.data;\n      });\n    },\n    async loadCurrentUser() {\n      await axios.get(\"user/current-user\", {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((response) => {\n        this.user = response.data;\n      });\n    },\n    async update_my(params) {\n      let fd = new FormData();\n      const originalUser = this.user;\n      if (params.user.first_name !== originalUser.first_name) {\n        fd.set(\"first_name\", params.user.first_name);\n      }\n      if (params.user.last_name !== originalUser.last_name) {\n        fd.set(\"last_name\", params.user.last_name);\n      }\n      if (params.user.phone !== originalUser.phone) {\n        fd.set(\"phone\", params.user.phone);\n      }\n      if (params.user.password !== originalUser.password) {\n        fd.set(\"password\", params.user.password);\n      }\n      if (params.user.salary !== originalUser.salary) {\n        fd.set(\"salary\", params.user.salary);\n      }\n      if (params.user.email !== originalUser.email) {\n        fd.set(\"email\", params.user.email);\n      }\n      if (params.user.date_of_birth !== originalUser.date_of_birth) {\n        fd.set(\"date_of_birth\", params.user.date_of_birth);\n      }\n      if (params.user.passport !== originalUser.passport) {\n        fd.set(\"password\", params.user.password);\n      }\n      if (params.user.department_id !== originalUser.department_id) {\n        fd.set(\"department_id\", params.user.department_id);\n      }\n      if (params.user.position.id !== originalUser.position.id) {\n        fd.set(\"position\", params.user.position.id);\n      }\n      if (params.update_type !== \"current-user\" && params.user.permissions_ids !== originalUser.permissions_id) {\n        fd.set(\"permissions_ids\", params.permissions_ids);\n      }\n      if (params.update_type !== \"current-user\" && params.user.role_id !== originalUser.role_id) {\n        fd.set(\"role_id\", params.user.role_id);\n      }\n      if (typeof params.user.photo === \"string\" && params.user.photo !== originalUser.photo) {\n        fd.set(\"photo\", params.user.photo);\n      }\n      await axios.patch(`user/current-user`, fd, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((response) => {\n        this.user = response.data;\n        toast.success(\"Данные успешно обновлены\", { autoClose: 1500, theme: \"auto\" });\n      }).catch((e) => {\n        toast.error(e, { autoClose: 1500, theme: \"auto\" });\n      });\n    }\n  }\n});\n",
-      "start": 1741684402302,
-      "end": 1741684403159,
+      "start": 1741685618751,
+      "end": 1741685620712,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -76,230 +76,230 @@
     },
     {
       "name": "vite:json",
-      "start": 1741684403160,
-      "end": 1741684403160,
+      "start": 1741685620713,
+      "end": 1741685620713,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1741684403160,
-      "end": 1741684403160,
+      "start": 1741685620714,
+      "end": 1741685620714,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1741684403160,
-      "end": 1741684403160,
+      "start": 1741685620714,
+      "end": 1741685620714,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1741684403160,
-      "end": 1741684403160,
+      "start": 1741685620714,
+      "end": 1741685620715,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1741684403160,
-      "end": 1741684403160,
+      "start": 1741685620715,
+      "end": 1741685620715,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1741684403160,
-      "end": 1741684403160,
+      "start": 1741685620715,
+      "end": 1741685620715,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1741684403161,
-      "end": 1741684403161,
+      "start": 1741685620716,
+      "end": 1741685620716,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1741684403161,
-      "end": 1741684403161,
+      "start": 1741685620716,
+      "end": 1741685620716,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1741684403161,
-      "end": 1741684403161,
+      "start": 1741685620717,
+      "end": 1741685620717,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1741684403161,
-      "end": 1741684403161,
+      "start": 1741685620717,
+      "end": 1741685620717,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1741684403162,
-      "end": 1741684403163,
+      "start": 1741685620718,
+      "end": 1741685620719,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1741684403163,
-      "end": 1741684403163,
+      "start": 1741685620719,
+      "end": 1741685620720,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1741684403163,
-      "end": 1741684403163,
+      "start": 1741685620720,
+      "end": 1741685620720,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1741684403164,
-      "end": 1741684403164,
+      "start": 1741685620721,
+      "end": 1741685620721,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1741684403167,
-      "end": 1741684403167,
+      "start": 1741685620724,
+      "end": 1741685620724,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1741684403169,
-      "end": 1741684403169,
+      "start": 1741685620726,
+      "end": 1741685620726,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1741684403169,
-      "end": 1741684403169,
+      "start": 1741685620726,
+      "end": 1741685620726,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1741684403169,
-      "end": 1741684403169,
+      "start": 1741685620726,
+      "end": 1741685620726,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1741684403170,
-      "end": 1741684403170,
+      "start": 1741685620727,
+      "end": 1741685620727,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1741684403173,
-      "end": 1741684403173,
+      "start": 1741685620727,
+      "end": 1741685620727,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1741684403173,
-      "end": 1741684403173,
+      "start": 1741685620727,
+      "end": 1741685620727,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1741684403173,
-      "end": 1741684403173,
+      "start": 1741685620729,
+      "end": 1741685620730,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1741684403173,
-      "end": 1741684403175,
+      "start": 1741685620729,
+      "end": 1741685620733,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1741684403175,
-      "end": 1741684403175,
+      "start": 1741685620735,
+      "end": 1741685620735,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1741684403175,
-      "end": 1741684403176,
+      "start": 1741685620735,
+      "end": 1741685620735,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1741684403176,
-      "end": 1741684403176,
+      "start": 1741685620735,
+      "end": 1741685620736,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1741684403176,
-      "end": 1741684403176,
+      "start": 1741685620735,
+      "end": 1741685620736,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1741684403180,
-      "end": 1741684403181,
+      "start": 1741685620741,
+      "end": 1741685620745,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1741684403180,
-      "end": 1741684403181,
+      "start": 1741685620741,
+      "end": 1741685620745,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1741684403181,
-      "end": 1741684403181,
+      "start": 1741685620745,
+      "end": 1741685620745,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1741684403181,
-      "end": 1741684403181,
+      "start": 1741685620745,
+      "end": 1741685620745,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1741684403182,
-      "end": 1741684403182,
+      "start": 1741685620745,
+      "end": 1741685620745,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1741684403182,
-      "end": 1741684403182,
+      "start": 1741685620745,
+      "end": 1741685620745,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1741684403182,
-      "end": 1741684403182,
+      "start": 1741685620746,
+      "end": 1741685620746,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1741684403182,
-      "end": 1741684403182,
+      "start": 1741685620746,
+      "end": 1741685620746,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1741684403182,
-      "end": 1741684403182,
+      "start": 1741685620747,
+      "end": 1741685620747,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1741684403182,
-      "end": 1741684403183,
+      "start": 1741685620747,
+      "end": 1741685620747,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1741684403183,
-      "end": 1741684403183,
+      "start": 1741685620747,
+      "end": 1741685620747,
       "order": "normal"
     }
   ]

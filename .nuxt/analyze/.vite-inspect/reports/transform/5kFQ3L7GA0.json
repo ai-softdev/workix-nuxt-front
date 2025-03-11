@@ -4,44 +4,44 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { normalizeClass as _normalizeClass, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\"\n\nconst _hoisted_1 = [\"placeholder\"]\n\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'TheSearch',\n  props: {\n  modelValue: String,\n  mode: {\n    type: String,\n    default: ''\n  }\n},\n  setup(__props) {\n\nconst props = __props\nconst focusInput = ref()\nconst timer = ref<number | null>(null)\nwatchSyncEffect(() => {\n  if (props.mode === 'scan') {\n    nextTick(() => {\n      focusInput.value.focus()\n    })\n  }\n})\n\nreturn (_ctx: any,_cache: any) => {\n  return (_openBlock(), _createElementBlock(\"div\", null, [\n    _createElementVNode(\"input\", {\n      ref_key: \"focusInput\",\n      ref: focusInput,\n      class: _normalizeClass([\"w-full px-4 py-3 rounded-full bg-gray-100 focus:bg-gray-200 text-black tracking-widest dark:focus:opacity-100 transition-all dark:opacity-40 outline-none\", { '': __props.mode === 'scan' }]),\n      type: \"text\",\n      placeholder: __props.mode === 'scan' ? _ctx.$t('Сканирование') : _ctx.$t('Найти'),\n      onInput: _cache[0] || (_cache[0] = ($event: any) => {_ctx.$emit('update:modelValue', $event.target.value); _ctx.$emit('search', $event.target.value)})\n    }, null, 42, _hoisted_1)\n  ]))\n}\n}\n\n})",
-      "start": 1741684380694,
-      "end": 1741684380694
+      "start": 1741685574328,
+      "end": 1741685574328
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1741684380694,
-      "end": 1741684380694,
+      "start": 1741685574328,
+      "end": 1741685574328,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1741684380694,
-      "end": 1741684380694,
+      "start": 1741685574328,
+      "end": 1741685574328,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1741684380694,
-      "end": 1741684380694,
+      "start": 1741685574328,
+      "end": 1741685574329,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1741684380694,
-      "end": 1741684380694,
+      "start": 1741685574329,
+      "end": 1741685574329,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1741684380694,
-      "end": 1741684380694,
+      "start": 1741685574329,
+      "end": 1741685574329,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { normalizeClass as _normalizeClass, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\";\nconst _hoisted_1 = [\"placeholder\"];\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"TheSearch\",\n  props: {\n    modelValue: String,\n    mode: {\n      type: String,\n      default: \"\"\n    }\n  },\n  setup(__props) {\n    const props = __props;\n    const focusInput = ref();\n    const timer = ref(null);\n    watchSyncEffect(() => {\n      if (props.mode === \"scan\") {\n        nextTick(() => {\n          focusInput.value.focus();\n        });\n      }\n    });\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", null, [\n        _createElementVNode(\"input\", {\n          ref_key: \"focusInput\",\n          ref: focusInput,\n          class: _normalizeClass([\"w-full px-4 py-3 rounded-full bg-gray-100 focus:bg-gray-200 text-black tracking-widest dark:focus:opacity-100 transition-all dark:opacity-40 outline-none\", { \"\": __props.mode === \"scan\" }]),\n          type: \"text\",\n          placeholder: __props.mode === \"scan\" ? _ctx.$t(\"Сканирование\") : _ctx.$t(\"Найти\"),\n          onInput: _cache[0] || (_cache[0] = ($event) => {\n            _ctx.$emit(\"update:modelValue\", $event.target.value);\n            _ctx.$emit(\"search\", $event.target.value);\n          })\n        }, null, 42, _hoisted_1)\n      ]);\n    };\n  }\n});\n",
-      "start": 1741684380694,
-      "end": 1741684381078,
+      "start": 1741685574329,
+      "end": 1741685575083,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -57,141 +57,141 @@
     },
     {
       "name": "vite:json",
-      "start": 1741684381078,
-      "end": 1741684381078,
+      "start": 1741685575084,
+      "end": 1741685575084,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1741684381078,
-      "end": 1741684381078,
+      "start": 1741685575084,
+      "end": 1741685575084,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1741684381078,
-      "end": 1741684381078,
+      "start": 1741685575084,
+      "end": 1741685575085,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1741684381078,
-      "end": 1741684381078,
+      "start": 1741685575085,
+      "end": 1741685575085,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1741684381078,
-      "end": 1741684381078,
+      "start": 1741685575085,
+      "end": 1741685575086,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1741684381078,
-      "end": 1741684381078,
+      "start": 1741685575086,
+      "end": 1741685575086,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1741684381078,
-      "end": 1741684381078,
+      "start": 1741685575087,
+      "end": 1741685575087,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1741684381079,
-      "end": 1741684381079,
+      "start": 1741685575088,
+      "end": 1741685575089,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1741684381079,
-      "end": 1741684381079,
+      "start": 1741685575089,
+      "end": 1741685575090,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1741684381079,
-      "end": 1741684381079,
+      "start": 1741685575090,
+      "end": 1741685575090,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1741684381079,
-      "end": 1741684381079,
+      "start": 1741685575091,
+      "end": 1741685575091,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1741684381079,
-      "end": 1741684381079,
+      "start": 1741685575091,
+      "end": 1741685575091,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1741684381079,
-      "end": 1741684381079,
+      "start": 1741685575092,
+      "end": 1741685575092,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1741684381079,
-      "end": 1741684381079,
+      "start": 1741685575092,
+      "end": 1741685575092,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1741684381079,
-      "end": 1741684381079,
+      "start": 1741685575093,
+      "end": 1741685575093,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1741684381079,
-      "end": 1741684381079,
+      "start": 1741685575093,
+      "end": 1741685575094,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1741684381080,
-      "end": 1741684381080,
+      "start": 1741685575094,
+      "end": 1741685575094,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1741684381080,
-      "end": 1741684381080,
+      "start": 1741685575094,
+      "end": 1741685575095,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1741684381080,
-      "end": 1741684381080,
+      "start": 1741685575095,
+      "end": 1741685575096,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1741684381080,
-      "end": 1741684381080,
+      "start": 1741685575097,
+      "end": 1741685575098,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1741684381081,
-      "end": 1741684381081,
+      "start": 1741685575099,
+      "end": 1741685575099,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1741684381081,
-      "end": 1741684381081,
+      "start": 1741685575100,
+      "end": 1741685575101,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref, watchSyncEffect, nextTick } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { normalizeClass as _normalizeClass, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\";\nconst _hoisted_1 = [\"placeholder\"];\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"TheSearch\",\n  props: {\n    modelValue: String,\n    mode: {\n      type: String,\n      default: \"\"\n    }\n  },\n  setup(__props) {\n    const props = __props;\n    const focusInput = ref();\n    const timer = ref(null);\n    watchSyncEffect(() => {\n      if (props.mode === \"scan\") {\n        nextTick(() => {\n          focusInput.value.focus();\n        });\n      }\n    });\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", null, [\n        _createElementVNode(\"input\", {\n          ref_key: \"focusInput\",\n          ref: focusInput,\n          class: _normalizeClass([\"w-full px-4 py-3 rounded-full bg-gray-100 focus:bg-gray-200 text-black tracking-widest dark:focus:opacity-100 transition-all dark:opacity-40 outline-none\", { \"\": __props.mode === \"scan\" }]),\n          type: \"text\",\n          placeholder: __props.mode === \"scan\" ? _ctx.$t(\"Сканирование\") : _ctx.$t(\"Найти\"),\n          onInput: _cache[0] || (_cache[0] = ($event) => {\n            _ctx.$emit(\"update:modelValue\", $event.target.value);\n            _ctx.$emit(\"search\", $event.target.value);\n          })\n        }, null, 42, _hoisted_1)\n      ]);\n    };\n  }\n});\n",
-      "start": 1741684381081,
-      "end": 1741684381088,
+      "start": 1741685575101,
+      "end": 1741685575132,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -204,50 +204,50 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1741684381088,
-      "end": 1741684381088,
+      "start": 1741685575133,
+      "end": 1741685575134,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1741684381089,
-      "end": 1741684381089,
+      "start": 1741685575134,
+      "end": 1741685575135,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1741684381089,
-      "end": 1741684381089,
+      "start": 1741685575135,
+      "end": 1741685575135,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1741684381089,
-      "end": 1741684381089,
+      "start": 1741685575136,
+      "end": 1741685575136,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1741684381089,
-      "end": 1741684381089,
+      "start": 1741685575137,
+      "end": 1741685575138,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1741684381090,
-      "end": 1741684381090,
+      "start": 1741685575139,
+      "end": 1741685575139,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1741684381090,
-      "end": 1741684381090,
+      "start": 1741685575141,
+      "end": 1741685575141,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1741684381090,
-      "end": 1741684381090,
+      "start": 1741685575142,
+      "end": 1741685575142,
       "order": "normal"
     }
   ]
