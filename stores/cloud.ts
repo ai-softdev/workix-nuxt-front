@@ -52,7 +52,7 @@ export const useCloudStore = defineStore('cloud', {
   },
   actions: {
     async loadAllFolders() {
-      await axios.get(`folder/main-folder`, {
+      await axios.get(`file-manager/folder/main-folder`, {
         headers: {
           Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
         }
@@ -61,7 +61,7 @@ export const useCloudStore = defineStore('cloud', {
       })
     },
     async loadFolder(params: { id: number }): Promise<void> {
-      await axios.get(`folder/${params.id}`, {
+      await axios.get(`file-manager/folder/${params.id}`, {
         headers: {
           Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
         }
@@ -71,7 +71,7 @@ export const useCloudStore = defineStore('cloud', {
     },
 
     async loadFiles(params: { id: number }) {
-      await axios.get(`files/${params.id}`, {
+      await axios.get(`file-manager/files/${params.id}`, {
         headers: {
           Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
         }
@@ -81,7 +81,7 @@ export const useCloudStore = defineStore('cloud', {
     },
 
     async loadhasFileInBin() {
-       await axios.get(`bin`, {
+       await axios.get(`file-manager/bin`, {
         headers: {
           Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
         }
@@ -95,7 +95,7 @@ export const useCloudStore = defineStore('cloud', {
     },
 
     async loadBin(params: { bin?: any }) {
-      await axios.get(`bin`, {
+      await axios.get(`file-manager/bin`, {
         headers: {
           Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
         }
@@ -106,7 +106,7 @@ export const useCloudStore = defineStore('cloud', {
     },
 
     async moveToBin(params: { elem_type: any, elem_id: any }) {
-      await axios.delete(`bin/move?${params.elem_type}=${params.elem_id}`, {
+      await axios.delete(`file-manager/bin/move?${params.elem_type}=${params.elem_id}`, {
         headers: {
           Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
         }
@@ -121,7 +121,7 @@ export const useCloudStore = defineStore('cloud', {
       })
     },
     async moveFromBin(params: { elem_type: any, elem_id: any }) {
-      await axios.delete(`bin/move?${params.elem_type}=${params.elem_id}`, {
+      await axios.delete(`file-manager/bin/move?${params.elem_type}=${params.elem_id}`, {
         headers: {
           Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
         }
@@ -135,7 +135,7 @@ export const useCloudStore = defineStore('cloud', {
 
 
     async deleteInBin(params: { delete_type: any, id: number }) {
-      await axios.delete(`bin/delete?${params.delete_type}=${params.id}`, {
+      await axios.delete(`file-manager/bin/delete?${params.delete_type}=${params.id}`, {
         headers: {
           Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
         }
@@ -146,7 +146,7 @@ export const useCloudStore = defineStore('cloud', {
       })
     },
     async delete(params: { id: number }) {
-      await axios.delete(`folder-file/delete/${params.id}`, {
+      await axios.delete(`file-manager/folder-file/delete/${params.id}`, {
         headers: {
           Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
         }
@@ -157,7 +157,7 @@ export const useCloudStore = defineStore('cloud', {
       })
     },
     async create_folder(params: { name: string, parent_id: number }) {
-      await axios.post(`folder/create`, {
+      await axios.post(`file-manager/folder/create`, {
         name: params.name,
         parent_id: params.parent_id
       }, {
@@ -170,7 +170,7 @@ export const useCloudStore = defineStore('cloud', {
       })
     },
     async update_folder(params: { folder_id: number, name: any, parent_id: number }) {
-      await axios.patch(`folder/update/${params.folder_id}`, {
+      await axios.patch(`file-manager/folder/update/${params.folder_id}`, {
         name: params.name,
         parent_id: params.parent_id
       }, {
@@ -188,7 +188,7 @@ export const useCloudStore = defineStore('cloud', {
       })
     },
     async update_file(params: { file_id: number, name: any, folder_id: number }) {
-      await axios.patch(`file/update/${params.file_id}`, {
+      await axios.patch(`file-manager/file/update/${params.file_id}`, {
         name: params.name,
         folder_id: params.folder_id
       }, {

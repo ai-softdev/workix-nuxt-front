@@ -1,6 +1,7 @@
 import {ref, onMounted} from "vue";
 import WaveSurfer from "wavesurfer.js";
-import RecordPlugin from "wavesurfer.js/dist/plugins/record";
+// @ts-ignore
+import RecordPlugin from 'wavesurfer.js/dist/plugins/record.esm.js'
 import {useChat} from "~/stores/chat";
 
 interface IWave {
@@ -47,13 +48,13 @@ export default function useRecorder() {
     })
   }
   {
-    RecordPlugin.getAvailableAudioDevices().then((devices) => {
-      devices.forEach((device) => {
-        const option = document.createElement('option')
-        option.value = device.deviceId
-        option.text = device.label || device.deviceId
-      })
-    })
+    RecordPlugin.getAvailableAudioDevices().then((devices: MediaDeviceInfo[]) => {
+      devices.forEach((device: MediaDeviceInfo) => {
+        const option = document.createElement('option');
+        option.value = device.deviceId;
+        option.text = device.label || device.deviceId;
+      });
+    });
   }
   const recButton = () => {
     if (record && (record.isRecording() || record.isPaused())) {

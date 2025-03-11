@@ -23,7 +23,7 @@ export const useObjects = defineStore('object', {
   },
   actions: {
     async loadObjectList() {
-      axios.get(`object/object-list`, {
+      axios.get(`object/list`, {
         headers: {
           Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
         }

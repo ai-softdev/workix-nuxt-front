@@ -24,7 +24,8 @@ defineProps({
     </div>
     <div
       class="flex items-center gap-x-4 my-6 hover:bg-blueSemiLight cursor-pointer p-2 rounded-lg transition-all hover:text-white"
-      @click.stop="downloadWithAxios(item)">
+    >
+<!--      @click.stop="downloadWithAxios(item)"-->
       <div v-if="item.file_name.substr(-3) === 'pdf'">
         <svg xmlns="http://www.w3.org/2000/svg"
              width="50px" height="50px" viewBox="0 0 56 64" enable-background="new 0 0 56 64" xml:space="preserve">

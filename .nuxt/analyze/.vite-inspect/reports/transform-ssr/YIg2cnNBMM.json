@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, createVNode as _createVNode, mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\"\n\nimport ProfileContentChart from \"~/components/Profile/ProfileUI/ProfileContentChart.vue\";\nimport ProfileContentUserInfo from \"~/components/Profile/ProfileUI/ProfileContentUserInfo.vue\";\nimport ProfileContentNotification from \"~/components/Profile/ProfileUI/ProfileContentNotification.vue\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport ProfileTasks from \"~/components/Profile/ProfileUI/ProfileTasks.vue\"\n\nimport {useMediaQuery, useParallax} from '@vueuse/core'\nimport TheContentBlock from \"~/components/UI/TheContentBlock.vue\";\n\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'ProfileContent',\n  __ssrInlineRender: true,\n  props: {\n  activeNav: {\n    type: Boolean,\n    default: false\n  }\n},\n  setup(__props) {\n\nconst target = ref(null)\nconst isMobile = useMediaQuery('(max-width: 700px)')\n\nconst parallax = reactive(useParallax(target))\n\nconst targetStyle: CSSProperties = {\n  transition: '.3s ease-out all',\n}\nconst cardWindowStyle: CSSProperties = {\n  margin: 'auto',\n}\nconst layerBase: CSSProperties = {\n  position: 'absolute',\n  height: '100%',\n  width: '100%',\n  transition: '.3s ease-out all',\n}\nconst containerStyle: CSSProperties = {\n  margin: '3em auto',\n  perspective: '300px',\n}\n\nconst cardStyle = computed(() => ({\n  transition: '.3s ease-out all',\n  transform: `rotateX(${parallax.roll * 1}deg) rotateY(${\n    parallax.tilt * 1\n  }deg)`,\n}))\n\nconst parallaxContainer = ref(null)\nconst {tilt, roll, source} = useParallax(parallaxContainer)\n\n\nconst props = __props\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  _push(`<div${_ssrRenderAttrs(_mergeProps({\n    class: [\"w-full grid gap-y-10 gap-x-10 grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1\", {'max-[1150px]:grid-cols-2' : __props.activeNav, 'max-[1150px]:grid-cols-3' : !__props.activeNav}]\n  }, _attrs))}>`)\n  _push(_ssrRenderComponent(ProfileContentUserInfo, null, null, _parent))\n  _push(`<div class=\"w-full p-6 dark:border-t dark:border-t-gray-500 dark:shadow-md shadow-lg dark:shadow-gray-500 cursor-pointer rounded-md hover:transform hover:-translate-y-2 transition-all duration-200\"><h2 class=\"dark:text-white tracking-widest\">${_ssrInterpolate(_ctx.$t('Личная статистика'))}</h2>`)\n  _push(_ssrRenderComponent(ProfileContentChart, null, null, _parent))\n  _push(`</div>`)\n  _push(_ssrRenderComponent(TheContentBlock, { class: \"\" }, {\n    default: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(_ssrRenderComponent(TheTextContent, null, {\n          default: _withCtx((_, _push, _parent, _scopeId) => {\n            if (_push) {\n              _push(`${_ssrInterpolate(_ctx.$t('Последние задания'))}`)\n            } else {\n              return [\n                _createTextVNode(_toDisplayString(_ctx.$t('Последние задания')), 1)\n              ]\n            }\n          }),\n          _: 1\n        }, _parent, _scopeId))\n        _push(`<div${_scopeId}>`)\n        _push(_ssrRenderComponent(ProfileTasks, null, null, _parent, _scopeId))\n        _push(`</div>`)\n      } else {\n        return [\n          _createVNode(TheTextContent, null, {\n            default: _withCtx(() => [\n              _createTextVNode(_toDisplayString(_ctx.$t('Последние задания')), 1)\n            ]),\n            _: 1\n          }),\n          _createVNode(\"div\", null, [\n            _createVNode(ProfileTasks)\n          ])\n        ]\n      }\n    }),\n    _: 1\n  }, _parent))\n  _push(_ssrRenderComponent(TheContentBlock, { class: \"\" }, {\n    default: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(_ssrRenderComponent(TheTextContent, null, {\n          default: _withCtx((_, _push, _parent, _scopeId) => {\n            if (_push) {\n              _push(`${_ssrInterpolate(_ctx.$t('Уведомления'))}`)\n            } else {\n              return [\n                _createTextVNode(_toDisplayString(_ctx.$t('Уведомления')), 1)\n              ]\n            }\n          }),\n          _: 1\n        }, _parent, _scopeId))\n        _push(_ssrRenderComponent(ProfileContentNotification, null, null, _parent, _scopeId))\n      } else {\n        return [\n          _createVNode(TheTextContent, null, {\n            default: _withCtx(() => [\n              _createTextVNode(_toDisplayString(_ctx.$t('Уведомления')), 1)\n            ]),\n            _: 1\n          }),\n          _createVNode(ProfileContentNotification)\n        ]\n      }\n    }),\n    _: 1\n  }, _parent))\n  _push(_ssrRenderComponent(TheContentBlock, { class: \"\" }, {\n    default: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(_ssrRenderComponent(TheTextContent, null, {\n          default: _withCtx((_, _push, _parent, _scopeId) => {\n            if (_push) {\n              _push(`${_ssrInterpolate(_ctx.$t(''))}`)\n            } else {\n              return [\n                _createTextVNode(_toDisplayString(_ctx.$t('')), 1)\n              ]\n            }\n          }),\n          _: 1\n        }, _parent, _scopeId))\n      } else {\n        return [\n          _createVNode(TheTextContent, null, {\n            default: _withCtx(() => [\n              _createTextVNode(_toDisplayString(_ctx.$t('')), 1)\n            ]),\n            _: 1\n          })\n        ]\n      }\n    }),\n    _: 1\n  }, _parent))\n  _push(`</div>`)\n}\n}\n\n})",
-      "start": 1741373268675,
-      "end": 1741373268675,
+      "start": 1741683370860,
+      "end": 1741683370860,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1741373268675,
-      "end": 1741373268675,
+      "start": 1741683370860,
+      "end": 1741683370860,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1741373268675,
-      "end": 1741373268675,
+      "start": 1741683370860,
+      "end": 1741683370860,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1741373268675,
-      "end": 1741373268675,
+      "start": 1741683370860,
+      "end": 1741683370860,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1741373268675,
-      "end": 1741373268675,
+      "start": 1741683370860,
+      "end": 1741683370860,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1741373268675,
-      "end": 1741373268675,
+      "start": 1741683370860,
+      "end": 1741683370860,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1741373268675,
-      "end": 1741373268675,
+      "start": 1741683370860,
+      "end": 1741683370860,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1741373268675,
-      "end": 1741373268675,
+      "start": 1741683370860,
+      "end": 1741683370860,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1741373268675,
-      "end": 1741373268675,
+      "start": 1741683370860,
+      "end": 1741683370860,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, createVNode as _createVNode, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport ProfileContentChart from \"~/components/Profile/ProfileUI/ProfileContentChart.vue\";\nimport ProfileContentUserInfo from \"~/components/Profile/ProfileUI/ProfileContentUserInfo.vue\";\nimport ProfileContentNotification from \"~/components/Profile/ProfileUI/ProfileContentNotification.vue\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport ProfileTasks from \"~/components/Profile/ProfileUI/ProfileTasks.vue\";\nimport { useMediaQuery, useParallax } from \"@vueuse/core\";\nimport TheContentBlock from \"~/components/UI/TheContentBlock.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ProfileContent\",\n  __ssrInlineRender: true,\n  props: {\n    activeNav: {\n      type: Boolean,\n      default: false\n    }\n  },\n  setup(__props) {\n    const target = ref(null);\n    const isMobile = useMediaQuery(\"(max-width: 700px)\");\n    const parallax = reactive(useParallax(target));\n    const targetStyle = {\n      transition: \".3s ease-out all\"\n    };\n    const cardWindowStyle = {\n      margin: \"auto\"\n    };\n    const layerBase = {\n      position: \"absolute\",\n      height: \"100%\",\n      width: \"100%\",\n      transition: \".3s ease-out all\"\n    };\n    const containerStyle = {\n      margin: \"3em auto\",\n      perspective: \"300px\"\n    };\n    const cardStyle = computed(() => ({\n      transition: \".3s ease-out all\",\n      transform: `rotateX(${parallax.roll * 1}deg) rotateY(${parallax.tilt * 1}deg)`\n    }));\n    const parallaxContainer = ref(null);\n    const { tilt, roll, source } = useParallax(parallaxContainer);\n    const props = __props;\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({\n        class: [\"w-full grid gap-y-10 gap-x-10 grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1\", { \"max-[1150px]:grid-cols-2\": __props.activeNav, \"max-[1150px]:grid-cols-3\": !__props.activeNav }]\n      }, _attrs))}>`);\n      _push(_ssrRenderComponent(ProfileContentUserInfo, null, null, _parent));\n      _push(`<div class=\"w-full p-6 dark:border-t dark:border-t-gray-500 dark:shadow-md shadow-lg dark:shadow-gray-500 cursor-pointer rounded-md hover:transform hover:-translate-y-2 transition-all duration-200\"><h2 class=\"dark:text-white tracking-widest\">${_ssrInterpolate(_ctx.$t(\"Личная статистика\"))}</h2>`);\n      _push(_ssrRenderComponent(ProfileContentChart, null, null, _parent));\n      _push(`</div>`);\n      _push(_ssrRenderComponent(TheContentBlock, { class: \"\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(_ssrRenderComponent(TheTextContent, null, {\n              default: _withCtx((_2, _push3, _parent3, _scopeId2) => {\n                if (_push3) {\n                  _push3(`${_ssrInterpolate(_ctx.$t(\"Последние задания\"))}`);\n                } else {\n                  return [\n                    _createTextVNode(_toDisplayString(_ctx.$t(\"Последние задания\")), 1)\n                  ];\n                }\n              }),\n              _: 1\n            }, _parent2, _scopeId));\n            _push2(`<div${_scopeId}>`);\n            _push2(_ssrRenderComponent(ProfileTasks, null, null, _parent2, _scopeId));\n            _push2(`</div>`);\n          } else {\n            return [\n              _createVNode(TheTextContent, null, {\n                default: _withCtx(() => [\n                  _createTextVNode(_toDisplayString(_ctx.$t(\"Последние задания\")), 1)\n                ]),\n                _: 1\n              }),\n              _createVNode(\"div\", null, [\n                _createVNode(ProfileTasks)\n              ])\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(_ssrRenderComponent(TheContentBlock, { class: \"\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(_ssrRenderComponent(TheTextContent, null, {\n              default: _withCtx((_2, _push3, _parent3, _scopeId2) => {\n                if (_push3) {\n                  _push3(`${_ssrInterpolate(_ctx.$t(\"Уведомления\"))}`);\n                } else {\n                  return [\n                    _createTextVNode(_toDisplayString(_ctx.$t(\"Уведомления\")), 1)\n                  ];\n                }\n              }),\n              _: 1\n            }, _parent2, _scopeId));\n            _push2(_ssrRenderComponent(ProfileContentNotification, null, null, _parent2, _scopeId));\n          } else {\n            return [\n              _createVNode(TheTextContent, null, {\n                default: _withCtx(() => [\n                  _createTextVNode(_toDisplayString(_ctx.$t(\"Уведомления\")), 1)\n                ]),\n                _: 1\n              }),\n              _createVNode(ProfileContentNotification)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(_ssrRenderComponent(TheContentBlock, { class: \"\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(_ssrRenderComponent(TheTextContent, null, {\n              default: _withCtx((_2, _push3, _parent3, _scopeId2) => {\n                if (_push3) {\n                  _push3(`${_ssrInterpolate(_ctx.$t(\"\"))}`);\n                } else {\n                  return [\n                    _createTextVNode(_toDisplayString(_ctx.$t(\"\")), 1)\n                  ];\n                }\n              }),\n              _: 1\n            }, _parent2, _scopeId));\n          } else {\n            return [\n              _createVNode(TheTextContent, null, {\n                default: _withCtx(() => [\n                  _createTextVNode(_toDisplayString(_ctx.$t(\"\")), 1)\n                ]),\n                _: 1\n              })\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1741373268675,
-      "end": 1741373269441,
+      "start": 1741683370860,
+      "end": 1741683371320,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -91,171 +91,171 @@
     },
     {
       "name": "vite:json",
-      "start": 1741373269442,
-      "end": 1741373269442,
+      "start": 1741683371320,
+      "end": 1741683371320,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1741373269442,
-      "end": 1741373269442,
+      "start": 1741683371320,
+      "end": 1741683371320,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1741373269442,
-      "end": 1741373269442,
+      "start": 1741683371320,
+      "end": 1741683371320,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1741373269442,
-      "end": 1741373269442,
+      "start": 1741683371320,
+      "end": 1741683371320,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1741373269442,
-      "end": 1741373269442,
+      "start": 1741683371320,
+      "end": 1741683371321,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1741373269442,
-      "end": 1741373269442,
+      "start": 1741683371320,
+      "end": 1741683371321,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1741373269442,
-      "end": 1741373269442,
+      "start": 1741683371321,
+      "end": 1741683371321,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1741373269442,
-      "end": 1741373269442,
+      "start": 1741683371321,
+      "end": 1741683371321,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1741373269442,
-      "end": 1741373269443,
+      "start": 1741683371321,
+      "end": 1741683371321,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1741373269443,
-      "end": 1741373269443,
+      "start": 1741683371321,
+      "end": 1741683371321,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1741373269443,
-      "end": 1741373269445,
+      "start": 1741683371321,
+      "end": 1741683371322,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1741373269445,
-      "end": 1741373269445,
+      "start": 1741683371322,
+      "end": 1741683371323,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1741373269445,
-      "end": 1741373269445,
+      "start": 1741683371323,
+      "end": 1741683371323,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1741373269445,
-      "end": 1741373269445,
+      "start": 1741683371323,
+      "end": 1741683371323,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1741373269445,
-      "end": 1741373269445,
+      "start": 1741683371325,
+      "end": 1741683371325,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1741373269445,
-      "end": 1741373269445,
+      "start": 1741683371326,
+      "end": 1741683371327,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1741373269445,
-      "end": 1741373269445,
+      "start": 1741683371327,
+      "end": 1741683371327,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1741373269445,
-      "end": 1741373269445,
+      "start": 1741683371327,
+      "end": 1741683371327,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1741373269445,
-      "end": 1741373269445,
+      "start": 1741683371327,
+      "end": 1741683371327,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1741373269446,
-      "end": 1741373269446,
+      "start": 1741683371327,
+      "end": 1741683371327,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1741373269446,
-      "end": 1741373269446,
+      "start": 1741683371327,
+      "end": 1741683371327,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1741373269446,
-      "end": 1741373269446,
+      "start": 1741683371328,
+      "end": 1741683371328,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1741373269446,
-      "end": 1741373269446,
+      "start": 1741683371328,
+      "end": 1741683371328,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1741373269446,
-      "end": 1741373269446,
+      "start": 1741683371330,
+      "end": 1741683371331,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1741373269446,
-      "end": 1741373269446,
+      "start": 1741683371330,
+      "end": 1741683371331,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1741373269446,
-      "end": 1741373269446,
+      "start": 1741683371331,
+      "end": 1741683371331,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1741373269446,
-      "end": 1741373269446,
+      "start": 1741683371331,
+      "end": 1741683371331,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref, reactive, computed } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, createVNode as _createVNode, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport ProfileContentChart from \"~/components/Profile/ProfileUI/ProfileContentChart.vue\";\nimport ProfileContentUserInfo from \"~/components/Profile/ProfileUI/ProfileContentUserInfo.vue\";\nimport ProfileContentNotification from \"~/components/Profile/ProfileUI/ProfileContentNotification.vue\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport ProfileTasks from \"~/components/Profile/ProfileUI/ProfileTasks.vue\";\nimport { useMediaQuery, useParallax } from \"@vueuse/core\";\nimport TheContentBlock from \"~/components/UI/TheContentBlock.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ProfileContent\",\n  __ssrInlineRender: true,\n  props: {\n    activeNav: {\n      type: Boolean,\n      default: false\n    }\n  },\n  setup(__props) {\n    const target = ref(null);\n    const isMobile = useMediaQuery(\"(max-width: 700px)\");\n    const parallax = reactive(useParallax(target));\n    const targetStyle = {\n      transition: \".3s ease-out all\"\n    };\n    const cardWindowStyle = {\n      margin: \"auto\"\n    };\n    const layerBase = {\n      position: \"absolute\",\n      height: \"100%\",\n      width: \"100%\",\n      transition: \".3s ease-out all\"\n    };\n    const containerStyle = {\n      margin: \"3em auto\",\n      perspective: \"300px\"\n    };\n    const cardStyle = computed(() => ({\n      transition: \".3s ease-out all\",\n      transform: `rotateX(${parallax.roll * 1}deg) rotateY(${parallax.tilt * 1}deg)`\n    }));\n    const parallaxContainer = ref(null);\n    const { tilt, roll, source } = useParallax(parallaxContainer);\n    const props = __props;\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({\n        class: [\"w-full grid gap-y-10 gap-x-10 grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1\", { \"max-[1150px]:grid-cols-2\": __props.activeNav, \"max-[1150px]:grid-cols-3\": !__props.activeNav }]\n      }, _attrs))}>`);\n      _push(_ssrRenderComponent(ProfileContentUserInfo, null, null, _parent));\n      _push(`<div class=\"w-full p-6 dark:border-t dark:border-t-gray-500 dark:shadow-md shadow-lg dark:shadow-gray-500 cursor-pointer rounded-md hover:transform hover:-translate-y-2 transition-all duration-200\"><h2 class=\"dark:text-white tracking-widest\">${_ssrInterpolate(_ctx.$t(\"Личная статистика\"))}</h2>`);\n      _push(_ssrRenderComponent(ProfileContentChart, null, null, _parent));\n      _push(`</div>`);\n      _push(_ssrRenderComponent(TheContentBlock, { class: \"\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(_ssrRenderComponent(TheTextContent, null, {\n              default: _withCtx((_2, _push3, _parent3, _scopeId2) => {\n                if (_push3) {\n                  _push3(`${_ssrInterpolate(_ctx.$t(\"Последние задания\"))}`);\n                } else {\n                  return [\n                    _createTextVNode(_toDisplayString(_ctx.$t(\"Последние задания\")), 1)\n                  ];\n                }\n              }),\n              _: 1\n            }, _parent2, _scopeId));\n            _push2(`<div${_scopeId}>`);\n            _push2(_ssrRenderComponent(ProfileTasks, null, null, _parent2, _scopeId));\n            _push2(`</div>`);\n          } else {\n            return [\n              _createVNode(TheTextContent, null, {\n                default: _withCtx(() => [\n                  _createTextVNode(_toDisplayString(_ctx.$t(\"Последние задания\")), 1)\n                ]),\n                _: 1\n              }),\n              _createVNode(\"div\", null, [\n                _createVNode(ProfileTasks)\n              ])\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(_ssrRenderComponent(TheContentBlock, { class: \"\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(_ssrRenderComponent(TheTextContent, null, {\n              default: _withCtx((_2, _push3, _parent3, _scopeId2) => {\n                if (_push3) {\n                  _push3(`${_ssrInterpolate(_ctx.$t(\"Уведомления\"))}`);\n                } else {\n                  return [\n                    _createTextVNode(_toDisplayString(_ctx.$t(\"Уведомления\")), 1)\n                  ];\n                }\n              }),\n              _: 1\n            }, _parent2, _scopeId));\n            _push2(_ssrRenderComponent(ProfileContentNotification, null, null, _parent2, _scopeId));\n          } else {\n            return [\n              _createVNode(TheTextContent, null, {\n                default: _withCtx(() => [\n                  _createTextVNode(_toDisplayString(_ctx.$t(\"Уведомления\")), 1)\n                ]),\n                _: 1\n              }),\n              _createVNode(ProfileContentNotification)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(_ssrRenderComponent(TheContentBlock, { class: \"\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(_ssrRenderComponent(TheTextContent, null, {\n              default: _withCtx((_2, _push3, _parent3, _scopeId2) => {\n                if (_push3) {\n                  _push3(`${_ssrInterpolate(_ctx.$t(\"\"))}`);\n                } else {\n                  return [\n                    _createTextVNode(_toDisplayString(_ctx.$t(\"\")), 1)\n                  ];\n                }\n              }),\n              _: 1\n            }, _parent2, _scopeId));\n          } else {\n            return [\n              _createVNode(TheTextContent, null, {\n                default: _withCtx(() => [\n                  _createTextVNode(_toDisplayString(_ctx.$t(\"\")), 1)\n                ]),\n                _: 1\n              })\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1741373269446,
-      "end": 1741373269452,
+      "start": 1741683371332,
+      "end": 1741683371338,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -269,8 +269,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref, reactive, computed } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, createVNode as _createVNode, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport ProfileContentChart from \"~/components/Profile/ProfileUI/ProfileContentChart.vue\";\nimport ProfileContentUserInfo from \"~/components/Profile/ProfileUI/ProfileContentUserInfo.vue\";\nimport ProfileContentNotification from \"~/components/Profile/ProfileUI/ProfileContentNotification.vue\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport ProfileTasks from \"~/components/Profile/ProfileUI/ProfileTasks.vue\";\nimport { useMediaQuery, useParallax } from \"@vueuse/core\";\nimport TheContentBlock from \"~/components/UI/TheContentBlock.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ProfileContent\",\n  __ssrInlineRender: true,\n  props: {\n    activeNav: {\n      type: Boolean,\n      default: false\n    }\n  },\n  setup(__props) {\n    const target = ref(null);\n    const isMobile = useMediaQuery(\"(max-width: 700px)\");\n    const parallax = reactive(useParallax(target));\n    const targetStyle = {\n      transition: \".3s ease-out all\"\n    };\n    const cardWindowStyle = {\n      margin: \"auto\"\n    };\n    const layerBase = {\n      position: \"absolute\",\n      height: \"100%\",\n      width: \"100%\",\n      transition: \".3s ease-out all\"\n    };\n    const containerStyle = {\n      margin: \"3em auto\",\n      perspective: \"300px\"\n    };\n    const cardStyle = computed(() => ({\n      transition: \".3s ease-out all\",\n      transform: `rotateX(${parallax.roll * 1}deg) rotateY(${parallax.tilt * 1}deg)`\n    }));\n    const parallaxContainer = ref(null);\n    const { tilt, roll, source } = useParallax(parallaxContainer);\n    const props = __props;\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({\n        class: [\"w-full grid gap-y-10 gap-x-10 grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1\", { \"max-[1150px]:grid-cols-2\": __props.activeNav, \"max-[1150px]:grid-cols-3\": !__props.activeNav }]\n      }, _attrs))}>`);\n      _push(_ssrRenderComponent(ProfileContentUserInfo, null, null, _parent));\n      _push(`<div class=\"w-full p-6 dark:border-t dark:border-t-gray-500 dark:shadow-md shadow-lg dark:shadow-gray-500 cursor-pointer rounded-md hover:transform hover:-translate-y-2 transition-all duration-200\"><h2 class=\"dark:text-white tracking-widest\">${_ssrInterpolate(_ctx.$t(\"Личная статистика\"))}</h2>`);\n      _push(_ssrRenderComponent(ProfileContentChart, null, null, _parent));\n      _push(`</div>`);\n      _push(_ssrRenderComponent(TheContentBlock, { class: \"\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(_ssrRenderComponent(TheTextContent, null, {\n              default: _withCtx((_2, _push3, _parent3, _scopeId2) => {\n                if (_push3) {\n                  _push3(`${_ssrInterpolate(_ctx.$t(\"Последние задания\"))}`);\n                } else {\n                  return [\n                    _createTextVNode(_toDisplayString(_ctx.$t(\"Последние задания\")), 1)\n                  ];\n                }\n              }),\n              _: 1\n            }, _parent2, _scopeId));\n            _push2(`<div${_scopeId}>`);\n            _push2(_ssrRenderComponent(ProfileTasks, null, null, _parent2, _scopeId));\n            _push2(`</div>`);\n          } else {\n            return [\n              _createVNode(TheTextContent, null, {\n                default: _withCtx(() => [\n                  _createTextVNode(_toDisplayString(_ctx.$t(\"Последние задания\")), 1)\n                ]),\n                _: 1\n              }),\n              _createVNode(\"div\", null, [\n                _createVNode(ProfileTasks)\n              ])\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(_ssrRenderComponent(TheContentBlock, { class: \"\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(_ssrRenderComponent(TheTextContent, null, {\n              default: _withCtx((_2, _push3, _parent3, _scopeId2) => {\n                if (_push3) {\n                  _push3(`${_ssrInterpolate(_ctx.$t(\"Уведомления\"))}`);\n                } else {\n                  return [\n                    _createTextVNode(_toDisplayString(_ctx.$t(\"Уведомления\")), 1)\n                  ];\n                }\n              }),\n              _: 1\n            }, _parent2, _scopeId));\n            _push2(_ssrRenderComponent(ProfileContentNotification, null, null, _parent2, _scopeId));\n          } else {\n            return [\n              _createVNode(TheTextContent, null, {\n                default: _withCtx(() => [\n                  _createTextVNode(_toDisplayString(_ctx.$t(\"Уведомления\")), 1)\n                ]),\n                _: 1\n              }),\n              _createVNode(ProfileContentNotification)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(_ssrRenderComponent(TheContentBlock, { class: \"\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(_ssrRenderComponent(TheTextContent, null, {\n              default: _withCtx((_2, _push3, _parent3, _scopeId2) => {\n                if (_push3) {\n                  _push3(`${_ssrInterpolate(_ctx.$t(\"\"))}`);\n                } else {\n                  return [\n                    _createTextVNode(_toDisplayString(_ctx.$t(\"\")), 1)\n                  ];\n                }\n              }),\n              _: 1\n            }, _parent2, _scopeId));\n          } else {\n            return [\n              _createVNode(TheTextContent, null, {\n                default: _withCtx(() => [\n                  _createTextVNode(_toDisplayString(_ctx.$t(\"\")), 1)\n                ]),\n                _: 1\n              })\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1741373269446,
-      "end": 1741373269452,
+      "start": 1741683371332,
+      "end": 1741683371338,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -283,56 +283,56 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1741373269453,
-      "end": 1741373269453,
+      "start": 1741683371338,
+      "end": 1741683371338,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1741373269453,
-      "end": 1741373269453,
+      "start": 1741683371338,
+      "end": 1741683371338,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1741373269453,
-      "end": 1741373269453,
+      "start": 1741683371338,
+      "end": 1741683371338,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1741373269453,
-      "end": 1741373269453,
+      "start": 1741683371338,
+      "end": 1741683371338,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1741373269453,
-      "end": 1741373269453,
+      "start": 1741683371339,
+      "end": 1741683371339,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1741373269454,
-      "end": 1741373269454,
+      "start": 1741683371339,
+      "end": 1741683371339,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1741373269454,
-      "end": 1741373269454,
+      "start": 1741683371339,
+      "end": 1741683371340,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1741373269454,
-      "end": 1741373269454,
+      "start": 1741683371340,
+      "end": 1741683371340,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1741373269454,
-      "end": 1741373269454,
+      "start": 1741683371340,
+      "end": 1741683371340,
       "order": "normal"
     }
   ]

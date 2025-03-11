@@ -26,7 +26,7 @@ export const useStorageStore = defineStore('storage', {
   },
   actions: {
     async loadStorageCategoryList(): Promise<void> {
-      await axios.get(`store/category/category-list`, {
+      await axios.get(`store/category/list`, {
         headers: {
           Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
         }
@@ -46,7 +46,7 @@ export const useStorageStore = defineStore('storage', {
       })
     },
     async loadStorageCategorySearch(params: { query: string | number }): Promise<void> {
-      await axios.get(`store/category/category-list?name=${params.query}`, {
+      await axios.get(`store/category/list?name=${params.query}`, {
         headers: {
           Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
         }
@@ -55,7 +55,7 @@ export const useStorageStore = defineStore('storage', {
       })
     },
     async loadAllList(): Promise<void> {
-      await axios.get(`store/item/item-list`, {
+      await axios.get(`store/item/list`, {
         headers: {
           Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
         }
@@ -64,7 +64,7 @@ export const useStorageStore = defineStore('storage', {
       })
     },
     async loadAllListSearch(params: { search?: any }): Promise<void> {
-      await axios.get(`store/item/item-list?search=${params.search}`, {
+      await axios.get(`store/item/list?search=${params.search}`, {
         headers: {
           Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
         }

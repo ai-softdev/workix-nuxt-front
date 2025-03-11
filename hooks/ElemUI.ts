@@ -46,10 +46,7 @@ const forceFileDownload = (res: any, item: any): void => {
 }
 
 export const downloadWithAxios = (item: any): void => {
-  axios.post(`download`, {
-    url: item.file,
-    name: item.file.name
-  }, {
+  axios.get(`download${item.file}`, {
     headers: {
       Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
     }

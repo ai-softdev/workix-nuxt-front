@@ -85,34 +85,34 @@
               <p>{{ $t('Задания') }}</p>
             </template>
           </NavigationLink>
-          <NavigationLink v-if="loadCurrentUser.user.role_en !== 'admin'"
-                          :to="`/base/graph`"
-                          class="flex items-center gap-x-6">
-            <template v-slot:navIcon>
-              <svg class="dark:stroke-white stroke-black" width="25px" height="25px" viewBox="0 0 24 24" fill="none"
-                   xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M2.99902 3V16.2C2.99902 17.8802 2.99902 18.7202 3.326 19.362C3.61362 19.9265 4.07257 20.3854 4.63705 20.673C5.27879 21 6.11887 21 7.79902 21H20.999M19.9998 15H15.9998M12.9998 7.00002H6.99978M17.9998 11H8.99978"
-                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </template>
-            <template v-slot:navLink>
-              <p>{{ $t('График') }}</p>
-            </template>
-          </NavigationLink>
-          <NavigationLink v-if="loadCurrentUser.user.role_en !== 'admin'" :to="`/base/tests`"
-                          class="flex items-center gap-x-6">
-            <template v-slot:navIcon>
-              <svg class="dark:fill-white fill-black" width="25px" height="25px" viewBox="0 0 24 24"
-                   xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M4,23a1,1,0,0,1-1-1V19a1,1,0,0,1,2,0v3A1,1,0,0,1,4,23Zm9-1V15a1,1,0,0,0-2,0v7a1,1,0,0,0,2,0Zm7-11a1,1,0,0,0-1,1V22a1,1,0,0,0,2,0V12A1,1,0,0,0,20,11Zm.382-9.923A.991.991,0,0,0,20,1H16a1,1,0,0,0,0,2h1.586L12,8.586,8.707,5.293a1,1,0,0,0-1.414,0l-4,4a1,1,0,0,0,1.414,1.414L8,7.414l3.293,3.293a1,1,0,0,0,1.414,0L19,4.414V6a1,1,0,0,0,2,0V2a1,1,0,0,0-.618-.923Z"/>
-              </svg>
-            </template>
-            <template v-slot:navLink>
-              <p>{{ $t('Тесты') }}</p>
-            </template>
-          </NavigationLink>
+<!--          <NavigationLink v-if="loadCurrentUser.user.role_en !== 'admin'"-->
+<!--                          :to="`/base/graph`"-->
+<!--                          class="flex items-center gap-x-6">-->
+<!--            <template v-slot:navIcon>-->
+<!--              <svg class="dark:stroke-white stroke-black" width="25px" height="25px" viewBox="0 0 24 24" fill="none"-->
+<!--                   xmlns="http://www.w3.org/2000/svg">-->
+<!--                <path-->
+<!--                  d="M2.99902 3V16.2C2.99902 17.8802 2.99902 18.7202 3.326 19.362C3.61362 19.9265 4.07257 20.3854 4.63705 20.673C5.27879 21 6.11887 21 7.79902 21H20.999M19.9998 15H15.9998M12.9998 7.00002H6.99978M17.9998 11H8.99978"-->
+<!--                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>-->
+<!--              </svg>-->
+<!--            </template>-->
+<!--            <template v-slot:navLink>-->
+<!--              <p>{{ $t('График') }}</p>-->
+<!--            </template>-->
+<!--          </NavigationLink>-->
+<!--          <NavigationLink v-if="loadCurrentUser.user.role_en !== 'admin'" :to="`/base/tests`"-->
+<!--                          class="flex items-center gap-x-6">-->
+<!--            <template v-slot:navIcon>-->
+<!--              <svg class="dark:fill-white fill-black" width="25px" height="25px" viewBox="0 0 24 24"-->
+<!--                   xmlns="http://www.w3.org/2000/svg">-->
+<!--                <path-->
+<!--                  d="M4,23a1,1,0,0,1-1-1V19a1,1,0,0,1,2,0v3A1,1,0,0,1,4,23Zm9-1V15a1,1,0,0,0-2,0v7a1,1,0,0,0,2,0Zm7-11a1,1,0,0,0-1,1V22a1,1,0,0,0,2,0V12A1,1,0,0,0,20,11Zm.382-9.923A.991.991,0,0,0,20,1H16a1,1,0,0,0,0,2h1.586L12,8.586,8.707,5.293a1,1,0,0,0-1.414,0l-4,4a1,1,0,0,0,1.414,1.414L8,7.414l3.293,3.293a1,1,0,0,0,1.414,0L19,4.414V6a1,1,0,0,0,2,0V2a1,1,0,0,0-.618-.923Z"/>-->
+<!--              </svg>-->
+<!--            </template>-->
+<!--            <template v-slot:navLink>-->
+<!--              <p>{{ $t('Тесты') }}</p>-->
+<!--            </template>-->
+<!--          </NavigationLink>-->
         </template>
       </NavigationBlock>
       <NavigationBlock>

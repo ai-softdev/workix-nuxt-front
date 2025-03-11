@@ -109,7 +109,7 @@ onUnmounted(() => {
           </button>
           <button @click.stop="deleteData(userGroup); documentStore.showContext = null; documentStore.showUsersNode = documentStore.showUsersNode.filter(user=> !userGroup.some(groupUser => groupUser.id === user.id))"
                   class="rounded-lg border border-gray-500 dark:border-white absolute px-2.5 pt-1 -top-10 left-10 text-red-400 font-bold">
-            X
+            x
           </button>
         </div>
         <Transition name="slide-down" class="" @click.stop>
@@ -150,9 +150,11 @@ onUnmounted(() => {
           </div>
         </Transition>
         <TransitionGroup name="list" tag="list" class="flex flex-col gap-y-6 transition-all">
-          <div @click="console.log(documentStore.showUsersNode.filter(el=>el.id !== userGroup.filter(e=>e.id)))"
+          <div
+              @click="console.log(documentStore.showUsersNode.filter(el=>el.id !== userGroup.filter(e=>e.id)))"
                class="h-24 w-[220px] border border-gray-500 dark:border-white px-2 rounded-lg text-center flex items-center justify-center mx-auto relative "
-               v-for="(user, userIndex) in userGroup" :key="userIndex">
+               v-for="(user, userIndex) in userGroup" :key="userIndex"
+          >
             <div class="flex items-center gap-x-2">
               <div v-if="user.photo_url" class="max-w-[50px]">
                 <img class="w-full rounded-full" :src="authStore.get_server_domain + user.photo_url" alt="">
@@ -160,7 +162,6 @@ onUnmounted(() => {
               <div class="break-words">
                 <p class="text-sm w-full">
                  {{user.first_name + ' ' + user.last_name}}
-<!--                  12312 312 3213123 123123 1232 1312 3123 123 123123 123213123123123 123-->
                 </p>
               </div>
             </div>

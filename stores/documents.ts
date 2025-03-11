@@ -43,7 +43,7 @@ export const useDocumentStore = defineStore('document-store', {
       })
     },
     async loadAllDocument(params: { page: number, limit: number, type?: any }): Promise<void> {
-      await axios.get(`document/document/document-list${params.type ? '/' + params.type : ''}`, {
+      await axios.get(`document/document-list${params.type ? '/' + params.type : ''}`, {
         headers: {
           Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
         }
@@ -53,7 +53,7 @@ export const useDocumentStore = defineStore('document-store', {
     },
 
     async loadDocument(params: { slug: string[] | string}): Promise<void> {
-      await axios.get(`document/document/${params.slug}`, {
+      await axios.get(`document/${params.slug}`, {
         headers: {
           Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
         }
@@ -71,7 +71,7 @@ export const useDocumentStore = defineStore('document-store', {
       if (typeof params.file !== 'string') {
         fd.set('file', params.file)
       }
-      await axios.post(`document/document/create`, fd, {
+      await axios.post(`document/create`, fd, {
         headers: {
           Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
         }
@@ -101,7 +101,7 @@ export const useDocumentStore = defineStore('document-store', {
     },
 
     async docDelete(params: { slug: string[] | string }) {
-      await axios.delete(`document/document/delete/${params.slug}`, {
+      await axios.delete(`document/delete/${params.slug}`, {
         headers: {
           Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
         }
