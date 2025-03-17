@@ -46,10 +46,10 @@ onMounted(async () => {
 
 async function startAppLoad() {
   try {
-    await loadScript("/e-imzo/e-imzo.js");
-    await loadScript("/e-imzo/e-imzo-client.js");
-    await loadScript("/e-imzo/micro-ajax.js");
-    await loadScript("/e-imzo/e-imzo-init.js");
+      // await loadScript("/e-imzo/e-imzo.js");
+      // await loadScript("/e-imzo/e-imzo-client.js");
+      // await loadScript("/e-imzo/micro-ajax.js");
+      // await loadScript("/e-imzo/e-imzo-init.js");
 
     if (window.EIMZOClient) {
       console.log("✅ EIMZOClient загружен:", window.EIMZOClient);
@@ -184,7 +184,7 @@ const signFile = function () {
         //если я не первый то нуно вызвать join на /frontend/pkcs7/join
       verify(pkcs7wtst, false, data64, function(result){
         console.log(result)//выкинуть назад router
-      }, true);  // !! set isDataBase64Encoded = TRUE
+      }, true);
     });
   }, (e, r) => {console.log('Ошибка при подписании')}, false, true); // !! set isDataBase64Encoded = TRUE
 };
@@ -250,16 +250,16 @@ function cbChanged(event) {
   }, (e, r)=> {console.log('error')});
 }
 
-const document = useDocumentStore()
+const documentStore = useDocumentStore()
 const authStore = useAuthStore()
 
 onMounted(()=>{
-  document.loadDocument({slug: route.params.slug})
+  documentStore.loadDocument({slug: route.params.slug})
 })
 
 async function fetchFileAsBase64() {
   try {
-    const url = authStore.get_server_domain + document.documentItem.file;
+    const url = authStore.get_server_domain + documentStore.documentItem.file;
     const response = await fetch(url);
 
     if (!response.ok) throw new Error('Ошибка при загрузке файла');
@@ -278,8 +278,8 @@ async function fetchFileAsBase64() {
   }
 }
 
-watch(() => document.documentItem, (newValue) => {
-  console.log(authStore.get_server_domain+document.documentItem.file)
+watch(() => documentStore.documentItem, (newValue) => {
+  console.log(authStore.get_server_domain+documentStore.documentItem.file)
 
   fetchFileAsBase64()
 
@@ -307,11 +307,6 @@ watch(() => document.documentItem, (newValue) => {
       </p>
       <select name="key" @change="cbChanged($event)"></select>
       <form id="myForm" @submit.prevent="handleSubmit">
-      <input
-          type="file"
-          @change="handleFileChange"
-          class="w-full dark:bg-gray-700 outline-none pl-10 h-[50px]"
-      />
         <button type="submit">CHECK</button>
       </form>
     </div>
