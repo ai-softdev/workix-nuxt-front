@@ -70,12 +70,12 @@ function dragLeaveNodeValue(event: any) {
 
 onMounted(() => {
   if (list.value.toArray().length === 0 && authStore.user?.first_name) {
-    appendData([{
+    appendData({
       first_name: authStore.user?.first_name,
       last_name: authStore.user?.last_name,
       photo_url: authStore.user?.photo,
       id: authStore.user?.id
-    }])
+    })
   }
   watchSyncEffect(() => {
     documentStore.userList = list.value.toArray().map(node => node.self)
@@ -84,12 +84,12 @@ onMounted(() => {
 
 watch(() => authStore.user, (newValue) => {
   if (list.value.toArray().length === 0) {
-    appendData([{
+    appendData({
       first_name: newValue?.first_name,
       last_name: newValue?.last_name,
       photo_url: newValue?.photo,
       id: newValue?.id
-    }])
+    })
   }
 })
 
@@ -170,22 +170,23 @@ onUnmounted(() => {
           <div
               @click="console.log(documentStore.showUsersNode.filter(el=>el.id !== userGroup.filter(e=>e.id)))"
                class="h-24 w-[220px] border border-gray-500 dark:border-white px-2 rounded-lg text-center flex items-center justify-center mx-auto relative "
-               v-for="(user, userIndex) in userGroup" :key="userIndex"
+
           >
+<!--            v-for="(user, userIndex) in userGroup" :key="userIndex"-->
             <div class="flex items-center gap-x-2">
-              <div v-if="user.photo" class="max-w-[50px]">
-                <img class="w-full rounded-full" :src="user.photo" alt="">
+              <div v-if="userGroup.photo" class="max-w-[50px]">
+                <img class="w-full rounded-full" :src="userGroup.photo" alt="">
               </div>
               <div class="break-words">
                 <p class="text-sm w-full">
-                 {{user.first_name + ' ' + user.last_name}}
+                 {{userGroup.first_name + ' ' + userGroup.last_name}}
                 </p>
               </div>
             </div>
             <button
               class="absolute px-2.5 pt-1 top-0 right-0 border-l border-b border-gray-500 dark:border-white rounded rounded-tl-none rounded-br-none text-red-400 font-bold"
-              v-if="user.id !== authStore.user.id && groupIndex !== 0"
-              @click="deleteNodeValue(userGroup, {...user}); documentStore.showUsersNode.splice(documentStore.showUsersNode.findIndex(e=>e.id === user?.id), 1)">
+              v-if="userGroup.id !== authStore.user.id && groupIndex !== 0"
+              @click="deleteNodeValue(userGroup, {...userGroup}); documentStore.showUsersNode.splice(documentStore.showUsersNode.findIndex(e=>e.id === userGroup?.id), 1)">
               X
             </button>
           </div>
