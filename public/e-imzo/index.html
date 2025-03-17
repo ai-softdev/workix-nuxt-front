@@ -181,7 +181,8 @@
             };
 
             getChallenge = function (callback){
-                microAjax('http://127.0.0.1:9999/frontend/challenge?_uc='+(Date.now() + "_" + Math.random()), function (data, s) {
+                const E_IMZO_URL = 'http://127.0.0.1:9999'
+                microAjax(E_IMZO_URL + '/frontend/challenge?_uc='+(Date.now() + "_" + Math.random()), function (data, s) {
                     if(s.status != 200){
                         uiShowMessage(s.status + " - " + s.statusText);
                         return;
@@ -202,7 +203,8 @@
 
             auth = function (keyId, challenge, callback){
                 EIMZOClient.createPkcs7(keyId, challenge, null, function(pkcs7){
-                    microAjax('http://127.0.0.1:8000/my_app/auth/', function (data, s) {
+                    const BACK_URL = 'http://127.0.0.1:8000/my_app/auth/';
+                    microAjax(BACK_URL, function (data, s) {
                         uiHideProgress();
                         if(s.status != 200){
                             uiShowMessage(s.status + " - " + s.statusText);

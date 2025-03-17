@@ -43,7 +43,7 @@ export const useDocumentStore = defineStore('document-store', {
       })
     },
     async loadAllDocument(params: { page: number, limit: number, type?: any }): Promise<void> {
-      await axios.get(`document/document-list${params.type ? '/' + params.type : ''}`, {
+      await axios.get(`document/list${params.type ? '/' + params.type : ''}`, {
         headers: {
           Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
         }

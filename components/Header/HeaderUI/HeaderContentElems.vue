@@ -190,7 +190,7 @@
       }">
       <div v-if="loadCurrentUser.user.id" class="">
         <img class="w-[50px] h-[50px] rounded-full shadow-lg border border-gray-100 dark:border-none"
-             :src="loadCurrentUser.user.photo" alt="">
+             :src="loadCurrentUser.user.photo" alt="header-img">
       </div>
       <div v-else class="flex items-center gap-x-2">
         <sceleton border-radius="100px" width="50px" height="50px"></sceleton>

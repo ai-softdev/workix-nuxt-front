@@ -131,3 +131,7 @@ var uiHandleError = function (e, r) {
     if (e) wsError(e);
 
 };
+
+window.EIMZOClient = EIMZOClient;
+
+window.AppLoad = AppLoad;

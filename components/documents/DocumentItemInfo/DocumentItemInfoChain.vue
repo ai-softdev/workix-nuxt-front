@@ -11,11 +11,18 @@ import DocumentItemInfoChainFile
   from "~/components/documents/DocumentItemInfo/DocumentIemInfoChain/DocumentItemInfoChainFile.vue";
 import {LinkedList} from "~/hooks/Node";
 import {useAuthStore} from "~/stores/auth";
+import { onMounted } from 'vue';
 
 const route = useRoute()
 const router = useRouter()
 const documentStore = useDocumentStore()
 const authStore = useAuthStore()
+
+function startChain(){
+  router.push(`/base/documents/signification/${route.params.slug}`)
+}
+
+
 </script>
 
 <template>
@@ -31,7 +38,9 @@ const authStore = useAuthStore()
       <div class="flex justify-center gap-x-10 mt-4">
         <TheButton :type="'documentBtn'" @click="documentStore.showWarn = true">{{ $t('Удалить документ') }}</TheButton>
         <TheButton :type="'documentBtn'"
-                   @click="documentStore.docUpdate({users: documentStore.userList.map((innerArray: any) => innerArray.filter((item : any)=> item.id !== authStore.user.id).map(item => item.id)).filter(innerArray => innerArray.length > 0), id: route.params.id}).then(res=>documentStore.loadDocument({id: route.params.id}))">
+                   @click="startChain"
+         >
+<!--          @click="documentStore.docUpdate({users: documentStore.userList.map((innerArray: any) => innerArray.filter((item : any)=> item.id !== authStore.user.id).map(item => item.id)).filter(innerArray => innerArray.length > 0), id: route.params.id}).then(res=>documentStore.loadDocument({id: route.params.id}))"-->
           {{ $t('Запустить цепь') }}
         </TheButton>
       </div>

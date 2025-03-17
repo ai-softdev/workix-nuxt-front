@@ -69,17 +69,28 @@ function dragLeaveNodeValue(event: any) {
 }
 
 onMounted(() => {
-  appendData([{
-    first_name: authStore.user?.first_name,
-    last_name: authStore.user?.last_name,
-    photo_url: authStore.user?.photo_url,
-    id: authStore.user?.id
-  }])
-  appendData([])
+  if (list.value.toArray().length === 0 && authStore.user?.first_name) {
+    appendData([{
+      first_name: authStore.user?.first_name,
+      last_name: authStore.user?.last_name,
+      photo_url: authStore.user?.photo,
+      id: authStore.user?.id
+    }])
+  }
   watchSyncEffect(() => {
-    // console.log(documentStore.documentItem.chain)
     documentStore.userList = list.value.toArray().map(node => node.self)
   })
+})
+
+watch(() => authStore.user, (newValue) => {
+  if (list.value.toArray().length === 0) {
+    appendData([{
+      first_name: newValue?.first_name,
+      last_name: newValue?.last_name,
+      photo_url: newValue?.photo,
+      id: newValue?.id
+    }])
+  }
 })
 
 
@@ -92,7 +103,8 @@ onUnmounted(() => {
 <template>
   <TransitionGroup name="list" tag="div" class="flex items-center ">
     <div v-for="(userGroup, groupIndex) in documentStore.userList" :key="groupIndex"
-         class="px-2 h-full  z-20 relative flex items-center transition-all">
+         class="px-2 h-full  z-20 relative flex items-center transition-all"
+    >
       <div class=" transition-all" @drop.prevent="console.log(123)"
            @dragenter.stop="groupIndex === 0 || userGroup.length == 0? '' :  dragEnterNode($event)"
            @dragleave.stop="dragLeaveNode" ></div>
@@ -102,9 +114,14 @@ onUnmounted(() => {
            class="absolute text-blueSemiLight tracking-widest text-sm w-full h-full flex items-center justify-center rounded-lg transition-all duration-200"
            @dragenter.prevent="dragEnterNodeValue" @dragleave.prevent="dragLeaveNodeValue" >
           {{ $t('Область для добавления') }}</p>
-        <div class="absolute top-0" v-if="groupIndex !== 0">
-          <button @click.stop="documentStore.showContext = groupIndex"
-                  class="rounded-lg border border-gray-500 dark:border-white absolute px-2.5 pt-1 -top-10 right-10 text-green-400 font-bold">
+        <div
+            v-if="groupIndex !== 0 && !userGroup[0]?.id"
+            class="absolute top-0"
+        >
+          <button
+              @click.stop="documentStore.showContext = groupIndex"
+              class="rounded-lg border border-gray-500 dark:border-white absolute px-2.5 pt-1 -top-10 right-10 text-green-400 font-bold"
+          >
             +
           </button>
           <button @click.stop="deleteData(userGroup); documentStore.showContext = null; documentStore.showUsersNode = documentStore.showUsersNode.filter(user=> !userGroup.some(groupUser => groupUser.id === user.id))"
@@ -156,8 +173,8 @@ onUnmounted(() => {
                v-for="(user, userIndex) in userGroup" :key="userIndex"
           >
             <div class="flex items-center gap-x-2">
-              <div v-if="user.photo_url" class="max-w-[50px]">
-                <img class="w-full rounded-full" :src="authStore.get_server_domain + user.photo_url" alt="">
+              <div v-if="user.photo" class="max-w-[50px]">
+                <img class="w-full rounded-full" :src="user.photo" alt="">
               </div>
               <div class="break-words">
                 <p class="text-sm w-full">

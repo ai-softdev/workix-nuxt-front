@@ -31,7 +31,7 @@ watchSyncEffect(()=>{
 
 <template>
   <div class="flex justify-center gap-x-6 h-full ">
-    <TheContentBlock class="w-8/12 h-max">
+    <TheContentBlock class="w-full h-max">
       <TheTextContent class="mx-auto text-center">{{ documentStore.documentItem.title }}</TheTextContent>
       <div class="flex items-center gap-x-4">
         <TheBreadcrumbs :breadcrumb-link="'/base/documents'">
@@ -53,9 +53,9 @@ watchSyncEffect(()=>{
       </div>
       <DocumentItemInfo :item="documentStore.documentItem"/>
     </TheContentBlock>
-    <TheContentBlock class="w-3/12">
-      <DocumentItemInfoUserList/>
-    </TheContentBlock>
+<!--    <TheContentBlock class="w-3/12">-->
+<!--      <DocumentItemInfoUserList/>-->
+<!--    </TheContentBlock>-->
   </div>
 </template>
 

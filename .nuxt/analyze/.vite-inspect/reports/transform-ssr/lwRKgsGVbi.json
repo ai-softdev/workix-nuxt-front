@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { unref as _unref, mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\"\n\nimport {useChat} from \"~/stores/chat\";\nimport {useUserStore} from \"~/stores/users\";\nimport {useRoute} from \"vue-router\";\nimport {useRouter} from \"vue-router\";\nimport {useAuthStore} from \"~/stores/auth\";\nimport TheSceleton from \"~/components/UI/TheSceleton.vue\";\nimport ChatNavHeader from \"~/components/Chat/ChatNav/ChatNavHeader.vue\";\nimport ChatNavContent from \"~/components/Chat/ChatNav/ChatNavContent.vue\";\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'ChatNav',\n  __ssrInlineRender: true,\n  props: {\n  activeNav: {\n    type:Boolean,\n    default: true\n  }\n},\n  setup(__props) {\n\n\nconst router = useRouter()\nconst route = useRoute()\nconst userStore = useUserStore()\nconst chatStore = useChat()\nconst user = useAuthStore()\nonMounted(()=>{\n  chatStore.windowWidth = window.innerWidth\n})\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"h-full\" }, _attrs))} data-v-0a4b6907>`)\n  _push(_ssrRenderComponent(ChatNavHeader, { class: \"pt-6\" }, null, _parent))\n  _push(_ssrRenderComponent(ChatNavContent, {\n    class: \"\",\n    onDragenter: ($event: any) => (_unref(chatStore).showDragInfo = false)\n  }, null, _parent))\n  _push(`</div>`)\n}\n}\n\n})",
-      "start": 1741686140540,
-      "end": 1741686140540,
+      "start": 1742237905495,
+      "end": 1742237905495,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1741686140540,
-      "end": 1741686140540,
+      "start": 1742237905496,
+      "end": 1742237905496,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1741686140540,
-      "end": 1741686140540,
+      "start": 1742237905496,
+      "end": 1742237905496,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1741686140540,
-      "end": 1741686140540,
+      "start": 1742237905496,
+      "end": 1742237905496,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1741686140540,
-      "end": 1741686140540,
+      "start": 1742237905496,
+      "end": 1742237905496,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1741686140541,
-      "end": 1741686140541,
+      "start": 1742237905496,
+      "end": 1742237905496,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1741686140541,
-      "end": 1741686140541,
+      "start": 1742237905496,
+      "end": 1742237905496,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1741686140541,
-      "end": 1741686140541,
+      "start": 1742237905498,
+      "end": 1742237905498,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1741686140541,
-      "end": 1741686140541,
+      "start": 1742237905498,
+      "end": 1742237905498,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport { useChat } from \"~/stores/chat\";\nimport { useUserStore } from \"~/stores/users\";\nimport { useRoute } from \"vue-router\";\nimport { useRouter } from \"vue-router\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport ChatNavHeader from \"~/components/Chat/ChatNav/ChatNavHeader.vue\";\nimport ChatNavContent from \"~/components/Chat/ChatNav/ChatNavContent.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ChatNav\",\n  __ssrInlineRender: true,\n  props: {\n    activeNav: {\n      type: Boolean,\n      default: true\n    }\n  },\n  setup(__props) {\n    const router = useRouter();\n    const route = useRoute();\n    const userStore = useUserStore();\n    const chatStore = useChat();\n    const user = useAuthStore();\n    onMounted(() => {\n      chatStore.windowWidth = window.innerWidth;\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"h-full\" }, _attrs))} data-v-0a4b6907>`);\n      _push(_ssrRenderComponent(ChatNavHeader, { class: \"pt-6\" }, null, _parent));\n      _push(_ssrRenderComponent(ChatNavContent, {\n        class: \"\",\n        onDragenter: ($event) => _unref(chatStore).showDragInfo = false\n      }, null, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1741686140543,
-      "end": 1741686141904,
+      "start": 1742237905498,
+      "end": 1742237906121,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -86,173 +86,173 @@
     },
     {
       "name": "vite:json",
-      "start": 1741686141904,
-      "end": 1741686141904,
+      "start": 1742237906121,
+      "end": 1742237906121,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1741686141904,
-      "end": 1741686141905,
+      "start": 1742237906121,
+      "end": 1742237906121,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1741686141905,
-      "end": 1741686141905,
+      "start": 1742237906121,
+      "end": 1742237906121,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1741686141905,
-      "end": 1741686141905,
+      "start": 1742237906121,
+      "end": 1742237906121,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1741686141905,
-      "end": 1741686141905,
+      "start": 1742237906124,
+      "end": 1742237906124,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1741686141905,
-      "end": 1741686141905,
+      "start": 1742237906124,
+      "end": 1742237906124,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1741686141905,
-      "end": 1741686141905,
+      "start": 1742237906124,
+      "end": 1742237906124,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1741686141905,
-      "end": 1741686141905,
+      "start": 1742237906124,
+      "end": 1742237906124,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1741686141907,
-      "end": 1741686141907,
+      "start": 1742237906124,
+      "end": 1742237906124,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1741686141907,
-      "end": 1741686141907,
+      "start": 1742237906128,
+      "end": 1742237906128,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1741686141908,
-      "end": 1741686141908,
+      "start": 1742237906128,
+      "end": 1742237906129,
       "order": "normal"
     },
     {
       "name": "vite:define",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport { useChat } from \"~/stores/chat\";\nimport { useUserStore } from \"~/stores/users\";\nimport { useRoute } from \"vue-router\";\nimport { useRouter } from \"vue-router\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport ChatNavHeader from \"~/components/Chat/ChatNav/ChatNavHeader.vue\";\nimport ChatNavContent from \"~/components/Chat/ChatNav/ChatNavContent.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ChatNav\",\n  __ssrInlineRender: true,\n  props: {\n    activeNav: {\n      type: Boolean,\n      default: true\n    }\n  },\n  setup(__props) {\n    const router = useRouter();\n    const route = useRoute();\n    const userStore = useUserStore();\n    const chatStore = useChat();\n    const user = useAuthStore();\n    onMounted(() => {\n      chatStore.windowWidth = (void 0).innerWidth;\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"h-full\" }, _attrs))} data-v-0a4b6907>`);\n      _push(_ssrRenderComponent(ChatNavHeader, { class: \"pt-6\" }, null, _parent));\n      _push(_ssrRenderComponent(ChatNavContent, {\n        class: \"\",\n        onDragenter: ($event) => _unref(chatStore).showDragInfo = false\n      }, null, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1741686141908,
-      "end": 1741686142052,
+      "start": 1742237906129,
+      "end": 1742237906475,
       "order": "normal",
       "sourcemaps": "{\n  \"version\": 3,\n  \"sources\": [\"D:/projects/nuxt/workix-nuxt-front/components/Chat/ChatNav.vue?vue&type=script&setup=true&lang.ts\"],\n  \"sourcesContent\": [\"import { defineComponent as _defineComponent } from \\\"vue\\\";\\nimport { unref as _unref, mergeProps as _mergeProps } from \\\"vue\\\";\\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \\\"vue/server-renderer\\\";\\nimport { useChat } from \\\"~/stores/chat\\\";\\nimport { useUserStore } from \\\"~/stores/users\\\";\\nimport { useRoute } from \\\"vue-router\\\";\\nimport { useRouter } from \\\"vue-router\\\";\\nimport { useAuthStore } from \\\"~/stores/auth\\\";\\nimport ChatNavHeader from \\\"~/components/Chat/ChatNav/ChatNavHeader.vue\\\";\\nimport ChatNavContent from \\\"~/components/Chat/ChatNav/ChatNavContent.vue\\\";\\nexport default /* @__PURE__ */ _defineComponent({\\n  __name: \\\"ChatNav\\\",\\n  __ssrInlineRender: true,\\n  props: {\\n    activeNav: {\\n      type: Boolean,\\n      default: true\\n    }\\n  },\\n  setup(__props) {\\n    const router = useRouter();\\n    const route = useRoute();\\n    const userStore = useUserStore();\\n    const chatStore = useChat();\\n    const user = useAuthStore();\\n    onMounted(() => {\\n      chatStore.windowWidth = window.innerWidth;\\n    });\\n    return (_ctx, _push, _parent, _attrs) => {\\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \\\"h-full\\\" }, _attrs))} data-v-0a4b6907>`);\\n      _push(_ssrRenderComponent(ChatNavHeader, { class: \\\"pt-6\\\" }, null, _parent));\\n      _push(_ssrRenderComponent(ChatNavContent, {\\n        class: \\\"\\\",\\n        onDragenter: ($event) => _unref(chatStore).showDragInfo = false\\n      }, null, _parent));\\n      _push(`</div>`);\\n    };\\n  }\\n});\\n\"],\n  \"mappings\": \"AAAA,SAAS,mBAAmB,wBAAwB;AACpD,SAAS,SAAS,QAAQ,cAAc,mBAAmB;AAC3D,SAAS,sBAAsB,qBAAqB,kBAAkB,uBAAuB;AAC7F,SAAS,eAAe;AACxB,SAAS,oBAAoB;AAC7B,SAAS,gBAAgB;AACzB,SAAS,iBAAiB;AAC1B,SAAS,oBAAoB;AAC7B,OAAO,mBAAmB;AAC1B,OAAO,oBAAoB;AAC3B,eAA+B,iCAAiB;AAAA,EAC9C,QAAQ;AAAA,EACR,mBAAmB;AAAA,EACnB,OAAO;AAAA,IACL,WAAW;AAAA,MACT,MAAM;AAAA,MACN,SAAS;AAAA,IACX;AAAA,EACF;AAAA,EACA,MAAM,SAAS;AACb,UAAM,SAAS,UAAU;AACzB,UAAM,QAAQ,SAAS;AACvB,UAAM,YAAY,aAAa;AAC/B,UAAM,YAAY,QAAQ;AAC1B,UAAM,OAAO,aAAa;AAC1B,cAAU,MAAM;AACd,gBAAU,cAAc,SAAO;AAAA,IACjC,CAAC;AACD,WAAO,CAAC,MAAM,OAAO,SAAS,WAAW;AACvC,YAAM,OAAO,gBAAgB,YAAY,EAAE,OAAO,SAAS,GAAG,MAAM,CAAC,CAAC,mBAAmB;AACzF,YAAM,oBAAoB,eAAe,EAAE,OAAO,OAAO,GAAG,MAAM,OAAO,CAAC;AAC1E,YAAM,oBAAoB,gBAAgB;AAAA,QACxC,OAAO;AAAA,QACP,aAAa,CAAC,WAAW,OAAO,SAAS,EAAE,eAAe;AAAA,MAC5D,GAAG,MAAM,OAAO,CAAC;AACjB,YAAM,QAAQ;AAAA,IAChB;AAAA,EACF;AACF,CAAC;\",\n  \"names\": []\n}\n"
     },
     {
       "name": "vite:css-post",
-      "start": 1741686142053,
-      "end": 1741686142053,
+      "start": 1742237906475,
+      "end": 1742237906475,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1741686142053,
-      "end": 1741686142053,
+      "start": 1742237906475,
+      "end": 1742237906475,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1741686142053,
-      "end": 1741686142053,
+      "start": 1742237906475,
+      "end": 1742237906475,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1741686142053,
-      "end": 1741686142053,
+      "start": 1742237906475,
+      "end": 1742237906475,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1741686142053,
-      "end": 1741686142053,
+      "start": 1742237906475,
+      "end": 1742237906476,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1741686142053,
-      "end": 1741686142053,
+      "start": 1742237906476,
+      "end": 1742237906476,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1741686142053,
-      "end": 1741686142054,
+      "start": 1742237906476,
+      "end": 1742237906476,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1741686142054,
-      "end": 1741686142054,
+      "start": 1742237906476,
+      "end": 1742237906476,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1741686142054,
-      "end": 1741686142054,
+      "start": 1742237906476,
+      "end": 1742237906476,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1741686142054,
-      "end": 1741686142054,
+      "start": 1742237906477,
+      "end": 1742237906477,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1741686142054,
-      "end": 1741686142054,
+      "start": 1742237906477,
+      "end": 1742237906477,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1741686142054,
-      "end": 1741686142054,
+      "start": 1742237906478,
+      "end": 1742237906478,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1741686142054,
-      "end": 1741686142054,
+      "start": 1742237906478,
+      "end": 1742237906478,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1741686142055,
-      "end": 1741686142055,
+      "start": 1742237906478,
+      "end": 1742237906478,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1741686142055,
-      "end": 1741686142055,
+      "start": 1742237906478,
+      "end": 1742237906478,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { onMounted } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport { useChat } from \"~/stores/chat\";\nimport { useUserStore } from \"~/stores/users\";\nimport { useRoute } from \"vue-router\";\nimport { useRouter } from \"vue-router\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport ChatNavHeader from \"~/components/Chat/ChatNav/ChatNavHeader.vue\";\nimport ChatNavContent from \"~/components/Chat/ChatNav/ChatNavContent.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ChatNav\",\n  __ssrInlineRender: true,\n  props: {\n    activeNav: {\n      type: Boolean,\n      default: true\n    }\n  },\n  setup(__props) {\n    const router = useRouter();\n    const route = useRoute();\n    const userStore = useUserStore();\n    const chatStore = useChat();\n    const user = useAuthStore();\n    onMounted(() => {\n      chatStore.windowWidth = (void 0).innerWidth;\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"h-full\" }, _attrs))} data-v-0a4b6907>`);\n      _push(_ssrRenderComponent(ChatNavHeader, { class: \"pt-6\" }, null, _parent));\n      _push(_ssrRenderComponent(ChatNavContent, {\n        class: \"\",\n        onDragenter: ($event) => _unref(chatStore).showDragInfo = false\n      }, null, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1741686142055,
-      "end": 1741686142057,
+      "start": 1742237906478,
+      "end": 1742237906479,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -266,8 +266,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { onMounted } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport { useChat } from \"~/stores/chat\";\nimport { useUserStore } from \"~/stores/users\";\nimport { useRoute } from \"vue-router\";\nimport { useRouter } from \"vue-router\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport ChatNavHeader from \"~/components/Chat/ChatNav/ChatNavHeader.vue\";\nimport ChatNavContent from \"~/components/Chat/ChatNav/ChatNavContent.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ChatNav\",\n  __ssrInlineRender: true,\n  props: {\n    activeNav: {\n      type: Boolean,\n      default: true\n    }\n  },\n  setup(__props) {\n    const router = useRouter();\n    const route = useRoute();\n    const userStore = useUserStore();\n    const chatStore = useChat();\n    const user = useAuthStore();\n    onMounted(() => {\n      chatStore.windowWidth = (void 0).innerWidth;\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"h-full\" }, _attrs))} data-v-0a4b6907>`);\n      _push(_ssrRenderComponent(ChatNavHeader, { class: \"pt-6\" }, null, _parent));\n      _push(_ssrRenderComponent(ChatNavContent, {\n        class: \"\",\n        onDragenter: ($event) => _unref(chatStore).showDragInfo = false\n      }, null, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1741686142055,
-      "end": 1741686142057,
+      "start": 1742237906478,
+      "end": 1742237906479,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -280,45 +280,45 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1741686142057,
-      "end": 1741686142057,
+      "start": 1742237906479,
+      "end": 1742237906479,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1741686142057,
-      "end": 1741686142057,
+      "start": 1742237906479,
+      "end": 1742237906479,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1741686142058,
-      "end": 1741686142058,
+      "start": 1742237906479,
+      "end": 1742237906480,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1741686142058,
-      "end": 1741686142058,
+      "start": 1742237906479,
+      "end": 1742237906480,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1741686142058,
-      "end": 1741686142058,
+      "start": 1742237906480,
+      "end": 1742237906480,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1741686142058,
-      "end": 1741686142058,
+      "start": 1742237906480,
+      "end": 1742237906480,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
       "result": "import { onMounted } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport { useChat } from \"~/stores/chat\";\nimport { useUserStore } from \"~/stores/users\";\nimport { useRoute } from \"vue-router\";\nimport { useRouter } from \"vue-router\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport ChatNavHeader from \"~/components/Chat/ChatNav/ChatNavHeader.vue\";\nimport ChatNavContent from \"~/components/Chat/ChatNav/ChatNavContent.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ChatNav\",\n  __ssrInlineRender: true,\n  props: {\n    activeNav: {\n      type: Boolean,\n      default: true\n    }\n  },\n  setup(__props) {\n    const router = useRouter();\n    const route = useRoute();\n    const userStore = useUserStore();\n    const chatStore = useChat();\n    const user = useAuthStore();\n     false && /*@__PURE__*/ onMounted(() => {\n      chatStore.windowWidth = (void 0).innerWidth;\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"h-full\" }, _attrs))} data-v-0a4b6907>`);\n      _push(_ssrRenderComponent(ChatNavHeader, { class: \"pt-6\" }, null, _parent));\n      _push(_ssrRenderComponent(ChatNavContent, {\n        class: \"\",\n        onDragenter: ($event) => _unref(chatStore).showDragInfo = false\n      }, null, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1741686142058,
-      "end": 1741686142059,
+      "start": 1742237906480,
+      "end": 1742237906481,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -331,14 +331,14 @@
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1741686142060,
-      "end": 1741686142061,
+      "start": 1742237906481,
+      "end": 1742237906481,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1741686142061,
-      "end": 1741686142061,
+      "start": 1742237906481,
+      "end": 1742237906481,
       "order": "normal"
     }
   ]

@@ -204,7 +204,9 @@ var  EIMZOClient = {
                         var id = data.keyId;
                         if(verifyPassword){
                             CAPIWS.callFunction({name: "verify_password", plugin: "pfx", arguments: [id]}, function (event, data) {
+
                                 if (data.success) {
+
                                     success(id);
                                 } else {
                                     fail(null, data.reason);

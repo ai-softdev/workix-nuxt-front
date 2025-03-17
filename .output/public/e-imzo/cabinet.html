@@ -54,10 +54,12 @@
 
                 if (file) {
                     const reader = new FileReader(); // Create a new FileReader
-
+                    console.log(file);
                     // When the file is loaded, convert to Base64 and log it
                     reader.onload = function(e) {
+                        console.log(e.target.result)
                         const base64Content = e.target.result.split(',')[1]; // Extract Base64 part
+                        
                         document.testform.fileData64.value = base64Content;
                     };
 
@@ -161,7 +163,9 @@
             };  
 
             attachTimestamp = function (pkcs7, callback){
-                microAjax('http://127.0.0.1:8080/frontend/timestamp/pkcs7', function (data, s) {
+                const E_IMZO_URL = 'http://127.0.0.1:9999'
+                microAjax(E_IMZO_URL + '/frontend/timestamp/pkcs7', function (data, s) {
+                    
                     uiHideProgress();
                     if(s.status != 200){
                         uiShowMessage(s.status + " - " + s.statusText);
@@ -190,10 +194,11 @@
                     } else {
                         data64 = Base64.encode(data);
                     }
-                }            
+                }
                 console.log(detached);
                 console.log(data64);
-                microAjax('http://127.0.0.1:8000/my_app/verify/', function (data, s) {
+                const BACK_URL = 'http://127.0.0.1:8000/my_app/verify/'
+                microAjax(BACK_URL, function (data, s) {
                     uiHideProgress();
                     if(s.status != 200){
                         uiShowMessage(s.status + " - " + s.statusText);
