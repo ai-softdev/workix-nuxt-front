@@ -4,63 +4,63 @@
     {
       "name": "vite:load-fallback",
       "result": "import {ref, onMounted} from \"vue\";\nimport WaveSurfer from \"wavesurfer.js\";\n// @ts-ignore\nimport RecordPlugin from 'wavesurfer.js/dist/plugins/record.esm.js'\nimport {useChat} from \"~/stores/chat\";\n\ninterface IWave {\n  registerPlugin: (plugin: any )=> any\n  destroy: () => void\n}\ninterface IRecord{\n  isRecording: () => boolean,\n  isPaused: () => boolean,\n  startRecording: (options: { deviceId: any }) => Promise<void>\n  stopRecording: () => void\n  on: (event: string, callback: (blob: Blob) => void) => void\n}\n\nlet wavesurfer: IWave\nlet record: IRecord\nlet scrollingWaveform = false\nexport default function useRecorder() {\n  const createWaveSurfer = () => {\n    if (wavesurfer) {\n      wavesurfer.destroy()\n    }\n    wavesurfer = WaveSurfer.create({\n      container: '#mic',\n    })\n\n    record = wavesurfer.registerPlugin(RecordPlugin.create({scrollingWaveform, renderRecordedAudio: false}))\n    record.on('record-end', (blob: Blob) => {\n      const chatStore = useChat()\n      chatStore.file = URL.createObjectURL(blob)\n      const wavesurfer = WaveSurfer.create({\n        container: '#voiceMessageContainer',\n        waveColor: 'rgba(0, 0, 0, 0.6)',\n        progressColor: 'rgba(255, 255, 255)',\n        cursorWidth: 0,\n        barWidth: 4,\n        barAlign: 'bottom',\n        height: 20,\n        interact: true,\n        dragToSeek: true,\n        normalize: true,\n        url: chatStore.file,\n      })\n    })\n  }\n  {\n    RecordPlugin.getAvailableAudioDevices().then((devices: MediaDeviceInfo[]) => {\n      devices.forEach((device: MediaDeviceInfo) => {\n        const option = document.createElement('option');\n        option.value = device.deviceId;\n        option.text = device.label || device.deviceId;\n      });\n    });\n  }\n  const recButton = () => {\n    if (record && (record.isRecording() || record.isPaused())) {\n      record.stopRecording()\n      return\n    }\n    if(record) {\n      record.startRecording({deviceId: null}).then(() => {\n        return false\n      })\n    }\n  }\n  onMounted(() => {\n    createWaveSurfer()\n  })\n  return{recButton, createWaveSurfer}\n}",
-      "start": 1742237906892,
-      "end": 1742237907171,
+      "start": 1742497796497,
+      "end": 1742497796808,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742237907171,
-      "end": 1742237907171,
+      "start": 1742497796808,
+      "end": 1742497796808,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742237907171,
-      "end": 1742237907171,
+      "start": 1742497796808,
+      "end": 1742497796808,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742237907171,
-      "end": 1742237907171,
+      "start": 1742497796808,
+      "end": 1742497796808,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742237907171,
-      "end": 1742237907171,
+      "start": 1742497796808,
+      "end": 1742497796808,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1742237907171,
-      "end": 1742237907171,
+      "start": 1742497796808,
+      "end": 1742497796808,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1742237907171,
-      "end": 1742237907171,
+      "start": 1742497796808,
+      "end": 1742497796808,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742237907171,
-      "end": 1742237907171,
+      "start": 1742497796808,
+      "end": 1742497796808,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742237907171,
-      "end": 1742237907171,
+      "start": 1742497796808,
+      "end": 1742497796808,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { onMounted } from \"vue\";\nimport WaveSurfer from \"wavesurfer.js\";\nimport RecordPlugin from \"wavesurfer.js/dist/plugins/record.esm.js\";\nimport { useChat } from \"~/stores/chat\";\nlet wavesurfer;\nlet record;\nlet scrollingWaveform = false;\nexport default function useRecorder() {\n  const createWaveSurfer = () => {\n    if (wavesurfer) {\n      wavesurfer.destroy();\n    }\n    wavesurfer = WaveSurfer.create({\n      container: \"#mic\"\n    });\n    record = wavesurfer.registerPlugin(RecordPlugin.create({ scrollingWaveform, renderRecordedAudio: false }));\n    record.on(\"record-end\", (blob) => {\n      const chatStore = useChat();\n      chatStore.file = URL.createObjectURL(blob);\n      const wavesurfer2 = WaveSurfer.create({\n        container: \"#voiceMessageContainer\",\n        waveColor: \"rgba(0, 0, 0, 0.6)\",\n        progressColor: \"rgba(255, 255, 255)\",\n        cursorWidth: 0,\n        barWidth: 4,\n        barAlign: \"bottom\",\n        height: 20,\n        interact: true,\n        dragToSeek: true,\n        normalize: true,\n        url: chatStore.file\n      });\n    });\n  };\n  {\n    RecordPlugin.getAvailableAudioDevices().then((devices) => {\n      devices.forEach((device) => {\n        const option = document.createElement(\"option\");\n        option.value = device.deviceId;\n        option.text = device.label || device.deviceId;\n      });\n    });\n  }\n  const recButton = () => {\n    if (record && (record.isRecording() || record.isPaused())) {\n      record.stopRecording();\n      return;\n    }\n    if (record) {\n      record.startRecording({ deviceId: null }).then(() => {\n        return false;\n      });\n    }\n  };\n  onMounted(() => {\n    createWaveSurfer();\n  });\n  return { recButton, createWaveSurfer };\n}\n",
-      "start": 1742237907171,
-      "end": 1742237907239,
+      "start": 1742497796808,
+      "end": 1742497796866,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -78,221 +78,221 @@
     },
     {
       "name": "vite:json",
-      "start": 1742237907240,
-      "end": 1742237907240,
+      "start": 1742497796866,
+      "end": 1742497796866,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742237907240,
-      "end": 1742237907240,
+      "start": 1742497796866,
+      "end": 1742497796866,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1742237907240,
-      "end": 1742237907240,
+      "start": 1742497796866,
+      "end": 1742497796866,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742237907240,
-      "end": 1742237907240,
+      "start": 1742497796866,
+      "end": 1742497796866,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742237907240,
-      "end": 1742237907240,
+      "start": 1742497796866,
+      "end": 1742497796866,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742237907240,
-      "end": 1742237907240,
+      "start": 1742497796866,
+      "end": 1742497796866,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742237907240,
-      "end": 1742237907240,
+      "start": 1742497796866,
+      "end": 1742497796866,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742237907240,
-      "end": 1742237907240,
+      "start": 1742497796866,
+      "end": 1742497796866,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1742237907241,
-      "end": 1742237907241,
+      "start": 1742497796866,
+      "end": 1742497796866,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742237907241,
-      "end": 1742237907241,
+      "start": 1742497796866,
+      "end": 1742497796866,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742237907241,
-      "end": 1742237907241,
+      "start": 1742497796866,
+      "end": 1742497796867,
       "order": "normal"
     },
     {
       "name": "vite:define",
       "result": "import { onMounted } from \"vue\";\nimport WaveSurfer from \"wavesurfer.js\";\nimport RecordPlugin from \"wavesurfer.js/dist/plugins/record.esm.js\";\nimport { useChat } from \"~/stores/chat\";\nlet wavesurfer;\nlet record;\nlet scrollingWaveform = false;\nexport default function useRecorder() {\n  const createWaveSurfer = () => {\n    if (wavesurfer) {\n      wavesurfer.destroy();\n    }\n    wavesurfer = WaveSurfer.create({\n      container: \"#mic\"\n    });\n    record = wavesurfer.registerPlugin(RecordPlugin.create({ scrollingWaveform, renderRecordedAudio: false }));\n    record.on(\"record-end\", (blob) => {\n      const chatStore = useChat();\n      chatStore.file = URL.createObjectURL(blob);\n      const wavesurfer2 = WaveSurfer.create({\n        container: \"#voiceMessageContainer\",\n        waveColor: \"rgba(0, 0, 0, 0.6)\",\n        progressColor: \"rgba(255, 255, 255)\",\n        cursorWidth: 0,\n        barWidth: 4,\n        barAlign: \"bottom\",\n        height: 20,\n        interact: true,\n        dragToSeek: true,\n        normalize: true,\n        url: chatStore.file\n      });\n    });\n  };\n  {\n    RecordPlugin.getAvailableAudioDevices().then((devices) => {\n      devices.forEach((device) => {\n        const option = (void 0).createElement(\"option\");\n        option.value = device.deviceId;\n        option.text = device.label || device.deviceId;\n      });\n    });\n  }\n  const recButton = () => {\n    if (record && (record.isRecording() || record.isPaused())) {\n      record.stopRecording();\n      return;\n    }\n    if (record) {\n      record.startRecording({ deviceId: null }).then(() => {\n        return false;\n      });\n    }\n  };\n  onMounted(() => {\n    createWaveSurfer();\n  });\n  return { recButton, createWaveSurfer };\n}\n",
-      "start": 1742237907241,
-      "end": 1742237907464,
+      "start": 1742497796867,
+      "end": 1742497796984,
       "order": "normal",
       "sourcemaps": "{\n  \"version\": 3,\n  \"sources\": [\"D:/projects/nuxt/workix-nuxt-front/hooks/Recordings.ts\"],\n  \"sourcesContent\": [\"import { onMounted } from \\\"vue\\\";\\nimport WaveSurfer from \\\"wavesurfer.js\\\";\\nimport RecordPlugin from \\\"wavesurfer.js/dist/plugins/record.esm.js\\\";\\nimport { useChat } from \\\"~/stores/chat\\\";\\nlet wavesurfer;\\nlet record;\\nlet scrollingWaveform = false;\\nexport default function useRecorder() {\\n  const createWaveSurfer = () => {\\n    if (wavesurfer) {\\n      wavesurfer.destroy();\\n    }\\n    wavesurfer = WaveSurfer.create({\\n      container: \\\"#mic\\\"\\n    });\\n    record = wavesurfer.registerPlugin(RecordPlugin.create({ scrollingWaveform, renderRecordedAudio: false }));\\n    record.on(\\\"record-end\\\", (blob) => {\\n      const chatStore = useChat();\\n      chatStore.file = URL.createObjectURL(blob);\\n      const wavesurfer2 = WaveSurfer.create({\\n        container: \\\"#voiceMessageContainer\\\",\\n        waveColor: \\\"rgba(0, 0, 0, 0.6)\\\",\\n        progressColor: \\\"rgba(255, 255, 255)\\\",\\n        cursorWidth: 0,\\n        barWidth: 4,\\n        barAlign: \\\"bottom\\\",\\n        height: 20,\\n        interact: true,\\n        dragToSeek: true,\\n        normalize: true,\\n        url: chatStore.file\\n      });\\n    });\\n  };\\n  {\\n    RecordPlugin.getAvailableAudioDevices().then((devices) => {\\n      devices.forEach((device) => {\\n        const option = document.createElement(\\\"option\\\");\\n        option.value = device.deviceId;\\n        option.text = device.label || device.deviceId;\\n      });\\n    });\\n  }\\n  const recButton = () => {\\n    if (record && (record.isRecording() || record.isPaused())) {\\n      record.stopRecording();\\n      return;\\n    }\\n    if (record) {\\n      record.startRecording({ deviceId: null }).then(() => {\\n        return false;\\n      });\\n    }\\n  };\\n  onMounted(() => {\\n    createWaveSurfer();\\n  });\\n  return { recButton, createWaveSurfer };\\n}\\n\"],\n  \"mappings\": \"AAAA,SAAS,iBAAiB;AAC1B,OAAO,gBAAgB;AACvB,OAAO,kBAAkB;AACzB,SAAS,eAAe;AACxB,IAAI;AACJ,IAAI;AACJ,IAAI,oBAAoB;AACxB,wBAAwB,cAAc;AACpC,QAAM,mBAAmB,MAAM;AAC7B,QAAI,YAAY;AACd,iBAAW,QAAQ;AAAA,IACrB;AACA,iBAAa,WAAW,OAAO;AAAA,MAC7B,WAAW;AAAA,IACb,CAAC;AACD,aAAS,WAAW,eAAe,aAAa,OAAO,EAAE,mBAAmB,qBAAqB,MAAM,CAAC,CAAC;AACzG,WAAO,GAAG,cAAc,CAAC,SAAS;AAChC,YAAM,YAAY,QAAQ;AAC1B,gBAAU,OAAO,IAAI,gBAAgB,IAAI;AACzC,YAAM,cAAc,WAAW,OAAO;AAAA,QACpC,WAAW;AAAA,QACX,WAAW;AAAA,QACX,eAAe;AAAA,QACf,aAAa;AAAA,QACb,UAAU;AAAA,QACV,UAAU;AAAA,QACV,QAAQ;AAAA,QACR,UAAU;AAAA,QACV,YAAY;AAAA,QACZ,WAAW;AAAA,QACX,KAAK,UAAU;AAAA,MACjB,CAAC;AAAA,IACH,CAAC;AAAA,EACH;AACA;AACE,iBAAa,yBAAyB,EAAE,KAAK,CAAC,YAAY;AACxD,cAAQ,QAAQ,CAAC,WAAW;AAC1B,cAAM,SAAS,SAAS,cAAc,QAAQ;AAC9C,eAAO,QAAQ,OAAO;AACtB,eAAO,OAAO,OAAO,SAAS,OAAO;AAAA,MACvC,CAAC;AAAA,IACH,CAAC;AAAA,EACH;AACA,QAAM,YAAY,MAAM;AACtB,QAAI,WAAW,OAAO,YAAY,KAAK,OAAO,SAAS,IAAI;AACzD,aAAO,cAAc;AACrB;AAAA,IACF;AACA,QAAI,QAAQ;AACV,aAAO,eAAe,EAAE,UAAU,KAAK,CAAC,EAAE,KAAK,MAAM;AACnD,eAAO;AAAA,MACT,CAAC;AAAA,IACH;AAAA,EACF;AACA,YAAU,MAAM;AACd,qBAAiB;AAAA,EACnB,CAAC;AACD,SAAO,EAAE,WAAW,iBAAiB;AACvC;\",\n  \"names\": []\n}\n"
     },
     {
       "name": "vite:css-post",
-      "start": 1742237907465,
-      "end": 1742237907465,
+      "start": 1742497796984,
+      "end": 1742497796984,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742237907465,
-      "end": 1742237907465,
+      "start": 1742497796984,
+      "end": 1742497796984,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742237907465,
-      "end": 1742237907465,
+      "start": 1742497796984,
+      "end": 1742497796985,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742237907465,
-      "end": 1742237907465,
+      "start": 1742497796985,
+      "end": 1742497796985,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1742237907466,
-      "end": 1742237907466,
+      "start": 1742497796985,
+      "end": 1742497796985,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742237907467,
-      "end": 1742237907467,
+      "start": 1742497796986,
+      "end": 1742497796986,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742237907467,
-      "end": 1742237907467,
+      "start": 1742497796986,
+      "end": 1742497796986,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742237907467,
-      "end": 1742237907467,
+      "start": 1742497796986,
+      "end": 1742497796986,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742237907467,
-      "end": 1742237907467,
+      "start": 1742497796986,
+      "end": 1742497796986,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1742237907468,
-      "end": 1742237907468,
+      "start": 1742497796986,
+      "end": 1742497796986,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1742237907468,
-      "end": 1742237907469,
+      "start": 1742497796986,
+      "end": 1742497796987,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1742237907470,
-      "end": 1742237907471,
+      "start": 1742497796988,
+      "end": 1742497796989,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1742237907470,
-      "end": 1742237907471,
+      "start": 1742497796988,
+      "end": 1742497796989,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1742237907471,
-      "end": 1742237907471,
+      "start": 1742497796989,
+      "end": 1742497796989,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1742237907471,
-      "end": 1742237907471,
+      "start": 1742497796989,
+      "end": 1742497796989,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1742237907472,
-      "end": 1742237907473,
+      "start": 1742497796989,
+      "end": 1742497796990,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1742237907472,
-      "end": 1742237907474,
+      "start": 1742497796989,
+      "end": 1742497796990,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1742237907474,
-      "end": 1742237907474,
+      "start": 1742497796990,
+      "end": 1742497796990,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1742237907474,
-      "end": 1742237907474,
+      "start": 1742497796990,
+      "end": 1742497796990,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742237907474,
-      "end": 1742237907474,
+      "start": 1742497796990,
+      "end": 1742497796990,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742237907474,
-      "end": 1742237907474,
+      "start": 1742497796990,
+      "end": 1742497796990,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1742237907474,
-      "end": 1742237907474,
+      "start": 1742497796990,
+      "end": 1742497796990,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1742237907475,
-      "end": 1742237907475,
+      "start": 1742497796990,
+      "end": 1742497796990,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
       "result": "import { onMounted } from \"vue\";\nimport WaveSurfer from \"wavesurfer.js\";\nimport RecordPlugin from \"wavesurfer.js/dist/plugins/record.esm.js\";\nimport { useChat } from \"~/stores/chat\";\nlet wavesurfer;\nlet record;\nlet scrollingWaveform = false;\nexport default function useRecorder() {\n  const createWaveSurfer = () => {\n    if (wavesurfer) {\n      wavesurfer.destroy();\n    }\n    wavesurfer = WaveSurfer.create({\n      container: \"#mic\"\n    });\n    record = wavesurfer.registerPlugin(RecordPlugin.create({ scrollingWaveform, renderRecordedAudio: false }));\n    record.on(\"record-end\", (blob) => {\n      const chatStore = useChat();\n      chatStore.file = URL.createObjectURL(blob);\n      const wavesurfer2 = WaveSurfer.create({\n        container: \"#voiceMessageContainer\",\n        waveColor: \"rgba(0, 0, 0, 0.6)\",\n        progressColor: \"rgba(255, 255, 255)\",\n        cursorWidth: 0,\n        barWidth: 4,\n        barAlign: \"bottom\",\n        height: 20,\n        interact: true,\n        dragToSeek: true,\n        normalize: true,\n        url: chatStore.file\n      });\n    });\n  };\n  {\n    RecordPlugin.getAvailableAudioDevices().then((devices) => {\n      devices.forEach((device) => {\n        const option = (void 0).createElement(\"option\");\n        option.value = device.deviceId;\n        option.text = device.label || device.deviceId;\n      });\n    });\n  }\n  const recButton = () => {\n    if (record && (record.isRecording() || record.isPaused())) {\n      record.stopRecording();\n      return;\n    }\n    if (record) {\n      record.startRecording({ deviceId: null }).then(() => {\n        return false;\n      });\n    }\n  };\n   false && /*@__PURE__*/ onMounted(() => {\n    createWaveSurfer();\n  });\n  return { recButton, createWaveSurfer };\n}\n",
-      "start": 1742237907475,
-      "end": 1742237907475,
+      "start": 1742497796991,
+      "end": 1742497796991,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -305,14 +305,14 @@
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1742237907476,
-      "end": 1742237907476,
+      "start": 1742497796992,
+      "end": 1742497796992,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1742237907477,
-      "end": 1742237907477,
+      "start": 1742497796993,
+      "end": 1742497796993,
       "order": "normal"
     }
   ]

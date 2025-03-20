@@ -6,7 +6,11 @@ import {useRoute} from "vue-router";
 import {useCompanies} from "~/stores/companies";
 import {useAuthStore} from "~/stores/auth";
 const route = useRoute()
+const router = useRouter()
 const isSigning = ref(false);
+const selectedKey = ref('');
+const notSelected = ref(true);
+const selectedTitle = ref('');
 
 function loadScript(src: string): Promise<void> {
   return new Promise((resolve, reject) => {
@@ -128,10 +132,11 @@ function responseUsers() {
         });
 
         // Устанавливаем первый элемент по умолчанию (если есть)
-        // исправить
-        // if (firstId && select.options.length > 0) {
-        //   select.value = firstId;
-        // }
+        if (select.options.length > 0) {
+          console.log('options yes', select.options[0],select.options[0].value)
+
+          select.value = select.options[0].value;
+        }
       },
       function(e, r) {
         if (e) {
@@ -181,7 +186,7 @@ const signFile = function () {
   EIMZOClient.createPkcs7(key, data64, null, function(pkcs7){
     attachTimestamp(pkcs7, function(pkcs7wtst){
         console.log("Подписанный документ с временем", pkcs7wtst);
-        //если я не первый то нуно вызвать join на /frontend/pkcs7/join
+
       verify(pkcs7wtst, false, data64, function(result){
         console.log(result)//выкинуть назад router
       }, true);
@@ -190,7 +195,7 @@ const signFile = function () {
 };
 
 const attachTimestamp = function (pkcs7, callback){
-  const E_IMZO_URL = 'http://127.0.0.1:9999'
+  const E_IMZO_URL = 'https://workix.uz/eimzo'
   microAjax(E_IMZO_URL + '/frontend/timestamp/pkcs7', function (data, s) {
 
     if(s.status != 200){
@@ -218,36 +223,22 @@ const verify = function (pkcs7wtst, detached, data, callback, isDataBase64Encode
 
   console.log(detached);
   console.log(data64);
-  const BACK_URL = 'http://127.0.0.1:8000/my_app/verify/'
-  microAjax(BACK_URL, function (data, s) {
-    if(s.status != 200){
-      console.log(s.status, ' - ', s.statusText);
-      return;
-    }
-    var result;
-    try {
-      var data = JSON.parse(data);
-      if (data.status != 1) {
-
-        return;
-      }
-      result = data.pkcs7Info;
-    } catch (e) {
-      }
-    callback(result);
-
-  }, 'pkcs7wtst=' + encodeURIComponent(pkcs7wtst) + (detached ? '&data64=' + encodeURIComponent(data64) : ""));
+  documentStore.documentSign({slug: route.params.slug, data: {signature: pkcs7wtst}}, router)
 }
 
-function cbChanged(event) {
+function selectKey() {
   // currentKey.value = event.target.value;
-  let option = document.getElementById(event.target.value);
+  let select = document.getElementById('select-key')
+  selectedKey.value = select
+  notSelected.value = false
+  let option = document.getElementById(select.value);
   let vo = JSON.parse(option.getAttribute('vo'))
+  selectedTitle.value = vo
   console.log("🔑 Выбранные днные:", vo);
   EIMZOClient.loadKey(vo, function(id){
     keyId.value = id;
 
-  }, (e, r)=> {console.log('error')});
+  }, (e, r)=> {console.log('error'); notSelected.value = true});
 }
 
 const documentStore = useDocumentStore()
@@ -280,37 +271,44 @@ async function fetchFileAsBase64() {
 
 watch(() => documentStore.documentItem, (newValue) => {
   console.log(authStore.get_server_domain+documentStore.documentItem.file)
-
   fetchFileAsBase64()
-
-  // if (new_file) {
-  //   const reader = new FileReader(); // Create a new FileReader
-  //
-  //   // When the file is loaded, convert to Base64 and log it
-  //   reader.onload = function (e) {
-  //
-  //     const base64Content = e.target.result.split(',')[1]; // Extract Base64 part
-  //     fileBase64.value = base64Content;
-  //   };
-  //
-  //   // Read the file as a data URL (Base64 encoding)
-  //   reader.readAsDataURL(file);
-  // }
 })
 </script>
 
 <template>
-  <div class="flex flex-col gap-5">
-    <div>
-      <p>
-        Выберите ключ:
+    <div class="flex items-center gap-4 flex-col border p-3 mt-4 rounded-lg">
+      <p class="text-xl font-medium">
+        Документ: "{{ documentStore.documentItem.title }}"
       </p>
-      <select name="key" @change="cbChanged($event)"></select>
-      <form id="myForm" @submit.prevent="handleSubmit">
-        <button type="submit">CHECK</button>
+      <div class="flex items-center gap-4 flex-col">
+        <select
+            id="select-key"
+            name="key"
+            class="p-3 border-white rounded-lg bg-bgWhite text-black"
+        >
+        </select>
+        <button
+            @click="selectKey"
+            class="border p-2 rounded-lg"
+        >
+          Выбрать ключ
+        </button>
+      </div>
+      <p v-if="notSelected" class="text-red-500 mt-2">Вы не выбрали ключ</p>
+      <p v-if="!notSelected" class="text-green-500 mt-2">Вы выбрали ключ: {{ selectedTitle.CN }}</p>
+      <form
+          id="myForm"
+          @submit.prevent="handleSubmit"
+          class="mt-4"
+      >
+        <button
+            type="submit"
+            class="border py-3 px-4 rounded-lg text-xl bg-[#8881]"
+        >
+          Подписать
+        </button>
       </form>
     </div>
-  </div>
 </template>
 
 <style scoped lang="scss">

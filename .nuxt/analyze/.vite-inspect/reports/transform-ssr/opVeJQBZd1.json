@@ -4,63 +4,63 @@
     {
       "name": "vite:load-fallback",
       "result": "import {defineStore} from \"pinia\";\nimport {useAuthStore} from \"~/stores/auth\";\nimport {toast} from \"vue3-toastify\";\nimport axios from \"~/composables/axios\";\nimport type {Router} from \"vue-router\";\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\nexport const useTestList = defineStore('test-list', {\n  state: () => ({\n    test: {},\n    testIQ: {},\n    testSpecial: {},\n    currentTest: {},\n    exam: {},\n  }),\n  getters: {\n    get_all_exam(exam) {\n      return this.exam\n    },\n    get_test(test) {\n      return this.test\n    },\n    get_current_test(currentTest) {\n      return this.currentTest\n    },\n    get_all_test(test) {\n      return this.test\n    },\n    get_test_iq(testIQ) {\n      return this.testIQ\n    },\n    get_test_special(testSpecial) {\n      return this.testSpecial\n    }\n  },\n  actions: {\n    async loadAllTest(params: { page: number, limit: number, usual?: number }) {\n      axios.get(`test/test-list?page=${params.page}&limit=${params.limit}&usual=${params.usual}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(response => {\n        if(params.usual !== 0) {\n          this.testIQ = response.data\n        } else {\n          this.testSpecial = response.data\n        }\n      })\n    },\n    async loadExam() {\n      axios.get(`exam/exam-list`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        this.test = res.data\n      })\n    },\n    async loadCurrentTest() {\n      axios.get(`exam/current-test`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        this.currentTest = res.data\n      }).catch(e=>{\n        useAuthStore().exam_active = false\n      })\n    },\n\n    async testStart(params: { usual: any }, router: Router) {\n      axios.post(`exam/start`, {usual: params.usual}, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        this.test = res.data\n        this.loadCurrentTest()\n        useAuthStore().exam_active = true\n        useAuthStore().loadCurrentUser()\n        router.push('/base/tests/exam')\n      })\n    },\n    async testAnswer(params: { answer: any, test_id: any }, router: Router) {\n      axios.post(`exam/answer`, {\n        test_id: params.test_id,\n        answer: params.answer\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        this.loadCurrentTest()\n        useAuthStore().loadCurrentUser()\n      }).catch(e => {\n        router.push('/base/tests')\n      })\n    },\n    async createTest(params: { test: any, options: any, answer: any }) {\n      axios.post(`test/create`, {\n        answer_text: params.answer,\n        options_list: params.options,\n        question: params.test.question,\n        department_id: params.test.department_id\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        this.test = res.data\n        toast.success('Тест успешно создан', {autoClose: 1500, theme: 'auto'})\n      })\n    },\n    async deleteTest(params: { test_id: number }) {\n      axios.delete(`test/delete/${params.test_id}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        toast.success('Тест успешно удалён', {autoClose: 1500, theme: 'auto'})\n        this.test = res.data\n        this.loadAllTest({page: 1, limit: 20})\n      }).catch(e => {\n        toast('Ошибка', {theme: \"auto\", autoClose: 1500})\n      })\n    }\n  }\n})\n",
-      "start": 1742237902333,
-      "end": 1742237902690,
+      "start": 1742497791846,
+      "end": 1742497792134,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742237902690,
-      "end": 1742237902690,
+      "start": 1742497792134,
+      "end": 1742497792134,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742237902690,
-      "end": 1742237902690,
+      "start": 1742497792134,
+      "end": 1742497792134,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742237902690,
-      "end": 1742237902691,
+      "start": 1742497792134,
+      "end": 1742497792134,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742237902690,
-      "end": 1742237902691,
+      "start": 1742497792134,
+      "end": 1742497792134,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1742237902691,
-      "end": 1742237902691,
+      "start": 1742497792134,
+      "end": 1742497792134,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1742237902691,
-      "end": 1742237902691,
+      "start": 1742497792134,
+      "end": 1742497792134,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742237902691,
-      "end": 1742237902691,
+      "start": 1742497792134,
+      "end": 1742497792134,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742237902691,
-      "end": 1742237902691,
+      "start": 1742497792134,
+      "end": 1742497792134,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineStore } from \"pinia\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { toast } from \"vue3-toastify\";\nimport axios from \"~/composables/axios\";\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\nexport const useTestList = defineStore(\"test-list\", {\n  state: () => ({\n    test: {},\n    testIQ: {},\n    testSpecial: {},\n    currentTest: {},\n    exam: {}\n  }),\n  getters: {\n    get_all_exam(exam) {\n      return this.exam;\n    },\n    get_test(test) {\n      return this.test;\n    },\n    get_current_test(currentTest) {\n      return this.currentTest;\n    },\n    get_all_test(test) {\n      return this.test;\n    },\n    get_test_iq(testIQ) {\n      return this.testIQ;\n    },\n    get_test_special(testSpecial) {\n      return this.testSpecial;\n    }\n  },\n  actions: {\n    async loadAllTest(params) {\n      axios.get(`test/test-list?page=${params.page}&limit=${params.limit}&usual=${params.usual}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((response) => {\n        if (params.usual !== 0) {\n          this.testIQ = response.data;\n        } else {\n          this.testSpecial = response.data;\n        }\n      });\n    },\n    async loadExam() {\n      axios.get(`exam/exam-list`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.test = res.data;\n      });\n    },\n    async loadCurrentTest() {\n      axios.get(`exam/current-test`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.currentTest = res.data;\n      }).catch((e) => {\n        useAuthStore().exam_active = false;\n      });\n    },\n    async testStart(params, router) {\n      axios.post(`exam/start`, { usual: params.usual }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.test = res.data;\n        this.loadCurrentTest();\n        useAuthStore().exam_active = true;\n        useAuthStore().loadCurrentUser();\n        router.push(\"/base/tests/exam\");\n      });\n    },\n    async testAnswer(params, router) {\n      axios.post(`exam/answer`, {\n        test_id: params.test_id,\n        answer: params.answer\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.loadCurrentTest();\n        useAuthStore().loadCurrentUser();\n      }).catch((e) => {\n        router.push(\"/base/tests\");\n      });\n    },\n    async createTest(params) {\n      axios.post(`test/create`, {\n        answer_text: params.answer,\n        options_list: params.options,\n        question: params.test.question,\n        department_id: params.test.department_id\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.test = res.data;\n        toast.success(\"Тест успешно создан\", { autoClose: 1500, theme: \"auto\" });\n      });\n    },\n    async deleteTest(params) {\n      axios.delete(`test/delete/${params.test_id}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        toast.success(\"Тест успешно удалён\", { autoClose: 1500, theme: \"auto\" });\n        this.test = res.data;\n        this.loadAllTest({ page: 1, limit: 20 });\n      }).catch((e) => {\n        toast(\"Ошибка\", { theme: \"auto\", autoClose: 1500 });\n      });\n    }\n  }\n});\n",
-      "start": 1742237902691,
-      "end": 1742237903382,
+      "start": 1742497792134,
+      "end": 1742497792736,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -76,230 +76,230 @@
     },
     {
       "name": "vite:json",
-      "start": 1742237903382,
-      "end": 1742237903382,
+      "start": 1742497792737,
+      "end": 1742497792737,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742237903382,
-      "end": 1742237903382,
+      "start": 1742497792737,
+      "end": 1742497792737,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1742237903382,
-      "end": 1742237903383,
+      "start": 1742497792738,
+      "end": 1742497792738,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742237903383,
-      "end": 1742237903383,
+      "start": 1742497792738,
+      "end": 1742497792738,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742237903383,
-      "end": 1742237903383,
+      "start": 1742497792739,
+      "end": 1742497792739,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742237903383,
-      "end": 1742237903383,
+      "start": 1742497792739,
+      "end": 1742497792739,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742237903384,
-      "end": 1742237903384,
+      "start": 1742497792739,
+      "end": 1742497792739,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742237903384,
-      "end": 1742237903384,
+      "start": 1742497792739,
+      "end": 1742497792739,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1742237903385,
-      "end": 1742237903385,
+      "start": 1742497792740,
+      "end": 1742497792740,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742237903385,
-      "end": 1742237903385,
+      "start": 1742497792740,
+      "end": 1742497792740,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742237903386,
-      "end": 1742237903387,
+      "start": 1742497792742,
+      "end": 1742497792742,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742237903387,
-      "end": 1742237903387,
+      "start": 1742497792742,
+      "end": 1742497792742,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1742237903388,
-      "end": 1742237903388,
+      "start": 1742497792742,
+      "end": 1742497792743,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742237903388,
-      "end": 1742237903388,
+      "start": 1742497792743,
+      "end": 1742497792743,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742237903388,
-      "end": 1742237903388,
+      "start": 1742497792745,
+      "end": 1742497792745,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742237903388,
-      "end": 1742237903388,
+      "start": 1742497792746,
+      "end": 1742497792746,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1742237903388,
-      "end": 1742237903388,
+      "start": 1742497792747,
+      "end": 1742497792747,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742237903389,
-      "end": 1742237903389,
+      "start": 1742497792747,
+      "end": 1742497792747,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742237903389,
-      "end": 1742237903389,
+      "start": 1742497792747,
+      "end": 1742497792747,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742237903389,
-      "end": 1742237903389,
+      "start": 1742497792763,
+      "end": 1742497792763,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742237903389,
-      "end": 1742237903389,
+      "start": 1742497792763,
+      "end": 1742497792764,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1742237903389,
-      "end": 1742237903389,
+      "start": 1742497792765,
+      "end": 1742497792765,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1742237903389,
-      "end": 1742237903390,
+      "start": 1742497792765,
+      "end": 1742497792765,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1742237903392,
-      "end": 1742237903392,
+      "start": 1742497792770,
+      "end": 1742497792770,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1742237903392,
-      "end": 1742237903392,
+      "start": 1742497792770,
+      "end": 1742497792770,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1742237903393,
-      "end": 1742237903393,
+      "start": 1742497792775,
+      "end": 1742497792775,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1742237903393,
-      "end": 1742237903393,
+      "start": 1742497792775,
+      "end": 1742497792775,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1742237903393,
-      "end": 1742237903396,
+      "start": 1742497792776,
+      "end": 1742497792782,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1742237903393,
-      "end": 1742237903397,
+      "start": 1742497792776,
+      "end": 1742497792783,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1742237903397,
-      "end": 1742237903398,
+      "start": 1742497792783,
+      "end": 1742497792783,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1742237903397,
-      "end": 1742237903398,
+      "start": 1742497792783,
+      "end": 1742497792783,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742237903398,
-      "end": 1742237903399,
+      "start": 1742497792783,
+      "end": 1742497792783,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742237903398,
-      "end": 1742237903399,
+      "start": 1742497792783,
+      "end": 1742497792783,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1742237903399,
-      "end": 1742237903399,
+      "start": 1742497792784,
+      "end": 1742497792784,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1742237903400,
-      "end": 1742237903400,
+      "start": 1742497792784,
+      "end": 1742497792784,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1742237903401,
-      "end": 1742237903401,
+      "start": 1742497792784,
+      "end": 1742497792784,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1742237903401,
-      "end": 1742237903401,
+      "start": 1742497792784,
+      "end": 1742497792784,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1742237903401,
-      "end": 1742237903401,
+      "start": 1742497792785,
+      "end": 1742497792785,
       "order": "normal"
     }
   ]

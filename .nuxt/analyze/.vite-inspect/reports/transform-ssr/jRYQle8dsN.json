@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { unref as _unref } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\"\n\nimport {Chart as ChartJS, ArcElement, Tooltip, Legend, RadialLinearScale, Chart} from 'chart.js'\nimport {Doughnut, Pie, PolarArea} from 'vue-chartjs'\nimport { useColorMode } from '@vueuse/core'\n\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'ProfileContentChart',\n  __ssrInlineRender: true,\n  setup(__props) {\n\nChartJS.register(ArcElement, Tooltip, Legend, RadialLinearScale,)\nChart.defaults.color = '#b6b6b6'\n\nconst chartData = ref({\n  labels: ['Выполненные задания', 'Выполненные IQ тесты', 'Активность', 'Посещаемость'],\n  datasets: [\n    {\n      backgroundColor: ['rgba(109,252,118,0.4)', \"rgba(252,155,0,0.91)\" , \"rgba(0,121,255,0.4)\", \"rgba(255,9,0,0.68)\"],\n      data: [70, 70, 90, 100]\n    }\n  ]\n});\n\nconst chartOptions = ref({\n  responsive: true,\n  maintainAspectRatio: false\n});\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  _push(`<div${_ssrRenderAttrs(_attrs)}>`)\n  _push(_ssrRenderComponent(_unref(PolarArea), {\n    class: \"text-white\",\n    style: {\"{color\":\"white\"},\n    data: _unref(chartData),\n    options: _unref(chartOptions)\n  }, null, _parent))\n  _push(`</div>`)\n}\n}\n\n})",
-      "start": 1742237906139,
-      "end": 1742237906139,
+      "start": 1742497795684,
+      "end": 1742497795684,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742237906139,
-      "end": 1742237906139,
+      "start": 1742497795684,
+      "end": 1742497795684,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742237906139,
-      "end": 1742237906139,
+      "start": 1742497795684,
+      "end": 1742497795684,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742237906139,
-      "end": 1742237906139,
+      "start": 1742497795684,
+      "end": 1742497795684,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742237906139,
-      "end": 1742237906139,
+      "start": 1742497795684,
+      "end": 1742497795684,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1742237906139,
-      "end": 1742237906139,
+      "start": 1742497795684,
+      "end": 1742497795684,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1742237906139,
-      "end": 1742237906139,
+      "start": 1742497795684,
+      "end": 1742497795684,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742237906139,
-      "end": 1742237906139,
+      "start": 1742497795684,
+      "end": 1742497795684,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742237906139,
-      "end": 1742237906139,
+      "start": 1742497795684,
+      "end": 1742497795684,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport { Chart as ChartJS, ArcElement, Tooltip, Legend, RadialLinearScale, Chart } from \"chart.js\";\nimport { PolarArea } from \"vue-chartjs\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ProfileContentChart\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    ChartJS.register(ArcElement, Tooltip, Legend, RadialLinearScale);\n    Chart.defaults.color = \"#b6b6b6\";\n    const chartData = ref({\n      labels: [\"Выполненные задания\", \"Выполненные IQ тесты\", \"Активность\", \"Посещаемость\"],\n      datasets: [\n        {\n          backgroundColor: [\"rgba(109,252,118,0.4)\", \"rgba(252,155,0,0.91)\", \"rgba(0,121,255,0.4)\", \"rgba(255,9,0,0.68)\"],\n          data: [70, 70, 90, 100]\n        }\n      ]\n    });\n    const chartOptions = ref({\n      responsive: true,\n      maintainAspectRatio: false\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(_unref(PolarArea), {\n        class: \"text-white\",\n        style: { \"{color\": \"white\" },\n        data: _unref(chartData),\n        options: _unref(chartOptions)\n      }, null, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1742237906139,
-      "end": 1742237906475,
+      "start": 1742497795684,
+      "end": 1742497795917,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -86,171 +86,171 @@
     },
     {
       "name": "vite:json",
-      "start": 1742237906475,
-      "end": 1742237906475,
+      "start": 1742497795918,
+      "end": 1742497795918,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742237906475,
-      "end": 1742237906475,
+      "start": 1742497795918,
+      "end": 1742497795918,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1742237906475,
-      "end": 1742237906475,
+      "start": 1742497795918,
+      "end": 1742497795918,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742237906475,
-      "end": 1742237906475,
+      "start": 1742497795918,
+      "end": 1742497795918,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742237906476,
-      "end": 1742237906476,
+      "start": 1742497795918,
+      "end": 1742497795918,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742237906476,
-      "end": 1742237906476,
+      "start": 1742497795918,
+      "end": 1742497795918,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742237906476,
-      "end": 1742237906476,
+      "start": 1742497795918,
+      "end": 1742497795918,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742237906476,
-      "end": 1742237906476,
+      "start": 1742497795918,
+      "end": 1742497795918,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1742237906476,
-      "end": 1742237906476,
+      "start": 1742497795918,
+      "end": 1742497795918,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742237906476,
-      "end": 1742237906477,
+      "start": 1742497795919,
+      "end": 1742497795919,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742237906477,
-      "end": 1742237906478,
+      "start": 1742497795920,
+      "end": 1742497795921,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742237906478,
-      "end": 1742237906478,
+      "start": 1742497795921,
+      "end": 1742497795921,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1742237906478,
-      "end": 1742237906478,
+      "start": 1742497795921,
+      "end": 1742497795921,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742237906478,
-      "end": 1742237906479,
+      "start": 1742497795921,
+      "end": 1742497795921,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742237906479,
-      "end": 1742237906479,
+      "start": 1742497795921,
+      "end": 1742497795921,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742237906479,
-      "end": 1742237906479,
+      "start": 1742497795921,
+      "end": 1742497795921,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1742237906479,
-      "end": 1742237906479,
+      "start": 1742497795921,
+      "end": 1742497795921,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742237906480,
-      "end": 1742237906480,
+      "start": 1742497795921,
+      "end": 1742497795921,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742237906480,
-      "end": 1742237906480,
+      "start": 1742497795921,
+      "end": 1742497795921,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742237906480,
-      "end": 1742237906480,
+      "start": 1742497795922,
+      "end": 1742497795922,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742237906480,
-      "end": 1742237906480,
+      "start": 1742497795922,
+      "end": 1742497795922,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1742237906480,
-      "end": 1742237906481,
+      "start": 1742497795922,
+      "end": 1742497795922,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1742237906480,
-      "end": 1742237906481,
+      "start": 1742497795922,
+      "end": 1742497795922,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1742237906481,
-      "end": 1742237906481,
+      "start": 1742497795922,
+      "end": 1742497795922,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1742237906481,
-      "end": 1742237906481,
+      "start": 1742497795922,
+      "end": 1742497795922,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1742237906481,
-      "end": 1742237906481,
+      "start": 1742497795922,
+      "end": 1742497795922,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1742237906481,
-      "end": 1742237906481,
+      "start": 1742497795922,
+      "end": 1742497795922,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport { Chart as ChartJS, ArcElement, Tooltip, Legend, RadialLinearScale, Chart } from \"chart.js\";\nimport { PolarArea } from \"vue-chartjs\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ProfileContentChart\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    ChartJS.register(ArcElement, Tooltip, Legend, RadialLinearScale);\n    Chart.defaults.color = \"#b6b6b6\";\n    const chartData = ref({\n      labels: [\"Выполненные задания\", \"Выполненные IQ тесты\", \"Активность\", \"Посещаемость\"],\n      datasets: [\n        {\n          backgroundColor: [\"rgba(109,252,118,0.4)\", \"rgba(252,155,0,0.91)\", \"rgba(0,121,255,0.4)\", \"rgba(255,9,0,0.68)\"],\n          data: [70, 70, 90, 100]\n        }\n      ]\n    });\n    const chartOptions = ref({\n      responsive: true,\n      maintainAspectRatio: false\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(_unref(PolarArea), {\n        class: \"text-white\",\n        style: { \"{color\": \"white\" },\n        data: _unref(chartData),\n        options: _unref(chartOptions)\n      }, null, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1742237906482,
-      "end": 1742237906486,
+      "start": 1742497795925,
+      "end": 1742497795931,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -264,8 +264,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport { Chart as ChartJS, ArcElement, Tooltip, Legend, RadialLinearScale, Chart } from \"chart.js\";\nimport { PolarArea } from \"vue-chartjs\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ProfileContentChart\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    ChartJS.register(ArcElement, Tooltip, Legend, RadialLinearScale);\n    Chart.defaults.color = \"#b6b6b6\";\n    const chartData = ref({\n      labels: [\"Выполненные задания\", \"Выполненные IQ тесты\", \"Активность\", \"Посещаемость\"],\n      datasets: [\n        {\n          backgroundColor: [\"rgba(109,252,118,0.4)\", \"rgba(252,155,0,0.91)\", \"rgba(0,121,255,0.4)\", \"rgba(255,9,0,0.68)\"],\n          data: [70, 70, 90, 100]\n        }\n      ]\n    });\n    const chartOptions = ref({\n      responsive: true,\n      maintainAspectRatio: false\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(_unref(PolarArea), {\n        class: \"text-white\",\n        style: { \"{color\": \"white\" },\n        data: _unref(chartData),\n        options: _unref(chartOptions)\n      }, null, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1742237906482,
-      "end": 1742237906486,
+      "start": 1742497795925,
+      "end": 1742497795932,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -278,56 +278,56 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1742237906486,
-      "end": 1742237906486,
+      "start": 1742497795932,
+      "end": 1742497795932,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1742237906486,
-      "end": 1742237906486,
+      "start": 1742497795932,
+      "end": 1742497795932,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742237906486,
-      "end": 1742237906486,
+      "start": 1742497795932,
+      "end": 1742497795932,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742237906486,
-      "end": 1742237906486,
+      "start": 1742497795932,
+      "end": 1742497795932,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1742237906486,
-      "end": 1742237906486,
+      "start": 1742497795933,
+      "end": 1742497795933,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1742237906486,
-      "end": 1742237906487,
+      "start": 1742497795933,
+      "end": 1742497795933,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1742237906487,
-      "end": 1742237906487,
+      "start": 1742497795934,
+      "end": 1742497795934,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1742237906487,
-      "end": 1742237906488,
+      "start": 1742497795934,
+      "end": 1742497795935,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1742237906488,
-      "end": 1742237906488,
+      "start": 1742497795935,
+      "end": 1742497795935,
       "order": "normal"
     }
   ]

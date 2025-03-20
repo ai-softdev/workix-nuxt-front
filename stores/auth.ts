@@ -46,8 +46,9 @@ export const useAuthStore = defineStore('authUser', {
       return this.user
     },
     get_server_domain(){
-      // return 'https://test-api-buildwithus.ai-softdev.com'
-      return 'http://192.168.152.169:8000'
+      return 'https://test-api-buildwithus.ai-softdev.com'
+      // return 'http://192.168.152.169:8000'
+      // return 'https://f01d-94-158-60-209.ngrok-free.app'
       // return 'https://api-buildwithus.ai-softdev.com'
     }
   },

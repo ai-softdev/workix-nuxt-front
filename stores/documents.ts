@@ -2,6 +2,7 @@ import {defineStore, type PiniaCustomProperties} from "pinia";
 import axios from "~/composables/axios";
 import {toast} from "vue3-toastify";
 import nuxtStorage from "nuxt-storage/nuxt-storage";
+import type {Router} from "vue-router";
 
 export const useDocumentStore = defineStore('document-store', {
 
@@ -82,6 +83,19 @@ export const useDocumentStore = defineStore('document-store', {
       })
     },
 
+    async setUsers(params: { slug: any, form: any }, router: Router): Promise<void> {
+
+      await axios.post(`document/set-users/${params.slug}`, {participants: params.form}, {
+        headers: {
+          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
+        }
+      }).then(res => {
+        router.push(`/base/documents/signification/${params.slug}`).then(e=>{
+          toast.success('Цепь запущена!', {autoClose: 1000, theme: 'auto'})
+        })
+      })
+    },
+
     async docUpdate(params: { title?: any, description?: any, users: any, id: any }): Promise<void> {
       let fd = new FormData()
       // fd.set('users', params.users)
@@ -97,6 +111,18 @@ export const useDocumentStore = defineStore('document-store', {
         }
       }).then(res => {
         toast.success('Успешный запуск', {autoClose: 1000, theme: 'auto'})
+      })
+    },
+
+    async documentSign(params: any, router: Router): Promise<void> {
+      await axios.patch(`document/sign/${params.slug}`, params.data, {
+        headers: {
+          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
+        }
+      }).then(res => {
+        router.push(`/base/documents`).then(e=>{
+          toast.success('Успешная подпись!', {autoClose: 1000, theme: 'auto'})
+        })
       })
     },
 

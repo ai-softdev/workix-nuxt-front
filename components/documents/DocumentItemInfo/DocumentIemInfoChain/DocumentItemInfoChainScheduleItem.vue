@@ -69,29 +69,82 @@ function dragLeaveNodeValue(event: any) {
 }
 
 onMounted(() => {
-  if (list.value.toArray().length === 0 && authStore.user?.first_name) {
-    appendData({
-      first_name: authStore.user?.first_name,
-      last_name: authStore.user?.last_name,
-      photo_url: authStore.user?.photo,
-      id: authStore.user?.id
+  if (documentStore.documentItem.documentusers?.length) {
+    list.value = new LinkedList()
+    console.log('mounted document yes')
+    documentStore.documentItem.documentusers.forEach(item => {
+      // if (!list.value.toArray().some(node => node.self.id === item.user?.id)) {
+        appendData([{
+          first_name: item.user?.first_name,
+          last_name: item.user?.last_name,
+          photo_url: item.user?.photo,
+          id: item.user?.id
+        }])
+      // }
+    })
+    watchSyncEffect(() => {
+      documentStore.userList = list.value.toArray().map(node => node.self)
+    })
+  } else {
+    console.log('mounted document no')
+    list.value = new LinkedList()
+    if (list.value.toArray().length === 0 && authStore.user?.first_name) {
+      appendData([{
+        first_name: authStore.user?.first_name,
+        last_name: authStore.user?.last_name,
+        photo_url: authStore.user?.photo,
+        id: authStore.user?.id
+      }])
+    }
+    watchSyncEffect(() => {
+      documentStore.userList = list.value.toArray().map(node => node.self)
     })
   }
-  watchSyncEffect(() => {
-    documentStore.userList = list.value.toArray().map(node => node.self)
-  })
 })
 
-watch(() => authStore.user, (newValue) => {
-  if (list.value.toArray().length === 0) {
-    appendData({
-      first_name: newValue?.first_name,
-      last_name: newValue?.last_name,
-      photo_url: newValue?.photo,
-      id: newValue?.id
+watch(() => documentStore.documentItem, () => {
+  if (documentStore.documentItem.documentusers?.length) {
+    list.value = new LinkedList()
+    console.log('watch document yes')
+    documentStore.documentItem.documentusers.forEach(item => {
+      appendData([{
+        first_name: item.user?.first_name,
+        last_name: item.user?.last_name,
+        photo_url: item.user?.photo,
+        id: item.user?.id
+      }]);
+    });
+    watchSyncEffect(() => {
+      documentStore.userList = list.value.toArray().map(node => node.self)
+    })
+  } else {
+    console.log('watch document no')
+    list.value = new LinkedList()
+    if (list.value.toArray().length === 0 && authStore.user?.first_name) {
+      appendData([{
+        first_name: authStore.user?.first_name,
+        last_name: authStore.user?.last_name,
+        photo_url: authStore.user?.photo,
+        id: authStore.user?.id
+      }])
+    }
+    watchSyncEffect(() => {
+      documentStore.userList = list.value.toArray().map(node => node.self)
     })
   }
 })
+
+// watch(() => authStore.user, (newValue) => {
+//   if (list.value.toArray().length === 0 && newValue?.first_name) {
+//     console.log('has user')
+//     appendData([{
+//       first_name: newValue?.first_name,
+//       last_name: newValue?.last_name,
+//       photo_url: newValue?.photo,
+//       id: newValue?.id
+//     }])
+//   }
+// })
 
 
 onUnmounted(() => {
@@ -170,23 +223,22 @@ onUnmounted(() => {
           <div
               @click="console.log(documentStore.showUsersNode.filter(el=>el.id !== userGroup.filter(e=>e.id)))"
                class="h-24 w-[220px] border border-gray-500 dark:border-white px-2 rounded-lg text-center flex items-center justify-center mx-auto relative "
-
+               v-for="(user, userIndex) in userGroup" :key="userIndex"
           >
-<!--            v-for="(user, userIndex) in userGroup" :key="userIndex"-->
             <div class="flex items-center gap-x-2">
-              <div v-if="userGroup.photo" class="max-w-[50px]">
-                <img class="w-full rounded-full" :src="userGroup.photo" alt="">
+              <div v-if="user.photo" class="max-w-[50px]">
+                <img class="w-full rounded-full" :src="user.photo" alt="">
               </div>
               <div class="break-words">
                 <p class="text-sm w-full">
-                 {{userGroup.first_name + ' ' + userGroup.last_name}}
+                 {{user.first_name + ' ' + user.last_name}}
                 </p>
               </div>
             </div>
             <button
               class="absolute px-2.5 pt-1 top-0 right-0 border-l border-b border-gray-500 dark:border-white rounded rounded-tl-none rounded-br-none text-red-400 font-bold"
-              v-if="userGroup.id !== authStore.user.id && groupIndex !== 0"
-              @click="deleteNodeValue(userGroup, {...userGroup}); documentStore.showUsersNode.splice(documentStore.showUsersNode.findIndex(e=>e.id === userGroup?.id), 1)">
+              v-if="documentStore.documentItem.status === 'created' && user.id !== authStore.user.id && groupIndex !== 0"
+              @click="deleteNodeValue(userGroup, {...user}); documentStore.showUsersNode.splice(documentStore.showUsersNode.findIndex(e=>e.id === user?.id), 1)">
               X
             </button>
           </div>
@@ -194,6 +246,7 @@ onUnmounted(() => {
       </div>
     </div>
     <button
+        v-if="documentStore.documentItem.status === 'created'"
       class=" text-2xl px-4 py-2 ml-4 rounded-lg border border-blueSemiLight text-blueDarkSemiLight cursor-pointer hover:scale-95 transition-all"
       @click="appendData([])">
       +
