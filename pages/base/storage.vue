@@ -7,6 +7,7 @@ import {useStorageStore} from "~/stores/storage";
 import TheModal from "~/components/UI/TheModal.vue";
 import TheBreadcrumbs from "~/components/UI/TheBreadcrumbs.vue";
 import type {IScannedBarcode} from "~/types/storage";
+import {useAuthStore} from "~/stores/auth";
 
 const route = useRoute()
 const storageStore = useStorageStore()
@@ -22,6 +23,19 @@ const onDecode = (value: any) => {
   
   storageStore.streaming = false
 }
+
+const router = useRouter()
+const loadAuthStore = useAuthStore()
+
+watch(() => loadAuthStore.user, (newValue) => {
+  if(loadAuthStore?.user?.role?.name_en === 'admin'){
+    if (window.history.length > 1) {
+      router.push('/base/profile');
+    } else {
+      router.push('/');
+    }
+  }
+})
 
 onMounted(() => {
   inWidth.value = window.innerWidth

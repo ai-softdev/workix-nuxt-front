@@ -4,12 +4,15 @@ import {useChat} from "~/stores/chat";
 import {useRoute} from "vue-router";
 import ChatNav from "~/components/Chat/ChatNav.vue"
 import ChatCropper from "~/components/Chat/UI/ChatCropper.vue";
+import {useAuthStore} from "~/stores/auth";
 
 const windowWidth = ref(0)
 const activeNav = ref(true)
 const route = useRoute()
+const router = useRouter()
 const chatStore = useChat()
 const userStore = useUserStore()
+const loadAuthStore = useAuthStore()
 
 chatStore.loadChatList({page: 1, limit: 100})
 userStore.loadUserList({query: '', user_type: 'user-list/my-company', page: 1, limit: 10000})
@@ -28,6 +31,17 @@ onUnmounted(() => {
   chatStore.src = '';
   chatStore.fileUpload = null;
   chatStore.results = {coordinates: null, image: null}
+})
+
+
+watch(() => loadAuthStore.user, (newValue) => {
+  if(loadAuthStore?.user?.role?.name_en === 'admin'){
+    if (window.history.length > 1) {
+      router.push('/base/profile');
+    } else {
+      router.push('/');
+    }
+  }
 })
 
 useSeoMeta({

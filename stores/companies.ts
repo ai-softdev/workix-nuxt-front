@@ -33,7 +33,11 @@ export const useCompanies = defineStore('current-company', {
       id: '',
       name: '',
       participants: []
-    }
+    },
+    company_administrators: {
+
+    },
+    modules: {}
   }),
   getters: {
     current_company(company) {
@@ -78,6 +82,44 @@ export const useCompanies = defineStore('current-company', {
         }
       }).then(response => {
         this.company = response.data
+      })
+    },
+    async loadCompanyAdministrators(params: { id: number }) {
+      await axios.get(`admin/user/company-admin/list?company_id=${params.company_id}`, {
+        headers: {
+          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
+        }
+      }).then(response => {
+        this.company_administrators = response.data
+      })
+    },
+    async createAdministrator(params: { data: any }) {
+      await axios.post(`admin/user/company-admin/create`, params.data,{
+        headers: {
+          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
+        }
+      }).then(response => {
+        toast.success('Администратор успешно добавлен!', {autoClose: 1500, theme: 'auto'})
+        this.loadCompanyAdministrators(params)
+      })
+    },
+    async loadModules(params: { id: number }) {
+      await axios.get(`company/modules/list`, {
+        headers: {
+          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
+        }
+      }).then(response => {
+        this.modules = response.data
+      })
+    },
+    async editModules(params: { id: number, data: any }) {
+      await axios.patch(`company/modules/set-modules/${params.id}`, {modules: params.data}, {
+        headers: {
+          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
+        }
+      }).then(response => {
+        toast.success('Модули успешно изменены!', {autoClose: 1500, theme: 'auto'})
+        this.loadCompany({id: params.id})
       })
     },
     async loadDepartmentList() {

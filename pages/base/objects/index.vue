@@ -4,6 +4,20 @@ import ObjectContent from "~/components/Objects/ObjectContent.vue";
 import TheSearch from "~/components/UI/TheSearch.vue";
 import TheFilter from "~/components/UI/TheFilter.vue";
 import ObjectCreate from "~/components/Objects/ObjectCreate.vue";
+import {useAuthStore} from "~/stores/auth";
+
+const router = useRouter()
+const loadAuthStore = useAuthStore()
+
+watch(() => loadAuthStore.user, (newValue) => {
+  if(loadAuthStore?.user?.role?.name_en === 'admin'){
+    if (window.history.length > 1) {
+      router.push('/base/profile');
+    } else {
+      router.push('/');
+    }
+  }
+})
 
 useSeoMeta({
   title: 'Объекты',

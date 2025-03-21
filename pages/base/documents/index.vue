@@ -4,11 +4,25 @@ import DocumentHeader from "~/components/documents/DocumentHeader.vue";
 import TheContentBlock from "~/components/UI/TheContentBlock.vue";
 import DocumentInfo from "~/components/documents/DocumentInfo.vue";
 import {useDocumentStore} from "~/stores/documents";
+import {useAuthStore} from "~/stores/auth";
 
 const document = useDocumentStore()
 
 onMounted(()=>{
   document.loadAllDocument({page: 1, limit: 15})
+})
+
+const router = useRouter()
+const loadAuthStore = useAuthStore()
+
+watch(() => loadAuthStore.user, (newValue) => {
+  if(loadAuthStore?.user?.role?.name_en === 'admin'){
+    if (window.history.length > 1) {
+      router.push('/base/profile');
+    } else {
+      router.push('/');
+    }
+  }
 })
 
 useSeoMeta({

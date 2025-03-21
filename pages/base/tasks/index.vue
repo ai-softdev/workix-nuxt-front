@@ -34,6 +34,7 @@ import {Chart as ChartJS, ArcElement, Tooltip, Legend, Chart} from 'chart.js'
 import {Doughnut, Pie} from 'vue-chartjs'
 import {useTaskList} from "~/stores/tasks";
 import {definePageMeta} from "#imports";
+import {useAuthStore} from "~/stores/auth";
 const statsList = useTaskList()
 ChartJS.register(ArcElement, Tooltip, Legend)
 Chart.defaults.color = '#b6b6b6'
@@ -51,6 +52,19 @@ const chartOptions = ref({
   responsive: true,
   maintainAspectRatio: false
 });
+
+const router = useRouter()
+const loadAuthStore = useAuthStore()
+
+watch(() => loadAuthStore.user, (newValue) => {
+  if(loadAuthStore?.user?.role?.name_en === 'admin'){
+    if (window.history.length > 1) {
+      router.push('/base/profile');
+    } else {
+      router.push('/');
+    }
+  }
+})
 
 useSeoMeta({
   title: 'Задания',
