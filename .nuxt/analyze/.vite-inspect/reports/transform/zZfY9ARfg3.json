@@ -1,0 +1,238 @@
+{
+  "resolvedId": "D:/projects/nuxt/workix-nuxt-front/components/Company/department/DepartmentUserList.vue",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "<script setup lang=\"ts\">\nimport {useAuthStore} from \"~/stores/auth\";\nconst loadCurrentUser = useAuthStore()\ndefineProps({\n  userItem: {\n    type: Object,\n    required: true,\n  },\n})\n\n</script>\n\n<template>\n  <div class=\"my-6\">\n    <NuxtLink :to=\"`/base/users/${userItem.id}`\" class=\"transition-all shadow-md hover:shadow-lg border dark:border-none dark:shadow-none dark:bg-gray-400 dark:hover:bg-gray-300 p-4 rounded-lg flex max-[1241px]:flex-col max-[1241px]:gap-y-4 justify-between items-center cursor-pointer \">\n      <div class=\"flex items-center gap-x-4 w-3/12 max-lg:w-full max-lg:x-mx-auto\">\n        <img class=\"w-14 h-14 rounded-full\" :src=\"userItem.photo_url\" alt=\"\">\n        <h2 class=\"tracking-widest font-bold max-xl:text-center\">{{ userItem.first_name + ' ' + userItem.last_name }}</h2>\n      </div>\n      <div class=\"flex flex-col items-center justify-center w-5/12 max-lg:w-full  mx-auto\">\n        <p class=\"text-lg font-bold tracking-widest mb-2\" v-if=\"loadCurrentUser.user.role?.name_en === 'admin'\">{{$t('Роль | Должность')}}</p>\n        <p class=\"text-lg font-bold tracking-widest mb-2\" v-else>{{$t('Должность')}}</p>\n        <div class=\"text-center flex flex-col gap-y-2\">\n          <h2 class=\"tracking-widest text-sm text-gray-600\" v-if=\"loadCurrentUser.user.role?.name_en === 'admin'\">({{ userItem.role }})</h2>\n          <h2 class=\"tracking-widest text-md \">{{ userItem.position }}</h2>\n        </div>\n      </div>\n      <div class=\"w-2/12 max-[1241px]:w-full max-lg:x-mx-auto text-center\">\n        <h2 class=\"tracking-widest font-bold\">{{$t('Дата регистрации')}}</h2>\n      </div>\n    </NuxtLink>\n  </div>\n</template>\n\n<style scoped lang=\"scss\">\n\n</style>",
+      "start": 1742845833908,
+      "end": 1742845834122,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1742845834122,
+      "end": 1742845834122,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1742845834122,
+      "end": 1742845834122,
+      "order": "pre"
+    },
+    {
+      "name": "unplugin-vue-i18n",
+      "start": 1742845834122,
+      "end": 1742845834122,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1742845834122,
+      "end": 1742845834122,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1742845834122,
+      "end": 1742845834122,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1742845834122,
+      "end": 1742845834122,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1742845834122,
+      "end": 1742845834122,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1742845834122,
+      "end": 1742845834122,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "result": "import _sfc_main from \"D:/projects/nuxt/workix-nuxt-front/components/Company/department/DepartmentUserList.vue?vue&type=script&setup=true&lang.ts\";\nexport * from \"D:/projects/nuxt/workix-nuxt-front/components/Company/department/DepartmentUserList.vue?vue&type=script&setup=true&lang.ts\";\nexport default _sfc_main;\n",
+      "start": 1742845834122,
+      "end": 1742845834187,
+      "order": "normal",
+      "sourcemaps": {
+        "mappings": ""
+      }
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1742845834187,
+      "end": 1742845834187,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1742845834187,
+      "end": 1742845834187,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1742845834187,
+      "end": 1742845834187,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:chunk-error",
+      "start": 1742845834187,
+      "end": 1742845834187,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1742845834188,
+      "end": 1742845834188,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1742845834188,
+      "end": 1742845834188,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1742845834188,
+      "end": 1742845834188,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1742845834188,
+      "end": 1742845834188,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1742845834188,
+      "end": 1742845834188,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1742845834188,
+      "end": 1742845834189,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1742845834189,
+      "end": 1742845834189,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1742845834189,
+      "end": 1742845834189,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1742845834189,
+      "end": 1742845834189,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1742845834189,
+      "end": 1742845834189,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1742845834189,
+      "end": 1742845834189,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1742845834189,
+      "end": 1742845834189,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-macros-transform",
+      "start": 1742845834189,
+      "end": 1742845834190,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-resource",
+      "start": 1742845834190,
+      "end": 1742845834190,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-meta-deprecation",
+      "start": 1742845834190,
+      "end": 1742845834190,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1742845834190,
+      "end": 1742845834191,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1742845834192,
+      "end": 1742845834192,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1742845834193,
+      "end": 1742845834193,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:runtime-paths-dep",
+      "start": 1742845834194,
+      "end": 1742845834194,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:route-injection-plugin",
+      "start": 1742845834196,
+      "end": 1742845834196,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1742845834196,
+      "end": 1742845834196,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1742845834197,
+      "end": 1742845834197,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1742845834197,
+      "end": 1742845834197,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1742845834197,
+      "end": 1742845834197,
+      "order": "normal"
+    }
+  ]
+}

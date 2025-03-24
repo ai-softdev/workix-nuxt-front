@@ -26,7 +26,7 @@ defineProps({
     <TheButton class="w-full h-full" type="signIn" @click="showCreateCompany = true">{{ $t('Создать компанию') }}
     </TheButton>
     <TheModal v-if="showCreateCompany" @showModal="showCreateCompany = !showCreateCompany; !showCreateCompany ? createForm = {} : createForm = {}">
-      <form @submit.prevent="createCompany.createCompany(createForm)">
+      <form @submit.prevent="createCompany.createCompany(createForm);showCreateCompany = false">
         <TheTextContent>{{ $t('Создание компании') }}</TheTextContent>
         <CompanyContentCreateElems>
           <div class="w-6/12">

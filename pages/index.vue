@@ -47,8 +47,9 @@ useHead({
                 fill="#000000"/>
             </svg>
           </div>
-          <div class="mx-auto text-center my-6">
-            <img class="w-2/12 mx-auto" src="/img/Logo.webp" alt="">
+          <div class="mx-auto text-center my-6 font-black text-[45px] uppercase -tracking-wider">
+            workix
+            <!--            <img class="w-2/12 mx-auto" src="/img/Logo.webp" alt="">-->
           </div>
           <h1 class="text-center text-xl leading-6 tracking-wide text-[#464A53]">{{ $t('Авторизация') }}</h1>
           <div class="p-4 flex flex-col gap-y-4">

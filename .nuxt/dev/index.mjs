@@ -3,28 +3,28 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { mkdirSync } from 'node:fs';
 import { parentPort, threadId } from 'node:worker_threads';
-import { defineEventHandler, handleCacheHeaders, splitCookiesString, isEvent, createEvent, fetchWithEvent, getRequestHeader, eventHandler, setHeaders, sendRedirect, proxyRequest, createError, setResponseHeader, send, getResponseStatus, setResponseStatus, setResponseHeaders, getRequestHeaders, lazyEventHandler, useBase, createApp, createRouter as createRouter$1, toNodeListener, getRouterParam, getQuery as getQuery$1, readBody, getResponseStatusText } from 'file://C:/project/nuxt/workix-nuxt-front/node_modules/h3/dist/index.mjs';
-import { getRequestDependencies, getPreloadLinks, getPrefetchLinks, createRenderer } from 'file://C:/project/nuxt/workix-nuxt-front/node_modules/vue-bundle-renderer/dist/runtime.mjs';
-import { stringify, uneval } from 'file://C:/project/nuxt/workix-nuxt-front/node_modules/devalue/index.js';
-import { renderToString } from 'file://C:/project/nuxt/workix-nuxt-front/node_modules/vue/server-renderer/index.mjs';
-import { renderSSRHead } from 'file://C:/project/nuxt/workix-nuxt-front/node_modules/@unhead/ssr/dist/index.mjs';
-import { createFetch as createFetch$1, Headers as Headers$1 } from 'file://C:/project/nuxt/workix-nuxt-front/node_modules/ofetch/dist/node.mjs';
-import destr from 'file://C:/project/nuxt/workix-nuxt-front/node_modules/destr/dist/index.mjs';
-import { createCall, createFetch } from 'file://C:/project/nuxt/workix-nuxt-front/node_modules/unenv/runtime/fetch/index.mjs';
-import { createHooks } from 'file://C:/project/nuxt/workix-nuxt-front/node_modules/hookable/dist/index.mjs';
-import { klona } from 'file://C:/project/nuxt/workix-nuxt-front/node_modules/klona/dist/index.mjs';
-import { snakeCase } from 'file://C:/project/nuxt/workix-nuxt-front/node_modules/scule/dist/index.mjs';
-import defu, { defuFn } from 'file://C:/project/nuxt/workix-nuxt-front/node_modules/defu/dist/defu.mjs';
-import { hash } from 'file://C:/project/nuxt/workix-nuxt-front/node_modules/ohash/dist/index.mjs';
-import { createStorage, prefixStorage } from 'file://C:/project/nuxt/workix-nuxt-front/node_modules/unstorage/dist/index.mjs';
-import unstorage_47drivers_47fs from 'file://C:/project/nuxt/workix-nuxt-front/node_modules/unstorage/drivers/fs.mjs';
-import { toRouteMatcher, createRouter } from 'file://C:/project/nuxt/workix-nuxt-front/node_modules/radix3/dist/index.mjs';
+import { defineEventHandler, handleCacheHeaders, splitCookiesString, isEvent, createEvent, fetchWithEvent, getRequestHeader, eventHandler, setHeaders, sendRedirect, proxyRequest, createError, setResponseHeader, send, getResponseStatus, setResponseStatus, setResponseHeaders, getRequestHeaders, lazyEventHandler, useBase, createApp, createRouter as createRouter$1, toNodeListener, getRouterParam, getQuery as getQuery$1, readBody, getResponseStatusText } from 'file://D:/projects/nuxt/workix-nuxt-front/node_modules/h3/dist/index.mjs';
+import { getRequestDependencies, getPreloadLinks, getPrefetchLinks, createRenderer } from 'file://D:/projects/nuxt/workix-nuxt-front/node_modules/vue-bundle-renderer/dist/runtime.mjs';
+import { stringify, uneval } from 'file://D:/projects/nuxt/workix-nuxt-front/node_modules/devalue/index.js';
+import { renderToString } from 'file://D:/projects/nuxt/workix-nuxt-front/node_modules/vue/server-renderer/index.mjs';
+import { renderSSRHead } from 'file://D:/projects/nuxt/workix-nuxt-front/node_modules/@unhead/ssr/dist/index.mjs';
+import { createFetch as createFetch$1, Headers as Headers$1 } from 'file://D:/projects/nuxt/workix-nuxt-front/node_modules/ofetch/dist/node.mjs';
+import destr from 'file://D:/projects/nuxt/workix-nuxt-front/node_modules/destr/dist/index.mjs';
+import { createCall, createFetch } from 'file://D:/projects/nuxt/workix-nuxt-front/node_modules/unenv/runtime/fetch/index.mjs';
+import { createHooks } from 'file://D:/projects/nuxt/workix-nuxt-front/node_modules/hookable/dist/index.mjs';
+import { klona } from 'file://D:/projects/nuxt/workix-nuxt-front/node_modules/klona/dist/index.mjs';
+import { snakeCase } from 'file://D:/projects/nuxt/workix-nuxt-front/node_modules/scule/dist/index.mjs';
+import defu, { defuFn } from 'file://D:/projects/nuxt/workix-nuxt-front/node_modules/defu/dist/defu.mjs';
+import { hash } from 'file://D:/projects/nuxt/workix-nuxt-front/node_modules/ohash/dist/index.mjs';
+import { createStorage, prefixStorage } from 'file://D:/projects/nuxt/workix-nuxt-front/node_modules/unstorage/dist/index.mjs';
+import unstorage_47drivers_47fs from 'file://D:/projects/nuxt/workix-nuxt-front/node_modules/unstorage/drivers/fs.mjs';
+import { toRouteMatcher, createRouter } from 'file://D:/projects/nuxt/workix-nuxt-front/node_modules/radix3/dist/index.mjs';
 import { fileURLToPath } from 'node:url';
-import { ipxFSStorage, ipxHttpStorage, createIPX, createIPXH3Handler } from 'file://C:/project/nuxt/workix-nuxt-front/node_modules/ipx/dist/index.mjs';
-import { isAbsolute } from 'file://C:/project/nuxt/workix-nuxt-front/node_modules/pathe/dist/index.mjs';
-import { version, unref } from 'file://C:/project/nuxt/workix-nuxt-front/node_modules/vue/index.mjs';
-import { createServerHead as createServerHead$1 } from 'file://C:/project/nuxt/workix-nuxt-front/node_modules/unhead/dist/index.mjs';
-import { defineHeadPlugin } from 'file://C:/project/nuxt/workix-nuxt-front/node_modules/@unhead/shared/dist/index.mjs';
+import { ipxFSStorage, ipxHttpStorage, createIPX, createIPXH3Handler } from 'file://D:/projects/nuxt/workix-nuxt-front/node_modules/ipx/dist/index.mjs';
+import { isAbsolute } from 'file://D:/projects/nuxt/workix-nuxt-front/node_modules/pathe/dist/index.mjs';
+import { version, unref } from 'file://D:/projects/nuxt/workix-nuxt-front/node_modules/vue/index.mjs';
+import { createServerHead as createServerHead$1 } from 'file://D:/projects/nuxt/workix-nuxt-front/node_modules/unhead/dist/index.mjs';
+import { defineHeadPlugin } from 'file://D:/projects/nuxt/workix-nuxt-front/node_modules/@unhead/shared/dist/index.mjs';
 
 const r=Object.create(null),E=e=>globalThis.process?.env||globalThis._importMeta_.env||globalThis.Deno?.env.toObject()||globalThis.__env__||(e?r:globalThis),s=new Proxy(r,{get(e,o){return E()[o]??r[o]},has(e,o){const i=E();return o in i||o in r},set(e,o,i){const g=E(!0);return g[o]=i,!0},deleteProperty(e,o){if(!o)return !1;const i=E(!0);return delete i[o],!0},ownKeys(){const e=E(!0);return Object.keys(e)}}),t=typeof process<"u"&&process.env&&"development"||"",p=[["APPVEYOR"],["AWS_AMPLIFY","AWS_APP_ID",{ci:!0}],["AZURE_PIPELINES","SYSTEM_TEAMFOUNDATIONCOLLECTIONURI"],["AZURE_STATIC","INPUT_AZURE_STATIC_WEB_APPS_API_TOKEN"],["APPCIRCLE","AC_APPCIRCLE"],["BAMBOO","bamboo_planKey"],["BITBUCKET","BITBUCKET_COMMIT"],["BITRISE","BITRISE_IO"],["BUDDY","BUDDY_WORKSPACE_ID"],["BUILDKITE"],["CIRCLE","CIRCLECI"],["CIRRUS","CIRRUS_CI"],["CLOUDFLARE_PAGES","CF_PAGES",{ci:!0}],["CODEBUILD","CODEBUILD_BUILD_ARN"],["CODEFRESH","CF_BUILD_ID"],["DRONE"],["DRONE","DRONE_BUILD_EVENT"],["DSARI"],["GITHUB_ACTIONS"],["GITLAB","GITLAB_CI"],["GITLAB","CI_MERGE_REQUEST_ID"],["GOCD","GO_PIPELINE_LABEL"],["LAYERCI"],["HUDSON","HUDSON_URL"],["JENKINS","JENKINS_URL"],["MAGNUM"],["NETLIFY"],["NETLIFY","NETLIFY_LOCAL",{ci:!1}],["NEVERCODE"],["RENDER"],["SAIL","SAILCI"],["SEMAPHORE"],["SCREWDRIVER"],["SHIPPABLE"],["SOLANO","TDDIUM"],["STRIDER"],["TEAMCITY","TEAMCITY_VERSION"],["TRAVIS"],["VERCEL","NOW_BUILDER"],["VERCEL","VERCEL",{ci:!1}],["VERCEL","VERCEL_ENV",{ci:!1}],["APPCENTER","APPCENTER_BUILD_ID"],["CODESANDBOX","CODESANDBOX_SSE",{ci:!1}],["STACKBLITZ"],["STORMKIT"],["CLEAVR"],["ZEABUR"],["CODESPHERE","CODESPHERE_APP_ID",{ci:!0}],["RAILWAY","RAILWAY_PROJECT_ID"],["RAILWAY","RAILWAY_SERVICE_ID"]];function B(){if(globalThis.process?.env)for(const e of p){const o=e[1]||e[0];if(globalThis.process?.env[o])return {name:e[0].toLowerCase(),...e[2]}}return globalThis.process?.env?.SHELL==="/bin/jsh"&&globalThis.process?.versions?.webcontainer?{name:"stackblitz",ci:!1}:{name:"",ci:!1}}const l=B(),d=l.name;function n(e){return e?e!=="false":!1}const I=globalThis.process?.platform||"",T=n(s.CI)||l.ci!==!1,R=n(globalThis.process?.stdout&&globalThis.process?.stdout.isTTY);n(s.DEBUG);const C=t==="test"||n(s.TEST);n(s.MINIMAL)||T||C||!R;const a=/^win/i.test(I);!n(s.NO_COLOR)&&(n(s.FORCE_COLOR)||(R||a)&&s.TERM!=="dumb"||T);const _=(globalThis.process?.versions?.node||"").replace(/^v/,"")||null;Number(_?.split(".")[0])||null;const W=globalThis.process||Object.create(null),c={versions:{}};new Proxy(W,{get(e,o){if(o==="env")return s;if(o in e)return e[o];if(o in c)return c[o]}});const A=globalThis.process?.release?.name==="node",L=!!globalThis.Bun||!!globalThis.process?.versions?.bun,D=!!globalThis.Deno,O=!!globalThis.fastly,S=!!globalThis.Netlify,N=!!globalThis.EdgeRuntime,u=globalThis.navigator?.userAgent==="Cloudflare-Workers",b=!!globalThis.__lagon__,F=[[S,"netlify"],[N,"edge-light"],[u,"workerd"],[O,"fastly"],[D,"deno"],[L,"bun"],[A,"node"],[b,"lagon"]];function G(){const e=F.find(o=>o[0]);if(e)return {name:e[1]}}const P=G();P?.name||"";
 
@@ -141,7 +141,7 @@ const _inlineRuntimeConfig = {
     "baseURL": "/_ipx",
     "alias": {},
     "fs": {
-      "dir": "C:/project/nuxt/workix-nuxt-front/public"
+      "dir": "D:/projects/nuxt/workix-nuxt-front/public"
     },
     "http": {
       "domains": []
@@ -414,7 +414,7 @@ function stringifyParsedURL(parsed) {
   return proto + auth + host + pathname + search + hash;
 }
 
-const serverAssets = [{"baseName":"server","dir":"C:/project/nuxt/workix-nuxt-front/server/assets"}];
+const serverAssets = [{"baseName":"server","dir":"D:/projects/nuxt/workix-nuxt-front/server/assets"}];
 
 const assets = createStorage();
 
@@ -426,11 +426,11 @@ const storage = createStorage({});
 
 storage.mount('/assets', assets);
 
-storage.mount('root', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"C:\\project\\nuxt\\workix-nuxt-front","ignore":["**/node_modules/**","**/.git/**"]}));
-storage.mount('src', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"C:\\project\\nuxt\\workix-nuxt-front\\server","ignore":["**/node_modules/**","**/.git/**"]}));
-storage.mount('build', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"C:\\project\\nuxt\\workix-nuxt-front\\.nuxt","ignore":["**/node_modules/**","**/.git/**"]}));
-storage.mount('cache', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"C:\\project\\nuxt\\workix-nuxt-front\\.nuxt\\cache","ignore":["**/node_modules/**","**/.git/**"]}));
-storage.mount('data', unstorage_47drivers_47fs({"driver":"fs","base":"C:\\project\\nuxt\\workix-nuxt-front\\.data\\kv","ignore":["**/node_modules/**","**/.git/**"]}));
+storage.mount('root', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"D:\\projects\\nuxt\\workix-nuxt-front","ignore":["**/node_modules/**","**/.git/**"]}));
+storage.mount('src', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"D:\\projects\\nuxt\\workix-nuxt-front\\server","ignore":["**/node_modules/**","**/.git/**"]}));
+storage.mount('build', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"D:\\projects\\nuxt\\workix-nuxt-front\\.nuxt","ignore":["**/node_modules/**","**/.git/**"]}));
+storage.mount('cache', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"D:\\projects\\nuxt\\workix-nuxt-front\\.nuxt\\cache","ignore":["**/node_modules/**","**/.git/**"]}));
+storage.mount('data', unstorage_47drivers_47fs({"driver":"fs","base":"D:\\projects\\nuxt\\workix-nuxt-front\\.data\\kv","ignore":["**/node_modules/**","**/.git/**"]}));
 
 function useStorage(base = "") {
   return base ? prefixStorage(storage, base) : storage;
@@ -877,7 +877,7 @@ if (!window.__NUXT_DEVTOOLS_TIME_METRIC__) {
 window.__NUXT_DEVTOOLS_TIME_METRIC__.appInit = Date.now()
 `;
 
-const _8c2JXeTPvS = (function(nitro) {
+const _6DfAZwJtXw = (function(nitro) {
   nitro.hooks.hook("render:html", (htmlContext) => {
     htmlContext.head.push(`<script>${script$1}<\/script>`);
   });
@@ -885,15 +885,15 @@ const _8c2JXeTPvS = (function(nitro) {
 
 const script = "\"use strict\";(()=>{const a=window,e=document.documentElement,m=[\"dark\",\"light\"],c=window&&window.localStorage&&window.localStorage.getItem&&window.localStorage.getItem(\"nuxt-color-mode\")||\"system\";let n=c===\"system\"?d():c;const l=e.getAttribute(\"data-color-mode-forced\");l&&(n=l),i(n),a[\"__NUXT_COLOR_MODE__\"]={preference:c,value:n,getColorScheme:d,addColorScheme:i,removeColorScheme:f};function i(o){const t=\"\"+o+\"\",s=\"\";e.classList?e.classList.add(t):e.className+=\" \"+t,s&&e.setAttribute(\"data-\"+s,o)}function f(o){const t=\"\"+o+\"\",s=\"\";e.classList?e.classList.remove(t):e.className=e.className.replace(new RegExp(t,\"g\"),\"\"),s&&e.removeAttribute(\"data-\"+s)}function r(o){return a.matchMedia(\"(prefers-color-scheme\"+o+\")\")}function d(){if(a.matchMedia&&r(\"\").media!==\"not all\"){for(const o of m)if(r(\":\"+o).matches)return o}return\"light\"}})();\n";
 
-const _EeNhtHIFrC = (function(nitro) {
+const _YpzBLrDVop = (function(nitro) {
   nitro.hooks.hook("render:html", (htmlContext) => {
     htmlContext.head.push(`<script>${script}<\/script>`);
   });
 });
 
 const plugins = [
-  _8c2JXeTPvS,
-_EeNhtHIFrC
+  _6DfAZwJtXw,
+_YpzBLrDVop
 ];
 
 const scheduledTasks = false;
@@ -1035,7 +1035,7 @@ function publicAssetsURL(...path) {
   return path.length ? joinURL(publicBase, ...path) : publicBase;
 }
 
-const _F7ltO3 = lazyEventHandler(() => {
+const _SOLTZ0 = lazyEventHandler(() => {
   const opts = useRuntimeConfig().ipx || {};
   const fsDir = opts.fs?.dir ? isAbsolute(opts.fs.dir) ? opts.fs.dir : fileURLToPath(new URL(opts.fs.dir, globalThis._importMeta_.url)) : void 0;
   const fsStorage = opts.fs?.dir ? ipxFSStorage({ ...opts.fs, dir: fsDir }) : void 0;
@@ -1053,12 +1053,12 @@ const _F7ltO3 = lazyEventHandler(() => {
   return useBase(opts.baseURL, ipxHandler);
 });
 
-const _lazy_cnA2re = () => Promise.resolve().then(function () { return renderer$1; });
+const _lazy_oCNvr0 = () => Promise.resolve().then(function () { return renderer$1; });
 
 const handlers = [
-  { route: '/__nuxt_error', handler: _lazy_cnA2re, lazy: true, middleware: false, method: undefined },
-  { route: '/_ipx/**', handler: _F7ltO3, lazy: false, middleware: false, method: undefined },
-  { route: '/**', handler: _lazy_cnA2re, lazy: true, middleware: false, method: undefined }
+  { route: '/__nuxt_error', handler: _lazy_oCNvr0, lazy: true, middleware: false, method: undefined },
+  { route: '/_ipx/**', handler: _SOLTZ0, lazy: false, middleware: false, method: undefined },
+  { route: '/**', handler: _lazy_oCNvr0, lazy: true, middleware: false, method: undefined }
 ];
 
 function createNitroApp() {
@@ -1332,8 +1332,8 @@ const appRootTag = "div";
 
 globalThis.__buildAssetsURL = buildAssetsURL;
 globalThis.__publicAssetsURL = publicAssetsURL;
-const getClientManifest = () => import('file://C:/project/nuxt/workix-nuxt-front/.nuxt/dist/server/client.manifest.mjs').then((r) => r.default || r).then((r) => typeof r === "function" ? r() : r);
-const getServerEntry = () => import('file://C:/project/nuxt/workix-nuxt-front/.nuxt/dist/server/server.mjs').then((r) => r.default || r);
+const getClientManifest = () => import('file://D:/projects/nuxt/workix-nuxt-front/.nuxt/dist/server/client.manifest.mjs').then((r) => r.default || r).then((r) => typeof r === "function" ? r() : r);
+const getServerEntry = () => import('file://D:/projects/nuxt/workix-nuxt-front/.nuxt/dist/server/server.mjs').then((r) => r.default || r);
 const getSSRRenderer = lazyCachedFunction(async () => {
   const manifest = await getClientManifest();
   if (!manifest) {

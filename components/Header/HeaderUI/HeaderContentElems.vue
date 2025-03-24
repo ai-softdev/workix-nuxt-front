@@ -262,7 +262,7 @@
               <h3>{{ $t('Русский') }}</h3>
             </template>
           </HeaderContentLink>
-          <HeaderContentLink to="profile">
+          <HeaderContentLink v-if="loadCurrentUser.user.role.name_en !== 'admin'" to="profile">
             <template v-slot:headerContentIcon>
               <svg width="30px" height="30px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -272,7 +272,7 @@
             </template>
             <template v-slot:headerContentText>{{ $t('Личная информация') }}</template>
           </HeaderContentLink>
-          <HeaderContentLink to="companies">
+          <HeaderContentLink v-if="loadCurrentUser.user.role.name_en !== 'admin'" to="companies">
             <template v-slot:headerContentIcon>
               <svg width="30px" height="30px" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg"
                    xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -284,7 +284,7 @@
               {{ $t('Информация о Компании') }}
             </template>
           </HeaderContentLink>
-          <HeaderContentLink to="tasks">
+          <HeaderContentLink v-if="loadCurrentUser.user.role.name_en !== 'admin'" to="tasks">
             <template v-slot:headerContentIcon>
               <svg width="30px" class="dark:stroke-white stroke-black" height="30px" viewBox="0 0 24 24" fill="none"
                    xmlns="http://www.w3.org/2000/svg">

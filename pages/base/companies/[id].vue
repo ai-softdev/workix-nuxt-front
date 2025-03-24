@@ -132,7 +132,7 @@ watchSyncEffect(() => {
             <div class="bg-bgWhite p-3 rounded-lg flex flex-col gap-3 items-start">
               <UITheButton
                   @click="openAdminModal"
-                  class="mb-2 border p-3 rounded-lg"
+                  class="mb-2 border p-3 rounded-lg !text-black dark:!text-white"
               >
                 Добавить
               </UITheButton>
@@ -153,7 +153,7 @@ watchSyncEffect(() => {
               class="flex flex-col gap-3 bg-bgWhite p-3 rounded-lg max-h-[400px] min-h-[400px] h-full overflow-y-scroll">
             <UITheButton
                 @click="openModuleModal"
-                class="mb-2 border p-3 rounded-lg"
+                class="mb-2 border p-3 rounded-lg !text-black dark:!text-white"
             >
               Изменить
             </UITheButton>
