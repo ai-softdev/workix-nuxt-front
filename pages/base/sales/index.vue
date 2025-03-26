@@ -335,26 +335,34 @@ watch(() => company.company, (newValue) => {
 }
 @media (max-width: 1150px) {
   .sales-up-table {
-    max-width: 96vw;
+    max-width: 86vw;
   }
   .sales-table {
     overflow: auto;
-    max-width: 96vw;
+    max-width: 86vw;
   }
   .sales-table table {
     width: 2000px;
   }
 }
 
-@media (max-width: 636px) {
+@media (max-width: 920px) {
   .sales-up-table {
-    width: 98vw !important;
+    width: 80vw !important;
   }
   .sales-table {
-    max-width: 100vw !important;
+    max-width: 80vw !important;
   }
   .pagination {
     flex-wrap: wrap;
+  }
+}
+@media (max-width: 650px) {
+  .sales-up-table {
+    width: 70vw !important;
+  }
+  .sales-table {
+    max-width: 70vw !important;
   }
 }
 </style>
