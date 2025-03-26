@@ -5,6 +5,7 @@ import {useRoute} from "vue-router";
 import ChatNav from "~/components/Chat/ChatNav.vue"
 import ChatCropper from "~/components/Chat/UI/ChatCropper.vue";
 import {useAuthStore} from "~/stores/auth";
+import {useCompanies} from "~/stores/companies";
 
 const windowWidth = ref(0)
 const activeNav = ref(true)
@@ -13,6 +14,7 @@ const router = useRouter()
 const chatStore = useChat()
 const userStore = useUserStore()
 const loadAuthStore = useAuthStore()
+const company = useCompanies()
 
 chatStore.loadChatList({page: 1, limit: 100})
 userStore.loadUserList({query: '', user_type: 'user-list/my-company', page: 1, limit: 10000})
@@ -36,6 +38,16 @@ onUnmounted(() => {
 
 watch(() => loadAuthStore.user, (newValue) => {
   if(loadAuthStore?.user?.role?.name_en === 'admin'){
+    if (window.history.length > 1) {
+      router.push('/base/profile');
+    } else {
+      router.push('/');
+    }
+  }
+})
+watch(() => company.company, (newValue) => {
+  let permission = company.company.modules?.find(item => item.name_en === 'chat')
+  if(!permission){
     if (window.history.length > 1) {
       router.push('/base/profile');
     } else {

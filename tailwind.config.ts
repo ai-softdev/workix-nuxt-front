@@ -4,6 +4,9 @@ export default <Partial<Config>>{
   darkMode: 'class',
   theme: {
     extend: {
+      screens: {
+        'max-2big': {'max': '1400px'},
+      },
       colors: {
         'bgWhite': 'rgba(255,255,255, 0.3)',
         'blueDark': '#023e8a',
@@ -19,5 +22,9 @@ export default <Partial<Config>>{
     require('autoprefixer')
   ],
 
-  content: []
+  content: [
+    "./pages/**/*.{vue,js,ts,jsx,tsx}",
+    "./components/**/*.{vue,js,ts,jsx,tsx}",
+    "./layouts/**/*.{vue,js,ts,jsx,tsx}"
+  ]
 }

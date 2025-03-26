@@ -35,6 +35,7 @@ import {Doughnut, Pie} from 'vue-chartjs'
 import {useTaskList} from "~/stores/tasks";
 import {definePageMeta} from "#imports";
 import {useAuthStore} from "~/stores/auth";
+import {useCompanies} from "~/stores/companies";
 const statsList = useTaskList()
 ChartJS.register(ArcElement, Tooltip, Legend)
 Chart.defaults.color = '#b6b6b6'
@@ -55,9 +56,20 @@ const chartOptions = ref({
 
 const router = useRouter()
 const loadAuthStore = useAuthStore()
+const company = useCompanies()
 
 watch(() => loadAuthStore.user, (newValue) => {
   if(loadAuthStore?.user?.role?.name_en === 'admin'){
+    if (window.history.length > 1) {
+      router.push('/base/profile');
+    } else {
+      router.push('/');
+    }
+  }
+})
+watch(() => company.company, (newValue) => {
+  let permission = company.company.modules?.find(item => item.name_en === 'tasks')
+  if(!permission){
     if (window.history.length > 1) {
       router.push('/base/profile');
     } else {
