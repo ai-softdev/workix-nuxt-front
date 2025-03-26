@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import { useRoute, useRouter } from 'vue-router';
 import TheTextContent from "~/components/UI/TheTextContent.vue";
 import TheBreadcrumbs from "~/components/UI/TheBreadcrumbs.vue";
@@ -8,6 +7,8 @@ import {useSales} from "~/stores/sales";
 import ThePreloader from "~/components/UI/ThePreloader.vue";
 import {useCompanies} from "~/stores/companies";
 import {useAuthStore} from "~/stores/auth";
+import TheInput from "~/components/UI/TheInput.vue";
+import TheModal from "~/components/UI/TheModal.vue";
 const loadAuthStore = useAuthStore()
 const company = useCompanies()
 
@@ -15,9 +16,15 @@ const route = useRoute();
 const router = useRouter();
 const sales = useSales();
 
+const showFiltersModal = ref(false);
+
 const page = ref(Number(route.query.page) || 1);
 const limit = ref(Number(route.query.limit) || 5);
 const itemName = ref(route.query.itemName || '');
+const min_price = ref(Number(route.query.min_price) || '');
+const max_price = ref(Number(route.query.max_price) || '');
+const min_count = ref(Number(route.query.min_count) || '');
+const max_count = ref(Number(route.query.max_count) || '');
 const limitItems = ref([5, 10, 20, 30, 50])
 
 const updateQueryParams = () => {
@@ -25,7 +32,11 @@ const updateQueryParams = () => {
     query: {
       page: page.value,
       limit: limit.value,
-      itemName: itemName.value || undefined
+      itemName: itemName.value || undefined,
+      min_price: min_price.value || '',
+      max_price: max_price.value || '',
+      min_count: min_count.value || '',
+      max_count: max_count.value || '',
     }
   });
 };
@@ -44,10 +55,19 @@ const searchByName = () => {
   updateQueryParams();
 };
 
+const openFiltersModal = () => {
+  showFiltersModal.value = !showFiltersModal.value
+}
+
+const submitFilters = () => {
+  console.log('submit')
+  updateQueryParams();
+}
+
 const pageCount = ref(0)
 
 onMounted(()=> {
-  sales.loadSalesList({page: page.value, limit: limit.value, name: itemName.value})
+  sales.loadSalesList({page: page.value, limit: limit.value, name: itemName.value, min_price: min_price.value, max_price: max_price.value, min_count: min_count.value, max_count: max_count.value})
 })
 
 watch(() => sales.sales, (newValue) => {
@@ -58,7 +78,7 @@ watch(() => route.query, (newQuery) => {
   page.value = Number(newQuery.page) || 1;
   limit.value = Number(newQuery.limit) || 3;
   itemName.value = newQuery.itemName || '';
-  sales.loadSalesList({ page: page.value, limit: limit.value, name: itemName.value });
+  sales.loadSalesList({ page: page.value, limit: limit.value, name: itemName.value, min_price: min_price.value, max_price: max_price.value, min_count: min_count.value, max_count: max_count.value });
 });
 
 watch(() => loadAuthStore.user, (newValue) => {
@@ -117,7 +137,13 @@ watch(() => company.company, (newValue) => {
         </NuxtLink>
       </div>
       <div class="w-fit sales-up-table rounded-lg border mt-10 overflow-hidden">
-        <div class="p-4">
+        <div class="p-4 flex items-center gap-3">
+          <UITheButton
+              @click="openFiltersModal"
+              class="border p-3 rounded-lg !text-black dark:!text-white"
+          >
+            Фильтры
+          </UITheButton>
           <div class="w-4/12 max-md:w-full relative flex items-center">
             <div class="absolute rotate-90 ml-2">
               <svg class="dark:stroke-white stroke-black" width="25px" height="25px" viewBox="0 0 24 24" fill="none"
@@ -207,6 +233,54 @@ watch(() => company.company, (newValue) => {
         </div>
       </div>
     </div>
+
+    <TheModal
+        :type="'resize'"
+        v-if="showFiltersModal"
+        @showModal=""
+    >
+      <button class="absolute top-3 right-3" @click="openFiltersModal">
+        x
+      </button>
+      <div
+          class="flex flex-col gap-5"
+      >
+        <p>
+          Фильтры:
+        </p>
+        <form @submit.prevent="updateQueryParams(); showFiltersModal = false" class="flex items-center gap-5 flex-col">
+          <TheInput
+              v-model="min_price"
+              class="bg-transparent bg-opacity-0 rounded-lg outline-none max-md:w-full"
+              type="number"
+              label="Минимальная цена"
+          />
+          <TheInput
+              v-model="max_price"
+              class="bg-transparent bg-opacity-0 rounded-lg outline-none max-md:w-full"
+              type="number"
+              label="Максимальная цена"
+          />
+          <TheInput
+              v-model="min_count"
+              class="bg-transparent bg-opacity-0 rounded-lg outline-none max-md:w-full"
+              type="number"
+              label="Минимальное количество"
+          />
+          <TheInput
+              v-model="max_count"
+              class="w-full bg-transparent bg-opacity-0 rounded-lg outline-none"
+              type="number"
+              label="Максимальное количество"
+          />
+          <UITheButton
+              class="mt-2 !text-black dark:!text-white"
+          >
+            Сохранить
+          </UITheButton>
+        </form>
+      </div>
+    </TheModal>
   </div>
 </template>
 

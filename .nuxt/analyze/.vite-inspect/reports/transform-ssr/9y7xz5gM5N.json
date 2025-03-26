@@ -4,81 +4,81 @@
     {
       "name": "vite:load-fallback",
       "result": "<script setup lang=\"ts\">\nimport {useCompanies} from \"~/stores/companies\";\nimport {useAuthStore} from \"~/stores/auth\";\nimport {useMediaQuery, useParallax} from '@vueuse/core'\nimport TheModal from \"~/components/UI/TheModal.vue\";\nimport TheButton from \"~/components/UI/TheButton.vue\";\nimport TheInput from \"~/components/UI/TheInput.vue\";\nimport Sceleton from \"~/components/UI/TheSceleton.vue\";\nimport ThePreloader from \"~/components/UI/ThePreloader.vue\";\nimport {useUserStore} from \"~/stores/users\";\n\nconst company = useCompanies()\nconst loadUserInfo = useAuthStore()\nconst target = ref(null)\nconst isMobile = useMediaQuery('(max-width: 700px)')\n\nconst parallax = reactive(useParallax(target))\n\nconst targetStyle: CSSProperties = {\n  transition: '.3s ease-out all',\n}\nconst cardWindowStyle: CSSProperties = {\n  margin: 'auto',\n}\nconst layerBase: CSSProperties = {\n  position: 'absolute',\n  height: '100%',\n  width: '100%',\n  transition: '.3s ease-out all',\n}\nconst containerStyle: CSSProperties = {\n  margin: '3em auto',\n  perspective: '300px',\n}\n\nconst cardStyle = computed(() => ({\n  transition: '.3s ease-out all',\n  transform: `rotateX(${parallax.roll * 1}deg) rotateY(${\n    parallax.tilt * 1\n  }deg)`,\n}))\n\nconst container = ref(null)\nconst {tilt, roll, source} = useParallax(container)\n\nconst loadCurrentUser = useAuthStore()\n defineProps({\n  showInfo: {\n    type: Boolean,\n    default: false\n  },\n  getCode: {\n    type: Boolean,\n    default: false\n  },\n  userEdit: {\n    type: Object,\n    default: () => {\n    }\n  }\n})\nconst birth = new Date(loadCurrentUser.user.date_of_birth).toLocaleDateString()\nonMounted(()=>{\n  loadUserInfo.loadCurrentUserWorker()\n})\n</script>\n\n<template>\n  <div class=\"w-full p-6 relative col-span-2 max-sm:col-auto shadow-lg dark:shadow-md dark:border-t dark:border-t-gray-500 cursor-pointer dark:shadow-gray-500 rounded-md transition-all duration-200\">\n    <div\n      @click=\"showInfo = true; userEdit={...loadCurrentUser.user}\">\n      <h2 class=\"mb-8 dark:text-white tracking-widest\">{{ $t('Личные данные') }}</h2>\n      <div :class=\"{'blur' : !loadCurrentUser.user.id}\" class=\"flex gap-x-10 max-lg:flex-wrap gap-y-10 justify-around\">\n        <div class=\"flex flex-col gap-y-6\">\n          <div v-if=\"loadCurrentUser.user.id\"\n               class=\"flex max-sm:flex-wrap max-sm:justify-center select-none text-gray-600 gap-x-2 \">\n            <div class=\"\">\n              <img class=\"w-[100px] h-[100px] rounded-full shadow-lg dark:shadow-none\"\n                   :src=\"loadCurrentUser.user.photo\" alt=\"\">\n            </div>\n            <div class=\"my-2 mx-2\">\n              <h3 class=\"text-xl dark:text-white select-none tracking-wide\">{{ loadCurrentUser.user.first_name }}\n                {{ loadCurrentUser.user.last_name }}</h3>\n              <p class=\"dark:text-white\">\n                {{ Math.trunc((new Date() - new Date(loadCurrentUser.user.date_of_birth)) / 1000 / 3600 / 24 / 365) + ' лет'\n                }}</p>\n              <p v-if=\"loadCurrentUser.user.role.name === 'Администратор сайта'\"\n                 class=\"dark:text-white tracking-widest font-bold\">{{ loadCurrentUser.user.role.name }}</p>\n              <p v-else-if=\"loadCurrentUser.user.role.name === 'Сотрудник'\"\n                 class=\"dark:text-white tracking-widest font-bold\">{{ loadCurrentUser.user.position.name }}</p>\n            </div>\n          </div>\n          <div v-else class=\"flex items-center gap-x-4\">\n            <sceleton border-radius=\"100px\" width=\"100px\" height=\"100px\"></sceleton>\n            <div class=\"flex flex-col gap-y-2\">\n              <sceleton width=\"150px\" height=\"20px\" border-radius=\"5px\"></sceleton>\n              <sceleton width=\"60px\" height=\"15px\" border-radius=\"5px\"></sceleton>\n            </div>\n          </div>\n          <div class=\"flex flex-col gap-y-2 ml-2 w-full\">\n            <div class=\"text-sm\">\n              <p class=\"text-gray-500 dark:text-white font-mono\">{{ $t('Email') }}:\n                <span v-if=\"loadCurrentUser.user.id\" class=\"font-bold tracking-widest\">{{loadCurrentUser.user.email}}</span>\n              </p>\n            </div>\n            <div class=\"text-sm\">\n              <p class=\"text-gray-500 dark:text-white font-mono\">{{ $t('Номер') }}:\n                <span class=\"font-bold tracking-widest\">{{ loadCurrentUser.user.phone?.slice(4, 13) }}</span></p>\n            </div>\n            <div class=\"text-sm\">\n              <p class=\"text-gray-500 flex gap-x-2 dark:text-white font-mono\">{{ $t('Зароботная плата') }}:\n                <span v-if=\"loadCurrentUser.user.id\" class=\"font-bold tracking-widest\">{{ loadCurrentUser.user.salary + ' сум' }}</span>\n                <span v-else> </span>\n              </p>\n            </div>\n          </div>\n        </div>\n        <div class=\"w-6/12 max-lg:w-full flex flex-col gap-y-10\">\n          <div class=\"\">\n            <p class=\"text-gray-500 dark:text-white font-mono\">{{ $t('Компания') }}:</p>\n            <p class=\"dark:text-white font-bold tracking-wide mt-2\">\n              {{company.company.description}}\n            </p>\n          </div>\n        </div>\n      </div>\n      <div v-if=\"!loadCurrentUser.user.id\">\n        <div class=\"bg-black w-full h-full absolute top-0 left-0 opacity-40 rounded-lg\"></div>\n        <ThePreloader></ThePreloader>\n      </div>\n    </div>\n    <Transition name=\"slide-down\">\n      <TheModal v-if=\"showInfo\" @showModal=\"showInfo = false; getCode = false\">\n        <form @submit.prevent=\"loadCurrentUser.update_my({user: userEdit})\">\n          <div>\n            <h2 class=\"text-center text-xl tracking-widest font-bold dark:text-white\">Личная информация</h2>\n          </div>\n          <div class=\"w-full\">\n            <div class=\"mt-10 flex items-center justify-around\">\n              <div class=\"flex flex-col text-center w-3/12 dark:text-white tracking-widest\">\n                <p class=\"dark:text-gray-200 text-gray-400 font-bold text-[14px]\">{{ $t('Должность' + ':') }} </p>\n                <p class=\"\">{{ userEdit.position.name }}</p>\n              </div>\n              <div class=\"flex flex-col text-center w-3/12 dark:text-white tracking-widest\">\n                <p class=\"dark:text-gray-200 text-gray-400 font-bold text-[14px]\">{{ $t('Заработная плата' + ':') }} </p>\n                <p class=\"\">{{ userEdit.salary + ' ' + $t('сум') }}</p>\n              </div>\n            </div>\n            <div class=\"px-10 max-sm:px-0\">\n              <div class=\"my-10 flex max-lg:gap-x-2 max-md:gap-y-2 max-md:flex-wrap max-md:justify-center justify-between\">\n                <div class=\"gap-y-2 flex flex-col w-5/12 max-lg:w-full justify-center\">\n                  <p class=\"dark:text-white ml-1 tracking-widest  font-bold\">{{ $t('Имя') + ':' }}</p>\n                  <TheInput type=\"text\"\n                            v-model=\"userEdit.first_name\"/>\n                </div>\n                <div class=\"gap-y-2 flex flex-col w-5/12 max-lg:w-full justify-center\">\n                  <p class=\"dark:text-white ml-1 tracking-widest  font-bold\">{{ $t('Фамилия') + ':' }}</p>\n                  <TheInput type=\"text\"\n                            v-model=\"userEdit.last_name\"/>\n                </div>\n              </div>\n              <div class=\"my-10 flex max-lg:gap-x-2 max-lg:gap-y-4 max-lg:flex-wrap max-md:justify-center justify-between items-center\">\n                <div class=\"gap-y-2 flex flex-col w-5/12 max-lg:w-full justify-center\">\n                  <p class=\"dark:text-white ml-1 tracking-widest  font-bold\">{{ $t('Телефон') + ':' }}</p>\n                  <TheInput type=\"tel\"\n                            v-model=\"userEdit.phone\"/>\n                </div>\n                <div\n                  class=\"gap-y-2 flex flex-col w-5/12 max-lg:w-full justify-center border p-4 rounded-xl shadow-md dark:shadow-none text-center\">\n                  <div>\n                    <p class=\"dark:text-white ml-1 tracking-widest font-bold text-sm\" v-if=\"!getCode\">\n                      {{ $t('Изменить номер') + ':' }}</p>\n                    <p class=\"dark:text-white ml-1 tracking-widest font-bold text-sm\" v-else>{{ $t('Введите Код') + ':'}}</p>\n                  </div>\n                  <div class=\"flex gap-x-1 justify-center\" v-if=\"getCode\">\n                    <TheInput type=\"text\" maxlength=\"1\" class=\"w-[40px] h-[45px] rounded text-center font-bold text-xl\"/>\n                    <TheInput type=\"text\" maxlength=\"1\" class=\"w-[40px] h-[45px] rounded text-center font-bold text-xl\"/>\n                    <TheInput type=\"text\" maxlength=\"1\" class=\"w-[40px] h-[45px] rounded text-center font-bold text-xl\"/>\n                    <TheInput type=\"text\" maxlength=\"1\" class=\"w-[40px] h-[45px] rounded text-center font-bold text-xl\"/>\n                  </div>\n                  <div>\n                    <TheButton t=\"button\" type=\"change\"\n                               class=\"p-2 text-sm rounded-xl border shadow-md dark:shadow-none font-bold tracking-widest\"\n                               @click=\"getCode = true;\" v-if=\"!getCode\">{{ $t('Изменить') }}\n                    </TheButton>\n                    <TheButton t=\"button\" type=\"change\"\n                               class=\"p-2 text-sm rounded-xl border shadow-md dark:shadow-none font-bold tracking-widest\"\n                               @click=\"getCode = true;\" v-if=\"getCode\">{{ $t('Подтвердить') }}\n                    </TheButton>\n                  </div>\n                </div>\n              </div>\n              <div class=\"my-10 flex max-lg:gap-x-2 max-md:flex-wrap max-md:justify-center justify-between\">\n                <div class=\"gap-y-2 flex flex-col w-5/12 max-lg:w-full justify-center\">\n                  <p class=\"dark:text-white ml-1 tracking-widest  font-bold\">{{ $t('Дата рождения') + ':' }}</p>\n                  <input type=\"date\" v-model=\"birth\"/>\n                </div>\n              </div>\n            </div>\n            <div class=\"flex justify-around max-sm:flex-col max-sm:gap-y-2\">\n              <TheButton class=\"w-4/12 max-sm:w-full py-2 rounded-full\" t=\"button\" type=\"danger\"\n                         @click=\"showInfo = false; getCode = false\">{{ $t('Отмена') }}\n              </TheButton>\n              <TheButton class=\"w-4/12 max-sm:w-full py-2 rounded-full\" t=\"submit\" type=\"success\">{{ $t('Сохранить') }}</TheButton>\n            </div>\n          </div>\n        </form>\n      </TheModal>\n    </Transition>\n  </div>\n\n</template>\n\n<style scoped lang=\"scss\">\n</style>",
-      "start": 1742845855939,
-      "end": 1742845856598,
+      "start": 1743013055245,
+      "end": 1743013055607,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742845856598,
-      "end": 1742845856598,
+      "start": 1743013055608,
+      "end": 1743013055608,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742845856598,
-      "end": 1742845856598,
+      "start": 1743013055608,
+      "end": 1743013055608,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742845856598,
-      "end": 1742845856598,
+      "start": 1743013055608,
+      "end": 1743013055608,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742845856598,
-      "end": 1742845856598,
+      "start": 1743013055608,
+      "end": 1743013055608,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1742845856598,
-      "end": 1742845856598,
+      "start": 1743013055608,
+      "end": 1743013055608,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1742845856598,
-      "end": 1742845856598,
+      "start": 1743013055608,
+      "end": 1743013055608,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742845856598,
-      "end": 1742845856598,
+      "start": 1743013055608,
+      "end": 1743013055608,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742845856598,
-      "end": 1742845856598,
+      "start": 1743013055608,
+      "end": 1743013055608,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1742845856598,
-      "end": 1742845856598,
+      "start": 1743013055608,
+      "end": 1743013055608,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1742845856598,
-      "end": 1742845856598,
+      "start": 1743013055608,
+      "end": 1743013055608,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742845856598,
-      "end": 1742845856598,
+      "start": 1743013055608,
+      "end": 1743013055608,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "import _sfc_main from \"D:/projects/nuxt/workix-nuxt-front/components/Profile/ProfileUI/ProfileContentUserInfo.vue?vue&type=script&setup=true&lang.ts\";\nexport * from \"D:/projects/nuxt/workix-nuxt-front/components/Profile/ProfileUI/ProfileContentUserInfo.vue?vue&type=script&setup=true&lang.ts\";\nimport { useSSRContext as __vite_useSSRContext } from \"vue\";\nconst _sfc_setup = _sfc_main.setup;\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext();\n  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(\"components/Profile/ProfileUI/ProfileContentUserInfo.vue\");\n  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;\n};\nexport default _sfc_main;\n",
-      "start": 1742845856598,
-      "end": 1742845856960,
+      "start": 1743013055608,
+      "end": 1743013055773,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -86,212 +86,212 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742845856960,
-      "end": 1742845856960,
+      "start": 1743013055773,
+      "end": 1743013055773,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742845856960,
-      "end": 1742845856960,
+      "start": 1743013055773,
+      "end": 1743013055773,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742845856960,
-      "end": 1742845856960,
+      "start": 1743013055773,
+      "end": 1743013055773,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742845856960,
-      "end": 1742845856960,
+      "start": 1743013055774,
+      "end": 1743013055774,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742845856960,
-      "end": 1742845856960,
+      "start": 1743013055774,
+      "end": 1743013055774,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1742845856960,
-      "end": 1742845856961,
+      "start": 1743013055774,
+      "end": 1743013055774,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742845856961,
-      "end": 1742845856961,
+      "start": 1743013055774,
+      "end": 1743013055775,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742845856961,
-      "end": 1742845856961,
+      "start": 1743013055775,
+      "end": 1743013055775,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742845856961,
-      "end": 1742845856961,
+      "start": 1743013055775,
+      "end": 1743013055776,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1742845856961,
-      "end": 1742845856961,
+      "start": 1743013055776,
+      "end": 1743013055776,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742845856962,
-      "end": 1742845856962,
+      "start": 1743013055776,
+      "end": 1743013055777,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742845856963,
-      "end": 1742845856963,
+      "start": 1743013055777,
+      "end": 1743013055777,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742845856963,
-      "end": 1742845856963,
+      "start": 1743013055777,
+      "end": 1743013055777,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1742845856963,
-      "end": 1742845856963,
+      "start": 1743013055778,
+      "end": 1743013055778,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742845856964,
-      "end": 1742845856964,
+      "start": 1743013055779,
+      "end": 1743013055779,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742845856964,
-      "end": 1742845856964,
+      "start": 1743013055780,
+      "end": 1743013055780,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742845856964,
-      "end": 1742845856964,
+      "start": 1743013055780,
+      "end": 1743013055780,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742845856964,
-      "end": 1742845856964,
+      "start": 1743013055780,
+      "end": 1743013055780,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1742845856965,
-      "end": 1742845856965,
+      "start": 1743013055780,
+      "end": 1743013055780,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1742845856965,
-      "end": 1742845856965,
+      "start": 1743013055780,
+      "end": 1743013055780,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1742845856965,
-      "end": 1742845856965,
+      "start": 1743013055780,
+      "end": 1743013055780,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1742845856965,
-      "end": 1742845856965,
+      "start": 1743013055780,
+      "end": 1743013055780,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1742845856965,
-      "end": 1742845856965,
+      "start": 1743013055781,
+      "end": 1743013055781,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1742845856965,
-      "end": 1742845856965,
+      "start": 1743013055781,
+      "end": 1743013055781,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1742845856966,
-      "end": 1742845856968,
+      "start": 1743013055781,
+      "end": 1743013055784,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1742845856966,
-      "end": 1742845856968,
+      "start": 1743013055781,
+      "end": 1743013055784,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1742845856968,
-      "end": 1742845856968,
+      "start": 1743013055785,
+      "end": 1743013055785,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1742845856968,
-      "end": 1742845856968,
+      "start": 1743013055785,
+      "end": 1743013055785,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742845856970,
-      "end": 1742845856971,
+      "start": 1743013055788,
+      "end": 1743013055788,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742845856970,
-      "end": 1742845856971,
+      "start": 1743013055788,
+      "end": 1743013055788,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1742845856973,
-      "end": 1742845856979,
+      "start": 1743013055790,
+      "end": 1743013055790,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1742845856979,
-      "end": 1742845856980,
+      "start": 1743013055791,
+      "end": 1743013055791,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1742845856980,
-      "end": 1742845856980,
+      "start": 1743013055791,
+      "end": 1743013055791,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1742845856980,
-      "end": 1742845856980,
+      "start": 1743013055792,
+      "end": 1743013055792,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1742845856980,
-      "end": 1742845856980,
+      "start": 1743013055792,
+      "end": 1743013055792,
       "order": "normal"
     }
   ]

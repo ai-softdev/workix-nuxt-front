@@ -193,7 +193,7 @@ watchSyncEffect(() => {
           </div>
         </div>
         <UITheButton
-            class="mt-2"
+            class="mt-2 !text-black dark:!text-white"
             @click="changeModules"
         >
           Сохранить
@@ -261,7 +261,7 @@ watchSyncEffect(() => {
             placeholder="Номер телефона"
         />
         <UITheButton
-            class="mt-2"
+            class="mt-2 !text-black dark:!text-white"
             @click="createAdministrator"
         >
           Сохранить

@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { unref as _unref, resolveComponent as _resolveComponent, withCtx as _withCtx, createVNode as _createVNode, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\"\n\nimport {useStorageStore} from \"~/stores/storage\";\nimport {useRoute, useRouter} from \"vue-router\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nimport TheButton from \"~/components/UI/TheButton.vue\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport type {ICurrentCategory, TGoods} from \"~/types/storage\";\n\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'StorageNavElemGoods',\n  __ssrInlineRender: true,\n  props: {\n  item: {\n    type: Object as ()=> ICurrentCategory,\n    default: {} as ICurrentCategory\n  },\n  moveEffectSubCategory: {\n    type: Boolean\n  },\n  moveEffectSubCategoryWarn: {\n    type: Boolean,\n  }\n},\n  setup(__props) {\n\nconst isActive = ref(false)\nconst route = useRoute()\nconst router = useRouter()\nconst storageStore = useStorageStore()\n\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  const _component_NuxtLink = _resolveComponent(\"NuxtLink\")!\n\n  _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"relative rounded-l-md dark:hover:bg-semiCyan hover:!bg-opacity-30 hover:bg-cyan transition-all\" }, _attrs))}>`)\n  _push(_ssrRenderComponent(_component_NuxtLink, {\n    to: `/base/storage/${__props.item.slug}`,\n    class: [{'dark:bg-semiCyan': _unref(route).path === `/base/storage/${__props.item.slug}/${_unref(route).params.id}`}, \"flex items-center w-full rounded-l-md p-1\"],\n    onClick: ($event: any) => (_unref(storageStore).currentCategory = {...__props.item} as any)\n  }, {\n    default: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(`<div class=\"flex items-center gap-x-3\"${\n          _scopeId\n        }><div class=\"text-semiCyan\"${\n          _scopeId\n        }> • </div><span class=\"tracking-wider\"${\n          _scopeId\n        }>${\n          _ssrInterpolate(__props.item.name)\n        }</span></div><div${\n          _scopeId\n        }></div>`)\n      } else {\n        return [\n          _createVNode(\"div\", { class: \"flex items-center gap-x-3\" }, [\n            _createVNode(\"div\", { class: \"text-semiCyan\" }, \" • \"),\n            _createVNode(\"span\", { class: \"tracking-wider\" }, _toDisplayString(__props.item.name), 1)\n          ]),\n          _createVNode(\"div\")\n        ]\n      }\n    }),\n    _: 1\n  }, _parent))\n  if (__props.moveEffectSubCategory) {\n    _push(`<button class=\"absolute right-2 rounded-lg top-1\"><svg width=\"25px\" height=\"25px\" viewBox=\"0 -5 32 32\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:sketch=\"http://www.bohemiancoding.com/sketch/ns\"><g id=\"Page-1\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" sketch:type=\"MSPage\"><g id=\"Icon-Set\" sketch:type=\"MSLayerGroup\" transform=\"translate(-516.000000, -1144.000000)\" class=\"dark:fill-white fill-black\"><path d=\"M538.708,1151.28 C538.314,1150.89 537.676,1150.89 537.281,1151.28 L534.981,1153.58 L532.742,1151.34 C532.352,1150.95 531.718,1150.95 531.327,1151.34 C530.936,1151.73 530.936,1152.37 531.327,1152.76 L533.566,1154.99 L531.298,1157.26 C530.904,1157.65 530.904,1158.29 531.298,1158.69 C531.692,1159.08 532.331,1159.08 532.725,1158.69 L534.993,1156.42 L537.232,1158.66 C537.623,1159.05 538.257,1159.05 538.647,1158.66 C539.039,1158.27 539.039,1157.63 538.647,1157.24 L536.408,1155.01 L538.708,1152.71 C539.103,1152.31 539.103,1151.68 538.708,1151.28 L538.708,1151.28 Z M545.998,1162 C545.998,1163.1 545.102,1164 543.996,1164 L526.467,1164 L518.316,1154.98 L526.438,1146 L543.996,1146 C545.102,1146 545.998,1146.9 545.998,1148 L545.998,1162 L545.998,1162 Z M543.996,1144 L526.051,1144 C525.771,1143.98 525.485,1144.07 525.271,1144.28 L516.285,1154.22 C516.074,1154.43 515.983,1154.71 515.998,1154.98 C515.983,1155.26 516.074,1155.54 516.285,1155.75 L525.271,1165.69 C525.467,1165.88 525.723,1165.98 525.979,1165.98 L525.979,1166 L543.996,1166 C546.207,1166 548,1164.21 548,1162 L548,1148 C548,1145.79 546.207,1144 543.996,1144 L543.996,1144 Z\" id=\"delete\" sketch:type=\"MSShapeGroup\"></path></g></g></svg></button>`)\n  } else {\n    _push(`<!---->`)\n  }\n  if (__props.moveEffectSubCategoryWarn) {\n    _push(_ssrRenderComponent(TheModal, {\n      type: \"resize\",\n      onShowModal: ($event: any) => (__props.moveEffectSubCategoryWarn = false)\n    }, {\n      default: _withCtx((_, _push, _parent, _scopeId) => {\n        if (_push) {\n          _push(_ssrRenderComponent(TheTextContent, null, {\n            default: _withCtx((_, _push, _parent, _scopeId) => {\n              if (_push) {\n                _push(`${_ssrInterpolate(_ctx.$t('Удалить категорию?'))}`)\n              } else {\n                return [\n                  _createTextVNode(_toDisplayString(_ctx.$t('Удалить категорию?')), 1)\n                ]\n              }\n            }),\n            _: 1\n          }, _parent, _scopeId))\n          _push(`<div class=\"break-words tracking-wider my-4 text-sm\"${\n            _scopeId\n          }><p${\n            _scopeId\n          }>${\n            _ssrInterpolate(_ctx.$t('Если вы удалите категорию то всё содержимое данной категории удалиться без возврата'))\n          }</p><p class=\"mt-4\"${\n            _scopeId\n          }>${\n            _ssrInterpolate(_ctx.$t('Убедитесь что категория пустая, переместите нужные товары в другие категории'))\n          }</p></div><div class=\"flex flex-wrap gap-x-10 justify-center\"${\n            _scopeId\n          }>`)\n          _push(_ssrRenderComponent(TheButton, {\n            type: \"chat\",\n            onClick: ($event: any) => (__props.moveEffectSubCategoryWarn = false)\n          }, {\n            default: _withCtx((_, _push, _parent, _scopeId) => {\n              if (_push) {\n                _push(`${_ssrInterpolate(_ctx.$t('Отмена'))}`)\n              } else {\n                return [\n                  _createTextVNode(_toDisplayString(_ctx.$t('Отмена')), 1)\n                ]\n              }\n            }),\n            _: 1\n          }, _parent, _scopeId))\n          _push(_ssrRenderComponent(TheButton, {\n            type: \"chat\",\n            onClick: ($event: any) => (_unref(storageStore).deleteStorageElem({deleteType: 'subcategory', id: __props.item.id}).then(res => {\n           if( _unref(storageStore).currentCategory.slug === __props.item.slug) {\n             _unref(router).push('/base/storage')\n             _unref(storageStore).currentCategory = {} as any\n           } else _unref(storageStore).currentCategory\n          }))\n          }, {\n            default: _withCtx((_, _push, _parent, _scopeId) => {\n              if (_push) {\n                _push(`${_ssrInterpolate(_ctx.$t('Удалить'))}`)\n              } else {\n                return [\n                  _createTextVNode(_toDisplayString(_ctx.$t('Удалить')), 1)\n                ]\n              }\n            }),\n            _: 1\n          }, _parent, _scopeId))\n          _push(`</div>`)\n        } else {\n          return [\n            _createVNode(TheTextContent, null, {\n              default: _withCtx(() => [\n                _createTextVNode(_toDisplayString(_ctx.$t('Удалить категорию?')), 1)\n              ]),\n              _: 1\n            }),\n            _createVNode(\"div\", { class: \"break-words tracking-wider my-4 text-sm\" }, [\n              _createVNode(\"p\", null, _toDisplayString(_ctx.$t('Если вы удалите категорию то всё содержимое данной категории удалиться без возврата')), 1),\n              _createVNode(\"p\", { class: \"mt-4\" }, _toDisplayString(_ctx.$t('Убедитесь что категория пустая, переместите нужные товары в другие категории')), 1)\n            ]),\n            _createVNode(\"div\", { class: \"flex flex-wrap gap-x-10 justify-center\" }, [\n              _createVNode(TheButton, {\n                type: \"chat\",\n                onClick: ($event: any) => (__props.moveEffectSubCategoryWarn = false)\n              }, {\n                default: _withCtx(() => [\n                  _createTextVNode(_toDisplayString(_ctx.$t('Отмена')), 1)\n                ]),\n                _: 1\n              }, 8, [\"onClick\"]),\n              _createVNode(TheButton, {\n                type: \"chat\",\n                onClick: ($event: any) => (_unref(storageStore).deleteStorageElem({deleteType: 'subcategory', id: __props.item.id}).then(res => {\n           if( _unref(storageStore).currentCategory.slug === __props.item.slug) {\n             _unref(router).push('/base/storage')\n             _unref(storageStore).currentCategory = {} as any\n           } else _unref(storageStore).currentCategory\n          }))\n              }, {\n                default: _withCtx(() => [\n                  _createTextVNode(_toDisplayString(_ctx.$t('Удалить')), 1)\n                ]),\n                _: 1\n              }, 8, [\"onClick\"])\n            ])\n          ]\n        }\n      }),\n      _: 1\n    }, _parent))\n  } else {\n    _push(`<!---->`)\n  }\n  _push(`</div>`)\n}\n}\n\n})",
-      "start": 1742845859498,
-      "end": 1742845859498,
+      "start": 1743013057857,
+      "end": 1743013057857,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742845859498,
-      "end": 1742845859498,
+      "start": 1743013057857,
+      "end": 1743013057857,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742845859498,
-      "end": 1742845859498,
+      "start": 1743013057857,
+      "end": 1743013057857,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742845859498,
-      "end": 1742845859498,
+      "start": 1743013057857,
+      "end": 1743013057857,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742845859498,
-      "end": 1742845859498,
+      "start": 1743013057857,
+      "end": 1743013057857,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1742845859498,
-      "end": 1742845859498,
+      "start": 1743013057858,
+      "end": 1743013057858,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1742845859498,
-      "end": 1742845859498,
+      "start": 1743013057858,
+      "end": 1743013057858,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742845859498,
-      "end": 1742845859498,
+      "start": 1743013057858,
+      "end": 1743013057858,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742845859498,
-      "end": 1742845859498,
+      "start": 1743013057858,
+      "end": 1743013057858,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, resolveComponent as _resolveComponent, withCtx as _withCtx, createVNode as _createVNode, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport { useStorageStore } from \"~/stores/storage\";\nimport { useRoute, useRouter } from \"vue-router\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nimport TheButton from \"~/components/UI/TheButton.vue\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"StorageNavElemGoods\",\n  __ssrInlineRender: true,\n  props: {\n    item: {\n      type: Object,\n      default: {}\n    },\n    moveEffectSubCategory: {\n      type: Boolean\n    },\n    moveEffectSubCategoryWarn: {\n      type: Boolean\n    }\n  },\n  setup(__props) {\n    const isActive = ref(false);\n    const route = useRoute();\n    const router = useRouter();\n    const storageStore = useStorageStore();\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_NuxtLink = _resolveComponent(\"NuxtLink\");\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"relative rounded-l-md dark:hover:bg-semiCyan hover:!bg-opacity-30 hover:bg-cyan transition-all\" }, _attrs))}>`);\n      _push(_ssrRenderComponent(_component_NuxtLink, {\n        to: `/base/storage/${__props.item.slug}`,\n        class: [{ \"dark:bg-semiCyan\": _unref(route).path === `/base/storage/${__props.item.slug}/${_unref(route).params.id}` }, \"flex items-center w-full rounded-l-md p-1\"],\n        onClick: ($event) => _unref(storageStore).currentCategory = { ...__props.item }\n      }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`<div class=\"flex items-center gap-x-3\"${_scopeId}><div class=\"text-semiCyan\"${_scopeId}> • </div><span class=\"tracking-wider\"${_scopeId}>${_ssrInterpolate(__props.item.name)}</span></div><div${_scopeId}></div>`);\n          } else {\n            return [\n              _createVNode(\"div\", { class: \"flex items-center gap-x-3\" }, [\n                _createVNode(\"div\", { class: \"text-semiCyan\" }, \" • \"),\n                _createVNode(\"span\", { class: \"tracking-wider\" }, _toDisplayString(__props.item.name), 1)\n              ]),\n              _createVNode(\"div\")\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      if (__props.moveEffectSubCategory) {\n        _push(`<button class=\"absolute right-2 rounded-lg top-1\"><svg width=\"25px\" height=\"25px\" viewBox=\"0 -5 32 32\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:sketch=\"http://www.bohemiancoding.com/sketch/ns\"><g id=\"Page-1\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" sketch:type=\"MSPage\"><g id=\"Icon-Set\" sketch:type=\"MSLayerGroup\" transform=\"translate(-516.000000, -1144.000000)\" class=\"dark:fill-white fill-black\"><path d=\"M538.708,1151.28 C538.314,1150.89 537.676,1150.89 537.281,1151.28 L534.981,1153.58 L532.742,1151.34 C532.352,1150.95 531.718,1150.95 531.327,1151.34 C530.936,1151.73 530.936,1152.37 531.327,1152.76 L533.566,1154.99 L531.298,1157.26 C530.904,1157.65 530.904,1158.29 531.298,1158.69 C531.692,1159.08 532.331,1159.08 532.725,1158.69 L534.993,1156.42 L537.232,1158.66 C537.623,1159.05 538.257,1159.05 538.647,1158.66 C539.039,1158.27 539.039,1157.63 538.647,1157.24 L536.408,1155.01 L538.708,1152.71 C539.103,1152.31 539.103,1151.68 538.708,1151.28 L538.708,1151.28 Z M545.998,1162 C545.998,1163.1 545.102,1164 543.996,1164 L526.467,1164 L518.316,1154.98 L526.438,1146 L543.996,1146 C545.102,1146 545.998,1146.9 545.998,1148 L545.998,1162 L545.998,1162 Z M543.996,1144 L526.051,1144 C525.771,1143.98 525.485,1144.07 525.271,1144.28 L516.285,1154.22 C516.074,1154.43 515.983,1154.71 515.998,1154.98 C515.983,1155.26 516.074,1155.54 516.285,1155.75 L525.271,1165.69 C525.467,1165.88 525.723,1165.98 525.979,1165.98 L525.979,1166 L543.996,1166 C546.207,1166 548,1164.21 548,1162 L548,1148 C548,1145.79 546.207,1144 543.996,1144 L543.996,1144 Z\" id=\"delete\" sketch:type=\"MSShapeGroup\"></path></g></g></svg></button>`);\n      } else {\n        _push(`<!---->`);\n      }\n      if (__props.moveEffectSubCategoryWarn) {\n        _push(_ssrRenderComponent(TheModal, {\n          type: \"resize\",\n          onShowModal: ($event) => __props.moveEffectSubCategoryWarn = false\n        }, {\n          default: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(_ssrRenderComponent(TheTextContent, null, {\n                default: _withCtx((_2, _push3, _parent3, _scopeId2) => {\n                  if (_push3) {\n                    _push3(`${_ssrInterpolate(_ctx.$t(\"Удалить категорию?\"))}`);\n                  } else {\n                    return [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Удалить категорию?\")), 1)\n                    ];\n                  }\n                }),\n                _: 1\n              }, _parent2, _scopeId));\n              _push2(`<div class=\"break-words tracking-wider my-4 text-sm\"${_scopeId}><p${_scopeId}>${_ssrInterpolate(_ctx.$t(\"Если вы удалите категорию то всё содержимое данной категории удалиться без возврата\"))}</p><p class=\"mt-4\"${_scopeId}>${_ssrInterpolate(_ctx.$t(\"Убедитесь что категория пустая, переместите нужные товары в другие категории\"))}</p></div><div class=\"flex flex-wrap gap-x-10 justify-center\"${_scopeId}>`);\n              _push2(_ssrRenderComponent(TheButton, {\n                type: \"chat\",\n                onClick: ($event) => __props.moveEffectSubCategoryWarn = false\n              }, {\n                default: _withCtx((_2, _push3, _parent3, _scopeId2) => {\n                  if (_push3) {\n                    _push3(`${_ssrInterpolate(_ctx.$t(\"Отмена\"))}`);\n                  } else {\n                    return [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Отмена\")), 1)\n                    ];\n                  }\n                }),\n                _: 1\n              }, _parent2, _scopeId));\n              _push2(_ssrRenderComponent(TheButton, {\n                type: \"chat\",\n                onClick: ($event) => _unref(storageStore).deleteStorageElem({ deleteType: \"subcategory\", id: __props.item.id }).then((res) => {\n                  if (_unref(storageStore).currentCategory.slug === __props.item.slug) {\n                    _unref(router).push(\"/base/storage\");\n                    _unref(storageStore).currentCategory = {};\n                  } else\n                    _unref(storageStore).currentCategory;\n                })\n              }, {\n                default: _withCtx((_2, _push3, _parent3, _scopeId2) => {\n                  if (_push3) {\n                    _push3(`${_ssrInterpolate(_ctx.$t(\"Удалить\"))}`);\n                  } else {\n                    return [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Удалить\")), 1)\n                    ];\n                  }\n                }),\n                _: 1\n              }, _parent2, _scopeId));\n              _push2(`</div>`);\n            } else {\n              return [\n                _createVNode(TheTextContent, null, {\n                  default: _withCtx(() => [\n                    _createTextVNode(_toDisplayString(_ctx.$t(\"Удалить категорию?\")), 1)\n                  ]),\n                  _: 1\n                }),\n                _createVNode(\"div\", { class: \"break-words tracking-wider my-4 text-sm\" }, [\n                  _createVNode(\"p\", null, _toDisplayString(_ctx.$t(\"Если вы удалите категорию то всё содержимое данной категории удалиться без возврата\")), 1),\n                  _createVNode(\"p\", { class: \"mt-4\" }, _toDisplayString(_ctx.$t(\"Убедитесь что категория пустая, переместите нужные товары в другие категории\")), 1)\n                ]),\n                _createVNode(\"div\", { class: \"flex flex-wrap gap-x-10 justify-center\" }, [\n                  _createVNode(TheButton, {\n                    type: \"chat\",\n                    onClick: ($event) => __props.moveEffectSubCategoryWarn = false\n                  }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Отмена\")), 1)\n                    ]),\n                    _: 1\n                  }, 8, [\"onClick\"]),\n                  _createVNode(TheButton, {\n                    type: \"chat\",\n                    onClick: ($event) => _unref(storageStore).deleteStorageElem({ deleteType: \"subcategory\", id: __props.item.id }).then((res) => {\n                      if (_unref(storageStore).currentCategory.slug === __props.item.slug) {\n                        _unref(router).push(\"/base/storage\");\n                        _unref(storageStore).currentCategory = {};\n                      } else\n                        _unref(storageStore).currentCategory;\n                    })\n                  }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Удалить\")), 1)\n                    ]),\n                    _: 1\n                  }, 8, [\"onClick\"])\n                ])\n              ];\n            }\n          }),\n          _: 1\n        }, _parent));\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1742845859498,
-      "end": 1742845859569,
+      "start": 1743013057858,
+      "end": 1743013057899,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -91,171 +91,171 @@
     },
     {
       "name": "vite:json",
-      "start": 1742845859569,
-      "end": 1742845859569,
+      "start": 1743013057899,
+      "end": 1743013057899,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742845859569,
-      "end": 1742845859569,
+      "start": 1743013057899,
+      "end": 1743013057899,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1742845859569,
-      "end": 1742845859569,
+      "start": 1743013057899,
+      "end": 1743013057899,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742845859569,
-      "end": 1742845859569,
+      "start": 1743013057899,
+      "end": 1743013057899,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742845859569,
-      "end": 1742845859569,
+      "start": 1743013057899,
+      "end": 1743013057899,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742845859569,
-      "end": 1742845859569,
+      "start": 1743013057899,
+      "end": 1743013057899,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742845859569,
-      "end": 1742845859569,
+      "start": 1743013057899,
+      "end": 1743013057899,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742845859569,
-      "end": 1742845859569,
+      "start": 1743013057899,
+      "end": 1743013057899,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1742845859570,
-      "end": 1742845859570,
+      "start": 1743013057899,
+      "end": 1743013057899,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742845859570,
-      "end": 1742845859570,
+      "start": 1743013057899,
+      "end": 1743013057899,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742845859570,
-      "end": 1742845859572,
+      "start": 1743013057900,
+      "end": 1743013057900,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742845859572,
-      "end": 1742845859572,
+      "start": 1743013057900,
+      "end": 1743013057900,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1742845859572,
-      "end": 1742845859572,
+      "start": 1743013057900,
+      "end": 1743013057900,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742845859572,
-      "end": 1742845859572,
+      "start": 1743013057900,
+      "end": 1743013057900,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742845859573,
-      "end": 1742845859573,
+      "start": 1743013057903,
+      "end": 1743013057903,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742845859573,
-      "end": 1742845859573,
+      "start": 1743013057904,
+      "end": 1743013057905,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1742845859573,
-      "end": 1742845859573,
+      "start": 1743013057905,
+      "end": 1743013057905,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742845859573,
-      "end": 1742845859574,
+      "start": 1743013057905,
+      "end": 1743013057905,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742845859574,
-      "end": 1742845859574,
+      "start": 1743013057905,
+      "end": 1743013057905,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742845859574,
-      "end": 1742845859574,
+      "start": 1743013057906,
+      "end": 1743013057906,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742845859574,
-      "end": 1742845859574,
+      "start": 1743013057906,
+      "end": 1743013057906,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1742845859574,
-      "end": 1742845859574,
+      "start": 1743013057906,
+      "end": 1743013057906,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1742845859574,
-      "end": 1742845859574,
+      "start": 1743013057906,
+      "end": 1743013057906,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1742845859574,
-      "end": 1742845859574,
+      "start": 1743013057910,
+      "end": 1743013057910,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1742845859574,
-      "end": 1742845859574,
+      "start": 1743013057910,
+      "end": 1743013057910,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1742845859574,
-      "end": 1742845859574,
+      "start": 1743013057910,
+      "end": 1743013057910,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1742845859574,
-      "end": 1742845859574,
+      "start": 1743013057910,
+      "end": 1743013057910,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, resolveComponent as _resolveComponent, withCtx as _withCtx, createVNode as _createVNode, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport { useStorageStore } from \"~/stores/storage\";\nimport { useRoute, useRouter } from \"vue-router\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nimport TheButton from \"~/components/UI/TheButton.vue\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"StorageNavElemGoods\",\n  __ssrInlineRender: true,\n  props: {\n    item: {\n      type: Object,\n      default: {}\n    },\n    moveEffectSubCategory: {\n      type: Boolean\n    },\n    moveEffectSubCategoryWarn: {\n      type: Boolean\n    }\n  },\n  setup(__props) {\n    const isActive = ref(false);\n    const route = useRoute();\n    const router = useRouter();\n    const storageStore = useStorageStore();\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_NuxtLink = _resolveComponent(\"NuxtLink\");\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"relative rounded-l-md dark:hover:bg-semiCyan hover:!bg-opacity-30 hover:bg-cyan transition-all\" }, _attrs))}>`);\n      _push(_ssrRenderComponent(_component_NuxtLink, {\n        to: `/base/storage/${__props.item.slug}`,\n        class: [{ \"dark:bg-semiCyan\": _unref(route).path === `/base/storage/${__props.item.slug}/${_unref(route).params.id}` }, \"flex items-center w-full rounded-l-md p-1\"],\n        onClick: ($event) => _unref(storageStore).currentCategory = { ...__props.item }\n      }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`<div class=\"flex items-center gap-x-3\"${_scopeId}><div class=\"text-semiCyan\"${_scopeId}> • </div><span class=\"tracking-wider\"${_scopeId}>${_ssrInterpolate(__props.item.name)}</span></div><div${_scopeId}></div>`);\n          } else {\n            return [\n              _createVNode(\"div\", { class: \"flex items-center gap-x-3\" }, [\n                _createVNode(\"div\", { class: \"text-semiCyan\" }, \" • \"),\n                _createVNode(\"span\", { class: \"tracking-wider\" }, _toDisplayString(__props.item.name), 1)\n              ]),\n              _createVNode(\"div\")\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      if (__props.moveEffectSubCategory) {\n        _push(`<button class=\"absolute right-2 rounded-lg top-1\"><svg width=\"25px\" height=\"25px\" viewBox=\"0 -5 32 32\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:sketch=\"http://www.bohemiancoding.com/sketch/ns\"><g id=\"Page-1\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" sketch:type=\"MSPage\"><g id=\"Icon-Set\" sketch:type=\"MSLayerGroup\" transform=\"translate(-516.000000, -1144.000000)\" class=\"dark:fill-white fill-black\"><path d=\"M538.708,1151.28 C538.314,1150.89 537.676,1150.89 537.281,1151.28 L534.981,1153.58 L532.742,1151.34 C532.352,1150.95 531.718,1150.95 531.327,1151.34 C530.936,1151.73 530.936,1152.37 531.327,1152.76 L533.566,1154.99 L531.298,1157.26 C530.904,1157.65 530.904,1158.29 531.298,1158.69 C531.692,1159.08 532.331,1159.08 532.725,1158.69 L534.993,1156.42 L537.232,1158.66 C537.623,1159.05 538.257,1159.05 538.647,1158.66 C539.039,1158.27 539.039,1157.63 538.647,1157.24 L536.408,1155.01 L538.708,1152.71 C539.103,1152.31 539.103,1151.68 538.708,1151.28 L538.708,1151.28 Z M545.998,1162 C545.998,1163.1 545.102,1164 543.996,1164 L526.467,1164 L518.316,1154.98 L526.438,1146 L543.996,1146 C545.102,1146 545.998,1146.9 545.998,1148 L545.998,1162 L545.998,1162 Z M543.996,1144 L526.051,1144 C525.771,1143.98 525.485,1144.07 525.271,1144.28 L516.285,1154.22 C516.074,1154.43 515.983,1154.71 515.998,1154.98 C515.983,1155.26 516.074,1155.54 516.285,1155.75 L525.271,1165.69 C525.467,1165.88 525.723,1165.98 525.979,1165.98 L525.979,1166 L543.996,1166 C546.207,1166 548,1164.21 548,1162 L548,1148 C548,1145.79 546.207,1144 543.996,1144 L543.996,1144 Z\" id=\"delete\" sketch:type=\"MSShapeGroup\"></path></g></g></svg></button>`);\n      } else {\n        _push(`<!---->`);\n      }\n      if (__props.moveEffectSubCategoryWarn) {\n        _push(_ssrRenderComponent(TheModal, {\n          type: \"resize\",\n          onShowModal: ($event) => __props.moveEffectSubCategoryWarn = false\n        }, {\n          default: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(_ssrRenderComponent(TheTextContent, null, {\n                default: _withCtx((_2, _push3, _parent3, _scopeId2) => {\n                  if (_push3) {\n                    _push3(`${_ssrInterpolate(_ctx.$t(\"Удалить категорию?\"))}`);\n                  } else {\n                    return [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Удалить категорию?\")), 1)\n                    ];\n                  }\n                }),\n                _: 1\n              }, _parent2, _scopeId));\n              _push2(`<div class=\"break-words tracking-wider my-4 text-sm\"${_scopeId}><p${_scopeId}>${_ssrInterpolate(_ctx.$t(\"Если вы удалите категорию то всё содержимое данной категории удалиться без возврата\"))}</p><p class=\"mt-4\"${_scopeId}>${_ssrInterpolate(_ctx.$t(\"Убедитесь что категория пустая, переместите нужные товары в другие категории\"))}</p></div><div class=\"flex flex-wrap gap-x-10 justify-center\"${_scopeId}>`);\n              _push2(_ssrRenderComponent(TheButton, {\n                type: \"chat\",\n                onClick: ($event) => __props.moveEffectSubCategoryWarn = false\n              }, {\n                default: _withCtx((_2, _push3, _parent3, _scopeId2) => {\n                  if (_push3) {\n                    _push3(`${_ssrInterpolate(_ctx.$t(\"Отмена\"))}`);\n                  } else {\n                    return [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Отмена\")), 1)\n                    ];\n                  }\n                }),\n                _: 1\n              }, _parent2, _scopeId));\n              _push2(_ssrRenderComponent(TheButton, {\n                type: \"chat\",\n                onClick: ($event) => _unref(storageStore).deleteStorageElem({ deleteType: \"subcategory\", id: __props.item.id }).then((res) => {\n                  if (_unref(storageStore).currentCategory.slug === __props.item.slug) {\n                    _unref(router).push(\"/base/storage\");\n                    _unref(storageStore).currentCategory = {};\n                  } else\n                    _unref(storageStore).currentCategory;\n                })\n              }, {\n                default: _withCtx((_2, _push3, _parent3, _scopeId2) => {\n                  if (_push3) {\n                    _push3(`${_ssrInterpolate(_ctx.$t(\"Удалить\"))}`);\n                  } else {\n                    return [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Удалить\")), 1)\n                    ];\n                  }\n                }),\n                _: 1\n              }, _parent2, _scopeId));\n              _push2(`</div>`);\n            } else {\n              return [\n                _createVNode(TheTextContent, null, {\n                  default: _withCtx(() => [\n                    _createTextVNode(_toDisplayString(_ctx.$t(\"Удалить категорию?\")), 1)\n                  ]),\n                  _: 1\n                }),\n                _createVNode(\"div\", { class: \"break-words tracking-wider my-4 text-sm\" }, [\n                  _createVNode(\"p\", null, _toDisplayString(_ctx.$t(\"Если вы удалите категорию то всё содержимое данной категории удалиться без возврата\")), 1),\n                  _createVNode(\"p\", { class: \"mt-4\" }, _toDisplayString(_ctx.$t(\"Убедитесь что категория пустая, переместите нужные товары в другие категории\")), 1)\n                ]),\n                _createVNode(\"div\", { class: \"flex flex-wrap gap-x-10 justify-center\" }, [\n                  _createVNode(TheButton, {\n                    type: \"chat\",\n                    onClick: ($event) => __props.moveEffectSubCategoryWarn = false\n                  }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Отмена\")), 1)\n                    ]),\n                    _: 1\n                  }, 8, [\"onClick\"]),\n                  _createVNode(TheButton, {\n                    type: \"chat\",\n                    onClick: ($event) => _unref(storageStore).deleteStorageElem({ deleteType: \"subcategory\", id: __props.item.id }).then((res) => {\n                      if (_unref(storageStore).currentCategory.slug === __props.item.slug) {\n                        _unref(router).push(\"/base/storage\");\n                        _unref(storageStore).currentCategory = {};\n                      } else\n                        _unref(storageStore).currentCategory;\n                    })\n                  }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Удалить\")), 1)\n                    ]),\n                    _: 1\n                  }, 8, [\"onClick\"])\n                ])\n              ];\n            }\n          }),\n          _: 1\n        }, _parent));\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1742845859574,
-      "end": 1742845859581,
+      "start": 1743013057911,
+      "end": 1743013057920,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -269,8 +269,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, resolveComponent as _resolveComponent, withCtx as _withCtx, createVNode as _createVNode, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport { useStorageStore } from \"~/stores/storage\";\nimport { useRoute, useRouter } from \"vue-router\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nimport TheButton from \"~/components/UI/TheButton.vue\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"StorageNavElemGoods\",\n  __ssrInlineRender: true,\n  props: {\n    item: {\n      type: Object,\n      default: {}\n    },\n    moveEffectSubCategory: {\n      type: Boolean\n    },\n    moveEffectSubCategoryWarn: {\n      type: Boolean\n    }\n  },\n  setup(__props) {\n    const isActive = ref(false);\n    const route = useRoute();\n    const router = useRouter();\n    const storageStore = useStorageStore();\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_NuxtLink = _resolveComponent(\"NuxtLink\");\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"relative rounded-l-md dark:hover:bg-semiCyan hover:!bg-opacity-30 hover:bg-cyan transition-all\" }, _attrs))}>`);\n      _push(_ssrRenderComponent(_component_NuxtLink, {\n        to: `/base/storage/${__props.item.slug}`,\n        class: [{ \"dark:bg-semiCyan\": _unref(route).path === `/base/storage/${__props.item.slug}/${_unref(route).params.id}` }, \"flex items-center w-full rounded-l-md p-1\"],\n        onClick: ($event) => _unref(storageStore).currentCategory = { ...__props.item }\n      }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`<div class=\"flex items-center gap-x-3\"${_scopeId}><div class=\"text-semiCyan\"${_scopeId}> • </div><span class=\"tracking-wider\"${_scopeId}>${_ssrInterpolate(__props.item.name)}</span></div><div${_scopeId}></div>`);\n          } else {\n            return [\n              _createVNode(\"div\", { class: \"flex items-center gap-x-3\" }, [\n                _createVNode(\"div\", { class: \"text-semiCyan\" }, \" • \"),\n                _createVNode(\"span\", { class: \"tracking-wider\" }, _toDisplayString(__props.item.name), 1)\n              ]),\n              _createVNode(\"div\")\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      if (__props.moveEffectSubCategory) {\n        _push(`<button class=\"absolute right-2 rounded-lg top-1\"><svg width=\"25px\" height=\"25px\" viewBox=\"0 -5 32 32\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:sketch=\"http://www.bohemiancoding.com/sketch/ns\"><g id=\"Page-1\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" sketch:type=\"MSPage\"><g id=\"Icon-Set\" sketch:type=\"MSLayerGroup\" transform=\"translate(-516.000000, -1144.000000)\" class=\"dark:fill-white fill-black\"><path d=\"M538.708,1151.28 C538.314,1150.89 537.676,1150.89 537.281,1151.28 L534.981,1153.58 L532.742,1151.34 C532.352,1150.95 531.718,1150.95 531.327,1151.34 C530.936,1151.73 530.936,1152.37 531.327,1152.76 L533.566,1154.99 L531.298,1157.26 C530.904,1157.65 530.904,1158.29 531.298,1158.69 C531.692,1159.08 532.331,1159.08 532.725,1158.69 L534.993,1156.42 L537.232,1158.66 C537.623,1159.05 538.257,1159.05 538.647,1158.66 C539.039,1158.27 539.039,1157.63 538.647,1157.24 L536.408,1155.01 L538.708,1152.71 C539.103,1152.31 539.103,1151.68 538.708,1151.28 L538.708,1151.28 Z M545.998,1162 C545.998,1163.1 545.102,1164 543.996,1164 L526.467,1164 L518.316,1154.98 L526.438,1146 L543.996,1146 C545.102,1146 545.998,1146.9 545.998,1148 L545.998,1162 L545.998,1162 Z M543.996,1144 L526.051,1144 C525.771,1143.98 525.485,1144.07 525.271,1144.28 L516.285,1154.22 C516.074,1154.43 515.983,1154.71 515.998,1154.98 C515.983,1155.26 516.074,1155.54 516.285,1155.75 L525.271,1165.69 C525.467,1165.88 525.723,1165.98 525.979,1165.98 L525.979,1166 L543.996,1166 C546.207,1166 548,1164.21 548,1162 L548,1148 C548,1145.79 546.207,1144 543.996,1144 L543.996,1144 Z\" id=\"delete\" sketch:type=\"MSShapeGroup\"></path></g></g></svg></button>`);\n      } else {\n        _push(`<!---->`);\n      }\n      if (__props.moveEffectSubCategoryWarn) {\n        _push(_ssrRenderComponent(TheModal, {\n          type: \"resize\",\n          onShowModal: ($event) => __props.moveEffectSubCategoryWarn = false\n        }, {\n          default: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(_ssrRenderComponent(TheTextContent, null, {\n                default: _withCtx((_2, _push3, _parent3, _scopeId2) => {\n                  if (_push3) {\n                    _push3(`${_ssrInterpolate(_ctx.$t(\"Удалить категорию?\"))}`);\n                  } else {\n                    return [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Удалить категорию?\")), 1)\n                    ];\n                  }\n                }),\n                _: 1\n              }, _parent2, _scopeId));\n              _push2(`<div class=\"break-words tracking-wider my-4 text-sm\"${_scopeId}><p${_scopeId}>${_ssrInterpolate(_ctx.$t(\"Если вы удалите категорию то всё содержимое данной категории удалиться без возврата\"))}</p><p class=\"mt-4\"${_scopeId}>${_ssrInterpolate(_ctx.$t(\"Убедитесь что категория пустая, переместите нужные товары в другие категории\"))}</p></div><div class=\"flex flex-wrap gap-x-10 justify-center\"${_scopeId}>`);\n              _push2(_ssrRenderComponent(TheButton, {\n                type: \"chat\",\n                onClick: ($event) => __props.moveEffectSubCategoryWarn = false\n              }, {\n                default: _withCtx((_2, _push3, _parent3, _scopeId2) => {\n                  if (_push3) {\n                    _push3(`${_ssrInterpolate(_ctx.$t(\"Отмена\"))}`);\n                  } else {\n                    return [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Отмена\")), 1)\n                    ];\n                  }\n                }),\n                _: 1\n              }, _parent2, _scopeId));\n              _push2(_ssrRenderComponent(TheButton, {\n                type: \"chat\",\n                onClick: ($event) => _unref(storageStore).deleteStorageElem({ deleteType: \"subcategory\", id: __props.item.id }).then((res) => {\n                  if (_unref(storageStore).currentCategory.slug === __props.item.slug) {\n                    _unref(router).push(\"/base/storage\");\n                    _unref(storageStore).currentCategory = {};\n                  } else\n                    _unref(storageStore).currentCategory;\n                })\n              }, {\n                default: _withCtx((_2, _push3, _parent3, _scopeId2) => {\n                  if (_push3) {\n                    _push3(`${_ssrInterpolate(_ctx.$t(\"Удалить\"))}`);\n                  } else {\n                    return [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Удалить\")), 1)\n                    ];\n                  }\n                }),\n                _: 1\n              }, _parent2, _scopeId));\n              _push2(`</div>`);\n            } else {\n              return [\n                _createVNode(TheTextContent, null, {\n                  default: _withCtx(() => [\n                    _createTextVNode(_toDisplayString(_ctx.$t(\"Удалить категорию?\")), 1)\n                  ]),\n                  _: 1\n                }),\n                _createVNode(\"div\", { class: \"break-words tracking-wider my-4 text-sm\" }, [\n                  _createVNode(\"p\", null, _toDisplayString(_ctx.$t(\"Если вы удалите категорию то всё содержимое данной категории удалиться без возврата\")), 1),\n                  _createVNode(\"p\", { class: \"mt-4\" }, _toDisplayString(_ctx.$t(\"Убедитесь что категория пустая, переместите нужные товары в другие категории\")), 1)\n                ]),\n                _createVNode(\"div\", { class: \"flex flex-wrap gap-x-10 justify-center\" }, [\n                  _createVNode(TheButton, {\n                    type: \"chat\",\n                    onClick: ($event) => __props.moveEffectSubCategoryWarn = false\n                  }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Отмена\")), 1)\n                    ]),\n                    _: 1\n                  }, 8, [\"onClick\"]),\n                  _createVNode(TheButton, {\n                    type: \"chat\",\n                    onClick: ($event) => _unref(storageStore).deleteStorageElem({ deleteType: \"subcategory\", id: __props.item.id }).then((res) => {\n                      if (_unref(storageStore).currentCategory.slug === __props.item.slug) {\n                        _unref(router).push(\"/base/storage\");\n                        _unref(storageStore).currentCategory = {};\n                      } else\n                        _unref(storageStore).currentCategory;\n                    })\n                  }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Удалить\")), 1)\n                    ]),\n                    _: 1\n                  }, 8, [\"onClick\"])\n                ])\n              ];\n            }\n          }),\n          _: 1\n        }, _parent));\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1742845859574,
-      "end": 1742845859581,
+      "start": 1743013057911,
+      "end": 1743013057920,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -283,39 +283,39 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1742845859581,
-      "end": 1742845859581,
+      "start": 1743013057920,
+      "end": 1743013057920,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1742845859581,
-      "end": 1742845859581,
+      "start": 1743013057920,
+      "end": 1743013057920,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742845859581,
-      "end": 1742845859581,
+      "start": 1743013057920,
+      "end": 1743013057920,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742845859581,
-      "end": 1742845859581,
+      "start": 1743013057920,
+      "end": 1743013057920,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1742845859581,
-      "end": 1742845859581,
+      "start": 1743013057920,
+      "end": 1743013057920,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
       "result": "import { default as __nuxt_component_0 } from \"D:/projects/nuxt/workix-nuxt-front/node_modules/nuxt/dist/app/components/nuxt-link\";\nimport { ref } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, resolveComponent as _resolveComponent, withCtx as _withCtx, createVNode as _createVNode, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport { useStorageStore } from \"~/stores/storage\";\nimport { useRoute, useRouter } from \"vue-router\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nimport TheButton from \"~/components/UI/TheButton.vue\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"StorageNavElemGoods\",\n  __ssrInlineRender: true,\n  props: {\n    item: {\n      type: Object,\n      default: {}\n    },\n    moveEffectSubCategory: {\n      type: Boolean\n    },\n    moveEffectSubCategoryWarn: {\n      type: Boolean\n    }\n  },\n  setup(__props) {\n    const isActive = ref(false);\n    const route = useRoute();\n    const router = useRouter();\n    const storageStore = useStorageStore();\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_NuxtLink = __nuxt_component_0;\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"relative rounded-l-md dark:hover:bg-semiCyan hover:!bg-opacity-30 hover:bg-cyan transition-all\" }, _attrs))}>`);\n      _push(_ssrRenderComponent(_component_NuxtLink, {\n        to: `/base/storage/${__props.item.slug}`,\n        class: [{ \"dark:bg-semiCyan\": _unref(route).path === `/base/storage/${__props.item.slug}/${_unref(route).params.id}` }, \"flex items-center w-full rounded-l-md p-1\"],\n        onClick: ($event) => _unref(storageStore).currentCategory = { ...__props.item }\n      }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`<div class=\"flex items-center gap-x-3\"${_scopeId}><div class=\"text-semiCyan\"${_scopeId}> • </div><span class=\"tracking-wider\"${_scopeId}>${_ssrInterpolate(__props.item.name)}</span></div><div${_scopeId}></div>`);\n          } else {\n            return [\n              _createVNode(\"div\", { class: \"flex items-center gap-x-3\" }, [\n                _createVNode(\"div\", { class: \"text-semiCyan\" }, \" • \"),\n                _createVNode(\"span\", { class: \"tracking-wider\" }, _toDisplayString(__props.item.name), 1)\n              ]),\n              _createVNode(\"div\")\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      if (__props.moveEffectSubCategory) {\n        _push(`<button class=\"absolute right-2 rounded-lg top-1\"><svg width=\"25px\" height=\"25px\" viewBox=\"0 -5 32 32\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:sketch=\"http://www.bohemiancoding.com/sketch/ns\"><g id=\"Page-1\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" sketch:type=\"MSPage\"><g id=\"Icon-Set\" sketch:type=\"MSLayerGroup\" transform=\"translate(-516.000000, -1144.000000)\" class=\"dark:fill-white fill-black\"><path d=\"M538.708,1151.28 C538.314,1150.89 537.676,1150.89 537.281,1151.28 L534.981,1153.58 L532.742,1151.34 C532.352,1150.95 531.718,1150.95 531.327,1151.34 C530.936,1151.73 530.936,1152.37 531.327,1152.76 L533.566,1154.99 L531.298,1157.26 C530.904,1157.65 530.904,1158.29 531.298,1158.69 C531.692,1159.08 532.331,1159.08 532.725,1158.69 L534.993,1156.42 L537.232,1158.66 C537.623,1159.05 538.257,1159.05 538.647,1158.66 C539.039,1158.27 539.039,1157.63 538.647,1157.24 L536.408,1155.01 L538.708,1152.71 C539.103,1152.31 539.103,1151.68 538.708,1151.28 L538.708,1151.28 Z M545.998,1162 C545.998,1163.1 545.102,1164 543.996,1164 L526.467,1164 L518.316,1154.98 L526.438,1146 L543.996,1146 C545.102,1146 545.998,1146.9 545.998,1148 L545.998,1162 L545.998,1162 Z M543.996,1144 L526.051,1144 C525.771,1143.98 525.485,1144.07 525.271,1144.28 L516.285,1154.22 C516.074,1154.43 515.983,1154.71 515.998,1154.98 C515.983,1155.26 516.074,1155.54 516.285,1155.75 L525.271,1165.69 C525.467,1165.88 525.723,1165.98 525.979,1165.98 L525.979,1166 L543.996,1166 C546.207,1166 548,1164.21 548,1162 L548,1148 C548,1145.79 546.207,1144 543.996,1144 L543.996,1144 Z\" id=\"delete\" sketch:type=\"MSShapeGroup\"></path></g></g></svg></button>`);\n      } else {\n        _push(`<!---->`);\n      }\n      if (__props.moveEffectSubCategoryWarn) {\n        _push(_ssrRenderComponent(TheModal, {\n          type: \"resize\",\n          onShowModal: ($event) => __props.moveEffectSubCategoryWarn = false\n        }, {\n          default: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(_ssrRenderComponent(TheTextContent, null, {\n                default: _withCtx((_2, _push3, _parent3, _scopeId2) => {\n                  if (_push3) {\n                    _push3(`${_ssrInterpolate(_ctx.$t(\"Удалить категорию?\"))}`);\n                  } else {\n                    return [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Удалить категорию?\")), 1)\n                    ];\n                  }\n                }),\n                _: 1\n              }, _parent2, _scopeId));\n              _push2(`<div class=\"break-words tracking-wider my-4 text-sm\"${_scopeId}><p${_scopeId}>${_ssrInterpolate(_ctx.$t(\"Если вы удалите категорию то всё содержимое данной категории удалиться без возврата\"))}</p><p class=\"mt-4\"${_scopeId}>${_ssrInterpolate(_ctx.$t(\"Убедитесь что категория пустая, переместите нужные товары в другие категории\"))}</p></div><div class=\"flex flex-wrap gap-x-10 justify-center\"${_scopeId}>`);\n              _push2(_ssrRenderComponent(TheButton, {\n                type: \"chat\",\n                onClick: ($event) => __props.moveEffectSubCategoryWarn = false\n              }, {\n                default: _withCtx((_2, _push3, _parent3, _scopeId2) => {\n                  if (_push3) {\n                    _push3(`${_ssrInterpolate(_ctx.$t(\"Отмена\"))}`);\n                  } else {\n                    return [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Отмена\")), 1)\n                    ];\n                  }\n                }),\n                _: 1\n              }, _parent2, _scopeId));\n              _push2(_ssrRenderComponent(TheButton, {\n                type: \"chat\",\n                onClick: ($event) => _unref(storageStore).deleteStorageElem({ deleteType: \"subcategory\", id: __props.item.id }).then((res) => {\n                  if (_unref(storageStore).currentCategory.slug === __props.item.slug) {\n                    _unref(router).push(\"/base/storage\");\n                    _unref(storageStore).currentCategory = {};\n                  } else\n                    _unref(storageStore).currentCategory;\n                })\n              }, {\n                default: _withCtx((_2, _push3, _parent3, _scopeId2) => {\n                  if (_push3) {\n                    _push3(`${_ssrInterpolate(_ctx.$t(\"Удалить\"))}`);\n                  } else {\n                    return [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Удалить\")), 1)\n                    ];\n                  }\n                }),\n                _: 1\n              }, _parent2, _scopeId));\n              _push2(`</div>`);\n            } else {\n              return [\n                _createVNode(TheTextContent, null, {\n                  default: _withCtx(() => [\n                    _createTextVNode(_toDisplayString(_ctx.$t(\"Удалить категорию?\")), 1)\n                  ]),\n                  _: 1\n                }),\n                _createVNode(\"div\", { class: \"break-words tracking-wider my-4 text-sm\" }, [\n                  _createVNode(\"p\", null, _toDisplayString(_ctx.$t(\"Если вы удалите категорию то всё содержимое данной категории удалиться без возврата\")), 1),\n                  _createVNode(\"p\", { class: \"mt-4\" }, _toDisplayString(_ctx.$t(\"Убедитесь что категория пустая, переместите нужные товары в другие категории\")), 1)\n                ]),\n                _createVNode(\"div\", { class: \"flex flex-wrap gap-x-10 justify-center\" }, [\n                  _createVNode(TheButton, {\n                    type: \"chat\",\n                    onClick: ($event) => __props.moveEffectSubCategoryWarn = false\n                  }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Отмена\")), 1)\n                    ]),\n                    _: 1\n                  }, 8, [\"onClick\"]),\n                  _createVNode(TheButton, {\n                    type: \"chat\",\n                    onClick: ($event) => _unref(storageStore).deleteStorageElem({ deleteType: \"subcategory\", id: __props.item.id }).then((res) => {\n                      if (_unref(storageStore).currentCategory.slug === __props.item.slug) {\n                        _unref(router).push(\"/base/storage\");\n                        _unref(storageStore).currentCategory = {};\n                      } else\n                        _unref(storageStore).currentCategory;\n                    })\n                  }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Удалить\")), 1)\n                    ]),\n                    _: 1\n                  }, 8, [\"onClick\"])\n                ])\n              ];\n            }\n          }),\n          _: 1\n        }, _parent));\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1742845859581,
-      "end": 1742845859582,
+      "start": 1743013057920,
+      "end": 1743013057921,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -328,20 +328,20 @@
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1742845859582,
-      "end": 1742845859589,
+      "start": 1743013057921,
+      "end": 1743013057921,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1742845859590,
-      "end": 1742845859590,
+      "start": 1743013057921,
+      "end": 1743013057921,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1742845859590,
-      "end": 1742845859590,
+      "start": 1743013057921,
+      "end": 1743013057921,
       "order": "normal"
     }
   ]

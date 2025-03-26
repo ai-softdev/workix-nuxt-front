@@ -4,44 +4,44 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { unref as _unref, createVNode as _createVNode, createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, renderList as _renderList, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock, vModelSelect as _vModelSelect, withDirectives as _withDirectives, createBlock as _createBlock, createTextVNode as _createTextVNode, withCtx as _withCtx, withModifiers as _withModifiers } from \"vue\"\n\nconst _hoisted_1 = { class: \"flex flex-wrap items-center justify-around gap-x-10 max-sm:gap-y-4 mb-6\" }\nconst _hoisted_2 = { class: \"w-5/12 max-sm:w-full\" }\nconst _hoisted_3 = { class: \"w-5/12 max-sm:w-full\" }\nconst _hoisted_4 = { class: \"flex flex-wrap items-center justify-around gap-x-10 max-sm:gap-y-4 mb-6\" }\nconst _hoisted_5 = { class: \"w-5/12 max-sm:w-full\" }\nconst _hoisted_6 = { class: \"w-5/12 max-sm:w-full\" }\nconst _hoisted_7 = { class: \"flex flex-wrap items-center justify-around gap-x-10 max-sm:gap-y-4 mb-6\" }\nconst _hoisted_8 = { class: \"w-5/12 max-sm:w-full\" }\nconst _hoisted_9 = { class: \"w-5/12 max-sm:w-full\" }\nconst _hoisted_10 = { class: \"flex flex-wrap items-center justify-around gap-x-10 max-sm:gap-y-4 mb-6\" }\nconst _hoisted_11 = { class: \"w-5/12 max-sm:w-full\" }\nconst _hoisted_12 = [\"value\"]\nconst _hoisted_13 = { class: \"w-5/12 max-sm:w-full\" }\nconst _hoisted_14 = { class: \"mb-6\" }\nconst _hoisted_15 = { class: \"w-full mx-auto text-center\" }\nconst _hoisted_16 = { class: \"w-full\" }\nconst _hoisted_17 = /*#__PURE__*/_createElementVNode(\"span\", { class: \"text-lg tracking-widest\" }, \"Фото\", -1)\nconst _hoisted_18 = { class: \"flex justify-center items-center my-2\" }\nconst _hoisted_19 = [\"src\"]\nconst _hoisted_20 = { class: \"flex items-center justify-around gap-x-10 mb-6\" }\nconst _hoisted_21 = { class: \"w-10/12\" }\nconst _hoisted_22 = { class: \"tracking-widest\" }\nconst _hoisted_23 = { class: \"flex flex-wrap justify-center mt-4\" }\nconst _hoisted_24 = { class: \"flex flex-wrap gap-y-3 items-center justify-center gap-x-10\" }\n\nimport TheCheckbox from \"~/components/UI/TheCheckbox.vue\";\nimport TheInput from \"~/components/UI/TheInput.vue\";\nimport TheButton from \"~/components/UI/TheButton.vue\";\nimport {useAuthStore} from \"~/stores/auth\";\nimport {useUserStore} from \"~/stores/users\";\nimport {useCompanies} from \"~/stores/companies\";\nimport {toast} from \"vue3-toastify\";\n\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'UserChange',\n  props: {\n  userEdit: {\n    type: Object,\n    default: () => {}\n  },\n  showChange: Boolean\n},\n  emits: ['showChange'],\n  setup(__props, { emit: __emit }) {\n\n\nconst userStore = useUserStore()\nconst companyStore = useCompanies()\nconst currentUser = useUserStore()\nconst route = useRoute()\n\nconst emit = __emit\n\nconst props = __props\n\n\nconst userEdit = ref({...props.userEdit});\n\nconst handleSubmit = async() => {\n  try {\n    await userStore.update_user({user: userEdit.value, id: userEdit.value.id})\n    if(userEdit.value.permissions !== userStore.user.permissions) {\n       await userStore.change_permissions({\n        permissions: userEdit.value.permissions.filter((e : any) => e.value).map((e : any) => e.id),\n        id: userEdit.value.id,\n      })\n    }\n    emit(\"showChange\")\n    await currentUser.loadUser({id: route.params.slug})\n  } catch (error) {\n    toast.error('Ошибка при обновлении пользователя или прав', {autoClose: 1500, theme:'auto'});\n  }\n}\n\nreturn (_ctx: any,_cache: any) => {\n  return (_openBlock(), _createElementBlock(\"form\", {\n    onSubmit: _withModifiers(handleSubmit, [\"prevent\"]),\n    class: \"mt-10\"\n  }, [\n    _createElementVNode(\"div\", _hoisted_1, [\n      _createElementVNode(\"div\", _hoisted_2, [\n        _createVNode(TheInput, {\n          label: _ctx.$t('Имя'),\n          placeholder: _unref(userStore).user.first_name,\n          modelValue: _unref(userEdit).first_name,\n          \"onUpdate:modelValue\": _cache[0] || (_cache[0] = ($event: any) => ((_unref(userEdit).first_name) = $event))\n        }, null, 8, [\"label\", \"placeholder\", \"modelValue\"])\n      ]),\n      _createElementVNode(\"div\", _hoisted_3, [\n        _createVNode(TheInput, {\n          label: _ctx.$t('Фамилия'),\n          placeholder: _unref(userStore).user.last_name,\n          modelValue: _unref(userEdit).last_name,\n          \"onUpdate:modelValue\": _cache[1] || (_cache[1] = ($event: any) => ((_unref(userEdit).last_name) = $event))\n        }, null, 8, [\"label\", \"placeholder\", \"modelValue\"])\n      ])\n    ]),\n    _createElementVNode(\"div\", _hoisted_4, [\n      _createElementVNode(\"div\", _hoisted_5, [\n        _createVNode(TheInput, {\n          label: _ctx.$t('Email'),\n          placeholder: _unref(userStore).user.email,\n          modelValue: _unref(userEdit).email,\n          \"onUpdate:modelValue\": _cache[2] || (_cache[2] = ($event: any) => ((_unref(userEdit).email) = $event))\n        }, null, 8, [\"label\", \"placeholder\", \"modelValue\"])\n      ]),\n      _createElementVNode(\"div\", _hoisted_6, [\n        _createVNode(TheInput, {\n          type: \"tel\",\n          label: _ctx.$t('Номер'),\n          placeholder: _unref(userStore).user.phone,\n          modelValue: _unref(userEdit).phone,\n          \"onUpdate:modelValue\": _cache[3] || (_cache[3] = ($event: any) => ((_unref(userEdit).phone) = $event))\n        }, null, 8, [\"label\", \"placeholder\", \"modelValue\"])\n      ])\n    ]),\n    _createElementVNode(\"div\", _hoisted_7, [\n      _createElementVNode(\"div\", _hoisted_8, [\n        _createVNode(TheInput, {\n          type: \"password\",\n          label: _ctx.$t('Пароль'),\n          placeholder: _unref(userStore).user.password,\n          modelValue: _unref(userEdit).password,\n          \"onUpdate:modelValue\": _cache[4] || (_cache[4] = ($event: any) => ((_unref(userEdit).password) = $event))\n        }, null, 8, [\"label\", \"placeholder\", \"modelValue\"])\n      ]),\n      _createElementVNode(\"div\", _hoisted_9, [\n        _createVNode(TheInput, {\n          label: _ctx.$t('Паспорт'),\n          placeholder: _unref(userStore).user.passport,\n          modelValue: _unref(userEdit).passport,\n          \"onUpdate:modelValue\": _cache[5] || (_cache[5] = ($event: any) => ((_unref(userEdit).passport) = $event))\n        }, null, 8, [\"label\", \"placeholder\", \"modelValue\"])\n      ])\n    ]),\n    _createElementVNode(\"div\", _hoisted_10, [\n      _createElementVNode(\"div\", _hoisted_11, [\n        _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t('Департаменты')), 1),\n        _withDirectives(_createElementVNode(\"select\", {\n          class: \"w-full dark:bg-gray-300 py-2 px-4 rounded-lg text-black\",\n          type: \"password\",\n          \"onUpdate:modelValue\": _cache[6] || (_cache[6] = ($event: any) => ((_unref(userEdit).department.id) = $event))\n        }, [\n          (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(companyStore)?.get_all_department.results, (department) => {\n            return (_openBlock(), _createElementBlock(\"option\", {\n              value: department.id\n            }, _toDisplayString(department.name), 9, _hoisted_12))\n          }), 256))\n        ], 512), [\n          [_vModelSelect, _unref(userEdit).department.id]\n        ])\n      ]),\n      _createElementVNode(\"div\", _hoisted_13, [\n        _createVNode(TheInput, {\n          label: _ctx.$t('Зароботная плата'),\n          modelValue: _unref(userEdit).salary,\n          \"onUpdate:modelValue\": _cache[7] || (_cache[7] = ($event: any) => ((_unref(userEdit).salary) = $event))\n        }, null, 8, [\"label\", \"modelValue\"])\n      ])\n    ]),\n    _createElementVNode(\"div\", _hoisted_14, [\n      _createElementVNode(\"div\", _hoisted_15, [\n        _createElementVNode(\"label\", _hoisted_16, [\n          _hoisted_17,\n          _createElementVNode(\"p\", _hoisted_18, [\n            _createElementVNode(\"img\", {\n              class: \"rounded-full h-20 w-20\",\n              src: _unref(userStore).user.photo,\n              alt: \"\"\n            }, null, 8, _hoisted_19)\n          ])\n        ])\n      ])\n    ]),\n    _createElementVNode(\"div\", _hoisted_20, [\n      _createElementVNode(\"div\", _hoisted_21, [\n        _createElementVNode(\"p\", _hoisted_22, _toDisplayString(_ctx.$t('Возможности')), 1),\n        _createElementVNode(\"div\", _hoisted_23, [\n          (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(userEdit).permissions, (permission) => {\n            return (_openBlock(), _createBlock(TheCheckbox, { item: permission }, null, 8, [\"item\"]))\n          }), 256))\n        ])\n      ])\n    ]),\n    _createElementVNode(\"div\", _hoisted_24, [\n      _createVNode(TheButton, {\n        class: \"py-2 px-6 rounded-full max-[450px]:w-full\",\n        t: \"button\",\n        onClick: _cache[8] || (_cache[8] = ($event: any) => (_ctx.$emit('showChange'))),\n        type: \"danger\"\n      }, {\n        default: _withCtx(() => [\n          _createTextVNode(_toDisplayString(_ctx.$t('Отменить')), 1)\n        ]),\n        _: 1\n      }),\n      _createVNode(TheButton, {\n        class: \"py-2 px-6 rounded-full max-[450px]:w-full\",\n        type: \"success\"\n      }, {\n        default: _withCtx(() => [\n          _createTextVNode(_toDisplayString(_ctx.$t('Изменить')), 1)\n        ]),\n        _: 1\n      })\n    ])\n  ], 32))\n}\n}\n\n})",
-      "start": 1742845834708,
-      "end": 1742845834708
+      "start": 1743013008413,
+      "end": 1743013008413
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742845834708,
-      "end": 1742845834708,
+      "start": 1743013008416,
+      "end": 1743013008416,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742845834708,
-      "end": 1742845834708,
+      "start": 1743013008416,
+      "end": 1743013008416,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1742845834708,
-      "end": 1742845834708,
+      "start": 1743013008416,
+      "end": 1743013008416,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742845834708,
-      "end": 1742845834708,
+      "start": 1743013008416,
+      "end": 1743013008416,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742845834708,
-      "end": 1742845834708,
+      "start": 1743013008416,
+      "end": 1743013008416,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, createVNode as _createVNode, createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, renderList as _renderList, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock, vModelSelect as _vModelSelect, withDirectives as _withDirectives, createBlock as _createBlock, createTextVNode as _createTextVNode, withCtx as _withCtx, withModifiers as _withModifiers } from \"vue\";\nconst _hoisted_1 = { class: \"flex flex-wrap items-center justify-around gap-x-10 max-sm:gap-y-4 mb-6\" };\nconst _hoisted_2 = { class: \"w-5/12 max-sm:w-full\" };\nconst _hoisted_3 = { class: \"w-5/12 max-sm:w-full\" };\nconst _hoisted_4 = { class: \"flex flex-wrap items-center justify-around gap-x-10 max-sm:gap-y-4 mb-6\" };\nconst _hoisted_5 = { class: \"w-5/12 max-sm:w-full\" };\nconst _hoisted_6 = { class: \"w-5/12 max-sm:w-full\" };\nconst _hoisted_7 = { class: \"flex flex-wrap items-center justify-around gap-x-10 max-sm:gap-y-4 mb-6\" };\nconst _hoisted_8 = { class: \"w-5/12 max-sm:w-full\" };\nconst _hoisted_9 = { class: \"w-5/12 max-sm:w-full\" };\nconst _hoisted_10 = { class: \"flex flex-wrap items-center justify-around gap-x-10 max-sm:gap-y-4 mb-6\" };\nconst _hoisted_11 = { class: \"w-5/12 max-sm:w-full\" };\nconst _hoisted_12 = [\"value\"];\nconst _hoisted_13 = { class: \"w-5/12 max-sm:w-full\" };\nconst _hoisted_14 = { class: \"mb-6\" };\nconst _hoisted_15 = { class: \"w-full mx-auto text-center\" };\nconst _hoisted_16 = { class: \"w-full\" };\nconst _hoisted_17 = /* @__PURE__ */ _createElementVNode(\"span\", { class: \"text-lg tracking-widest\" }, \"Фото\", -1);\nconst _hoisted_18 = { class: \"flex justify-center items-center my-2\" };\nconst _hoisted_19 = [\"src\"];\nconst _hoisted_20 = { class: \"flex items-center justify-around gap-x-10 mb-6\" };\nconst _hoisted_21 = { class: \"w-10/12\" };\nconst _hoisted_22 = { class: \"tracking-widest\" };\nconst _hoisted_23 = { class: \"flex flex-wrap justify-center mt-4\" };\nconst _hoisted_24 = { class: \"flex flex-wrap gap-y-3 items-center justify-center gap-x-10\" };\nimport TheCheckbox from \"~/components/UI/TheCheckbox.vue\";\nimport TheInput from \"~/components/UI/TheInput.vue\";\nimport TheButton from \"~/components/UI/TheButton.vue\";\nimport { useUserStore } from \"~/stores/users\";\nimport { useCompanies } from \"~/stores/companies\";\nimport { toast } from \"vue3-toastify\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"UserChange\",\n  props: {\n    userEdit: {\n      type: Object,\n      default: () => {\n      }\n    },\n    showChange: Boolean\n  },\n  emits: [\"showChange\"],\n  setup(__props, { emit: __emit }) {\n    const userStore = useUserStore();\n    const companyStore = useCompanies();\n    const currentUser = useUserStore();\n    const route = useRoute();\n    const emit = __emit;\n    const props = __props;\n    const userEdit = ref({ ...props.userEdit });\n    const handleSubmit = async () => {\n      try {\n        await userStore.update_user({ user: userEdit.value, id: userEdit.value.id });\n        if (userEdit.value.permissions !== userStore.user.permissions) {\n          await userStore.change_permissions({\n            permissions: userEdit.value.permissions.filter((e) => e.value).map((e) => e.id),\n            id: userEdit.value.id\n          });\n        }\n        emit(\"showChange\");\n        await currentUser.loadUser({ id: route.params.slug });\n      } catch (error) {\n        toast.error(\"Ошибка при обновлении пользователя или прав\", { autoClose: 1500, theme: \"auto\" });\n      }\n    };\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"form\", {\n        onSubmit: _withModifiers(handleSubmit, [\"prevent\"]),\n        class: \"mt-10\"\n      }, [\n        _createElementVNode(\"div\", _hoisted_1, [\n          _createElementVNode(\"div\", _hoisted_2, [\n            _createVNode(TheInput, {\n              label: _ctx.$t(\"Имя\"),\n              placeholder: _unref(userStore).user.first_name,\n              modelValue: _unref(userEdit).first_name,\n              \"onUpdate:modelValue\": _cache[0] || (_cache[0] = ($event) => _unref(userEdit).first_name = $event)\n            }, null, 8, [\"label\", \"placeholder\", \"modelValue\"])\n          ]),\n          _createElementVNode(\"div\", _hoisted_3, [\n            _createVNode(TheInput, {\n              label: _ctx.$t(\"Фамилия\"),\n              placeholder: _unref(userStore).user.last_name,\n              modelValue: _unref(userEdit).last_name,\n              \"onUpdate:modelValue\": _cache[1] || (_cache[1] = ($event) => _unref(userEdit).last_name = $event)\n            }, null, 8, [\"label\", \"placeholder\", \"modelValue\"])\n          ])\n        ]),\n        _createElementVNode(\"div\", _hoisted_4, [\n          _createElementVNode(\"div\", _hoisted_5, [\n            _createVNode(TheInput, {\n              label: _ctx.$t(\"Email\"),\n              placeholder: _unref(userStore).user.email,\n              modelValue: _unref(userEdit).email,\n              \"onUpdate:modelValue\": _cache[2] || (_cache[2] = ($event) => _unref(userEdit).email = $event)\n            }, null, 8, [\"label\", \"placeholder\", \"modelValue\"])\n          ]),\n          _createElementVNode(\"div\", _hoisted_6, [\n            _createVNode(TheInput, {\n              type: \"tel\",\n              label: _ctx.$t(\"Номер\"),\n              placeholder: _unref(userStore).user.phone,\n              modelValue: _unref(userEdit).phone,\n              \"onUpdate:modelValue\": _cache[3] || (_cache[3] = ($event) => _unref(userEdit).phone = $event)\n            }, null, 8, [\"label\", \"placeholder\", \"modelValue\"])\n          ])\n        ]),\n        _createElementVNode(\"div\", _hoisted_7, [\n          _createElementVNode(\"div\", _hoisted_8, [\n            _createVNode(TheInput, {\n              type: \"password\",\n              label: _ctx.$t(\"Пароль\"),\n              placeholder: _unref(userStore).user.password,\n              modelValue: _unref(userEdit).password,\n              \"onUpdate:modelValue\": _cache[4] || (_cache[4] = ($event) => _unref(userEdit).password = $event)\n            }, null, 8, [\"label\", \"placeholder\", \"modelValue\"])\n          ]),\n          _createElementVNode(\"div\", _hoisted_9, [\n            _createVNode(TheInput, {\n              label: _ctx.$t(\"Паспорт\"),\n              placeholder: _unref(userStore).user.passport,\n              modelValue: _unref(userEdit).passport,\n              \"onUpdate:modelValue\": _cache[5] || (_cache[5] = ($event) => _unref(userEdit).passport = $event)\n            }, null, 8, [\"label\", \"placeholder\", \"modelValue\"])\n          ])\n        ]),\n        _createElementVNode(\"div\", _hoisted_10, [\n          _createElementVNode(\"div\", _hoisted_11, [\n            _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t(\"Департаменты\")), 1),\n            _withDirectives(_createElementVNode(\"select\", {\n              class: \"w-full dark:bg-gray-300 py-2 px-4 rounded-lg text-black\",\n              type: \"password\",\n              \"onUpdate:modelValue\": _cache[6] || (_cache[6] = ($event) => _unref(userEdit).department.id = $event)\n            }, [\n              (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(companyStore)?.get_all_department.results, (department) => {\n                return _openBlock(), _createElementBlock(\"option\", {\n                  value: department.id\n                }, _toDisplayString(department.name), 9, _hoisted_12);\n              }), 256))\n            ], 512), [\n              [_vModelSelect, _unref(userEdit).department.id]\n            ])\n          ]),\n          _createElementVNode(\"div\", _hoisted_13, [\n            _createVNode(TheInput, {\n              label: _ctx.$t(\"Зароботная плата\"),\n              modelValue: _unref(userEdit).salary,\n              \"onUpdate:modelValue\": _cache[7] || (_cache[7] = ($event) => _unref(userEdit).salary = $event)\n            }, null, 8, [\"label\", \"modelValue\"])\n          ])\n        ]),\n        _createElementVNode(\"div\", _hoisted_14, [\n          _createElementVNode(\"div\", _hoisted_15, [\n            _createElementVNode(\"label\", _hoisted_16, [\n              _hoisted_17,\n              _createElementVNode(\"p\", _hoisted_18, [\n                _createElementVNode(\"img\", {\n                  class: \"rounded-full h-20 w-20\",\n                  src: _unref(userStore).user.photo,\n                  alt: \"\"\n                }, null, 8, _hoisted_19)\n              ])\n            ])\n          ])\n        ]),\n        _createElementVNode(\"div\", _hoisted_20, [\n          _createElementVNode(\"div\", _hoisted_21, [\n            _createElementVNode(\"p\", _hoisted_22, _toDisplayString(_ctx.$t(\"Возможности\")), 1),\n            _createElementVNode(\"div\", _hoisted_23, [\n              (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(userEdit).permissions, (permission) => {\n                return _openBlock(), _createBlock(TheCheckbox, { item: permission }, null, 8, [\"item\"]);\n              }), 256))\n            ])\n          ])\n        ]),\n        _createElementVNode(\"div\", _hoisted_24, [\n          _createVNode(TheButton, {\n            class: \"py-2 px-6 rounded-full max-[450px]:w-full\",\n            t: \"button\",\n            onClick: _cache[8] || (_cache[8] = ($event) => _ctx.$emit(\"showChange\")),\n            type: \"danger\"\n          }, {\n            default: _withCtx(() => [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Отменить\")), 1)\n            ]),\n            _: 1\n          }),\n          _createVNode(TheButton, {\n            class: \"py-2 px-6 rounded-full max-[450px]:w-full\",\n            type: \"success\"\n          }, {\n            default: _withCtx(() => [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Изменить\")), 1)\n            ]),\n            _: 1\n          })\n        ])\n      ], 32);\n    };\n  }\n});\n",
-      "start": 1742845834708,
-      "end": 1742845835141,
+      "start": 1743013008417,
+      "end": 1743013008548,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -57,141 +57,141 @@
     },
     {
       "name": "vite:json",
-      "start": 1742845835141,
-      "end": 1742845835141,
+      "start": 1743013008548,
+      "end": 1743013008548,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742845835141,
-      "end": 1742845835141,
+      "start": 1743013008548,
+      "end": 1743013008548,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1742845835141,
-      "end": 1742845835141,
+      "start": 1743013008549,
+      "end": 1743013008549,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742845835141,
-      "end": 1742845835141,
+      "start": 1743013008549,
+      "end": 1743013008549,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742845835141,
-      "end": 1742845835141,
+      "start": 1743013008549,
+      "end": 1743013008549,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742845835142,
-      "end": 1742845835142,
+      "start": 1743013008549,
+      "end": 1743013008549,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1742845835142,
-      "end": 1742845835142,
+      "start": 1743013008549,
+      "end": 1743013008549,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1742845835142,
-      "end": 1742845835142,
+      "start": 1743013008550,
+      "end": 1743013008550,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742845835142,
-      "end": 1742845835142,
+      "start": 1743013008550,
+      "end": 1743013008550,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742845835142,
-      "end": 1742845835142,
+      "start": 1743013008551,
+      "end": 1743013008551,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742845835142,
-      "end": 1742845835142,
+      "start": 1743013008551,
+      "end": 1743013008551,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1742845835142,
-      "end": 1742845835142,
+      "start": 1743013008551,
+      "end": 1743013008551,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742845835142,
-      "end": 1742845835142,
+      "start": 1743013008551,
+      "end": 1743013008551,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742845835142,
-      "end": 1742845835142,
+      "start": 1743013008551,
+      "end": 1743013008551,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742845835142,
-      "end": 1742845835142,
+      "start": 1743013008551,
+      "end": 1743013008551,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1742845835142,
-      "end": 1742845835142,
+      "start": 1743013008551,
+      "end": 1743013008551,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742845835142,
-      "end": 1742845835142,
+      "start": 1743013008551,
+      "end": 1743013008551,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742845835142,
-      "end": 1742845835142,
+      "start": 1743013008551,
+      "end": 1743013008551,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742845835142,
-      "end": 1742845835142,
+      "start": 1743013008552,
+      "end": 1743013008552,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1742845835143,
-      "end": 1742845835143,
+      "start": 1743013008552,
+      "end": 1743013008552,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1742845835143,
-      "end": 1742845835143,
+      "start": 1743013008553,
+      "end": 1743013008553,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1742845835143,
-      "end": 1742845835143,
+      "start": 1743013008553,
+      "end": 1743013008553,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { useRoute } from '#app/composables/router';\nimport { ref } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, createVNode as _createVNode, createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, renderList as _renderList, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock, vModelSelect as _vModelSelect, withDirectives as _withDirectives, createBlock as _createBlock, createTextVNode as _createTextVNode, withCtx as _withCtx, withModifiers as _withModifiers } from \"vue\";\nconst _hoisted_1 = { class: \"flex flex-wrap items-center justify-around gap-x-10 max-sm:gap-y-4 mb-6\" };\nconst _hoisted_2 = { class: \"w-5/12 max-sm:w-full\" };\nconst _hoisted_3 = { class: \"w-5/12 max-sm:w-full\" };\nconst _hoisted_4 = { class: \"flex flex-wrap items-center justify-around gap-x-10 max-sm:gap-y-4 mb-6\" };\nconst _hoisted_5 = { class: \"w-5/12 max-sm:w-full\" };\nconst _hoisted_6 = { class: \"w-5/12 max-sm:w-full\" };\nconst _hoisted_7 = { class: \"flex flex-wrap items-center justify-around gap-x-10 max-sm:gap-y-4 mb-6\" };\nconst _hoisted_8 = { class: \"w-5/12 max-sm:w-full\" };\nconst _hoisted_9 = { class: \"w-5/12 max-sm:w-full\" };\nconst _hoisted_10 = { class: \"flex flex-wrap items-center justify-around gap-x-10 max-sm:gap-y-4 mb-6\" };\nconst _hoisted_11 = { class: \"w-5/12 max-sm:w-full\" };\nconst _hoisted_12 = [\"value\"];\nconst _hoisted_13 = { class: \"w-5/12 max-sm:w-full\" };\nconst _hoisted_14 = { class: \"mb-6\" };\nconst _hoisted_15 = { class: \"w-full mx-auto text-center\" };\nconst _hoisted_16 = { class: \"w-full\" };\nconst _hoisted_17 = /* @__PURE__ */ _createElementVNode(\"span\", { class: \"text-lg tracking-widest\" }, \"Фото\", -1);\nconst _hoisted_18 = { class: \"flex justify-center items-center my-2\" };\nconst _hoisted_19 = [\"src\"];\nconst _hoisted_20 = { class: \"flex items-center justify-around gap-x-10 mb-6\" };\nconst _hoisted_21 = { class: \"w-10/12\" };\nconst _hoisted_22 = { class: \"tracking-widest\" };\nconst _hoisted_23 = { class: \"flex flex-wrap justify-center mt-4\" };\nconst _hoisted_24 = { class: \"flex flex-wrap gap-y-3 items-center justify-center gap-x-10\" };\nimport TheCheckbox from \"~/components/UI/TheCheckbox.vue\";\nimport TheInput from \"~/components/UI/TheInput.vue\";\nimport TheButton from \"~/components/UI/TheButton.vue\";\nimport { useUserStore } from \"~/stores/users\";\nimport { useCompanies } from \"~/stores/companies\";\nimport { toast } from \"vue3-toastify\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"UserChange\",\n  props: {\n    userEdit: {\n      type: Object,\n      default: () => {\n      }\n    },\n    showChange: Boolean\n  },\n  emits: [\"showChange\"],\n  setup(__props, { emit: __emit }) {\n    const userStore = useUserStore();\n    const companyStore = useCompanies();\n    const currentUser = useUserStore();\n    const route = useRoute();\n    const emit = __emit;\n    const props = __props;\n    const userEdit = ref({ ...props.userEdit });\n    const handleSubmit = async () => {\n      try {\n        await userStore.update_user({ user: userEdit.value, id: userEdit.value.id });\n        if (userEdit.value.permissions !== userStore.user.permissions) {\n          await userStore.change_permissions({\n            permissions: userEdit.value.permissions.filter((e) => e.value).map((e) => e.id),\n            id: userEdit.value.id\n          });\n        }\n        emit(\"showChange\");\n        await currentUser.loadUser({ id: route.params.slug });\n      } catch (error) {\n        toast.error(\"Ошибка при обновлении пользователя или прав\", { autoClose: 1500, theme: \"auto\" });\n      }\n    };\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"form\", {\n        onSubmit: _withModifiers(handleSubmit, [\"prevent\"]),\n        class: \"mt-10\"\n      }, [\n        _createElementVNode(\"div\", _hoisted_1, [\n          _createElementVNode(\"div\", _hoisted_2, [\n            _createVNode(TheInput, {\n              label: _ctx.$t(\"Имя\"),\n              placeholder: _unref(userStore).user.first_name,\n              modelValue: _unref(userEdit).first_name,\n              \"onUpdate:modelValue\": _cache[0] || (_cache[0] = ($event) => _unref(userEdit).first_name = $event)\n            }, null, 8, [\"label\", \"placeholder\", \"modelValue\"])\n          ]),\n          _createElementVNode(\"div\", _hoisted_3, [\n            _createVNode(TheInput, {\n              label: _ctx.$t(\"Фамилия\"),\n              placeholder: _unref(userStore).user.last_name,\n              modelValue: _unref(userEdit).last_name,\n              \"onUpdate:modelValue\": _cache[1] || (_cache[1] = ($event) => _unref(userEdit).last_name = $event)\n            }, null, 8, [\"label\", \"placeholder\", \"modelValue\"])\n          ])\n        ]),\n        _createElementVNode(\"div\", _hoisted_4, [\n          _createElementVNode(\"div\", _hoisted_5, [\n            _createVNode(TheInput, {\n              label: _ctx.$t(\"Email\"),\n              placeholder: _unref(userStore).user.email,\n              modelValue: _unref(userEdit).email,\n              \"onUpdate:modelValue\": _cache[2] || (_cache[2] = ($event) => _unref(userEdit).email = $event)\n            }, null, 8, [\"label\", \"placeholder\", \"modelValue\"])\n          ]),\n          _createElementVNode(\"div\", _hoisted_6, [\n            _createVNode(TheInput, {\n              type: \"tel\",\n              label: _ctx.$t(\"Номер\"),\n              placeholder: _unref(userStore).user.phone,\n              modelValue: _unref(userEdit).phone,\n              \"onUpdate:modelValue\": _cache[3] || (_cache[3] = ($event) => _unref(userEdit).phone = $event)\n            }, null, 8, [\"label\", \"placeholder\", \"modelValue\"])\n          ])\n        ]),\n        _createElementVNode(\"div\", _hoisted_7, [\n          _createElementVNode(\"div\", _hoisted_8, [\n            _createVNode(TheInput, {\n              type: \"password\",\n              label: _ctx.$t(\"Пароль\"),\n              placeholder: _unref(userStore).user.password,\n              modelValue: _unref(userEdit).password,\n              \"onUpdate:modelValue\": _cache[4] || (_cache[4] = ($event) => _unref(userEdit).password = $event)\n            }, null, 8, [\"label\", \"placeholder\", \"modelValue\"])\n          ]),\n          _createElementVNode(\"div\", _hoisted_9, [\n            _createVNode(TheInput, {\n              label: _ctx.$t(\"Паспорт\"),\n              placeholder: _unref(userStore).user.passport,\n              modelValue: _unref(userEdit).passport,\n              \"onUpdate:modelValue\": _cache[5] || (_cache[5] = ($event) => _unref(userEdit).passport = $event)\n            }, null, 8, [\"label\", \"placeholder\", \"modelValue\"])\n          ])\n        ]),\n        _createElementVNode(\"div\", _hoisted_10, [\n          _createElementVNode(\"div\", _hoisted_11, [\n            _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t(\"Департаменты\")), 1),\n            _withDirectives(_createElementVNode(\"select\", {\n              class: \"w-full dark:bg-gray-300 py-2 px-4 rounded-lg text-black\",\n              type: \"password\",\n              \"onUpdate:modelValue\": _cache[6] || (_cache[6] = ($event) => _unref(userEdit).department.id = $event)\n            }, [\n              (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(companyStore)?.get_all_department.results, (department) => {\n                return _openBlock(), _createElementBlock(\"option\", {\n                  value: department.id\n                }, _toDisplayString(department.name), 9, _hoisted_12);\n              }), 256))\n            ], 512), [\n              [_vModelSelect, _unref(userEdit).department.id]\n            ])\n          ]),\n          _createElementVNode(\"div\", _hoisted_13, [\n            _createVNode(TheInput, {\n              label: _ctx.$t(\"Зароботная плата\"),\n              modelValue: _unref(userEdit).salary,\n              \"onUpdate:modelValue\": _cache[7] || (_cache[7] = ($event) => _unref(userEdit).salary = $event)\n            }, null, 8, [\"label\", \"modelValue\"])\n          ])\n        ]),\n        _createElementVNode(\"div\", _hoisted_14, [\n          _createElementVNode(\"div\", _hoisted_15, [\n            _createElementVNode(\"label\", _hoisted_16, [\n              _hoisted_17,\n              _createElementVNode(\"p\", _hoisted_18, [\n                _createElementVNode(\"img\", {\n                  class: \"rounded-full h-20 w-20\",\n                  src: _unref(userStore).user.photo,\n                  alt: \"\"\n                }, null, 8, _hoisted_19)\n              ])\n            ])\n          ])\n        ]),\n        _createElementVNode(\"div\", _hoisted_20, [\n          _createElementVNode(\"div\", _hoisted_21, [\n            _createElementVNode(\"p\", _hoisted_22, _toDisplayString(_ctx.$t(\"Возможности\")), 1),\n            _createElementVNode(\"div\", _hoisted_23, [\n              (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(userEdit).permissions, (permission) => {\n                return _openBlock(), _createBlock(TheCheckbox, { item: permission }, null, 8, [\"item\"]);\n              }), 256))\n            ])\n          ])\n        ]),\n        _createElementVNode(\"div\", _hoisted_24, [\n          _createVNode(TheButton, {\n            class: \"py-2 px-6 rounded-full max-[450px]:w-full\",\n            t: \"button\",\n            onClick: _cache[8] || (_cache[8] = ($event) => _ctx.$emit(\"showChange\")),\n            type: \"danger\"\n          }, {\n            default: _withCtx(() => [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Отменить\")), 1)\n            ]),\n            _: 1\n          }),\n          _createVNode(TheButton, {\n            class: \"py-2 px-6 rounded-full max-[450px]:w-full\",\n            type: \"success\"\n          }, {\n            default: _withCtx(() => [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Изменить\")), 1)\n            ]),\n            _: 1\n          })\n        ])\n      ], 32);\n    };\n  }\n});\n",
-      "start": 1742845835143,
-      "end": 1742845835152,
+      "start": 1743013008554,
+      "end": 1743013008569,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -204,50 +204,50 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1742845835152,
-      "end": 1742845835153,
+      "start": 1743013008569,
+      "end": 1743013008569,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742845835153,
-      "end": 1742845835153,
+      "start": 1743013008569,
+      "end": 1743013008569,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1742845835153,
-      "end": 1742845835153,
+      "start": 1743013008570,
+      "end": 1743013008570,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1742845835153,
-      "end": 1742845835153,
+      "start": 1743013008570,
+      "end": 1743013008570,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1742845835153,
-      "end": 1742845835153,
+      "start": 1743013008571,
+      "end": 1743013008571,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1742845835153,
-      "end": 1742845835153,
+      "start": 1743013008572,
+      "end": 1743013008572,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1742845835153,
-      "end": 1742845835154,
+      "start": 1743013008572,
+      "end": 1743013008572,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1742845835154,
-      "end": 1742845835154,
+      "start": 1743013008572,
+      "end": 1743013008572,
       "order": "normal"
     }
   ]

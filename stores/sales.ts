@@ -13,7 +13,7 @@ export const useSales = defineStore('sales', {
     },
     actions: {
         async loadSalesList(params: any) {
-            axios.get(`sales/list?page=${params.page}&limit=${params.limit}${params.name ? `&name=${params.name}` : ''}`, {
+            axios.get(`sales/list?page=${params.page}&limit=${params.limit}${params.name ? `&name=${params.name}` : ''}${params.min_price ? `&min_price=${params.min_price}` : ''}${params.max_price ? `&max_price=${params.max_price}` : ''}${params.min_count ? `&min_count=${params.min_count}` : ''}${params.max_count ? `&max_count=${params.max_count}` : ''}`, {
                 headers: {
                     Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
                 }
