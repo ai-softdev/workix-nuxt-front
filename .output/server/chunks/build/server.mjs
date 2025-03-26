@@ -1058,7 +1058,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-Bt0WvulX.mjs').then((m) => m.default || m)
+        component: () => import('./index-CofwA5AW.mjs').then((m) => m.default || m)
       },
       {
         name: "base-sales-item-create",

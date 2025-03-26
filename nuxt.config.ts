@@ -1,3 +1,4 @@
+import { defineNuxtConfig } from 'nuxt/config'
 export default defineNuxtConfig({
   runtimeConfig: {
     public: {
@@ -7,7 +8,7 @@ export default defineNuxtConfig({
   ssr: true,
   app: {
     head: {
-      charset: 'urf-8',
+      charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1'
     }
   },
@@ -21,7 +22,8 @@ export default defineNuxtConfig({
   //   pageTransition: {name: 'page', mode: 'out-in'}
   // },
 
-  modules: ["@nuxtjs/color-mode", "@tresjs/nuxt", [
+  modules: [
+      "@nuxtjs/color-mode", "@tresjs/nuxt", [
     "@nuxtjs/i18n",
     {
       i18n: {

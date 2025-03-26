@@ -335,11 +335,11 @@ watch(() => company.company, (newValue) => {
 }
 @media (max-width: 1150px) {
   .sales-up-table {
-    max-width: 86vw;
+    max-width: 93vw;
   }
   .sales-table {
     overflow: auto;
-    max-width: 86vw;
+    max-width: 93vw;
   }
   .sales-table table {
     width: 2000px;
@@ -348,21 +348,13 @@ watch(() => company.company, (newValue) => {
 
 @media (max-width: 920px) {
   .sales-up-table {
-    width: 80vw !important;
+    width: 96vw !important;
   }
   .sales-table {
-    max-width: 80vw !important;
+    max-width: 96vw !important;
   }
   .pagination {
     flex-wrap: wrap;
-  }
-}
-@media (max-width: 650px) {
-  .sales-up-table {
-    width: 70vw !important;
-  }
-  .sales-table {
-    max-width: 70vw !important;
   }
 }
 </style>
