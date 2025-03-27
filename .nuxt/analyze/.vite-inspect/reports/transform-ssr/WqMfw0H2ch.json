@@ -4,81 +4,81 @@
     {
       "name": "vite:load-fallback",
       "result": "<script setup lang=\"ts\">\nimport {useStorageStore} from \"~/stores/storage\";\nimport {useRoute, useRouter} from \"vue-router\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nimport TheButton from \"~/components/UI/TheButton.vue\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport type {ICurrentCategory, TGoods} from \"~/types/storage\";\n\nconst isActive = ref(false)\nconst route = useRoute()\nconst router = useRouter()\nconst storageStore = useStorageStore()\ndefineProps({\n  item: {\n    type: Object as ()=> ICurrentCategory,\n    default: {} as ICurrentCategory\n  },\n  moveEffectSubCategory: {\n    type: Boolean\n  },\n  moveEffectSubCategoryWarn: {\n    type: Boolean,\n  }\n})\n</script>\n\n<template>\n  <div @mouseenter=\"moveEffectSubCategory = true\" @mouseleave=\"moveEffectSubCategory = false\"\n       class=\"relative rounded-l-md dark:hover:bg-semiCyan hover:!bg-opacity-30 hover:bg-cyan transition-all\">\n    <NuxtLink :to=\"`/base/storage/${item.slug}`\"\n              :class=\"{'dark:bg-semiCyan': route.path === `/base/storage/${item.slug}/${route.params.id}`}\"\n              class=\"flex items-center w-full rounded-l-md p-1\"\n              @click=\"storageStore.currentCategory = {...item} as any\">\n      <div class=\"flex items-center gap-x-3 \">\n        <div class=\"text-semiCyan\">\n          •\n        </div>\n        <span class=\"tracking-wider\">{{ item.name }}</span>\n      </div>\n      <div>\n\n      </div>\n    </NuxtLink>\n    <Transition name=\"slide-right\">\n      <button v-if=\"moveEffectSubCategory\" class=\"absolute right-2 rounded-lg top-1\"\n              @click.stop=\"moveEffectSubCategoryWarn = true; moveEffectSubCategory = false\">\n        <svg width=\"25px\" height=\"25px\" viewBox=\"0 -5 32 32\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:sketch=\"http://www.bohemiancoding.com/sketch/ns\">\n          <g id=\"Page-1\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" sketch:type=\"MSPage\">\n            <g id=\"Icon-Set\" sketch:type=\"MSLayerGroup\" transform=\"translate(-516.000000, -1144.000000)\" class=\"dark:fill-white fill-black\">\n              <path d=\"M538.708,1151.28 C538.314,1150.89 537.676,1150.89 537.281,1151.28 L534.981,1153.58 L532.742,1151.34 C532.352,1150.95 531.718,1150.95 531.327,1151.34 C530.936,1151.73 530.936,1152.37 531.327,1152.76 L533.566,1154.99 L531.298,1157.26 C530.904,1157.65 530.904,1158.29 531.298,1158.69 C531.692,1159.08 532.331,1159.08 532.725,1158.69 L534.993,1156.42 L537.232,1158.66 C537.623,1159.05 538.257,1159.05 538.647,1158.66 C539.039,1158.27 539.039,1157.63 538.647,1157.24 L536.408,1155.01 L538.708,1152.71 C539.103,1152.31 539.103,1151.68 538.708,1151.28 L538.708,1151.28 Z M545.998,1162 C545.998,1163.1 545.102,1164 543.996,1164 L526.467,1164 L518.316,1154.98 L526.438,1146 L543.996,1146 C545.102,1146 545.998,1146.9 545.998,1148 L545.998,1162 L545.998,1162 Z M543.996,1144 L526.051,1144 C525.771,1143.98 525.485,1144.07 525.271,1144.28 L516.285,1154.22 C516.074,1154.43 515.983,1154.71 515.998,1154.98 C515.983,1155.26 516.074,1155.54 516.285,1155.75 L525.271,1165.69 C525.467,1165.88 525.723,1165.98 525.979,1165.98 L525.979,1166 L543.996,1166 C546.207,1166 548,1164.21 548,1162 L548,1148 C548,1145.79 546.207,1144 543.996,1144 L543.996,1144 Z\"\n                    id=\"delete\" sketch:type=\"MSShapeGroup\">\n              </path>\n            </g>\n          </g>\n        </svg>\n      </button>\n    </Transition>\n    <Transition name=\"slide-down\" class=\"text-center\">\n      <TheModal type=\"resize\" v-if=\"moveEffectSubCategoryWarn\" @showModal=\"moveEffectSubCategoryWarn = false\">\n        <TheTextContent>{{ $t('Удалить категорию?') }}</TheTextContent>\n        <div class=\"break-words tracking-wider my-4 text-sm\">\n          <p>{{ $t('Если вы удалите категорию то всё содержимое данной категории удалиться без возврата') }}</p>\n          <p class=\"mt-4\">{{ $t('Убедитесь что категория пустая, переместите нужные товары в другие категории') }}</p>\n        </div>\n        <div class=\"flex flex-wrap gap-x-10 justify-center\">\n          <TheButton type=\"chat\" @click=\"moveEffectSubCategoryWarn = false\">{{ $t('Отмена') }}</TheButton>\n          <TheButton type=\"chat\" @click=\"storageStore.deleteStorageElem({deleteType: 'subcategory', id: item.id}).then(res => {\n           if( storageStore.currentCategory.slug === item.slug) {\n             router.push('/base/storage')\n             storageStore.currentCategory = {} as any\n           } else storageStore.currentCategory\n          })\">\n            {{ $t('Удалить') }}\n          </TheButton>\n        </div>\n      </TheModal>\n    </Transition>\n  </div>\n</template>\n\n<style scoped lang=\"scss\">\n\n</style>",
-      "start": 1743093258648,
-      "end": 1743093258903,
+      "start": 1743096228900,
+      "end": 1743096229030,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1743093258903,
-      "end": 1743093258903,
+      "start": 1743096229030,
+      "end": 1743096229030,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1743093258903,
-      "end": 1743093258903,
+      "start": 1743096229030,
+      "end": 1743096229030,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1743093258903,
-      "end": 1743093258903,
+      "start": 1743096229030,
+      "end": 1743096229030,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1743093258903,
-      "end": 1743093258903,
+      "start": 1743096229030,
+      "end": 1743096229030,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1743093258903,
-      "end": 1743093258903,
+      "start": 1743096229030,
+      "end": 1743096229030,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1743093258903,
-      "end": 1743093258903,
+      "start": 1743096229030,
+      "end": 1743096229030,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1743093258903,
-      "end": 1743093258903,
+      "start": 1743096229030,
+      "end": 1743096229030,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1743093258903,
-      "end": 1743093258903,
+      "start": 1743096229030,
+      "end": 1743096229030,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1743093258903,
-      "end": 1743093258903,
+      "start": 1743096229030,
+      "end": 1743096229030,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1743093258903,
-      "end": 1743093258903,
+      "start": 1743096229030,
+      "end": 1743096229030,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1743093258903,
-      "end": 1743093258903,
+      "start": 1743096229030,
+      "end": 1743096229030,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "import _sfc_main from \"D:/projects/nuxt/workix-nuxt-front/components/Storage/StorageNav/StorageNavElemGoods.vue?vue&type=script&setup=true&lang.ts\";\nexport * from \"D:/projects/nuxt/workix-nuxt-front/components/Storage/StorageNav/StorageNavElemGoods.vue?vue&type=script&setup=true&lang.ts\";\nimport { useSSRContext as __vite_useSSRContext } from \"vue\";\nconst _sfc_setup = _sfc_main.setup;\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext();\n  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(\"components/Storage/StorageNav/StorageNavElemGoods.vue\");\n  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;\n};\nexport default _sfc_main;\n",
-      "start": 1743093258903,
-      "end": 1743093259002,
+      "start": 1743096229030,
+      "end": 1743096229063,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -86,212 +86,212 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1743093259002,
-      "end": 1743093259002,
+      "start": 1743096229063,
+      "end": 1743096229063,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1743093259002,
-      "end": 1743093259002,
+      "start": 1743096229063,
+      "end": 1743096229063,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1743093259002,
-      "end": 1743093259002,
+      "start": 1743096229063,
+      "end": 1743096229063,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1743093259002,
-      "end": 1743093259002,
+      "start": 1743096229063,
+      "end": 1743096229063,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1743093259002,
-      "end": 1743093259002,
+      "start": 1743096229063,
+      "end": 1743096229063,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1743093259002,
-      "end": 1743093259003,
+      "start": 1743096229063,
+      "end": 1743096229063,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1743093259003,
-      "end": 1743093259003,
+      "start": 1743096229064,
+      "end": 1743096229064,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1743093259003,
-      "end": 1743093259004,
+      "start": 1743096229064,
+      "end": 1743096229064,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1743093259004,
-      "end": 1743093259004,
+      "start": 1743096229064,
+      "end": 1743096229064,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1743093259004,
-      "end": 1743093259004,
+      "start": 1743096229064,
+      "end": 1743096229064,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1743093259005,
-      "end": 1743093259006,
+      "start": 1743096229064,
+      "end": 1743096229065,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1743093259006,
-      "end": 1743093259007,
+      "start": 1743096229065,
+      "end": 1743096229065,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1743093259007,
-      "end": 1743093259007,
+      "start": 1743096229065,
+      "end": 1743096229065,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1743093259007,
-      "end": 1743093259007,
+      "start": 1743096229065,
+      "end": 1743096229065,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1743093259008,
-      "end": 1743093259009,
+      "start": 1743096229067,
+      "end": 1743096229068,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1743093259009,
-      "end": 1743093259009,
+      "start": 1743096229069,
+      "end": 1743096229069,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1743093259009,
-      "end": 1743093259009,
+      "start": 1743096229070,
+      "end": 1743096229070,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1743093259009,
-      "end": 1743093259009,
+      "start": 1743096229070,
+      "end": 1743096229070,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1743093259009,
-      "end": 1743093259009,
+      "start": 1743096229070,
+      "end": 1743096229070,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1743093259009,
-      "end": 1743093259009,
+      "start": 1743096229070,
+      "end": 1743096229070,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1743093259010,
-      "end": 1743093259010,
+      "start": 1743096229070,
+      "end": 1743096229070,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1743093259010,
-      "end": 1743093259010,
+      "start": 1743096229070,
+      "end": 1743096229070,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1743093259010,
-      "end": 1743093259010,
+      "start": 1743096229070,
+      "end": 1743096229070,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1743093259010,
-      "end": 1743093259010,
+      "start": 1743096229070,
+      "end": 1743096229071,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1743093259010,
-      "end": 1743093259011,
+      "start": 1743096229071,
+      "end": 1743096229074,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1743093259010,
-      "end": 1743093259011,
+      "start": 1743096229071,
+      "end": 1743096229074,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1743093259012,
-      "end": 1743093259012,
+      "start": 1743096229074,
+      "end": 1743096229074,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1743093259012,
-      "end": 1743093259012,
+      "start": 1743096229074,
+      "end": 1743096229074,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1743093259013,
-      "end": 1743093259013,
+      "start": 1743096229077,
+      "end": 1743096229077,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1743093259013,
-      "end": 1743093259013,
+      "start": 1743096229077,
+      "end": 1743096229078,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1743093259014,
-      "end": 1743093259014,
+      "start": 1743096229079,
+      "end": 1743096229079,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1743093259014,
-      "end": 1743093259014,
+      "start": 1743096229079,
+      "end": 1743096229079,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1743093259014,
-      "end": 1743093259014,
+      "start": 1743096229079,
+      "end": 1743096229079,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1743093259014,
-      "end": 1743093259014,
+      "start": 1743096229079,
+      "end": 1743096229079,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1743093259014,
-      "end": 1743093259014,
+      "start": 1743096229079,
+      "end": 1743096229079,
       "order": "normal"
     }
   ]

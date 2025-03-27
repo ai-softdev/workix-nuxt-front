@@ -4,45 +4,45 @@
     {
       "name": "vite:load-fallback",
       "result": "import axios from '~/composables/axios'\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\n\nexport type TEventInput = Event & {target: HTMLInputElement}\n\nexport const uploadImage = (event: TEventInput, item: any): void => {\n  item.file = event\n  if (event.type === 'image/svg+xml' || event.type === 'image/jpeg' || event.type === 'image/jpg' || event.type === 'image/png' || event.type === 'image/webp') {\n    item.src = URL.createObjectURL(item.file);\n  } else {\n    setTimeout(() => {\n      item.fileChecked = true\n    }, 0)\n    setTimeout(() => {\n      item.fileChecked = false\n    }, 3000)\n    item.src = ''\n    item.file = ''\n  }\n}\n\nexport const uploadFile = (event: TEventInput, item: any): void => {\n  item.file = event\n  if (event.type) {\n    item.src = URL.createObjectURL(item.file)\n    if (item.file.size == 0) {\n      setTimeout(() => {\n        item.fileSizeInfo = true\n      }, 0)\n      setTimeout(() => {\n        item.fileSizeInfo = false\n        item.file = ''\n        item.src = ''\n      }, 3000)\n    }\n  }\n}\n\nconst forceFileDownload = (res: any, item: any): void => {\n  const url = window.URL.createObjectURL(new Blob([res.data]))\n  const link = document.createElement('a')\n  link.href = url\n  link.setAttribute('download', `${item.file_name}`)\n  document.body.appendChild(link)\n  link.click()\n}\n\nexport const downloadWithAxios = (item: any): void => {\n  axios.get(`download${item.file}`, {\n    headers: {\n      Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n    }\n  }).then(res => {\n    forceFileDownload(res, item)\n  })\n}\nexport const setFocus = (value: any) => {\n  nextTick(() => {\n    value.focus()\n  })\n}\n\n\nexport const clearTimer = (recordingVoice: boolean, clicker: NodeJS.Timeout | null): void => {\n  if(clicker !== null) {\n    clearTimeout(clicker)\n    clicker = null\n    recordingVoice\n  }\n}\n\nexport const viewSelect = [\n  {\n    label: 'Список',\n    icon: 'i-heroicons-list-bullet',\n    type: 'list'\n  },\n  {\n    label: 'Плитка',\n    icon: 'i-heroicons-squares-2x2',\n    type: 'tile'\n  },\n]\n\n\nexport const handleSearch = (item: any, request: Promise<void>, reqErr?: Promise<void>) => {\n  if(item.trim() !== '') {\n    request\n  } else if(item === '') {\n    reqErr\n  }\n}",
-      "start": 1743093215574,
-      "end": 1743093216067,
+      "start": 1743096187320,
+      "end": 1743096187630,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1743093216067,
-      "end": 1743093216067,
+      "start": 1743096187631,
+      "end": 1743096187631,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1743093216067,
-      "end": 1743093216068,
+      "start": 1743096187631,
+      "end": 1743096187631,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1743093216068,
-      "end": 1743093216068,
+      "start": 1743096187631,
+      "end": 1743096187631,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1743093216068,
-      "end": 1743093216068,
+      "start": 1743096187631,
+      "end": 1743096187631,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1743093216068,
-      "end": 1743093216068,
+      "start": 1743096187631,
+      "end": 1743096187631,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import axios from \"~/composables/axios\";\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\nexport const uploadImage = (event, item) => {\n  item.file = event;\n  if (event.type === \"image/svg+xml\" || event.type === \"image/jpeg\" || event.type === \"image/jpg\" || event.type === \"image/png\" || event.type === \"image/webp\") {\n    item.src = URL.createObjectURL(item.file);\n  } else {\n    setTimeout(() => {\n      item.fileChecked = true;\n    }, 0);\n    setTimeout(() => {\n      item.fileChecked = false;\n    }, 3e3);\n    item.src = \"\";\n    item.file = \"\";\n  }\n};\nexport const uploadFile = (event, item) => {\n  item.file = event;\n  if (event.type) {\n    item.src = URL.createObjectURL(item.file);\n    if (item.file.size == 0) {\n      setTimeout(() => {\n        item.fileSizeInfo = true;\n      }, 0);\n      setTimeout(() => {\n        item.fileSizeInfo = false;\n        item.file = \"\";\n        item.src = \"\";\n      }, 3e3);\n    }\n  }\n};\nconst forceFileDownload = (res, item) => {\n  const url = window.URL.createObjectURL(new Blob([res.data]));\n  const link = document.createElement(\"a\");\n  link.href = url;\n  link.setAttribute(\"download\", `${item.file_name}`);\n  document.body.appendChild(link);\n  link.click();\n};\nexport const downloadWithAxios = (item) => {\n  axios.get(`download${item.file}`, {\n    headers: {\n      Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n    }\n  }).then((res) => {\n    forceFileDownload(res, item);\n  });\n};\nexport const setFocus = (value) => {\n  nextTick(() => {\n    value.focus();\n  });\n};\nexport const clearTimer = (recordingVoice, clicker) => {\n  if (clicker !== null) {\n    clearTimeout(clicker);\n    clicker = null;\n    recordingVoice;\n  }\n};\nexport const viewSelect = [\n  {\n    label: \"Список\",\n    icon: \"i-heroicons-list-bullet\",\n    type: \"list\"\n  },\n  {\n    label: \"Плитка\",\n    icon: \"i-heroicons-squares-2x2\",\n    type: \"tile\"\n  }\n];\nexport const handleSearch = (item, request, reqErr) => {\n  if (item.trim() !== \"\") {\n    request;\n  } else if (item === \"\") {\n    reqErr;\n  }\n};\n",
-      "start": 1743093216068,
-      "end": 1743093216300,
+      "start": 1743096187631,
+      "end": 1743096188600,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -58,141 +58,141 @@
     },
     {
       "name": "vite:json",
-      "start": 1743093216300,
-      "end": 1743093216300,
+      "start": 1743096188600,
+      "end": 1743096188600,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1743093216300,
-      "end": 1743093216300,
+      "start": 1743096188600,
+      "end": 1743096188600,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1743093216301,
-      "end": 1743093216301,
+      "start": 1743096188600,
+      "end": 1743096188600,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1743093216301,
-      "end": 1743093216301,
+      "start": 1743096188600,
+      "end": 1743096188600,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1743093216301,
-      "end": 1743093216301,
+      "start": 1743096188601,
+      "end": 1743096188601,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1743093216301,
-      "end": 1743093216301,
+      "start": 1743096188601,
+      "end": 1743096188601,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1743093216301,
-      "end": 1743093216301,
+      "start": 1743096188601,
+      "end": 1743096188601,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1743093216301,
-      "end": 1743093216301,
+      "start": 1743096188601,
+      "end": 1743096188602,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1743093216301,
-      "end": 1743093216301,
+      "start": 1743096188602,
+      "end": 1743096188602,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1743093216301,
-      "end": 1743093216301,
+      "start": 1743096188602,
+      "end": 1743096188602,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1743093216301,
-      "end": 1743093216301,
+      "start": 1743096188602,
+      "end": 1743096188602,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1743093216301,
-      "end": 1743093216301,
+      "start": 1743096188602,
+      "end": 1743096188603,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1743093216301,
-      "end": 1743093216301,
+      "start": 1743096188603,
+      "end": 1743096188603,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1743093216302,
-      "end": 1743093216302,
+      "start": 1743096188603,
+      "end": 1743096188603,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1743093216302,
-      "end": 1743093216302,
+      "start": 1743096188603,
+      "end": 1743096188603,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1743093216302,
-      "end": 1743093216302,
+      "start": 1743096188604,
+      "end": 1743096188604,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1743093216302,
-      "end": 1743093216302,
+      "start": 1743096188604,
+      "end": 1743096188604,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1743093216302,
-      "end": 1743093216302,
+      "start": 1743096188604,
+      "end": 1743096188604,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1743093216302,
-      "end": 1743093216302,
+      "start": 1743096188604,
+      "end": 1743096188604,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1743093216303,
-      "end": 1743093216303,
+      "start": 1743096188604,
+      "end": 1743096188605,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1743093216303,
-      "end": 1743093216303,
+      "start": 1743096188605,
+      "end": 1743096188605,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1743093216303,
-      "end": 1743093216303,
+      "start": 1743096188605,
+      "end": 1743096188605,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { nextTick } from 'vue';\nimport axios from \"~/composables/axios\";\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\nexport const uploadImage = (event, item) => {\n  item.file = event;\n  if (event.type === \"image/svg+xml\" || event.type === \"image/jpeg\" || event.type === \"image/jpg\" || event.type === \"image/png\" || event.type === \"image/webp\") {\n    item.src = URL.createObjectURL(item.file);\n  } else {\n    setTimeout(() => {\n      item.fileChecked = true;\n    }, 0);\n    setTimeout(() => {\n      item.fileChecked = false;\n    }, 3e3);\n    item.src = \"\";\n    item.file = \"\";\n  }\n};\nexport const uploadFile = (event, item) => {\n  item.file = event;\n  if (event.type) {\n    item.src = URL.createObjectURL(item.file);\n    if (item.file.size == 0) {\n      setTimeout(() => {\n        item.fileSizeInfo = true;\n      }, 0);\n      setTimeout(() => {\n        item.fileSizeInfo = false;\n        item.file = \"\";\n        item.src = \"\";\n      }, 3e3);\n    }\n  }\n};\nconst forceFileDownload = (res, item) => {\n  const url = window.URL.createObjectURL(new Blob([res.data]));\n  const link = document.createElement(\"a\");\n  link.href = url;\n  link.setAttribute(\"download\", `${item.file_name}`);\n  document.body.appendChild(link);\n  link.click();\n};\nexport const downloadWithAxios = (item) => {\n  axios.get(`download${item.file}`, {\n    headers: {\n      Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n    }\n  }).then((res) => {\n    forceFileDownload(res, item);\n  });\n};\nexport const setFocus = (value) => {\n  nextTick(() => {\n    value.focus();\n  });\n};\nexport const clearTimer = (recordingVoice, clicker) => {\n  if (clicker !== null) {\n    clearTimeout(clicker);\n    clicker = null;\n    recordingVoice;\n  }\n};\nexport const viewSelect = [\n  {\n    label: \"Список\",\n    icon: \"i-heroicons-list-bullet\",\n    type: \"list\"\n  },\n  {\n    label: \"Плитка\",\n    icon: \"i-heroicons-squares-2x2\",\n    type: \"tile\"\n  }\n];\nexport const handleSearch = (item, request, reqErr) => {\n  if (item.trim() !== \"\") {\n    request;\n  } else if (item === \"\") {\n    reqErr;\n  }\n};\n",
-      "start": 1743093216304,
-      "end": 1743093216305,
+      "start": 1743096188606,
+      "end": 1743096188617,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -205,50 +205,50 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1743093216305,
-      "end": 1743093216305,
+      "start": 1743096188619,
+      "end": 1743096188619,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1743093216305,
-      "end": 1743093216305,
+      "start": 1743096188619,
+      "end": 1743096188619,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1743093216305,
-      "end": 1743093216305,
+      "start": 1743096188619,
+      "end": 1743096188619,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1743093216306,
-      "end": 1743093216306,
+      "start": 1743096188619,
+      "end": 1743096188619,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1743093216306,
-      "end": 1743093216306,
+      "start": 1743096188620,
+      "end": 1743096188620,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1743093216307,
-      "end": 1743093216307,
+      "start": 1743096188620,
+      "end": 1743096188620,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1743093216307,
-      "end": 1743093216307,
+      "start": 1743096188620,
+      "end": 1743096188621,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1743093216307,
-      "end": 1743093216307,
+      "start": 1743096188621,
+      "end": 1743096188621,
       "order": "normal"
     }
   ]
