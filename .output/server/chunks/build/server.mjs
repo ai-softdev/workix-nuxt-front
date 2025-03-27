@@ -1058,7 +1058,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-CofwA5AW.mjs').then((m) => m.default || m)
+        component: () => import('./index-U5qSqtdV.mjs').then((m) => m.default || m)
       },
       {
         name: "base-sales-item-create",
@@ -1066,7 +1066,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-BKTKMfba.mjs').then((m) => m.default || m)
+        component: () => import('./index-BmvI1yiX.mjs').then((m) => m.default || m)
       },
       {
         name: "base-storage",

@@ -4,63 +4,63 @@
     {
       "name": "vite:load-fallback",
       "result": "import axios from '~/composables/axios'\nimport {defineStore} from \"pinia\";\nimport {toast} from \"vue3-toastify\";\nimport {FileOperationPatternKind} from \"vscode-languageserver-protocol\";\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\nexport const useCloudStore = defineStore('cloud', {\n  state: () => ({\n    bin: {\n      folders: [],\n      files: [],\n    },\n    folder: {\n      name: '',\n      parent_id: '',\n      updated_at: '',\n      id: null,\n      folders: {\n        id: '',\n        name: ''\n      },\n      files: {\n        file_url: '',\n        name: '',\n        updated_at: ''\n      },\n    },\n    moveObject: {},\n    showObjectElem: false,\n    showAccessSetting: false,\n    hasFileInBin: false,\n    file: '',\n    src: '',\n    fileSizeInfo: false,\n    fileReadInfo: false,\n    fileChecked: false,\n    fileUpload: null,\n  }),\n  getters: {\n    get_hasFileInBin: (state) => state.hasFileInBin,\n    get_all_folders(folder) {\n      return this.folder\n    },\n    get_folder(folder) {\n      return this.folder\n    },\n    get_bin(folder) {\n      return this.bin\n    },\n    get_all_files(files) {\n      return this.folder.files\n    },\n  },\n  actions: {\n    async loadAllFolders() {\n      await axios.get(`file-manager/folder/main-folder`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(response => {\n        this.folder = response.data\n      })\n    },\n    async loadFolder(params: { id: number }): Promise<void> {\n      await axios.get(`file-manager/folder/${params.id}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(response => {\n        this.folder = response.data\n      })\n    },\n\n    async loadFiles(params: { id: number }) {\n      await axios.get(`file-manager/files/${params.id}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        this.folder.files = res.data\n      })\n    },\n\n    async loadhasFileInBin() {\n       await axios.get(`file-manager/bin`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(response => {\n        if (response.data.folders.length > 0 || response.data.files.length > 0) {\n          this.hasFileInBin = true\n        } else {\n          this.hasFileInBin = false\n        }\n      })\n    },\n\n    async loadBin(params: { bin?: any }) {\n      await axios.get(`file-manager/bin`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(response => {\n        this.bin = response.data\n        this.folder = this.bin\n      })\n    },\n\n    async moveToBin(params: { elem_type: any, elem_id: any }) {\n      await axios.delete(`file-manager/bin/move?${params.elem_type}=${params.elem_id}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        toast.success('Перемещен в корзину', {theme: 'auto', autoClose: 1500})\n        this.hasFileInBin = true\n        if (this.folder.parent_id) {\n          this.loadFolder({id: this.folder.id})\n        } else if (!this.folder.parent_id) {\n          this.loadAllFolders()\n        }\n      })\n    },\n    async moveFromBin(params: { elem_type: any, elem_id: any }) {\n      await axios.delete(`file-manager/bin/move?${params.elem_type}=${params.elem_id}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        toast.success('Успешно восстановлен', {theme: 'auto', autoClose: 1500})\n        this.hasFileInBin = true\n        this.folder = res.data\n        this.loadBin({bin: this.bin})\n      })\n    },\n\n\n    async deleteInBin(params: { delete_type: any, id: number }) {\n      await axios.delete(`file-manager/bin/delete?${params.delete_type}=${params.id}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        toast.success('Успешно удалён', {theme: \"auto\", autoClose: 1500})\n        this.folder = res.data\n        this.loadBin({bin: this.bin});\n      })\n    },\n    async delete(params: { id: number }) {\n      await axios.delete(`file-manager/folder-file/delete/${params.id}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        toast.success('Успешно удалён', {theme: \"auto\", autoClose: 1500})\n        this.folder = res.data\n        this.loadBin({bin: this.bin});\n      })\n    },\n    async create_folder(params: { name: string, parent_id: number }) {\n      await axios.post(`file-manager/folder/create`, {\n        name: params.name,\n        parent_id: params.parent_id\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(response => {\n        this.folder = response.data\n        this.loadAllFolders()\n      })\n    },\n    async update_folder(params: { folder_id: number, name: any, parent_id: number }) {\n      await axios.patch(`file-manager/folder/update/${params.folder_id}`, {\n        name: params.name,\n        parent_id: params.parent_id\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(response => {\n        if (!this.folder.parent_id) {\n          this.loadAllFolders()\n        } else if (this.folder.parent_id) {\n          this.loadFolder({id: this.folder.id})\n        }\n        toast.success('Папка успешно изменена', {autoClose: 1500, theme: 'auto'})\n\n      })\n    },\n    async update_file(params: { file_id: number, name: any, folder_id: number }) {\n      await axios.patch(`file-manager/file/update/${params.file_id}`, {\n        name: params.name,\n        folder_id: params.folder_id\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        if (!this.folder.parent_id) {\n          this.loadAllFolders()\n        } else if (this.folder.parent_id) {\n          this.loadFolder({id: this.folder.id})\n        }\n        toast.success('Успешно изменён', {autoClose: 1500, theme: 'auto'})\n      })\n    }\n  }\n})",
-      "start": 1743017507146,
-      "end": 1743017507620,
+      "start": 1743093258602,
+      "end": 1743093258850,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1743017507620,
-      "end": 1743017507620,
+      "start": 1743093258850,
+      "end": 1743093258850,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1743017507620,
-      "end": 1743017507620,
+      "start": 1743093258850,
+      "end": 1743093258850,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1743017507620,
-      "end": 1743017507620,
+      "start": 1743093258850,
+      "end": 1743093258850,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1743017507620,
-      "end": 1743017507620,
+      "start": 1743093258850,
+      "end": 1743093258850,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1743017507620,
-      "end": 1743017507620,
+      "start": 1743093258850,
+      "end": 1743093258850,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1743017507620,
-      "end": 1743017507620,
+      "start": 1743093258850,
+      "end": 1743093258850,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1743017507620,
-      "end": 1743017507620,
+      "start": 1743093258850,
+      "end": 1743093258850,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1743017507620,
-      "end": 1743017507620,
+      "start": 1743093258850,
+      "end": 1743093258850,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import axios from \"~/composables/axios\";\nimport { defineStore } from \"pinia\";\nimport { toast } from \"vue3-toastify\";\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\nexport const useCloudStore = defineStore(\"cloud\", {\n  state: () => ({\n    bin: {\n      folders: [],\n      files: []\n    },\n    folder: {\n      name: \"\",\n      parent_id: \"\",\n      updated_at: \"\",\n      id: null,\n      folders: {\n        id: \"\",\n        name: \"\"\n      },\n      files: {\n        file_url: \"\",\n        name: \"\",\n        updated_at: \"\"\n      }\n    },\n    moveObject: {},\n    showObjectElem: false,\n    showAccessSetting: false,\n    hasFileInBin: false,\n    file: \"\",\n    src: \"\",\n    fileSizeInfo: false,\n    fileReadInfo: false,\n    fileChecked: false,\n    fileUpload: null\n  }),\n  getters: {\n    get_hasFileInBin: (state) => state.hasFileInBin,\n    get_all_folders(folder) {\n      return this.folder;\n    },\n    get_folder(folder) {\n      return this.folder;\n    },\n    get_bin(folder) {\n      return this.bin;\n    },\n    get_all_files(files) {\n      return this.folder.files;\n    }\n  },\n  actions: {\n    async loadAllFolders() {\n      await axios.get(`file-manager/folder/main-folder`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((response) => {\n        this.folder = response.data;\n      });\n    },\n    async loadFolder(params) {\n      await axios.get(`file-manager/folder/${params.id}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((response) => {\n        this.folder = response.data;\n      });\n    },\n    async loadFiles(params) {\n      await axios.get(`file-manager/files/${params.id}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.folder.files = res.data;\n      });\n    },\n    async loadhasFileInBin() {\n      await axios.get(`file-manager/bin`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((response) => {\n        if (response.data.folders.length > 0 || response.data.files.length > 0) {\n          this.hasFileInBin = true;\n        } else {\n          this.hasFileInBin = false;\n        }\n      });\n    },\n    async loadBin(params) {\n      await axios.get(`file-manager/bin`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((response) => {\n        this.bin = response.data;\n        this.folder = this.bin;\n      });\n    },\n    async moveToBin(params) {\n      await axios.delete(`file-manager/bin/move?${params.elem_type}=${params.elem_id}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        toast.success(\"Перемещен в корзину\", { theme: \"auto\", autoClose: 1500 });\n        this.hasFileInBin = true;\n        if (this.folder.parent_id) {\n          this.loadFolder({ id: this.folder.id });\n        } else if (!this.folder.parent_id) {\n          this.loadAllFolders();\n        }\n      });\n    },\n    async moveFromBin(params) {\n      await axios.delete(`file-manager/bin/move?${params.elem_type}=${params.elem_id}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        toast.success(\"Успешно восстановлен\", { theme: \"auto\", autoClose: 1500 });\n        this.hasFileInBin = true;\n        this.folder = res.data;\n        this.loadBin({ bin: this.bin });\n      });\n    },\n    async deleteInBin(params) {\n      await axios.delete(`file-manager/bin/delete?${params.delete_type}=${params.id}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        toast.success(\"Успешно удалён\", { theme: \"auto\", autoClose: 1500 });\n        this.folder = res.data;\n        this.loadBin({ bin: this.bin });\n      });\n    },\n    async delete(params) {\n      await axios.delete(`file-manager/folder-file/delete/${params.id}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        toast.success(\"Успешно удалён\", { theme: \"auto\", autoClose: 1500 });\n        this.folder = res.data;\n        this.loadBin({ bin: this.bin });\n      });\n    },\n    async create_folder(params) {\n      await axios.post(`file-manager/folder/create`, {\n        name: params.name,\n        parent_id: params.parent_id\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((response) => {\n        this.folder = response.data;\n        this.loadAllFolders();\n      });\n    },\n    async update_folder(params) {\n      await axios.patch(`file-manager/folder/update/${params.folder_id}`, {\n        name: params.name,\n        parent_id: params.parent_id\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((response) => {\n        if (!this.folder.parent_id) {\n          this.loadAllFolders();\n        } else if (this.folder.parent_id) {\n          this.loadFolder({ id: this.folder.id });\n        }\n        toast.success(\"Папка успешно изменена\", { autoClose: 1500, theme: \"auto\" });\n      });\n    },\n    async update_file(params) {\n      await axios.patch(`file-manager/file/update/${params.file_id}`, {\n        name: params.name,\n        folder_id: params.folder_id\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        if (!this.folder.parent_id) {\n          this.loadAllFolders();\n        } else if (this.folder.parent_id) {\n          this.loadFolder({ id: this.folder.id });\n        }\n        toast.success(\"Успешно изменён\", { autoClose: 1500, theme: \"auto\" });\n      });\n    }\n  }\n});\n",
-      "start": 1743017507620,
-      "end": 1743017507664,
+      "start": 1743093258850,
+      "end": 1743093259002,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -76,230 +76,230 @@
     },
     {
       "name": "vite:json",
-      "start": 1743017507664,
-      "end": 1743017507664,
+      "start": 1743093259002,
+      "end": 1743093259002,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1743017507664,
-      "end": 1743017507664,
+      "start": 1743093259002,
+      "end": 1743093259002,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1743017507664,
-      "end": 1743017507664,
+      "start": 1743093259002,
+      "end": 1743093259002,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1743017507664,
-      "end": 1743017507664,
+      "start": 1743093259002,
+      "end": 1743093259002,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1743017507664,
-      "end": 1743017507664,
+      "start": 1743093259003,
+      "end": 1743093259003,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1743017507664,
-      "end": 1743017507664,
+      "start": 1743093259003,
+      "end": 1743093259003,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1743017507664,
-      "end": 1743017507664,
+      "start": 1743093259003,
+      "end": 1743093259004,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1743017507664,
-      "end": 1743017507664,
+      "start": 1743093259003,
+      "end": 1743093259004,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1743017507664,
-      "end": 1743017507664,
+      "start": 1743093259004,
+      "end": 1743093259004,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1743017507664,
-      "end": 1743017507665,
+      "start": 1743093259004,
+      "end": 1743093259004,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1743017507665,
-      "end": 1743017507666,
+      "start": 1743093259005,
+      "end": 1743093259006,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1743017507666,
-      "end": 1743017507666,
+      "start": 1743093259007,
+      "end": 1743093259007,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1743017507666,
-      "end": 1743017507666,
+      "start": 1743093259007,
+      "end": 1743093259007,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1743017507666,
-      "end": 1743017507666,
+      "start": 1743093259007,
+      "end": 1743093259007,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1743017507666,
-      "end": 1743017507666,
+      "start": 1743093259008,
+      "end": 1743093259009,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1743017507666,
-      "end": 1743017507666,
+      "start": 1743093259009,
+      "end": 1743093259009,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1743017507666,
-      "end": 1743017507666,
+      "start": 1743093259009,
+      "end": 1743093259009,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1743017507666,
-      "end": 1743017507666,
+      "start": 1743093259009,
+      "end": 1743093259009,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1743017507666,
-      "end": 1743017507666,
+      "start": 1743093259010,
+      "end": 1743093259010,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1743017507667,
-      "end": 1743017507667,
+      "start": 1743093259010,
+      "end": 1743093259010,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1743017507667,
-      "end": 1743017507667,
+      "start": 1743093259010,
+      "end": 1743093259010,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1743017507667,
-      "end": 1743017507667,
+      "start": 1743093259010,
+      "end": 1743093259010,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1743017507667,
-      "end": 1743017507667,
+      "start": 1743093259010,
+      "end": 1743093259010,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1743017507667,
-      "end": 1743017507667,
+      "start": 1743093259011,
+      "end": 1743093259011,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1743017507667,
-      "end": 1743017507667,
+      "start": 1743093259011,
+      "end": 1743093259011,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1743017507667,
-      "end": 1743017507667,
+      "start": 1743093259012,
+      "end": 1743093259012,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1743017507667,
-      "end": 1743017507667,
+      "start": 1743093259012,
+      "end": 1743093259012,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1743017507667,
-      "end": 1743017507669,
+      "start": 1743093259012,
+      "end": 1743093259014,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1743017507667,
-      "end": 1743017507669,
+      "start": 1743093259012,
+      "end": 1743093259014,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1743017507670,
-      "end": 1743017507670,
+      "start": 1743093259014,
+      "end": 1743093259014,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1743017507670,
-      "end": 1743017507670,
+      "start": 1743093259014,
+      "end": 1743093259014,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1743017507670,
-      "end": 1743017507670,
+      "start": 1743093259014,
+      "end": 1743093259014,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1743017507670,
-      "end": 1743017507670,
+      "start": 1743093259014,
+      "end": 1743093259014,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1743017507670,
-      "end": 1743017507670,
+      "start": 1743093259014,
+      "end": 1743093259014,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1743017507671,
-      "end": 1743017507671,
+      "start": 1743093259014,
+      "end": 1743093259014,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1743017507675,
-      "end": 1743017507675,
+      "start": 1743093259014,
+      "end": 1743093259014,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1743017507675,
-      "end": 1743017507675,
+      "start": 1743093259014,
+      "end": 1743093259015,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1743017507675,
-      "end": 1743017507675,
+      "start": 1743093259015,
+      "end": 1743093259015,
       "order": "normal"
     }
   ]

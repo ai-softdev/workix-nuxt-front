@@ -994,7 +994,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$d == null ? void 0 : __nuxt_page_meta$d.redirect,
-        component: () => import("./_nuxt/index-CofwA5AW.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/index-U5qSqtdV.js").then((m) => m.default || m)
       },
       {
         name: "base-sales-item-create",
@@ -1002,7 +1002,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$c == null ? void 0 : __nuxt_page_meta$c.redirect,
-        component: () => import("./_nuxt/index-BKTKMfba.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/index-BmvI1yiX.js").then((m) => m.default || m)
       },
       {
         name: "base-storage",

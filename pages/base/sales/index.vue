@@ -26,6 +26,8 @@ const max_price = ref(Number(route.query.max_price) || '');
 const min_count = ref(Number(route.query.min_count) || '');
 const max_count = ref(Number(route.query.max_count) || '');
 const limitItems = ref([5, 10, 20, 30, 50])
+const orderBy = ref([]);
+const orderString = ref('')
 
 const updateQueryParams = () => {
   router.push({
@@ -37,6 +39,7 @@ const updateQueryParams = () => {
       max_price: max_price.value || '',
       min_count: min_count.value || '',
       max_count: max_count.value || '',
+      order_by: orderString.value || '',
     }
   });
 };
@@ -66,9 +69,31 @@ const submitFilters = () => {
 
 const pageCount = ref(0)
 
+const toggleSort = (field) => {
+  const index = orderBy.value.findIndex((item) => item === field || item === `-${field}`);
+
+  if (index !== -1) {
+    orderBy.value[index] = orderBy.value[index].startsWith('-') ? field : `-${field}`;
+  } else {
+    orderBy.value.push(field);
+  }
+
+  updateQueryParams()
+};
+
+const getSortDirection = (field) => {
+  if (orderBy.value.includes(field)) return 'rotate-0';
+  if (orderBy.value.includes(`-${field}`)) return 'rotate-180';
+  return 'rotate-180';
+};
+
 onMounted(()=> {
-  sales.loadSalesList({page: page.value, limit: limit.value, name: itemName.value, min_price: min_price.value, max_price: max_price.value, min_count: min_count.value, max_count: max_count.value})
+  sales.loadSalesList({page: page.value, limit: limit.value, name: itemName.value, min_price: min_price.value, max_price: max_price.value, min_count: min_count.value, max_count: max_count.value, order_by: orderString.value})
 })
+
+watch(orderBy.value, (newVal) => {
+  orderString.value = newVal.join(',');
+});
 
 watch(() => sales.sales, (newValue) => {
   pageCount.value = Math.ceil(sales.sales.count / limit.value);
@@ -76,9 +101,9 @@ watch(() => sales.sales, (newValue) => {
 
 watch(() => route.query, (newQuery) => {
   page.value = Number(newQuery.page) || 1;
-  limit.value = Number(newQuery.limit) || 3;
+  limit.value = Number(newQuery.limit) || 5;
   itemName.value = newQuery.itemName || '';
-  sales.loadSalesList({ page: page.value, limit: limit.value, name: itemName.value, min_price: min_price.value, max_price: max_price.value, min_count: min_count.value, max_count: max_count.value });
+  sales.loadSalesList({page: page.value, limit: limit.value, name: itemName.value, min_price: min_price.value, max_price: max_price.value, min_count: min_count.value, max_count: max_count.value, order_by: orderString.value})
 });
 
 watch(() => loadAuthStore.user, (newValue) => {
@@ -166,15 +191,57 @@ watch(() => company.company, (newValue) => {
           <table v-if="sales.sales?.results?.length">
             <thead class="bg-gray-200 dark:bg-bgWhite">
             <tr>
-              <th>№</th>
-              <th>Наименование</th>
-              <th>Кол-во продаж</th>
-              <th>Цена за единицу</th>
-              <th>Сумма</th>
-              <th>НДС</th>
-              <th>Сумма с НДС</th>
-              <th>Наименование компании</th>
-              <th>Агент</th>
+              <th>
+                №
+              </th>
+              <th>
+                <button @click="toggleSort('name')" class="flex items-center gap-3">
+                  Наименование
+                  <img :class="getSortDirection('name')" src="/icons/table-arrow.svg" alt="table-arrow" />
+                </button>
+              </th>
+              <th>
+                <button @click="toggleSort('sales_count')" class="flex items-center gap-3">
+                  Кол-во продаж
+                  <img :class="getSortDirection('sales_count')" src="/icons/table-arrow.svg" alt="table-arrow" />
+                </button>
+              </th>
+              <th>
+                <button @click="toggleSort('price_per_count')" class="flex items-center gap-3">
+                  Цена за единицу
+                  <img :class="getSortDirection('price_per_count')" src="/icons/table-arrow.svg" alt="table-arrow" />
+                </button>
+              </th>
+              <th>
+                <button @click="toggleSort('total')" class="flex items-center gap-3">
+                  Сумма
+                  <img :class="getSortDirection('total')" src="/icons/table-arrow.svg" alt="table-arrow" />
+                </button>
+              </th>
+              <th>
+                <button @click="toggleSort('vat')" class="flex items-center gap-3">
+                  НДС
+                  <img :class="getSortDirection('vat')" src="/icons/table-arrow.svg" alt="table-arrow" />
+                </button>
+              </th>
+              <th>
+                <button @click="toggleSort('total_with_vat')" class="flex items-center gap-3">
+                  Сумма с НДС
+                  <img :class="getSortDirection('total_with_vat')" src="/icons/table-arrow.svg" alt="table-arrow" />
+                </button>
+              </th>
+              <th>
+                <button @click="toggleSort('company_sale_to')" class="flex items-center gap-3">
+                  Наименование компании
+                  <img :class="getSortDirection('company_sale_to')" src="/icons/table-arrow.svg" alt="table-arrow" />
+                </button>
+              </th>
+              <th>
+                <button @click="toggleSort('agent')" class="flex items-center gap-3">
+                  Агент
+                  <img :class="getSortDirection('agent')" src="/icons/table-arrow.svg" alt="table-arrow" />
+                </button>
+              </th>
             </tr>
             </thead>
             <tbody>
@@ -304,20 +371,20 @@ watch(() => company.company, (newValue) => {
   gap: 10px;
 }
 
-.page-item {
+.page-link {
   padding: 10px 15px !important;
   border: 1px solid #ddd !important;
   border-radius: 8px;
   background: #8881;
 }
-.dark .page-item.active {
+.dark .page-item.active .page-link{
   border: 1px solid rgba(255,255,255, 0.3) !important;
   background: rgba(255,255,255, 0.3) !important;
 }
-.page-item.active{
+.page-item.active .page-link{
   background: #E5E7EB !important;
 }
-.page-item.disabled{
+.page-item.disabled .page-link{
   opacity: 0.5 !important;
 }
 

@@ -4,45 +4,45 @@
     {
       "name": "vite:load-fallback",
       "result": "import {ref, onMounted} from \"vue\";\nimport WaveSurfer from \"wavesurfer.js\";\n// @ts-ignore\nimport RecordPlugin from 'wavesurfer.js/dist/plugins/record.esm.js'\nimport {useChat} from \"~/stores/chat\";\n\ninterface IWave {\n  registerPlugin: (plugin: any )=> any\n  destroy: () => void\n}\ninterface IRecord{\n  isRecording: () => boolean,\n  isPaused: () => boolean,\n  startRecording: (options: { deviceId: any }) => Promise<void>\n  stopRecording: () => void\n  on: (event: string, callback: (blob: Blob) => void) => void\n}\n\nlet wavesurfer: IWave\nlet record: IRecord\nlet scrollingWaveform = false\nexport default function useRecorder() {\n  const createWaveSurfer = () => {\n    if (wavesurfer) {\n      wavesurfer.destroy()\n    }\n    wavesurfer = WaveSurfer.create({\n      container: '#mic',\n    })\n\n    record = wavesurfer.registerPlugin(RecordPlugin.create({scrollingWaveform, renderRecordedAudio: false}))\n    record.on('record-end', (blob: Blob) => {\n      const chatStore = useChat()\n      chatStore.file = URL.createObjectURL(blob)\n      const wavesurfer = WaveSurfer.create({\n        container: '#voiceMessageContainer',\n        waveColor: 'rgba(0, 0, 0, 0.6)',\n        progressColor: 'rgba(255, 255, 255)',\n        cursorWidth: 0,\n        barWidth: 4,\n        barAlign: 'bottom',\n        height: 20,\n        interact: true,\n        dragToSeek: true,\n        normalize: true,\n        url: chatStore.file,\n      })\n    })\n  }\n  {\n    RecordPlugin.getAvailableAudioDevices().then((devices: MediaDeviceInfo[]) => {\n      devices.forEach((device: MediaDeviceInfo) => {\n        const option = document.createElement('option');\n        option.value = device.deviceId;\n        option.text = device.label || device.deviceId;\n      });\n    });\n  }\n  const recButton = () => {\n    if (record && (record.isRecording() || record.isPaused())) {\n      record.stopRecording()\n      return\n    }\n    if(record) {\n      record.startRecording({deviceId: null}).then(() => {\n        return false\n      })\n    }\n  }\n  onMounted(() => {\n    createWaveSurfer()\n  })\n  return{recButton, createWaveSurfer}\n}",
-      "start": 1743017469605,
-      "end": 1743017469687,
+      "start": 1743093221262,
+      "end": 1743093221487,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1743017469687,
-      "end": 1743017469687,
+      "start": 1743093221487,
+      "end": 1743093221487,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1743017469687,
-      "end": 1743017469687,
+      "start": 1743093221487,
+      "end": 1743093221487,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1743017469687,
-      "end": 1743017469687,
+      "start": 1743093221487,
+      "end": 1743093221487,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1743017469687,
-      "end": 1743017469687,
+      "start": 1743093221487,
+      "end": 1743093221487,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1743017469687,
-      "end": 1743017469687,
+      "start": 1743093221487,
+      "end": 1743093221487,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { onMounted } from \"vue\";\nimport WaveSurfer from \"wavesurfer.js\";\nimport RecordPlugin from \"wavesurfer.js/dist/plugins/record.esm.js\";\nimport { useChat } from \"~/stores/chat\";\nlet wavesurfer;\nlet record;\nlet scrollingWaveform = false;\nexport default function useRecorder() {\n  const createWaveSurfer = () => {\n    if (wavesurfer) {\n      wavesurfer.destroy();\n    }\n    wavesurfer = WaveSurfer.create({\n      container: \"#mic\"\n    });\n    record = wavesurfer.registerPlugin(RecordPlugin.create({ scrollingWaveform, renderRecordedAudio: false }));\n    record.on(\"record-end\", (blob) => {\n      const chatStore = useChat();\n      chatStore.file = URL.createObjectURL(blob);\n      const wavesurfer2 = WaveSurfer.create({\n        container: \"#voiceMessageContainer\",\n        waveColor: \"rgba(0, 0, 0, 0.6)\",\n        progressColor: \"rgba(255, 255, 255)\",\n        cursorWidth: 0,\n        barWidth: 4,\n        barAlign: \"bottom\",\n        height: 20,\n        interact: true,\n        dragToSeek: true,\n        normalize: true,\n        url: chatStore.file\n      });\n    });\n  };\n  {\n    RecordPlugin.getAvailableAudioDevices().then((devices) => {\n      devices.forEach((device) => {\n        const option = document.createElement(\"option\");\n        option.value = device.deviceId;\n        option.text = device.label || device.deviceId;\n      });\n    });\n  }\n  const recButton = () => {\n    if (record && (record.isRecording() || record.isPaused())) {\n      record.stopRecording();\n      return;\n    }\n    if (record) {\n      record.startRecording({ deviceId: null }).then(() => {\n        return false;\n      });\n    }\n  };\n  onMounted(() => {\n    createWaveSurfer();\n  });\n  return { recButton, createWaveSurfer };\n}\n",
-      "start": 1743017469687,
-      "end": 1743017469755,
+      "start": 1743093221487,
+      "end": 1743093221626,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -60,188 +60,188 @@
     },
     {
       "name": "vite:json",
-      "start": 1743017469755,
-      "end": 1743017469755,
+      "start": 1743093221626,
+      "end": 1743093221627,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1743017469755,
-      "end": 1743017469756,
+      "start": 1743093221627,
+      "end": 1743093221627,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1743017469756,
-      "end": 1743017469756,
+      "start": 1743093221627,
+      "end": 1743093221627,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1743017469756,
-      "end": 1743017469756,
+      "start": 1743093221627,
+      "end": 1743093221627,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1743017469756,
-      "end": 1743017469756,
+      "start": 1743093221627,
+      "end": 1743093221627,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1743017469756,
-      "end": 1743017469756,
+      "start": 1743093221627,
+      "end": 1743093221627,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1743017469756,
-      "end": 1743017469756,
+      "start": 1743093221627,
+      "end": 1743093221627,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1743017469756,
-      "end": 1743017469756,
+      "start": 1743093221627,
+      "end": 1743093221627,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1743017469756,
-      "end": 1743017469756,
+      "start": 1743093221627,
+      "end": 1743093221627,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1743017469756,
-      "end": 1743017469756,
+      "start": 1743093221627,
+      "end": 1743093221627,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1743017469756,
-      "end": 1743017469756,
+      "start": 1743093221627,
+      "end": 1743093221627,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1743017469756,
-      "end": 1743017469756,
+      "start": 1743093221627,
+      "end": 1743093221627,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1743017469756,
-      "end": 1743017469756,
+      "start": 1743093221627,
+      "end": 1743093221627,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1743017469756,
-      "end": 1743017469757,
+      "start": 1743093221627,
+      "end": 1743093221627,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1743017469757,
-      "end": 1743017469757,
+      "start": 1743093221627,
+      "end": 1743093221627,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1743017469757,
-      "end": 1743017469757,
+      "start": 1743093221627,
+      "end": 1743093221627,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1743017469757,
-      "end": 1743017469757,
+      "start": 1743093221627,
+      "end": 1743093221627,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1743017469757,
-      "end": 1743017469757,
+      "start": 1743093221627,
+      "end": 1743093221627,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1743017469757,
-      "end": 1743017469757,
+      "start": 1743093221627,
+      "end": 1743093221627,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1743017469757,
-      "end": 1743017469757,
+      "start": 1743093221627,
+      "end": 1743093221627,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1743017469757,
-      "end": 1743017469757,
+      "start": 1743093221627,
+      "end": 1743093221627,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1743017469757,
-      "end": 1743017469757,
+      "start": 1743093221627,
+      "end": 1743093221627,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1743017469757,
-      "end": 1743017469760,
+      "start": 1743093221627,
+      "end": 1743093221628,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1743017469760,
-      "end": 1743017469760,
+      "start": 1743093221628,
+      "end": 1743093221628,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1743017469760,
-      "end": 1743017469760,
+      "start": 1743093221628,
+      "end": 1743093221628,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1743017469760,
-      "end": 1743017469760,
+      "start": 1743093221628,
+      "end": 1743093221628,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1743017469760,
-      "end": 1743017469760,
+      "start": 1743093221628,
+      "end": 1743093221628,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1743017469760,
-      "end": 1743017469760,
+      "start": 1743093221628,
+      "end": 1743093221628,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1743017469760,
-      "end": 1743017469760,
+      "start": 1743093221628,
+      "end": 1743093221628,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1743017469761,
-      "end": 1743017469761,
+      "start": 1743093221628,
+      "end": 1743093221628,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1743017469761,
-      "end": 1743017469761,
+      "start": 1743093221628,
+      "end": 1743093221628,
       "order": "normal"
     }
   ]
