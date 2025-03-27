@@ -4,44 +4,44 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { createVNode as _createVNode, withCtx as _withCtx, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\"\n\nconst _hoisted_1 = { class: \"flex gap-x-10 justify-center\" }\n\nimport DocumentContent from \"~/components/documents/DocumentContent.vue\";\r\nimport DocumentHeader from \"~/components/documents/DocumentHeader.vue\";\r\nimport TheContentBlock from \"~/components/UI/TheContentBlock.vue\";\r\nimport DocumentInfo from \"~/components/documents/DocumentInfo.vue\";\r\nimport {useDocumentStore} from \"~/stores/documents\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport {useCompanies} from \"~/stores/companies\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'index',\n  setup(__props) {\n\r\nconst document = useDocumentStore()\r\n\r\nonMounted(()=>{\r\n  document.loadAllDocument({page: 1, limit: 15})\r\n})\r\n\r\nconst router = useRouter()\r\nconst loadAuthStore = useAuthStore()\r\nconst company = useCompanies()\r\n\r\nwatch(() => loadAuthStore.user, (newValue) => {\r\n  if(loadAuthStore?.user?.role?.name_en === 'admin'){\r\n    if (window.history.length > 1) {\r\n      router.push('/base/profile');\r\n    } else {\r\n      router.push('/');\r\n    }\r\n  }\r\n})\r\nwatch(() => company.company, (newValue) => {\r\n  let permission = company.company.modules?.find(item => item.name_en === 'documents')\r\n  if(!permission){\r\n    if (window.history.length > 1) {\r\n      router.push('/base/profile');\r\n    } else {\r\n      router.push('/');\r\n    }\r\n  }\r\n})\r\n\r\nuseSeoMeta({\r\n  title: 'Документы'\r\n})\r\n\nreturn (_ctx: any,_cache: any) => {\n  return (_openBlock(), _createElementBlock(\"div\", null, [\n    _createVNode(DocumentHeader, { class: \"w-6/12 mx-auto max-md:w-full\" }),\n    _createElementVNode(\"div\", _hoisted_1, [\n      _createVNode(TheContentBlock, { class: \"w-9/12\" }, {\n        default: _withCtx(() => [\n          _createVNode(DocumentContent)\n        ]),\n        _: 1\n      }),\n      _createVNode(TheContentBlock, null, {\n        default: _withCtx(() => [\n          _createVNode(DocumentInfo)\n        ]),\n        _: 1\n      })\n    ])\n  ]))\n}\n}\n\n})",
-      "start": 1743096183710,
-      "end": 1743096183710
+      "start": 1743102833705,
+      "end": 1743102833705
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1743096183711,
-      "end": 1743096183711,
+      "start": 1743102833706,
+      "end": 1743102833706,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1743096183711,
-      "end": 1743096183711,
+      "start": 1743102833706,
+      "end": 1743102833706,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1743096183711,
-      "end": 1743096183711,
+      "start": 1743102833706,
+      "end": 1743102833706,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1743096183711,
-      "end": 1743096183711,
+      "start": 1743102833706,
+      "end": 1743102833706,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1743096183711,
-      "end": 1743096183711,
+      "start": 1743102833706,
+      "end": 1743102833706,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { createVNode as _createVNode, withCtx as _withCtx, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\";\nconst _hoisted_1 = { class: \"flex gap-x-10 justify-center\" };\nimport DocumentContent from \"~/components/documents/DocumentContent.vue\";\nimport DocumentHeader from \"~/components/documents/DocumentHeader.vue\";\nimport TheContentBlock from \"~/components/UI/TheContentBlock.vue\";\nimport DocumentInfo from \"~/components/documents/DocumentInfo.vue\";\nimport { useDocumentStore } from \"~/stores/documents\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  setup(__props) {\n    const document = useDocumentStore();\n    onMounted(() => {\n      document.loadAllDocument({ page: 1, limit: 15 });\n    });\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    const company = useCompanies();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if (window.history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    watch(() => company.company, (newValue) => {\n      let permission = company.company.modules?.find((item) => item.name_en === \"documents\");\n      if (!permission) {\n        if (window.history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Документы\"\n    });\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", null, [\n        _createVNode(DocumentHeader, { class: \"w-6/12 mx-auto max-md:w-full\" }),\n        _createElementVNode(\"div\", _hoisted_1, [\n          _createVNode(TheContentBlock, { class: \"w-9/12\" }, {\n            default: _withCtx(() => [\n              _createVNode(DocumentContent)\n            ]),\n            _: 1\n          }),\n          _createVNode(TheContentBlock, null, {\n            default: _withCtx(() => [\n              _createVNode(DocumentInfo)\n            ]),\n            _: 1\n          })\n        ])\n      ]);\n    };\n  }\n});\n",
-      "start": 1743096183711,
-      "end": 1743096185602,
+      "start": 1743102833708,
+      "end": 1743102836126,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -57,141 +57,141 @@
     },
     {
       "name": "vite:json",
-      "start": 1743096185602,
-      "end": 1743096185602,
+      "start": 1743102836126,
+      "end": 1743102836126,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1743096185602,
-      "end": 1743096185602,
+      "start": 1743102836126,
+      "end": 1743102836126,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1743096185602,
-      "end": 1743096185602,
+      "start": 1743102836127,
+      "end": 1743102836127,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1743096185602,
-      "end": 1743096185602,
+      "start": 1743102836127,
+      "end": 1743102836127,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1743096185602,
-      "end": 1743096185602,
+      "start": 1743102836127,
+      "end": 1743102836127,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1743096185602,
-      "end": 1743096185602,
+      "start": 1743102836127,
+      "end": 1743102836127,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1743096185602,
-      "end": 1743096185602,
+      "start": 1743102836127,
+      "end": 1743102836127,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1743096185602,
-      "end": 1743096185602,
+      "start": 1743102836127,
+      "end": 1743102836128,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1743096185603,
-      "end": 1743096185603,
+      "start": 1743102836128,
+      "end": 1743102836128,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1743096185603,
-      "end": 1743096185603,
+      "start": 1743102836128,
+      "end": 1743102836128,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1743096185603,
-      "end": 1743096185603,
+      "start": 1743102836128,
+      "end": 1743102836128,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1743096185603,
-      "end": 1743096185603,
+      "start": 1743102836128,
+      "end": 1743102836128,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1743096185603,
-      "end": 1743096185603,
+      "start": 1743102836128,
+      "end": 1743102836128,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1743096185603,
-      "end": 1743096185603,
+      "start": 1743102836129,
+      "end": 1743102836129,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1743096185603,
-      "end": 1743096185603,
+      "start": 1743102836129,
+      "end": 1743102836129,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1743096185603,
-      "end": 1743096185603,
+      "start": 1743102836129,
+      "end": 1743102836129,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1743096185603,
-      "end": 1743096185603,
+      "start": 1743102836129,
+      "end": 1743102836129,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1743096185603,
-      "end": 1743096185603,
+      "start": 1743102836129,
+      "end": 1743102836129,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1743096185603,
-      "end": 1743096185603,
+      "start": 1743102836129,
+      "end": 1743102836129,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1743096185603,
-      "end": 1743096185603,
+      "start": 1743102836129,
+      "end": 1743102836130,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1743096185603,
-      "end": 1743096185604,
+      "start": 1743102836130,
+      "end": 1743102836130,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1743096185604,
-      "end": 1743096185604,
+      "start": 1743102836130,
+      "end": 1743102836130,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { onMounted, watch } from 'vue';\nimport { useRouter } from '#app/composables/router';\nimport { useSeoMeta } from '@unhead/vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { createVNode as _createVNode, withCtx as _withCtx, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\";\nconst _hoisted_1 = { class: \"flex gap-x-10 justify-center\" };\nimport DocumentContent from \"~/components/documents/DocumentContent.vue\";\nimport DocumentHeader from \"~/components/documents/DocumentHeader.vue\";\nimport TheContentBlock from \"~/components/UI/TheContentBlock.vue\";\nimport DocumentInfo from \"~/components/documents/DocumentInfo.vue\";\nimport { useDocumentStore } from \"~/stores/documents\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  setup(__props) {\n    const document = useDocumentStore();\n    onMounted(() => {\n      document.loadAllDocument({ page: 1, limit: 15 });\n    });\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    const company = useCompanies();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if (window.history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    watch(() => company.company, (newValue) => {\n      let permission = company.company.modules?.find((item) => item.name_en === \"documents\");\n      if (!permission) {\n        if (window.history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Документы\"\n    });\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", null, [\n        _createVNode(DocumentHeader, { class: \"w-6/12 mx-auto max-md:w-full\" }),\n        _createElementVNode(\"div\", _hoisted_1, [\n          _createVNode(TheContentBlock, { class: \"w-9/12\" }, {\n            default: _withCtx(() => [\n              _createVNode(DocumentContent)\n            ]),\n            _: 1\n          }),\n          _createVNode(TheContentBlock, null, {\n            default: _withCtx(() => [\n              _createVNode(DocumentInfo)\n            ]),\n            _: 1\n          })\n        ])\n      ]);\n    };\n  }\n});\n",
-      "start": 1743096185604,
-      "end": 1743096185612,
+      "start": 1743102836130,
+      "end": 1743102836140,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -204,15 +204,15 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1743096185613,
-      "end": 1743096185613,
+      "start": 1743102836146,
+      "end": 1743102836146,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
       "result": "\nconst __nuxt_page_meta = null\nexport default __nuxt_page_meta\n",
-      "start": 1743096185613,
-      "end": 1743096185613,
+      "start": 1743102836146,
+      "end": 1743102836147,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -225,38 +225,38 @@
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1743096185614,
-      "end": 1743096185614,
+      "start": 1743102836149,
+      "end": 1743102836149,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1743096185614,
-      "end": 1743096185614,
+      "start": 1743102836149,
+      "end": 1743102836150,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1743096185614,
-      "end": 1743096185614,
+      "start": 1743102836150,
+      "end": 1743102836150,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1743096185615,
-      "end": 1743096185615,
+      "start": 1743102836151,
+      "end": 1743102836151,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1743096185615,
-      "end": 1743096185615,
+      "start": 1743102836151,
+      "end": 1743102836151,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1743096185615,
-      "end": 1743096185615,
+      "start": 1743102836151,
+      "end": 1743102836151,
       "order": "normal"
     }
   ]

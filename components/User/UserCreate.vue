@@ -24,9 +24,11 @@ const createForm = ref({
   phone: '',
   photo: '',
   position: '',
+  head_user_id: '',
   date_of_birth: new Date().toDateString(),
   company_id: Number(),
   department_id: Number(),
+  department: {},
   role_id: Number(),
   permissions: {}
 })
@@ -44,6 +46,55 @@ defineProps({
   },
 })
 
+function createAdmin() {
+  if (createForm.value.department?.id) {
+    createForm.value.department_id = createForm.value.department.id;
+  }
+  userList.createAdmin(createForm.value);
+  createForm.value = {
+    email: '',
+    first_name: '',
+    last_name: '',
+    patronymic: '',
+    password: '',
+    phone: '',
+    photo: '',
+    position: '',
+    head_user_id: '',
+    date_of_birth: new Date().toDateString(),
+    company_id: Number(),
+    department_id: Number(),
+    department: {},
+    role_id: Number(),
+    permissions: {}
+  };
+}
+
+function createUser() {
+  if (createForm.value.department?.id) {
+    createForm.value.department_id = createForm.value.department.id;
+  }
+  userList.createUser(createForm.value);
+  createForm.value = {
+    email: '',
+    first_name: '',
+    last_name: '',
+    patronymic: '',
+    password: '',
+    phone: '',
+    photo: '',
+    position: '',
+    head_user_id: '',
+    date_of_birth: new Date().toDateString(),
+    company_id: Number(),
+    department_id: Number(),
+    department: {},
+    role_id: Number(),
+    permissions: {}
+  };
+}
+
+
 </script>
 
 <template>
@@ -57,7 +108,7 @@ defineProps({
               :show-create-user="showCreateUser">
       <TheTextContent>{{ $t('Создание пользователя') }}</TheTextContent>
       <form enctype="multipart/form-data"
-            @submit.prevent="loadCurrentUser.user.role?.name_en === 'admin' ? userList.createAdmin(createForm) : userList.createUser(createForm)">
+            @submit.prevent="loadCurrentUser.user.role?.name_en === 'admin' ? createAdmin() : createUser()">
         <UserContentCreateElems>
           <div class="w-6/12 max-lg:w-full">
             <TheInput type="text" :label="$t('Имя')" v-model="createForm.first_name"/>
@@ -80,11 +131,16 @@ defineProps({
         <UserContentCreateElems>
           <div class="w-6/12 max-lg:w-full flex flex-col">
             <p class="text-md dark:text-white tracking-wider">{{ $t('Дата рождения') }}</p>
-            <VueDatePicker v-model="createForm.date_of_birth" :select-text="$t('Выбрать')"
-                           :cancel-text="$t('Отменить')" placeholder="Start Typing ..." text-input
-                           class="w-full max-lg:hidden rounded-lg p-2 dark:border-none mx-auto outline-semiCyan outline-1"
-                           auto-apply
-                           multi-calendars-solo/>
+            <TheInput type="date" class="w-full rounded-lg p-2 outline-1"
+                      id="date"
+                      placeholder="Выбрать"
+                      v-model="createForm.date_of_birth"
+            />
+<!--            <VueDatePicker v-model="createForm.date_of_birth" :select-text="$t('Выбрать')"-->
+<!--                           :cancel-text="$t('Отменить')" placeholder="Start Typing ..." text-input-->
+<!--                           class="w-full max-lg:hidden rounded-lg p-2 dark:border-none mx-auto outline-semiCyan outline-1"-->
+<!--                           auto-apply-->
+<!--                           multi-calendars-solo/>-->
             <input type="date" v-model="createForm.date_of_birth"
                    class="max-lg:block border outline-semiCyan dark:outline-none outline-1 dark:border-none hidden p-4 dark:bg-gray-300 dark:text-black mb-4 rounded-lg">
           </div>
@@ -117,28 +173,40 @@ defineProps({
           </div>
         </UserContentCreateElems>
         <UserContentCreateElems>
-          <div class="w-full">
-            <p v-if="loadCurrentUser.user.role.name_en === 'admin'"
-               class="text-md dark:text-white tracking-widest mb-2">{{ $t('Компании') }}</p>
-            <p v-else class="text-md dark:text-white tracking-widest mb-2">{{ $t('Компания') }}</p>
-            <select type="text" v-model="createForm.company_id"
-                    class="w-full dark:bg-gray-300 rounded-lg p-2.5 border dark:border-none outline-semiCyan outline-1 text-black"
-                    v-if="loadCurrentUser?.user.role.name_en === 'admin'">
-              <option class="text-black" v-for="companyItem in company?.get_all_company?.results"
-                      :value="companyItem.id">
-                {{ companyItem.name }}
+<!--          <div class="w-full">-->
+<!--            <p v-if="loadCurrentUser.user.role.name_en === 'admin'"-->
+<!--               class="text-md dark:text-white tracking-widest mb-2">{{ $t('Компании') }}</p>-->
+<!--            <p v-else class="text-md dark:text-white tracking-widest mb-2">{{ $t('Компания') }}</p>-->
+<!--            <select type="text" v-model="createForm.company_id"-->
+<!--                    class="w-full dark:bg-gray-300 rounded-lg p-2.5 border dark:border-none outline-semiCyan outline-1 text-black"-->
+<!--                    v-if="loadCurrentUser?.user.role.name_en === 'admin'">-->
+<!--              <option class="text-black" v-for="companyItem in company?.get_all_company?.results"-->
+<!--                      :value="companyItem.id">-->
+<!--                {{ companyItem.name }}-->
+<!--              </option>-->
+<!--            </select>-->
+<!--            <div v-else-if="loadCurrentUser.user.role.name_en === 'company_admin'">-->
+<!--              <p class="text-md dark:text-white tracking-widest mb-2">{{ loadCurrentUser.user.company }}</p>-->
+<!--            </div>-->
+<!--          </div>-->
+          <div class="w-6/12 max-lg:w-full" v-if="loadCurrentUser.user.role.name_en === 'company_admin'">
+            <p class="text-md dark:text-white tracking-widest mb-2">{{ $t('Отдел') }}</p>
+            <select type="text" v-model="createForm.department"
+                    class="w-full dark:bg-gray-300 rounded-lg p-2.5 border dark:border-none outline-semiCyan outline-1 text-black">
+              <option v-for="department in company?.get_all_department.results" :value="department">
+                {{ department.name }}
               </option>
             </select>
-            <div v-else-if="loadCurrentUser.user.role.name_en === 'company_admin'">
-              <p class="text-md dark:text-white tracking-widest mb-2">{{ loadCurrentUser.user.company }}</p>
-            </div>
           </div>
-          <div class="w-full" v-if="loadCurrentUser.user.role.name_en === 'company_admin'">
-            <p class="text-md dark:text-white tracking-widest mb-2">{{ $t('Отдел') }}</p>
-            <select type="text" v-model="createForm.department_id"
-                    class="w-full dark:bg-gray-300 rounded-lg p-2.5 border dark:border-none outline-semiCyan outline-1 text-black">
-              <option v-for="department in company?.get_all_department.results" :value="department.id">
-                {{ department.name }}
+        </UserContentCreateElems>
+        <UserContentCreateElems v-if="createForm.department?.participants?.length">
+          <div class="w-6/12 max-lg:w-full">
+            <p class="text-md dark:text-white tracking-wider">{{ $t('Руководитель') }}</p>
+            <TheInput v-if="!userList?.get_position_list" type="text" name="text" :label="'Руководитель'" class="dark:text-white cursor-pointer" v-model="createForm.head_user_id"/>
+            <select v-model="createForm.head_user_id"
+                    class="w-full dark:bg-gray-300 rounded-lg p-2.5 mt-2 border dark:border-none outline-semiCyan outline-1 text-black">
+              <option v-for="participant in createForm.department.participants" :key="participant.id" :value="participant.id">
+                {{ participant.first_name }} {{ participant.last_name }}
               </option>
             </select>
           </div>

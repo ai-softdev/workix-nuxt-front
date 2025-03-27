@@ -105,6 +105,7 @@ export const useUserStore = defineStore('user-list', {
       formD.set('patronymic', params.patronymic)
       formD.set('company_id', params.company_id)
       formD.set('department_id', params.department_id)
+      formD.set('head_user_id', params.head_user_id)
       if (typeof params.photo !== 'string') {
         formD.set('photo', params.photo)
       }

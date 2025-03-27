@@ -25,14 +25,14 @@ const props = defineProps({
   },
 })
 
-function normalizeTreeData(data) {
-  return Object.values(data).map(department => ({
-    ...department,
-    children: department.participants?.map(participant => ({
-      ...(participant._custom?.value || participant) // Берем `value`, если есть, иначе сам объект
-    })) || []
-  }));
-}
+// function normalizeTreeData(data) {
+//   return Object.values(data).map(department => ({
+//     ...department,
+//     children: department.participants?.map(participant => ({
+//       ...(participant._custom?.value || participant) // Берем `value`, если есть, иначе сам объект
+//     })) || []
+//   }));
+// }
 
 onMounted(() => {
   treeStore.loadTreeList()
@@ -85,26 +85,13 @@ onMounted(() => {
         class="relative border w-11/12 h-[80vh] mx-auto rounded-2xl overflow-hidden dark:border-gray-400 shadow dark:shadow-gray-400 transition-all duration-300"
         :class="{'!fixed left-0 top-0 !h-screen !w-screen flex !bg-opacity-60 !rounded-none !border-0 !bg-black z-[100] justify-center items-center' : treeStore.treeFullScreen === true}">
         <VueTree ref="scaleTree" class="mx-auto select-none relative rounded-2xl w-full h-full"
-                 :dataset="richMediaData =  normalizeTreeData(treeStore.get_list)"
-                 :config="treeConfig = {nodeWidth: 170, nodeHeight: 80, levelHeight: 170}">
-          <template v-slot:node="{ node, collapsed }">
+                 :dataset="richMediaData =  [...treeStore.get_list]"
+                 :config="treeConfig = { nodeWidth: 170, nodeHeight: 80, levelHeight: 170, nodeSpacing: 20 }">
+        <template v-slot:node="{ node, collapsed }">
             <div
               @dblclick="treeUserInfo = {id: node.id, first_name: node.first_name, last_name: node.last_name, photo_url: node.photo_url, position: node.position, department_id: node.department_id, department: node.department, role: node.role}"
               class="p-2 bg-blueDarkSemiLight transition-all rounded-lg"
               :class="{'shadow-md dark:shadow-gray-400 ' : node.id === treeUserInfo?.id}">
-              <div
-                  v-if="node.name"
-              >
-                <p
-                    class="text-white text-center break-words"
-                    style="font-weight: bold;"
-                >
-                  {{ node.name}}
-                </p>
-              </div>
-              <div
-                  v-if="node.first_name"
-              >
                 <img alt="photo" :src="node.photo"
                      class="w-[50px] h-[50px] rounded-full mx-auto"/>
                 <p
@@ -120,7 +107,6 @@ onMounted(() => {
                   {{ node.first_name?.length > 10 && node.last_name?.length > 10 ? (node.first_name + ' ' + node.last_name.slice(0, 9)) + '...' : node.first_name + ' ' + node.last_name}}
                 </p>
                 <p class="text-sm text-white text-center">{{node.position}}</p>
-              </div>
             </div>
           </template>
         </VueTree>

@@ -4,63 +4,63 @@
     {
       "name": "vite:load-fallback",
       "result": "<script setup lang=\"ts\">\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\nimport CompanyCreate from \"~/components/Company/admin/CompanyCreate.vue\";\n\nimport {useCompanies} from \"~/stores/companies\";\nimport {useAuthStore} from \"~/stores/auth\";\n\nimport CurrentCompanyInfo from \"~/components/Company/User/CurrentCompanyInfo.vue\";\nimport CompanyList from \"~/components/Company/admin/CompanyList.vue\";\nimport CompanyStats from \"~/components/Company/CompanyUI/CompanyStats.vue\";\nimport TheContentBlock from \"~/components/UI/TheContentBlock.vue\";\nimport CurrentCompanyChangeInfo from \"~/components/Company/User/CurrentCompanyChangeInfo.vue\";\n\nconst currentUser = useAuthStore()\nconst companies = useCompanies()\nconst params = {\n  page: 1,\n  limit: 5,\n  query: '',\n}\nfunction loadPage(page) {\n  if (page === '<') {\n    if (Number(params.page) > 1) {\n      params.page -= 1;\n    }\n  } else if (page === '>') {\n    if (Number(params.page) < companies.company.number_of_pages) {\n      params.page = Number(params.page) + 1\n    }\n  } else {\n    if (Number(page) <= companies.company.number_of_pages) {\n      params.page = Number(page)\n    }\n  }\n  // console.log(page)\n  if (window.innerWidth > 1000) {\n    window.scrollTo({top: 600})\n  } else if (window.innerWidth < 1000) {\n    window.scrollTo({top: 895})\n  } else {\n    window.scrollTo()\n  }\n}\nwatchEffect(() => {\n  if (currentUser.user.role?.name_en !== 'admin') {\n    companies.loadCurrentCompany()\n  } else {\n    companies.loadCompanyList({page: params.page, limit: params.limit, query: params.query})\n  }\n})\nuseSeoMeta({\n  title: 'О компании',\n  description: 'Страница с информацией о компании'\n})\n</script>\n\n<template>\n  <div>\n    <div v-if=\"currentUser.user.role?.name_en !== 'admin'\">\n      <div class=\"\">\n        <div class=\"flex items-center tracking-widest  gap-x-2 justify-center max-sm:flex-col mb-10\">\n          <p class=\"text-lg\">{{ $t('Страница информации о ') }}</p>\n          <p class=\"font-bold text-white bg-blueSemiLight p-2 px-4 rounded-full\">{{ companies.company.name}}</p>\n        </div>\n        <CurrentCompanyChangeInfo v-if=\"['company_admin', 'director', 'vice_director'].includes(currentUser.user.role?.name_en)\"/>\n      </div>\n      <div class=\"\">\n        <CurrentCompanyInfo/>\n      </div>\n    </div>\n    <div v-else-if=\"currentUser.user.role?.name_en === 'admin'\">\n      <TheTextContent :text-type=\"'pageTitle'\">\n        {{ $t('Страница списка Компаний') }}\n      </TheTextContent>\n      <div class=\"flex justify-between items-center\">\n        <TheSearch class=\"my-10 w-6/12\"/>\n        <CompanyCreate class=\"w-2/12\"></CompanyCreate>\n      </div>\n      <div class=\"flex gap-x-10\">\n        <div class=\"w-full gap-y-10 flex flex-col\">\n          <CompanyList v-for=\"item in companies?.get_all_company.results\" :company-block=\"item\"></CompanyList>\n        </div>\n        <TheContentBlock\n          class=\"w-3/12 h-full transition-all rounded-md p-4\">\n          <h2 class=\"text-center text-lg tracking-widest font-bold dark:text-white\">{{ $t('Информация Компаний') }}</h2>\n          <CompanyStats>\n            <template v-slot:statsName>\n              {{ $t('Количество компаний') }}\n            </template>\n            <template v-slot:statsValue>\n              <p v-if=\"companies.get_all_company.count > 0\">{{ companies.get_all_company.count }}</p>\n              <p v-else>{{ '0' }}</p>\n            </template>\n          </CompanyStats>\n        </TheContentBlock>\n      </div>\n      <div class=\"flex justify-center gap-x-4 mt-10\">\n        <div v-if=\"companies?.get_all_company.count > 5\" v-for=\"(page, id) in companies?.get_all_company.links\" :key=\"id\"\n             class=\"px-4 py-2  rounded-full cursor-pointer\"\n             :class=\"{'bg-blue-400 text-white' : page.active, 'bg-gray-200 text-black hover:bg-blue-400 hover:text-white transition-all' : !page.active}\"\n             @click=\"loadPage(page.label); companies.loadCompanyList({page: params.page, limit: params.limit, query: params.query})\">\n          {{ page.label }}\n        </div>\n      </div>\n\n    </div>\n  </div>\n</template>\n\n<style scoped lang=\"scss\">\n\n</style>",
-      "start": 1743096183335,
-      "end": 1743096183447,
+      "start": 1743102832307,
+      "end": 1743102832471,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1743096183448,
-      "end": 1743096183448,
+      "start": 1743102832471,
+      "end": 1743102832471,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1743096183448,
-      "end": 1743096183448,
+      "start": 1743102832471,
+      "end": 1743102832471,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1743096183448,
-      "end": 1743096183448,
+      "start": 1743102832471,
+      "end": 1743102832471,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1743096183448,
-      "end": 1743096183448,
+      "start": 1743102832471,
+      "end": 1743102832471,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1743096183448,
-      "end": 1743096183448,
+      "start": 1743102832471,
+      "end": 1743102832471,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1743096183448,
-      "end": 1743096183448,
+      "start": 1743102832471,
+      "end": 1743102832471,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1743096183448,
-      "end": 1743096183448,
+      "start": 1743102832471,
+      "end": 1743102832471,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1743096183448,
-      "end": 1743096183448,
+      "start": 1743102832471,
+      "end": 1743102832471,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "import _sfc_main from \"D:/projects/nuxt/workix-nuxt-front/pages/base/companies/index.vue?vue&type=script&setup=true&lang.ts\";\nexport * from \"D:/projects/nuxt/workix-nuxt-front/pages/base/companies/index.vue?vue&type=script&setup=true&lang.ts\";\nexport default _sfc_main;\n",
-      "start": 1743096183448,
-      "end": 1743096183505,
+      "start": 1743102832471,
+      "end": 1743102832697,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -68,170 +68,170 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1743096183506,
-      "end": 1743096183506,
+      "start": 1743102832698,
+      "end": 1743102832698,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1743096183507,
-      "end": 1743096183507,
+      "start": 1743102832698,
+      "end": 1743102832699,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1743096183508,
-      "end": 1743096183508,
+      "start": 1743102832700,
+      "end": 1743102832700,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1743096183509,
-      "end": 1743096183509,
+      "start": 1743102832701,
+      "end": 1743102832701,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1743096183511,
-      "end": 1743096183511,
+      "start": 1743102832701,
+      "end": 1743102832703,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1743096183512,
-      "end": 1743096183512,
+      "start": 1743102832704,
+      "end": 1743102832705,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1743096183513,
-      "end": 1743096183513,
+      "start": 1743102832705,
+      "end": 1743102832705,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1743096183513,
-      "end": 1743096183514,
+      "start": 1743102832706,
+      "end": 1743102832706,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1743096183514,
-      "end": 1743096183514,
+      "start": 1743102832707,
+      "end": 1743102832707,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1743096183515,
-      "end": 1743096183515,
+      "start": 1743102832707,
+      "end": 1743102832707,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1743096183515,
-      "end": 1743096183515,
+      "start": 1743102832708,
+      "end": 1743102832708,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1743096183516,
-      "end": 1743096183516,
+      "start": 1743102832708,
+      "end": 1743102832709,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1743096183516,
-      "end": 1743096183516,
+      "start": 1743102832709,
+      "end": 1743102832709,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1743096183517,
-      "end": 1743096183517,
+      "start": 1743102832710,
+      "end": 1743102832710,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1743096183517,
-      "end": 1743096183517,
+      "start": 1743102832711,
+      "end": 1743102832711,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1743096183518,
-      "end": 1743096183519,
+      "start": 1743102832711,
+      "end": 1743102832713,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1743096183521,
-      "end": 1743096183522,
+      "start": 1743102832714,
+      "end": 1743102832723,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1743096183523,
-      "end": 1743096183523,
+      "start": 1743102832724,
+      "end": 1743102832724,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1743096183525,
-      "end": 1743096183525,
+      "start": 1743102832725,
+      "end": 1743102832727,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1743096183527,
-      "end": 1743096183533,
+      "start": 1743102832728,
+      "end": 1743102832736,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1743096183535,
-      "end": 1743096183535,
+      "start": 1743102832737,
+      "end": 1743102832738,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1743096183538,
-      "end": 1743096183539,
+      "start": 1743102832739,
+      "end": 1743102832744,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1743096183539,
-      "end": 1743096183540,
+      "start": 1743102832745,
+      "end": 1743102832746,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1743096183540,
-      "end": 1743096183540,
+      "start": 1743102832747,
+      "end": 1743102832748,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1743096183542,
-      "end": 1743096183542,
+      "start": 1743102832749,
+      "end": 1743102832751,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1743096183543,
-      "end": 1743096183543,
+      "start": 1743102832751,
+      "end": 1743102832753,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1743096183543,
-      "end": 1743096183545,
+      "start": 1743102832754,
+      "end": 1743102832757,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1743096183545,
-      "end": 1743096183545,
+      "start": 1743102832758,
+      "end": 1743102832758,
       "order": "normal"
     }
   ]
