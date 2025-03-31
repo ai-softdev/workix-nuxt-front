@@ -21,6 +21,30 @@ export const useSales = defineStore('sales', {
                 this.sales = response.data
             })
         },
+        async loadSalesListFile() {
+            axios.post(`sales/report`, {}, {
+                responseType: 'blob',
+                headers: {
+                    Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
+                }
+            }).then(response => {
+                console.log(response)
+                if(response.status === 201){
+                    toast.success('Создание отчёта началось!', {autoClose: 1500, theme: 'auto'})
+                } else if (response.status === 200){
+                    const url = window.URL.createObjectURL(new Blob([response.data]));
+
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `sales.xlsx`;
+                    document.body.appendChild(a);
+                    a.click();
+
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                }
+            })
+        },
 
         async createItem(params: any) {
 

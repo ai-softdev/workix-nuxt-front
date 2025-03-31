@@ -864,7 +864,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$s == null ? void 0 : __nuxt_page_meta$s.redirect,
-        component: () => import("./_nuxt/chat-Dul9rEF8.js").then((m) => m.default || m),
+        component: () => import("./_nuxt/chat-WvPzdXxL.js").then((m) => m.default || m),
         children: [
           {
             name: "base-chat-id",
@@ -938,7 +938,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$k == null ? void 0 : __nuxt_page_meta$k.redirect,
-        component: () => import("./_nuxt/_slug_-ByeSkJbV.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/_slug_-dS_J5Scv.js").then((m) => m.default || m)
       },
       {
         name: "base-documents",
@@ -978,7 +978,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$f == null ? void 0 : __nuxt_page_meta$f.redirect,
-        component: () => import("./_nuxt/index-wLWVayVG.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/index-BXpMI6YK.js").then((m) => m.default || m)
       },
       {
         name: "base-profile",
@@ -994,7 +994,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$d == null ? void 0 : __nuxt_page_meta$d.redirect,
-        component: () => import("./_nuxt/index-D9_tApPy.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/index-CrhC1P69.js").then((m) => m.default || m)
       },
       {
         name: "base-sales-item-create",
@@ -1002,7 +1002,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$c == null ? void 0 : __nuxt_page_meta$c.redirect,
-        component: () => import("./_nuxt/index-CP8CrfrN.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/index-XLKfXtpM.js").then((m) => m.default || m)
       },
       {
         name: "base-storage",
@@ -1076,7 +1076,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$3 == null ? void 0 : __nuxt_page_meta$3.redirect,
-        component: () => import("./_nuxt/_slug_-JREDNqlT.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/_slug_-XjyQR-r3.js").then((m) => m.default || m)
       },
       {
         name: "base-users",
@@ -1084,7 +1084,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$2 == null ? void 0 : __nuxt_page_meta$2.redirect,
-        component: () => import("./_nuxt/index-DaGW85-i.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/index-C_Wvo40A.js").then((m) => m.default || m)
       }
     ]
   },

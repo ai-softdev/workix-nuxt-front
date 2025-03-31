@@ -17,7 +17,7 @@ const loadAuthStore = useAuthStore()
 const company = useCompanies()
 
 chatStore.loadChatList({page: 1, limit: 100})
-userStore.loadUserList({query: '', user_type: 'user-list/my-company', page: 1, limit: 10000})
+userStore.loadUserList({query: '', user_type: 'user-list', page: 1, limit: 10000})
 onMounted(() => {
   windowWidth.value = window.innerWidth
   if (route.path === '/base/chat') {

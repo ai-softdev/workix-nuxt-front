@@ -94,6 +94,30 @@ function createUser() {
   };
 }
 
+const showDropdown = ref(false);
+const filteredPositions = ref([]);
+const filterPositions = () => {
+  if (!createForm.value.position) {
+    filteredPositions.value = userList.get_position_list;
+  } else {
+    filteredPositions.value = userList.get_position_list.filter(position =>
+        position.name.toLowerCase().includes(createForm.value.position.toLowerCase())
+    );
+  }
+  showDropdown.value = true;
+};
+
+const selectPosition = (name) => {
+  createForm.value.position = name;
+  showDropdown.value = false;
+};
+
+const hideDropdown = () => {
+  setTimeout(() => {
+    showDropdown.value = false;
+  }, 200);
+};
+
 
 </script>
 
@@ -163,13 +187,24 @@ function createUser() {
           </div>
         </UserContentCreateElems>
         <UserContentCreateElems>
-          <div class="w-6/12 max-lg:w-full">
+          <div class="w-6/12 max-lg:w-full relative">
             <p class="text-md dark:text-white tracking-wider">{{ $t('Должность') }}</p>
-            <TheInput v-if="!userList?.get_position_list" type="text" name="text" :label="'Должность'" class="dark:text-white cursor-pointer" v-model="createForm.position"/>
-            <select v-else type="text" v-model="createForm.position" :modelValue="createForm.position"
-                    class="w-full dark:bg-gray-300 rounded-lg p-2.5 mt-2 border dark:border-none outline-semiCyan outline-1 text-black">
-              <option v-for="position in userList?.get_position_list" :value="position.name">{{ position.name }}</option>
-            </select>
+            <input
+                type="text"
+                v-model="createForm.position"
+                class="dark:text-white cursor-pointer w-full dark:bg-gray-300 rounded-lg p-2.5 mt-2 border dark:border-none outline-semiCyan outline-1 text-black"
+                @focus="showDropdown = true"
+                @blur="hideDropdown"
+                @input="filterPositions"
+            />
+            <ul v-if="showDropdown && filteredPositions.length"
+                class="absolute z-10 bg-white dark:bg-gray-800 w-full rounded-lg mt-1 border border-gray-300 dark:border-gray-600 shadow-md max-h-40 overflow-y-auto">
+              <li v-for="position in filteredPositions" :key="position.name"
+                  @mousedown="selectPosition(position.name)"
+                  class="p-2 hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer">
+                {{ position.name }}
+              </li>
+            </ul>
           </div>
         </UserContentCreateElems>
         <UserContentCreateElems>

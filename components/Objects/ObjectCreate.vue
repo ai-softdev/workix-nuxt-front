@@ -35,23 +35,10 @@ defineProps({
           <div class="w-6/12">
             <TheInput type="text" :label="$t('Наименование')" v-model="createForm.name"></TheInput>
           </div>
-          <div class="w-6/12">
-            <TheInput type="text" :label="$t('Email')" v-model="createForm.email"></TheInput>
-          </div>
         </ObjectContentCreateElems>
         <ObjectContentCreateElems class="flex-wrap">
           <div class="w-6/12">
             <TheInput type="text" :label="$t('Адрес')" v-model="createForm.address"></TheInput>
-          </div>
-          <div class="w-full text-center mx-auto border p-4 border-dashed rounded-md">
-            <TheInput type="file" :label="$t('Прикрепите файлы')"
-                      @input="createForm.files = $event.target.files[0]"></TheInput>
-          </div>
-        </ObjectContentCreateElems>
-        <ObjectContentCreateElems>
-          <div class="w-full">
-            <TheInput type="textarea" :label="$t('Описание')"
-                      v-model="createForm.description"></TheInput>
           </div>
         </ObjectContentCreateElems>
         <ObjectContentCreateElems>

@@ -928,7 +928,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./chat-Dul9rEF8.mjs').then((m) => m.default || m),
+        component: () => import('./chat-WvPzdXxL.mjs').then((m) => m.default || m),
         children: [
           {
             name: "base-chat-id",
@@ -1002,7 +1002,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./_slug_-ByeSkJbV.mjs').then((m) => m.default || m)
+        component: () => import('./_slug_-dS_J5Scv.mjs').then((m) => m.default || m)
       },
       {
         name: "base-documents",
@@ -1042,7 +1042,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-wLWVayVG.mjs').then((m) => m.default || m)
+        component: () => import('./index-BXpMI6YK.mjs').then((m) => m.default || m)
       },
       {
         name: "base-profile",
@@ -1058,7 +1058,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-D9_tApPy.mjs').then((m) => m.default || m)
+        component: () => import('./index-CrhC1P69.mjs').then((m) => m.default || m)
       },
       {
         name: "base-sales-item-create",
@@ -1066,7 +1066,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-CP8CrfrN.mjs').then((m) => m.default || m)
+        component: () => import('./index-XLKfXtpM.mjs').then((m) => m.default || m)
       },
       {
         name: "base-storage",
@@ -1140,7 +1140,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./_slug_-JREDNqlT.mjs').then((m) => m.default || m)
+        component: () => import('./_slug_-XjyQR-r3.mjs').then((m) => m.default || m)
       },
       {
         name: "base-users",
@@ -1148,7 +1148,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-DaGW85-i.mjs').then((m) => m.default || m)
+        component: () => import('./index-C_Wvo40A.mjs').then((m) => m.default || m)
       }
     ]
   },

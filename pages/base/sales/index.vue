@@ -87,6 +87,10 @@ const getSortDirection = (field) => {
   return 'rotate-180';
 };
 
+const downloadFile = () => {
+  sales.loadSalesListFile()
+}
+
 onMounted(()=> {
   sales.loadSalesList({page: page.value, limit: limit.value, name: itemName.value, min_price: min_price.value, max_price: max_price.value, min_count: min_count.value, max_count: max_count.value, order_by: orderString.value})
 })
@@ -150,16 +154,24 @@ watch(() => company.company, (newValue) => {
             {{ $t('Продажи') }}
           </TheBreadcrumbs>
         </div>
-        <NuxtLink
-            to="/base/sales/item-create"
-            class="ml-auto"
-        >
+        <div class="ml-auto flex items-center gap-3">
+          <NuxtLink
+              to="/base/sales/item-create"
+              class="ml-auto"
+          >
+            <UITheButton
+                class="border p-3 rounded-lg !text-black dark:!text-white"
+            >
+              Добавить товар
+            </UITheButton>
+          </NuxtLink>
           <UITheButton
+              @click="downloadFile"
               class="border p-3 rounded-lg !text-black dark:!text-white"
           >
-            Добавить товар
+            Экспортировать список
           </UITheButton>
-        </NuxtLink>
+        </div>
       </div>
       <div class="w-fit sales-up-table rounded-lg border mt-10 overflow-hidden">
         <div class="p-4 flex items-center gap-3">
@@ -376,6 +388,7 @@ watch(() => company.company, (newValue) => {
   border: 1px solid #ddd !important;
   border-radius: 8px;
   background: #8881;
+  cursor: pointer;
 }
 .dark .page-item.active .page-link{
   border: 1px solid rgba(255,255,255, 0.3) !important;
@@ -388,7 +401,19 @@ watch(() => company.company, (newValue) => {
   opacity: 0.5 !important;
 }
 
-@media (max-width: 1500px) {
+@media (max-width: 2100px) {
+  .sales-up-table {
+    max-width: 87vw;
+  }
+  .sales-table {
+    overflow: auto;
+    max-width: 87vw;
+  }
+  .sales-table table {
+    width: 2000px;
+  }
+}
+@media (max-width: 1800px) {
   .sales-up-table {
     max-width: 80vw;
   }

@@ -4,45 +4,45 @@
     {
       "name": "vite:load-fallback",
       "result": "import {defineStore} from \"pinia\";\nimport axios from \"~/composables/axios\";\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\nimport {toast} from \"vue3-toastify\";\nimport type {ICurrentCategory, TGoods} from \"~/types/storage\";\n\nexport const useStorageStore = defineStore('storage', {\n  state: () => ({\n    isActive: false,\n    createCategory: false,\n    storageCategoryList: [],\n    storageHomeAllList: [],\n    storageItem: {} as TGoods,\n    currentCategory: {} as ICurrentCategory,\n    contextMenuCategory: false,\n    scan: ref(null),\n    searchGoods: '',\n    searchCategory: '',\n    streaming: false,\n  }),\n  getters: {\n    getStorageCategoryList: (state) => state.storageCategoryList,\n    getStorageSubCategory: (state) => state.currentCategory,\n    getStorageHomeAllList: (state) => state.storageHomeAllList,\n    getStorageItem: (state) => state.storageItem\n  },\n  actions: {\n    async loadStorageCategoryList(): Promise<void> {\n      await axios.get(`store/category/list`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        this.storageCategoryList = res.data\n      })\n    },\n    async loadStorageSubCategory(params: { slug: string | string[], search?: string | number }): Promise<void> {\n      await axios.get(`store/subcategory/${params.slug}?search=${params.search}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        this.currentCategory = res.data\n\n      }).catch(e => {\n      })\n    },\n    async loadStorageCategorySearch(params: { query: string | number }): Promise<void> {\n      await axios.get(`store/category/list?name=${params.query}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        this.storageCategoryList = res.data\n      })\n    },\n    async loadAllList(): Promise<void> {\n      await axios.get(`store/item/list`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        this.storageHomeAllList = res.data\n      })\n    },\n    async loadAllListSearch(params: { search?: any }): Promise<void> {\n      await axios.get(`store/item/list?search=${params.search}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        this.storageHomeAllList = res.data\n      })\n    },\n    async loadItem(params: { itemSlug: string | string[] }): Promise<void> {\n      await axios.get(`store/item/${params.itemSlug}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        this.storageItem = res.data\n      })\n    },\n    async createStorageCategoryOrSubcategory(params: {\n      createType?: string,\n      name: string,\n      category_id?: number\n    }): Promise<void> {\n      await axios.post(`store/${params.createType}/create`, {\n        name: params.name,\n        category_id: params.createType === 'subcategory' ? params.category_id : null\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        this.loadStorageCategoryList()\n        this.createCategory = false\n        toast.success('Успешно создано', {autoClose: 1500, theme: 'auto'})\n      }).catch(e => {\n        toast.error('Возникла ошибка при создании', {autoClose: 1500, theme: 'auto'})\n      })\n    },\n    async updateStorageElem(params: { updateType: string, id: number }): Promise<void> {\n      await axios.patch(`store/${params.updateType}/update`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n\n      }).catch(e => {\n\n      })\n    },\n    async deleteStorageElem(params: { deleteType: string, id: number }): Promise<void> {\n      await axios.delete(`store/${params.deleteType}/delete/${params.id}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        if (['subcategory', 'category'].includes(params.deleteType)) {\n          this.loadStorageCategoryList()\n        }\n        toast.success('Успешно удалён', {autoClose: 1500, theme: 'auto'})\n      })\n    }\n  }\n})",
-      "start": 1743102837967,
-      "end": 1743102838159,
+      "start": 1743442375327,
+      "end": 1743442375541,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1743102838159,
-      "end": 1743102838159,
+      "start": 1743442375541,
+      "end": 1743442375541,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1743102838159,
-      "end": 1743102838159,
+      "start": 1743442375541,
+      "end": 1743442375541,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1743102838159,
-      "end": 1743102838159,
+      "start": 1743442375541,
+      "end": 1743442375541,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1743102838159,
-      "end": 1743102838159,
+      "start": 1743442375541,
+      "end": 1743442375541,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1743102838159,
-      "end": 1743102838159,
+      "start": 1743442375541,
+      "end": 1743442375541,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineStore } from \"pinia\";\nimport axios from \"~/composables/axios\";\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\nimport { toast } from \"vue3-toastify\";\nexport const useStorageStore = defineStore(\"storage\", {\n  state: () => ({\n    isActive: false,\n    createCategory: false,\n    storageCategoryList: [],\n    storageHomeAllList: [],\n    storageItem: {},\n    currentCategory: {},\n    contextMenuCategory: false,\n    scan: ref(null),\n    searchGoods: \"\",\n    searchCategory: \"\",\n    streaming: false\n  }),\n  getters: {\n    getStorageCategoryList: (state) => state.storageCategoryList,\n    getStorageSubCategory: (state) => state.currentCategory,\n    getStorageHomeAllList: (state) => state.storageHomeAllList,\n    getStorageItem: (state) => state.storageItem\n  },\n  actions: {\n    async loadStorageCategoryList() {\n      await axios.get(`store/category/list`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.storageCategoryList = res.data;\n      });\n    },\n    async loadStorageSubCategory(params) {\n      await axios.get(`store/subcategory/${params.slug}?search=${params.search}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.currentCategory = res.data;\n      }).catch((e) => {\n      });\n    },\n    async loadStorageCategorySearch(params) {\n      await axios.get(`store/category/list?name=${params.query}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.storageCategoryList = res.data;\n      });\n    },\n    async loadAllList() {\n      await axios.get(`store/item/list`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.storageHomeAllList = res.data;\n      });\n    },\n    async loadAllListSearch(params) {\n      await axios.get(`store/item/list?search=${params.search}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.storageHomeAllList = res.data;\n      });\n    },\n    async loadItem(params) {\n      await axios.get(`store/item/${params.itemSlug}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.storageItem = res.data;\n      });\n    },\n    async createStorageCategoryOrSubcategory(params) {\n      await axios.post(`store/${params.createType}/create`, {\n        name: params.name,\n        category_id: params.createType === \"subcategory\" ? params.category_id : null\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.loadStorageCategoryList();\n        this.createCategory = false;\n        toast.success(\"Успешно создано\", { autoClose: 1500, theme: \"auto\" });\n      }).catch((e) => {\n        toast.error(\"Возникла ошибка при создании\", { autoClose: 1500, theme: \"auto\" });\n      });\n    },\n    async updateStorageElem(params) {\n      await axios.patch(`store/${params.updateType}/update`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n      }).catch((e) => {\n      });\n    },\n    async deleteStorageElem(params) {\n      await axios.delete(`store/${params.deleteType}/delete/${params.id}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        if ([\"subcategory\", \"category\"].includes(params.deleteType)) {\n          this.loadStorageCategoryList();\n        }\n        toast.success(\"Успешно удалён\", { autoClose: 1500, theme: \"auto\" });\n      });\n    }\n  }\n});\n",
-      "start": 1743102838159,
-      "end": 1743102838474,
+      "start": 1743442375541,
+      "end": 1743442376634,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -58,141 +58,141 @@
     },
     {
       "name": "vite:json",
-      "start": 1743102838474,
-      "end": 1743102838474,
+      "start": 1743442376634,
+      "end": 1743442376634,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1743102838474,
-      "end": 1743102838474,
+      "start": 1743442376634,
+      "end": 1743442376634,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1743102838474,
-      "end": 1743102838474,
+      "start": 1743442376635,
+      "end": 1743442376635,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1743102838474,
-      "end": 1743102838474,
+      "start": 1743442376635,
+      "end": 1743442376635,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1743102838475,
-      "end": 1743102838475,
+      "start": 1743442376635,
+      "end": 1743442376636,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1743102838475,
-      "end": 1743102838475,
+      "start": 1743442376636,
+      "end": 1743442376636,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1743102838475,
-      "end": 1743102838475,
+      "start": 1743442376636,
+      "end": 1743442376636,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1743102838475,
-      "end": 1743102838475,
+      "start": 1743442376636,
+      "end": 1743442376636,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1743102838476,
-      "end": 1743102838476,
+      "start": 1743442376636,
+      "end": 1743442376636,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1743102838476,
-      "end": 1743102838476,
+      "start": 1743442376636,
+      "end": 1743442376636,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1743102838476,
-      "end": 1743102838476,
+      "start": 1743442376636,
+      "end": 1743442376637,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1743102838476,
-      "end": 1743102838476,
+      "start": 1743442376637,
+      "end": 1743442376637,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1743102838476,
-      "end": 1743102838476,
+      "start": 1743442376637,
+      "end": 1743442376637,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1743102838476,
-      "end": 1743102838476,
+      "start": 1743442376637,
+      "end": 1743442376637,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1743102838476,
-      "end": 1743102838476,
+      "start": 1743442376637,
+      "end": 1743442376637,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1743102838477,
-      "end": 1743102838477,
+      "start": 1743442376646,
+      "end": 1743442376646,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1743102838477,
-      "end": 1743102838477,
+      "start": 1743442376647,
+      "end": 1743442376647,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1743102838477,
-      "end": 1743102838477,
+      "start": 1743442376647,
+      "end": 1743442376647,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1743102838477,
-      "end": 1743102838477,
+      "start": 1743442376647,
+      "end": 1743442376647,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1743102838478,
-      "end": 1743102838478,
+      "start": 1743442376648,
+      "end": 1743442376648,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1743102838479,
-      "end": 1743102838479,
+      "start": 1743442376649,
+      "end": 1743442376649,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1743102838479,
-      "end": 1743102838479,
+      "start": 1743442376649,
+      "end": 1743442376649,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref } from 'vue';\nimport { defineStore } from \"pinia\";\nimport axios from \"~/composables/axios\";\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\nimport { toast } from \"vue3-toastify\";\nexport const useStorageStore = defineStore(\"storage\", {\n  state: () => ({\n    isActive: false,\n    createCategory: false,\n    storageCategoryList: [],\n    storageHomeAllList: [],\n    storageItem: {},\n    currentCategory: {},\n    contextMenuCategory: false,\n    scan: ref(null),\n    searchGoods: \"\",\n    searchCategory: \"\",\n    streaming: false\n  }),\n  getters: {\n    getStorageCategoryList: (state) => state.storageCategoryList,\n    getStorageSubCategory: (state) => state.currentCategory,\n    getStorageHomeAllList: (state) => state.storageHomeAllList,\n    getStorageItem: (state) => state.storageItem\n  },\n  actions: {\n    async loadStorageCategoryList() {\n      await axios.get(`store/category/list`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.storageCategoryList = res.data;\n      });\n    },\n    async loadStorageSubCategory(params) {\n      await axios.get(`store/subcategory/${params.slug}?search=${params.search}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.currentCategory = res.data;\n      }).catch((e) => {\n      });\n    },\n    async loadStorageCategorySearch(params) {\n      await axios.get(`store/category/list?name=${params.query}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.storageCategoryList = res.data;\n      });\n    },\n    async loadAllList() {\n      await axios.get(`store/item/list`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.storageHomeAllList = res.data;\n      });\n    },\n    async loadAllListSearch(params) {\n      await axios.get(`store/item/list?search=${params.search}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.storageHomeAllList = res.data;\n      });\n    },\n    async loadItem(params) {\n      await axios.get(`store/item/${params.itemSlug}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.storageItem = res.data;\n      });\n    },\n    async createStorageCategoryOrSubcategory(params) {\n      await axios.post(`store/${params.createType}/create`, {\n        name: params.name,\n        category_id: params.createType === \"subcategory\" ? params.category_id : null\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.loadStorageCategoryList();\n        this.createCategory = false;\n        toast.success(\"Успешно создано\", { autoClose: 1500, theme: \"auto\" });\n      }).catch((e) => {\n        toast.error(\"Возникла ошибка при создании\", { autoClose: 1500, theme: \"auto\" });\n      });\n    },\n    async updateStorageElem(params) {\n      await axios.patch(`store/${params.updateType}/update`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n      }).catch((e) => {\n      });\n    },\n    async deleteStorageElem(params) {\n      await axios.delete(`store/${params.deleteType}/delete/${params.id}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        if ([\"subcategory\", \"category\"].includes(params.deleteType)) {\n          this.loadStorageCategoryList();\n        }\n        toast.success(\"Успешно удалён\", { autoClose: 1500, theme: \"auto\" });\n      });\n    }\n  }\n});\n",
-      "start": 1743102838479,
-      "end": 1743102838489,
+      "start": 1743442376649,
+      "end": 1743442376657,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -205,50 +205,50 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1743102838489,
-      "end": 1743102838489,
+      "start": 1743442376657,
+      "end": 1743442376657,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1743102838489,
-      "end": 1743102838489,
+      "start": 1743442376657,
+      "end": 1743442376657,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1743102838489,
-      "end": 1743102838489,
+      "start": 1743442376657,
+      "end": 1743442376657,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1743102838490,
-      "end": 1743102838490,
+      "start": 1743442376658,
+      "end": 1743442376658,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1743102838490,
-      "end": 1743102838490,
+      "start": 1743442376658,
+      "end": 1743442376658,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1743102838490,
-      "end": 1743102838490,
+      "start": 1743442376658,
+      "end": 1743442376658,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1743102838490,
-      "end": 1743102838491,
+      "start": 1743442376658,
+      "end": 1743442376658,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1743102838491,
-      "end": 1743102838491,
+      "start": 1743442376658,
+      "end": 1743442376658,
       "order": "normal"
     }
   ]

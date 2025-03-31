@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, resolveComponent as _resolveComponent } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\"\n\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport {useAuthStore} from \"~/stores/auth\";\n\n\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'index',\n  __ssrInlineRender: true,\n  setup(__props) {\n\nconst currentUser = useAuthStore()\n\nuseSeoMeta({\n  title: 'Пользователи',\n  description: 'Список пользователей данной платформы'\n})\n\nonMounted(()=> {\n  currentUser.loadCurrentUserWorker()\n})\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  const _component_UserContent = _resolveComponent(\"UserContent\")!\n\n  _push(`<div${_ssrRenderAttrs(_attrs)}>`)\n  _push(_ssrRenderComponent(TheTextContent, { \"text-type\": 'pageTitle' }, {\n    default: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(`${_ssrInterpolate(_ctx.$t('Страница с пользователями'))}`)\n      } else {\n        return [\n          _createTextVNode(_toDisplayString(_ctx.$t('Страница с пользователями')), 1)\n        ]\n      }\n    }),\n    _: 1\n  }, _parent))\n  _push(`<p class=\"dark:text-gray-300 tracking-widest text-sm\">${_ssrInterpolate(_ctx.$t('Данная страница хранит информацию о пользователях данной платформы'))}</p><div>`)\n  _push(_ssrRenderComponent(_component_UserContent, null, null, _parent))\n  _push(`</div></div>`)\n}\n}\n\n})",
-      "start": 1743102867681,
-      "end": 1743102867681,
+      "start": 1743442415050,
+      "end": 1743442415050,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1743102867681,
-      "end": 1743102867681,
+      "start": 1743442415050,
+      "end": 1743442415050,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1743102867681,
-      "end": 1743102867681,
+      "start": 1743442415050,
+      "end": 1743442415050,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1743102867681,
-      "end": 1743102867681,
+      "start": 1743442415050,
+      "end": 1743442415050,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1743102867681,
-      "end": 1743102867681,
+      "start": 1743442415050,
+      "end": 1743442415050,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1743102867681,
-      "end": 1743102867681,
+      "start": 1743442415050,
+      "end": 1743442415051,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1743102867681,
-      "end": 1743102867681,
+      "start": 1743442415050,
+      "end": 1743442415051,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1743102867681,
-      "end": 1743102867681,
+      "start": 1743442415051,
+      "end": 1743442415051,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1743102867681,
-      "end": 1743102867681,
+      "start": 1743442415051,
+      "end": 1743442415051,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, resolveComponent as _resolveComponent } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport { useAuthStore } from \"~/stores/auth\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const currentUser = useAuthStore();\n    useSeoMeta({\n      title: \"Пользователи\",\n      description: \"Список пользователей данной платформы\"\n    });\n    onMounted(() => {\n      currentUser.loadCurrentUserWorker();\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_UserContent = _resolveComponent(\"UserContent\");\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(TheTextContent, { \"text-type\": \"pageTitle\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Страница с пользователями\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Страница с пользователями\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<p class=\"dark:text-gray-300 tracking-widest text-sm\">${_ssrInterpolate(_ctx.$t(\"Данная страница хранит информацию о пользователях данной платформы\"))}</p><div>`);\n      _push(_ssrRenderComponent(_component_UserContent, null, null, _parent));\n      _push(`</div></div>`);\n    };\n  }\n});\n",
-      "start": 1743102867681,
-      "end": 1743102868936,
+      "start": 1743442415051,
+      "end": 1743442415876,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -89,171 +89,171 @@
     },
     {
       "name": "vite:json",
-      "start": 1743102868936,
-      "end": 1743102868936,
+      "start": 1743442415876,
+      "end": 1743442415876,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1743102868936,
-      "end": 1743102868936,
+      "start": 1743442415876,
+      "end": 1743442415876,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1743102868936,
-      "end": 1743102868936,
+      "start": 1743442415876,
+      "end": 1743442415876,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1743102868936,
-      "end": 1743102868936,
+      "start": 1743442415876,
+      "end": 1743442415876,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1743102868937,
-      "end": 1743102868937,
+      "start": 1743442415877,
+      "end": 1743442415877,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1743102868937,
-      "end": 1743102868937,
+      "start": 1743442415877,
+      "end": 1743442415877,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1743102868937,
-      "end": 1743102868937,
+      "start": 1743442415877,
+      "end": 1743442415877,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1743102868937,
-      "end": 1743102868937,
+      "start": 1743442415877,
+      "end": 1743442415877,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1743102868937,
-      "end": 1743102868937,
+      "start": 1743442415877,
+      "end": 1743442415877,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1743102868938,
-      "end": 1743102868938,
+      "start": 1743442415877,
+      "end": 1743442415877,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1743102868940,
-      "end": 1743102868941,
+      "start": 1743442415878,
+      "end": 1743442415879,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1743102868942,
-      "end": 1743102868946,
+      "start": 1743442415880,
+      "end": 1743442415880,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1743102868947,
-      "end": 1743102868947,
+      "start": 1743442415880,
+      "end": 1743442415880,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1743102868947,
-      "end": 1743102868947,
+      "start": 1743442415880,
+      "end": 1743442415880,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1743102868947,
-      "end": 1743102868947,
+      "start": 1743442415880,
+      "end": 1743442415880,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1743102868947,
-      "end": 1743102868947,
+      "start": 1743442415880,
+      "end": 1743442415880,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1743102868947,
-      "end": 1743102868947,
+      "start": 1743442415880,
+      "end": 1743442415880,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1743102868947,
-      "end": 1743102868947,
+      "start": 1743442415880,
+      "end": 1743442415880,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1743102868947,
-      "end": 1743102868947,
+      "start": 1743442415880,
+      "end": 1743442415880,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1743102868950,
-      "end": 1743102868950,
+      "start": 1743442415880,
+      "end": 1743442415880,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1743102868950,
-      "end": 1743102868950,
+      "start": 1743442415880,
+      "end": 1743442415880,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1743102868951,
-      "end": 1743102868951,
+      "start": 1743442415881,
+      "end": 1743442415881,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1743102868951,
-      "end": 1743102868951,
+      "start": 1743442415881,
+      "end": 1743442415881,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1743102868951,
-      "end": 1743102868951,
+      "start": 1743442415881,
+      "end": 1743442415881,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1743102868951,
-      "end": 1743102868951,
+      "start": 1743442415881,
+      "end": 1743442415881,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1743102868952,
-      "end": 1743102868952,
+      "start": 1743442415881,
+      "end": 1743442415881,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1743102868952,
-      "end": 1743102868952,
+      "start": 1743442415881,
+      "end": 1743442415881,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { useSeoMeta } from '@unhead/vue';\nimport { onMounted } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, resolveComponent as _resolveComponent } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport { useAuthStore } from \"~/stores/auth\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const currentUser = useAuthStore();\n    useSeoMeta({\n      title: \"Пользователи\",\n      description: \"Список пользователей данной платформы\"\n    });\n    onMounted(() => {\n      currentUser.loadCurrentUserWorker();\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_UserContent = _resolveComponent(\"UserContent\");\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(TheTextContent, { \"text-type\": \"pageTitle\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Страница с пользователями\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Страница с пользователями\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<p class=\"dark:text-gray-300 tracking-widest text-sm\">${_ssrInterpolate(_ctx.$t(\"Данная страница хранит информацию о пользователях данной платформы\"))}</p><div>`);\n      _push(_ssrRenderComponent(_component_UserContent, null, null, _parent));\n      _push(`</div></div>`);\n    };\n  }\n});\n",
-      "start": 1743102868953,
-      "end": 1743102869008,
+      "start": 1743442415881,
+      "end": 1743442415884,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -267,8 +267,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { useSeoMeta } from '@unhead/vue';\nimport { onMounted } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, resolveComponent as _resolveComponent } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport { useAuthStore } from \"~/stores/auth\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const currentUser = useAuthStore();\n    useSeoMeta({\n      title: \"Пользователи\",\n      description: \"Список пользователей данной платформы\"\n    });\n    onMounted(() => {\n      currentUser.loadCurrentUserWorker();\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_UserContent = _resolveComponent(\"UserContent\");\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(TheTextContent, { \"text-type\": \"pageTitle\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Страница с пользователями\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Страница с пользователями\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<p class=\"dark:text-gray-300 tracking-widest text-sm\">${_ssrInterpolate(_ctx.$t(\"Данная страница хранит информацию о пользователях данной платформы\"))}</p><div>`);\n      _push(_ssrRenderComponent(_component_UserContent, null, null, _parent));\n      _push(`</div></div>`);\n    };\n  }\n});\n",
-      "start": 1743102868953,
-      "end": 1743102869008,
+      "start": 1743442415881,
+      "end": 1743442415884,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -281,39 +281,39 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1743102869009,
-      "end": 1743102869009,
+      "start": 1743442415885,
+      "end": 1743442415885,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1743102869009,
-      "end": 1743102869009,
+      "start": 1743442415885,
+      "end": 1743442415885,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1743102869011,
-      "end": 1743102869018,
+      "start": 1743442415886,
+      "end": 1743442415886,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1743102869011,
-      "end": 1743102869018,
+      "start": 1743442415886,
+      "end": 1743442415886,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1743102869019,
-      "end": 1743102869019,
+      "start": 1743442415886,
+      "end": 1743442415886,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
       "result": "import { default as __nuxt_component_0 } from \"D:/projects/nuxt/workix-nuxt-front/components/User/UserContent.vue\";\nimport { useSeoMeta } from '@unhead/vue';\nimport { onMounted } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, resolveComponent as _resolveComponent } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport { useAuthStore } from \"~/stores/auth\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const currentUser = useAuthStore();\n    useSeoMeta({\n      title: \"Пользователи\",\n      description: \"Список пользователей данной платформы\"\n    });\n    onMounted(() => {\n      currentUser.loadCurrentUserWorker();\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_UserContent = __nuxt_component_0;\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(TheTextContent, { \"text-type\": \"pageTitle\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Страница с пользователями\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Страница с пользователями\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<p class=\"dark:text-gray-300 tracking-widest text-sm\">${_ssrInterpolate(_ctx.$t(\"Данная страница хранит информацию о пользователях данной платформы\"))}</p><div>`);\n      _push(_ssrRenderComponent(_component_UserContent, null, null, _parent));\n      _push(`</div></div>`);\n    };\n  }\n});\n",
-      "start": 1743102869020,
-      "end": 1743102869020,
+      "start": 1743442415886,
+      "end": 1743442415886,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -327,8 +327,8 @@
     {
       "name": "nuxt:tree-shake-composables:transform",
       "result": "import { default as __nuxt_component_0 } from \"D:/projects/nuxt/workix-nuxt-front/components/User/UserContent.vue\";\nimport { useSeoMeta } from '@unhead/vue';\nimport { onMounted } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, resolveComponent as _resolveComponent } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport { useAuthStore } from \"~/stores/auth\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const currentUser = useAuthStore();\n    useSeoMeta({\n      title: \"Пользователи\",\n      description: \"Список пользователей данной платформы\"\n    });\n     false && /*@__PURE__*/ onMounted(() => {\n      currentUser.loadCurrentUserWorker();\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_UserContent = __nuxt_component_0;\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(TheTextContent, { \"text-type\": \"pageTitle\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Страница с пользователями\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Страница с пользователями\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<p class=\"dark:text-gray-300 tracking-widest text-sm\">${_ssrInterpolate(_ctx.$t(\"Данная страница хранит информацию о пользователях данной платформы\"))}</p><div>`);\n      _push(_ssrRenderComponent(_component_UserContent, null, null, _parent));\n      _push(`</div></div>`);\n    };\n  }\n});\n",
-      "start": 1743102869023,
-      "end": 1743102869026,
+      "start": 1743442415887,
+      "end": 1743442415888,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -341,14 +341,14 @@
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1743102869026,
-      "end": 1743102869027,
+      "start": 1743442415888,
+      "end": 1743442415888,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1743102869027,
-      "end": 1743102869027,
+      "start": 1743442415889,
+      "end": 1743442415889,
       "order": "normal"
     }
   ]
