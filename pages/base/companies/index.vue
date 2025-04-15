@@ -73,16 +73,16 @@ useSeoMeta({
       <TheTextContent :text-type="'pageTitle'">
         {{ $t('Страница списка Компаний') }}
       </TheTextContent>
-      <div class="flex justify-between items-center">
-        <TheSearch class="my-10 w-6/12"/>
-        <CompanyCreate class="w-2/12"></CompanyCreate>
+      <div class="flex justify-between items-center max-md:flex-col">
+        <TheSearch class="my-10 w-6/12 max-md:w-full"/>
+        <CompanyCreate class="w-2/12 max-md:w-full"></CompanyCreate>
       </div>
-      <div class="flex gap-x-10">
-        <div class="w-full gap-y-10 flex flex-col">
+      <div class="flex gap-x-10 max-md:flex-col max-md:mt-5">
+        <div class="w-full gap-y-10 flex flex-col max-md:order-2">
           <CompanyList v-for="item in companies?.get_all_company.results" :company-block="item"></CompanyList>
         </div>
         <TheContentBlock
-          class="w-3/12 h-full transition-all rounded-md p-4">
+          class="w-3/12 h-full transition-all rounded-md p-4 max-md:w-full">
           <h2 class="text-center text-lg tracking-widest font-bold dark:text-white">{{ $t('Информация Компаний') }}</h2>
           <CompanyStats>
             <template v-slot:statsName>

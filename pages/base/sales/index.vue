@@ -169,7 +169,7 @@ watch(() => company.company, (newValue) => {
               @click="downloadFile"
               class="border p-3 rounded-lg !text-black dark:!text-white"
           >
-            Экспортировать список
+            Экспортировать в файл
           </UITheButton>
         </div>
       </div>

@@ -920,7 +920,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0 ,
-    component: () => import('./base-BJqV4Gsm.mjs').then((m) => m.default || m),
+    component: () => import('./base-PHvXQ06Y.mjs').then((m) => m.default || m),
     children: [
       {
         name: "base-chat",
@@ -978,7 +978,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-CNrDIoR7.mjs').then((m) => m.default || m)
+        component: () => import('./index-79kj2ieG.mjs').then((m) => m.default || m)
       },
       {
         name: "base-companies-news-id",
@@ -1058,7 +1058,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-CrhC1P69.mjs').then((m) => m.default || m)
+        component: () => import('./index-BXs7TdpV.mjs').then((m) => m.default || m)
       },
       {
         name: "base-sales-item-create",
@@ -1263,7 +1263,7 @@ const validate = /* @__PURE__ */ defineNuxtRouteMiddleware(async (to) => {
 });
 const inlineConfig = {
   "nuxt": {
-    "buildId": "dev"
+    "buildId": "fa8f98b7-a326-4886-b826-8b1c07f60640"
   },
   "ui": {
     "primary": "green",

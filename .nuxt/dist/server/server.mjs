@@ -856,7 +856,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: __nuxt_page_meta$1 == null ? void 0 : __nuxt_page_meta$1.redirect,
-    component: () => import("./_nuxt/base-BJqV4Gsm.js").then((m) => m.default || m),
+    component: () => import("./_nuxt/base-PHvXQ06Y.js").then((m) => m.default || m),
     children: [
       {
         name: "base-chat",
@@ -914,7 +914,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$n == null ? void 0 : __nuxt_page_meta$n.redirect,
-        component: () => import("./_nuxt/index-CNrDIoR7.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/index-79kj2ieG.js").then((m) => m.default || m)
       },
       {
         name: "base-companies-news-id",
@@ -994,7 +994,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$d == null ? void 0 : __nuxt_page_meta$d.redirect,
-        component: () => import("./_nuxt/index-CrhC1P69.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/index-BXs7TdpV.js").then((m) => m.default || m)
       },
       {
         name: "base-sales-item-create",
@@ -1199,7 +1199,7 @@ const validate = /* @__PURE__ */ defineNuxtRouteMiddleware(async (to) => {
 });
 const inlineConfig = {
   "nuxt": {
-    "buildId": "dev"
+    "buildId": "fa8f98b7-a326-4886-b826-8b1c07f60640"
   },
   "ui": {
     "primary": "green",

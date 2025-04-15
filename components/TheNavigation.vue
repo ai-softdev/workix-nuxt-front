@@ -329,7 +329,7 @@
           </NavigationLink>
         </template>
       </NavigationBlock>
-      <div class="h-full transition-all duration-500 mx-auto">
+      <div class="h-full transition-all duration-500 mx-auto max-md:!ml-3">
         <TheButton
             class="rounded-full flex items-center gap-x-2 hover:dark:bg-semiCyan hover:bg-cyan transition-all duration-200 p-2"
             @click="logOut()">

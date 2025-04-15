@@ -50,6 +50,7 @@ import nuxtStorage from "nuxt-storage/nuxt-storage";
 import TheNavigation from "~/components/TheNavigation.vue";
 
 const treeStore = useTreeStore()
+
 const chat = useChat()
 const notice = useNotification()
 const route = useRouter()
@@ -125,6 +126,13 @@ function notification() {
     ws.close();
   };
 }
+onMounted(() => {
+  route.afterEach(() => {
+    if (window.innerWidth <= 636) {
+      user.activeNav = false
+    }
+  })
+})
 
 onMounted(() => {
   if (!nuxtStorage.localStorage.getData('token')) {
@@ -144,6 +152,8 @@ onUpdated(() => {
     })
   }
 })
+
+
 
 useHead({
   titleTemplate: (title) => {

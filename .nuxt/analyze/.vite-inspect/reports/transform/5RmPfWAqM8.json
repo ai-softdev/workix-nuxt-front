@@ -4,44 +4,44 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, unref as _unref, renderList as _renderList, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock, createBlock as _createBlock, createElementVNode as _createElementVNode, withCtx as _withCtx, createVNode as _createVNode } from \"vue\"\n\nconst _hoisted_1 = { class: \"w-11/12 mx-auto\" }\n\nimport {useCompanies} from \"~/stores/companies\";\nimport {useAuthStore} from \"~/stores/auth\";\nimport CurrentCompanyElems from \"~/components/Company/CompanyUI/CurrentCompanyElems.vue\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport CurrentCompanyNewsList from \"~/components/Company/User/News/CurrentCompanyNewsList.vue\";\n\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'CurrentCompanyNews',\n  setup(__props) {\n\nconst currentUser = useAuthStore()\nconst companyNews = useCompanies()\n\nwatchEffect(() => {\n  companyNews.loadNewsList()\n})\n\nreturn (_ctx: any,_cache: any) => {\n  return (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n    _createVNode(CurrentCompanyElems, null, {\n      blockTitle: _withCtx(() => [\n        _createTextVNode(_toDisplayString(_ctx.$t('Новости компании')), 1)\n      ]),\n      blockContent: _withCtx(() => [\n        _createElementVNode(\"div\", null, [\n          (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(companyNews).get_all_news, (companyItem) => {\n            return (_openBlock(), _createBlock(CurrentCompanyNewsList, { \"news-item\": companyItem }, null, 8, [\"news-item\"]))\n          }), 256))\n        ])\n      ]),\n      _: 1\n    })\n  ]))\n}\n}\n\n})",
-      "start": 1743442379636,
-      "end": 1743442379636
+      "start": 1744735565582,
+      "end": 1744735565582
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1743442379636,
-      "end": 1743442379636,
+      "start": 1744735565583,
+      "end": 1744735565583,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1743442379636,
-      "end": 1743442379636,
+      "start": 1744735565583,
+      "end": 1744735565583,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1743442379636,
-      "end": 1743442379636,
+      "start": 1744735565583,
+      "end": 1744735565583,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1743442379636,
-      "end": 1743442379636,
+      "start": 1744735565583,
+      "end": 1744735565583,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1743442379636,
-      "end": 1743442379636,
+      "start": 1744735565583,
+      "end": 1744735565583,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, unref as _unref, renderList as _renderList, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock, createBlock as _createBlock, createElementVNode as _createElementVNode, withCtx as _withCtx, createVNode as _createVNode } from \"vue\";\nconst _hoisted_1 = { class: \"w-11/12 mx-auto\" };\nimport { useCompanies } from \"~/stores/companies\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport CurrentCompanyElems from \"~/components/Company/CompanyUI/CurrentCompanyElems.vue\";\nimport CurrentCompanyNewsList from \"~/components/Company/User/News/CurrentCompanyNewsList.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"CurrentCompanyNews\",\n  setup(__props) {\n    const currentUser = useAuthStore();\n    const companyNews = useCompanies();\n    watchEffect(() => {\n      companyNews.loadNewsList();\n    });\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n        _createVNode(CurrentCompanyElems, null, {\n          blockTitle: _withCtx(() => [\n            _createTextVNode(_toDisplayString(_ctx.$t(\"Новости компании\")), 1)\n          ]),\n          blockContent: _withCtx(() => [\n            _createElementVNode(\"div\", null, [\n              (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(companyNews).get_all_news, (companyItem) => {\n                return _openBlock(), _createBlock(CurrentCompanyNewsList, { \"news-item\": companyItem }, null, 8, [\"news-item\"]);\n              }), 256))\n            ])\n          ]),\n          _: 1\n        })\n      ]);\n    };\n  }\n});\n",
-      "start": 1743442379637,
-      "end": 1743442380012,
+      "start": 1744735565583,
+      "end": 1744735565945,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -57,141 +57,141 @@
     },
     {
       "name": "vite:json",
-      "start": 1743442380013,
-      "end": 1743442380013,
+      "start": 1744735565945,
+      "end": 1744735565945,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1743442380013,
-      "end": 1743442380013,
+      "start": 1744735565945,
+      "end": 1744735565945,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1743442380014,
-      "end": 1743442380014,
+      "start": 1744735565945,
+      "end": 1744735565946,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1743442380014,
-      "end": 1743442380014,
+      "start": 1744735565946,
+      "end": 1744735565946,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1743442380015,
-      "end": 1743442380015,
+      "start": 1744735565946,
+      "end": 1744735565946,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1743442380015,
-      "end": 1743442380015,
+      "start": 1744735565946,
+      "end": 1744735565946,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1743442380015,
-      "end": 1743442380015,
+      "start": 1744735565946,
+      "end": 1744735565946,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1743442380016,
-      "end": 1743442380017,
+      "start": 1744735565946,
+      "end": 1744735565947,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1743442380017,
-      "end": 1743442380017,
+      "start": 1744735565947,
+      "end": 1744735565947,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1743442380017,
-      "end": 1743442380017,
+      "start": 1744735565947,
+      "end": 1744735565947,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1743442380017,
-      "end": 1743442380018,
+      "start": 1744735565947,
+      "end": 1744735565947,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1743442380018,
-      "end": 1743442380018,
+      "start": 1744735565947,
+      "end": 1744735565947,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1743442380018,
-      "end": 1743442380018,
+      "start": 1744735565947,
+      "end": 1744735565947,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1743442380018,
-      "end": 1743442380018,
+      "start": 1744735565947,
+      "end": 1744735565947,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1743442380018,
-      "end": 1743442380018,
+      "start": 1744735565947,
+      "end": 1744735565947,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1743442380019,
-      "end": 1743442380019,
+      "start": 1744735565947,
+      "end": 1744735565947,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1743442380019,
-      "end": 1743442380019,
+      "start": 1744735565948,
+      "end": 1744735565948,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1743442380019,
-      "end": 1743442380019,
+      "start": 1744735565948,
+      "end": 1744735565948,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1743442380020,
-      "end": 1743442380021,
+      "start": 1744735565948,
+      "end": 1744735565948,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1743442380022,
-      "end": 1743442380023,
+      "start": 1744735565948,
+      "end": 1744735565948,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1743442380024,
-      "end": 1743442380024,
+      "start": 1744735565949,
+      "end": 1744735565949,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1743442380024,
-      "end": 1743442380024,
+      "start": 1744735565949,
+      "end": 1744735565950,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { watchEffect } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, unref as _unref, renderList as _renderList, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock, createBlock as _createBlock, createElementVNode as _createElementVNode, withCtx as _withCtx, createVNode as _createVNode } from \"vue\";\nconst _hoisted_1 = { class: \"w-11/12 mx-auto\" };\nimport { useCompanies } from \"~/stores/companies\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport CurrentCompanyElems from \"~/components/Company/CompanyUI/CurrentCompanyElems.vue\";\nimport CurrentCompanyNewsList from \"~/components/Company/User/News/CurrentCompanyNewsList.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"CurrentCompanyNews\",\n  setup(__props) {\n    const currentUser = useAuthStore();\n    const companyNews = useCompanies();\n    watchEffect(() => {\n      companyNews.loadNewsList();\n    });\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n        _createVNode(CurrentCompanyElems, null, {\n          blockTitle: _withCtx(() => [\n            _createTextVNode(_toDisplayString(_ctx.$t(\"Новости компании\")), 1)\n          ]),\n          blockContent: _withCtx(() => [\n            _createElementVNode(\"div\", null, [\n              (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(companyNews).get_all_news, (companyItem) => {\n                return _openBlock(), _createBlock(CurrentCompanyNewsList, { \"news-item\": companyItem }, null, 8, [\"news-item\"]);\n              }), 256))\n            ])\n          ]),\n          _: 1\n        })\n      ]);\n    };\n  }\n});\n",
-      "start": 1743442380025,
-      "end": 1743442380040,
+      "start": 1744735565950,
+      "end": 1744735565962,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -204,50 +204,50 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1743442380041,
-      "end": 1743442380041,
+      "start": 1744735565963,
+      "end": 1744735565963,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1743442380041,
-      "end": 1743442380041,
+      "start": 1744735565963,
+      "end": 1744735565963,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1743442380041,
-      "end": 1743442380041,
+      "start": 1744735565963,
+      "end": 1744735565963,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1743442380041,
-      "end": 1743442380041,
+      "start": 1744735565964,
+      "end": 1744735565964,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1743442380042,
-      "end": 1743442380042,
+      "start": 1744735565964,
+      "end": 1744735565964,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1743442380042,
-      "end": 1743442380042,
+      "start": 1744735565965,
+      "end": 1744735565965,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1743442380043,
-      "end": 1743442380043,
+      "start": 1744735565965,
+      "end": 1744735565966,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1743442380043,
-      "end": 1743442380043,
+      "start": 1744735565966,
+      "end": 1744735565966,
       "order": "normal"
     }
   ]

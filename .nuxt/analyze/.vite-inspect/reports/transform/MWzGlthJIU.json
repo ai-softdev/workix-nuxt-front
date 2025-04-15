@@ -4,45 +4,45 @@
     {
       "name": "vite:load-fallback",
       "result": "import {defineStore} from \"pinia\";\nimport axios from \"~/composables/axios\";\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\n\ntype TClickTimeout = NodeJS.Timeout | null\nexport const useChat = defineStore('chat', {\n  state: () => ({\n    chatList: {},\n    userChat: {\n      messages: [],\n      name: '',\n      description: ''\n    },\n    messageLimit: null,\n    messagesMakeRead: [],\n    messageUpdate: {},\n    messageReplied: {},\n    messageText: '',\n    searchElem: '',\n    messageForwarded: {},\n    showForwardInfo: false,\n    checkboxForwarded: true,\n    showSendWindow: false,\n    messagePinned: {},\n    arrayPin: [],\n    activeChatNav: true,\n    windowWidth: 0,\n    showPinnedWindow: false,\n    showGroupCreate: false,\n    showGroupCreateChoice: false,\n    showVoiceInfo: false,\n    showChatInfo: false,\n    showSettingChat: false,\n    showChatChangeInfo: false,\n    showChatChangeInfoModal: false,\n    showChatCropper: false,\n    showImageChange: false,\n    chatChangeInfo: {\n      name: '',\n      img: '',\n      description: '',\n    },\n    showChangeWindowChat: false,\n    showChatGallery: false,\n    showDragInfo: false,\n    showUploadWindow: false,\n    updateChatName: '',\n    updateDescription: '',\n    voiceTimer: 0,\n    recordingVoice: false,\n    isGroup: false,\n    clickerTimeout: null as TClickTimeout,\n    flag: true,\n    displayChat: 'all',\n    file: '',\n    src: '',\n    signature: '',\n    fileSizeInfo : false,\n    fileReadInfo: false,\n    fileChecked: false,\n    fileUpload: null,\n    results: {\n      coordinates: null,\n      image: null,\n    },\n    focusInput: null,\n  }),\n  getters: {\n    get_chat_list: (state) => state.chatList,\n    get_user_chat: (state) => state.userChat,\n    get_pinned_list: (state) => state.arrayPin\n  },\n  actions: {\n    async loadChatList(params: { page?: number, limit?: number }) {\n      await axios.get(`chat/chat-list?page=${params.page}&limit=${params.limit}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        this.chatList = res.data\n      })\n    },\n    async loadUserChat(params: { id: number, limit: number, page: number }) {\n      await axios.get(`chat/${params.id}?limit=${params.limit}&page=${params.page}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        this.messageLimit = res.data.messages.length\n        if (res.data.messages) {\n          this.userChat = res.data\n          let new_array = res.data.messages.reverse()\n          let temp = [...new_array]\n          new_array = new_array.map((el: any) => {\n            return new Date(el.created_at).toLocaleDateString()\n          })\n          new_array = [...new Set(new_array)]\n          let new_messages = new_array.map((el: string) => {\n            return {\n              messages: temp.filter(e => {\n                return new Date(e.created_at).toLocaleDateString() == el\n              }),\n              date: el\n            }\n          })\n          this.userChat.messages = new_messages\n        }\n        // else {\n        //   this.userChat.messages = [...res.data.messages.reverse(), ...this.userChat.messages]\n        // }\n      })\n    },\n    async loadPinnedList(params: {id: number, page: number, limit: number }) {\n      await axios.get(`chat/message/pinned-list/${params.id}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        this.arrayPin = res.data\n      })\n    },\n\n    async chatUpdate(params: {\n      id: any; update: {\n        name: any,\n        description: any,\n        photo: any\n      }\n    }) {\n      let fd = new FormData();\n      if(this.updateChatName !== this.userChat.name){\n        fd.set('name', params.update.name)\n      }\n      if(this.updateDescription !== this.userChat.description) {\n        fd.set('description', params.update.description)\n      }\n      if(this.fileUpload) {\n        fd.append('photo', params.update.photo, 'image.webp')\n      }\n      await axios.patch(`chat/update/${params.id}`, fd, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      })\n    },\n    async chatDelete(params: { id: number }) {\n      await axios.delete(`chat/delete/${params.id}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n\n      })\n    },\n\n    async createMessage(params: { id: number, text: string, message_id?: number, file?: any }) {\n      let fd = new FormData();\n      if (!this.messageForwarded.id && !this.file) {\n        fd.set('text', params.text)\n      } else if(!this.signature && !this.messageForwarded.id){\n        fd.set('file', params.file)\n      } else if(this.signature && this.file){\n        fd.set('text', params.text)\n        fd.set('file', params.file)\n      } else {\n        fd.set('text', params.text)\n        fd.set('message_id', params.message_id)\n      }\n      await axios.post(`chat/message/create/${params.id}`, fd, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res=>{\n        this.messageForwarded = {id: null}\n      })\n    },\n    async updateMessage(params: { id: number, text: any }) {\n      await axios.patch(`chat/message/update/${params.id}`, {\n        text: params.text\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n      })\n    },\n    async deleteMessage(params: { id: number }) {\n      await axios.delete(`chat/message/delete/${params.id}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n      })\n    },\n    async createChatUser(params: { users: any, user_id: any, name: string, photo: any }) {\n      let fd = new FormData()\n      if (this.isGroup) {\n        fd.set('name', params.name)\n        fd.set('users', params.users)\n        if (typeof params.photo !== 'string') {\n          fd.set('photo', params.photo)\n        }\n      } else {\n        fd.set('user_id', params.user_id)\n      }\n      await axios.post(`chat/create`, fd, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        this.loadChatList()\n      })\n    },\n\n\n\n    async makeRead(params: { messages: any }) {\n      await axios.post(`chat/message/make-read`, {\n        messages: params.messages\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        this.loadChatList()\n      })\n    },\n    async makePinned(params: { messages: any }) {\n      await axios.post(`chat/message/make-pinned`, {\n        messages: params.messages\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      })\n    },\n  }\n})\n",
-      "start": 1743442375621,
-      "end": 1743442376271,
+      "start": 1744735560836,
+      "end": 1744735561064,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1743442376271,
-      "end": 1743442376271,
+      "start": 1744735561065,
+      "end": 1744735561065,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1743442376271,
-      "end": 1743442376271,
+      "start": 1744735561065,
+      "end": 1744735561065,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1743442376271,
-      "end": 1743442376271,
+      "start": 1744735561065,
+      "end": 1744735561065,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1743442376271,
-      "end": 1743442376271,
+      "start": 1744735561065,
+      "end": 1744735561065,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1743442376271,
-      "end": 1743442376271,
+      "start": 1744735561065,
+      "end": 1744735561065,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineStore } from \"pinia\";\nimport axios from \"~/composables/axios\";\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\nexport const useChat = defineStore(\"chat\", {\n  state: () => ({\n    chatList: {},\n    userChat: {\n      messages: [],\n      name: \"\",\n      description: \"\"\n    },\n    messageLimit: null,\n    messagesMakeRead: [],\n    messageUpdate: {},\n    messageReplied: {},\n    messageText: \"\",\n    searchElem: \"\",\n    messageForwarded: {},\n    showForwardInfo: false,\n    checkboxForwarded: true,\n    showSendWindow: false,\n    messagePinned: {},\n    arrayPin: [],\n    activeChatNav: true,\n    windowWidth: 0,\n    showPinnedWindow: false,\n    showGroupCreate: false,\n    showGroupCreateChoice: false,\n    showVoiceInfo: false,\n    showChatInfo: false,\n    showSettingChat: false,\n    showChatChangeInfo: false,\n    showChatChangeInfoModal: false,\n    showChatCropper: false,\n    showImageChange: false,\n    chatChangeInfo: {\n      name: \"\",\n      img: \"\",\n      description: \"\"\n    },\n    showChangeWindowChat: false,\n    showChatGallery: false,\n    showDragInfo: false,\n    showUploadWindow: false,\n    updateChatName: \"\",\n    updateDescription: \"\",\n    voiceTimer: 0,\n    recordingVoice: false,\n    isGroup: false,\n    clickerTimeout: null,\n    flag: true,\n    displayChat: \"all\",\n    file: \"\",\n    src: \"\",\n    signature: \"\",\n    fileSizeInfo: false,\n    fileReadInfo: false,\n    fileChecked: false,\n    fileUpload: null,\n    results: {\n      coordinates: null,\n      image: null\n    },\n    focusInput: null\n  }),\n  getters: {\n    get_chat_list: (state) => state.chatList,\n    get_user_chat: (state) => state.userChat,\n    get_pinned_list: (state) => state.arrayPin\n  },\n  actions: {\n    async loadChatList(params) {\n      await axios.get(`chat/chat-list?page=${params.page}&limit=${params.limit}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.chatList = res.data;\n      });\n    },\n    async loadUserChat(params) {\n      await axios.get(`chat/${params.id}?limit=${params.limit}&page=${params.page}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.messageLimit = res.data.messages.length;\n        if (res.data.messages) {\n          this.userChat = res.data;\n          let new_array = res.data.messages.reverse();\n          let temp = [...new_array];\n          new_array = new_array.map((el) => {\n            return new Date(el.created_at).toLocaleDateString();\n          });\n          new_array = [...new Set(new_array)];\n          let new_messages = new_array.map((el) => {\n            return {\n              messages: temp.filter((e) => {\n                return new Date(e.created_at).toLocaleDateString() == el;\n              }),\n              date: el\n            };\n          });\n          this.userChat.messages = new_messages;\n        }\n      });\n    },\n    async loadPinnedList(params) {\n      await axios.get(`chat/message/pinned-list/${params.id}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.arrayPin = res.data;\n      });\n    },\n    async chatUpdate(params) {\n      let fd = new FormData();\n      if (this.updateChatName !== this.userChat.name) {\n        fd.set(\"name\", params.update.name);\n      }\n      if (this.updateDescription !== this.userChat.description) {\n        fd.set(\"description\", params.update.description);\n      }\n      if (this.fileUpload) {\n        fd.append(\"photo\", params.update.photo, \"image.webp\");\n      }\n      await axios.patch(`chat/update/${params.id}`, fd, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      });\n    },\n    async chatDelete(params) {\n      await axios.delete(`chat/delete/${params.id}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n      });\n    },\n    async createMessage(params) {\n      let fd = new FormData();\n      if (!this.messageForwarded.id && !this.file) {\n        fd.set(\"text\", params.text);\n      } else if (!this.signature && !this.messageForwarded.id) {\n        fd.set(\"file\", params.file);\n      } else if (this.signature && this.file) {\n        fd.set(\"text\", params.text);\n        fd.set(\"file\", params.file);\n      } else {\n        fd.set(\"text\", params.text);\n        fd.set(\"message_id\", params.message_id);\n      }\n      await axios.post(`chat/message/create/${params.id}`, fd, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.messageForwarded = { id: null };\n      });\n    },\n    async updateMessage(params) {\n      await axios.patch(`chat/message/update/${params.id}`, {\n        text: params.text\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n      });\n    },\n    async deleteMessage(params) {\n      await axios.delete(`chat/message/delete/${params.id}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n      });\n    },\n    async createChatUser(params) {\n      let fd = new FormData();\n      if (this.isGroup) {\n        fd.set(\"name\", params.name);\n        fd.set(\"users\", params.users);\n        if (typeof params.photo !== \"string\") {\n          fd.set(\"photo\", params.photo);\n        }\n      } else {\n        fd.set(\"user_id\", params.user_id);\n      }\n      await axios.post(`chat/create`, fd, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.loadChatList();\n      });\n    },\n    async makeRead(params) {\n      await axios.post(`chat/message/make-read`, {\n        messages: params.messages\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.loadChatList();\n      });\n    },\n    async makePinned(params) {\n      await axios.post(`chat/message/make-pinned`, {\n        messages: params.messages\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      });\n    }\n  }\n});\n",
-      "start": 1743442376271,
-      "end": 1743442376693,
+      "start": 1744735561065,
+      "end": 1744735562468,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -58,188 +58,188 @@
     },
     {
       "name": "vite:json",
-      "start": 1743442376694,
-      "end": 1743442376694,
+      "start": 1744735562468,
+      "end": 1744735562468,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1743442376694,
-      "end": 1743442376694,
+      "start": 1744735562468,
+      "end": 1744735562468,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1743442376694,
-      "end": 1743442376694,
+      "start": 1744735562468,
+      "end": 1744735562468,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1743442376694,
-      "end": 1743442376694,
+      "start": 1744735562468,
+      "end": 1744735562468,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1743442376695,
-      "end": 1743442376695,
+      "start": 1744735562469,
+      "end": 1744735562469,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1743442376695,
-      "end": 1743442376695,
+      "start": 1744735562469,
+      "end": 1744735562469,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1743442376695,
-      "end": 1743442376695,
+      "start": 1744735562469,
+      "end": 1744735562469,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1743442376695,
-      "end": 1743442376695,
+      "start": 1744735562469,
+      "end": 1744735562470,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1743442376696,
-      "end": 1743442376696,
+      "start": 1744735562470,
+      "end": 1744735562470,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1743442376696,
-      "end": 1743442376696,
+      "start": 1744735562470,
+      "end": 1744735562470,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1743442376696,
-      "end": 1743442376696,
+      "start": 1744735562470,
+      "end": 1744735562470,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1743442376696,
-      "end": 1743442376696,
+      "start": 1744735562470,
+      "end": 1744735562470,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1743442376696,
-      "end": 1743442376696,
+      "start": 1744735562470,
+      "end": 1744735562470,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1743442376696,
-      "end": 1743442376696,
+      "start": 1744735562471,
+      "end": 1744735562471,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1743442376696,
-      "end": 1743442376696,
+      "start": 1744735562471,
+      "end": 1744735562471,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1743442376697,
-      "end": 1743442376697,
+      "start": 1744735562471,
+      "end": 1744735562471,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1743442376697,
-      "end": 1743442376697,
+      "start": 1744735562471,
+      "end": 1744735562471,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1743442376697,
-      "end": 1743442376697,
+      "start": 1744735562472,
+      "end": 1744735562472,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1743442376698,
-      "end": 1743442376698,
+      "start": 1744735562472,
+      "end": 1744735562472,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1743442376698,
-      "end": 1743442376698,
+      "start": 1744735562473,
+      "end": 1744735562473,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1743442376699,
-      "end": 1743442376700,
+      "start": 1744735562474,
+      "end": 1744735562474,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1743442376700,
-      "end": 1743442376700,
+      "start": 1744735562474,
+      "end": 1744735562474,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1743442376700,
-      "end": 1743442376702,
+      "start": 1744735562474,
+      "end": 1744735562488,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1743442376702,
-      "end": 1743442376702,
+      "start": 1744735562488,
+      "end": 1744735562488,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1743442376703,
-      "end": 1743442376703,
+      "start": 1744735562489,
+      "end": 1744735562489,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1743442376703,
-      "end": 1743442376703,
+      "start": 1744735562490,
+      "end": 1744735562490,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1743442376703,
-      "end": 1743442376704,
+      "start": 1744735562490,
+      "end": 1744735562491,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1743442376704,
-      "end": 1743442376704,
+      "start": 1744735562491,
+      "end": 1744735562491,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1743442376704,
-      "end": 1743442376705,
+      "start": 1744735562491,
+      "end": 1744735562492,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1743442376705,
-      "end": 1743442376705,
+      "start": 1744735562492,
+      "end": 1744735562493,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1743442376705,
-      "end": 1743442376705,
+      "start": 1744735562493,
+      "end": 1744735562493,
       "order": "normal"
     }
   ]
