@@ -20,7 +20,7 @@ let salesForm = ref({
 })
 
 const createItem = () => {
-  sales.createItem({ form: salesForm })
+  sales.createItem({ form: salesForm.value })
       .then(() => clearForm())
       .catch((error) => console.error("Ошибка при создании товара:", error));
 };
@@ -110,24 +110,24 @@ const clearForm = () => {
             v-model="salesForm.company_sale_to"
             type="text"
         />
-        <TheInput
-            :label="$t('Имя агента')"
-            :placeholder="salesForm.agent.first_name"
-            v-model="salesForm.agent.first_name"
-            type="text"
-        />
-        <TheInput
-            :label="$t('Фамилия агента')"
-            :placeholder="salesForm.agent.last_name"
-            v-model="salesForm.agent.last_name"
-            type="text"
-        />
-        <TheInput
-            :label="$t('Отчество агента')"
-            :placeholder="salesForm.agent.patronymic"
-            v-model="salesForm.agent.patronymic"
-            type="text"
-        />
+<!--        <TheInput-->
+<!--            :label="$t('Имя агентадядя')"-->
+<!--            :placeholder="salesForm.agent.first_name"-->
+<!--            v-model="salesForm.agent.first_name"-->
+<!--            type="text"-->
+<!--        />-->
+<!--        <TheInput-->
+<!--            :label="$t('Фамилия агента')"-->
+<!--            :placeholder="salesForm.agent.last_name"-->
+<!--            v-model="salesForm.agent.last_name"-->
+<!--            type="text"-->
+<!--        />-->
+<!--        <TheInput-->
+<!--            :label="$t('Отчество агента')"-->
+<!--            :placeholder="salesForm.agent.patronymic"-->
+<!--            v-model="salesForm.agent.patronymic"-->
+<!--            type="text"-->
+<!--        />-->
         <UITheButton
             type="submit"
             class="mb-2 border p-3 rounded-lg !text-black dark:!text-white"

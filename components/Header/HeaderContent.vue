@@ -52,7 +52,7 @@
             </div>
             <HeaderContentLinkList/>
             <TheButton class="rounded-full py-2" :type="'danger'"
-                       @click="()=>{localStorage.removeItem('token'); router.push('/')}">
+                       @click="()=>{nuxtStorage.localStorage.removeItem('token'); router.push('/')}">
               {{ $t('Выйти') }}
             </TheButton>
           </div>
@@ -71,6 +71,7 @@ import {useRouter} from "vue-router";
 import {useRoute} from "vue-router";
 import {useChat} from "~/stores/chat";
 import {useTreeStore} from "~/stores/tree";
+import nuxtStorage from "nuxt-storage/nuxt-storage";
 
 const windowWidth = ref(null)
 const chatStore = useChat()

@@ -25,7 +25,7 @@ const props = defineProps({
 <template>
   <div>
     <button @click="active = !active" class="px-2 w-full text-start transition-all">
-      <div class="items-center flex justify-start">
+      <div class="items-center flex justify-between max-sm:!justify-start">
         <slot name="navTitleIcon"/>
         <span v-if="authStore.activeNav" class="tracking-wider dark:text-white text-black"><slot name="navTitle"/></span>
         <div class="" :class="{'rotate-180 transition-all' : active, '-rotate-0 transition-all' : !active}">
