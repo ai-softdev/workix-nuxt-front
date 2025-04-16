@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { unref as _unref, mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\"\n\nimport {onMounted} from \"vue\";\r\nimport {useDocumentStore} from \"~/stores/documents\";\r\nimport {useRoute} from \"vue-router\";\r\nimport {useCompanies} from \"~/stores/companies\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: '[slug]',\n  __ssrInlineRender: true,\n  setup(__props) {\n\r\n\r\nconst route = useRoute()\r\nconst router = useRouter()\r\nconst isSigning = ref(false);\r\nconst selectedKey = ref('');\r\nconst notSelected = ref(true);\r\nconst selectedTitle = ref('');\r\n\r\nfunction loadScript(src: string): Promise<void> {\r\n  return new Promise((resolve, reject) => {\r\n    if (document.querySelector(`script[src=\"${src}\"]`)) {\r\n      resolve();\r\n      return;\r\n    }\r\n\r\n    const script = document.createElement('script');\r\n    script.src = src;\r\n    script.async = true;\r\n    script.onload = () => resolve();\r\n    script.onerror = () => reject(new Error(`Ошибка загрузки скрипта ${src}`));\r\n\r\n    document.head.appendChild(script);\r\n  });\r\n}\r\n\r\nasync function loadEImzoScripts() {\r\n  try {\r\n    await loadScript('/e-imzo/e-imzo.js');\r\n    await loadScript('/e-imzo/e-imzo-client.js');\r\n    await loadScript('/e-imzo/micro-ajax.js');\r\n    await loadScript('/e-imzo/e-imzo-init.js');\r\n    console.log('✅ Все скрипты загружены');\r\n\r\n    startAppLoad()\r\n  } catch (error) {\r\n    console.error('❌ Ошибка загрузки скриптов E-IMZO', error);\r\n  }\r\n}\r\n\r\nonMounted(async () => {\r\n  await loadEImzoScripts();\r\n});\r\n\r\n\r\nasync function startAppLoad() {\r\n  try {\r\n      // await loadScript(\"/e-imzo/e-imzo.js\");\r\n      // await loadScript(\"/e-imzo/e-imzo-client.js\");\r\n      // await loadScript(\"/e-imzo/micro-ajax.js\");\r\n      // await loadScript(\"/e-imzo/e-imzo-init.js\");\r\n\r\n    if (window.EIMZOClient) {\r\n      console.log(\"✅ EIMZOClient загружен:\", window.EIMZOClient);\r\n      console.log(\"📜 Доступные методы EIMZOClient:\", Object.keys(window.EIMZOClient));\r\n\r\n      installKeys();\r\n    } else {\r\n      console.error(\"❌ EIMZOClient не найден после загрузки\");\r\n    }\r\n  } catch (error) {\r\n    console.error(\"❌ Ошибка при загрузке скриптов:\", error);\r\n  }\r\n}\r\n\r\nasync function installKeys() {\r\n  if (!window.EIMZOClient) {\r\n    console.error(\"EIMZOClient не загружен\");\r\n    return;\r\n  }\r\n\r\n  isSigning.value = true;\r\n  try {\r\n    EIMZOClient.checkVersion(function (major, minor) {\r\n      var newVersion = EIMZO_MAJOR * 100 + EIMZO_MINOR;\r\n      var installedVersion = parseInt(major) * 100 + parseInt(minor);\r\n      if (installedVersion < newVersion) {\r\n        console.log('installedVersion < newVersion');\r\n      } else {\r\n        EIMZOClient.installApiKeys(function () {\r\n          responseUsers()\r\n        }, function (e, r) {\r\n          if (r) {\r\n            console.log('da');\r\n          } else {\r\n            console.log('net');\r\n          }\r\n        });\r\n      }\r\n    }, function (e, r) {\r\n      if (r) {\r\n        console.log('da2');\r\n      } else {\r\n        console.log('net2');\r\n      }\r\n    });\r\n\r\n    // console.log(\"✅ Подписанные данные:\", signedData);\r\n\r\n    // await documentStore.updateDocument({ id: route.params.id, signedData });\r\n    console.log(\"📄 Документ успешно подписан и обновлён\");\r\n  } catch (error) {\r\n    console.error(\"❌ Ошибка при подписании документа:\", error);\r\n  } finally {\r\n    isSigning.value = false;\r\n  }\r\n}\r\n\r\nfunction responseUsers() {\r\n  EIMZOClient.listAllUserKeys(\r\n      function(o, i) {\r\n        var itemId = \"itm-\" + o.serialNumber + \"-\" + i;\r\n        return itemId;\r\n      },\r\n      function(itemId, v) {\r\n        return uiCreateItem(itemId, v);\r\n      },\r\n      function(items, firstId) {\r\n\r\n        // Находим селект\r\n        var select = document.querySelector('select[name=\"key\"]');\r\n        select.innerHTML = \"\"; // Очищаем селект перед добавлением новых элементов\r\n\r\n        // Заполняем селект опциями\r\n        items.forEach(function(item) {\r\n          select.appendChild(item);\r\n        });\r\n\r\n        // Устанавливаем первый элемент по умолчанию (если есть)\r\n        if (select.options.length > 0) {\r\n          console.log('options yes', select.options[0],select.options[0].value)\r\n\r\n          select.value = select.options[0].value;\r\n        }\r\n      },\r\n      function(e, r) {\r\n        if (e) {\r\n          uiShowMessage(errorCAPIWS + \" : \" + e);\r\n        } else {\r\n          console.log(r);\r\n        }\r\n      }\r\n  );\r\n}\r\n\r\nvar uiCreateItem = function (itmkey, vo) {\r\n  var now = new Date();\r\n  vo.expired = dates.compare(now, vo.validTo) > 0;\r\n  var itm = document.createElement(\"option\");\r\n  itm.value = itmkey;\r\n  itm.text = vo.CN;\r\n  if (!vo.expired) {\r\n\r\n  } else {\r\n    itm.style.color = 'gray';\r\n    itm.text = itm.text + ' (срок истек)';\r\n  }\r\n  itm.setAttribute('vo',JSON.stringify(vo));\r\n  itm.setAttribute('id',itmkey);\r\n  return itm;\r\n}\r\n\r\nlet currentKey = ref('') // vo\r\nlet keyId = ref(null);\r\nconst fileBase64 = ref(null)\r\n\r\n\r\nconst handleSubmit = (event) => {\r\n\r\n  signFile()\r\n\r\n}\r\n\r\n\r\nconst signFile = function () {\r\n\r\n  console.log(\"Начало подписи\")\r\n  let data64 = fileBase64.value;\r\n  let key = keyId.value\r\n\r\n  EIMZOClient.createPkcs7(key, data64, null, function(pkcs7){\r\n    attachTimestamp(pkcs7, function(pkcs7wtst){\r\n        console.log(\"Подписанный документ с временем\", pkcs7wtst);\r\n\r\n      verify(pkcs7wtst, false, data64, function(result){\r\n        console.log(result)//выкинуть назад router\r\n      }, true);\r\n    });\r\n  }, (e, r) => {console.log('Ошибка при подписании')}, false, true); // !! set isDataBase64Encoded = TRUE\r\n};\r\n\r\nconst attachTimestamp = function (pkcs7, callback){\r\n  const E_IMZO_URL = 'https://workix.uz/eimzo'\r\n  microAjax(E_IMZO_URL + '/frontend/timestamp/pkcs7', function (data, s) {\r\n\r\n    if(s.status != 200){\r\n      console.log(\"Ошибка при добавлении timestamp к подписи\")\r\n      return;\r\n    }\r\n    var pkcs7wtst;\r\n    try {\r\n      var data = JSON.parse(data);\r\n      if (data.status != 1) {\r\n\r\n        console.log(data.status, ' - ', s.message);\r\n        return;\r\n      }\r\n      pkcs7wtst = data.pkcs7b64;\r\n    } catch (e) {\r\n      console.log(\"Ошибка\", s.status, ' - ', s.statusText, e);\r\n    }\r\n    callback(pkcs7wtst);\r\n  },pkcs7);\r\n}\r\n\r\nconst verify = function (pkcs7wtst, detached, data, callback, isDataBase64Encoded){\r\n  var data64;\r\n\r\n  console.log(detached);\r\n  console.log(data64);\r\n  documentStore.documentSign({slug: route.params.slug, data: {signature: pkcs7wtst}}, router)\r\n}\r\n\r\nfunction selectKey() {\r\n  // currentKey.value = event.target.value;\r\n  let select = document.getElementById('select-key')\r\n  selectedKey.value = select\r\n  notSelected.value = false\r\n  let option = document.getElementById(select.value);\r\n  let vo = JSON.parse(option.getAttribute('vo'))\r\n  selectedTitle.value = vo\r\n  console.log(\"🔑 Выбранные днные:\", vo);\r\n  EIMZOClient.loadKey(vo, function(id){\r\n    keyId.value = id;\r\n\r\n  }, (e, r)=> {console.log('error'); notSelected.value = true});\r\n}\r\n\r\nconst documentStore = useDocumentStore()\r\nconst authStore = useAuthStore()\r\n\r\nonMounted(()=>{\r\n  documentStore.loadDocument({slug: route.params.slug})\r\n})\r\n\r\nasync function fetchFileAsBase64() {\r\n  try {\r\n    const url = authStore.get_server_domain + documentStore.documentItem.file;\r\n    const response = await fetch(url);\r\n\r\n    if (!response.ok) throw new Error('Ошибка при загрузке файла');\r\n\r\n    const blob = await response.blob(); // Получаем Blob\r\n    const reader = new FileReader(); // Создаём FileReader\r\n\r\n    reader.onloadend = () => {\r\n      const base64Content = reader.result.split(',')[1]; // Извлекаем Base64\r\n      fileBase64.value = base64Content; // Сохраняем\r\n    };\r\n\r\n    reader.readAsDataURL(blob); // Читаем как Base64\r\n  } catch (error) {\r\n    console.error('Ошибка загрузки файла:', error);\r\n  }\r\n}\r\n\r\nwatch(() => documentStore.documentItem, (newValue) => {\r\n  console.log(authStore.get_server_domain+documentStore.documentItem.file)\r\n  fetchFileAsBase64()\r\n})\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  _push(`<div${\n    _ssrRenderAttrs(_mergeProps({ class: \"flex items-center gap-4 flex-col border p-3 mt-4 rounded-lg\" }, _attrs))\n  }><p class=\"text-xl font-medium\"> Документ: &quot;${\n    _ssrInterpolate(_unref(documentStore).documentItem.title)\n  }&quot; </p><div class=\"flex items-center gap-4 flex-col\"><select id=\"select-key\" name=\"key\" class=\"p-3 border-white rounded-lg bg-bgWhite text-black\"></select><button class=\"border p-2 rounded-lg\"> Выбрать ключ </button></div>`)\n  if (_unref(notSelected)) {\n    _push(`<p class=\"text-red-500 mt-2\">Вы не выбрали ключ</p>`)\n  } else {\n    _push(`<!---->`)\n  }\n  if (!_unref(notSelected)) {\n    _push(`<p class=\"text-green-500 mt-2\">Вы выбрали ключ: ${_ssrInterpolate(_unref(selectedTitle).CN)}</p>`)\n  } else {\n    _push(`<!---->`)\n  }\n  _push(`<form id=\"myForm\" class=\"mt-4\"><button type=\"submit\" class=\"border py-3 px-4 rounded-lg text-xl bg-[#8881]\"> Подписать </button></form></div>`)\n}\n}\n\n})",
-      "start": 1744823399196,
-      "end": 1744823399196,
+      "start": 1744827960667,
+      "end": 1744827960667,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1744823399196,
-      "end": 1744823399196,
+      "start": 1744827960668,
+      "end": 1744827960668,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1744823399196,
-      "end": 1744823399196,
+      "start": 1744827960668,
+      "end": 1744827960668,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1744823399196,
-      "end": 1744823399197,
+      "start": 1744827960668,
+      "end": 1744827960668,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1744823399196,
-      "end": 1744823399197,
+      "start": 1744827960668,
+      "end": 1744827960668,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1744823399197,
-      "end": 1744823399197,
+      "start": 1744827960668,
+      "end": 1744827960668,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1744823399197,
-      "end": 1744823399197,
+      "start": 1744827960668,
+      "end": 1744827960668,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1744823399197,
-      "end": 1744823399197,
+      "start": 1744827960668,
+      "end": 1744827960668,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1744823399197,
-      "end": 1744823399197,
+      "start": 1744827960668,
+      "end": 1744827960668,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport { onMounted } from \"vue\";\nimport { useDocumentStore } from \"~/stores/documents\";\nimport { useRoute } from \"vue-router\";\nimport { useAuthStore } from \"~/stores/auth\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"[slug]\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const route = useRoute();\n    const router = useRouter();\n    const isSigning = ref(false);\n    const selectedKey = ref(\"\");\n    const notSelected = ref(true);\n    const selectedTitle = ref(\"\");\n    function loadScript(src) {\n      return new Promise((resolve, reject) => {\n        if (document.querySelector(`script[src=\"${src}\"]`)) {\n          resolve();\n          return;\n        }\n        const script = document.createElement(\"script\");\n        script.src = src;\n        script.async = true;\n        script.onload = () => resolve();\n        script.onerror = () => reject(new Error(`Ошибка загрузки скрипта ${src}`));\n        document.head.appendChild(script);\n      });\n    }\n    async function loadEImzoScripts() {\n      try {\n        await loadScript(\"/e-imzo/e-imzo.js\");\n        await loadScript(\"/e-imzo/e-imzo-client.js\");\n        await loadScript(\"/e-imzo/micro-ajax.js\");\n        await loadScript(\"/e-imzo/e-imzo-init.js\");\n        console.log(\"✅ Все скрипты загружены\");\n        startAppLoad();\n      } catch (error) {\n        console.error(\"❌ Ошибка загрузки скриптов E-IMZO\", error);\n      }\n    }\n    onMounted(async () => {\n      await loadEImzoScripts();\n    });\n    async function startAppLoad() {\n      try {\n        if (window.EIMZOClient) {\n          console.log(\"✅ EIMZOClient загружен:\", window.EIMZOClient);\n          console.log(\"📜 Доступные методы EIMZOClient:\", Object.keys(window.EIMZOClient));\n          installKeys();\n        } else {\n          console.error(\"❌ EIMZOClient не найден после загрузки\");\n        }\n      } catch (error) {\n        console.error(\"❌ Ошибка при загрузке скриптов:\", error);\n      }\n    }\n    async function installKeys() {\n      if (!window.EIMZOClient) {\n        console.error(\"EIMZOClient не загружен\");\n        return;\n      }\n      isSigning.value = true;\n      try {\n        EIMZOClient.checkVersion(function(major, minor) {\n          var newVersion = EIMZO_MAJOR * 100 + EIMZO_MINOR;\n          var installedVersion = parseInt(major) * 100 + parseInt(minor);\n          if (installedVersion < newVersion) {\n            console.log(\"installedVersion < newVersion\");\n          } else {\n            EIMZOClient.installApiKeys(function() {\n              responseUsers();\n            }, function(e, r) {\n              if (r) {\n                console.log(\"da\");\n              } else {\n                console.log(\"net\");\n              }\n            });\n          }\n        }, function(e, r) {\n          if (r) {\n            console.log(\"da2\");\n          } else {\n            console.log(\"net2\");\n          }\n        });\n        console.log(\"📄 Документ успешно подписан и обновлён\");\n      } catch (error) {\n        console.error(\"❌ Ошибка при подписании документа:\", error);\n      } finally {\n        isSigning.value = false;\n      }\n    }\n    function responseUsers() {\n      EIMZOClient.listAllUserKeys(\n        function(o, i) {\n          var itemId = \"itm-\" + o.serialNumber + \"-\" + i;\n          return itemId;\n        },\n        function(itemId, v) {\n          return uiCreateItem(itemId, v);\n        },\n        function(items, firstId) {\n          var select = document.querySelector('select[name=\"key\"]');\n          select.innerHTML = \"\";\n          items.forEach(function(item) {\n            select.appendChild(item);\n          });\n          if (select.options.length > 0) {\n            console.log(\"options yes\", select.options[0], select.options[0].value);\n            select.value = select.options[0].value;\n          }\n        },\n        function(e, r) {\n          if (e) {\n            uiShowMessage(errorCAPIWS + \" : \" + e);\n          } else {\n            console.log(r);\n          }\n        }\n      );\n    }\n    var uiCreateItem = function(itmkey, vo) {\n      var now = /* @__PURE__ */ new Date();\n      vo.expired = dates.compare(now, vo.validTo) > 0;\n      var itm = document.createElement(\"option\");\n      itm.value = itmkey;\n      itm.text = vo.CN;\n      if (!vo.expired) {\n      } else {\n        itm.style.color = \"gray\";\n        itm.text = itm.text + \" (срок истек)\";\n      }\n      itm.setAttribute(\"vo\", JSON.stringify(vo));\n      itm.setAttribute(\"id\", itmkey);\n      return itm;\n    };\n    let currentKey = ref(\"\");\n    let keyId = ref(null);\n    const fileBase64 = ref(null);\n    const handleSubmit = (event) => {\n      signFile();\n    };\n    const signFile = function() {\n      console.log(\"Начало подписи\");\n      let data64 = fileBase64.value;\n      let key = keyId.value;\n      EIMZOClient.createPkcs7(key, data64, null, function(pkcs7) {\n        attachTimestamp(pkcs7, function(pkcs7wtst) {\n          console.log(\"Подписанный документ с временем\", pkcs7wtst);\n          verify(pkcs7wtst, false, data64, function(result) {\n            console.log(result);\n          }, true);\n        });\n      }, (e, r) => {\n        console.log(\"Ошибка при подписании\");\n      }, false, true);\n    };\n    const attachTimestamp = function(pkcs7, callback) {\n      const E_IMZO_URL = \"https://workix.uz/eimzo\";\n      microAjax(E_IMZO_URL + \"/frontend/timestamp/pkcs7\", function(data, s) {\n        if (s.status != 200) {\n          console.log(\"Ошибка при добавлении timestamp к подписи\");\n          return;\n        }\n        var pkcs7wtst;\n        try {\n          var data = JSON.parse(data);\n          if (data.status != 1) {\n            console.log(data.status, \" - \", s.message);\n            return;\n          }\n          pkcs7wtst = data.pkcs7b64;\n        } catch (e) {\n          console.log(\"Ошибка\", s.status, \" - \", s.statusText, e);\n        }\n        callback(pkcs7wtst);\n      }, pkcs7);\n    };\n    const verify = function(pkcs7wtst, detached, data, callback, isDataBase64Encoded) {\n      var data64;\n      console.log(detached);\n      console.log(data64);\n      documentStore.documentSign({ slug: route.params.slug, data: { signature: pkcs7wtst } }, router);\n    };\n    function selectKey() {\n      let select = document.getElementById(\"select-key\");\n      selectedKey.value = select;\n      notSelected.value = false;\n      let option = document.getElementById(select.value);\n      let vo = JSON.parse(option.getAttribute(\"vo\"));\n      selectedTitle.value = vo;\n      console.log(\"🔑 Выбранные днные:\", vo);\n      EIMZOClient.loadKey(vo, function(id) {\n        keyId.value = id;\n      }, (e, r) => {\n        console.log(\"error\");\n        notSelected.value = true;\n      });\n    }\n    const documentStore = useDocumentStore();\n    const authStore = useAuthStore();\n    onMounted(() => {\n      documentStore.loadDocument({ slug: route.params.slug });\n    });\n    async function fetchFileAsBase64() {\n      try {\n        const url = authStore.get_server_domain + documentStore.documentItem.file;\n        const response = await fetch(url);\n        if (!response.ok)\n          throw new Error(\"Ошибка при загрузке файла\");\n        const blob = await response.blob();\n        const reader = new FileReader();\n        reader.onloadend = () => {\n          const base64Content = reader.result.split(\",\")[1];\n          fileBase64.value = base64Content;\n        };\n        reader.readAsDataURL(blob);\n      } catch (error) {\n        console.error(\"Ошибка загрузки файла:\", error);\n      }\n    }\n    watch(() => documentStore.documentItem, (newValue) => {\n      console.log(authStore.get_server_domain + documentStore.documentItem.file);\n      fetchFileAsBase64();\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"flex items-center gap-4 flex-col border p-3 mt-4 rounded-lg\" }, _attrs))}><p class=\"text-xl font-medium\"> Документ: &quot;${_ssrInterpolate(_unref(documentStore).documentItem.title)}&quot; </p><div class=\"flex items-center gap-4 flex-col\"><select id=\"select-key\" name=\"key\" class=\"p-3 border-white rounded-lg bg-bgWhite text-black\"></select><button class=\"border p-2 rounded-lg\"> Выбрать ключ </button></div>`);\n      if (_unref(notSelected)) {\n        _push(`<p class=\"text-red-500 mt-2\">Вы не выбрали ключ</p>`);\n      } else {\n        _push(`<!---->`);\n      }\n      if (!_unref(notSelected)) {\n        _push(`<p class=\"text-green-500 mt-2\">Вы выбрали ключ: ${_ssrInterpolate(_unref(selectedTitle).CN)}</p>`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`<form id=\"myForm\" class=\"mt-4\"><button type=\"submit\" class=\"border py-3 px-4 rounded-lg text-xl bg-[#8881]\"> Подписать </button></form></div>`);\n    };\n  }\n});\n",
-      "start": 1744823399197,
-      "end": 1744823400304,
+      "start": 1744827960668,
+      "end": 1744827961749,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -86,173 +86,173 @@
     },
     {
       "name": "vite:json",
-      "start": 1744823400304,
-      "end": 1744823400304,
+      "start": 1744827961749,
+      "end": 1744827961749,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1744823400304,
-      "end": 1744823400304,
+      "start": 1744827961749,
+      "end": 1744827961749,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1744823400304,
-      "end": 1744823400304,
+      "start": 1744827961749,
+      "end": 1744827961749,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1744823400304,
-      "end": 1744823400304,
+      "start": 1744827961749,
+      "end": 1744827961749,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1744823400304,
-      "end": 1744823400304,
+      "start": 1744827961749,
+      "end": 1744827961749,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1744823400304,
-      "end": 1744823400304,
+      "start": 1744827961749,
+      "end": 1744827961749,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1744823400304,
-      "end": 1744823400304,
+      "start": 1744827961749,
+      "end": 1744827961749,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1744823400304,
-      "end": 1744823400304,
+      "start": 1744827961749,
+      "end": 1744827961749,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1744823400304,
-      "end": 1744823400304,
+      "start": 1744827961749,
+      "end": 1744827961749,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1744823400304,
-      "end": 1744823400305,
+      "start": 1744827961749,
+      "end": 1744827961749,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1744823400305,
-      "end": 1744823400305,
+      "start": 1744827961751,
+      "end": 1744827961751,
       "order": "normal"
     },
     {
       "name": "vite:define",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport { onMounted } from \"vue\";\nimport { useDocumentStore } from \"~/stores/documents\";\nimport { useRoute } from \"vue-router\";\nimport { useAuthStore } from \"~/stores/auth\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"[slug]\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const route = useRoute();\n    const router = useRouter();\n    const isSigning = ref(false);\n    const selectedKey = ref(\"\");\n    const notSelected = ref(true);\n    const selectedTitle = ref(\"\");\n    function loadScript(src) {\n      return new Promise((resolve, reject) => {\n        if ((void 0).querySelector(`script[src=\"${src}\"]`)) {\n          resolve();\n          return;\n        }\n        const script = (void 0).createElement(\"script\");\n        script.src = src;\n        script.async = true;\n        script.onload = () => resolve();\n        script.onerror = () => reject(new Error(`Ошибка загрузки скрипта ${src}`));\n        (void 0).head.appendChild(script);\n      });\n    }\n    async function loadEImzoScripts() {\n      try {\n        await loadScript(\"/e-imzo/e-imzo.js\");\n        await loadScript(\"/e-imzo/e-imzo-client.js\");\n        await loadScript(\"/e-imzo/micro-ajax.js\");\n        await loadScript(\"/e-imzo/e-imzo-init.js\");\n        console.log(\"✅ Все скрипты загружены\");\n        startAppLoad();\n      } catch (error) {\n        console.error(\"❌ Ошибка загрузки скриптов E-IMZO\", error);\n      }\n    }\n    onMounted(async () => {\n      await loadEImzoScripts();\n    });\n    async function startAppLoad() {\n      try {\n        if ((void 0).EIMZOClient) {\n          console.log(\"✅ EIMZOClient загружен:\", (void 0).EIMZOClient);\n          console.log(\"📜 Доступные методы EIMZOClient:\", Object.keys((void 0).EIMZOClient));\n          installKeys();\n        } else {\n          console.error(\"❌ EIMZOClient не найден после загрузки\");\n        }\n      } catch (error) {\n        console.error(\"❌ Ошибка при загрузке скриптов:\", error);\n      }\n    }\n    async function installKeys() {\n      if (!(void 0).EIMZOClient) {\n        console.error(\"EIMZOClient не загружен\");\n        return;\n      }\n      isSigning.value = true;\n      try {\n        EIMZOClient.checkVersion(function(major, minor) {\n          var newVersion = EIMZO_MAJOR * 100 + EIMZO_MINOR;\n          var installedVersion = parseInt(major) * 100 + parseInt(minor);\n          if (installedVersion < newVersion) {\n            console.log(\"installedVersion < newVersion\");\n          } else {\n            EIMZOClient.installApiKeys(function() {\n              responseUsers();\n            }, function(e, r) {\n              if (r) {\n                console.log(\"da\");\n              } else {\n                console.log(\"net\");\n              }\n            });\n          }\n        }, function(e, r) {\n          if (r) {\n            console.log(\"da2\");\n          } else {\n            console.log(\"net2\");\n          }\n        });\n        console.log(\"📄 Документ успешно подписан и обновлён\");\n      } catch (error) {\n        console.error(\"❌ Ошибка при подписании документа:\", error);\n      } finally {\n        isSigning.value = false;\n      }\n    }\n    function responseUsers() {\n      EIMZOClient.listAllUserKeys(\n        function(o, i) {\n          var itemId = \"itm-\" + o.serialNumber + \"-\" + i;\n          return itemId;\n        },\n        function(itemId, v) {\n          return uiCreateItem(itemId, v);\n        },\n        function(items, firstId) {\n          var select = (void 0).querySelector('select[name=\"key\"]');\n          select.innerHTML = \"\";\n          items.forEach(function(item) {\n            select.appendChild(item);\n          });\n          if (select.options.length > 0) {\n            console.log(\"options yes\", select.options[0], select.options[0].value);\n            select.value = select.options[0].value;\n          }\n        },\n        function(e, r) {\n          if (e) {\n            uiShowMessage(errorCAPIWS + \" : \" + e);\n          } else {\n            console.log(r);\n          }\n        }\n      );\n    }\n    var uiCreateItem = function(itmkey, vo) {\n      var now = /* @__PURE__ */ new Date();\n      vo.expired = dates.compare(now, vo.validTo) > 0;\n      var itm = (void 0).createElement(\"option\");\n      itm.value = itmkey;\n      itm.text = vo.CN;\n      if (!vo.expired) {\n      } else {\n        itm.style.color = \"gray\";\n        itm.text = itm.text + \" (срок истек)\";\n      }\n      itm.setAttribute(\"vo\", JSON.stringify(vo));\n      itm.setAttribute(\"id\", itmkey);\n      return itm;\n    };\n    let currentKey = ref(\"\");\n    let keyId = ref(null);\n    const fileBase64 = ref(null);\n    const handleSubmit = (event) => {\n      signFile();\n    };\n    const signFile = function() {\n      console.log(\"Начало подписи\");\n      let data64 = fileBase64.value;\n      let key = keyId.value;\n      EIMZOClient.createPkcs7(key, data64, null, function(pkcs7) {\n        attachTimestamp(pkcs7, function(pkcs7wtst) {\n          console.log(\"Подписанный документ с временем\", pkcs7wtst);\n          verify(pkcs7wtst, false, data64, function(result) {\n            console.log(result);\n          }, true);\n        });\n      }, (e, r) => {\n        console.log(\"Ошибка при подписании\");\n      }, false, true);\n    };\n    const attachTimestamp = function(pkcs7, callback) {\n      const E_IMZO_URL = \"https://workix.uz/eimzo\";\n      microAjax(E_IMZO_URL + \"/frontend/timestamp/pkcs7\", function(data, s) {\n        if (s.status != 200) {\n          console.log(\"Ошибка при добавлении timestamp к подписи\");\n          return;\n        }\n        var pkcs7wtst;\n        try {\n          var data = JSON.parse(data);\n          if (data.status != 1) {\n            console.log(data.status, \" - \", s.message);\n            return;\n          }\n          pkcs7wtst = data.pkcs7b64;\n        } catch (e) {\n          console.log(\"Ошибка\", s.status, \" - \", s.statusText, e);\n        }\n        callback(pkcs7wtst);\n      }, pkcs7);\n    };\n    const verify = function(pkcs7wtst, detached, data, callback, isDataBase64Encoded) {\n      var data64;\n      console.log(detached);\n      console.log(data64);\n      documentStore.documentSign({ slug: route.params.slug, data: { signature: pkcs7wtst } }, router);\n    };\n    function selectKey() {\n      let select = (void 0).getElementById(\"select-key\");\n      selectedKey.value = select;\n      notSelected.value = false;\n      let option = (void 0).getElementById(select.value);\n      let vo = JSON.parse(option.getAttribute(\"vo\"));\n      selectedTitle.value = vo;\n      console.log(\"🔑 Выбранные днные:\", vo);\n      EIMZOClient.loadKey(vo, function(id) {\n        keyId.value = id;\n      }, (e, r) => {\n        console.log(\"error\");\n        notSelected.value = true;\n      });\n    }\n    const documentStore = useDocumentStore();\n    const authStore = useAuthStore();\n    onMounted(() => {\n      documentStore.loadDocument({ slug: route.params.slug });\n    });\n    async function fetchFileAsBase64() {\n      try {\n        const url = authStore.get_server_domain + documentStore.documentItem.file;\n        const response = await fetch(url);\n        if (!response.ok)\n          throw new Error(\"Ошибка при загрузке файла\");\n        const blob = await response.blob();\n        const reader = new FileReader();\n        reader.onloadend = () => {\n          const base64Content = reader.result.split(\",\")[1];\n          fileBase64.value = base64Content;\n        };\n        reader.readAsDataURL(blob);\n      } catch (error) {\n        console.error(\"Ошибка загрузки файла:\", error);\n      }\n    }\n    watch(() => documentStore.documentItem, (newValue) => {\n      console.log(authStore.get_server_domain + documentStore.documentItem.file);\n      fetchFileAsBase64();\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"flex items-center gap-4 flex-col border p-3 mt-4 rounded-lg\" }, _attrs))}><p class=\"text-xl font-medium\"> Документ: &quot;${_ssrInterpolate(_unref(documentStore).documentItem.title)}&quot; </p><div class=\"flex items-center gap-4 flex-col\"><select id=\"select-key\" name=\"key\" class=\"p-3 border-white rounded-lg bg-bgWhite text-black\"></select><button class=\"border p-2 rounded-lg\"> Выбрать ключ </button></div>`);\n      if (_unref(notSelected)) {\n        _push(`<p class=\"text-red-500 mt-2\">Вы не выбрали ключ</p>`);\n      } else {\n        _push(`<!---->`);\n      }\n      if (!_unref(notSelected)) {\n        _push(`<p class=\"text-green-500 mt-2\">Вы выбрали ключ: ${_ssrInterpolate(_unref(selectedTitle).CN)}</p>`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`<form id=\"myForm\" class=\"mt-4\"><button type=\"submit\" class=\"border py-3 px-4 rounded-lg text-xl bg-[#8881]\"> Подписать </button></form></div>`);\n    };\n  }\n});\n",
-      "start": 1744823400305,
-      "end": 1744823401336,
+      "start": 1744827961751,
+      "end": 1744827962850,
       "order": "normal",
       "sourcemaps": "{\n  \"version\": 3,\n  \"sources\": [\"D:/projects/nuxt/workix-nuxt-front/pages/base/documents/signification/[slug].vue?macro=true&vue&type=script&setup=true&lang.ts\"],\n  \"sourcesContent\": [\"import { defineComponent as _defineComponent } from \\\"vue\\\";\\nimport { unref as _unref, mergeProps as _mergeProps } from \\\"vue\\\";\\nimport { ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \\\"vue/server-renderer\\\";\\nimport { onMounted } from \\\"vue\\\";\\nimport { useDocumentStore } from \\\"~/stores/documents\\\";\\nimport { useRoute } from \\\"vue-router\\\";\\nimport { useAuthStore } from \\\"~/stores/auth\\\";\\nexport default /* @__PURE__ */ _defineComponent({\\n  __name: \\\"[slug]\\\",\\n  __ssrInlineRender: true,\\n  setup(__props) {\\n    const route = useRoute();\\n    const router = useRouter();\\n    const isSigning = ref(false);\\n    const selectedKey = ref(\\\"\\\");\\n    const notSelected = ref(true);\\n    const selectedTitle = ref(\\\"\\\");\\n    function loadScript(src) {\\n      return new Promise((resolve, reject) => {\\n        if (document.querySelector(`script[src=\\\"${src}\\\"]`)) {\\n          resolve();\\n          return;\\n        }\\n        const script = document.createElement(\\\"script\\\");\\n        script.src = src;\\n        script.async = true;\\n        script.onload = () => resolve();\\n        script.onerror = () => reject(new Error(`Ошибка загрузки скрипта ${src}`));\\n        document.head.appendChild(script);\\n      });\\n    }\\n    async function loadEImzoScripts() {\\n      try {\\n        await loadScript(\\\"/e-imzo/e-imzo.js\\\");\\n        await loadScript(\\\"/e-imzo/e-imzo-client.js\\\");\\n        await loadScript(\\\"/e-imzo/micro-ajax.js\\\");\\n        await loadScript(\\\"/e-imzo/e-imzo-init.js\\\");\\n        console.log(\\\"✅ Все скрипты загружены\\\");\\n        startAppLoad();\\n      } catch (error) {\\n        console.error(\\\"❌ Ошибка загрузки скриптов E-IMZO\\\", error);\\n      }\\n    }\\n    onMounted(async () => {\\n      await loadEImzoScripts();\\n    });\\n    async function startAppLoad() {\\n      try {\\n        if (window.EIMZOClient) {\\n          console.log(\\\"✅ EIMZOClient загружен:\\\", window.EIMZOClient);\\n          console.log(\\\"📜 Доступные методы EIMZOClient:\\\", Object.keys(window.EIMZOClient));\\n          installKeys();\\n        } else {\\n          console.error(\\\"❌ EIMZOClient не найден после загрузки\\\");\\n        }\\n      } catch (error) {\\n        console.error(\\\"❌ Ошибка при загрузке скриптов:\\\", error);\\n      }\\n    }\\n    async function installKeys() {\\n      if (!window.EIMZOClient) {\\n        console.error(\\\"EIMZOClient не загружен\\\");\\n        return;\\n      }\\n      isSigning.value = true;\\n      try {\\n        EIMZOClient.checkVersion(function(major, minor) {\\n          var newVersion = EIMZO_MAJOR * 100 + EIMZO_MINOR;\\n          var installedVersion = parseInt(major) * 100 + parseInt(minor);\\n          if (installedVersion < newVersion) {\\n            console.log(\\\"installedVersion < newVersion\\\");\\n          } else {\\n            EIMZOClient.installApiKeys(function() {\\n              responseUsers();\\n            }, function(e, r) {\\n              if (r) {\\n                console.log(\\\"da\\\");\\n              } else {\\n                console.log(\\\"net\\\");\\n              }\\n            });\\n          }\\n        }, function(e, r) {\\n          if (r) {\\n            console.log(\\\"da2\\\");\\n          } else {\\n            console.log(\\\"net2\\\");\\n          }\\n        });\\n        console.log(\\\"📄 Документ успешно подписан и обновлён\\\");\\n      } catch (error) {\\n        console.error(\\\"❌ Ошибка при подписании документа:\\\", error);\\n      } finally {\\n        isSigning.value = false;\\n      }\\n    }\\n    function responseUsers() {\\n      EIMZOClient.listAllUserKeys(\\n        function(o, i) {\\n          var itemId = \\\"itm-\\\" + o.serialNumber + \\\"-\\\" + i;\\n          return itemId;\\n        },\\n        function(itemId, v) {\\n          return uiCreateItem(itemId, v);\\n        },\\n        function(items, firstId) {\\n          var select = document.querySelector('select[name=\\\"key\\\"]');\\n          select.innerHTML = \\\"\\\";\\n          items.forEach(function(item) {\\n            select.appendChild(item);\\n          });\\n          if (select.options.length > 0) {\\n            console.log(\\\"options yes\\\", select.options[0], select.options[0].value);\\n            select.value = select.options[0].value;\\n          }\\n        },\\n        function(e, r) {\\n          if (e) {\\n            uiShowMessage(errorCAPIWS + \\\" : \\\" + e);\\n          } else {\\n            console.log(r);\\n          }\\n        }\\n      );\\n    }\\n    var uiCreateItem = function(itmkey, vo) {\\n      var now = /* @__PURE__ */ new Date();\\n      vo.expired = dates.compare(now, vo.validTo) > 0;\\n      var itm = document.createElement(\\\"option\\\");\\n      itm.value = itmkey;\\n      itm.text = vo.CN;\\n      if (!vo.expired) {\\n      } else {\\n        itm.style.color = \\\"gray\\\";\\n        itm.text = itm.text + \\\" (срок истек)\\\";\\n      }\\n      itm.setAttribute(\\\"vo\\\", JSON.stringify(vo));\\n      itm.setAttribute(\\\"id\\\", itmkey);\\n      return itm;\\n    };\\n    let currentKey = ref(\\\"\\\");\\n    let keyId = ref(null);\\n    const fileBase64 = ref(null);\\n    const handleSubmit = (event) => {\\n      signFile();\\n    };\\n    const signFile = function() {\\n      console.log(\\\"Начало подписи\\\");\\n      let data64 = fileBase64.value;\\n      let key = keyId.value;\\n      EIMZOClient.createPkcs7(key, data64, null, function(pkcs7) {\\n        attachTimestamp(pkcs7, function(pkcs7wtst) {\\n          console.log(\\\"Подписанный документ с временем\\\", pkcs7wtst);\\n          verify(pkcs7wtst, false, data64, function(result) {\\n            console.log(result);\\n          }, true);\\n        });\\n      }, (e, r) => {\\n        console.log(\\\"Ошибка при подписании\\\");\\n      }, false, true);\\n    };\\n    const attachTimestamp = function(pkcs7, callback) {\\n      const E_IMZO_URL = \\\"https://workix.uz/eimzo\\\";\\n      microAjax(E_IMZO_URL + \\\"/frontend/timestamp/pkcs7\\\", function(data, s) {\\n        if (s.status != 200) {\\n          console.log(\\\"Ошибка при добавлении timestamp к подписи\\\");\\n          return;\\n        }\\n        var pkcs7wtst;\\n        try {\\n          var data = JSON.parse(data);\\n          if (data.status != 1) {\\n            console.log(data.status, \\\" - \\\", s.message);\\n            return;\\n          }\\n          pkcs7wtst = data.pkcs7b64;\\n        } catch (e) {\\n          console.log(\\\"Ошибка\\\", s.status, \\\" - \\\", s.statusText, e);\\n        }\\n        callback(pkcs7wtst);\\n      }, pkcs7);\\n    };\\n    const verify = function(pkcs7wtst, detached, data, callback, isDataBase64Encoded) {\\n      var data64;\\n      console.log(detached);\\n      console.log(data64);\\n      documentStore.documentSign({ slug: route.params.slug, data: { signature: pkcs7wtst } }, router);\\n    };\\n    function selectKey() {\\n      let select = document.getElementById(\\\"select-key\\\");\\n      selectedKey.value = select;\\n      notSelected.value = false;\\n      let option = document.getElementById(select.value);\\n      let vo = JSON.parse(option.getAttribute(\\\"vo\\\"));\\n      selectedTitle.value = vo;\\n      console.log(\\\"🔑 Выбранные днные:\\\", vo);\\n      EIMZOClient.loadKey(vo, function(id) {\\n        keyId.value = id;\\n      }, (e, r) => {\\n        console.log(\\\"error\\\");\\n        notSelected.value = true;\\n      });\\n    }\\n    const documentStore = useDocumentStore();\\n    const authStore = useAuthStore();\\n    onMounted(() => {\\n      documentStore.loadDocument({ slug: route.params.slug });\\n    });\\n    async function fetchFileAsBase64() {\\n      try {\\n        const url = authStore.get_server_domain + documentStore.documentItem.file;\\n        const response = await fetch(url);\\n        if (!response.ok)\\n          throw new Error(\\\"Ошибка при загрузке файла\\\");\\n        const blob = await response.blob();\\n        const reader = new FileReader();\\n        reader.onloadend = () => {\\n          const base64Content = reader.result.split(\\\",\\\")[1];\\n          fileBase64.value = base64Content;\\n        };\\n        reader.readAsDataURL(blob);\\n      } catch (error) {\\n        console.error(\\\"Ошибка загрузки файла:\\\", error);\\n      }\\n    }\\n    watch(() => documentStore.documentItem, (newValue) => {\\n      console.log(authStore.get_server_domain + documentStore.documentItem.file);\\n      fetchFileAsBase64();\\n    });\\n    return (_ctx, _push, _parent, _attrs) => {\\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \\\"flex items-center gap-4 flex-col border p-3 mt-4 rounded-lg\\\" }, _attrs))}><p class=\\\"text-xl font-medium\\\"> Документ: &quot;${_ssrInterpolate(_unref(documentStore).documentItem.title)}&quot; </p><div class=\\\"flex items-center gap-4 flex-col\\\"><select id=\\\"select-key\\\" name=\\\"key\\\" class=\\\"p-3 border-white rounded-lg bg-bgWhite text-black\\\"></select><button class=\\\"border p-2 rounded-lg\\\"> Выбрать ключ </button></div>`);\\n      if (_unref(notSelected)) {\\n        _push(`<p class=\\\"text-red-500 mt-2\\\">Вы не выбрали ключ</p>`);\\n      } else {\\n        _push(`<!---->`);\\n      }\\n      if (!_unref(notSelected)) {\\n        _push(`<p class=\\\"text-green-500 mt-2\\\">Вы выбрали ключ: ${_ssrInterpolate(_unref(selectedTitle).CN)}</p>`);\\n      } else {\\n        _push(`<!---->`);\\n      }\\n      _push(`<form id=\\\"myForm\\\" class=\\\"mt-4\\\"><button type=\\\"submit\\\" class=\\\"border py-3 px-4 rounded-lg text-xl bg-[#8881]\\\"> Подписать </button></form></div>`);\\n    };\\n  }\\n});\\n\"],\n  \"mappings\": \"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\",\n  \"names\": []\n}\n"
     },
     {
       "name": "vite:css-post",
-      "start": 1744823401337,
-      "end": 1744823401337,
+      "start": 1744827962851,
+      "end": 1744827962851,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1744823401337,
-      "end": 1744823401337,
+      "start": 1744827962851,
+      "end": 1744827962851,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1744823401337,
-      "end": 1744823401337,
+      "start": 1744827962851,
+      "end": 1744827962851,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1744823401337,
-      "end": 1744823401337,
+      "start": 1744827962851,
+      "end": 1744827962851,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1744823401337,
-      "end": 1744823401337,
+      "start": 1744827962851,
+      "end": 1744827962851,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1744823401337,
-      "end": 1744823401337,
+      "start": 1744827962851,
+      "end": 1744827962851,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1744823401337,
-      "end": 1744823401337,
+      "start": 1744827962851,
+      "end": 1744827962851,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1744823401337,
-      "end": 1744823401337,
+      "start": 1744827962851,
+      "end": 1744827962851,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1744823401337,
-      "end": 1744823401337,
+      "start": 1744827962851,
+      "end": 1744827962851,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1744823401338,
-      "end": 1744823401338,
+      "start": 1744827962851,
+      "end": 1744827962851,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1744823401338,
-      "end": 1744823401338,
+      "start": 1744827962851,
+      "end": 1744827962851,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1744823401338,
-      "end": 1744823401338,
+      "start": 1744827962851,
+      "end": 1744827962851,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1744823401338,
-      "end": 1744823401338,
+      "start": 1744827962851,
+      "end": 1744827962851,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1744823401338,
-      "end": 1744823401338,
+      "start": 1744827962851,
+      "end": 1744827962851,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1744823401338,
-      "end": 1744823401338,
+      "start": 1744827962851,
+      "end": 1744827962851,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { useRouter } from '#app/composables/router';\nimport { ref, watch } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport { onMounted } from \"vue\";\nimport { useDocumentStore } from \"~/stores/documents\";\nimport { useRoute } from \"vue-router\";\nimport { useAuthStore } from \"~/stores/auth\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"[slug]\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const route = useRoute();\n    const router = useRouter();\n    const isSigning = ref(false);\n    const selectedKey = ref(\"\");\n    const notSelected = ref(true);\n    const selectedTitle = ref(\"\");\n    function loadScript(src) {\n      return new Promise((resolve, reject) => {\n        if ((void 0).querySelector(`script[src=\"${src}\"]`)) {\n          resolve();\n          return;\n        }\n        const script = (void 0).createElement(\"script\");\n        script.src = src;\n        script.async = true;\n        script.onload = () => resolve();\n        script.onerror = () => reject(new Error(`Ошибка загрузки скрипта ${src}`));\n        (void 0).head.appendChild(script);\n      });\n    }\n    async function loadEImzoScripts() {\n      try {\n        await loadScript(\"/e-imzo/e-imzo.js\");\n        await loadScript(\"/e-imzo/e-imzo-client.js\");\n        await loadScript(\"/e-imzo/micro-ajax.js\");\n        await loadScript(\"/e-imzo/e-imzo-init.js\");\n        console.log(\"✅ Все скрипты загружены\");\n        startAppLoad();\n      } catch (error) {\n        console.error(\"❌ Ошибка загрузки скриптов E-IMZO\", error);\n      }\n    }\n    onMounted(async () => {\n      await loadEImzoScripts();\n    });\n    async function startAppLoad() {\n      try {\n        if ((void 0).EIMZOClient) {\n          console.log(\"✅ EIMZOClient загружен:\", (void 0).EIMZOClient);\n          console.log(\"📜 Доступные методы EIMZOClient:\", Object.keys((void 0).EIMZOClient));\n          installKeys();\n        } else {\n          console.error(\"❌ EIMZOClient не найден после загрузки\");\n        }\n      } catch (error) {\n        console.error(\"❌ Ошибка при загрузке скриптов:\", error);\n      }\n    }\n    async function installKeys() {\n      if (!(void 0).EIMZOClient) {\n        console.error(\"EIMZOClient не загружен\");\n        return;\n      }\n      isSigning.value = true;\n      try {\n        EIMZOClient.checkVersion(function(major, minor) {\n          var newVersion = EIMZO_MAJOR * 100 + EIMZO_MINOR;\n          var installedVersion = parseInt(major) * 100 + parseInt(minor);\n          if (installedVersion < newVersion) {\n            console.log(\"installedVersion < newVersion\");\n          } else {\n            EIMZOClient.installApiKeys(function() {\n              responseUsers();\n            }, function(e, r) {\n              if (r) {\n                console.log(\"da\");\n              } else {\n                console.log(\"net\");\n              }\n            });\n          }\n        }, function(e, r) {\n          if (r) {\n            console.log(\"da2\");\n          } else {\n            console.log(\"net2\");\n          }\n        });\n        console.log(\"📄 Документ успешно подписан и обновлён\");\n      } catch (error) {\n        console.error(\"❌ Ошибка при подписании документа:\", error);\n      } finally {\n        isSigning.value = false;\n      }\n    }\n    function responseUsers() {\n      EIMZOClient.listAllUserKeys(\n        function(o, i) {\n          var itemId = \"itm-\" + o.serialNumber + \"-\" + i;\n          return itemId;\n        },\n        function(itemId, v) {\n          return uiCreateItem(itemId, v);\n        },\n        function(items, firstId) {\n          var select = (void 0).querySelector('select[name=\"key\"]');\n          select.innerHTML = \"\";\n          items.forEach(function(item) {\n            select.appendChild(item);\n          });\n          if (select.options.length > 0) {\n            console.log(\"options yes\", select.options[0], select.options[0].value);\n            select.value = select.options[0].value;\n          }\n        },\n        function(e, r) {\n          if (e) {\n            uiShowMessage(errorCAPIWS + \" : \" + e);\n          } else {\n            console.log(r);\n          }\n        }\n      );\n    }\n    var uiCreateItem = function(itmkey, vo) {\n      var now = /* @__PURE__ */ new Date();\n      vo.expired = dates.compare(now, vo.validTo) > 0;\n      var itm = (void 0).createElement(\"option\");\n      itm.value = itmkey;\n      itm.text = vo.CN;\n      if (!vo.expired) {\n      } else {\n        itm.style.color = \"gray\";\n        itm.text = itm.text + \" (срок истек)\";\n      }\n      itm.setAttribute(\"vo\", JSON.stringify(vo));\n      itm.setAttribute(\"id\", itmkey);\n      return itm;\n    };\n    let currentKey = ref(\"\");\n    let keyId = ref(null);\n    const fileBase64 = ref(null);\n    const handleSubmit = (event) => {\n      signFile();\n    };\n    const signFile = function() {\n      console.log(\"Начало подписи\");\n      let data64 = fileBase64.value;\n      let key = keyId.value;\n      EIMZOClient.createPkcs7(key, data64, null, function(pkcs7) {\n        attachTimestamp(pkcs7, function(pkcs7wtst) {\n          console.log(\"Подписанный документ с временем\", pkcs7wtst);\n          verify(pkcs7wtst, false, data64, function(result) {\n            console.log(result);\n          }, true);\n        });\n      }, (e, r) => {\n        console.log(\"Ошибка при подписании\");\n      }, false, true);\n    };\n    const attachTimestamp = function(pkcs7, callback) {\n      const E_IMZO_URL = \"https://workix.uz/eimzo\";\n      microAjax(E_IMZO_URL + \"/frontend/timestamp/pkcs7\", function(data, s) {\n        if (s.status != 200) {\n          console.log(\"Ошибка при добавлении timestamp к подписи\");\n          return;\n        }\n        var pkcs7wtst;\n        try {\n          var data = JSON.parse(data);\n          if (data.status != 1) {\n            console.log(data.status, \" - \", s.message);\n            return;\n          }\n          pkcs7wtst = data.pkcs7b64;\n        } catch (e) {\n          console.log(\"Ошибка\", s.status, \" - \", s.statusText, e);\n        }\n        callback(pkcs7wtst);\n      }, pkcs7);\n    };\n    const verify = function(pkcs7wtst, detached, data, callback, isDataBase64Encoded) {\n      var data64;\n      console.log(detached);\n      console.log(data64);\n      documentStore.documentSign({ slug: route.params.slug, data: { signature: pkcs7wtst } }, router);\n    };\n    function selectKey() {\n      let select = (void 0).getElementById(\"select-key\");\n      selectedKey.value = select;\n      notSelected.value = false;\n      let option = (void 0).getElementById(select.value);\n      let vo = JSON.parse(option.getAttribute(\"vo\"));\n      selectedTitle.value = vo;\n      console.log(\"🔑 Выбранные днные:\", vo);\n      EIMZOClient.loadKey(vo, function(id) {\n        keyId.value = id;\n      }, (e, r) => {\n        console.log(\"error\");\n        notSelected.value = true;\n      });\n    }\n    const documentStore = useDocumentStore();\n    const authStore = useAuthStore();\n    onMounted(() => {\n      documentStore.loadDocument({ slug: route.params.slug });\n    });\n    async function fetchFileAsBase64() {\n      try {\n        const url = authStore.get_server_domain + documentStore.documentItem.file;\n        const response = await fetch(url);\n        if (!response.ok)\n          throw new Error(\"Ошибка при загрузке файла\");\n        const blob = await response.blob();\n        const reader = new FileReader();\n        reader.onloadend = () => {\n          const base64Content = reader.result.split(\",\")[1];\n          fileBase64.value = base64Content;\n        };\n        reader.readAsDataURL(blob);\n      } catch (error) {\n        console.error(\"Ошибка загрузки файла:\", error);\n      }\n    }\n    watch(() => documentStore.documentItem, (newValue) => {\n      console.log(authStore.get_server_domain + documentStore.documentItem.file);\n      fetchFileAsBase64();\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"flex items-center gap-4 flex-col border p-3 mt-4 rounded-lg\" }, _attrs))}><p class=\"text-xl font-medium\"> Документ: &quot;${_ssrInterpolate(_unref(documentStore).documentItem.title)}&quot; </p><div class=\"flex items-center gap-4 flex-col\"><select id=\"select-key\" name=\"key\" class=\"p-3 border-white rounded-lg bg-bgWhite text-black\"></select><button class=\"border p-2 rounded-lg\"> Выбрать ключ </button></div>`);\n      if (_unref(notSelected)) {\n        _push(`<p class=\"text-red-500 mt-2\">Вы не выбрали ключ</p>`);\n      } else {\n        _push(`<!---->`);\n      }\n      if (!_unref(notSelected)) {\n        _push(`<p class=\"text-green-500 mt-2\">Вы выбрали ключ: ${_ssrInterpolate(_unref(selectedTitle).CN)}</p>`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`<form id=\"myForm\" class=\"mt-4\"><button type=\"submit\" class=\"border py-3 px-4 rounded-lg text-xl bg-[#8881]\"> Подписать </button></form></div>`);\n    };\n  }\n});\n",
-      "start": 1744823401338,
-      "end": 1744823401356,
+      "start": 1744827962851,
+      "end": 1744827962860,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -266,8 +266,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { useRouter } from '#app/composables/router';\nimport { ref, watch } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport { onMounted } from \"vue\";\nimport { useDocumentStore } from \"~/stores/documents\";\nimport { useRoute } from \"vue-router\";\nimport { useAuthStore } from \"~/stores/auth\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"[slug]\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const route = useRoute();\n    const router = useRouter();\n    const isSigning = ref(false);\n    const selectedKey = ref(\"\");\n    const notSelected = ref(true);\n    const selectedTitle = ref(\"\");\n    function loadScript(src) {\n      return new Promise((resolve, reject) => {\n        if ((void 0).querySelector(`script[src=\"${src}\"]`)) {\n          resolve();\n          return;\n        }\n        const script = (void 0).createElement(\"script\");\n        script.src = src;\n        script.async = true;\n        script.onload = () => resolve();\n        script.onerror = () => reject(new Error(`Ошибка загрузки скрипта ${src}`));\n        (void 0).head.appendChild(script);\n      });\n    }\n    async function loadEImzoScripts() {\n      try {\n        await loadScript(\"/e-imzo/e-imzo.js\");\n        await loadScript(\"/e-imzo/e-imzo-client.js\");\n        await loadScript(\"/e-imzo/micro-ajax.js\");\n        await loadScript(\"/e-imzo/e-imzo-init.js\");\n        console.log(\"✅ Все скрипты загружены\");\n        startAppLoad();\n      } catch (error) {\n        console.error(\"❌ Ошибка загрузки скриптов E-IMZO\", error);\n      }\n    }\n    onMounted(async () => {\n      await loadEImzoScripts();\n    });\n    async function startAppLoad() {\n      try {\n        if ((void 0).EIMZOClient) {\n          console.log(\"✅ EIMZOClient загружен:\", (void 0).EIMZOClient);\n          console.log(\"📜 Доступные методы EIMZOClient:\", Object.keys((void 0).EIMZOClient));\n          installKeys();\n        } else {\n          console.error(\"❌ EIMZOClient не найден после загрузки\");\n        }\n      } catch (error) {\n        console.error(\"❌ Ошибка при загрузке скриптов:\", error);\n      }\n    }\n    async function installKeys() {\n      if (!(void 0).EIMZOClient) {\n        console.error(\"EIMZOClient не загружен\");\n        return;\n      }\n      isSigning.value = true;\n      try {\n        EIMZOClient.checkVersion(function(major, minor) {\n          var newVersion = EIMZO_MAJOR * 100 + EIMZO_MINOR;\n          var installedVersion = parseInt(major) * 100 + parseInt(minor);\n          if (installedVersion < newVersion) {\n            console.log(\"installedVersion < newVersion\");\n          } else {\n            EIMZOClient.installApiKeys(function() {\n              responseUsers();\n            }, function(e, r) {\n              if (r) {\n                console.log(\"da\");\n              } else {\n                console.log(\"net\");\n              }\n            });\n          }\n        }, function(e, r) {\n          if (r) {\n            console.log(\"da2\");\n          } else {\n            console.log(\"net2\");\n          }\n        });\n        console.log(\"📄 Документ успешно подписан и обновлён\");\n      } catch (error) {\n        console.error(\"❌ Ошибка при подписании документа:\", error);\n      } finally {\n        isSigning.value = false;\n      }\n    }\n    function responseUsers() {\n      EIMZOClient.listAllUserKeys(\n        function(o, i) {\n          var itemId = \"itm-\" + o.serialNumber + \"-\" + i;\n          return itemId;\n        },\n        function(itemId, v) {\n          return uiCreateItem(itemId, v);\n        },\n        function(items, firstId) {\n          var select = (void 0).querySelector('select[name=\"key\"]');\n          select.innerHTML = \"\";\n          items.forEach(function(item) {\n            select.appendChild(item);\n          });\n          if (select.options.length > 0) {\n            console.log(\"options yes\", select.options[0], select.options[0].value);\n            select.value = select.options[0].value;\n          }\n        },\n        function(e, r) {\n          if (e) {\n            uiShowMessage(errorCAPIWS + \" : \" + e);\n          } else {\n            console.log(r);\n          }\n        }\n      );\n    }\n    var uiCreateItem = function(itmkey, vo) {\n      var now = /* @__PURE__ */ new Date();\n      vo.expired = dates.compare(now, vo.validTo) > 0;\n      var itm = (void 0).createElement(\"option\");\n      itm.value = itmkey;\n      itm.text = vo.CN;\n      if (!vo.expired) {\n      } else {\n        itm.style.color = \"gray\";\n        itm.text = itm.text + \" (срок истек)\";\n      }\n      itm.setAttribute(\"vo\", JSON.stringify(vo));\n      itm.setAttribute(\"id\", itmkey);\n      return itm;\n    };\n    let currentKey = ref(\"\");\n    let keyId = ref(null);\n    const fileBase64 = ref(null);\n    const handleSubmit = (event) => {\n      signFile();\n    };\n    const signFile = function() {\n      console.log(\"Начало подписи\");\n      let data64 = fileBase64.value;\n      let key = keyId.value;\n      EIMZOClient.createPkcs7(key, data64, null, function(pkcs7) {\n        attachTimestamp(pkcs7, function(pkcs7wtst) {\n          console.log(\"Подписанный документ с временем\", pkcs7wtst);\n          verify(pkcs7wtst, false, data64, function(result) {\n            console.log(result);\n          }, true);\n        });\n      }, (e, r) => {\n        console.log(\"Ошибка при подписании\");\n      }, false, true);\n    };\n    const attachTimestamp = function(pkcs7, callback) {\n      const E_IMZO_URL = \"https://workix.uz/eimzo\";\n      microAjax(E_IMZO_URL + \"/frontend/timestamp/pkcs7\", function(data, s) {\n        if (s.status != 200) {\n          console.log(\"Ошибка при добавлении timestamp к подписи\");\n          return;\n        }\n        var pkcs7wtst;\n        try {\n          var data = JSON.parse(data);\n          if (data.status != 1) {\n            console.log(data.status, \" - \", s.message);\n            return;\n          }\n          pkcs7wtst = data.pkcs7b64;\n        } catch (e) {\n          console.log(\"Ошибка\", s.status, \" - \", s.statusText, e);\n        }\n        callback(pkcs7wtst);\n      }, pkcs7);\n    };\n    const verify = function(pkcs7wtst, detached, data, callback, isDataBase64Encoded) {\n      var data64;\n      console.log(detached);\n      console.log(data64);\n      documentStore.documentSign({ slug: route.params.slug, data: { signature: pkcs7wtst } }, router);\n    };\n    function selectKey() {\n      let select = (void 0).getElementById(\"select-key\");\n      selectedKey.value = select;\n      notSelected.value = false;\n      let option = (void 0).getElementById(select.value);\n      let vo = JSON.parse(option.getAttribute(\"vo\"));\n      selectedTitle.value = vo;\n      console.log(\"🔑 Выбранные днные:\", vo);\n      EIMZOClient.loadKey(vo, function(id) {\n        keyId.value = id;\n      }, (e, r) => {\n        console.log(\"error\");\n        notSelected.value = true;\n      });\n    }\n    const documentStore = useDocumentStore();\n    const authStore = useAuthStore();\n    onMounted(() => {\n      documentStore.loadDocument({ slug: route.params.slug });\n    });\n    async function fetchFileAsBase64() {\n      try {\n        const url = authStore.get_server_domain + documentStore.documentItem.file;\n        const response = await fetch(url);\n        if (!response.ok)\n          throw new Error(\"Ошибка при загрузке файла\");\n        const blob = await response.blob();\n        const reader = new FileReader();\n        reader.onloadend = () => {\n          const base64Content = reader.result.split(\",\")[1];\n          fileBase64.value = base64Content;\n        };\n        reader.readAsDataURL(blob);\n      } catch (error) {\n        console.error(\"Ошибка загрузки файла:\", error);\n      }\n    }\n    watch(() => documentStore.documentItem, (newValue) => {\n      console.log(authStore.get_server_domain + documentStore.documentItem.file);\n      fetchFileAsBase64();\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"flex items-center gap-4 flex-col border p-3 mt-4 rounded-lg\" }, _attrs))}><p class=\"text-xl font-medium\"> Документ: &quot;${_ssrInterpolate(_unref(documentStore).documentItem.title)}&quot; </p><div class=\"flex items-center gap-4 flex-col\"><select id=\"select-key\" name=\"key\" class=\"p-3 border-white rounded-lg bg-bgWhite text-black\"></select><button class=\"border p-2 rounded-lg\"> Выбрать ключ </button></div>`);\n      if (_unref(notSelected)) {\n        _push(`<p class=\"text-red-500 mt-2\">Вы не выбрали ключ</p>`);\n      } else {\n        _push(`<!---->`);\n      }\n      if (!_unref(notSelected)) {\n        _push(`<p class=\"text-green-500 mt-2\">Вы выбрали ключ: ${_ssrInterpolate(_unref(selectedTitle).CN)}</p>`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`<form id=\"myForm\" class=\"mt-4\"><button type=\"submit\" class=\"border py-3 px-4 rounded-lg text-xl bg-[#8881]\"> Подписать </button></form></div>`);\n    };\n  }\n});\n",
-      "start": 1744823401338,
-      "end": 1744823401356,
+      "start": 1744827962851,
+      "end": 1744827962860,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -280,21 +280,21 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1744823401357,
-      "end": 1744823401357,
+      "start": 1744827962860,
+      "end": 1744827962860,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1744823401357,
-      "end": 1744823401357,
+      "start": 1744827962860,
+      "end": 1744827962860,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
       "result": "\nconst __nuxt_page_meta = null\nexport default __nuxt_page_meta\n",
-      "start": 1744823401357,
-      "end": 1744823401358,
+      "start": 1744827962860,
+      "end": 1744827962861,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -308,8 +308,8 @@
     {
       "name": "nuxt:pages-macros-transform",
       "result": "\nconst __nuxt_page_meta = null\nexport default __nuxt_page_meta\n",
-      "start": 1744823401357,
-      "end": 1744823401358,
+      "start": 1744827962860,
+      "end": 1744827962861,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -322,32 +322,32 @@
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1744823401359,
-      "end": 1744823401359,
+      "start": 1744827962861,
+      "end": 1744827962861,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1744823401363,
-      "end": 1744823401363,
+      "start": 1744827962875,
+      "end": 1744827962875,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1744823401363,
-      "end": 1744823401363,
+      "start": 1744827962878,
+      "end": 1744827962878,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1744823401365,
-      "end": 1744823401365,
+      "start": 1744827962878,
+      "end": 1744827962879,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1744823401365,
-      "end": 1744823401365,
+      "start": 1744827962884,
+      "end": 1744827962884,
       "order": "normal"
     }
   ]

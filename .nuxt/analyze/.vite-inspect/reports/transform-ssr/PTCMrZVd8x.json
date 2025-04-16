@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { resolveComponent as _resolveComponent, unref as _unref, withCtx as _withCtx, createVNode as _createVNode, toDisplayString as _toDisplayString } from \"vue\"\nimport { ssrRenderAttr as _ssrRenderAttr, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\"\n\nimport {useObjects} from \"~/stores/objects\";\nimport {useAuthStore} from \"~/stores/auth\";\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'ObjectParticipants',\n  __ssrInlineRender: true,\n  props: {\n  user: {\n    type: Object,\n    default: ()=>{}\n  }\n},\n  setup(__props) {\n\nconst url = useAuthStore()\nconst currentObject = useObjects()\n\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  const _component_NuxtLink = _resolveComponent(\"NuxtLink\")!\n\n  _push(`<div${_ssrRenderAttrs(_attrs)}>`)\n  _push(_ssrRenderComponent(_component_NuxtLink, {\n    class: \"flex dark:hover:bg-gray-700 p-2 rounded-lg transition-all items-center gap-x-2\",\n    to: `/base/users/${__props.user.id}`\n  }, {\n    default: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(`<div class=\"w-[50px] h-[50px]\"${\n          _scopeId\n        }><img class=\"w-full rounded-full\"${\n          _ssrRenderAttr(\"src\", _unref(url).get_server_domain + __props.user.photo_url)\n        } alt=\"\"${\n          _scopeId\n        }></div><p${\n          _scopeId\n        }>${\n          _ssrInterpolate(__props.user.first_name + ' ' + __props.user.last_name)\n        }</p>`)\n      } else {\n        return [\n          _createVNode(\"div\", { class: \"w-[50px] h-[50px]\" }, [\n            _createVNode(\"img\", {\n              class: \"w-full rounded-full\",\n              src: _unref(url).get_server_domain + __props.user.photo_url,\n              alt: \"\"\n            }, null, 8, [\"src\"])\n          ]),\n          _createVNode(\"p\", null, _toDisplayString(__props.user.first_name + ' ' + __props.user.last_name), 1)\n        ]\n      }\n    }),\n    _: 1\n  }, _parent))\n  _push(`</div>`)\n}\n}\n\n})",
-      "start": 1744823401652,
-      "end": 1744823401652,
+      "start": 1744827963888,
+      "end": 1744827963888,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1744823401654,
-      "end": 1744823401654,
+      "start": 1744827963888,
+      "end": 1744827963888,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1744823401654,
-      "end": 1744823401654,
+      "start": 1744827963888,
+      "end": 1744827963888,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1744823401654,
-      "end": 1744823401654,
+      "start": 1744827963889,
+      "end": 1744827963889,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1744823401654,
-      "end": 1744823401654,
+      "start": 1744827963889,
+      "end": 1744827963889,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1744823401654,
-      "end": 1744823401654,
+      "start": 1744827963889,
+      "end": 1744827963889,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1744823401654,
-      "end": 1744823401654,
+      "start": 1744827963889,
+      "end": 1744827963889,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1744823401654,
-      "end": 1744823401654,
+      "start": 1744827963889,
+      "end": 1744827963889,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1744823401654,
-      "end": 1744823401654,
+      "start": 1744827963889,
+      "end": 1744827963889,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { resolveComponent as _resolveComponent, unref as _unref, withCtx as _withCtx, createVNode as _createVNode, toDisplayString as _toDisplayString } from \"vue\";\nimport { ssrRenderAttr as _ssrRenderAttr, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport { useObjects } from \"~/stores/objects\";\nimport { useAuthStore } from \"~/stores/auth\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ObjectParticipants\",\n  __ssrInlineRender: true,\n  props: {\n    user: {\n      type: Object,\n      default: () => {\n      }\n    }\n  },\n  setup(__props) {\n    const url = useAuthStore();\n    const currentObject = useObjects();\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_NuxtLink = _resolveComponent(\"NuxtLink\");\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(_component_NuxtLink, {\n        class: \"flex dark:hover:bg-gray-700 p-2 rounded-lg transition-all items-center gap-x-2\",\n        to: `/base/users/${__props.user.id}`\n      }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`<div class=\"w-[50px] h-[50px]\"${_scopeId}><img class=\"w-full rounded-full\"${_ssrRenderAttr(\"src\", _unref(url).get_server_domain + __props.user.photo_url)} alt=\"\"${_scopeId}></div><p${_scopeId}>${_ssrInterpolate(__props.user.first_name + \" \" + __props.user.last_name)}</p>`);\n          } else {\n            return [\n              _createVNode(\"div\", { class: \"w-[50px] h-[50px]\" }, [\n                _createVNode(\"img\", {\n                  class: \"w-full rounded-full\",\n                  src: _unref(url).get_server_domain + __props.user.photo_url,\n                  alt: \"\"\n                }, null, 8, [\"src\"])\n              ]),\n              _createVNode(\"p\", null, _toDisplayString(__props.user.first_name + \" \" + __props.user.last_name), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1744823401654,
-      "end": 1744823402116,
+      "start": 1744827963889,
+      "end": 1744827964325,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -89,213 +89,213 @@
     },
     {
       "name": "vite:json",
-      "start": 1744823402116,
-      "end": 1744823402116,
+      "start": 1744827964334,
+      "end": 1744827964334,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1744823402117,
-      "end": 1744823402117,
+      "start": 1744827964341,
+      "end": 1744827964341,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1744823402117,
-      "end": 1744823402117,
+      "start": 1744827964342,
+      "end": 1744827964342,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1744823402117,
-      "end": 1744823402118,
+      "start": 1744827964342,
+      "end": 1744827964342,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1744823402118,
-      "end": 1744823402118,
+      "start": 1744827964343,
+      "end": 1744827964343,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1744823402118,
-      "end": 1744823402118,
+      "start": 1744827964343,
+      "end": 1744827964343,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1744823402119,
-      "end": 1744823402119,
+      "start": 1744827964343,
+      "end": 1744827964344,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1744823402119,
-      "end": 1744823402119,
+      "start": 1744827964343,
+      "end": 1744827964344,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1744823402120,
-      "end": 1744823402120,
+      "start": 1744827964345,
+      "end": 1744827964345,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1744823402121,
-      "end": 1744823402121,
+      "start": 1744827964345,
+      "end": 1744827964345,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1744823402122,
-      "end": 1744823402123,
+      "start": 1744827964346,
+      "end": 1744827964347,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1744823402126,
-      "end": 1744823402126,
+      "start": 1744827964347,
+      "end": 1744827964347,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1744823402127,
-      "end": 1744823402127,
+      "start": 1744827964347,
+      "end": 1744827964347,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1744823402127,
-      "end": 1744823402127,
+      "start": 1744827964347,
+      "end": 1744827964347,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1744823402128,
-      "end": 1744823402128,
+      "start": 1744827964351,
+      "end": 1744827964352,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1744823402128,
-      "end": 1744823402128,
+      "start": 1744827964358,
+      "end": 1744827964358,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1744823402129,
-      "end": 1744823402129,
+      "start": 1744827964359,
+      "end": 1744827964359,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1744823402129,
-      "end": 1744823402129,
+      "start": 1744827964359,
+      "end": 1744827964360,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1744823402130,
-      "end": 1744823402130,
+      "start": 1744827964360,
+      "end": 1744827964360,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1744823402130,
-      "end": 1744823402130,
+      "start": 1744827964361,
+      "end": 1744827964361,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1744823402130,
-      "end": 1744823402131,
+      "start": 1744827964361,
+      "end": 1744827964361,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1744823402131,
-      "end": 1744823402131,
+      "start": 1744827964362,
+      "end": 1744827964363,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1744823402131,
-      "end": 1744823402131,
+      "start": 1744827964362,
+      "end": 1744827964363,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1744823402136,
-      "end": 1744823402137,
+      "start": 1744827964367,
+      "end": 1744827964367,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1744823402136,
-      "end": 1744823402138,
+      "start": 1744827964367,
+      "end": 1744827964367,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1744823402138,
-      "end": 1744823402138,
+      "start": 1744827964369,
+      "end": 1744827964369,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1744823402138,
-      "end": 1744823402138,
+      "start": 1744827964369,
+      "end": 1744827964369,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1744823402139,
-      "end": 1744823402143,
+      "start": 1744827964372,
+      "end": 1744827964376,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1744823402139,
-      "end": 1744823402143,
+      "start": 1744827964372,
+      "end": 1744827964376,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1744823402144,
-      "end": 1744823402144,
+      "start": 1744827964376,
+      "end": 1744827964377,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1744823402144,
-      "end": 1744823402144,
+      "start": 1744827964376,
+      "end": 1744827964377,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1744823402144,
-      "end": 1744823402144,
+      "start": 1744827964377,
+      "end": 1744827964377,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1744823402144,
-      "end": 1744823402144,
+      "start": 1744827964377,
+      "end": 1744827964378,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1744823402145,
-      "end": 1744823402145,
+      "start": 1744827964378,
+      "end": 1744827964378,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
       "result": "import { default as __nuxt_component_0 } from \"D:/projects/nuxt/workix-nuxt-front/node_modules/nuxt/dist/app/components/nuxt-link\";\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { resolveComponent as _resolveComponent, unref as _unref, withCtx as _withCtx, createVNode as _createVNode, toDisplayString as _toDisplayString } from \"vue\";\nimport { ssrRenderAttr as _ssrRenderAttr, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport { useObjects } from \"~/stores/objects\";\nimport { useAuthStore } from \"~/stores/auth\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ObjectParticipants\",\n  __ssrInlineRender: true,\n  props: {\n    user: {\n      type: Object,\n      default: () => {\n      }\n    }\n  },\n  setup(__props) {\n    const url = useAuthStore();\n    const currentObject = useObjects();\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_NuxtLink = __nuxt_component_0;\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(_component_NuxtLink, {\n        class: \"flex dark:hover:bg-gray-700 p-2 rounded-lg transition-all items-center gap-x-2\",\n        to: `/base/users/${__props.user.id}`\n      }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`<div class=\"w-[50px] h-[50px]\"${_scopeId}><img class=\"w-full rounded-full\"${_ssrRenderAttr(\"src\", _unref(url).get_server_domain + __props.user.photo_url)} alt=\"\"${_scopeId}></div><p${_scopeId}>${_ssrInterpolate(__props.user.first_name + \" \" + __props.user.last_name)}</p>`);\n          } else {\n            return [\n              _createVNode(\"div\", { class: \"w-[50px] h-[50px]\" }, [\n                _createVNode(\"img\", {\n                  class: \"w-full rounded-full\",\n                  src: _unref(url).get_server_domain + __props.user.photo_url,\n                  alt: \"\"\n                }, null, 8, [\"src\"])\n              ]),\n              _createVNode(\"p\", null, _toDisplayString(__props.user.first_name + \" \" + __props.user.last_name), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1744823402145,
-      "end": 1744823402145,
+      "start": 1744827964379,
+      "end": 1744827964380,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -308,20 +308,20 @@
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1744823402147,
-      "end": 1744823402147,
+      "start": 1744827964381,
+      "end": 1744827964382,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1744823402147,
-      "end": 1744823402147,
+      "start": 1744827964382,
+      "end": 1744827964382,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1744823402147,
-      "end": 1744823402147,
+      "start": 1744827964382,
+      "end": 1744827964382,
       "order": "normal"
     }
   ]

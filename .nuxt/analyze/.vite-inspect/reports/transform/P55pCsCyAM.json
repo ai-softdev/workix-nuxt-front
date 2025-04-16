@@ -4,185 +4,185 @@
     {
       "name": "vite:load-fallback",
       "result": "import { computed, toValue, useAttrs } from \"vue\";\nimport { useAppConfig } from \"#imports\";\nimport { mergeConfig, omit, get } from \"../utils/index.mjs\";\nexport const useUI = (key, $ui, $config, $wrapperClass, withAppConfig = false) => {\n  const $attrs = useAttrs();\n  const appConfig = useAppConfig();\n  const ui = computed(() => {\n    const _ui = toValue($ui);\n    const _config = toValue($config);\n    const _wrapperClass = toValue($wrapperClass);\n    return mergeConfig(\n      _ui?.strategy || appConfig.ui?.strategy,\n      _wrapperClass ? { wrapper: _wrapperClass } : {},\n      _ui || {},\n      process.dev || withAppConfig ? get(appConfig.ui, key, {}) : {},\n      _config || {}\n    );\n  });\n  const attrs = computed(() => omit($attrs, [\"class\"]));\n  return {\n    ui,\n    attrs\n  };\n};\n",
-      "start": 1744823373954,
-      "end": 1744823374591,
+      "start": 1744827929883,
+      "end": 1744827930066,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1744823374591,
-      "end": 1744823374591,
+      "start": 1744827930066,
+      "end": 1744827930066,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1744823374591,
-      "end": 1744823374591,
+      "start": 1744827930066,
+      "end": 1744827930066,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1744823374591,
-      "end": 1744823374591,
+      "start": 1744827930066,
+      "end": 1744827930066,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1744823374591,
-      "end": 1744823374592,
+      "start": 1744827930066,
+      "end": 1744827930066,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1744823374592,
-      "end": 1744823374592,
+      "start": 1744827930066,
+      "end": 1744827930066,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1744823374592,
-      "end": 1744823374592,
+      "start": 1744827930066,
+      "end": 1744827930066,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1744823374592,
-      "end": 1744823374592,
+      "start": 1744827930066,
+      "end": 1744827930066,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1744823374592,
-      "end": 1744823374592,
+      "start": 1744827930066,
+      "end": 1744827930066,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1744823374592,
-      "end": 1744823374592,
+      "start": 1744827930066,
+      "end": 1744827930066,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1744823374592,
-      "end": 1744823374592,
+      "start": 1744827930066,
+      "end": 1744827930066,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1744823374592,
-      "end": 1744823374592,
+      "start": 1744827930066,
+      "end": 1744827930066,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1744823374592,
-      "end": 1744823374592,
+      "start": 1744827930066,
+      "end": 1744827930066,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1744823374592,
-      "end": 1744823374592,
+      "start": 1744827930066,
+      "end": 1744827930066,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1744823374592,
-      "end": 1744823374592,
+      "start": 1744827930066,
+      "end": 1744827930066,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1744823374592,
-      "end": 1744823374592,
+      "start": 1744827930066,
+      "end": 1744827930066,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1744823374592,
-      "end": 1744823374592,
+      "start": 1744827930066,
+      "end": 1744827930066,
       "order": "normal"
     },
     {
       "name": "vite:define",
       "result": "import { computed, toValue, useAttrs } from \"vue\";\nimport { useAppConfig } from \"#imports\";\nimport { mergeConfig, omit, get } from \"../utils/index.mjs\";\nexport const useUI = (key, $ui, $config, $wrapperClass, withAppConfig = false) => {\n  const $attrs = useAttrs();\n  const appConfig = useAppConfig();\n  const ui = computed(() => {\n    const _ui = toValue($ui);\n    const _config = toValue($config);\n    const _wrapperClass = toValue($wrapperClass);\n    return mergeConfig(\n      _ui?.strategy || appConfig.ui?.strategy,\n      _wrapperClass ? { wrapper: _wrapperClass } : {},\n      _ui || {},\n      withAppConfig ? get(appConfig.ui, key, {}) : {},\n      _config || {}\n    );\n  });\n  const attrs = computed(() => omit($attrs, [\"class\"]));\n  return {\n    ui,\n    attrs\n  };\n};\n",
-      "start": 1744823374592,
-      "end": 1744823374642,
+      "start": 1744827930066,
+      "end": 1744827930596,
       "order": "normal",
       "sourcemaps": null
     },
     {
       "name": "vite:css-post",
-      "start": 1744823374642,
-      "end": 1744823374642,
+      "start": 1744827930596,
+      "end": 1744827930596,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1744823374642,
-      "end": 1744823374642,
+      "start": 1744827930596,
+      "end": 1744827930596,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1744823374642,
-      "end": 1744823374642,
+      "start": 1744827930597,
+      "end": 1744827930597,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1744823374643,
-      "end": 1744823374643,
+      "start": 1744827930597,
+      "end": 1744827930597,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1744823374643,
-      "end": 1744823374643,
+      "start": 1744827930597,
+      "end": 1744827930597,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1744823374643,
-      "end": 1744823374643,
+      "start": 1744827930597,
+      "end": 1744827930597,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1744823374643,
-      "end": 1744823374643,
+      "start": 1744827930598,
+      "end": 1744827930598,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1744823374643,
-      "end": 1744823374643,
+      "start": 1744827930598,
+      "end": 1744827930598,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1744823374644,
-      "end": 1744823374644,
+      "start": 1744827930599,
+      "end": 1744827930599,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1744823374644,
-      "end": 1744823374644,
+      "start": 1744827930599,
+      "end": 1744827930599,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1744823374644,
-      "end": 1744823374644,
+      "start": 1744827930599,
+      "end": 1744827930599,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { useAppConfig } from '#app/config';\nimport { computed, toValue, useAttrs } from \"vue\";\nimport { mergeConfig, omit, get } from \"../utils/index.mjs\";\nexport const useUI = (key, $ui, $config, $wrapperClass, withAppConfig = false) => {\n  const $attrs = useAttrs();\n  const appConfig = useAppConfig();\n  const ui = computed(() => {\n    const _ui = toValue($ui);\n    const _config = toValue($config);\n    const _wrapperClass = toValue($wrapperClass);\n    return mergeConfig(\n      _ui?.strategy || appConfig.ui?.strategy,\n      _wrapperClass ? { wrapper: _wrapperClass } : {},\n      _ui || {},\n      withAppConfig ? get(appConfig.ui, key, {}) : {},\n      _config || {}\n    );\n  });\n  const attrs = computed(() => omit($attrs, [\"class\"]));\n  return {\n    ui,\n    attrs\n  };\n};\n",
-      "start": 1744823374649,
-      "end": 1744823374650,
+      "start": 1744827930600,
+      "end": 1744827930601,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -195,50 +195,50 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1744823374651,
-      "end": 1744823374651,
+      "start": 1744827930601,
+      "end": 1744827930601,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1744823374651,
-      "end": 1744823374651,
+      "start": 1744827930602,
+      "end": 1744827930602,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1744823374651,
-      "end": 1744823374651,
+      "start": 1744827930602,
+      "end": 1744827930602,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1744823374651,
-      "end": 1744823374651,
+      "start": 1744827930602,
+      "end": 1744827930602,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1744823374651,
-      "end": 1744823374651,
+      "start": 1744827930602,
+      "end": 1744827930602,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1744823374651,
-      "end": 1744823374651,
+      "start": 1744827930603,
+      "end": 1744827930603,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1744823374652,
-      "end": 1744823374652,
+      "start": 1744827930603,
+      "end": 1744827930603,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1744823374652,
-      "end": 1744823374652,
+      "start": 1744827930604,
+      "end": 1744827930606,
       "order": "normal"
     }
   ]

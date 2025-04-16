@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\"\n\nimport CloudContent from \"~/components/Cloud/CloudContent.vue\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport {useCompanies} from \"~/stores/companies\";\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'index',\n  __ssrInlineRender: true,\n  setup(__props) {\n\r\nconst router = useRouter()\r\nconst loadAuthStore = useAuthStore()\r\nconst company = useCompanies()\r\n\r\nwatch(() => loadAuthStore.user, (newValue) => {\r\n  if(loadAuthStore?.user?.role?.name_en === 'admin'){\r\n    if (window.history.length > 1) {\r\n      router.push('/base/profile');\r\n    } else {\r\n      router.push('/');\r\n    }\r\n  }\r\n})\r\n\r\nwatch(() => company.company, (newValue) => {\r\n  let permission = company.company.modules?.find(item => item.name_en === 'file_manager')\r\n  if(!permission){\r\n    if (window.history.length > 1) {\r\n      router.push('/base/profile');\r\n    } else {\r\n      router.push('/');\r\n    }\r\n  }\r\n})\r\n\r\nuseSeoMeta({\r\n  title: 'Файл менеджер',\r\n  description: 'Файловый менеджер для хранения или взаимодействия с файлами'\r\n})\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"h-screen\" }, _attrs))}>`)\n  _push(_ssrRenderComponent(CloudContent, null, null, _parent))\n  _push(`</div>`)\n}\n}\n\n})",
-      "start": 1744823399093,
-      "end": 1744823399093,
+      "start": 1744827960543,
+      "end": 1744827960543,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1744823399093,
-      "end": 1744823399093,
+      "start": 1744827960543,
+      "end": 1744827960543,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1744823399093,
-      "end": 1744823399093,
+      "start": 1744827960543,
+      "end": 1744827960543,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1744823399093,
-      "end": 1744823399093,
+      "start": 1744827960543,
+      "end": 1744827960543,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1744823399093,
-      "end": 1744823399093,
+      "start": 1744827960543,
+      "end": 1744827960543,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1744823399093,
-      "end": 1744823399093,
+      "start": 1744827960543,
+      "end": 1744827960543,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1744823399093,
-      "end": 1744823399093,
+      "start": 1744827960543,
+      "end": 1744827960543,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1744823399093,
-      "end": 1744823399093,
+      "start": 1744827960545,
+      "end": 1744827960545,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1744823399093,
-      "end": 1744823399093,
+      "start": 1744827960545,
+      "end": 1744827960545,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport CloudContent from \"~/components/Cloud/CloudContent.vue\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    const company = useCompanies();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if (window.history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    watch(() => company.company, (newValue) => {\n      let permission = company.company.modules?.find((item) => item.name_en === \"file_manager\");\n      if (!permission) {\n        if (window.history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Файл менеджер\",\n      description: \"Файловый менеджер для хранения или взаимодействия с файлами\"\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"h-screen\" }, _attrs))}>`);\n      _push(_ssrRenderComponent(CloudContent, null, null, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1744823399094,
-      "end": 1744823400002,
+      "start": 1744827960545,
+      "end": 1744827962368,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -86,173 +86,173 @@
     },
     {
       "name": "vite:json",
-      "start": 1744823400002,
-      "end": 1744823400002,
+      "start": 1744827962368,
+      "end": 1744827962368,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1744823400003,
-      "end": 1744823400003,
+      "start": 1744827962368,
+      "end": 1744827962368,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1744823400003,
-      "end": 1744823400003,
+      "start": 1744827962368,
+      "end": 1744827962368,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1744823400003,
-      "end": 1744823400003,
+      "start": 1744827962368,
+      "end": 1744827962368,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1744823400003,
-      "end": 1744823400003,
+      "start": 1744827962368,
+      "end": 1744827962368,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1744823400003,
-      "end": 1744823400003,
+      "start": 1744827962368,
+      "end": 1744827962368,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1744823400003,
-      "end": 1744823400003,
+      "start": 1744827962368,
+      "end": 1744827962368,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1744823400003,
-      "end": 1744823400003,
+      "start": 1744827962368,
+      "end": 1744827962368,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1744823400003,
-      "end": 1744823400003,
+      "start": 1744827962369,
+      "end": 1744827962369,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1744823400003,
-      "end": 1744823400004,
+      "start": 1744827962369,
+      "end": 1744827962369,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1744823400004,
-      "end": 1744823400004,
+      "start": 1744827962370,
+      "end": 1744827962371,
       "order": "normal"
     },
     {
       "name": "vite:define",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport CloudContent from \"~/components/Cloud/CloudContent.vue\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    const company = useCompanies();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    watch(() => company.company, (newValue) => {\n      let permission = company.company.modules?.find((item) => item.name_en === \"file_manager\");\n      if (!permission) {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Файл менеджер\",\n      description: \"Файловый менеджер для хранения или взаимодействия с файлами\"\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"h-screen\" }, _attrs))}>`);\n      _push(_ssrRenderComponent(CloudContent, null, null, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1744823400004,
-      "end": 1744823401172,
+      "start": 1744827962372,
+      "end": 1744827963376,
       "order": "normal",
       "sourcemaps": "{\n  \"version\": 3,\n  \"sources\": [\"D:/projects/nuxt/workix-nuxt-front/pages/base/cloud/index.vue?macro=true&vue&type=script&setup=true&lang.ts\"],\n  \"sourcesContent\": [\"import { defineComponent as _defineComponent } from \\\"vue\\\";\\nimport { mergeProps as _mergeProps } from \\\"vue\\\";\\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \\\"vue/server-renderer\\\";\\nimport CloudContent from \\\"~/components/Cloud/CloudContent.vue\\\";\\nimport { useAuthStore } from \\\"~/stores/auth\\\";\\nimport { useCompanies } from \\\"~/stores/companies\\\";\\nexport default /* @__PURE__ */ _defineComponent({\\n  __name: \\\"index\\\",\\n  __ssrInlineRender: true,\\n  setup(__props) {\\n    const router = useRouter();\\n    const loadAuthStore = useAuthStore();\\n    const company = useCompanies();\\n    watch(() => loadAuthStore.user, (newValue) => {\\n      if (loadAuthStore?.user?.role?.name_en === \\\"admin\\\") {\\n        if (window.history.length > 1) {\\n          router.push(\\\"/base/profile\\\");\\n        } else {\\n          router.push(\\\"/\\\");\\n        }\\n      }\\n    });\\n    watch(() => company.company, (newValue) => {\\n      let permission = company.company.modules?.find((item) => item.name_en === \\\"file_manager\\\");\\n      if (!permission) {\\n        if (window.history.length > 1) {\\n          router.push(\\\"/base/profile\\\");\\n        } else {\\n          router.push(\\\"/\\\");\\n        }\\n      }\\n    });\\n    useSeoMeta({\\n      title: \\\"Файл менеджер\\\",\\n      description: \\\"Файловый менеджер для хранения или взаимодействия с файлами\\\"\\n    });\\n    return (_ctx, _push, _parent, _attrs) => {\\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \\\"h-screen\\\" }, _attrs))}>`);\\n      _push(_ssrRenderComponent(CloudContent, null, null, _parent));\\n      _push(`</div>`);\\n    };\\n  }\\n});\\n\"],\n  \"mappings\": \"AAAA,SAAS,mBAAmB,wBAAwB;AACpD,SAAS,cAAc,mBAAmB;AAC1C,SAAS,sBAAsB,qBAAqB,kBAAkB,uBAAuB;AAC7F,OAAO,kBAAkB;AACzB,SAAS,oBAAoB;AAC7B,SAAS,oBAAoB;AAC7B,eAA+B,iCAAiB;AAAA,EAC9C,QAAQ;AAAA,EACR,mBAAmB;AAAA,EACnB,MAAM,SAAS;AACb,UAAM,SAAS,UAAU;AACzB,UAAM,gBAAgB,aAAa;AACnC,UAAM,UAAU,aAAa;AAC7B,UAAM,MAAM,cAAc,MAAM,CAAC,aAAa;AAC5C,UAAI,eAAe,MAAM,MAAM,YAAY,SAAS;AAClD,YAAI,SAAO,QAAQ,SAAS,GAAG;AAC7B,iBAAO,KAAK,eAAe;AAAA,QAC7B,OAAO;AACL,iBAAO,KAAK,GAAG;AAAA,QACjB;AAAA,MACF;AAAA,IACF,CAAC;AACD,UAAM,MAAM,QAAQ,SAAS,CAAC,aAAa;AACzC,UAAI,aAAa,QAAQ,QAAQ,SAAS,KAAK,CAAC,SAAS,KAAK,YAAY,cAAc;AACxF,UAAI,CAAC,YAAY;AACf,YAAI,SAAO,QAAQ,SAAS,GAAG;AAC7B,iBAAO,KAAK,eAAe;AAAA,QAC7B,OAAO;AACL,iBAAO,KAAK,GAAG;AAAA,QACjB;AAAA,MACF;AAAA,IACF,CAAC;AACD,eAAW;AAAA,MACT,OAAO;AAAA,MACP,aAAa;AAAA,IACf,CAAC;AACD,WAAO,CAAC,MAAM,OAAO,SAAS,WAAW;AACvC,YAAM,OAAO,gBAAgB,YAAY,EAAE,OAAO,WAAW,GAAG,MAAM,CAAC,CAAC,GAAG;AAC3E,YAAM,oBAAoB,cAAc,MAAM,MAAM,OAAO,CAAC;AAC5D,YAAM,QAAQ;AAAA,IAChB;AAAA,EACF;AACF,CAAC;\",\n  \"names\": []\n}\n"
     },
     {
       "name": "vite:css-post",
-      "start": 1744823401172,
-      "end": 1744823401172,
+      "start": 1744827963376,
+      "end": 1744827963376,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1744823401172,
-      "end": 1744823401172,
+      "start": 1744827963376,
+      "end": 1744827963376,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1744823401172,
-      "end": 1744823401172,
+      "start": 1744827963376,
+      "end": 1744827963376,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1744823401173,
-      "end": 1744823401173,
+      "start": 1744827963376,
+      "end": 1744827963376,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1744823401173,
-      "end": 1744823401174,
+      "start": 1744827963376,
+      "end": 1744827963376,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1744823401174,
-      "end": 1744823401174,
+      "start": 1744827963376,
+      "end": 1744827963376,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1744823401174,
-      "end": 1744823401174,
+      "start": 1744827963377,
+      "end": 1744827963377,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1744823401174,
-      "end": 1744823401174,
+      "start": 1744827963377,
+      "end": 1744827963377,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1744823401174,
-      "end": 1744823401174,
+      "start": 1744827963377,
+      "end": 1744827963377,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1744823401174,
-      "end": 1744823401175,
+      "start": 1744827963377,
+      "end": 1744827963377,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1744823401174,
-      "end": 1744823401175,
+      "start": 1744827963377,
+      "end": 1744827963378,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1744823401175,
-      "end": 1744823401175,
+      "start": 1744827963378,
+      "end": 1744827963378,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1744823401175,
-      "end": 1744823401175,
+      "start": 1744827963378,
+      "end": 1744827963378,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1744823401175,
-      "end": 1744823401175,
+      "start": 1744827963378,
+      "end": 1744827963378,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1744823401175,
-      "end": 1744823401175,
+      "start": 1744827963378,
+      "end": 1744827963378,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { useRouter } from '#app/composables/router';\nimport { watch } from 'vue';\nimport { useSeoMeta } from '@unhead/vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport CloudContent from \"~/components/Cloud/CloudContent.vue\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    const company = useCompanies();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    watch(() => company.company, (newValue) => {\n      let permission = company.company.modules?.find((item) => item.name_en === \"file_manager\");\n      if (!permission) {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Файл менеджер\",\n      description: \"Файловый менеджер для хранения или взаимодействия с файлами\"\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"h-screen\" }, _attrs))}>`);\n      _push(_ssrRenderComponent(CloudContent, null, null, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1744823401175,
-      "end": 1744823401184,
+      "start": 1744827963379,
+      "end": 1744827963385,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -266,8 +266,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { useRouter } from '#app/composables/router';\nimport { watch } from 'vue';\nimport { useSeoMeta } from '@unhead/vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport CloudContent from \"~/components/Cloud/CloudContent.vue\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    const company = useCompanies();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    watch(() => company.company, (newValue) => {\n      let permission = company.company.modules?.find((item) => item.name_en === \"file_manager\");\n      if (!permission) {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Файл менеджер\",\n      description: \"Файловый менеджер для хранения или взаимодействия с файлами\"\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"h-screen\" }, _attrs))}>`);\n      _push(_ssrRenderComponent(CloudContent, null, null, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1744823401175,
-      "end": 1744823401184,
+      "start": 1744827963379,
+      "end": 1744827963386,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -280,21 +280,21 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1744823401186,
-      "end": 1744823401186,
+      "start": 1744827963386,
+      "end": 1744827963386,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1744823401186,
-      "end": 1744823401186,
+      "start": 1744827963386,
+      "end": 1744827963386,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
       "result": "\nconst __nuxt_page_meta = null\nexport default __nuxt_page_meta\n",
-      "start": 1744823401186,
-      "end": 1744823401187,
+      "start": 1744827963387,
+      "end": 1744827963387,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -308,8 +308,8 @@
     {
       "name": "nuxt:pages-macros-transform",
       "result": "\nconst __nuxt_page_meta = null\nexport default __nuxt_page_meta\n",
-      "start": 1744823401186,
-      "end": 1744823401187,
+      "start": 1744827963387,
+      "end": 1744827963387,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -322,32 +322,32 @@
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1744823401190,
-      "end": 1744823401190,
+      "start": 1744827963387,
+      "end": 1744827963387,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1744823401196,
-      "end": 1744823401197,
+      "start": 1744827963387,
+      "end": 1744827963388,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1744823401197,
-      "end": 1744823401197,
+      "start": 1744827963388,
+      "end": 1744827963388,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1744823401197,
-      "end": 1744823401197,
+      "start": 1744827963388,
+      "end": 1744827963388,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1744823401200,
-      "end": 1744823401200,
+      "start": 1744827963389,
+      "end": 1744827963389,
       "order": "normal"
     }
   ]

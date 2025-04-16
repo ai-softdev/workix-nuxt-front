@@ -200,6 +200,18 @@ export const useCompanies = defineStore('current-company', {
         this.department = res.data
         router.go(-1)
       })
-    }
+    },
+    async editCompany(params:any): Promise<void> {
+      await axios.patch(`company/update`, params.form, {
+        headers: {
+          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
+        }
+      }).then(response => {
+        this.loadCurrentCompany()
+        toast.success('Компания успешно обновлена!', {autoClose: 1500, theme: 'auto'})
+      }).catch(e => {
+        toast.error(e, {autoClose: 1500, theme: 'auto'})
+      })
+    },
   }
 })

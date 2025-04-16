@@ -4,63 +4,63 @@
     {
       "name": "vite:load-fallback",
       "result": "<template>\n   <div>\n     <div class=\"preloader absolute loading\">\n       <span class=\"slice\"></span>\n       <span class=\"slice\"></span>\n       <span class=\"slice\"></span>\n       <span class=\"slice\"></span>\n       <span class=\"slice\"></span>\n       <span class=\"slice\"></span>\n     </div>\n   </div>\n</template>\n\n<style scoped lang=\"scss\">\n@for $i from 1 through 6 {\n  @keyframes preload-show-#{$i} {\n    from {\n      transform: rotateZ(60 * $i + deg) rotateY(-90deg) rotateX(0deg);\n      border-left-color: #0ea5e9;\n    }\n  }\n  @keyframes preload-hide-#{$i} {\n    to {\n      transform: rotateZ(60 * $i + deg) rotateY(-90deg) rotateX(0deg);\n      border-left-color: #2988c8;\n    }\n  }\n\n  @keyframes preload-cycle-#{$i} {\n    $startIndex: $i * 5;\n    $reverseIndex: (80 - $i * 5);\n\n    #{$startIndex * 1%} {\n      transform: rotateZ(60 * $i + deg) rotateY(90deg) rotateX(0deg);\n      border-left-color: #0ea5e9;\n    }\n    #{$startIndex + 5%},\n    #{$reverseIndex * 1%} {\n      transform: rotateZ(60 * $i + deg) rotateY(0) rotateX(0deg);\n      border-left-color: #2988c8;\n    }\n\n    #{$reverseIndex + 5%},\n    100% {\n      transform: rotateZ(60 * $i + deg) rotateY(90deg) rotateX(0deg);\n      border-left-color: #0ea5e9;\n    }\n  }\n}\n\n@keyframes preload-flip {\n  0% {\n    transform: rotateY(0deg) rotateZ(-60deg);\n  }\n  100% {\n    transform: rotateY(360deg) rotateZ(-60deg);\n  }\n}\n\n.preloader {\n  top: 50%;\n  left: 50%;\n  font-size: 20px;\n  display: block;\n  width: 3.75em;\n  height: 4.25em;\n  margin-left: -1.875em;\n  margin-top: -2.125em;\n  transform-origin: center center;\n  transform: rotateY(180deg) rotateZ(-60deg);\n\n  .slice {\n    border-top: 1.125em solid transparent;\n    border-right: none;\n    border-bottom: 1em solid transparent;\n    border-left: 1.875em solid #2988c8;\n    position: absolute;\n    top: 0px;\n    left: 50%;\n    transform-origin: left bottom;\n    border-radius: 3px 3px 0 0;\n  }\n\n  @for $i from 1 through 6 {\n    .slice:nth-child(#{$i}) {\n      transform: rotateZ(60 * $i + deg) rotateY(0deg) rotateX(0);\n      animation: 0.15s linear 0.9 - $i * 0.08s preload-hide-#{$i} both 1;\n    }\n  }\n\n  &.loading {\n    animation: 2s preload-flip steps(2) infinite both;\n    @for $i from 1 through 6 {\n      .slice:nth-child(#{$i}) {\n        transform: rotateZ(60 * $i + deg) rotateY(90deg) rotateX(0);\n        animation: 2s preload-cycle-#{$i} linear infinite both;\n      }\n    }\n  }\n}\n</style>",
-      "start": 1744823374596,
-      "end": 1744823374883,
+      "start": 1744827930011,
+      "end": 1744827930812,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1744823374883,
-      "end": 1744823374883,
+      "start": 1744827930812,
+      "end": 1744827930812,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1744823374883,
-      "end": 1744823374883,
+      "start": 1744827930812,
+      "end": 1744827930812,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1744823374883,
-      "end": 1744823374883,
+      "start": 1744827930812,
+      "end": 1744827930812,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1744823374883,
-      "end": 1744823374883,
+      "start": 1744827930812,
+      "end": 1744827930812,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1744823374883,
-      "end": 1744823374883,
+      "start": 1744827930812,
+      "end": 1744827930812,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1744823374883,
-      "end": 1744823374883,
+      "start": 1744827930812,
+      "end": 1744827930812,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1744823374883,
-      "end": 1744823374883,
+      "start": 1744827930812,
+      "end": 1744827930812,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1744823374883,
-      "end": 1744823374883,
+      "start": 1744827930812,
+      "end": 1744827930812,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "const _sfc_main = {}\nimport { createElementVNode as _createElementVNode, createStaticVNode as _createStaticVNode, openBlock as _openBlock, createElementBlock as _createElementBlock, pushScopeId as _pushScopeId, popScopeId as _popScopeId } from \"vue\"\n\nconst _withScopeId = n => (_pushScopeId(\"data-v-2be646fe\"),n=n(),_popScopeId(),n)\nconst _hoisted_1 = /*#__PURE__*/_createStaticVNode(\"<div class=\\\"preloader absolute loading\\\" data-v-2be646fe><span class=\\\"slice\\\" data-v-2be646fe></span><span class=\\\"slice\\\" data-v-2be646fe></span><span class=\\\"slice\\\" data-v-2be646fe></span><span class=\\\"slice\\\" data-v-2be646fe></span><span class=\\\"slice\\\" data-v-2be646fe></span><span class=\\\"slice\\\" data-v-2be646fe></span></div>\", 1)\nconst _hoisted_2 = [\n  _hoisted_1\n]\n\nfunction _sfc_render(_ctx, _cache) {\n  return (_openBlock(), _createElementBlock(\"div\", null, _hoisted_2))\n}\n\nimport \"D:/projects/nuxt/workix-nuxt-front/components/UI/ThePreloader.vue?vue&type=style&index=0&scoped=2be646fe&lang.scss\"\n\nimport _export_sfc from '\u0000plugin-vue:export-helper'\nexport default /*#__PURE__*/_export_sfc(_sfc_main, [['render',_sfc_render],['__scopeId',\"data-v-2be646fe\"]])",
-      "start": 1744823374883,
-      "end": 1744823374885,
+      "start": 1744827930812,
+      "end": 1744827930814,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -68,170 +68,170 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1744823374885,
-      "end": 1744823374885,
+      "start": 1744827930814,
+      "end": 1744827930814,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1744823374885,
-      "end": 1744823374885,
+      "start": 1744827930814,
+      "end": 1744827930814,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1744823374885,
-      "end": 1744823374885,
+      "start": 1744827930814,
+      "end": 1744827930814,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1744823374885,
-      "end": 1744823374885,
+      "start": 1744827930814,
+      "end": 1744827930814,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1744823374885,
-      "end": 1744823374885,
+      "start": 1744827930814,
+      "end": 1744827930814,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1744823374885,
-      "end": 1744823374885,
+      "start": 1744827930814,
+      "end": 1744827930814,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1744823374885,
-      "end": 1744823374885,
+      "start": 1744827930814,
+      "end": 1744827930814,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1744823374885,
-      "end": 1744823374885,
+      "start": 1744827930814,
+      "end": 1744827930814,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1744823374885,
-      "end": 1744823374885,
+      "start": 1744827930814,
+      "end": 1744827930814,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1744823374885,
-      "end": 1744823374885,
+      "start": 1744827930814,
+      "end": 1744827930814,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1744823374885,
-      "end": 1744823374885,
+      "start": 1744827930814,
+      "end": 1744827930814,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1744823374885,
-      "end": 1744823374885,
+      "start": 1744827930814,
+      "end": 1744827930814,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1744823374885,
-      "end": 1744823374885,
+      "start": 1744827930814,
+      "end": 1744827930814,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1744823374885,
-      "end": 1744823374885,
+      "start": 1744827930814,
+      "end": 1744827930814,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1744823374885,
-      "end": 1744823374885,
+      "start": 1744827930814,
+      "end": 1744827930814,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1744823374885,
-      "end": 1744823374885,
+      "start": 1744827930814,
+      "end": 1744827930814,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1744823374885,
-      "end": 1744823374885,
+      "start": 1744827930814,
+      "end": 1744827930814,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1744823374885,
-      "end": 1744823374886,
+      "start": 1744827930814,
+      "end": 1744827930814,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1744823374886,
-      "end": 1744823374886,
+      "start": 1744827930814,
+      "end": 1744827930814,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1744823374886,
-      "end": 1744823374886,
+      "start": 1744827930814,
+      "end": 1744827930815,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1744823374886,
-      "end": 1744823374886,
+      "start": 1744827930815,
+      "end": 1744827930815,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1744823374886,
-      "end": 1744823374886,
+      "start": 1744827930815,
+      "end": 1744827930815,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1744823374886,
-      "end": 1744823374886,
+      "start": 1744827930815,
+      "end": 1744827930815,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1744823374886,
-      "end": 1744823374886,
+      "start": 1744827930815,
+      "end": 1744827930815,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1744823374886,
-      "end": 1744823374886,
+      "start": 1744827930815,
+      "end": 1744827930815,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1744823374886,
-      "end": 1744823374886,
+      "start": 1744827930816,
+      "end": 1744827930816,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1744823374886,
-      "end": 1744823374887,
+      "start": 1744827930816,
+      "end": 1744827930816,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1744823374887,
-      "end": 1744823374887,
+      "start": 1744827930816,
+      "end": 1744827930816,
       "order": "normal"
     }
   ]
