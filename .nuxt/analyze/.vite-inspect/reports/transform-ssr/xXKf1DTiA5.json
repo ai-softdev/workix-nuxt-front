@@ -4,81 +4,81 @@
     {
       "name": "vite:load-fallback",
       "result": "<script setup lang=\"ts\">\nimport {useTestList} from \"~/stores/test\";\nimport {useAuthStore} from \"~/stores/auth\";\nimport TheContentBlock from \"~/components/UI/TheContentBlock.vue\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport TheButton from \"~/components/UI/TheButton.vue\";\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\n\nconst loadCurrentUser = useAuthStore()\nconst testList = useTestList()\ntestList.loadExam()\nconst testType = ref({\n  type: '',\n})\nconst params = {\n  page: 1,\n  limit: 5\n}\nonUpdated(() => {\n  if(loadCurrentUser.user.exam_active === true) {\n    testList.loadCurrentTest()\n  }\n})\n\n\n</script>\n<template>\n  <div class=\"flex flex-col gap-y-10 w-full\">\n    <div class=\"w-full flex max-sm:flex-col max-sm:gap-y-4 gap-x-10 justify-center\">\n      <div class=\"w-5/12 max-sm:w-11/12 mx-auto\">\n        <TheContentBlock>\n          <TheTextContent>{{ $t('По специальности') }}</TheTextContent>\n          <div class=\"justify-center flex\">\n            <img class=\"rounded-lg\" src=\"/img/2.png\" alt=\"\">\n          </div>\n          <div class=\"my-2\">\n            <p class=\"text-sm tracking-wider\">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aliquid atque\n              commodi consectetur cupiditate distinctio dolores earum eius esse eum ipsam iste minus molestiae, natus\n              necessitatibus neque nulla optio pariatur placeat porro quasi quia quibusdam, ratione reiciendis rem rerum\n              sunt suscipit tempore unde velit! Accusantium amet asperiores assumenda atque dolorem dolores enim\n              explicabo impedit iste magnam modi necessitatibus omnis placeat quae quidem quo repellendus reprehenderit,\n              saepe soluta voluptates. Deleniti dolores eligendi, error laboriosam minima quasi quod repellendus\n              temporibus unde. Debitis earum incidunt maiores vitae. Accusantium alias deleniti doloremque illo illum,\n              itaque, nemo pariatur quidem ratione sapiente sunt tempora veritatis voluptate.</p>\n          </div>\n          <div class=\"mt-4 flex justify-center\"\n               @click=\"testType.type = 'testSpecial'; nuxtStorage.localStorage.setData('testType', testType.type)\">\n            <TheButton v-if=\"!loadCurrentUser.user.exam_active\" type=\"success\" class=\"px-10 py-2 rounded-lg\"\n                       @click=\"testList.testStart({usual: 0}, $router)\">{{ $t('Начать') }}\n            </TheButton>\n          </div>\n        </TheContentBlock>\n      </div>\n      <div class=\"w-5/12 max-sm:w-11/12 mx-auto\">\n        <TheContentBlock>\n          <TheTextContent>{{ $t('На интеллект') }}</TheTextContent>\n          <div class=\"justify-center h-full flex\">\n            <img class=\"rounded-lg h-full\" src=\"/img/3.webp\" alt=\"\">\n          </div>\n          <div class=\"my-2\">\n            <p class=\"text-sm tracking-wider\">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aliquid atque\n              commodi consectetur cupiditate distinctio dolores earum eius esse eum ipsam iste minus molestiae, natus\n              necessitatibus neque nulla optio pariatur placeat porro quasi quia quibusdam, ratione reiciendis rem rerum\n              sunt suscipit tempore unde velit! Accusantium amet asperiores assumenda atque dolorem dolores enim\n              explicabo impedit iste magnam modi necessitatibus omnis placeat quae quidem quo repellendus reprehenderit,\n              saepe soluta voluptates. Deleniti dolores eligendi, error laboriosam minima quasi quod repellendus\n              temporibus unde. Debitis earum incidunt maiores vitae. Accusantium alias deleniti doloremque illo illum,\n              itaque, nemo pariatur quidem ratione sapiente sunt tempora veritatis voluptate.</p>\n          </div>\n          <div class=\"mt-4 flex justify-center\"\n               @click=\"testType.type = 'testIq'; nuxtStorage.localStorage.setData('testType', testType.type)\">\n            <TheButton v-if=\"!loadCurrentUser.user.exam_active\" type=\"success\" class=\"px-10 py-2 rounded-lg\"\n                       @click=\"testList.testStart({usual: 1}, $router)\">{{ $t('Начать') }}\n            </TheButton>\n          </div>\n        </TheContentBlock>\n      </div>\n    </div>\n    <div v-if=\"loadCurrentUser.user.exam_active\">\n      <TheContentBlock class=\"w-10/12 mx-auto\">\n        <TheTextContent>{{ $t('Текущий тест') }}</TheTextContent>\n        <p class=\"text-center\">\n          <span v-if=\"nuxtStorage.localStorage.getData('testType')\">{{ $t('по') + ' ' }}</span>\n          <span v-if=\"nuxtStorage.localStorage.getData('testType') === 'testIq'\">{{ 'IQ' }}</span>\n          <span v-else-if=\"nuxtStorage.localStorage.getData('testType') === 'testSpecial'\">{{ $t('специальности') }}</span>\n        </p>\n        <div class=\"p-4 w-full h-full flex max-md:flex-wrap border-t gap-x-4 dark:border-gray-500 mt-2\"\n             @click=\"console.log(nuxtStorage.localStorage.getData('testType'))\">\n          <div class=\"w-5/12 max-md:w-full\">\n            <div class=\"w-[250px] max-md:w-9/12 max-sm:w-full mx-auto\">\n              <img class=\"w-full h-full\" v-if=\"nuxtStorage.localStorage.getData('testType') === 'testSpecial'\"\n                   src=\"/img/2.png\" alt=\"\">\n              <img class=\"w-full h-full\" v-else-if=\"nuxtStorage.localStorage.getData('testType') === 'testIq'\"\n                   src=\"/img/3.webp\" alt=\"\">\n              <img class=\"w-full h-full\" v-else src=\"/img/3.webp\" alt=\"\">\n            </div>\n          </div>\n          <div\n            class=\"flex max-lg:flex-col items-center justify-around max-md:justify-center w-8/12 max-md:w-full gap-x-10 max-md:gap-y-4\">\n            <div class=\"w-7/12 max-md:w-full\">\n              <p class=\"text-gray-400 max-sm:text-sm tracking-widest\">{{ $t('Вопрос:') }}</p>\n              <p class=\"text-2xl max-sm:text-lg break-words\">\n                {{ testList.get_current_test.test?.question.length > 80 ? testList.get_current_test.test?.question.slice(0, 80) + '...' : testList.get_current_test.test?.question\n                }}</p>\n            </div>\n            <NuxtLink to=\"/base/tests/exam\"\n                      class=\"text-2xl text-white max-sm:text-lg py-2 bg-blueDarkSemiLight rounded-full text-center w-4/12 max-lg:w-7/12 max-md:w-full \">\n              {{ $t('Продолжить') }}\n            </NuxtLink>\n          </div>\n        </div>\n      </TheContentBlock>\n    </div>\n  </div>\n</template>\n\n<style scoped lang=\"scss\">\n\n</style>",
-      "start": 1744827962431,
-      "end": 1744827962640,
+      "start": 1746213268356,
+      "end": 1746213268618,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1744827962640,
-      "end": 1744827962640,
+      "start": 1746213268619,
+      "end": 1746213268619,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1744827962640,
-      "end": 1744827962640,
+      "start": 1746213268619,
+      "end": 1746213268619,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1744827962640,
-      "end": 1744827962641,
+      "start": 1746213268619,
+      "end": 1746213268619,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1744827962640,
-      "end": 1744827962641,
+      "start": 1746213268619,
+      "end": 1746213268619,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1744827962641,
-      "end": 1744827962641,
+      "start": 1746213268619,
+      "end": 1746213268619,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1744827962641,
-      "end": 1744827962641,
+      "start": 1746213268619,
+      "end": 1746213268619,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1744827962641,
-      "end": 1744827962641,
+      "start": 1746213268619,
+      "end": 1746213268619,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1744827962641,
-      "end": 1744827962641,
+      "start": 1746213268619,
+      "end": 1746213268619,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1744827962641,
-      "end": 1744827962641,
+      "start": 1746213268619,
+      "end": 1746213268619,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1744827962641,
-      "end": 1744827962641,
+      "start": 1746213268619,
+      "end": 1746213268619,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1744827962641,
-      "end": 1744827962641,
+      "start": 1746213268619,
+      "end": 1746213268619,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "import _sfc_main from \"D:/projects/nuxt/workix-nuxt-front/components/Tests/TestContent.vue?vue&type=script&setup=true&lang.ts\";\nexport * from \"D:/projects/nuxt/workix-nuxt-front/components/Tests/TestContent.vue?vue&type=script&setup=true&lang.ts\";\nimport { useSSRContext as __vite_useSSRContext } from \"vue\";\nconst _sfc_setup = _sfc_main.setup;\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext();\n  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(\"components/Tests/TestContent.vue\");\n  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;\n};\nexport default _sfc_main;\n",
-      "start": 1744827962641,
-      "end": 1744827963893,
+      "start": 1746213268619,
+      "end": 1746213269178,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -86,212 +86,212 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1744827963893,
-      "end": 1744827963893,
+      "start": 1746213269178,
+      "end": 1746213269178,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1744827963893,
-      "end": 1744827963893,
+      "start": 1746213269178,
+      "end": 1746213269178,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1744827963893,
-      "end": 1744827963893,
+      "start": 1746213269178,
+      "end": 1746213269178,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1744827963894,
-      "end": 1744827963894,
+      "start": 1746213269179,
+      "end": 1746213269179,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1744827963894,
-      "end": 1744827963894,
+      "start": 1746213269179,
+      "end": 1746213269179,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1744827963894,
-      "end": 1744827963894,
+      "start": 1746213269179,
+      "end": 1746213269179,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1744827963895,
-      "end": 1744827963895,
+      "start": 1746213269179,
+      "end": 1746213269179,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1744827963895,
-      "end": 1744827963896,
+      "start": 1746213269179,
+      "end": 1746213269179,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1744827963896,
-      "end": 1744827963896,
+      "start": 1746213269179,
+      "end": 1746213269179,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1744827963896,
-      "end": 1744827963896,
+      "start": 1746213269179,
+      "end": 1746213269179,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1744827963897,
-      "end": 1744827963897,
+      "start": 1746213269179,
+      "end": 1746213269179,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1744827963899,
-      "end": 1744827963900,
+      "start": 1746213269180,
+      "end": 1746213269180,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1744827963900,
-      "end": 1744827963900,
+      "start": 1746213269180,
+      "end": 1746213269180,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1744827963900,
-      "end": 1744827963901,
+      "start": 1746213269180,
+      "end": 1746213269180,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1744827963901,
-      "end": 1744827963901,
+      "start": 1746213269182,
+      "end": 1746213269182,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1744827963901,
-      "end": 1744827963901,
+      "start": 1746213269183,
+      "end": 1746213269184,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1744827963901,
-      "end": 1744827963901,
+      "start": 1746213269184,
+      "end": 1746213269184,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1744827963901,
-      "end": 1744827963901,
+      "start": 1746213269184,
+      "end": 1746213269184,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1744827963901,
-      "end": 1744827963901,
+      "start": 1746213269184,
+      "end": 1746213269184,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1744827963901,
-      "end": 1744827963901,
+      "start": 1746213269184,
+      "end": 1746213269184,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1744827963901,
-      "end": 1744827963901,
+      "start": 1746213269184,
+      "end": 1746213269184,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1744827963901,
-      "end": 1744827963901,
+      "start": 1746213269184,
+      "end": 1746213269185,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1744827963901,
-      "end": 1744827963902,
+      "start": 1746213269185,
+      "end": 1746213269186,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1744827963901,
-      "end": 1744827963902,
+      "start": 1746213269185,
+      "end": 1746213269186,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1744827963902,
-      "end": 1744827963903,
+      "start": 1746213269194,
+      "end": 1746213269195,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1744827963902,
-      "end": 1744827963903,
+      "start": 1746213269194,
+      "end": 1746213269195,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1744827963904,
-      "end": 1744827963904,
+      "start": 1746213269195,
+      "end": 1746213269195,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1744827963904,
-      "end": 1744827963904,
+      "start": 1746213269195,
+      "end": 1746213269195,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1744827963912,
-      "end": 1744827963913,
+      "start": 1746213269201,
+      "end": 1746213269202,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1744827963912,
-      "end": 1744827963914,
+      "start": 1746213269201,
+      "end": 1746213269202,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1744827963916,
-      "end": 1744827963917,
+      "start": 1746213269202,
+      "end": 1746213269202,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1744827963917,
-      "end": 1744827963917,
+      "start": 1746213269202,
+      "end": 1746213269202,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1744827963917,
-      "end": 1744827963917,
+      "start": 1746213269202,
+      "end": 1746213269202,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1744827963917,
-      "end": 1744827963917,
+      "start": 1746213269202,
+      "end": 1746213269202,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1744827963918,
-      "end": 1744827963918,
+      "start": 1746213269202,
+      "end": 1746213269202,
       "order": "normal"
     }
   ]

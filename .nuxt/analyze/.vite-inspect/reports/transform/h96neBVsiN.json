@@ -4,44 +4,44 @@
     {
       "name": "vite:vue",
       "result": "import { useCssVars as _useCssVars, unref as _unref, defineComponent as _defineComponent } from 'vue'\nimport { normalizeStyle as _normalizeStyle, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\"\n\nimport { computed } from 'vue'\nimport { useAppConfig } from '#imports'\nimport { resolveIconName } from './utils'\n\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'IconCSS',\n  props: {\n  name: {\n    type: String,\n    required: true\n  },\n  size: {\n    type: String,\n    default: ''\n  }\n},\n  setup(__props) {\n\n_useCssVars(_ctx => ({\n  \"efdb04fa\": (iconUrl.value)\n}))\n\nconst appConfig = useAppConfig() as {\n  nuxtIcon: {\n    size?: string\n    class?: string\n    aliases?: Record<string, string>\n    iconifyApiOptions?: {\n      url?: string\n      publicApiFallback?: boolean\n    }\n  }\n}\n\nconst props = __props\n\nconst iconName = computed(() => {\n  if (appConfig.nuxtIcon?.aliases?.[props.name]) {\n    return appConfig.nuxtIcon.aliases[props.name]\n  }\n  return props.name\n})\nconst resolvedIcon = computed(() => resolveIconName(iconName.value))\nconst iconUrl = computed(() => {\n  const customUrl = appConfig.nuxtIcon?.iconifyApiOptions?.url\n\n  if (customUrl) {\n    // validate the custom Iconify API URL\n    try {\n      new URL(customUrl)\n    } catch (e) {\n      console.warn('Nuxt IconCSS: Invalid custom Iconify API URL')\n      return\n    }\n  }\n\n  const baseUrl = customUrl || 'https://api.iconify.design'\n  return `url('${baseUrl}/${resolvedIcon.value.prefix}/${resolvedIcon.value.name}.svg')`\n})\nconst sSize = computed(() => {\n  // Disable size if appConfig.nuxtIcon.size === false\n  if (!props.size && typeof appConfig.nuxtIcon?.size === 'boolean' && !appConfig.nuxtIcon?.size) {\n    return undefined\n  }\n  const size = props.size || appConfig.nuxtIcon?.size || '1em'\n  if (String(Number(size)) === size) {\n    return `${size}px`\n  }\n  return size\n})\n\nreturn (_ctx: any,_cache: any) => {\n  return (_openBlock(), _createElementBlock(\"span\", {\n    style: _normalizeStyle({ width: sSize.value, height: sSize.value })\n  }, null, 4))\n}\n}\n\n})",
-      "start": 1744827923984,
-      "end": 1744827923985
+      "start": 1746213242805,
+      "end": 1746213242805
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1744827923986,
-      "end": 1744827923986,
+      "start": 1746213242805,
+      "end": 1746213242805,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1744827923986,
-      "end": 1744827923986,
+      "start": 1746213242805,
+      "end": 1746213242805,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1744827923986,
-      "end": 1744827923986,
+      "start": 1746213242805,
+      "end": 1746213242805,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1744827923986,
-      "end": 1744827923986,
+      "start": 1746213242805,
+      "end": 1746213242805,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1744827923986,
-      "end": 1744827923986,
+      "start": 1746213242805,
+      "end": 1746213242805,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { useCssVars as _useCssVars, defineComponent as _defineComponent } from \"vue\";\nimport { normalizeStyle as _normalizeStyle, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\";\nimport { computed } from \"vue\";\nimport { useAppConfig } from \"#imports\";\nimport { resolveIconName } from \"./utils\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"IconCSS\",\n  props: {\n    name: {\n      type: String,\n      required: true\n    },\n    size: {\n      type: String,\n      default: \"\"\n    }\n  },\n  setup(__props) {\n    _useCssVars((_ctx) => ({\n      \"efdb04fa\": iconUrl.value\n    }));\n    const appConfig = useAppConfig();\n    const props = __props;\n    const iconName = computed(() => {\n      if (appConfig.nuxtIcon?.aliases?.[props.name]) {\n        return appConfig.nuxtIcon.aliases[props.name];\n      }\n      return props.name;\n    });\n    const resolvedIcon = computed(() => resolveIconName(iconName.value));\n    const iconUrl = computed(() => {\n      const customUrl = appConfig.nuxtIcon?.iconifyApiOptions?.url;\n      if (customUrl) {\n        try {\n          new URL(customUrl);\n        } catch (e) {\n          console.warn(\"Nuxt IconCSS: Invalid custom Iconify API URL\");\n          return;\n        }\n      }\n      const baseUrl = customUrl || \"https://api.iconify.design\";\n      return `url('${baseUrl}/${resolvedIcon.value.prefix}/${resolvedIcon.value.name}.svg')`;\n    });\n    const sSize = computed(() => {\n      if (!props.size && typeof appConfig.nuxtIcon?.size === \"boolean\" && !appConfig.nuxtIcon?.size) {\n        return void 0;\n      }\n      const size = props.size || appConfig.nuxtIcon?.size || \"1em\";\n      if (String(Number(size)) === size) {\n        return `${size}px`;\n      }\n      return size;\n    });\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"span\", {\n        style: _normalizeStyle({ width: sSize.value, height: sSize.value })\n      }, null, 4);\n    };\n  }\n});\n",
-      "start": 1744827923986,
-      "end": 1744827928605,
+      "start": 1746213242805,
+      "end": 1746213245006,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -57,141 +57,141 @@
     },
     {
       "name": "vite:json",
-      "start": 1744827928606,
-      "end": 1744827928606,
+      "start": 1746213245007,
+      "end": 1746213245007,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1744827928606,
-      "end": 1744827928606,
+      "start": 1746213245007,
+      "end": 1746213245007,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1744827928606,
-      "end": 1744827928606,
+      "start": 1746213245007,
+      "end": 1746213245007,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1744827928606,
-      "end": 1744827928606,
+      "start": 1746213245007,
+      "end": 1746213245007,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1744827928606,
-      "end": 1744827928606,
+      "start": 1746213245007,
+      "end": 1746213245007,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1744827928606,
-      "end": 1744827928606,
+      "start": 1746213245007,
+      "end": 1746213245007,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1744827928606,
-      "end": 1744827928607,
+      "start": 1746213245008,
+      "end": 1746213245008,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1744827928607,
-      "end": 1744827928607,
+      "start": 1746213245008,
+      "end": 1746213245008,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1744827928607,
-      "end": 1744827928607,
+      "start": 1746213245008,
+      "end": 1746213245008,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1744827928607,
-      "end": 1744827928607,
+      "start": 1746213245008,
+      "end": 1746213245008,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1744827928607,
-      "end": 1744827928607,
+      "start": 1746213245009,
+      "end": 1746213245009,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1744827928607,
-      "end": 1744827928607,
+      "start": 1746213245009,
+      "end": 1746213245009,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1744827928608,
-      "end": 1744827928608,
+      "start": 1746213245009,
+      "end": 1746213245009,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1744827928608,
-      "end": 1744827928608,
+      "start": 1746213245009,
+      "end": 1746213245009,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1744827928608,
-      "end": 1744827928608,
+      "start": 1746213245009,
+      "end": 1746213245009,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1744827928608,
-      "end": 1744827928608,
+      "start": 1746213245009,
+      "end": 1746213245009,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1744827928608,
-      "end": 1744827928608,
+      "start": 1746213245010,
+      "end": 1746213245010,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1744827928608,
-      "end": 1744827928608,
+      "start": 1746213245010,
+      "end": 1746213245010,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1744827928608,
-      "end": 1744827928608,
+      "start": 1746213245010,
+      "end": 1746213245010,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1744827928608,
-      "end": 1744827928609,
+      "start": 1746213245011,
+      "end": 1746213245011,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1744827928609,
-      "end": 1744827928609,
+      "start": 1746213245011,
+      "end": 1746213245011,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1744827928609,
-      "end": 1744827928609,
+      "start": 1746213245012,
+      "end": 1746213245012,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { useAppConfig } from '#app/config';\nimport { useCssVars as _useCssVars, defineComponent as _defineComponent } from \"vue\";\nimport { normalizeStyle as _normalizeStyle, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\";\nimport { computed } from \"vue\";\nimport { resolveIconName } from \"./utils\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"IconCSS\",\n  props: {\n    name: {\n      type: String,\n      required: true\n    },\n    size: {\n      type: String,\n      default: \"\"\n    }\n  },\n  setup(__props) {\n    _useCssVars((_ctx) => ({\n      \"efdb04fa\": iconUrl.value\n    }));\n    const appConfig = useAppConfig();\n    const props = __props;\n    const iconName = computed(() => {\n      if (appConfig.nuxtIcon?.aliases?.[props.name]) {\n        return appConfig.nuxtIcon.aliases[props.name];\n      }\n      return props.name;\n    });\n    const resolvedIcon = computed(() => resolveIconName(iconName.value));\n    const iconUrl = computed(() => {\n      const customUrl = appConfig.nuxtIcon?.iconifyApiOptions?.url;\n      if (customUrl) {\n        try {\n          new URL(customUrl);\n        } catch (e) {\n          console.warn(\"Nuxt IconCSS: Invalid custom Iconify API URL\");\n          return;\n        }\n      }\n      const baseUrl = customUrl || \"https://api.iconify.design\";\n      return `url('${baseUrl}/${resolvedIcon.value.prefix}/${resolvedIcon.value.name}.svg')`;\n    });\n    const sSize = computed(() => {\n      if (!props.size && typeof appConfig.nuxtIcon?.size === \"boolean\" && !appConfig.nuxtIcon?.size) {\n        return void 0;\n      }\n      const size = props.size || appConfig.nuxtIcon?.size || \"1em\";\n      if (String(Number(size)) === size) {\n        return `${size}px`;\n      }\n      return size;\n    });\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"span\", {\n        style: _normalizeStyle({ width: sSize.value, height: sSize.value })\n      }, null, 4);\n    };\n  }\n});\n",
-      "start": 1744827928609,
-      "end": 1744827928620,
+      "start": 1746213245012,
+      "end": 1746213245019,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -204,50 +204,50 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1744827928625,
-      "end": 1744827928625,
+      "start": 1746213245020,
+      "end": 1746213245020,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1744827928625,
-      "end": 1744827928625,
+      "start": 1746213245020,
+      "end": 1746213245020,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1744827928625,
-      "end": 1744827928626,
+      "start": 1746213245020,
+      "end": 1746213245020,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1744827928626,
-      "end": 1744827928626,
+      "start": 1746213245021,
+      "end": 1746213245021,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1744827928626,
-      "end": 1744827928626,
+      "start": 1746213245021,
+      "end": 1746213245021,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1744827928627,
-      "end": 1744827928627,
+      "start": 1746213245022,
+      "end": 1746213245022,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1744827928627,
-      "end": 1744827928627,
+      "start": 1746213245022,
+      "end": 1746213245023,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1744827928628,
-      "end": 1744827928628,
+      "start": 1746213245023,
+      "end": 1746213245023,
       "order": "normal"
     }
   ]

@@ -856,7 +856,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: __nuxt_page_meta$1 == null ? void 0 : __nuxt_page_meta$1.redirect,
-    component: () => import("./_nuxt/base-Cr9DJ2sl.js").then((m) => m.default || m),
+    component: () => import("./_nuxt/base-DrN7GlwP.js").then((m) => m.default || m),
     children: [
       {
         name: "base-chat",
@@ -1036,7 +1036,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$8 == null ? void 0 : __nuxt_page_meta$8.redirect,
-        component: () => import("./_nuxt/_id_-CdVIqg1V.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/_id_-DM_Cfy9w.js").then((m) => m.default || m)
       },
       {
         name: "base-tasks",
@@ -1044,7 +1044,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$7 == null ? void 0 : __nuxt_page_meta$7.redirect,
-        component: () => import("./_nuxt/index-BBBoYBPZ.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/index-PLqAQwEp.js").then((m) => m.default || m)
       },
       {
         name: "base-tests-exam",
@@ -1199,7 +1199,7 @@ const validate = /* @__PURE__ */ defineNuxtRouteMiddleware(async (to) => {
 });
 const inlineConfig = {
   "nuxt": {
-    "buildId": "dev"
+    "buildId": "1f6d8c4d-7f2b-4613-bbcd-e8c77cec90bc"
   },
   "ui": {
     "primary": "green",

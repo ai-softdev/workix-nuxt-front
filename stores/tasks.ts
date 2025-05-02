@@ -62,7 +62,13 @@ export const useTaskList = defineStore('task-list', {
       formD.set('description', params.description)
       formD.append('deadline', params.deadline.toISOString())
       formD.set('main_performer_id', params.main_performer_id)
-      formD.set('performers', params.performers)
+
+      if (Array.isArray(params.performers)) {
+        params.performers.forEach(id => {
+          formD.append('performers', id);
+        });
+      }
+
       formD.set('worth', params.worth)
       if (typeof params.author_file_file !== 'string') {
         for(let i of params.author_file_file){

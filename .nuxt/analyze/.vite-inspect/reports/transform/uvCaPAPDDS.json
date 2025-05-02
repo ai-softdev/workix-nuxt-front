@@ -4,44 +4,44 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { createVNode as _createVNode, Transition as _Transition, withCtx as _withCtx, unref as _unref, createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, openBlock as _openBlock, createElementBlock as _createElementBlock, renderList as _renderList, Fragment as _Fragment, createBlock as _createBlock, createCommentVNode as _createCommentVNode } from \"vue\"\n\nconst _hoisted_1 = {\n  key: 0,\n  class: \"absolute z-30 w-full h-full top-0 left-0 flex items-center\"\n}\nconst _hoisted_2 = { class: \"bg-gray-700 w-10/12 mx-auto h-max rounded-lg relative\" }\nconst _hoisted_3 = { class: \"tracking-wider px-4 pt-4\" }\nconst _hoisted_4 = { class: \"text-sm text-gray-400 ml-2\" }\nconst _hoisted_5 = /*#__PURE__*/_createElementVNode(\"div\", { class: \"w-full px-4 flex overflow-y-auto max-h-[300px] items-center\" }, [\n  /*#__PURE__*/_createElementVNode(\"div\", { class: \"absolute rotate-90 ml-2\" }, [\n    /*#__PURE__*/_createElementVNode(\"svg\", {\n      class: \"dark:stroke-white stroke-black\",\n      width: \"25px\",\n      height: \"25px\",\n      viewBox: \"0 0 24 24\",\n      fill: \"none\",\n      xmlns: \"http://www.w3.org/2000/svg\"\n    }, [\n      /*#__PURE__*/_createElementVNode(\"path\", {\n        d: \"M14.9536 14.9458L21 21M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z\",\n        \"stroke-width\": \"1.2\",\n        \"stroke-linecap\": \"round\",\n        \"stroke-linejoin\": \"round\"\n      })\n    ])\n  ]),\n  /*#__PURE__*/_createElementVNode(\"input\", {\n    type: \"text\",\n    class: \"w-full dark:bg-gray-700 outline-none pl-10 h-[50px]\",\n    placeholder: \"Поиск...\"\n  })\n], -1)\nconst _hoisted_6 = { class: \"max-h-[300px] overflow-y-auto\" }\nconst _hoisted_7 = { class: \"w-full px-4 h-[50px] flex items-center justify-end text-sm gap-x-4\" }\n\nimport ChatWindowSettingContentHeader\n  from \"~/components/Chat/ChatContent/ChatWindowSetting/ChatWindowSettingContent/ChatWindowSettingContentHeader.vue\";\nimport ChatWindowSettingContentMain\n  from \"~/components/Chat/ChatContent/ChatWindowSetting/ChatWindowSettingContent/ChatWindowSettingContentMain.vue\";\nimport ChatWindowSettingContentUserList\n  from \"~/components/Chat/ChatContent/ChatWindowSetting/ChatWindowSettingContent/ChatWindowSettingContentUserList.vue\";\nimport {useChat} from \"~/stores/chat\";\nimport ChatUserCheckbox from \"~/components/Chat/UI/ChatUserCheckbox.vue\";\nimport TheButton from \"~/components/UI/TheButton.vue\";\nimport ChatWindowSettingContentHeaderChange\n  from \"~/components/Chat/ChatContent/ChatWindowSetting/ChatWindowSettingContent/ChatWindowSettingContentHeaderUI/ChatWindowSettingContentHeaderChange.vue\";\n\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'ChatWindowSettingContent',\n  setup(__props) {\n\nconst chat = useChat()\n\nconst showGroupAdd = ref(false)\nconst groupTitle = ref('')\nconst userCount = []\n\nreturn (_ctx: any,_cache: any) => {\n  return (_openBlock(), _createElementBlock(\"div\", {\n    onClick: _cache[4] || (_cache[4] = ($event: any) => (_unref(chat).showSettingChat = false))\n  }, [\n    _createVNode(ChatWindowSettingContentHeader, {\n      onShowGroupAdd: _cache[0] || (_cache[0] = ($event: any) => (showGroupAdd.value = true))\n    }),\n    _createVNode(ChatWindowSettingContentMain),\n    _createVNode(ChatWindowSettingContentUserList),\n    _createVNode(_Transition, { name: \"fade\" }, {\n      default: _withCtx(() => [\n        _createVNode(ChatWindowSettingContentHeaderChange)\n      ]),\n      _: 1\n    }),\n    _createVNode(_Transition, { name: \"fade\" }, {\n      default: _withCtx(() => [\n        (_unref(showGroupAdd))\n          ? (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n              _createElementVNode(\"div\", {\n                class: \"absolute bg-black left-0 top-0 w-full h-full bg-opacity-50\",\n                onClick: _cache[1] || (_cache[1] = ($event: any) => (showGroupAdd.value = false))\n              }),\n              _createElementVNode(\"div\", _hoisted_2, [\n                _createElementVNode(\"p\", _hoisted_3, [\n                  _createTextVNode(_toDisplayString(_ctx.$t('Добавить участников')) + \" \", 1),\n                  _createElementVNode(\"span\", _hoisted_4, _toDisplayString(userCount.length + '/1000'), 1)\n                ]),\n                _hoisted_5,\n                _createElementVNode(\"div\", _hoisted_6, [\n                  (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(chat).get_chat_list.results.filter(e=> !e.is_group), (item) => {\n                    return (_openBlock(), _createBlock(ChatUserCheckbox, { item: item }, null, 8, [\"item\"]))\n                  }), 256))\n                ]),\n                _createElementVNode(\"div\", _hoisted_7, [\n                  _createVNode(TheButton, {\n                    type: \"chat\",\n                    onClick: _cache[2] || (_cache[2] = ($event: any) => {showGroupAdd.value = false;})\n                  }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(_toDisplayString(_ctx.$t('Отмена')), 1)\n                    ]),\n                    _: 1\n                  }),\n                  _createVNode(TheButton, {\n                    type: \"chat\",\n                    onClick: _cache[3] || (_cache[3] = () => {})\n                  }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(_toDisplayString(_ctx.$t('Добавить')), 1)\n                    ]),\n                    _: 1\n                  })\n                ])\n              ])\n            ]))\n          : _createCommentVNode(\"\", true)\n      ]),\n      _: 1\n    })\n  ]))\n}\n}\n\n})",
-      "start": 1744827930434,
-      "end": 1744827930434
+      "start": 1746213246927,
+      "end": 1746213246927
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1744827930434,
-      "end": 1744827930434,
+      "start": 1746213246927,
+      "end": 1746213246927,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1744827930434,
-      "end": 1744827930434,
+      "start": 1746213246927,
+      "end": 1746213246927,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1744827930434,
-      "end": 1744827930434,
+      "start": 1746213246927,
+      "end": 1746213246927,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1744827930434,
-      "end": 1744827930434,
+      "start": 1746213246927,
+      "end": 1746213246927,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1744827930434,
-      "end": 1744827930434,
+      "start": 1746213246927,
+      "end": 1746213246927,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { createVNode as _createVNode, Transition as _Transition, withCtx as _withCtx, unref as _unref, createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, openBlock as _openBlock, createElementBlock as _createElementBlock, renderList as _renderList, Fragment as _Fragment, createBlock as _createBlock, createCommentVNode as _createCommentVNode } from \"vue\";\nconst _hoisted_1 = {\n  key: 0,\n  class: \"absolute z-30 w-full h-full top-0 left-0 flex items-center\"\n};\nconst _hoisted_2 = { class: \"bg-gray-700 w-10/12 mx-auto h-max rounded-lg relative\" };\nconst _hoisted_3 = { class: \"tracking-wider px-4 pt-4\" };\nconst _hoisted_4 = { class: \"text-sm text-gray-400 ml-2\" };\nconst _hoisted_5 = /* @__PURE__ */ _createElementVNode(\"div\", { class: \"w-full px-4 flex overflow-y-auto max-h-[300px] items-center\" }, [\n  /* @__PURE__ */ _createElementVNode(\"div\", { class: \"absolute rotate-90 ml-2\" }, [\n    /* @__PURE__ */ _createElementVNode(\"svg\", {\n      class: \"dark:stroke-white stroke-black\",\n      width: \"25px\",\n      height: \"25px\",\n      viewBox: \"0 0 24 24\",\n      fill: \"none\",\n      xmlns: \"http://www.w3.org/2000/svg\"\n    }, [\n      /* @__PURE__ */ _createElementVNode(\"path\", {\n        d: \"M14.9536 14.9458L21 21M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z\",\n        \"stroke-width\": \"1.2\",\n        \"stroke-linecap\": \"round\",\n        \"stroke-linejoin\": \"round\"\n      })\n    ])\n  ]),\n  /* @__PURE__ */ _createElementVNode(\"input\", {\n    type: \"text\",\n    class: \"w-full dark:bg-gray-700 outline-none pl-10 h-[50px]\",\n    placeholder: \"Поиск...\"\n  })\n], -1);\nconst _hoisted_6 = { class: \"max-h-[300px] overflow-y-auto\" };\nconst _hoisted_7 = { class: \"w-full px-4 h-[50px] flex items-center justify-end text-sm gap-x-4\" };\nimport ChatWindowSettingContentHeader from \"~/components/Chat/ChatContent/ChatWindowSetting/ChatWindowSettingContent/ChatWindowSettingContentHeader.vue\";\nimport ChatWindowSettingContentMain from \"~/components/Chat/ChatContent/ChatWindowSetting/ChatWindowSettingContent/ChatWindowSettingContentMain.vue\";\nimport ChatWindowSettingContentUserList from \"~/components/Chat/ChatContent/ChatWindowSetting/ChatWindowSettingContent/ChatWindowSettingContentUserList.vue\";\nimport { useChat } from \"~/stores/chat\";\nimport ChatUserCheckbox from \"~/components/Chat/UI/ChatUserCheckbox.vue\";\nimport TheButton from \"~/components/UI/TheButton.vue\";\nimport ChatWindowSettingContentHeaderChange from \"~/components/Chat/ChatContent/ChatWindowSetting/ChatWindowSettingContent/ChatWindowSettingContentHeaderUI/ChatWindowSettingContentHeaderChange.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ChatWindowSettingContent\",\n  setup(__props) {\n    const chat = useChat();\n    const showGroupAdd = ref(false);\n    const groupTitle = ref(\"\");\n    const userCount = [];\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", {\n        onClick: _cache[4] || (_cache[4] = ($event) => _unref(chat).showSettingChat = false)\n      }, [\n        _createVNode(ChatWindowSettingContentHeader, {\n          onShowGroupAdd: _cache[0] || (_cache[0] = ($event) => showGroupAdd.value = true)\n        }),\n        _createVNode(ChatWindowSettingContentMain),\n        _createVNode(ChatWindowSettingContentUserList),\n        _createVNode(_Transition, { name: \"fade\" }, {\n          default: _withCtx(() => [\n            _createVNode(ChatWindowSettingContentHeaderChange)\n          ]),\n          _: 1\n        }),\n        _createVNode(_Transition, { name: \"fade\" }, {\n          default: _withCtx(() => [\n            _unref(showGroupAdd) ? (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n              _createElementVNode(\"div\", {\n                class: \"absolute bg-black left-0 top-0 w-full h-full bg-opacity-50\",\n                onClick: _cache[1] || (_cache[1] = ($event) => showGroupAdd.value = false)\n              }),\n              _createElementVNode(\"div\", _hoisted_2, [\n                _createElementVNode(\"p\", _hoisted_3, [\n                  _createTextVNode(_toDisplayString(_ctx.$t(\"Добавить участников\")) + \" \", 1),\n                  _createElementVNode(\"span\", _hoisted_4, _toDisplayString(userCount.length + \"/1000\"), 1)\n                ]),\n                _hoisted_5,\n                _createElementVNode(\"div\", _hoisted_6, [\n                  (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(chat).get_chat_list.results.filter((e) => !e.is_group), (item) => {\n                    return _openBlock(), _createBlock(ChatUserCheckbox, { item }, null, 8, [\"item\"]);\n                  }), 256))\n                ]),\n                _createElementVNode(\"div\", _hoisted_7, [\n                  _createVNode(TheButton, {\n                    type: \"chat\",\n                    onClick: _cache[2] || (_cache[2] = ($event) => {\n                      showGroupAdd.value = false;\n                    })\n                  }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Отмена\")), 1)\n                    ]),\n                    _: 1\n                  }),\n                  _createVNode(TheButton, {\n                    type: \"chat\",\n                    onClick: _cache[3] || (_cache[3] = () => {\n                    })\n                  }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Добавить\")), 1)\n                    ]),\n                    _: 1\n                  })\n                ])\n              ])\n            ])) : _createCommentVNode(\"\", true)\n          ]),\n          _: 1\n        })\n      ]);\n    };\n  }\n});\n",
-      "start": 1744827930434,
-      "end": 1744827930777,
+      "start": 1746213246927,
+      "end": 1746213247124,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -57,141 +57,141 @@
     },
     {
       "name": "vite:json",
-      "start": 1744827930777,
-      "end": 1744827930777,
+      "start": 1746213247124,
+      "end": 1746213247124,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1744827930777,
-      "end": 1744827930777,
+      "start": 1746213247124,
+      "end": 1746213247124,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1744827930778,
-      "end": 1744827930778,
+      "start": 1746213247124,
+      "end": 1746213247124,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1744827930778,
-      "end": 1744827930778,
+      "start": 1746213247124,
+      "end": 1746213247124,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1744827930779,
-      "end": 1744827930779,
+      "start": 1746213247125,
+      "end": 1746213247125,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1744827930779,
-      "end": 1744827930779,
+      "start": 1746213247125,
+      "end": 1746213247125,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1744827930779,
-      "end": 1744827930779,
+      "start": 1746213247125,
+      "end": 1746213247125,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1744827930780,
-      "end": 1744827930780,
+      "start": 1746213247125,
+      "end": 1746213247125,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1744827930780,
-      "end": 1744827930780,
+      "start": 1746213247125,
+      "end": 1746213247126,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1744827930780,
-      "end": 1744827930780,
+      "start": 1746213247126,
+      "end": 1746213247126,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1744827930780,
-      "end": 1744827930780,
+      "start": 1746213247126,
+      "end": 1746213247126,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1744827930780,
-      "end": 1744827930780,
+      "start": 1746213247126,
+      "end": 1746213247126,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1744827930781,
-      "end": 1744827930781,
+      "start": 1746213247126,
+      "end": 1746213247126,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1744827930781,
-      "end": 1744827930781,
+      "start": 1746213247126,
+      "end": 1746213247126,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1744827930781,
-      "end": 1744827930781,
+      "start": 1746213247126,
+      "end": 1746213247126,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1744827930781,
-      "end": 1744827930781,
+      "start": 1746213247126,
+      "end": 1746213247126,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1744827930781,
-      "end": 1744827930782,
+      "start": 1746213247126,
+      "end": 1746213247126,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1744827930782,
-      "end": 1744827930782,
+      "start": 1746213247126,
+      "end": 1746213247126,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1744827930782,
-      "end": 1744827930782,
+      "start": 1746213247127,
+      "end": 1746213247127,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1744827930783,
-      "end": 1744827930783,
+      "start": 1746213247127,
+      "end": 1746213247127,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1744827930784,
-      "end": 1744827930784,
+      "start": 1746213247128,
+      "end": 1746213247128,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1744827930785,
-      "end": 1744827930785,
+      "start": 1746213247128,
+      "end": 1746213247128,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { createVNode as _createVNode, Transition as _Transition, withCtx as _withCtx, unref as _unref, createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, openBlock as _openBlock, createElementBlock as _createElementBlock, renderList as _renderList, Fragment as _Fragment, createBlock as _createBlock, createCommentVNode as _createCommentVNode } from \"vue\";\nconst _hoisted_1 = {\n  key: 0,\n  class: \"absolute z-30 w-full h-full top-0 left-0 flex items-center\"\n};\nconst _hoisted_2 = { class: \"bg-gray-700 w-10/12 mx-auto h-max rounded-lg relative\" };\nconst _hoisted_3 = { class: \"tracking-wider px-4 pt-4\" };\nconst _hoisted_4 = { class: \"text-sm text-gray-400 ml-2\" };\nconst _hoisted_5 = /* @__PURE__ */ _createElementVNode(\"div\", { class: \"w-full px-4 flex overflow-y-auto max-h-[300px] items-center\" }, [\n  /* @__PURE__ */ _createElementVNode(\"div\", { class: \"absolute rotate-90 ml-2\" }, [\n    /* @__PURE__ */ _createElementVNode(\"svg\", {\n      class: \"dark:stroke-white stroke-black\",\n      width: \"25px\",\n      height: \"25px\",\n      viewBox: \"0 0 24 24\",\n      fill: \"none\",\n      xmlns: \"http://www.w3.org/2000/svg\"\n    }, [\n      /* @__PURE__ */ _createElementVNode(\"path\", {\n        d: \"M14.9536 14.9458L21 21M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z\",\n        \"stroke-width\": \"1.2\",\n        \"stroke-linecap\": \"round\",\n        \"stroke-linejoin\": \"round\"\n      })\n    ])\n  ]),\n  /* @__PURE__ */ _createElementVNode(\"input\", {\n    type: \"text\",\n    class: \"w-full dark:bg-gray-700 outline-none pl-10 h-[50px]\",\n    placeholder: \"Поиск...\"\n  })\n], -1);\nconst _hoisted_6 = { class: \"max-h-[300px] overflow-y-auto\" };\nconst _hoisted_7 = { class: \"w-full px-4 h-[50px] flex items-center justify-end text-sm gap-x-4\" };\nimport ChatWindowSettingContentHeader from \"~/components/Chat/ChatContent/ChatWindowSetting/ChatWindowSettingContent/ChatWindowSettingContentHeader.vue\";\nimport ChatWindowSettingContentMain from \"~/components/Chat/ChatContent/ChatWindowSetting/ChatWindowSettingContent/ChatWindowSettingContentMain.vue\";\nimport ChatWindowSettingContentUserList from \"~/components/Chat/ChatContent/ChatWindowSetting/ChatWindowSettingContent/ChatWindowSettingContentUserList.vue\";\nimport { useChat } from \"~/stores/chat\";\nimport ChatUserCheckbox from \"~/components/Chat/UI/ChatUserCheckbox.vue\";\nimport TheButton from \"~/components/UI/TheButton.vue\";\nimport ChatWindowSettingContentHeaderChange from \"~/components/Chat/ChatContent/ChatWindowSetting/ChatWindowSettingContent/ChatWindowSettingContentHeaderUI/ChatWindowSettingContentHeaderChange.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ChatWindowSettingContent\",\n  setup(__props) {\n    const chat = useChat();\n    const showGroupAdd = ref(false);\n    const groupTitle = ref(\"\");\n    const userCount = [];\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", {\n        onClick: _cache[4] || (_cache[4] = ($event) => _unref(chat).showSettingChat = false)\n      }, [\n        _createVNode(ChatWindowSettingContentHeader, {\n          onShowGroupAdd: _cache[0] || (_cache[0] = ($event) => showGroupAdd.value = true)\n        }),\n        _createVNode(ChatWindowSettingContentMain),\n        _createVNode(ChatWindowSettingContentUserList),\n        _createVNode(_Transition, { name: \"fade\" }, {\n          default: _withCtx(() => [\n            _createVNode(ChatWindowSettingContentHeaderChange)\n          ]),\n          _: 1\n        }),\n        _createVNode(_Transition, { name: \"fade\" }, {\n          default: _withCtx(() => [\n            _unref(showGroupAdd) ? (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n              _createElementVNode(\"div\", {\n                class: \"absolute bg-black left-0 top-0 w-full h-full bg-opacity-50\",\n                onClick: _cache[1] || (_cache[1] = ($event) => showGroupAdd.value = false)\n              }),\n              _createElementVNode(\"div\", _hoisted_2, [\n                _createElementVNode(\"p\", _hoisted_3, [\n                  _createTextVNode(_toDisplayString(_ctx.$t(\"Добавить участников\")) + \" \", 1),\n                  _createElementVNode(\"span\", _hoisted_4, _toDisplayString(userCount.length + \"/1000\"), 1)\n                ]),\n                _hoisted_5,\n                _createElementVNode(\"div\", _hoisted_6, [\n                  (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(chat).get_chat_list.results.filter((e) => !e.is_group), (item) => {\n                    return _openBlock(), _createBlock(ChatUserCheckbox, { item }, null, 8, [\"item\"]);\n                  }), 256))\n                ]),\n                _createElementVNode(\"div\", _hoisted_7, [\n                  _createVNode(TheButton, {\n                    type: \"chat\",\n                    onClick: _cache[2] || (_cache[2] = ($event) => {\n                      showGroupAdd.value = false;\n                    })\n                  }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Отмена\")), 1)\n                    ]),\n                    _: 1\n                  }),\n                  _createVNode(TheButton, {\n                    type: \"chat\",\n                    onClick: _cache[3] || (_cache[3] = () => {\n                    })\n                  }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Добавить\")), 1)\n                    ]),\n                    _: 1\n                  })\n                ])\n              ])\n            ])) : _createCommentVNode(\"\", true)\n          ]),\n          _: 1\n        })\n      ]);\n    };\n  }\n});\n",
-      "start": 1744827930785,
-      "end": 1744827930797,
+      "start": 1746213247128,
+      "end": 1746213247135,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -204,50 +204,50 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1744827930797,
-      "end": 1744827930797,
+      "start": 1746213247135,
+      "end": 1746213247135,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1744827930798,
-      "end": 1744827930798,
+      "start": 1746213247136,
+      "end": 1746213247136,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1744827930798,
-      "end": 1744827930798,
+      "start": 1746213247136,
+      "end": 1746213247136,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1744827930799,
-      "end": 1744827930799,
+      "start": 1746213247136,
+      "end": 1746213247136,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1744827930800,
-      "end": 1744827930801,
+      "start": 1746213247136,
+      "end": 1746213247137,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1744827930801,
-      "end": 1744827930801,
+      "start": 1746213247137,
+      "end": 1746213247137,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1744827930802,
-      "end": 1744827930802,
+      "start": 1746213247137,
+      "end": 1746213247137,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1744827930802,
-      "end": 1744827930802,
+      "start": 1746213247137,
+      "end": 1746213247137,
       "order": "normal"
     }
   ]

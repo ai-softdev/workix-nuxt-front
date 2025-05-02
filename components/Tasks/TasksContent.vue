@@ -117,7 +117,7 @@
     <div>
       <TheTextContent>{{ $t('Создание задания') }}</TheTextContent>
       <form
-          @submit.prevent="tasksList.create_task({...createForm, performers: filteredParticipants?.filter(e=>e.value).map(i=>i.id).join(',')}); showCreate = false">
+          @submit.prevent="tasksList.create_task({...createForm, performers: filteredParticipants?.filter(e => e.value).map(i => i.id)}); showCreate = false">
         <TaskContentCreateElems>
           <div
               v-if="loadCurrentUser.user.role_en === 'department_director' || loadCurrentUser.user.role_en === 'vice_department_director'"
