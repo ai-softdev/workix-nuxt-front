@@ -86,6 +86,8 @@ export const useTaskList = defineStore('task-list', {
         this.task = response.data
         this.loadTasksLists({task_type: 'task-list', query: '', limit: 5, page: 1})
         toast.success('Вы успешно создали задание', {autoClose: 1500, theme: 'auto'})
+      }).catch(e => {
+        toast.error(e, {autoClose: 1500, theme: 'auto'})
       })
     },
     async update_task(params: { task: any }) {
