@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { unref as _unref, mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\"\n\nimport TheInput from \"~/components/UI/TheInput.vue\";\nimport {useCompanies} from \"~/stores/companies\";\n\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'CurrentCompanyChangeInfoContent',\n  __ssrInlineRender: true,\n  setup(__props) {\n\n\nconst companies = useCompanies()\nconst form = reactive({\n  title: '',\n  description: '',\n  email: '',\n  address: '',\n  file: null as File | null,\n  phones: [''] // массив номеров\n})\n\nconst handleFileChange = (e: Event) => {\n  const target = e.target as HTMLInputElement\n  if (target.files && target.files.length > 0) {\n    form.file = target.files[0]\n  }\n}\n\nconst addPhone = () => {\n  form.phones.push('')\n}\n\nconst removePhone = (index: number) => {\n  if (form.phones.length > 1) {\n    form.phones.splice(index, 1)\n  }\n}\n\nonMounted(() => {\n  const company = companies.company\n\n  if (company) {\n    form.title = company.name || ''\n    form.description = company.description || ''\n    form.email = company.email || ''\n    form.address = company.address || ''\n    form.phones = Array.isArray(company.phones) && company.phones.length > 0\n        ? [...company.phones]\n        : ['']\n  }\n})\n\nconst handleSubmit = async () => {\n  const fd = new FormData()\n  fd.append('title', form.title)\n  fd.append('description', form.description)\n  fd.append('email', form.email)\n  fd.append('address', form.address)\n\n  // Добавим телефоны как массив\n  form.phones.forEach((phone, index) => {\n    fd.append(`phones[${index}]`, phone)\n  })\n\n  // Файл, если выбран\n  if (form.file) {\n    fd.append('file', form.file)\n  }\n\n  try {\n    await companies.editCompany({ form: fd })\n    // alert('Компания успешно обновлена!')\n  } catch (e) {\n    console.error('Ошибка при сохранении компании:', e)\n  }\n}\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"mt-10 flex flex-col gap-4\" }, _attrs))}>`)\n  _push(_ssrRenderComponent(TheInput, {\n    label: \"Название\",\n    modelValue: _unref(form).title,\n    \"onUpdate:modelValue\": ($event: any) => ((_unref(form).title) = $event)\n  }, null, _parent))\n  _push(_ssrRenderComponent(TheInput, {\n    label: \"Описание\",\n    modelValue: _unref(form).description,\n    \"onUpdate:modelValue\": ($event: any) => ((_unref(form).description) = $event)\n  }, null, _parent))\n  _push(_ssrRenderComponent(TheInput, {\n    label: \"Email\",\n    modelValue: _unref(form).email,\n    \"onUpdate:modelValue\": ($event: any) => ((_unref(form).email) = $event)\n  }, null, _parent))\n  _push(_ssrRenderComponent(TheInput, {\n    label: \"Адрес\",\n    modelValue: _unref(form).address,\n    \"onUpdate:modelValue\": ($event: any) => ((_unref(form).address) = $event)\n  }, null, _parent))\n  _push(`<div><label class=\"font-medium mb-2 block\">Мобильный телефон(ы)</label><!--[-->`)\n  _ssrRenderList(_unref(form).phones, (phone, index) => {\n    _push(`<div class=\"flex items-center gap-2 mb-2\">`)\n    _push(_ssrRenderComponent(TheInput, {\n      label: `Телефон #${index + 1}`,\n      modelValue: _unref(form).phones[index],\n      \"onUpdate:modelValue\": ($event: any) => ((_unref(form).phones[index]) = $event)\n    }, null, _parent))\n    if (_unref(form).phones.length > 1) {\n      _push(`<button class=\"text-red-500 text-sm\">Удалить</button>`)\n    } else {\n      _push(`<!---->`)\n    }\n    _push(`</div>`)\n  })\n  _push(`<!--]--><button class=\"text-blue-500 text-sm\">+ Добавить номер</button></div>`)\n  _push(_ssrRenderComponent(TheInput, {\n    type: \"file\",\n    id: \"upload-file\",\n    onInput: handleFileChange\n  }, null, _parent))\n  _push(`<button class=\"bg-blue-600 text-white px-4 py-2 rounded w-fit mt-4\"> Сохранить компанию </button></div>`)\n}\n}\n\n})",
-      "start": 1746213276230,
-      "end": 1746213276230,
+      "start": 1746241976184,
+      "end": 1746241976184,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1746213276230,
-      "end": 1746213276230,
+      "start": 1746241976186,
+      "end": 1746241976186,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1746213276230,
-      "end": 1746213276230,
+      "start": 1746241976186,
+      "end": 1746241976186,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1746213276230,
-      "end": 1746213276230,
+      "start": 1746241976186,
+      "end": 1746241976186,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1746213276230,
-      "end": 1746213276230,
+      "start": 1746241976186,
+      "end": 1746241976186,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1746213276230,
-      "end": 1746213276230,
+      "start": 1746241976186,
+      "end": 1746241976186,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1746213276230,
-      "end": 1746213276230,
+      "start": 1746241976186,
+      "end": 1746241976186,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1746213276230,
-      "end": 1746213276230,
+      "start": 1746241976187,
+      "end": 1746241976187,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1746213276230,
-      "end": 1746213276230,
+      "start": 1746241976187,
+      "end": 1746241976187,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport TheInput from \"~/components/UI/TheInput.vue\";\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"CurrentCompanyChangeInfoContent\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const companies = useCompanies();\n    const form = reactive({\n      title: \"\",\n      description: \"\",\n      email: \"\",\n      address: \"\",\n      file: null,\n      phones: [\"\"]\n      // массив номеров\n    });\n    const handleFileChange = (e) => {\n      const target = e.target;\n      if (target.files && target.files.length > 0) {\n        form.file = target.files[0];\n      }\n    };\n    const addPhone = () => {\n      form.phones.push(\"\");\n    };\n    const removePhone = (index) => {\n      if (form.phones.length > 1) {\n        form.phones.splice(index, 1);\n      }\n    };\n    onMounted(() => {\n      const company = companies.company;\n      if (company) {\n        form.title = company.name || \"\";\n        form.description = company.description || \"\";\n        form.email = company.email || \"\";\n        form.address = company.address || \"\";\n        form.phones = Array.isArray(company.phones) && company.phones.length > 0 ? [...company.phones] : [\"\"];\n      }\n    });\n    const handleSubmit = async () => {\n      const fd = new FormData();\n      fd.append(\"title\", form.title);\n      fd.append(\"description\", form.description);\n      fd.append(\"email\", form.email);\n      fd.append(\"address\", form.address);\n      form.phones.forEach((phone, index) => {\n        fd.append(`phones[${index}]`, phone);\n      });\n      if (form.file) {\n        fd.append(\"file\", form.file);\n      }\n      try {\n        await companies.editCompany({ form: fd });\n      } catch (e) {\n        console.error(\"Ошибка при сохранении компании:\", e);\n      }\n    };\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"mt-10 flex flex-col gap-4\" }, _attrs))}>`);\n      _push(_ssrRenderComponent(TheInput, {\n        label: \"Название\",\n        modelValue: _unref(form).title,\n        \"onUpdate:modelValue\": ($event) => _unref(form).title = $event\n      }, null, _parent));\n      _push(_ssrRenderComponent(TheInput, {\n        label: \"Описание\",\n        modelValue: _unref(form).description,\n        \"onUpdate:modelValue\": ($event) => _unref(form).description = $event\n      }, null, _parent));\n      _push(_ssrRenderComponent(TheInput, {\n        label: \"Email\",\n        modelValue: _unref(form).email,\n        \"onUpdate:modelValue\": ($event) => _unref(form).email = $event\n      }, null, _parent));\n      _push(_ssrRenderComponent(TheInput, {\n        label: \"Адрес\",\n        modelValue: _unref(form).address,\n        \"onUpdate:modelValue\": ($event) => _unref(form).address = $event\n      }, null, _parent));\n      _push(`<div><label class=\"font-medium mb-2 block\">Мобильный телефон(ы)</label><!--[-->`);\n      _ssrRenderList(_unref(form).phones, (phone, index) => {\n        _push(`<div class=\"flex items-center gap-2 mb-2\">`);\n        _push(_ssrRenderComponent(TheInput, {\n          label: `Телефон #${index + 1}`,\n          modelValue: _unref(form).phones[index],\n          \"onUpdate:modelValue\": ($event) => _unref(form).phones[index] = $event\n        }, null, _parent));\n        if (_unref(form).phones.length > 1) {\n          _push(`<button class=\"text-red-500 text-sm\">Удалить</button>`);\n        } else {\n          _push(`<!---->`);\n        }\n        _push(`</div>`);\n      });\n      _push(`<!--]--><button class=\"text-blue-500 text-sm\">+ Добавить номер</button></div>`);\n      _push(_ssrRenderComponent(TheInput, {\n        type: \"file\",\n        id: \"upload-file\",\n        onInput: handleFileChange\n      }, null, _parent));\n      _push(`<button class=\"bg-blue-600 text-white px-4 py-2 rounded w-fit mt-4\"> Сохранить компанию </button></div>`);\n    };\n  }\n});\n",
-      "start": 1746213276230,
-      "end": 1746213277127,
+      "start": 1746241976187,
+      "end": 1746241976279,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -86,171 +86,171 @@
     },
     {
       "name": "vite:json",
-      "start": 1746213277128,
-      "end": 1746213277128,
+      "start": 1746241976279,
+      "end": 1746241976279,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1746213277128,
-      "end": 1746213277128,
+      "start": 1746241976279,
+      "end": 1746241976279,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1746213277128,
-      "end": 1746213277128,
+      "start": 1746241976279,
+      "end": 1746241976279,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1746213277128,
-      "end": 1746213277128,
+      "start": 1746241976280,
+      "end": 1746241976280,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1746213277129,
-      "end": 1746213277129,
+      "start": 1746241976280,
+      "end": 1746241976280,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1746213277129,
-      "end": 1746213277129,
+      "start": 1746241976280,
+      "end": 1746241976280,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1746213277129,
-      "end": 1746213277129,
+      "start": 1746241976280,
+      "end": 1746241976280,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1746213277129,
-      "end": 1746213277129,
+      "start": 1746241976280,
+      "end": 1746241976280,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1746213277129,
-      "end": 1746213277130,
+      "start": 1746241976280,
+      "end": 1746241976280,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1746213277130,
-      "end": 1746213277130,
+      "start": 1746241976281,
+      "end": 1746241976281,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1746213277130,
-      "end": 1746213277131,
+      "start": 1746241976281,
+      "end": 1746241976281,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1746213277131,
-      "end": 1746213277131,
+      "start": 1746241976281,
+      "end": 1746241976281,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1746213277131,
-      "end": 1746213277131,
+      "start": 1746241976281,
+      "end": 1746241976281,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1746213277131,
-      "end": 1746213277131,
+      "start": 1746241976282,
+      "end": 1746241976282,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1746213277144,
-      "end": 1746213277148,
+      "start": 1746241976285,
+      "end": 1746241976286,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1746213277157,
-      "end": 1746213277170,
+      "start": 1746241976291,
+      "end": 1746241976293,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1746213277171,
-      "end": 1746213277171,
+      "start": 1746241976293,
+      "end": 1746241976293,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1746213277171,
-      "end": 1746213277171,
+      "start": 1746241976293,
+      "end": 1746241976293,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1746213277171,
-      "end": 1746213277171,
+      "start": 1746241976293,
+      "end": 1746241976293,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1746213277172,
-      "end": 1746213277172,
+      "start": 1746241976293,
+      "end": 1746241976293,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1746213277172,
-      "end": 1746213277172,
+      "start": 1746241976293,
+      "end": 1746241976293,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1746213277179,
-      "end": 1746213277179,
+      "start": 1746241976295,
+      "end": 1746241976295,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1746213277179,
-      "end": 1746213277179,
+      "start": 1746241976295,
+      "end": 1746241976295,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1746213277211,
-      "end": 1746213277211,
+      "start": 1746241976297,
+      "end": 1746241976297,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1746213277211,
-      "end": 1746213277212,
+      "start": 1746241976297,
+      "end": 1746241976297,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1746213277213,
-      "end": 1746213277213,
+      "start": 1746241976297,
+      "end": 1746241976297,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1746213277213,
-      "end": 1746213277213,
+      "start": 1746241976297,
+      "end": 1746241976297,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { reactive, onMounted } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport TheInput from \"~/components/UI/TheInput.vue\";\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"CurrentCompanyChangeInfoContent\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const companies = useCompanies();\n    const form = reactive({\n      title: \"\",\n      description: \"\",\n      email: \"\",\n      address: \"\",\n      file: null,\n      phones: [\"\"]\n      // массив номеров\n    });\n    const handleFileChange = (e) => {\n      const target = e.target;\n      if (target.files && target.files.length > 0) {\n        form.file = target.files[0];\n      }\n    };\n    const addPhone = () => {\n      form.phones.push(\"\");\n    };\n    const removePhone = (index) => {\n      if (form.phones.length > 1) {\n        form.phones.splice(index, 1);\n      }\n    };\n    onMounted(() => {\n      const company = companies.company;\n      if (company) {\n        form.title = company.name || \"\";\n        form.description = company.description || \"\";\n        form.email = company.email || \"\";\n        form.address = company.address || \"\";\n        form.phones = Array.isArray(company.phones) && company.phones.length > 0 ? [...company.phones] : [\"\"];\n      }\n    });\n    const handleSubmit = async () => {\n      const fd = new FormData();\n      fd.append(\"title\", form.title);\n      fd.append(\"description\", form.description);\n      fd.append(\"email\", form.email);\n      fd.append(\"address\", form.address);\n      form.phones.forEach((phone, index) => {\n        fd.append(`phones[${index}]`, phone);\n      });\n      if (form.file) {\n        fd.append(\"file\", form.file);\n      }\n      try {\n        await companies.editCompany({ form: fd });\n      } catch (e) {\n        console.error(\"Ошибка при сохранении компании:\", e);\n      }\n    };\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"mt-10 flex flex-col gap-4\" }, _attrs))}>`);\n      _push(_ssrRenderComponent(TheInput, {\n        label: \"Название\",\n        modelValue: _unref(form).title,\n        \"onUpdate:modelValue\": ($event) => _unref(form).title = $event\n      }, null, _parent));\n      _push(_ssrRenderComponent(TheInput, {\n        label: \"Описание\",\n        modelValue: _unref(form).description,\n        \"onUpdate:modelValue\": ($event) => _unref(form).description = $event\n      }, null, _parent));\n      _push(_ssrRenderComponent(TheInput, {\n        label: \"Email\",\n        modelValue: _unref(form).email,\n        \"onUpdate:modelValue\": ($event) => _unref(form).email = $event\n      }, null, _parent));\n      _push(_ssrRenderComponent(TheInput, {\n        label: \"Адрес\",\n        modelValue: _unref(form).address,\n        \"onUpdate:modelValue\": ($event) => _unref(form).address = $event\n      }, null, _parent));\n      _push(`<div><label class=\"font-medium mb-2 block\">Мобильный телефон(ы)</label><!--[-->`);\n      _ssrRenderList(_unref(form).phones, (phone, index) => {\n        _push(`<div class=\"flex items-center gap-2 mb-2\">`);\n        _push(_ssrRenderComponent(TheInput, {\n          label: `Телефон #${index + 1}`,\n          modelValue: _unref(form).phones[index],\n          \"onUpdate:modelValue\": ($event) => _unref(form).phones[index] = $event\n        }, null, _parent));\n        if (_unref(form).phones.length > 1) {\n          _push(`<button class=\"text-red-500 text-sm\">Удалить</button>`);\n        } else {\n          _push(`<!---->`);\n        }\n        _push(`</div>`);\n      });\n      _push(`<!--]--><button class=\"text-blue-500 text-sm\">+ Добавить номер</button></div>`);\n      _push(_ssrRenderComponent(TheInput, {\n        type: \"file\",\n        id: \"upload-file\",\n        onInput: handleFileChange\n      }, null, _parent));\n      _push(`<button class=\"bg-blue-600 text-white px-4 py-2 rounded w-fit mt-4\"> Сохранить компанию </button></div>`);\n    };\n  }\n});\n",
-      "start": 1746213277213,
-      "end": 1746213277250,
+      "start": 1746241976297,
+      "end": 1746241976307,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -264,8 +264,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { reactive, onMounted } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport TheInput from \"~/components/UI/TheInput.vue\";\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"CurrentCompanyChangeInfoContent\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const companies = useCompanies();\n    const form = reactive({\n      title: \"\",\n      description: \"\",\n      email: \"\",\n      address: \"\",\n      file: null,\n      phones: [\"\"]\n      // массив номеров\n    });\n    const handleFileChange = (e) => {\n      const target = e.target;\n      if (target.files && target.files.length > 0) {\n        form.file = target.files[0];\n      }\n    };\n    const addPhone = () => {\n      form.phones.push(\"\");\n    };\n    const removePhone = (index) => {\n      if (form.phones.length > 1) {\n        form.phones.splice(index, 1);\n      }\n    };\n    onMounted(() => {\n      const company = companies.company;\n      if (company) {\n        form.title = company.name || \"\";\n        form.description = company.description || \"\";\n        form.email = company.email || \"\";\n        form.address = company.address || \"\";\n        form.phones = Array.isArray(company.phones) && company.phones.length > 0 ? [...company.phones] : [\"\"];\n      }\n    });\n    const handleSubmit = async () => {\n      const fd = new FormData();\n      fd.append(\"title\", form.title);\n      fd.append(\"description\", form.description);\n      fd.append(\"email\", form.email);\n      fd.append(\"address\", form.address);\n      form.phones.forEach((phone, index) => {\n        fd.append(`phones[${index}]`, phone);\n      });\n      if (form.file) {\n        fd.append(\"file\", form.file);\n      }\n      try {\n        await companies.editCompany({ form: fd });\n      } catch (e) {\n        console.error(\"Ошибка при сохранении компании:\", e);\n      }\n    };\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"mt-10 flex flex-col gap-4\" }, _attrs))}>`);\n      _push(_ssrRenderComponent(TheInput, {\n        label: \"Название\",\n        modelValue: _unref(form).title,\n        \"onUpdate:modelValue\": ($event) => _unref(form).title = $event\n      }, null, _parent));\n      _push(_ssrRenderComponent(TheInput, {\n        label: \"Описание\",\n        modelValue: _unref(form).description,\n        \"onUpdate:modelValue\": ($event) => _unref(form).description = $event\n      }, null, _parent));\n      _push(_ssrRenderComponent(TheInput, {\n        label: \"Email\",\n        modelValue: _unref(form).email,\n        \"onUpdate:modelValue\": ($event) => _unref(form).email = $event\n      }, null, _parent));\n      _push(_ssrRenderComponent(TheInput, {\n        label: \"Адрес\",\n        modelValue: _unref(form).address,\n        \"onUpdate:modelValue\": ($event) => _unref(form).address = $event\n      }, null, _parent));\n      _push(`<div><label class=\"font-medium mb-2 block\">Мобильный телефон(ы)</label><!--[-->`);\n      _ssrRenderList(_unref(form).phones, (phone, index) => {\n        _push(`<div class=\"flex items-center gap-2 mb-2\">`);\n        _push(_ssrRenderComponent(TheInput, {\n          label: `Телефон #${index + 1}`,\n          modelValue: _unref(form).phones[index],\n          \"onUpdate:modelValue\": ($event) => _unref(form).phones[index] = $event\n        }, null, _parent));\n        if (_unref(form).phones.length > 1) {\n          _push(`<button class=\"text-red-500 text-sm\">Удалить</button>`);\n        } else {\n          _push(`<!---->`);\n        }\n        _push(`</div>`);\n      });\n      _push(`<!--]--><button class=\"text-blue-500 text-sm\">+ Добавить номер</button></div>`);\n      _push(_ssrRenderComponent(TheInput, {\n        type: \"file\",\n        id: \"upload-file\",\n        onInput: handleFileChange\n      }, null, _parent));\n      _push(`<button class=\"bg-blue-600 text-white px-4 py-2 rounded w-fit mt-4\"> Сохранить компанию </button></div>`);\n    };\n  }\n});\n",
-      "start": 1746213277213,
-      "end": 1746213277250,
+      "start": 1746241976297,
+      "end": 1746241976307,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -278,45 +278,45 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1746213277251,
-      "end": 1746213277251,
+      "start": 1746241976308,
+      "end": 1746241976308,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1746213277251,
-      "end": 1746213277251,
+      "start": 1746241976308,
+      "end": 1746241976308,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1746213277251,
-      "end": 1746213277251,
+      "start": 1746241976308,
+      "end": 1746241976308,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1746213277251,
-      "end": 1746213277251,
+      "start": 1746241976308,
+      "end": 1746241976308,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1746213277251,
-      "end": 1746213277251,
+      "start": 1746241976308,
+      "end": 1746241976308,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1746213277251,
-      "end": 1746213277251,
+      "start": 1746241976308,
+      "end": 1746241976309,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
       "result": "import { reactive, onMounted } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport TheInput from \"~/components/UI/TheInput.vue\";\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"CurrentCompanyChangeInfoContent\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const companies = useCompanies();\n    const form = reactive({\n      title: \"\",\n      description: \"\",\n      email: \"\",\n      address: \"\",\n      file: null,\n      phones: [\"\"]\n      // массив номеров\n    });\n    const handleFileChange = (e) => {\n      const target = e.target;\n      if (target.files && target.files.length > 0) {\n        form.file = target.files[0];\n      }\n    };\n    const addPhone = () => {\n      form.phones.push(\"\");\n    };\n    const removePhone = (index) => {\n      if (form.phones.length > 1) {\n        form.phones.splice(index, 1);\n      }\n    };\n     false && /*@__PURE__*/ onMounted(() => {\n      const company = companies.company;\n      if (company) {\n        form.title = company.name || \"\";\n        form.description = company.description || \"\";\n        form.email = company.email || \"\";\n        form.address = company.address || \"\";\n        form.phones = Array.isArray(company.phones) && company.phones.length > 0 ? [...company.phones] : [\"\"];\n      }\n    });\n    const handleSubmit = async () => {\n      const fd = new FormData();\n      fd.append(\"title\", form.title);\n      fd.append(\"description\", form.description);\n      fd.append(\"email\", form.email);\n      fd.append(\"address\", form.address);\n      form.phones.forEach((phone, index) => {\n        fd.append(`phones[${index}]`, phone);\n      });\n      if (form.file) {\n        fd.append(\"file\", form.file);\n      }\n      try {\n        await companies.editCompany({ form: fd });\n      } catch (e) {\n        console.error(\"Ошибка при сохранении компании:\", e);\n      }\n    };\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"mt-10 flex flex-col gap-4\" }, _attrs))}>`);\n      _push(_ssrRenderComponent(TheInput, {\n        label: \"Название\",\n        modelValue: _unref(form).title,\n        \"onUpdate:modelValue\": ($event) => _unref(form).title = $event\n      }, null, _parent));\n      _push(_ssrRenderComponent(TheInput, {\n        label: \"Описание\",\n        modelValue: _unref(form).description,\n        \"onUpdate:modelValue\": ($event) => _unref(form).description = $event\n      }, null, _parent));\n      _push(_ssrRenderComponent(TheInput, {\n        label: \"Email\",\n        modelValue: _unref(form).email,\n        \"onUpdate:modelValue\": ($event) => _unref(form).email = $event\n      }, null, _parent));\n      _push(_ssrRenderComponent(TheInput, {\n        label: \"Адрес\",\n        modelValue: _unref(form).address,\n        \"onUpdate:modelValue\": ($event) => _unref(form).address = $event\n      }, null, _parent));\n      _push(`<div><label class=\"font-medium mb-2 block\">Мобильный телефон(ы)</label><!--[-->`);\n      _ssrRenderList(_unref(form).phones, (phone, index) => {\n        _push(`<div class=\"flex items-center gap-2 mb-2\">`);\n        _push(_ssrRenderComponent(TheInput, {\n          label: `Телефон #${index + 1}`,\n          modelValue: _unref(form).phones[index],\n          \"onUpdate:modelValue\": ($event) => _unref(form).phones[index] = $event\n        }, null, _parent));\n        if (_unref(form).phones.length > 1) {\n          _push(`<button class=\"text-red-500 text-sm\">Удалить</button>`);\n        } else {\n          _push(`<!---->`);\n        }\n        _push(`</div>`);\n      });\n      _push(`<!--]--><button class=\"text-blue-500 text-sm\">+ Добавить номер</button></div>`);\n      _push(_ssrRenderComponent(TheInput, {\n        type: \"file\",\n        id: \"upload-file\",\n        onInput: handleFileChange\n      }, null, _parent));\n      _push(`<button class=\"bg-blue-600 text-white px-4 py-2 rounded w-fit mt-4\"> Сохранить компанию </button></div>`);\n    };\n  }\n});\n",
-      "start": 1746213277251,
-      "end": 1746213277254,
+      "start": 1746241976309,
+      "end": 1746241976310,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -329,14 +329,14 @@
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1746213277254,
-      "end": 1746213277254,
+      "start": 1746241976310,
+      "end": 1746241976310,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1746213277254,
-      "end": 1746213277254,
+      "start": 1746241976310,
+      "end": 1746241976310,
       "order": "normal"
     }
   ]
