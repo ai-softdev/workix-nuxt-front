@@ -920,7 +920,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0 ,
-    component: () => import('./base-DrN7GlwP.mjs').then((m) => m.default || m),
+    component: () => import('./base-B_Gerv2m.mjs').then((m) => m.default || m),
     children: [
       {
         name: "base-chat",
@@ -1042,7 +1042,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-DqTEVBvi.mjs').then((m) => m.default || m)
+        component: () => import('./index-CEuc-sm9.mjs').then((m) => m.default || m)
       },
       {
         name: "base-profile",
@@ -1100,7 +1100,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./_id_-DM_Cfy9w.mjs').then((m) => m.default || m)
+        component: () => import('./_id_-D7fr3LmQ.mjs').then((m) => m.default || m)
       },
       {
         name: "base-tasks",
@@ -1108,7 +1108,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-PLqAQwEp.mjs').then((m) => m.default || m)
+        component: () => import('./index-BaO1kRid.mjs').then((m) => m.default || m)
       },
       {
         name: "base-tests-exam",
@@ -1263,7 +1263,7 @@ const validate = /* @__PURE__ */ defineNuxtRouteMiddleware(async (to) => {
 });
 const inlineConfig = {
   "nuxt": {
-    "buildId": "52b3427d-9ac0-43dd-a97c-1687e0db9f18"
+    "buildId": "dev"
   },
   "ui": {
     "primary": "green",

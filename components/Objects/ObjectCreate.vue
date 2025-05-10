@@ -5,12 +5,12 @@ import TheTextContent from "~/components/UI/TheTextContent.vue";
 import ObjectContentCreateElems from "~/components/Objects/ObjectUI/ObjectContentCreateElems.vue";
 import TheInput from "~/components/UI/TheInput.vue";
 import {useObjects} from "~/stores/objects";
+import {useAuthStore} from "~/stores/auth";
 
 const objects = useObjects()
+const currentUser = useAuthStore()
 const createForm = ref({
   name: '',
-  description: '',
-  email: '',
   files: '',
   address: ''
 })
@@ -25,7 +25,7 @@ defineProps({
 
 <template>
   <div>
-    <button class="font-bold tracking-widest text-white bg-blue-400 mx-auto py-4 rounded-xl w-full px-4 text-sm"
+    <button v-if="currentUser.user.permissions?.find(e=>e.name_en === 'object.create')" class="font-bold tracking-widest text-white bg-blue-400 mx-auto py-4 rounded-xl w-full px-4 text-sm"
             @click="showCreate = true">{{ $t('Создать объект') }}
     </button>
     <TheModal v-if="showCreate" @showModal="showCreate = !showCreate">

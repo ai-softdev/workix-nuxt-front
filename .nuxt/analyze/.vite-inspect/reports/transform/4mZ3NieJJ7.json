@@ -1,0 +1,238 @@
+{
+  "resolvedId": "D:/projects/nuxt/workix-nuxt-front/components/Tests/TestCreate.vue",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "<script setup lang=\"ts\">\nimport TheButton from \"~/components/UI/TheButton.vue\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport TestContentCreateElems from \"~/components/Tests/TestUI/TestContentCreateElems.vue\";\nimport TheInput from \"~/components/UI/TheInput.vue\";\nimport {useTestList} from \"~/stores/test\";\nimport {useCompanies} from \"~/stores/companies\";\nimport {useAuthStore} from \"~/stores/auth\";\nimport {toast} from \"vue3-toastify\";\n\n\nconst department = useCompanies()\nconst test = useTestList()\n\nconst selectedTestType = ref('')\nconst props = defineProps({\n  showCreate: {\n    type: Boolean,\n    default: false,\n  },\n  trimi: {\n    type: Boolean,\n    default: null,\n  },\n  checkAnswer: {\n    type: Object,\n    default: () => {\n    },\n  }\n})\n\nconst createForm = ref({\n  answer: '',\n  options_list: [\n    {},\n    {}\n  ],\n  department_id: null,\n  question: '',\n})\n</script>\n\n<template>\n  <div class=\"\">\n    <button class=\"font-bold tracking-widest text-white bg-blue-400 mx-auto py-4 rounded-xl px-4 text-sm\"\n            @click=\"showCreate = true; department.loadDepartmentList()\">{{ $t('Создать тест') }}\n    </button>\n    <TheModal v-if=\"showCreate\" @showModal=\"showCreate = !showCreate\">\n      <TheTextContent>{{ $t('Создание тест') }}</TheTextContent>\n      <form class=\"!overflow-x-hidden p-2\"\n            @submit.prevent=\"()=>{\n              if(createForm.options_list.find(e=> e.text.trim() == '')) {\n                 toast.error('Заполните пустые поля', {autoClose: 1500, theme: 'auto'})\n              } else if(selectedTestType === '') {\n                selectedTestType = 'error'\n                toast.error('Укажите тип теста', {autoClose: 1500, theme: 'auto'})\n              } else if(selectedTestType === 'testSpecial' && !createForm.department_id){\n                toast.error('Выберите департамент', {autoClose: 1500, theme: 'auto'})\n              } else {\n                  test.createTest({test: createForm, answer: props.checkAnswer.item?.text, options: createForm.options_list.filter(e=>e.text).map(e=>e.text)}).then(res=>{\n                    test.loadAllTest({page: 1, limit: 20})\n                  })\n                }\n            }\">\n        <TestContentCreateElems>\n          <div class=\"flex flex-wrap gap-y-2 justify-center gap-x-10\">\n            <button type=\"button\" class=\"border px-6 py-4 rounded-lg transition-all\"\n                    :class=\"{'bg-gray-700 text-white': selectedTestType === 'testIQ', 'bg-red-400 text-white' : selectedTestType === 'error'}\"\n                    @click=\"selectedTestType = 'testIQ'; createForm.department_id = null\">\n              {{ $t('На IQ') }}\n            </button>\n            <button type=\"button\" class=\"border px-6 py-4 rounded-lg transition-all\"\n                    :class=\"{'bg-gray-700 text-white': selectedTestType === 'testSpecial', 'bg-red-400 text-white' : selectedTestType === 'error'}\"\n                    @click=\"selectedTestType = 'testSpecial'\">\n              {{ $t('По специальности') }}\n            </button>\n          </div>\n        </TestContentCreateElems>\n        <TestContentCreateElems v-if=\"selectedTestType === 'testSpecial'\">\n          <div class=\"flex flex-col w-full items-center\">\n            <p>{{ $t('Выберите департамент') }}<span class=\"text-red-500 ml-2\">*</span></p>\n            <select\n              class=\"w-7/12 max-lg:w-full dark:bg-gray-300 dark:border-none border dark:text-black text-sm rounded-lg py-4 px-2\"\n              v-model=\"createForm.department_id\">\n              <option v-for=\"item in department.get_all_department?.results\" :value=\"item.id\">{{ item.name }}</option>\n            </select>\n          </div>\n        </TestContentCreateElems>\n        <TestContentCreateElems>\n          <div class=\"w-full \">\n            <TheInput type=\"textarea\" :required=\"true\" :label=\"$t('Вопрос')\"\n                      :trimi=\"createForm.question.trim() == '' && createForm.question.length !== 0 ? true : false\"\n                      v-model=\"createForm.question\"></TheInput>\n          </div>\n        </TestContentCreateElems>\n        <TestContentCreateElems>\n          <div class=\"w-full \">\n            <div>\n              <TheButton class=\"px-10 py-2 mx-auto flex justify-center rounded-full\" type=\"change\" t=\"button\"\n                         @click=\"createForm.options_list.push({text: ''})\">\n                {{ $t('Добавить ответ') }}\n              </TheButton>\n              <p class=\"text-center text-sm text-gray-300 my-2\">({{ $t('Выберите правильный ответ') }})</p>\n            </div>\n            <TransitionGroup clas=\"=\" name=\"list\" class=\"w-full flex flex-col gap-y-4\" tag=\"ul\">\n              <li class=\"flex max-[400px]:flex-col max-[400px]: gap-x-2 items-center w-full\"\n                  v-for=\"(item, id) in createForm.options_list\" :key=\"id\">\n                <div class=\"flex flex-col w-full\">\n                  <span>Ответ <span class=\"text-red-500\" v-if=\"id === 0 || id === 1\">*</span></span>\n                  <input class=\"w-full p-2 rounded-lg dark:bg-gray-500 bg-gray-200\" :key=\"id\"\n                         :class=\"{'!bg-green-500 text-white' : checkAnswer?.id === id}\" type=\"text\"\n                         v-model=\"item.text\"/>\n                </div>\n                <div class=\"flex gap-x-2 mt-8\">\n                  <div class=\"cursor-pointer bg-blueSemiLight p-2 rounded-lg\"\n                       @click=\"checkAnswer = {id, item}\">\n                    <svg class=\"fill-white\" width=\"20px\" height=\"20px\" viewBox=\"0 0 24 24\" fill=\"none\"\n                         xmlns=\"http://www.w3.org/2000/svg\">\n                      <path fill-rule=\"evenodd\" clip-rule=\"evenodd\"\n                            d=\"M21.2287 6.60355C21.6193 6.99407 21.6193 7.62723 21.2287 8.01776L10.2559 18.9906C9.86788 19.3786 9.23962 19.3814 8.84811 18.9969L2.66257 12.9218C2.26855 12.5349 2.26284 11.9017 2.64983 11.5077L3.35054 10.7942C3.73753 10.4002 4.37067 10.3945 4.7647 10.7815L9.53613 15.4677L19.1074 5.89644C19.4979 5.50592 20.1311 5.50591 20.5216 5.89644L21.2287 6.60355Z\"/>\n                    </svg>\n                  </div>\n                  <div @click=\"createForm.options_list.splice(id, 1)\" v-if=\"id !== 0 && id !== 1\"\n                       class=\" cursor-pointer bg-red-400 p-2 rounded-lg\">\n                    <svg class=\"fill-white\" width=\"20px\" height=\"20px\" viewBox=\"-3.5 0 19 19\"\n                         xmlns=\"http://www.w3.org/2000/svg\">\n                      <path\n                        d=\"M11.383 13.644A1.03 1.03 0 0 1 9.928 15.1L6 11.172 2.072 15.1a1.03 1.03 0 1 1-1.455-1.456l3.928-3.928L.617 5.79a1.03 1.03 0 1 1 1.455-1.456L6 8.261l3.928-3.928a1.03 1.03 0 0 1 1.455 1.456L7.455 9.716z\"/>\n                    </svg>\n                  </div>\n                </div>\n              </li>\n            </TransitionGroup>\n          </div>\n        </TestContentCreateElems>\n        <TestContentCreateElems>\n          <TheButton class=\"py-2 max-sm:w-full px-6 rounded-full\" t=\"button\" type=\"danger\" @click=\"showCreate = false\">\n            {{ $t('Отменить')\n            }}\n          </TheButton>\n          <TheButton class=\"py-2 max-sm:w-full px-6 rounded-full\" t=\"submit\" type=\"change\">{{ $t('Создать') }}\n          </TheButton>\n        </TestContentCreateElems>\n      </form>\n\n    </TheModal>\n  </div>\n</template>\n\n<style lang=\"scss\">\n.list-enter-active,\n.list-leave-active {\n  transition: all 0.5s ease;\n}\n\n.list-enter-from,\n.list-leave-to {\n  opacity: 0;\n  transform: translateX(30px);\n}\n</style>",
+      "start": 1746856007554,
+      "end": 1746856008026,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1746856008026,
+      "end": 1746856008026,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1746856008026,
+      "end": 1746856008026,
+      "order": "pre"
+    },
+    {
+      "name": "unplugin-vue-i18n",
+      "start": 1746856008026,
+      "end": 1746856008026,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1746856008026,
+      "end": 1746856008026,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1746856008026,
+      "end": 1746856008026,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1746856008026,
+      "end": 1746856008026,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1746856008026,
+      "end": 1746856008026,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1746856008026,
+      "end": 1746856008026,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "result": "import _sfc_main from \"D:/projects/nuxt/workix-nuxt-front/components/Tests/TestCreate.vue?vue&type=script&setup=true&lang.ts\";\nexport * from \"D:/projects/nuxt/workix-nuxt-front/components/Tests/TestCreate.vue?vue&type=script&setup=true&lang.ts\";\nimport \"D:/projects/nuxt/workix-nuxt-front/components/Tests/TestCreate.vue?vue&type=style&index=0&lang.scss\";\nexport default _sfc_main;\n",
+      "start": 1746856008026,
+      "end": 1746856008555,
+      "order": "normal",
+      "sourcemaps": {
+        "mappings": ""
+      }
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1746856008555,
+      "end": 1746856008556,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1746856008556,
+      "end": 1746856008556,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1746856008556,
+      "end": 1746856008556,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:chunk-error",
+      "start": 1746856008556,
+      "end": 1746856008557,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1746856008557,
+      "end": 1746856008557,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1746856008557,
+      "end": 1746856008558,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1746856008558,
+      "end": 1746856008558,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1746856008558,
+      "end": 1746856008558,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1746856008559,
+      "end": 1746856008559,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1746856008559,
+      "end": 1746856008559,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1746856008559,
+      "end": 1746856008559,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1746856008560,
+      "end": 1746856008560,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1746856008560,
+      "end": 1746856008560,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1746856008560,
+      "end": 1746856008560,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1746856008560,
+      "end": 1746856008560,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1746856008560,
+      "end": 1746856008560,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-macros-transform",
+      "start": 1746856008561,
+      "end": 1746856008561,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-resource",
+      "start": 1746856008561,
+      "end": 1746856008561,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-meta-deprecation",
+      "start": 1746856008561,
+      "end": 1746856008562,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1746856008562,
+      "end": 1746856008563,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1746856008564,
+      "end": 1746856008564,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1746856008565,
+      "end": 1746856008565,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:runtime-paths-dep",
+      "start": 1746856008569,
+      "end": 1746856008569,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:route-injection-plugin",
+      "start": 1746856008570,
+      "end": 1746856008570,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1746856008571,
+      "end": 1746856008571,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1746856008571,
+      "end": 1746856008571,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1746856008572,
+      "end": 1746856008572,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1746856008573,
+      "end": 1746856008573,
+      "order": "normal"
+    }
+  ]
+}

@@ -1,0 +1,296 @@
+{
+  "resolvedId": "D:/projects/nuxt/workix-nuxt-front/node_modules/@popperjs/core/lib/dom-utils/getScrollParent.js",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "import getParentNode from \"./getParentNode.js\";\nimport isScrollParent from \"./isScrollParent.js\";\nimport getNodeName from \"./getNodeName.js\";\nimport { isHTMLElement } from \"./instanceOf.js\";\nexport default function getScrollParent(node) {\n  if (['html', 'body', '#document'].indexOf(getNodeName(node)) >= 0) {\n    // $FlowFixMe[incompatible-return]: assume body is always available\n    return node.ownerDocument.body;\n  }\n\n  if (isHTMLElement(node) && isScrollParent(node)) {\n    return node;\n  }\n\n  return getScrollParent(getParentNode(node));\n}",
+      "start": 1746856039374,
+      "end": 1746856039574,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1746856039574,
+      "end": 1746856039574,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1746856039574,
+      "end": 1746856039574,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1746856039574,
+      "end": 1746856039574,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1746856039574,
+      "end": 1746856039574,
+      "order": "pre"
+    },
+    {
+      "name": "unplugin-vue-i18n",
+      "start": 1746856039574,
+      "end": 1746856039574,
+      "order": "pre"
+    },
+    {
+      "name": "unplugin-vue-i18n",
+      "start": 1746856039574,
+      "end": 1746856039574,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1746856039574,
+      "end": 1746856039574,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1746856039574,
+      "end": 1746856039574,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1746856039574,
+      "end": 1746856039574,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1746856039574,
+      "end": 1746856039574,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1746856039574,
+      "end": 1746856039574,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "start": 1746856039574,
+      "end": 1746856039574,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1746856039574,
+      "end": 1746856039574,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1746856039574,
+      "end": 1746856039574,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1746856039574,
+      "end": 1746856039574,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1746856039574,
+      "end": 1746856039574,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1746856039574,
+      "end": 1746856039574,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1746856039574,
+      "end": 1746856039574,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1746856039574,
+      "end": 1746856039574,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1746856039574,
+      "end": 1746856039574,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "result": "import getParentNode from \"./getParentNode.js\";\nimport isScrollParent from \"./isScrollParent.js\";\nimport getNodeName from \"./getNodeName.js\";\nimport { isHTMLElement } from \"./instanceOf.js\";\nexport default function getScrollParent(node) {\n  if ([\"html\", \"body\", \"#document\"].indexOf(getNodeName(node)) >= 0) {\n    return node.ownerDocument.body;\n  }\n  if (isHTMLElement(node) && isScrollParent(node)) {\n    return node;\n  }\n  return getScrollParent(getParentNode(node));\n}\n",
+      "start": 1746856039574,
+      "end": 1746856039769,
+      "order": "normal",
+      "sourcemaps": "{\n  \"version\": 3,\n  \"sources\": [\"D:/projects/nuxt/workix-nuxt-front/node_modules/@popperjs/core/lib/dom-utils/getScrollParent.js\"],\n  \"sourcesContent\": [\"import getParentNode from \\\"./getParentNode.js\\\";\\nimport isScrollParent from \\\"./isScrollParent.js\\\";\\nimport getNodeName from \\\"./getNodeName.js\\\";\\nimport { isHTMLElement } from \\\"./instanceOf.js\\\";\\nexport default function getScrollParent(node) {\\n  if (['html', 'body', '#document'].indexOf(getNodeName(node)) >= 0) {\\n    // $FlowFixMe[incompatible-return]: assume body is always available\\n    return node.ownerDocument.body;\\n  }\\n\\n  if (isHTMLElement(node) && isScrollParent(node)) {\\n    return node;\\n  }\\n\\n  return getScrollParent(getParentNode(node));\\n}\"],\n  \"mappings\": \"AAAA,OAAO,mBAAmB;AAC1B,OAAO,oBAAoB;AAC3B,OAAO,iBAAiB;AACxB,SAAS,qBAAqB;AAC9B,wBAAwB,gBAAgB,MAAM;AAC5C,MAAI,CAAC,QAAQ,QAAQ,WAAW,EAAE,QAAQ,YAAY,IAAI,CAAC,KAAK,GAAG;AAEjE,WAAO,KAAK,cAAc;AAAA,EAC5B;AAEA,MAAI,cAAc,IAAI,KAAK,eAAe,IAAI,GAAG;AAC/C,WAAO;AAAA,EACT;AAEA,SAAO,gBAAgB,cAAc,IAAI,CAAC;AAC5C;\",\n  \"names\": []\n}\n"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1746856039769,
+      "end": 1746856039769,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1746856039770,
+      "end": 1746856039770,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1746856039770,
+      "end": 1746856039770,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1746856039770,
+      "end": 1746856039770,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1746856039770,
+      "end": 1746856039771,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1746856039771,
+      "end": 1746856039771,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1746856039772,
+      "end": 1746856039772,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1746856039772,
+      "end": 1746856039772,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1746856039772,
+      "end": 1746856039772,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-macros-transform",
+      "start": 1746856039772,
+      "end": 1746856039772,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-macros-transform",
+      "start": 1746856039772,
+      "end": 1746856039772,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-resource",
+      "start": 1746856039773,
+      "end": 1746856039773,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-resource",
+      "start": 1746856039773,
+      "end": 1746856039774,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-meta-deprecation",
+      "start": 1746856039774,
+      "end": 1746856039774,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-meta-deprecation",
+      "start": 1746856039774,
+      "end": 1746856039774,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1746856039774,
+      "end": 1746856039775,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1746856039774,
+      "end": 1746856039775,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1746856039776,
+      "end": 1746856039776,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1746856039776,
+      "end": 1746856039776,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1746856039776,
+      "end": 1746856039776,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1746856039776,
+      "end": 1746856039776,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-template",
+      "start": 1746856039776,
+      "end": 1746856039776,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1746856039777,
+      "end": 1746856039777,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1746856039777,
+      "end": 1746856039777,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1746856039777,
+      "end": 1746856039777,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1746856039778,
+      "end": 1746856039778,
+      "order": "normal"
+    }
+  ]
+}
