@@ -4,81 +4,81 @@
     {
       "name": "vite:load-fallback",
       "result": "<script setup>\nimport TheFilter from \"~/components/UI/TheFilter.vue\"\nimport TheUserStats from \"~/components/User/UserUI/TheUserStats.vue\"\nimport {useUserStore} from \"~/stores/users\";\nimport {useAuthStore} from \"~/stores/auth\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\n\nconst loadCurrentUser = useAuthStore()\nconst userList = useUserStore()\nconst phone = ref('')\nconst params = {\n  page: 1,\n  limit: 15,\n  query: '',\n  user_type: 'user-list'\n}\n\ndefineProps({\n  userChecked: {\n    type: String,\n    default: 'user-list'\n  },\n  showUserInfo: {\n    type: Boolean,\n    default: false,\n  }\n})\n\nfunction loadPage(page) {\n  if (page === '<') {\n    if (Number(params.page) > 1) {\n      params.page -= 1;\n    }\n  } else if (page === '>') {\n    if (Number(params.page) < userList.user.number_of_pages) {\n      params.page = Number(params.page) + 1\n    }\n  } else {\n    if (Number(page) <= userList.user.number_of_pages) {\n      params.page = Number(page)\n    }\n  }\n  if (window.innerWidth > 1000) {\n    window.scrollTo({top: 600})\n  } else if (window.innerWidth < 1000) {\n    window.scrollTo({top: 895})\n  } else {\n    window.scrollTo()\n  }\n}\n\nonMounted(() => {\n  navigateTo({\n    params: {\n      page: params.page\n    }\n  })\n})\nwatchSyncEffect(() => {\n  if (loadCurrentUser.user.role?.name_en === 'admin') {\n    userList.loadAdminList({page: params.page, limit: params.limit, query: params.query})\n  } else if(loadCurrentUser.user.role?.name_en === 'company_admin') {\n    userList.loadUserList({\n      page: params.page,\n      limit: params.limit,\n      query: params.query\n    })\n  }\n})\n</script>\n\n<template>\n  <div class=\"\">\n    <div :class=\"{'flex flex-wrap items-center justify-between' :['company_admin', 'admin'].includes( loadCurrentUser.user.role?.name_en )}\">\n      <div class=\"mb-10 mt-12 text-lg flex gap-x-10\">\n        <p class=\"dark:text-white tracking-widest\" v-if=\"loadCurrentUser.user.role?.name_en === 'admin'\">\n          {{ $t('Список администраторов компании') }}</p>\n        <p class=\"dark:text-white tracking-widest \" v-else>{{ $t('Список всех пользователей компании') }}</p>\n      </div>\n      <div\n        :class=\"{'flex items-center justify-evenly my-10' : loadCurrentUser.user.role?.name_en === 'admin', 'w-2/12 max-lg:w-4/12 max-sm:w-full max-sm:mb-6 max-sm:mx-auto' : loadCurrentUser.user.role_en !== 'admin'}\">\n        <div class=\"flex gap-x-10\" v-if=\"loadCurrentUser?.user.role === 'Администратор сайта'\">\n          <button class=\"p-2 rounded-xl dark:text-white tracking-widest font-bold\"\n                  :class=\"{'bg-blueDarkSemiLight text-white' : userChecked === 'user-list'}\"\n                  @click=\"userChecked = 'user-list'; userList.loadUserList({page: userList.page, limit: params.limit, user_type: userChecked})\">\n            {{ $t('Все пользователи') }}\n          </button>\n          <button class=\"p-2 rounded-xl dark:text-white tracking-widest font-bold\"\n                  :class=\"{'bg-blueDarkSemiLight text-white' : userChecked === 'admin-list'}\"\n                  @click=\"userChecked = 'admin-list'; userList.loadAdminList({page: userList.page, limit: params.limit})\">\n            {{ $t('Администраторы компаний') }}\n          </button>\n        </div>\n        <UserCreate></UserCreate>\n      </div>\n    </div>\n    <div class=\"w-full \">\n      <div class=\"flex gap-x-10 max-lg:flex-wrap max-md:justify-center\">\n        <div class=\"flex w-9/12 justify-between max-lg:justify-center gap-x-10 items-center max-md:flex-wrap max-md:mt-10 max-md:justify-center\">\n          <TheSearch class=\"w-full\" v-model:model-value=\"params.query\" @search=\"userList.loadUserList(params)\"/>\n          <TheFilter></TheFilter>\n        </div>\n      </div>\n      <div class=\"flex max-md:flex-wrap justify-center max-md:mt-10\">\n        <div class=\"flex flex-wrap gap-x-6 max-md:order-2 max-lg:justify-center\">\n          <UserContentList v-if=\"userList?.get_user_list.count > 0\" v-for=\"userItem in userList?.get_user_list.results\" :user-item=\"userItem\" class=\"max-md:w-full\"></UserContentList>\n        </div>\n      </div>\n    </div>\n    <div class=\"flex flex-wrap justify-center gap-x-4 mt-10\">\n      <div v-if=\"userList.get_user_list.count > 5\" v-for=\"(page, id) in userList?.get_user_list?.links\" :key=\"id\"\n           class=\"px-4 py-2 rounded-full cursor-pointer\"\n           :class=\"{'bg-blue-400 text-white' : page.active, 'bg-gray-200 text-black' : !page.active}\"\n           @click=\"loadPage(page.label); userList?.loadUserList({page: params.page, limit: params.limit, user_type: loadCurrentUser.user.role_en !== 'admin' ? 'user-list/my-company' : userChecked, query: params.query})\">\n        {{ page.label }}\n      </div>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n\n</style>",
-      "start": 1746856033665,
-      "end": 1746856033972,
+      "start": 1748346376432,
+      "end": 1748346376802,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1746856033972,
-      "end": 1746856033972,
+      "start": 1748346376803,
+      "end": 1748346376803,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1746856033972,
-      "end": 1746856033972,
+      "start": 1748346376803,
+      "end": 1748346376803,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1746856033972,
-      "end": 1746856033972,
+      "start": 1748346376803,
+      "end": 1748346376803,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1746856033972,
-      "end": 1746856033972,
+      "start": 1748346376803,
+      "end": 1748346376803,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1746856033972,
-      "end": 1746856033972,
+      "start": 1748346376803,
+      "end": 1748346376803,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1746856033972,
-      "end": 1746856033972,
+      "start": 1748346376803,
+      "end": 1748346376803,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1746856033972,
-      "end": 1746856033972,
+      "start": 1748346376803,
+      "end": 1748346376803,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1746856033972,
-      "end": 1746856033972,
+      "start": 1748346376803,
+      "end": 1748346376803,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1746856033972,
-      "end": 1746856033972,
+      "start": 1748346376803,
+      "end": 1748346376803,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1746856033972,
-      "end": 1746856033972,
+      "start": 1748346376803,
+      "end": 1748346376803,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1746856033972,
-      "end": 1746856033972,
+      "start": 1748346376803,
+      "end": 1748346376803,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "import { unref as _unref, resolveComponent as _resolveComponent, mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderClass as _ssrRenderClass, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\"\n\nimport TheFilter from \"~/components/UI/TheFilter.vue\"\nimport TheUserStats from \"~/components/User/UserUI/TheUserStats.vue\"\nimport {useUserStore} from \"~/stores/users\";\nimport {useAuthStore} from \"~/stores/auth\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\n\n\nconst _sfc_main = {\n  __name: 'UserContent',\n  __ssrInlineRender: true,\n  props: {\n  userChecked: {\n    type: String,\n    default: 'user-list'\n  },\n  showUserInfo: {\n    type: Boolean,\n    default: false,\n  }\n},\n  setup(__props) {\n\nconst loadCurrentUser = useAuthStore()\nconst userList = useUserStore()\nconst phone = ref('')\nconst params = {\n  page: 1,\n  limit: 15,\n  query: '',\n  user_type: 'user-list'\n}\n\n\n\nfunction loadPage(page) {\n  if (page === '<') {\n    if (Number(params.page) > 1) {\n      params.page -= 1;\n    }\n  } else if (page === '>') {\n    if (Number(params.page) < userList.user.number_of_pages) {\n      params.page = Number(params.page) + 1\n    }\n  } else {\n    if (Number(page) <= userList.user.number_of_pages) {\n      params.page = Number(page)\n    }\n  }\n  if (window.innerWidth > 1000) {\n    window.scrollTo({top: 600})\n  } else if (window.innerWidth < 1000) {\n    window.scrollTo({top: 895})\n  } else {\n    window.scrollTo()\n  }\n}\n\nonMounted(() => {\n  navigateTo({\n    params: {\n      page: params.page\n    }\n  })\n})\nwatchSyncEffect(() => {\n  if (loadCurrentUser.user.role?.name_en === 'admin') {\n    userList.loadAdminList({page: params.page, limit: params.limit, query: params.query})\n  } else if(loadCurrentUser.user.role?.name_en === 'company_admin') {\n    userList.loadUserList({\n      page: params.page,\n      limit: params.limit,\n      query: params.query\n    })\n  }\n})\n\nreturn (_ctx, _push, _parent, _attrs) => {\n  const _component_UserCreate = _resolveComponent(\"UserCreate\")\n  const _component_UserContentList = _resolveComponent(\"UserContentList\")\n\n  _push(`<div${\n    _ssrRenderAttrs(_mergeProps({ class: \"\" }, _attrs))\n  }><div class=\"${\n    _ssrRenderClass({'flex flex-wrap items-center justify-between' :['company_admin', 'admin'].includes( _unref(loadCurrentUser).user.role?.name_en )})\n  }\"><div class=\"mb-10 mt-12 text-lg flex gap-x-10\">`)\n  if (_unref(loadCurrentUser).user.role?.name_en === 'admin') {\n    _push(`<p class=\"dark:text-white tracking-widest\">${_ssrInterpolate(_ctx.$t('Список администраторов компании'))}</p>`)\n  } else {\n    _push(`<p class=\"dark:text-white tracking-widest\">${_ssrInterpolate(_ctx.$t('Список всех пользователей компании'))}</p>`)\n  }\n  _push(`</div><div class=\"${_ssrRenderClass({'flex items-center justify-evenly my-10' : _unref(loadCurrentUser).user.role?.name_en === 'admin', 'w-2/12 max-lg:w-4/12 max-sm:w-full max-sm:mb-6 max-sm:mx-auto' : _unref(loadCurrentUser).user.role_en !== 'admin'})}\">`)\n  if (_unref(loadCurrentUser)?.user.role === 'Администратор сайта') {\n    _push(`<div class=\"flex gap-x-10\"><button class=\"${\n      _ssrRenderClass([{'bg-blueDarkSemiLight text-white' : __props.userChecked === 'user-list'}, \"p-2 rounded-xl dark:text-white tracking-widest font-bold\"])\n    }\">${\n      _ssrInterpolate(_ctx.$t('Все пользователи'))\n    }</button><button class=\"${\n      _ssrRenderClass([{'bg-blueDarkSemiLight text-white' : __props.userChecked === 'admin-list'}, \"p-2 rounded-xl dark:text-white tracking-widest font-bold\"])\n    }\">${\n      _ssrInterpolate(_ctx.$t('Администраторы компаний'))\n    }</button></div>`)\n  } else {\n    _push(`<!---->`)\n  }\n  _push(_ssrRenderComponent(_component_UserCreate, null, null, _parent))\n  _push(`</div></div><div class=\"w-full\"><div class=\"flex gap-x-10 max-lg:flex-wrap max-md:justify-center\"><div class=\"flex w-9/12 justify-between max-lg:justify-center gap-x-10 items-center max-md:flex-wrap max-md:mt-10 max-md:justify-center\">`)\n  _push(_ssrRenderComponent(TheSearch, {\n    class: \"w-full\",\n    \"model-value\": params.query,\n    \"onUpdate:modelValue\": $event => ((params.query) = $event),\n    onSearch: $event => (_unref(userList).loadUserList(params))\n  }, null, _parent))\n  _push(_ssrRenderComponent(TheFilter, null, null, _parent))\n  _push(`</div></div><div class=\"flex max-md:flex-wrap justify-center max-md:mt-10\"><div class=\"flex flex-wrap gap-x-6 max-md:order-2 max-lg:justify-center\">`)\n  if (_unref(userList)?.get_user_list.count > 0) {\n    _push(`<!--[-->`)\n    _ssrRenderList(_unref(userList)?.get_user_list.results, (userItem) => {\n      _push(_ssrRenderComponent(_component_UserContentList, {\n        \"user-item\": userItem,\n        class: \"max-md:w-full\"\n      }, null, _parent))\n    })\n    _push(`<!--]-->`)\n  } else {\n    _push(`<!---->`)\n  }\n  _push(`</div></div></div><div class=\"flex flex-wrap justify-center gap-x-4 mt-10\">`)\n  if (_unref(userList).get_user_list.count > 5) {\n    _push(`<!--[-->`)\n    _ssrRenderList(_unref(userList)?.get_user_list?.links, (page, id) => {\n      _push(`<div class=\"${\n        _ssrRenderClass([{'bg-blue-400 text-white' : page.active, 'bg-gray-200 text-black' : !page.active}, \"px-4 py-2 rounded-full cursor-pointer\"])\n      }\">${\n        _ssrInterpolate(page.label)\n      }</div>`)\n    })\n    _push(`<!--]-->`)\n  } else {\n    _push(`<!---->`)\n  }\n  _push(`</div></div>`)\n}\n}\n\n}\n\n\n\nimport { useSSRContext as __vite_useSSRContext } from 'vue'\nconst _sfc_setup = _sfc_main.setup\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext()\n  ;(ssrContext.modules || (ssrContext.modules = new Set())).add(\"components/User/UserContent.vue\")\n  return _sfc_setup ? _sfc_setup(props, ctx) : undefined\n}\nexport default _sfc_main",
-      "start": 1746856033972,
-      "end": 1746856033983,
+      "start": 1748346376803,
+      "end": 1748346376823,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -94,155 +94,155 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1746856033983,
-      "end": 1746856033983,
+      "start": 1748346376823,
+      "end": 1748346376823,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1746856033983,
-      "end": 1746856033983,
+      "start": 1748346376823,
+      "end": 1748346376824,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1746856033983,
-      "end": 1746856033983,
+      "start": 1748346376823,
+      "end": 1748346376824,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1746856033983,
-      "end": 1746856033983,
+      "start": 1748346376824,
+      "end": 1748346376824,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1746856033983,
-      "end": 1746856033983,
+      "start": 1748346376824,
+      "end": 1748346376824,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1746856033983,
-      "end": 1746856033983,
+      "start": 1748346376824,
+      "end": 1748346376824,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1746856033983,
-      "end": 1746856033983,
+      "start": 1748346376824,
+      "end": 1748346376824,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1746856033983,
-      "end": 1746856033984,
+      "start": 1748346376824,
+      "end": 1748346376825,
       "order": "normal"
     },
     {
       "name": "vite:define",
       "result": "import { unref as _unref, resolveComponent as _resolveComponent, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderClass as _ssrRenderClass, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport TheFilter from \"~/components/UI/TheFilter.vue\";\nimport TheUserStats from \"~/components/User/UserUI/TheUserStats.vue\";\nimport { useUserStore } from \"~/stores/users\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\nconst _sfc_main = {\n  __name: \"UserContent\",\n  __ssrInlineRender: true,\n  props: {\n    userChecked: {\n      type: String,\n      default: \"user-list\"\n    },\n    showUserInfo: {\n      type: Boolean,\n      default: false\n    }\n  },\n  setup(__props) {\n    const loadCurrentUser = useAuthStore();\n    const userList = useUserStore();\n    const phone = ref(\"\");\n    const params = {\n      page: 1,\n      limit: 15,\n      query: \"\",\n      user_type: \"user-list\"\n    };\n    function loadPage(page) {\n      if (page === \"<\") {\n        if (Number(params.page) > 1) {\n          params.page -= 1;\n        }\n      } else if (page === \">\") {\n        if (Number(params.page) < userList.user.number_of_pages) {\n          params.page = Number(params.page) + 1;\n        }\n      } else {\n        if (Number(page) <= userList.user.number_of_pages) {\n          params.page = Number(page);\n        }\n      }\n      if ((void 0).innerWidth > 1e3) {\n        (void 0).scrollTo({ top: 600 });\n      } else if ((void 0).innerWidth < 1e3) {\n        (void 0).scrollTo({ top: 895 });\n      } else {\n        (void 0).scrollTo();\n      }\n    }\n    onMounted(() => {\n      navigateTo({\n        params: {\n          page: params.page\n        }\n      });\n    });\n    watchSyncEffect(() => {\n      if (loadCurrentUser.user.role?.name_en === \"admin\") {\n        userList.loadAdminList({ page: params.page, limit: params.limit, query: params.query });\n      } else if (loadCurrentUser.user.role?.name_en === \"company_admin\") {\n        userList.loadUserList({\n          page: params.page,\n          limit: params.limit,\n          query: params.query\n        });\n      }\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_UserCreate = _resolveComponent(\"UserCreate\");\n      const _component_UserContentList = _resolveComponent(\"UserContentList\");\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"\" }, _attrs))}><div class=\"${_ssrRenderClass({ \"flex flex-wrap items-center justify-between\": [\"company_admin\", \"admin\"].includes(_unref(loadCurrentUser).user.role?.name_en) })}\"><div class=\"mb-10 mt-12 text-lg flex gap-x-10\">`);\n      if (_unref(loadCurrentUser).user.role?.name_en === \"admin\") {\n        _push(`<p class=\"dark:text-white tracking-widest\">${_ssrInterpolate(_ctx.$t(\"Список администраторов компании\"))}</p>`);\n      } else {\n        _push(`<p class=\"dark:text-white tracking-widest\">${_ssrInterpolate(_ctx.$t(\"Список всех пользователей компании\"))}</p>`);\n      }\n      _push(`</div><div class=\"${_ssrRenderClass({ \"flex items-center justify-evenly my-10\": _unref(loadCurrentUser).user.role?.name_en === \"admin\", \"w-2/12 max-lg:w-4/12 max-sm:w-full max-sm:mb-6 max-sm:mx-auto\": _unref(loadCurrentUser).user.role_en !== \"admin\" })}\">`);\n      if (_unref(loadCurrentUser)?.user.role === \"Администратор сайта\") {\n        _push(`<div class=\"flex gap-x-10\"><button class=\"${_ssrRenderClass([{ \"bg-blueDarkSemiLight text-white\": __props.userChecked === \"user-list\" }, \"p-2 rounded-xl dark:text-white tracking-widest font-bold\"])}\">${_ssrInterpolate(_ctx.$t(\"Все пользователи\"))}</button><button class=\"${_ssrRenderClass([{ \"bg-blueDarkSemiLight text-white\": __props.userChecked === \"admin-list\" }, \"p-2 rounded-xl dark:text-white tracking-widest font-bold\"])}\">${_ssrInterpolate(_ctx.$t(\"Администраторы компаний\"))}</button></div>`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(_ssrRenderComponent(_component_UserCreate, null, null, _parent));\n      _push(`</div></div><div class=\"w-full\"><div class=\"flex gap-x-10 max-lg:flex-wrap max-md:justify-center\"><div class=\"flex w-9/12 justify-between max-lg:justify-center gap-x-10 items-center max-md:flex-wrap max-md:mt-10 max-md:justify-center\">`);\n      _push(_ssrRenderComponent(TheSearch, {\n        class: \"w-full\",\n        \"model-value\": params.query,\n        \"onUpdate:modelValue\": ($event) => params.query = $event,\n        onSearch: ($event) => _unref(userList).loadUserList(params)\n      }, null, _parent));\n      _push(_ssrRenderComponent(TheFilter, null, null, _parent));\n      _push(`</div></div><div class=\"flex max-md:flex-wrap justify-center max-md:mt-10\"><div class=\"flex flex-wrap gap-x-6 max-md:order-2 max-lg:justify-center\">`);\n      if (_unref(userList)?.get_user_list.count > 0) {\n        _push(`<!--[-->`);\n        _ssrRenderList(_unref(userList)?.get_user_list.results, (userItem) => {\n          _push(_ssrRenderComponent(_component_UserContentList, {\n            \"user-item\": userItem,\n            class: \"max-md:w-full\"\n          }, null, _parent));\n        });\n        _push(`<!--]-->`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div></div></div><div class=\"flex flex-wrap justify-center gap-x-4 mt-10\">`);\n      if (_unref(userList).get_user_list.count > 5) {\n        _push(`<!--[-->`);\n        _ssrRenderList(_unref(userList)?.get_user_list?.links, (page, id) => {\n          _push(`<div class=\"${_ssrRenderClass([{ \"bg-blue-400 text-white\": page.active, \"bg-gray-200 text-black\": !page.active }, \"px-4 py-2 rounded-full cursor-pointer\"])}\">${_ssrInterpolate(page.label)}</div>`);\n        });\n        _push(`<!--]-->`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div></div>`);\n    };\n  }\n};\nimport { useSSRContext as __vite_useSSRContext } from \"vue\";\nconst _sfc_setup = _sfc_main.setup;\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext();\n  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(\"components/User/UserContent.vue\");\n  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;\n};\nexport default _sfc_main;\n",
-      "start": 1746856033984,
-      "end": 1746856035042,
+      "start": 1748346376825,
+      "end": 1748346378016,
       "order": "normal",
       "sourcemaps": "{\n  \"version\": 3,\n  \"sources\": [\"D:/projects/nuxt/workix-nuxt-front/components/User/UserContent.vue\"],\n  \"sourcesContent\": [\"import { unref as _unref, resolveComponent as _resolveComponent, mergeProps as _mergeProps } from \\\"vue\\\"\\nimport { ssrRenderClass as _ssrRenderClass, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \\\"vue/server-renderer\\\"\\n\\nimport TheFilter from \\\"~/components/UI/TheFilter.vue\\\"\\nimport TheUserStats from \\\"~/components/User/UserUI/TheUserStats.vue\\\"\\nimport {useUserStore} from \\\"~/stores/users\\\";\\nimport {useAuthStore} from \\\"~/stores/auth\\\";\\nimport TheModal from \\\"~/components/UI/TheModal.vue\\\";\\nimport TheSearch from \\\"~/components/UI/TheSearch.vue\\\";\\n\\n\\nconst _sfc_main = {\\n  __name: 'UserContent',\\n  __ssrInlineRender: true,\\n  props: {\\n  userChecked: {\\n    type: String,\\n    default: 'user-list'\\n  },\\n  showUserInfo: {\\n    type: Boolean,\\n    default: false,\\n  }\\n},\\n  setup(__props) {\\n\\nconst loadCurrentUser = useAuthStore()\\nconst userList = useUserStore()\\nconst phone = ref('')\\nconst params = {\\n  page: 1,\\n  limit: 15,\\n  query: '',\\n  user_type: 'user-list'\\n}\\n\\n\\n\\nfunction loadPage(page) {\\n  if (page === '<') {\\n    if (Number(params.page) > 1) {\\n      params.page -= 1;\\n    }\\n  } else if (page === '>') {\\n    if (Number(params.page) < userList.user.number_of_pages) {\\n      params.page = Number(params.page) + 1\\n    }\\n  } else {\\n    if (Number(page) <= userList.user.number_of_pages) {\\n      params.page = Number(page)\\n    }\\n  }\\n  if (window.innerWidth > 1000) {\\n    window.scrollTo({top: 600})\\n  } else if (window.innerWidth < 1000) {\\n    window.scrollTo({top: 895})\\n  } else {\\n    window.scrollTo()\\n  }\\n}\\n\\nonMounted(() => {\\n  navigateTo({\\n    params: {\\n      page: params.page\\n    }\\n  })\\n})\\nwatchSyncEffect(() => {\\n  if (loadCurrentUser.user.role?.name_en === 'admin') {\\n    userList.loadAdminList({page: params.page, limit: params.limit, query: params.query})\\n  } else if(loadCurrentUser.user.role?.name_en === 'company_admin') {\\n    userList.loadUserList({\\n      page: params.page,\\n      limit: params.limit,\\n      query: params.query\\n    })\\n  }\\n})\\n\\nreturn (_ctx, _push, _parent, _attrs) => {\\n  const _component_UserCreate = _resolveComponent(\\\"UserCreate\\\")\\n  const _component_UserContentList = _resolveComponent(\\\"UserContentList\\\")\\n\\n  _push(`<div${\\n    _ssrRenderAttrs(_mergeProps({ class: \\\"\\\" }, _attrs))\\n  }><div class=\\\"${\\n    _ssrRenderClass({'flex flex-wrap items-center justify-between' :['company_admin', 'admin'].includes( _unref(loadCurrentUser).user.role?.name_en )})\\n  }\\\"><div class=\\\"mb-10 mt-12 text-lg flex gap-x-10\\\">`)\\n  if (_unref(loadCurrentUser).user.role?.name_en === 'admin') {\\n    _push(`<p class=\\\"dark:text-white tracking-widest\\\">${_ssrInterpolate(_ctx.$t('Список администраторов компании'))}</p>`)\\n  } else {\\n    _push(`<p class=\\\"dark:text-white tracking-widest\\\">${_ssrInterpolate(_ctx.$t('Список всех пользователей компании'))}</p>`)\\n  }\\n  _push(`</div><div class=\\\"${_ssrRenderClass({'flex items-center justify-evenly my-10' : _unref(loadCurrentUser).user.role?.name_en === 'admin', 'w-2/12 max-lg:w-4/12 max-sm:w-full max-sm:mb-6 max-sm:mx-auto' : _unref(loadCurrentUser).user.role_en !== 'admin'})}\\\">`)\\n  if (_unref(loadCurrentUser)?.user.role === 'Администратор сайта') {\\n    _push(`<div class=\\\"flex gap-x-10\\\"><button class=\\\"${\\n      _ssrRenderClass([{'bg-blueDarkSemiLight text-white' : __props.userChecked === 'user-list'}, \\\"p-2 rounded-xl dark:text-white tracking-widest font-bold\\\"])\\n    }\\\">${\\n      _ssrInterpolate(_ctx.$t('Все пользователи'))\\n    }</button><button class=\\\"${\\n      _ssrRenderClass([{'bg-blueDarkSemiLight text-white' : __props.userChecked === 'admin-list'}, \\\"p-2 rounded-xl dark:text-white tracking-widest font-bold\\\"])\\n    }\\\">${\\n      _ssrInterpolate(_ctx.$t('Администраторы компаний'))\\n    }</button></div>`)\\n  } else {\\n    _push(`<!---->`)\\n  }\\n  _push(_ssrRenderComponent(_component_UserCreate, null, null, _parent))\\n  _push(`</div></div><div class=\\\"w-full\\\"><div class=\\\"flex gap-x-10 max-lg:flex-wrap max-md:justify-center\\\"><div class=\\\"flex w-9/12 justify-between max-lg:justify-center gap-x-10 items-center max-md:flex-wrap max-md:mt-10 max-md:justify-center\\\">`)\\n  _push(_ssrRenderComponent(TheSearch, {\\n    class: \\\"w-full\\\",\\n    \\\"model-value\\\": params.query,\\n    \\\"onUpdate:modelValue\\\": $event => ((params.query) = $event),\\n    onSearch: $event => (_unref(userList).loadUserList(params))\\n  }, null, _parent))\\n  _push(_ssrRenderComponent(TheFilter, null, null, _parent))\\n  _push(`</div></div><div class=\\\"flex max-md:flex-wrap justify-center max-md:mt-10\\\"><div class=\\\"flex flex-wrap gap-x-6 max-md:order-2 max-lg:justify-center\\\">`)\\n  if (_unref(userList)?.get_user_list.count > 0) {\\n    _push(`<!--[-->`)\\n    _ssrRenderList(_unref(userList)?.get_user_list.results, (userItem) => {\\n      _push(_ssrRenderComponent(_component_UserContentList, {\\n        \\\"user-item\\\": userItem,\\n        class: \\\"max-md:w-full\\\"\\n      }, null, _parent))\\n    })\\n    _push(`<!--]-->`)\\n  } else {\\n    _push(`<!---->`)\\n  }\\n  _push(`</div></div></div><div class=\\\"flex flex-wrap justify-center gap-x-4 mt-10\\\">`)\\n  if (_unref(userList).get_user_list.count > 5) {\\n    _push(`<!--[-->`)\\n    _ssrRenderList(_unref(userList)?.get_user_list?.links, (page, id) => {\\n      _push(`<div class=\\\"${\\n        _ssrRenderClass([{'bg-blue-400 text-white' : page.active, 'bg-gray-200 text-black' : !page.active}, \\\"px-4 py-2 rounded-full cursor-pointer\\\"])\\n      }\\\">${\\n        _ssrInterpolate(page.label)\\n      }</div>`)\\n    })\\n    _push(`<!--]-->`)\\n  } else {\\n    _push(`<!---->`)\\n  }\\n  _push(`</div></div>`)\\n}\\n}\\n\\n}\\n\\n\\n\\nimport { useSSRContext as __vite_useSSRContext } from 'vue'\\nconst _sfc_setup = _sfc_main.setup\\n_sfc_main.setup = (props, ctx) => {\\n  const ssrContext = __vite_useSSRContext()\\n  ;(ssrContext.modules || (ssrContext.modules = new Set())).add(\\\"components/User/UserContent.vue\\\")\\n  return _sfc_setup ? _sfc_setup(props, ctx) : undefined\\n}\\nexport default _sfc_main\"],\n  \"mappings\": \"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\",\n  \"names\": []\n}\n"
     },
     {
       "name": "vite:css-post",
-      "start": 1746856035042,
-      "end": 1746856035042,
+      "start": 1748346378017,
+      "end": 1748346378017,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1746856035043,
-      "end": 1746856035043,
+      "start": 1748346378017,
+      "end": 1748346378017,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1746856035043,
-      "end": 1746856035043,
+      "start": 1748346378017,
+      "end": 1748346378017,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1746856035043,
-      "end": 1746856035043,
+      "start": 1748346378017,
+      "end": 1748346378017,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1746856035043,
-      "end": 1746856035043,
+      "start": 1748346378018,
+      "end": 1748346378018,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1746856035043,
-      "end": 1746856035043,
+      "start": 1748346378018,
+      "end": 1748346378018,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1746856035043,
-      "end": 1746856035043,
+      "start": 1748346378019,
+      "end": 1748346378019,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1746856035043,
-      "end": 1746856035043,
+      "start": 1748346378019,
+      "end": 1748346378019,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1746856035043,
-      "end": 1746856035043,
+      "start": 1748346378019,
+      "end": 1748346378019,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1746856035044,
-      "end": 1746856035044,
+      "start": 1748346378019,
+      "end": 1748346378020,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1746856035044,
-      "end": 1746856035044,
+      "start": 1748346378019,
+      "end": 1748346378020,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1746856035044,
-      "end": 1746856035044,
+      "start": 1748346378020,
+      "end": 1748346378020,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1746856035044,
-      "end": 1746856035044,
+      "start": 1748346378020,
+      "end": 1748346378020,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1746856035044,
-      "end": 1746856035044,
+      "start": 1748346378020,
+      "end": 1748346378021,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1746856035044,
-      "end": 1746856035044,
+      "start": 1748346378020,
+      "end": 1748346378021,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref, onMounted, watchSyncEffect } from 'vue';\nimport { navigateTo } from '#app/composables/router';\nimport { unref as _unref, resolveComponent as _resolveComponent, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderClass as _ssrRenderClass, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport TheFilter from \"~/components/UI/TheFilter.vue\";\nimport TheUserStats from \"~/components/User/UserUI/TheUserStats.vue\";\nimport { useUserStore } from \"~/stores/users\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\nconst _sfc_main = {\n  __name: \"UserContent\",\n  __ssrInlineRender: true,\n  props: {\n    userChecked: {\n      type: String,\n      default: \"user-list\"\n    },\n    showUserInfo: {\n      type: Boolean,\n      default: false\n    }\n  },\n  setup(__props) {\n    const loadCurrentUser = useAuthStore();\n    const userList = useUserStore();\n    const phone = ref(\"\");\n    const params = {\n      page: 1,\n      limit: 15,\n      query: \"\",\n      user_type: \"user-list\"\n    };\n    function loadPage(page) {\n      if (page === \"<\") {\n        if (Number(params.page) > 1) {\n          params.page -= 1;\n        }\n      } else if (page === \">\") {\n        if (Number(params.page) < userList.user.number_of_pages) {\n          params.page = Number(params.page) + 1;\n        }\n      } else {\n        if (Number(page) <= userList.user.number_of_pages) {\n          params.page = Number(page);\n        }\n      }\n      if ((void 0).innerWidth > 1e3) {\n        (void 0).scrollTo({ top: 600 });\n      } else if ((void 0).innerWidth < 1e3) {\n        (void 0).scrollTo({ top: 895 });\n      } else {\n        (void 0).scrollTo();\n      }\n    }\n    onMounted(() => {\n      navigateTo({\n        params: {\n          page: params.page\n        }\n      });\n    });\n    watchSyncEffect(() => {\n      if (loadCurrentUser.user.role?.name_en === \"admin\") {\n        userList.loadAdminList({ page: params.page, limit: params.limit, query: params.query });\n      } else if (loadCurrentUser.user.role?.name_en === \"company_admin\") {\n        userList.loadUserList({\n          page: params.page,\n          limit: params.limit,\n          query: params.query\n        });\n      }\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_UserCreate = _resolveComponent(\"UserCreate\");\n      const _component_UserContentList = _resolveComponent(\"UserContentList\");\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"\" }, _attrs))}><div class=\"${_ssrRenderClass({ \"flex flex-wrap items-center justify-between\": [\"company_admin\", \"admin\"].includes(_unref(loadCurrentUser).user.role?.name_en) })}\"><div class=\"mb-10 mt-12 text-lg flex gap-x-10\">`);\n      if (_unref(loadCurrentUser).user.role?.name_en === \"admin\") {\n        _push(`<p class=\"dark:text-white tracking-widest\">${_ssrInterpolate(_ctx.$t(\"Список администраторов компании\"))}</p>`);\n      } else {\n        _push(`<p class=\"dark:text-white tracking-widest\">${_ssrInterpolate(_ctx.$t(\"Список всех пользователей компании\"))}</p>`);\n      }\n      _push(`</div><div class=\"${_ssrRenderClass({ \"flex items-center justify-evenly my-10\": _unref(loadCurrentUser).user.role?.name_en === \"admin\", \"w-2/12 max-lg:w-4/12 max-sm:w-full max-sm:mb-6 max-sm:mx-auto\": _unref(loadCurrentUser).user.role_en !== \"admin\" })}\">`);\n      if (_unref(loadCurrentUser)?.user.role === \"Администратор сайта\") {\n        _push(`<div class=\"flex gap-x-10\"><button class=\"${_ssrRenderClass([{ \"bg-blueDarkSemiLight text-white\": __props.userChecked === \"user-list\" }, \"p-2 rounded-xl dark:text-white tracking-widest font-bold\"])}\">${_ssrInterpolate(_ctx.$t(\"Все пользователи\"))}</button><button class=\"${_ssrRenderClass([{ \"bg-blueDarkSemiLight text-white\": __props.userChecked === \"admin-list\" }, \"p-2 rounded-xl dark:text-white tracking-widest font-bold\"])}\">${_ssrInterpolate(_ctx.$t(\"Администраторы компаний\"))}</button></div>`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(_ssrRenderComponent(_component_UserCreate, null, null, _parent));\n      _push(`</div></div><div class=\"w-full\"><div class=\"flex gap-x-10 max-lg:flex-wrap max-md:justify-center\"><div class=\"flex w-9/12 justify-between max-lg:justify-center gap-x-10 items-center max-md:flex-wrap max-md:mt-10 max-md:justify-center\">`);\n      _push(_ssrRenderComponent(TheSearch, {\n        class: \"w-full\",\n        \"model-value\": params.query,\n        \"onUpdate:modelValue\": ($event) => params.query = $event,\n        onSearch: ($event) => _unref(userList).loadUserList(params)\n      }, null, _parent));\n      _push(_ssrRenderComponent(TheFilter, null, null, _parent));\n      _push(`</div></div><div class=\"flex max-md:flex-wrap justify-center max-md:mt-10\"><div class=\"flex flex-wrap gap-x-6 max-md:order-2 max-lg:justify-center\">`);\n      if (_unref(userList)?.get_user_list.count > 0) {\n        _push(`<!--[-->`);\n        _ssrRenderList(_unref(userList)?.get_user_list.results, (userItem) => {\n          _push(_ssrRenderComponent(_component_UserContentList, {\n            \"user-item\": userItem,\n            class: \"max-md:w-full\"\n          }, null, _parent));\n        });\n        _push(`<!--]-->`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div></div></div><div class=\"flex flex-wrap justify-center gap-x-4 mt-10\">`);\n      if (_unref(userList).get_user_list.count > 5) {\n        _push(`<!--[-->`);\n        _ssrRenderList(_unref(userList)?.get_user_list?.links, (page, id) => {\n          _push(`<div class=\"${_ssrRenderClass([{ \"bg-blue-400 text-white\": page.active, \"bg-gray-200 text-black\": !page.active }, \"px-4 py-2 rounded-full cursor-pointer\"])}\">${_ssrInterpolate(page.label)}</div>`);\n        });\n        _push(`<!--]-->`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div></div>`);\n    };\n  }\n};\nimport { useSSRContext as __vite_useSSRContext } from \"vue\";\nconst _sfc_setup = _sfc_main.setup;\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext();\n  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(\"components/User/UserContent.vue\");\n  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;\n};\nexport default _sfc_main;\n",
-      "start": 1746856035044,
-      "end": 1746856035053,
+      "start": 1748346378021,
+      "end": 1748346378025,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -256,8 +256,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref, onMounted, watchSyncEffect } from 'vue';\nimport { navigateTo } from '#app/composables/router';\nimport { unref as _unref, resolveComponent as _resolveComponent, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderClass as _ssrRenderClass, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport TheFilter from \"~/components/UI/TheFilter.vue\";\nimport TheUserStats from \"~/components/User/UserUI/TheUserStats.vue\";\nimport { useUserStore } from \"~/stores/users\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\nconst _sfc_main = {\n  __name: \"UserContent\",\n  __ssrInlineRender: true,\n  props: {\n    userChecked: {\n      type: String,\n      default: \"user-list\"\n    },\n    showUserInfo: {\n      type: Boolean,\n      default: false\n    }\n  },\n  setup(__props) {\n    const loadCurrentUser = useAuthStore();\n    const userList = useUserStore();\n    const phone = ref(\"\");\n    const params = {\n      page: 1,\n      limit: 15,\n      query: \"\",\n      user_type: \"user-list\"\n    };\n    function loadPage(page) {\n      if (page === \"<\") {\n        if (Number(params.page) > 1) {\n          params.page -= 1;\n        }\n      } else if (page === \">\") {\n        if (Number(params.page) < userList.user.number_of_pages) {\n          params.page = Number(params.page) + 1;\n        }\n      } else {\n        if (Number(page) <= userList.user.number_of_pages) {\n          params.page = Number(page);\n        }\n      }\n      if ((void 0).innerWidth > 1e3) {\n        (void 0).scrollTo({ top: 600 });\n      } else if ((void 0).innerWidth < 1e3) {\n        (void 0).scrollTo({ top: 895 });\n      } else {\n        (void 0).scrollTo();\n      }\n    }\n    onMounted(() => {\n      navigateTo({\n        params: {\n          page: params.page\n        }\n      });\n    });\n    watchSyncEffect(() => {\n      if (loadCurrentUser.user.role?.name_en === \"admin\") {\n        userList.loadAdminList({ page: params.page, limit: params.limit, query: params.query });\n      } else if (loadCurrentUser.user.role?.name_en === \"company_admin\") {\n        userList.loadUserList({\n          page: params.page,\n          limit: params.limit,\n          query: params.query\n        });\n      }\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_UserCreate = _resolveComponent(\"UserCreate\");\n      const _component_UserContentList = _resolveComponent(\"UserContentList\");\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"\" }, _attrs))}><div class=\"${_ssrRenderClass({ \"flex flex-wrap items-center justify-between\": [\"company_admin\", \"admin\"].includes(_unref(loadCurrentUser).user.role?.name_en) })}\"><div class=\"mb-10 mt-12 text-lg flex gap-x-10\">`);\n      if (_unref(loadCurrentUser).user.role?.name_en === \"admin\") {\n        _push(`<p class=\"dark:text-white tracking-widest\">${_ssrInterpolate(_ctx.$t(\"Список администраторов компании\"))}</p>`);\n      } else {\n        _push(`<p class=\"dark:text-white tracking-widest\">${_ssrInterpolate(_ctx.$t(\"Список всех пользователей компании\"))}</p>`);\n      }\n      _push(`</div><div class=\"${_ssrRenderClass({ \"flex items-center justify-evenly my-10\": _unref(loadCurrentUser).user.role?.name_en === \"admin\", \"w-2/12 max-lg:w-4/12 max-sm:w-full max-sm:mb-6 max-sm:mx-auto\": _unref(loadCurrentUser).user.role_en !== \"admin\" })}\">`);\n      if (_unref(loadCurrentUser)?.user.role === \"Администратор сайта\") {\n        _push(`<div class=\"flex gap-x-10\"><button class=\"${_ssrRenderClass([{ \"bg-blueDarkSemiLight text-white\": __props.userChecked === \"user-list\" }, \"p-2 rounded-xl dark:text-white tracking-widest font-bold\"])}\">${_ssrInterpolate(_ctx.$t(\"Все пользователи\"))}</button><button class=\"${_ssrRenderClass([{ \"bg-blueDarkSemiLight text-white\": __props.userChecked === \"admin-list\" }, \"p-2 rounded-xl dark:text-white tracking-widest font-bold\"])}\">${_ssrInterpolate(_ctx.$t(\"Администраторы компаний\"))}</button></div>`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(_ssrRenderComponent(_component_UserCreate, null, null, _parent));\n      _push(`</div></div><div class=\"w-full\"><div class=\"flex gap-x-10 max-lg:flex-wrap max-md:justify-center\"><div class=\"flex w-9/12 justify-between max-lg:justify-center gap-x-10 items-center max-md:flex-wrap max-md:mt-10 max-md:justify-center\">`);\n      _push(_ssrRenderComponent(TheSearch, {\n        class: \"w-full\",\n        \"model-value\": params.query,\n        \"onUpdate:modelValue\": ($event) => params.query = $event,\n        onSearch: ($event) => _unref(userList).loadUserList(params)\n      }, null, _parent));\n      _push(_ssrRenderComponent(TheFilter, null, null, _parent));\n      _push(`</div></div><div class=\"flex max-md:flex-wrap justify-center max-md:mt-10\"><div class=\"flex flex-wrap gap-x-6 max-md:order-2 max-lg:justify-center\">`);\n      if (_unref(userList)?.get_user_list.count > 0) {\n        _push(`<!--[-->`);\n        _ssrRenderList(_unref(userList)?.get_user_list.results, (userItem) => {\n          _push(_ssrRenderComponent(_component_UserContentList, {\n            \"user-item\": userItem,\n            class: \"max-md:w-full\"\n          }, null, _parent));\n        });\n        _push(`<!--]-->`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div></div></div><div class=\"flex flex-wrap justify-center gap-x-4 mt-10\">`);\n      if (_unref(userList).get_user_list.count > 5) {\n        _push(`<!--[-->`);\n        _ssrRenderList(_unref(userList)?.get_user_list?.links, (page, id) => {\n          _push(`<div class=\"${_ssrRenderClass([{ \"bg-blue-400 text-white\": page.active, \"bg-gray-200 text-black\": !page.active }, \"px-4 py-2 rounded-full cursor-pointer\"])}\">${_ssrInterpolate(page.label)}</div>`);\n        });\n        _push(`<!--]-->`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div></div>`);\n    };\n  }\n};\nimport { useSSRContext as __vite_useSSRContext } from \"vue\";\nconst _sfc_setup = _sfc_main.setup;\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext();\n  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(\"components/User/UserContent.vue\");\n  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;\n};\nexport default _sfc_main;\n",
-      "start": 1746856035044,
-      "end": 1746856035053,
+      "start": 1748346378021,
+      "end": 1748346378025,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -270,39 +270,39 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1746856035053,
-      "end": 1746856035053,
+      "start": 1748346378025,
+      "end": 1748346378025,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1746856035053,
-      "end": 1746856035053,
+      "start": 1748346378025,
+      "end": 1748346378025,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1746856035053,
-      "end": 1746856035053,
+      "start": 1748346378026,
+      "end": 1748346378026,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1746856035053,
-      "end": 1746856035053,
+      "start": 1748346378026,
+      "end": 1748346378026,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1746856035053,
-      "end": 1746856035053,
+      "start": 1748346378026,
+      "end": 1748346378026,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
       "result": "import { default as __nuxt_component_0 } from \"D:/projects/nuxt/workix-nuxt-front/components/User/UserCreate.vue\";\nimport { default as __nuxt_component_1 } from \"D:/projects/nuxt/workix-nuxt-front/components/User/UserContentList.vue\";\nimport { ref, onMounted, watchSyncEffect } from 'vue';\nimport { navigateTo } from '#app/composables/router';\nimport { unref as _unref, resolveComponent as _resolveComponent, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderClass as _ssrRenderClass, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport TheFilter from \"~/components/UI/TheFilter.vue\";\nimport TheUserStats from \"~/components/User/UserUI/TheUserStats.vue\";\nimport { useUserStore } from \"~/stores/users\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\nconst _sfc_main = {\n  __name: \"UserContent\",\n  __ssrInlineRender: true,\n  props: {\n    userChecked: {\n      type: String,\n      default: \"user-list\"\n    },\n    showUserInfo: {\n      type: Boolean,\n      default: false\n    }\n  },\n  setup(__props) {\n    const loadCurrentUser = useAuthStore();\n    const userList = useUserStore();\n    const phone = ref(\"\");\n    const params = {\n      page: 1,\n      limit: 15,\n      query: \"\",\n      user_type: \"user-list\"\n    };\n    function loadPage(page) {\n      if (page === \"<\") {\n        if (Number(params.page) > 1) {\n          params.page -= 1;\n        }\n      } else if (page === \">\") {\n        if (Number(params.page) < userList.user.number_of_pages) {\n          params.page = Number(params.page) + 1;\n        }\n      } else {\n        if (Number(page) <= userList.user.number_of_pages) {\n          params.page = Number(page);\n        }\n      }\n      if ((void 0).innerWidth > 1e3) {\n        (void 0).scrollTo({ top: 600 });\n      } else if ((void 0).innerWidth < 1e3) {\n        (void 0).scrollTo({ top: 895 });\n      } else {\n        (void 0).scrollTo();\n      }\n    }\n    onMounted(() => {\n      navigateTo({\n        params: {\n          page: params.page\n        }\n      });\n    });\n    watchSyncEffect(() => {\n      if (loadCurrentUser.user.role?.name_en === \"admin\") {\n        userList.loadAdminList({ page: params.page, limit: params.limit, query: params.query });\n      } else if (loadCurrentUser.user.role?.name_en === \"company_admin\") {\n        userList.loadUserList({\n          page: params.page,\n          limit: params.limit,\n          query: params.query\n        });\n      }\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_UserCreate = __nuxt_component_0;\n      const _component_UserContentList = __nuxt_component_1;\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"\" }, _attrs))}><div class=\"${_ssrRenderClass({ \"flex flex-wrap items-center justify-between\": [\"company_admin\", \"admin\"].includes(_unref(loadCurrentUser).user.role?.name_en) })}\"><div class=\"mb-10 mt-12 text-lg flex gap-x-10\">`);\n      if (_unref(loadCurrentUser).user.role?.name_en === \"admin\") {\n        _push(`<p class=\"dark:text-white tracking-widest\">${_ssrInterpolate(_ctx.$t(\"Список администраторов компании\"))}</p>`);\n      } else {\n        _push(`<p class=\"dark:text-white tracking-widest\">${_ssrInterpolate(_ctx.$t(\"Список всех пользователей компании\"))}</p>`);\n      }\n      _push(`</div><div class=\"${_ssrRenderClass({ \"flex items-center justify-evenly my-10\": _unref(loadCurrentUser).user.role?.name_en === \"admin\", \"w-2/12 max-lg:w-4/12 max-sm:w-full max-sm:mb-6 max-sm:mx-auto\": _unref(loadCurrentUser).user.role_en !== \"admin\" })}\">`);\n      if (_unref(loadCurrentUser)?.user.role === \"Администратор сайта\") {\n        _push(`<div class=\"flex gap-x-10\"><button class=\"${_ssrRenderClass([{ \"bg-blueDarkSemiLight text-white\": __props.userChecked === \"user-list\" }, \"p-2 rounded-xl dark:text-white tracking-widest font-bold\"])}\">${_ssrInterpolate(_ctx.$t(\"Все пользователи\"))}</button><button class=\"${_ssrRenderClass([{ \"bg-blueDarkSemiLight text-white\": __props.userChecked === \"admin-list\" }, \"p-2 rounded-xl dark:text-white tracking-widest font-bold\"])}\">${_ssrInterpolate(_ctx.$t(\"Администраторы компаний\"))}</button></div>`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(_ssrRenderComponent(_component_UserCreate, null, null, _parent));\n      _push(`</div></div><div class=\"w-full\"><div class=\"flex gap-x-10 max-lg:flex-wrap max-md:justify-center\"><div class=\"flex w-9/12 justify-between max-lg:justify-center gap-x-10 items-center max-md:flex-wrap max-md:mt-10 max-md:justify-center\">`);\n      _push(_ssrRenderComponent(TheSearch, {\n        class: \"w-full\",\n        \"model-value\": params.query,\n        \"onUpdate:modelValue\": ($event) => params.query = $event,\n        onSearch: ($event) => _unref(userList).loadUserList(params)\n      }, null, _parent));\n      _push(_ssrRenderComponent(TheFilter, null, null, _parent));\n      _push(`</div></div><div class=\"flex max-md:flex-wrap justify-center max-md:mt-10\"><div class=\"flex flex-wrap gap-x-6 max-md:order-2 max-lg:justify-center\">`);\n      if (_unref(userList)?.get_user_list.count > 0) {\n        _push(`<!--[-->`);\n        _ssrRenderList(_unref(userList)?.get_user_list.results, (userItem) => {\n          _push(_ssrRenderComponent(_component_UserContentList, {\n            \"user-item\": userItem,\n            class: \"max-md:w-full\"\n          }, null, _parent));\n        });\n        _push(`<!--]-->`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div></div></div><div class=\"flex flex-wrap justify-center gap-x-4 mt-10\">`);\n      if (_unref(userList).get_user_list.count > 5) {\n        _push(`<!--[-->`);\n        _ssrRenderList(_unref(userList)?.get_user_list?.links, (page, id) => {\n          _push(`<div class=\"${_ssrRenderClass([{ \"bg-blue-400 text-white\": page.active, \"bg-gray-200 text-black\": !page.active }, \"px-4 py-2 rounded-full cursor-pointer\"])}\">${_ssrInterpolate(page.label)}</div>`);\n        });\n        _push(`<!--]-->`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div></div>`);\n    };\n  }\n};\nimport { useSSRContext as __vite_useSSRContext } from \"vue\";\nconst _sfc_setup = _sfc_main.setup;\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext();\n  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(\"components/User/UserContent.vue\");\n  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;\n};\nexport default _sfc_main;\n",
-      "start": 1746856035054,
-      "end": 1746856035055,
+      "start": 1748346378027,
+      "end": 1748346378027,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -316,8 +316,8 @@
     {
       "name": "nuxt:tree-shake-composables:transform",
       "result": "import { default as __nuxt_component_0 } from \"D:/projects/nuxt/workix-nuxt-front/components/User/UserCreate.vue\";\nimport { default as __nuxt_component_1 } from \"D:/projects/nuxt/workix-nuxt-front/components/User/UserContentList.vue\";\nimport { ref, onMounted, watchSyncEffect } from 'vue';\nimport { navigateTo } from '#app/composables/router';\nimport { unref as _unref, resolveComponent as _resolveComponent, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderClass as _ssrRenderClass, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport TheFilter from \"~/components/UI/TheFilter.vue\";\nimport TheUserStats from \"~/components/User/UserUI/TheUserStats.vue\";\nimport { useUserStore } from \"~/stores/users\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\nconst _sfc_main = {\n  __name: \"UserContent\",\n  __ssrInlineRender: true,\n  props: {\n    userChecked: {\n      type: String,\n      default: \"user-list\"\n    },\n    showUserInfo: {\n      type: Boolean,\n      default: false\n    }\n  },\n  setup(__props) {\n    const loadCurrentUser = useAuthStore();\n    const userList = useUserStore();\n    const phone = ref(\"\");\n    const params = {\n      page: 1,\n      limit: 15,\n      query: \"\",\n      user_type: \"user-list\"\n    };\n    function loadPage(page) {\n      if (page === \"<\") {\n        if (Number(params.page) > 1) {\n          params.page -= 1;\n        }\n      } else if (page === \">\") {\n        if (Number(params.page) < userList.user.number_of_pages) {\n          params.page = Number(params.page) + 1;\n        }\n      } else {\n        if (Number(page) <= userList.user.number_of_pages) {\n          params.page = Number(page);\n        }\n      }\n      if ((void 0).innerWidth > 1e3) {\n        (void 0).scrollTo({ top: 600 });\n      } else if ((void 0).innerWidth < 1e3) {\n        (void 0).scrollTo({ top: 895 });\n      } else {\n        (void 0).scrollTo();\n      }\n    }\n     false && /*@__PURE__*/ onMounted(() => {\n      navigateTo({\n        params: {\n          page: params.page\n        }\n      });\n    });\n    watchSyncEffect(() => {\n      if (loadCurrentUser.user.role?.name_en === \"admin\") {\n        userList.loadAdminList({ page: params.page, limit: params.limit, query: params.query });\n      } else if (loadCurrentUser.user.role?.name_en === \"company_admin\") {\n        userList.loadUserList({\n          page: params.page,\n          limit: params.limit,\n          query: params.query\n        });\n      }\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_UserCreate = __nuxt_component_0;\n      const _component_UserContentList = __nuxt_component_1;\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"\" }, _attrs))}><div class=\"${_ssrRenderClass({ \"flex flex-wrap items-center justify-between\": [\"company_admin\", \"admin\"].includes(_unref(loadCurrentUser).user.role?.name_en) })}\"><div class=\"mb-10 mt-12 text-lg flex gap-x-10\">`);\n      if (_unref(loadCurrentUser).user.role?.name_en === \"admin\") {\n        _push(`<p class=\"dark:text-white tracking-widest\">${_ssrInterpolate(_ctx.$t(\"Список администраторов компании\"))}</p>`);\n      } else {\n        _push(`<p class=\"dark:text-white tracking-widest\">${_ssrInterpolate(_ctx.$t(\"Список всех пользователей компании\"))}</p>`);\n      }\n      _push(`</div><div class=\"${_ssrRenderClass({ \"flex items-center justify-evenly my-10\": _unref(loadCurrentUser).user.role?.name_en === \"admin\", \"w-2/12 max-lg:w-4/12 max-sm:w-full max-sm:mb-6 max-sm:mx-auto\": _unref(loadCurrentUser).user.role_en !== \"admin\" })}\">`);\n      if (_unref(loadCurrentUser)?.user.role === \"Администратор сайта\") {\n        _push(`<div class=\"flex gap-x-10\"><button class=\"${_ssrRenderClass([{ \"bg-blueDarkSemiLight text-white\": __props.userChecked === \"user-list\" }, \"p-2 rounded-xl dark:text-white tracking-widest font-bold\"])}\">${_ssrInterpolate(_ctx.$t(\"Все пользователи\"))}</button><button class=\"${_ssrRenderClass([{ \"bg-blueDarkSemiLight text-white\": __props.userChecked === \"admin-list\" }, \"p-2 rounded-xl dark:text-white tracking-widest font-bold\"])}\">${_ssrInterpolate(_ctx.$t(\"Администраторы компаний\"))}</button></div>`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(_ssrRenderComponent(_component_UserCreate, null, null, _parent));\n      _push(`</div></div><div class=\"w-full\"><div class=\"flex gap-x-10 max-lg:flex-wrap max-md:justify-center\"><div class=\"flex w-9/12 justify-between max-lg:justify-center gap-x-10 items-center max-md:flex-wrap max-md:mt-10 max-md:justify-center\">`);\n      _push(_ssrRenderComponent(TheSearch, {\n        class: \"w-full\",\n        \"model-value\": params.query,\n        \"onUpdate:modelValue\": ($event) => params.query = $event,\n        onSearch: ($event) => _unref(userList).loadUserList(params)\n      }, null, _parent));\n      _push(_ssrRenderComponent(TheFilter, null, null, _parent));\n      _push(`</div></div><div class=\"flex max-md:flex-wrap justify-center max-md:mt-10\"><div class=\"flex flex-wrap gap-x-6 max-md:order-2 max-lg:justify-center\">`);\n      if (_unref(userList)?.get_user_list.count > 0) {\n        _push(`<!--[-->`);\n        _ssrRenderList(_unref(userList)?.get_user_list.results, (userItem) => {\n          _push(_ssrRenderComponent(_component_UserContentList, {\n            \"user-item\": userItem,\n            class: \"max-md:w-full\"\n          }, null, _parent));\n        });\n        _push(`<!--]-->`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div></div></div><div class=\"flex flex-wrap justify-center gap-x-4 mt-10\">`);\n      if (_unref(userList).get_user_list.count > 5) {\n        _push(`<!--[-->`);\n        _ssrRenderList(_unref(userList)?.get_user_list?.links, (page, id) => {\n          _push(`<div class=\"${_ssrRenderClass([{ \"bg-blue-400 text-white\": page.active, \"bg-gray-200 text-black\": !page.active }, \"px-4 py-2 rounded-full cursor-pointer\"])}\">${_ssrInterpolate(page.label)}</div>`);\n        });\n        _push(`<!--]-->`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div></div>`);\n    };\n  }\n};\nimport { useSSRContext as __vite_useSSRContext } from \"vue\";\nconst _sfc_setup = _sfc_main.setup;\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext();\n  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(\"components/User/UserContent.vue\");\n  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;\n};\nexport default _sfc_main;\n",
-      "start": 1746856035059,
-      "end": 1746856035066,
+      "start": 1748346378028,
+      "end": 1748346378030,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -330,14 +330,14 @@
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1746856035066,
-      "end": 1746856035067,
+      "start": 1748346378031,
+      "end": 1748346378032,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1746856035067,
-      "end": 1746856035067,
+      "start": 1748346378032,
+      "end": 1748346378032,
       "order": "normal"
     }
   ]

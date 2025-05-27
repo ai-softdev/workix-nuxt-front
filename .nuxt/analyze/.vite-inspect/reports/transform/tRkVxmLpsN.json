@@ -3,45 +3,45 @@
   "transforms": [
     {
       "name": "vite:vue",
-      "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { renderSlot as _renderSlot, normalizeClass as _normalizeClass, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\"\n\nconst _hoisted_1 = [\"type\"]\n\nimport {useTreeStore} from \"~/stores/tree\";\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'TheButton',\n  props: {\n  type: String,\n  t: String\n},\n  setup(__props) {\n\nconst treeStore = useTreeStore()\n\n\nreturn (_ctx: any,_cache: any) => {\n  return (_openBlock(), _createElementBlock(\"button\", {\n    type: __props.t,\n    class: _normalizeClass([\"font-bold tracking-widest text-white\", {\n          'bg-blue-400 w-5/12 mx-auto py-4 rounded-xl' : __props.type === 'signIn',\n          'bg-blueSemiLight' : __props.type === 'change', 'bg-green-400' : __props.type === 'success',\n          'bg-red-400': __props.type === 'danger',\n          'dark:hover:bg-gray-600 hover:bg-gray-100 rounded-lg !text-semiCyan transition-all p-2' : __props.type === 'chat',\n          '!text-black dark:!text-white border border-semiCyan p-2 rounded-lg' : __props.type === 'treeBtn',\n          'dark:hover:bg-gray-700 hover:bg-gray-100 rounded-lg !text-semiCyan transition-all p-2' : __props.type === 'documentBtn',\n          }])\n  }, [\n    _renderSlot(_ctx.$slots, \"default\")\n  ], 10, _hoisted_1))\n}\n}\n\n})",
-      "start": 1746856008060,
-      "end": 1746856008060
+      "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { renderSlot as _renderSlot, normalizeClass as _normalizeClass, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\"\n\nconst _hoisted_1 = [\"type\"]\n\nimport {useTreeStore} from \"~/stores/tree\";\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'TheButton',\n  props: {\n  type: String,\n  t: String\n},\n  setup(__props) {\n\nconst treeStore = useTreeStore()\n\n\nreturn (_ctx: any,_cache: any) => {\n  return (_openBlock(), _createElementBlock(\"button\", {\n    type: __props.t,\n    class: _normalizeClass([\"font-bold text-white\", {\n          'bg-blue-400 w-5/12 mx-auto py-4 rounded-xl' : __props.type === 'signIn',\n          'bg-blueSemiLight' : __props.type === 'change', 'bg-green-400' : __props.type === 'success',\n          'bg-red-400': __props.type === 'danger',\n          'dark:hover:bg-gray-600 hover:bg-gray-100 rounded-lg !text-semiCyan transition-all p-2' : __props.type === 'chat',\n          '!text-black dark:!text-white border border-semiCyan p-2 rounded-lg' : __props.type === 'treeBtn',\n          'dark:hover:bg-gray-700 hover:bg-gray-100 rounded-lg !text-semiCyan transition-all p-2' : __props.type === 'documentBtn',\n          }])\n  }, [\n    _renderSlot(_ctx.$slots, \"default\")\n  ], 10, _hoisted_1))\n}\n}\n\n})",
+      "start": 1748346346772,
+      "end": 1748346346772
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1746856008060,
-      "end": 1746856008060,
+      "start": 1748346346772,
+      "end": 1748346346772,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1746856008060,
-      "end": 1746856008060,
+      "start": 1748346346772,
+      "end": 1748346346772,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1746856008060,
-      "end": 1746856008060,
+      "start": 1748346346772,
+      "end": 1748346346772,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1746856008060,
-      "end": 1746856008060,
+      "start": 1748346346772,
+      "end": 1748346346772,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1746856008060,
-      "end": 1746856008060,
+      "start": 1748346346772,
+      "end": 1748346346772,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { renderSlot as _renderSlot, normalizeClass as _normalizeClass, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\";\nconst _hoisted_1 = [\"type\"];\nimport { useTreeStore } from \"~/stores/tree\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"TheButton\",\n  props: {\n    type: String,\n    t: String\n  },\n  setup(__props) {\n    const treeStore = useTreeStore();\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"button\", {\n        type: __props.t,\n        class: _normalizeClass([\"font-bold tracking-widest text-white\", {\n          \"bg-blue-400 w-5/12 mx-auto py-4 rounded-xl\": __props.type === \"signIn\",\n          \"bg-blueSemiLight\": __props.type === \"change\",\n          \"bg-green-400\": __props.type === \"success\",\n          \"bg-red-400\": __props.type === \"danger\",\n          \"dark:hover:bg-gray-600 hover:bg-gray-100 rounded-lg !text-semiCyan transition-all p-2\": __props.type === \"chat\",\n          \"!text-black dark:!text-white border border-semiCyan p-2 rounded-lg\": __props.type === \"treeBtn\",\n          \"dark:hover:bg-gray-700 hover:bg-gray-100 rounded-lg !text-semiCyan transition-all p-2\": __props.type === \"documentBtn\"\n        }])\n      }, [\n        _renderSlot(_ctx.$slots, \"default\")\n      ], 10, _hoisted_1);\n    };\n  }\n});\n",
-      "start": 1746856008060,
-      "end": 1746856008756,
+      "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { renderSlot as _renderSlot, normalizeClass as _normalizeClass, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\";\nconst _hoisted_1 = [\"type\"];\nimport { useTreeStore } from \"~/stores/tree\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"TheButton\",\n  props: {\n    type: String,\n    t: String\n  },\n  setup(__props) {\n    const treeStore = useTreeStore();\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"button\", {\n        type: __props.t,\n        class: _normalizeClass([\"font-bold text-white\", {\n          \"bg-blue-400 w-5/12 mx-auto py-4 rounded-xl\": __props.type === \"signIn\",\n          \"bg-blueSemiLight\": __props.type === \"change\",\n          \"bg-green-400\": __props.type === \"success\",\n          \"bg-red-400\": __props.type === \"danger\",\n          \"dark:hover:bg-gray-600 hover:bg-gray-100 rounded-lg !text-semiCyan transition-all p-2\": __props.type === \"chat\",\n          \"!text-black dark:!text-white border border-semiCyan p-2 rounded-lg\": __props.type === \"treeBtn\",\n          \"dark:hover:bg-gray-700 hover:bg-gray-100 rounded-lg !text-semiCyan transition-all p-2\": __props.type === \"documentBtn\"\n        }])\n      }, [\n        _renderSlot(_ctx.$slots, \"default\")\n      ], 10, _hoisted_1);\n    };\n  }\n});\n",
+      "start": 1748346346772,
+      "end": 1748346346994,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -49,196 +49,196 @@
           "D:/projects/nuxt/workix-nuxt-front/components/UI/TheButton.vue?vue&type=script&setup=true&lang.ts"
         ],
         "sourcesContent": [
-          "import { defineComponent as _defineComponent } from 'vue'\nimport { renderSlot as _renderSlot, normalizeClass as _normalizeClass, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\"\n\nconst _hoisted_1 = [\"type\"]\n\nimport {useTreeStore} from \"~/stores/tree\";\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'TheButton',\n  props: {\n  type: String,\n  t: String\n},\n  setup(__props) {\n\nconst treeStore = useTreeStore()\n\n\nreturn (_ctx: any,_cache: any) => {\n  return (_openBlock(), _createElementBlock(\"button\", {\n    type: __props.t,\n    class: _normalizeClass([\"font-bold tracking-widest text-white\", {\n          'bg-blue-400 w-5/12 mx-auto py-4 rounded-xl' : __props.type === 'signIn',\n          'bg-blueSemiLight' : __props.type === 'change', 'bg-green-400' : __props.type === 'success',\n          'bg-red-400': __props.type === 'danger',\n          'dark:hover:bg-gray-600 hover:bg-gray-100 rounded-lg !text-semiCyan transition-all p-2' : __props.type === 'chat',\n          '!text-black dark:!text-white border border-semiCyan p-2 rounded-lg' : __props.type === 'treeBtn',\n          'dark:hover:bg-gray-700 hover:bg-gray-100 rounded-lg !text-semiCyan transition-all p-2' : __props.type === 'documentBtn',\n          }])\n  }, [\n    _renderSlot(_ctx.$slots, \"default\")\n  ], 10, _hoisted_1))\n}\n}\n\n})"
+          "import { defineComponent as _defineComponent } from 'vue'\nimport { renderSlot as _renderSlot, normalizeClass as _normalizeClass, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\"\n\nconst _hoisted_1 = [\"type\"]\n\nimport {useTreeStore} from \"~/stores/tree\";\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'TheButton',\n  props: {\n  type: String,\n  t: String\n},\n  setup(__props) {\n\nconst treeStore = useTreeStore()\n\n\nreturn (_ctx: any,_cache: any) => {\n  return (_openBlock(), _createElementBlock(\"button\", {\n    type: __props.t,\n    class: _normalizeClass([\"font-bold text-white\", {\n          'bg-blue-400 w-5/12 mx-auto py-4 rounded-xl' : __props.type === 'signIn',\n          'bg-blueSemiLight' : __props.type === 'change', 'bg-green-400' : __props.type === 'success',\n          'bg-red-400': __props.type === 'danger',\n          'dark:hover:bg-gray-600 hover:bg-gray-100 rounded-lg !text-semiCyan transition-all p-2' : __props.type === 'chat',\n          '!text-black dark:!text-white border border-semiCyan p-2 rounded-lg' : __props.type === 'treeBtn',\n          'dark:hover:bg-gray-700 hover:bg-gray-100 rounded-lg !text-semiCyan transition-all p-2' : __props.type === 'documentBtn',\n          }])\n  }, [\n    _renderSlot(_ctx.$slots, \"default\")\n  ], 10, _hoisted_1))\n}\n}\n\n})"
         ],
-        "mappings": "AAAA,SAAS,mBAAmB,wBAAwB;AACpD,SAAS,cAAc,aAAa,kBAAkB,iBAAiB,aAAa,YAAY,sBAAsB,2BAA2B;AAEjJ,MAAM,aAAa,CAAC,MAAM;AAE1B,SAAQ,oBAAmB;AAE3B,eAA4B,iCAAiB;AAAA,EAC3C,QAAQ;AAAA,EACR,OAAO;AAAA,IACP,MAAM;AAAA,IACN,GAAG;AAAA,EACL;AAAA,EACE,MAAM,SAAS;AAEjB,UAAM,YAAY,aAAa;AAG/B,WAAO,CAAC,MAAU,WAAgB;AAChC,aAAQ,WAAW,GAAG,oBAAoB,UAAU;AAAA,QAClD,MAAM,QAAQ;AAAA,QACd,OAAO,gBAAgB,CAAC,wCAAwC;AAAA,UAC1D,8CAA+C,QAAQ,SAAS;AAAA,UAChE,oBAAqB,QAAQ,SAAS;AAAA,UAAU,gBAAiB,QAAQ,SAAS;AAAA,UAClF,cAAc,QAAQ,SAAS;AAAA,UAC/B,yFAA0F,QAAQ,SAAS;AAAA,UAC3G,sEAAuE,QAAQ,SAAS;AAAA,UACxF,yFAA0F,QAAQ,SAAS;AAAA,QAC3G,CAAC,CAAC;AAAA,MACV,GAAG;AAAA,QACD,YAAY,KAAK,QAAQ,SAAS;AAAA,MACpC,GAAG,IAAI,UAAU;AAAA,IACnB;AAAA,EACA;AAEA,CAAC;",
+        "mappings": "AAAA,SAAS,mBAAmB,wBAAwB;AACpD,SAAS,cAAc,aAAa,kBAAkB,iBAAiB,aAAa,YAAY,sBAAsB,2BAA2B;AAEjJ,MAAM,aAAa,CAAC,MAAM;AAE1B,SAAQ,oBAAmB;AAE3B,eAA4B,iCAAiB;AAAA,EAC3C,QAAQ;AAAA,EACR,OAAO;AAAA,IACP,MAAM;AAAA,IACN,GAAG;AAAA,EACL;AAAA,EACE,MAAM,SAAS;AAEjB,UAAM,YAAY,aAAa;AAG/B,WAAO,CAAC,MAAU,WAAgB;AAChC,aAAQ,WAAW,GAAG,oBAAoB,UAAU;AAAA,QAClD,MAAM,QAAQ;AAAA,QACd,OAAO,gBAAgB,CAAC,wBAAwB;AAAA,UAC1C,8CAA+C,QAAQ,SAAS;AAAA,UAChE,oBAAqB,QAAQ,SAAS;AAAA,UAAU,gBAAiB,QAAQ,SAAS;AAAA,UAClF,cAAc,QAAQ,SAAS;AAAA,UAC/B,yFAA0F,QAAQ,SAAS;AAAA,UAC3G,sEAAuE,QAAQ,SAAS;AAAA,UACxF,yFAA0F,QAAQ,SAAS;AAAA,QAC3G,CAAC,CAAC;AAAA,MACV,GAAG;AAAA,QACD,YAAY,KAAK,QAAQ,SAAS;AAAA,MACpC,GAAG,IAAI,UAAU;AAAA,IACnB;AAAA,EACA;AAEA,CAAC;",
         "names": []
       }
     },
     {
       "name": "vite:json",
-      "start": 1746856008757,
-      "end": 1746856008757,
+      "start": 1748346346994,
+      "end": 1748346346994,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1746856008757,
-      "end": 1746856008757,
+      "start": 1748346346995,
+      "end": 1748346346995,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1746856008757,
-      "end": 1746856008757,
+      "start": 1748346346995,
+      "end": 1748346346995,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1746856008757,
-      "end": 1746856008757,
+      "start": 1748346346995,
+      "end": 1748346346995,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1746856008758,
-      "end": 1746856008758,
+      "start": 1748346346995,
+      "end": 1748346346995,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1746856008758,
-      "end": 1746856008758,
+      "start": 1748346346995,
+      "end": 1748346346995,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1746856008758,
-      "end": 1746856008758,
+      "start": 1748346346995,
+      "end": 1748346346995,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1746856008758,
-      "end": 1746856008759,
+      "start": 1748346346996,
+      "end": 1748346346996,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1746856008759,
-      "end": 1746856008759,
+      "start": 1748346346996,
+      "end": 1748346346996,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1746856008759,
-      "end": 1746856008759,
+      "start": 1748346346996,
+      "end": 1748346346996,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1746856008759,
-      "end": 1746856008760,
+      "start": 1748346346996,
+      "end": 1748346346996,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1746856008760,
-      "end": 1746856008760,
+      "start": 1748346346996,
+      "end": 1748346346996,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1746856008760,
-      "end": 1746856008760,
+      "start": 1748346346996,
+      "end": 1748346346996,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1746856008760,
-      "end": 1746856008760,
+      "start": 1748346346996,
+      "end": 1748346346996,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1746856008760,
-      "end": 1746856008760,
+      "start": 1748346346996,
+      "end": 1748346346997,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1746856008760,
-      "end": 1746856008760,
+      "start": 1748346346997,
+      "end": 1748346346997,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1746856008760,
-      "end": 1746856008760,
+      "start": 1748346346997,
+      "end": 1748346346997,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1746856008760,
-      "end": 1746856008760,
+      "start": 1748346346997,
+      "end": 1748346346997,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1746856008761,
-      "end": 1746856008761,
+      "start": 1748346346997,
+      "end": 1748346346997,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1746856008761,
-      "end": 1746856008762,
+      "start": 1748346346997,
+      "end": 1748346346997,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1746856008762,
-      "end": 1746856008762,
+      "start": 1748346346997,
+      "end": 1748346346997,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1746856008762,
-      "end": 1746856008762,
+      "start": 1748346346998,
+      "end": 1748346346998,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1746856008763,
-      "end": 1746856008773,
+      "start": 1748346346998,
+      "end": 1748346347002,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1746856008773,
-      "end": 1746856008773,
+      "start": 1748346347002,
+      "end": 1748346347002,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1746856008774,
-      "end": 1746856008774,
+      "start": 1748346347003,
+      "end": 1748346347003,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1746856008774,
-      "end": 1746856008774,
+      "start": 1748346347003,
+      "end": 1748346347003,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1746856008774,
-      "end": 1746856008774,
+      "start": 1748346347003,
+      "end": 1748346347003,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1746856008775,
-      "end": 1746856008775,
+      "start": 1748346347003,
+      "end": 1748346347003,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1746856008776,
-      "end": 1746856008776,
+      "start": 1748346347004,
+      "end": 1748346347004,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1746856008776,
-      "end": 1746856008777,
+      "start": 1748346347004,
+      "end": 1748346347004,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1746856008777,
-      "end": 1746856008777,
+      "start": 1748346347004,
+      "end": 1748346347004,
       "order": "normal"
     }
   ]

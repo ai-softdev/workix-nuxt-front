@@ -11,7 +11,10 @@ export default <Partial<Config>>{
         'blueSemiLight': '#0096C7',
         'semiCyan': '#3fb1c9',
         'cyan': '#90E0EF',
-        'bgPages': '#4B5563'
+        'bgPages': '#4B5563',
+        porcelain: "#F2F2F2",
+        golden: "#F4C107",
+        sunset: "#FF5852"
       },
     }
   },

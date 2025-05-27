@@ -1,6 +1,6 @@
 <template>
   <div :class="{'blur' : useTreeStore().treeFullScreen === true}"
-       class="w-full bg-white py-4 px-10 flex dark:bg-gray-600 shadow-lg transition-all duration-300 dark:shadow-lg justify-end relative z-30"
+       class="w-full bg-white py-4 px-10 flex dark:bg-gray-600 transition-all duration-300 dark:shadow-lg justify-end relative z-30"
        @click.stop="()=>{
         if(windowWidth >= 800) {
         loadCurrentUser.openNotification = false; loadCurrentUser.openSettings = false;

@@ -1,5 +1,5 @@
 <template>
-  <button :type="t" class="font-bold  tracking-widest text-white"
+  <button :type="t" class="font-bold text-white"
           :class="{
           'bg-blue-400 w-5/12 mx-auto py-4 rounded-xl' : type === 'signIn',
           'bg-blueSemiLight' : type === 'change', 'bg-green-400' : type === 'success',

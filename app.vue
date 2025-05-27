@@ -6,9 +6,6 @@
 
 
 <style lang="scss">
-* {
-  font-family: Montserrat, sans-serif;
-}
 
 
 .fade-enter-active,

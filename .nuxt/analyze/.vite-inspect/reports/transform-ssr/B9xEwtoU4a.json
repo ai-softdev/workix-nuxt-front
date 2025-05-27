@@ -4,73 +4,73 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { resolveComponent as _resolveComponent, mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\"\n\nimport 'vue3-toastify/dist/index.css';\nimport {useI18n} from \"vue-i18n\";\nimport {useColorMode} from \"@vueuse/core\";\nimport {useRoute} from \"vue-router\";\n\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'app',\n  __ssrInlineRender: true,\n  setup(__props) {\n\nconst colorMode = useColorMode()\nconst {locale} = useI18n()\nconst route = useRoute()\n\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  const _component_NuxtPage = _resolveComponent(\"NuxtPage\")!\n\n  _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"\" }, _attrs))}>`)\n  _push(_ssrRenderComponent(_component_NuxtPage, null, null, _parent))\n  _push(`</div>`)\n}\n}\n\n})",
-      "start": 1746856030695,
-      "end": 1746856030695,
+      "start": 1748346372538,
+      "end": 1748346372538,
       "sourcemaps": {
         "version": 3,
         "sources": [
           "D:/projects/nuxt/workix-nuxt-front/app.vue"
         ],
         "sourcesContent": [
-          "<template>\n  <div class=\"\">\n    <NuxtPage/>\n  </div>\n</template>\n\n\n<style lang=\"scss\">\n* {\n  font-family: Montserrat, sans-serif;\n}\n\n\n.fade-enter-active,\n.fade-leave-active {\n  transition: opacity 0.3s ease;\n}\n\n.fade-enter-from,\n.fade-leave-to {\n  opacity: 0;\n}\n\n.page-enter-active,\n.page-leave-active {\n  transition: all .3s;\n}\n\n.page-enter-from,\n.page-leave-to {\n  opacity: .9;\n  filter: blur(10px);\n}\n\n\n.slide-fade-enter-active {\n  transition: all 0.3s ease-out;\n}\n\n.slide-fade-leave-active {\n  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);\n}\n\n.slide-fade-enter-from,\n.slide-fade-leave-to {\n  transform: translateY(-10px);\n  opacity: 0;\n}\n\n\n\n.slide-right-enter-active {\n  transition: all 0.3s ease-out;\n}\n\n.slide-right-leave-active {\n  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);\n}\n\n.slide-right-enter-from,\n.slide-right-leave-to {\n  transform: translateX(5px);\n  opacity: 0;\n}\n\n\n.slide-up-enter-active {\n  transition: all 0.3s ease-out;\n}\n\n.slide-up-leave-active {\n  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);\n}\n\n.slide-up-enter-from,\n.slide-up-leave-to {\n  transform: translateY(10px);\n  opacity: 0;\n}\n\n.slide-down-enter-active {\n  transition: all 0.3s ease-out;\n}\n\n.slide-down-leave-active {\n  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);\n}\n\n.slide-down-enter-from,\n.slide-down-leave-to {\n  transform: translateY(-10px);\n  opacity: 0;\n}\n\n\n</style>\n\n\n<script lang=\"ts\" setup>\nimport 'vue3-toastify/dist/index.css';\nimport {useI18n} from \"vue-i18n\";\nimport {useColorMode} from \"@vueuse/core\";\nimport {useRoute} from \"vue-router\";\n\nconst colorMode = useColorMode()\nconst {locale} = useI18n()\nconst route = useRoute()\n\n</script>"
+          "<template>\n  <div class=\"\">\n    <NuxtPage/>\n  </div>\n</template>\n\n\n<style lang=\"scss\">\n\n\n.fade-enter-active,\n.fade-leave-active {\n  transition: opacity 0.3s ease;\n}\n\n.fade-enter-from,\n.fade-leave-to {\n  opacity: 0;\n}\n\n.page-enter-active,\n.page-leave-active {\n  transition: all .3s;\n}\n\n.page-enter-from,\n.page-leave-to {\n  opacity: .9;\n  filter: blur(10px);\n}\n\n\n.slide-fade-enter-active {\n  transition: all 0.3s ease-out;\n}\n\n.slide-fade-leave-active {\n  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);\n}\n\n.slide-fade-enter-from,\n.slide-fade-leave-to {\n  transform: translateY(-10px);\n  opacity: 0;\n}\n\n\n\n.slide-right-enter-active {\n  transition: all 0.3s ease-out;\n}\n\n.slide-right-leave-active {\n  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);\n}\n\n.slide-right-enter-from,\n.slide-right-leave-to {\n  transform: translateX(5px);\n  opacity: 0;\n}\n\n\n.slide-up-enter-active {\n  transition: all 0.3s ease-out;\n}\n\n.slide-up-leave-active {\n  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);\n}\n\n.slide-up-enter-from,\n.slide-up-leave-to {\n  transform: translateY(10px);\n  opacity: 0;\n}\n\n.slide-down-enter-active {\n  transition: all 0.3s ease-out;\n}\n\n.slide-down-leave-active {\n  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);\n}\n\n.slide-down-enter-from,\n.slide-down-leave-to {\n  transform: translateY(-10px);\n  opacity: 0;\n}\n\n\n</style>\n\n\n<script lang=\"ts\" setup>\nimport 'vue3-toastify/dist/index.css';\nimport {useI18n} from \"vue-i18n\";\nimport {useColorMode} from \"@vueuse/core\";\nimport {useRoute} from \"vue-router\";\n\nconst colorMode = useColorMode()\nconst {locale} = useI18n()\nconst route = useRoute()\n\n</script>"
         ],
         "names": [],
-        "mappings": ";;;;AAmGA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACtC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACjC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC1C,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACpC;;;;;;AALwB;AAMxB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAChC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC1B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACxB;;;;;;;;;;;"
+        "mappings": ";;;;AAgGA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACtC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACjC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC1C,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACpC;;;;;;AALwB;AAMxB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAChC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC1B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACxB;;;;;;;;;;;"
       }
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1746856030702,
-      "end": 1746856030702,
+      "start": 1748346372538,
+      "end": 1748346372539,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1746856030702,
-      "end": 1746856030702,
+      "start": 1748346372538,
+      "end": 1748346372540,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1746856030702,
-      "end": 1746856030702,
+      "start": 1748346372541,
+      "end": 1748346372541,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1746856030702,
-      "end": 1746856030702,
+      "start": 1748346372541,
+      "end": 1748346372541,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1746856030702,
-      "end": 1746856030702,
+      "start": 1748346372541,
+      "end": 1748346372541,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1746856030702,
-      "end": 1746856030702,
+      "start": 1748346372541,
+      "end": 1748346372541,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1746856030702,
-      "end": 1746856030702,
+      "start": 1748346372541,
+      "end": 1748346372541,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1746856030702,
-      "end": 1746856030702,
+      "start": 1748346372541,
+      "end": 1748346372541,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { resolveComponent as _resolveComponent, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport \"vue3-toastify/dist/index.css\";\nimport { useI18n } from \"vue-i18n\";\nimport { useColorMode } from \"@vueuse/core\";\nimport { useRoute } from \"vue-router\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"app\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const colorMode = useColorMode();\n    const { locale } = useI18n();\n    const route = useRoute();\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_NuxtPage = _resolveComponent(\"NuxtPage\");\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"\" }, _attrs))}>`);\n      _push(_ssrRenderComponent(_component_NuxtPage, null, null, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1746856030702,
-      "end": 1746856032447,
+      "start": 1748346372542,
+      "end": 1748346373335,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -86,213 +86,213 @@
     },
     {
       "name": "vite:json",
-      "start": 1746856032447,
-      "end": 1746856032447,
+      "start": 1748346373336,
+      "end": 1748346373336,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1746856032447,
-      "end": 1746856032447,
+      "start": 1748346373336,
+      "end": 1748346373336,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1746856032448,
-      "end": 1746856032448,
+      "start": 1748346373338,
+      "end": 1748346373338,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1746856032448,
-      "end": 1746856032448,
+      "start": 1748346373339,
+      "end": 1748346373339,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1746856032448,
-      "end": 1746856032448,
+      "start": 1748346373339,
+      "end": 1748346373339,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1746856032448,
-      "end": 1746856032448,
+      "start": 1748346373339,
+      "end": 1748346373339,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1746856032448,
-      "end": 1746856032448,
+      "start": 1748346373341,
+      "end": 1748346373341,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1746856032448,
-      "end": 1746856032448,
+      "start": 1748346373341,
+      "end": 1748346373341,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1746856032448,
-      "end": 1746856032448,
+      "start": 1748346373342,
+      "end": 1748346373342,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1746856032448,
-      "end": 1746856032448,
+      "start": 1748346373342,
+      "end": 1748346373342,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1746856032448,
-      "end": 1746856032451,
+      "start": 1748346373344,
+      "end": 1748346373437,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1746856032451,
-      "end": 1746856032451,
+      "start": 1748346373438,
+      "end": 1748346373439,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1746856032451,
-      "end": 1746856032451,
+      "start": 1748346373448,
+      "end": 1748346373448,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1746856032451,
-      "end": 1746856032451,
+      "start": 1748346373448,
+      "end": 1748346373448,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1746856032451,
-      "end": 1746856032451,
+      "start": 1748346373452,
+      "end": 1748346373452,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1746856032451,
-      "end": 1746856032451,
+      "start": 1748346373454,
+      "end": 1748346373454,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1746856032451,
-      "end": 1746856032451,
+      "start": 1748346373454,
+      "end": 1748346373454,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1746856032452,
-      "end": 1746856032452,
+      "start": 1748346373455,
+      "end": 1748346373455,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1746856032452,
-      "end": 1746856032452,
+      "start": 1748346373456,
+      "end": 1748346373457,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1746856032452,
-      "end": 1746856032452,
+      "start": 1748346373464,
+      "end": 1748346373465,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1746856032452,
-      "end": 1746856032452,
+      "start": 1748346373464,
+      "end": 1748346373465,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1746856032452,
-      "end": 1746856032452,
+      "start": 1748346373465,
+      "end": 1748346373465,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1746856032452,
-      "end": 1746856032452,
+      "start": 1748346373465,
+      "end": 1748346373465,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1746856032452,
-      "end": 1746856032452,
+      "start": 1748346373466,
+      "end": 1748346373466,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1746856032452,
-      "end": 1746856032452,
+      "start": 1748346373466,
+      "end": 1748346373467,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1746856032452,
-      "end": 1746856032452,
+      "start": 1748346373467,
+      "end": 1748346373467,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1746856032452,
-      "end": 1746856032452,
+      "start": 1748346373467,
+      "end": 1748346373467,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1746856032452,
-      "end": 1746856032453,
+      "start": 1748346373467,
+      "end": 1748346373468,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1746856032452,
-      "end": 1746856032453,
+      "start": 1748346373467,
+      "end": 1748346373468,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1746856032453,
-      "end": 1746856032453,
+      "start": 1748346373469,
+      "end": 1748346373469,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1746856032453,
-      "end": 1746856032453,
+      "start": 1748346373469,
+      "end": 1748346373469,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1746856032453,
-      "end": 1746856032453,
+      "start": 1748346373469,
+      "end": 1748346373469,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1746856032453,
-      "end": 1746856032453,
+      "start": 1748346373469,
+      "end": 1748346373469,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1746856032453,
-      "end": 1746856032453,
+      "start": 1748346373470,
+      "end": 1748346373470,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
       "result": "import { default as __nuxt_component_0 } from \"D:/projects/nuxt/workix-nuxt-front/node_modules/nuxt/dist/pages/runtime/page\";\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { resolveComponent as _resolveComponent, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport \"vue3-toastify/dist/index.css\";\nimport { useI18n } from \"vue-i18n\";\nimport { useColorMode } from \"@vueuse/core\";\nimport { useRoute } from \"vue-router\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"app\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const colorMode = useColorMode();\n    const { locale } = useI18n();\n    const route = useRoute();\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_NuxtPage = __nuxt_component_0;\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"\" }, _attrs))}>`);\n      _push(_ssrRenderComponent(_component_NuxtPage, null, null, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1746856032453,
-      "end": 1746856032454,
+      "start": 1748346373470,
+      "end": 1748346373470,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -305,20 +305,20 @@
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1746856032454,
-      "end": 1746856032454,
+      "start": 1748346373471,
+      "end": 1748346373471,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1746856032454,
-      "end": 1746856032454,
+      "start": 1748346373664,
+      "end": 1748346373664,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1746856032454,
-      "end": 1746856032454,
+      "start": 1748346373672,
+      "end": 1748346373672,
       "order": "normal"
     }
   ]

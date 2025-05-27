@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, resolveComponent as _resolveComponent, mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\"\n\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'profile',\n  __ssrInlineRender: true,\n  props: {\n  activeNav: {\n    type: Boolean,\n    default: false\n  }\n},\n  setup(__props) {\n\nconst props = __props\n\nuseSeoMeta({\n  title: 'Профиль',\n  description: 'Личный кабинет | Текущая информация обо мне'\n})\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  const _component_ProfileContent = _resolveComponent(\"ProfileContent\")!\n\n  _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"flex flex-col\" }, _attrs))}>`)\n  _push(_ssrRenderComponent(TheTextContent, { \"text-type\": 'pageTitle' }, {\n    default: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(`${_ssrInterpolate(_ctx.$t('Страница профиля'))}`)\n      } else {\n        return [\n          _createTextVNode(_toDisplayString(_ctx.$t('Страница профиля')), 1)\n        ]\n      }\n    }),\n    _: 1\n  }, _parent))\n  _push(`<div class=\"w-full mx-auto\">`)\n  _push(_ssrRenderComponent(_component_ProfileContent, { activeNav: __props.activeNav }, null, _parent))\n  _push(`</div></div>`)\n}\n}\n\n})",
-      "start": 1746856031027,
-      "end": 1746856031027,
+      "start": 1748346373056,
+      "end": 1748346373057,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1746856031027,
-      "end": 1746856031027,
+      "start": 1748346373057,
+      "end": 1748346373057,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1746856031027,
-      "end": 1746856031027,
+      "start": 1748346373057,
+      "end": 1748346373057,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1746856031027,
-      "end": 1746856031027,
+      "start": 1748346373057,
+      "end": 1748346373057,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1746856031027,
-      "end": 1746856031027,
+      "start": 1748346373057,
+      "end": 1748346373057,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1746856031028,
-      "end": 1746856031028,
+      "start": 1748346373057,
+      "end": 1748346373058,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1746856031028,
-      "end": 1746856031028,
+      "start": 1748346373057,
+      "end": 1748346373058,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1746856031028,
-      "end": 1746856031028,
+      "start": 1748346373058,
+      "end": 1748346373058,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1746856031028,
-      "end": 1746856031028,
+      "start": 1748346373058,
+      "end": 1748346373058,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, resolveComponent as _resolveComponent, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"profile\",\n  __ssrInlineRender: true,\n  props: {\n    activeNav: {\n      type: Boolean,\n      default: false\n    }\n  },\n  setup(__props) {\n    const props = __props;\n    useSeoMeta({\n      title: \"Профиль\",\n      description: \"Личный кабинет | Текущая информация обо мне\"\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_ProfileContent = _resolveComponent(\"ProfileContent\");\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"flex flex-col\" }, _attrs))}>`);\n      _push(_ssrRenderComponent(TheTextContent, { \"text-type\": \"pageTitle\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Страница профиля\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Страница профиля\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<div class=\"w-full mx-auto\">`);\n      _push(_ssrRenderComponent(_component_ProfileContent, { activeNav: __props.activeNav }, null, _parent));\n      _push(`</div></div>`);\n    };\n  }\n});\n",
-      "start": 1746856031028,
-      "end": 1746856033036,
+      "start": 1748346373058,
+      "end": 1748346375722,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -89,171 +89,171 @@
     },
     {
       "name": "vite:json",
-      "start": 1746856033036,
-      "end": 1746856033036,
+      "start": 1748346375722,
+      "end": 1748346375722,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1746856033036,
-      "end": 1746856033036,
+      "start": 1748346375722,
+      "end": 1748346375722,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1746856033036,
-      "end": 1746856033036,
+      "start": 1748346375722,
+      "end": 1748346375722,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1746856033036,
-      "end": 1746856033036,
+      "start": 1748346375722,
+      "end": 1748346375722,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1746856033036,
-      "end": 1746856033036,
+      "start": 1748346375722,
+      "end": 1748346375722,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1746856033036,
-      "end": 1746856033036,
+      "start": 1748346375722,
+      "end": 1748346375722,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1746856033036,
-      "end": 1746856033036,
+      "start": 1748346375722,
+      "end": 1748346375723,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1746856033036,
-      "end": 1746856033036,
+      "start": 1748346375722,
+      "end": 1748346375723,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1746856033037,
-      "end": 1746856033037,
+      "start": 1748346375723,
+      "end": 1748346375723,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1746856033037,
-      "end": 1746856033037,
+      "start": 1748346375723,
+      "end": 1748346375723,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1746856033040,
-      "end": 1746856033040,
+      "start": 1748346375725,
+      "end": 1748346375725,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1746856033041,
-      "end": 1746856033042,
+      "start": 1748346375726,
+      "end": 1748346375726,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1746856033042,
-      "end": 1746856033042,
+      "start": 1748346375726,
+      "end": 1748346375726,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1746856033042,
-      "end": 1746856033042,
+      "start": 1748346375726,
+      "end": 1748346375726,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1746856033042,
-      "end": 1746856033042,
+      "start": 1748346375726,
+      "end": 1748346375726,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1746856033042,
-      "end": 1746856033042,
+      "start": 1748346375726,
+      "end": 1748346375726,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1746856033042,
-      "end": 1746856033042,
+      "start": 1748346375726,
+      "end": 1748346375726,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1746856033042,
-      "end": 1746856033042,
+      "start": 1748346375726,
+      "end": 1748346375726,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1746856033042,
-      "end": 1746856033042,
+      "start": 1748346375726,
+      "end": 1748346375726,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1746856033042,
-      "end": 1746856033042,
+      "start": 1748346375727,
+      "end": 1748346375727,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1746856033042,
-      "end": 1746856033042,
+      "start": 1748346375727,
+      "end": 1748346375727,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1746856033043,
-      "end": 1746856033043,
+      "start": 1748346375727,
+      "end": 1748346375727,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1746856033043,
-      "end": 1746856033043,
+      "start": 1748346375727,
+      "end": 1748346375727,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1746856033043,
-      "end": 1746856033043,
+      "start": 1748346375727,
+      "end": 1748346375727,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1746856033043,
-      "end": 1746856033043,
+      "start": 1748346375727,
+      "end": 1748346375727,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1746856033043,
-      "end": 1746856033043,
+      "start": 1748346375727,
+      "end": 1748346375727,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1746856033043,
-      "end": 1746856033043,
+      "start": 1748346375727,
+      "end": 1748346375727,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { useSeoMeta } from '@unhead/vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, resolveComponent as _resolveComponent, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"profile\",\n  __ssrInlineRender: true,\n  props: {\n    activeNav: {\n      type: Boolean,\n      default: false\n    }\n  },\n  setup(__props) {\n    const props = __props;\n    useSeoMeta({\n      title: \"Профиль\",\n      description: \"Личный кабинет | Текущая информация обо мне\"\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_ProfileContent = _resolveComponent(\"ProfileContent\");\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"flex flex-col\" }, _attrs))}>`);\n      _push(_ssrRenderComponent(TheTextContent, { \"text-type\": \"pageTitle\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Страница профиля\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Страница профиля\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<div class=\"w-full mx-auto\">`);\n      _push(_ssrRenderComponent(_component_ProfileContent, { activeNav: __props.activeNav }, null, _parent));\n      _push(`</div></div>`);\n    };\n  }\n});\n",
-      "start": 1746856033043,
-      "end": 1746856033045,
+      "start": 1748346375728,
+      "end": 1748346375740,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -267,8 +267,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { useSeoMeta } from '@unhead/vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, resolveComponent as _resolveComponent, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"profile\",\n  __ssrInlineRender: true,\n  props: {\n    activeNav: {\n      type: Boolean,\n      default: false\n    }\n  },\n  setup(__props) {\n    const props = __props;\n    useSeoMeta({\n      title: \"Профиль\",\n      description: \"Личный кабинет | Текущая информация обо мне\"\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_ProfileContent = _resolveComponent(\"ProfileContent\");\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"flex flex-col\" }, _attrs))}>`);\n      _push(_ssrRenderComponent(TheTextContent, { \"text-type\": \"pageTitle\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Страница профиля\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Страница профиля\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<div class=\"w-full mx-auto\">`);\n      _push(_ssrRenderComponent(_component_ProfileContent, { activeNav: __props.activeNav }, null, _parent));\n      _push(`</div></div>`);\n    };\n  }\n});\n",
-      "start": 1746856033043,
-      "end": 1746856033045,
+      "start": 1748346375728,
+      "end": 1748346375740,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -281,39 +281,39 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1746856033046,
-      "end": 1746856033046,
+      "start": 1748346375740,
+      "end": 1748346375740,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1746856033046,
-      "end": 1746856033046,
+      "start": 1748346375740,
+      "end": 1748346375740,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1746856033047,
-      "end": 1746856033047,
+      "start": 1748346375741,
+      "end": 1748346375744,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1746856033047,
-      "end": 1746856033047,
+      "start": 1748346375741,
+      "end": 1748346375744,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1746856033047,
-      "end": 1746856033047,
+      "start": 1748346375744,
+      "end": 1748346375744,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
       "result": "import { default as __nuxt_component_0 } from \"D:/projects/nuxt/workix-nuxt-front/components/Profile/ProfileContent.vue\";\nimport { useSeoMeta } from '@unhead/vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, resolveComponent as _resolveComponent, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"profile\",\n  __ssrInlineRender: true,\n  props: {\n    activeNav: {\n      type: Boolean,\n      default: false\n    }\n  },\n  setup(__props) {\n    const props = __props;\n    useSeoMeta({\n      title: \"Профиль\",\n      description: \"Личный кабинет | Текущая информация обо мне\"\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_ProfileContent = __nuxt_component_0;\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"flex flex-col\" }, _attrs))}>`);\n      _push(_ssrRenderComponent(TheTextContent, { \"text-type\": \"pageTitle\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Страница профиля\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Страница профиля\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<div class=\"w-full mx-auto\">`);\n      _push(_ssrRenderComponent(_component_ProfileContent, { activeNav: __props.activeNav }, null, _parent));\n      _push(`</div></div>`);\n    };\n  }\n});\n",
-      "start": 1746856033047,
-      "end": 1746856033047,
+      "start": 1748346375744,
+      "end": 1748346375744,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -326,20 +326,20 @@
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1746856033047,
-      "end": 1746856033047,
+      "start": 1748346375745,
+      "end": 1748346375745,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1746856033047,
-      "end": 1746856033047,
+      "start": 1748346375745,
+      "end": 1748346375745,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1746856033048,
-      "end": 1746856033048,
+      "start": 1748346375745,
+      "end": 1748346375745,
       "order": "normal"
     }
   ]

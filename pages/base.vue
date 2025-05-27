@@ -3,7 +3,7 @@
     <div class="w-screen h-screen z-50 fixed bg-black opacity-30 hidden"
          :class="{'hidden' : !user.activeNav, 'max-[1150px]:block' : user.activeNav}"
          @click="user.activeNav = false"/>
-    <div class="flex w-full h-full dark:bg-bgPages">
+    <div class="flex w-full h-full bg-porcelain dark:bg-bgPages">
       <div
         class="bg-white transition-all duration-300 dark:bg-black max-[880px]:h-screen max-[1150px]:fixed z-[70]"
         :class="{'max-[1150px]:-translate-x-24 transition-all duration-200' : !user.activeNav, 'max-[600px]:w-full transition-all' : user.activeNav}">
@@ -20,7 +20,7 @@
                    :activeNav="user.activeNav"></TheNavigation>
       </div>
       <div class="w-full relative">
-        <div class="cursor-pointer absolute top-8 max-[800px]:top-6 left-5 z-50 dark:fill-white fill-black"
+        <div class="cursor-pointer bg-porcelain h-10 w-10 flex items-center justify-center rounded-lg absolute top-5 max-[800px]:top-6 left-5 z-50 dark:fill-white fill-black"
              :class="{'blur' : treeStore.treeFullScreen === true}"
              @click="user.activeNav = !user.activeNav; user.openNotification = false; user.openSettings = false">
           <svg width="22" height="16" viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg">
@@ -165,9 +165,6 @@ useHead({
 </script>
 
 <style lang="postcss">
-.router-link-active {
-  @apply dark:bg-blueDarkSemiLight bg-cyan dark:border-r-blue-400 border-r-semiCyan border-r-4;
-}
 
 ::-webkit-scrollbar {
   @apply w-2

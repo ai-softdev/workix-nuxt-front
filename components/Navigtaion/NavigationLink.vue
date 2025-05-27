@@ -1,13 +1,13 @@
 <template>
   <div>
     <NuxtLink :to="to" @click="authUser.openSettings = false; authUser.openNotification = false;"
-              class="flex pl-6 transition-all hover:bg-cyan dark:hover:bg-blueDarkSemiLight dark:hover:border-r-blue-400 hover:border-r-4 hover:border-r-semiCyan py-2 w-full items-center gap-x-3 dark:text-white text-black px-4"
-              :class="{'rounded-l-none justify-center ' : !authUser.activeNav}"
+              class="router-link flex pl-6 transition-all rounded-lg border-lg py-2 w-full items-center gap-x-3 text-black px-4"
+              :class="{'rounded-lg' : !authUser.activeNav}"
     >
-      <div class="dark:fill-white fill-black transition-all">
+      <div class="link-icon dark:fill-white fill-black transition-all w-10 h-10 rounded-lg flex items-center justify-center border bg-white">
         <slot name="navIcon"/>
       </div>
-      <div class="tracking-wider text-sm max-sm:text-base" v-if="authUser.activeNav">
+      <div class="text-sm max-sm:text-base" v-if="authUser.activeNav">
         <slot name="navLink"/>
       </div>
     </NuxtLink>
@@ -28,12 +28,51 @@ const props = defineProps({
 </script>
 
 <style lang="scss">
-a.nuxt-link-active {
-  color: blue;
+.router-link-active {
+  position: relative;
+  color: #F4C107;
+  //background-color: rgba(244, 193, 7, 1);
 }
 
-/* exact link will show the primary color for only the exact matching link */
-a.nuxt-link-exact-active {
-  color: #00c58e;
+.router-link-active svg {
+  stroke: #F4C107;
 }
+
+.router-link-active .link-icon {
+  border-color: #F4C107;
+}
+
+.router-link:hover {
+  color: #F4C107 !important;
+}
+
+.router-link:hover svg {
+  stroke: #F4C107 !important;
+}
+
+.router-link:hover .link-icon {
+  border-color: #F4C107 !important;
+}
+
+.router-link-active::after {
+  content: "";
+  position: absolute;
+  top: 40%;
+  right: 10px;
+  bottom: 0;
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: 100%;
+  background-color: #F4C107;
+}
+
+//a.nuxt-link-active {
+//  color: blue;
+//}
+
+/* exact link will show the primary color for only the exact matching link */
+//a.nuxt-link-exact-active {
+//  color: #00c58e;
+//}
 </style>
