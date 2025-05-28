@@ -4,141 +4,141 @@
     {
       "name": "vite:load-fallback",
       "result": "var isPrototype = require('./_isPrototype'),\n    nativeKeys = require('./_nativeKeys');\n\n/** Used for built-in method references. */\nvar objectProto = Object.prototype;\n\n/** Used to check objects for own properties. */\nvar hasOwnProperty = objectProto.hasOwnProperty;\n\n/**\n * The base implementation of `_.keys` which doesn't treat sparse arrays as dense.\n *\n * @private\n * @param {Object} object The object to query.\n * @returns {Array} Returns the array of property names.\n */\nfunction baseKeys(object) {\n  if (!isPrototype(object)) {\n    return nativeKeys(object);\n  }\n  var result = [];\n  for (var key in Object(object)) {\n    if (hasOwnProperty.call(object, key) && key != 'constructor') {\n      result.push(key);\n    }\n  }\n  return result;\n}\n\nmodule.exports = baseKeys;\n",
-      "start": 1748415692952,
-      "end": 1748415692993,
+      "start": 1748427022226,
+      "end": 1748427022275,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1748415692993,
-      "end": 1748415692993,
+      "start": 1748427022275,
+      "end": 1748427022275,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1748415692993,
-      "end": 1748415692993,
+      "start": 1748427022275,
+      "end": 1748427022275,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1748415692993,
-      "end": 1748415692993,
+      "start": 1748427022275,
+      "end": 1748427022275,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1748415692993,
-      "end": 1748415692993,
+      "start": 1748427022275,
+      "end": 1748427022275,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1748415692993,
-      "end": 1748415692993,
+      "start": 1748427022275,
+      "end": 1748427022275,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1748415692993,
-      "end": 1748415692993,
+      "start": 1748427022275,
+      "end": 1748427022275,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1748415692993,
-      "end": 1748415692993,
+      "start": 1748427022275,
+      "end": 1748427022275,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1748415692993,
-      "end": 1748415692993,
+      "start": 1748427022275,
+      "end": 1748427022275,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1748415692993,
-      "end": 1748415692993,
+      "start": 1748427022275,
+      "end": 1748427022275,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1748415692993,
-      "end": 1748415692993,
+      "start": 1748427022275,
+      "end": 1748427022275,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748415692993,
-      "end": 1748415692993,
+      "start": 1748427022275,
+      "end": 1748427022275,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1748415692993,
-      "end": 1748415692993,
+      "start": 1748427022275,
+      "end": 1748427022275,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1748415692993,
-      "end": 1748415692993,
+      "start": 1748427022275,
+      "end": 1748427022275,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1748415692993,
-      "end": 1748415692993,
+      "start": 1748427022275,
+      "end": 1748427022275,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748415692993,
-      "end": 1748415692993,
+      "start": 1748427022275,
+      "end": 1748427022275,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1748415692993,
-      "end": 1748415692993,
+      "start": 1748427022275,
+      "end": 1748427022275,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1748415692993,
-      "end": 1748415692993,
+      "start": 1748427022275,
+      "end": 1748427022275,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1748415692993,
-      "end": 1748415692993,
+      "start": 1748427022275,
+      "end": 1748427022275,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1748415692993,
-      "end": 1748415692993,
+      "start": 1748427022275,
+      "end": 1748427022275,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1748415692993,
-      "end": 1748415692993,
+      "start": 1748427022275,
+      "end": 1748427022275,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1748415692993,
-      "end": 1748415692993,
+      "start": 1748427022275,
+      "end": 1748427022275,
       "order": "normal"
     },
     {
       "name": "commonjs",
       "result": "import * as commonjsHelpers from \"\u0000commonjsHelpers.js\";\nimport require$$0 from \"\\u0000D:/projects/nuxt/workix-nuxt-front/node_modules/lodash/_isPrototype.js?commonjs-proxy\";\nimport require$$1 from \"\\u0000D:/projects/nuxt/workix-nuxt-front/node_modules/lodash/_nativeKeys.js?commonjs-proxy\";\n\nvar isPrototype = require$$0,\n    nativeKeys = require$$1;\n\n/** Used for built-in method references. */\nvar objectProto = Object.prototype;\n\n/** Used to check objects for own properties. */\nvar hasOwnProperty = objectProto.hasOwnProperty;\n\n/**\n * The base implementation of `_.keys` which doesn't treat sparse arrays as dense.\n *\n * @private\n * @param {Object} object The object to query.\n * @returns {Array} Returns the array of property names.\n */\nfunction baseKeys(object) {\n  if (!isPrototype(object)) {\n    return nativeKeys(object);\n  }\n  var result = [];\n  for (var key in Object(object)) {\n    if (hasOwnProperty.call(object, key) && key != 'constructor') {\n      result.push(key);\n    }\n  }\n  return result;\n}\n\nvar _baseKeys = baseKeys;\n\nexport default /*@__PURE__*/commonjsHelpers.getDefaultExportFromCjs(_baseKeys);\nexport { _baseKeys as __moduleExports };",
-      "start": 1748415692993,
-      "end": 1748415693060,
+      "start": 1748427022275,
+      "end": 1748427022347,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -151,92 +151,92 @@
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1748415693060,
-      "end": 1748415693060,
+      "start": 1748427022347,
+      "end": 1748427022347,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1748415693060,
-      "end": 1748415693060,
+      "start": 1748427022347,
+      "end": 1748427022347,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1748415693060,
-      "end": 1748415693060,
+      "start": 1748427022347,
+      "end": 1748427022347,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1748415693060,
-      "end": 1748415693060,
+      "start": 1748427022347,
+      "end": 1748427022347,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1748415693060,
-      "end": 1748415693060,
+      "start": 1748427022347,
+      "end": 1748427022347,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1748415693060,
-      "end": 1748415693060,
+      "start": 1748427022347,
+      "end": 1748427022347,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1748415693060,
-      "end": 1748415693060,
+      "start": 1748427022347,
+      "end": 1748427022347,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1748415693060,
-      "end": 1748415693061,
+      "start": 1748427022347,
+      "end": 1748427022347,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1748415693061,
-      "end": 1748415693061,
+      "start": 1748427022347,
+      "end": 1748427022347,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1748415693061,
-      "end": 1748415693061,
+      "start": 1748427022347,
+      "end": 1748427022347,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1748415693061,
-      "end": 1748415693061,
+      "start": 1748427022347,
+      "end": 1748427022347,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1748415693061,
-      "end": 1748415693061,
+      "start": 1748427022347,
+      "end": 1748427022347,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1748415693061,
-      "end": 1748415693061,
+      "start": 1748427022347,
+      "end": 1748427022347,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1748415693061,
-      "end": 1748415693061,
+      "start": 1748427022347,
+      "end": 1748427022347,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1748415693061,
-      "end": 1748415693061,
+      "start": 1748427022347,
+      "end": 1748427022347,
       "order": "normal"
     }
   ]

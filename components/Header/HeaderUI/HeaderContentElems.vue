@@ -186,7 +186,42 @@
               </div>
             </template>
             <template v-slot:headerContentText>
-              <h3>{{ $t('Русский') }}</h3>
+              <div class="flex items-center gap-3">
+                <h3>{{ $t('Язык') }}:</h3>
+                <div>
+                    <button @click="toggleMenu"
+                            class="inline-flex justify-center items-center w-full rounded-3xl border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none"
+                            :class="{'!bg-gray-50': open}"
+                    >
+                      <img :src="currentLang === 'ru' ? '/icons/ru.svg' : '/icons/us.svg'" class="w-5 h-5 mr-2 rounded-sm" />
+                      {{ currentLang === 'ru' ? 'Русский' : 'English' }}
+                      <svg
+                          class="ml-2 h-5 w-5 transition-all ease-in-out duration-300"
+                          :class="{'!rotate-180': open}"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M5.23 7.21a.75.75 0 011.06.02L10 11.585l3.71-4.355a.75.75 0 011.14.976l-4.25 5a.75.75 0 01-1.14 0l-4.25-5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                      </svg>
+                    </button>
+
+                    <Transition name="fade">
+                      <div v-if="open" class="absolute z-10 mt-2 w-40 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+                        <div class="py-1 text-sm text-gray-700">
+                          <button @click="setLang('ru')" class="flex items-center w-full px-4 py-2 hover:bg-gray-100">
+                            <img src="/icons/ru.svg" class="w-5 h-5 mr-2 rounded-lg" />
+                            Русский
+                          </button>
+                          <button @click="setLang('en')" class="flex items-center w-full px-4 py-2 hover:bg-gray-100">
+                            <img src="/icons/us.svg" class="w-5 h-5 mr-2 rounded-lg" />
+                            English
+                          </button>
+                        </div>
+                      </div>
+                    </Transition>
+                  </div>
+              </div>
             </template>
           </HeaderContentLink>
           <HeaderContentLink v-if="loadCurrentUser.user.role.name_en !== 'admin'" to="profile">
@@ -250,6 +285,24 @@ onMounted(()=>[
 onMounted(()=> {
   loadNotification.loadNotification()
 })
+
+import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const open = ref(false)
+const currentLang = ref('ru')
+
+const { locale } = useI18n()
+
+function toggleMenu() {
+  open.value = !open.value
+}
+
+function setLang(lang) {
+  currentLang.value = lang
+  open.value = false
+  locale.value = lang
+}
 </script>
 
 <style lang="scss">

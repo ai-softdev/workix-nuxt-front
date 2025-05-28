@@ -856,7 +856,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: __nuxt_page_meta$1 == null ? void 0 : __nuxt_page_meta$1.redirect,
-    component: () => import("./_nuxt/base-BnFbd4zS.js").then((m) => m.default || m),
+    component: () => import("./_nuxt/base-CLF8a4fV.js").then((m) => m.default || m),
     children: [
       {
         name: "base-chat",
@@ -864,7 +864,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$s == null ? void 0 : __nuxt_page_meta$s.redirect,
-        component: () => import("./_nuxt/chat-D3PhFCNn.js").then((m) => m.default || m),
+        component: () => import("./_nuxt/chat-DeTTUyNh.js").then((m) => m.default || m),
         children: [
           {
             name: "base-chat-id",
@@ -872,7 +872,7 @@ const _routes = [
             meta: {},
             alias: [],
             redirect: __nuxt_page_meta$t == null ? void 0 : __nuxt_page_meta$t.redirect,
-            component: () => import("./_nuxt/_id_-BiTx4U7f.js").then((m) => m.default || m)
+            component: () => import("./_nuxt/_id_-DpFv_666.js").then((m) => m.default || m)
           }
         ]
       },
@@ -882,7 +882,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$r == null ? void 0 : __nuxt_page_meta$r.redirect,
-        component: () => import("./_nuxt/index-DlOQZ8_8.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/index-UpKt6CvL.js").then((m) => m.default || m)
       },
       {
         name: "base-companies-id",
@@ -890,7 +890,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$q == null ? void 0 : __nuxt_page_meta$q.redirect,
-        component: () => import("./_nuxt/_id_-Dj2Meh17.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/_id_-BX_tnVkx.js").then((m) => m.default || m)
       },
       {
         name: "base-companies-department-id",
@@ -898,7 +898,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$p == null ? void 0 : __nuxt_page_meta$p.redirect,
-        component: () => import("./_nuxt/_id_-BG7Mwnh6.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/_id_-BIJBKydo.js").then((m) => m.default || m)
       },
       {
         name: "base-companies-department",
@@ -906,7 +906,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$o == null ? void 0 : __nuxt_page_meta$o.redirect,
-        component: () => import("./_nuxt/index-94aMlM5F.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/index-OoEHvvQO.js").then((m) => m.default || m)
       },
       {
         name: "base-companies",
@@ -914,7 +914,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$n == null ? void 0 : __nuxt_page_meta$n.redirect,
-        component: () => import("./_nuxt/index-CibI-48c.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/index-CVZpDfDt.js").then((m) => m.default || m)
       },
       {
         name: "base-companies-news-id",
@@ -938,7 +938,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$k == null ? void 0 : __nuxt_page_meta$k.redirect,
-        component: () => import("./_nuxt/_slug_-c61uthjT.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/_slug_-D2pOGnRy.js").then((m) => m.default || m)
       },
       {
         name: "base-documents",
@@ -946,7 +946,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$j == null ? void 0 : __nuxt_page_meta$j.redirect,
-        component: () => import("./_nuxt/index-DxBuXt-a.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/index-qlrn9Fsl.js").then((m) => m.default || m)
       },
       {
         name: "base-documents-signification-slug",
@@ -970,7 +970,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$g == null ? void 0 : __nuxt_page_meta$g.redirect,
-        component: () => import("./_nuxt/_id_-DmSNYCRj.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/_id_-D3jmnMhF.js").then((m) => m.default || m)
       },
       {
         name: "base-objects",
@@ -978,7 +978,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$f == null ? void 0 : __nuxt_page_meta$f.redirect,
-        component: () => import("./_nuxt/index-BmCJzSua.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/index-Der6BZFl.js").then((m) => m.default || m)
       },
       {
         name: "base-profile",
@@ -986,7 +986,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$e == null ? void 0 : __nuxt_page_meta$e.redirect,
-        component: () => import("./_nuxt/profile-CM2r4OlB.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/profile-smDkIfPQ.js").then((m) => m.default || m)
       },
       {
         name: "base-sales",
@@ -1010,7 +1010,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$9 == null ? void 0 : __nuxt_page_meta$9.redirect,
-        component: () => import("./_nuxt/storage-Izo69FNA.js").then((m) => m.default || m),
+        component: () => import("./_nuxt/storage-Cq6u9U4z.js").then((m) => m.default || m),
         children: [
           {
             name: "base-storage-slug-nestedSlug",
@@ -1036,7 +1036,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$8 == null ? void 0 : __nuxt_page_meta$8.redirect,
-        component: () => import("./_nuxt/_id_-Bgn6xobx.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/_id_-CGpju-lP.js").then((m) => m.default || m)
       },
       {
         name: "base-tasks",
@@ -1044,7 +1044,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$7 == null ? void 0 : __nuxt_page_meta$7.redirect,
-        component: () => import("./_nuxt/index-aKvbH6z7.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/index-viLntqVV.js").then((m) => m.default || m)
       },
       {
         name: "base-tests-exam",
@@ -1052,7 +1052,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$6 == null ? void 0 : __nuxt_page_meta$6.redirect,
-        component: () => import("./_nuxt/exam-Dq6jtQIK.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/exam-1NpOV7qG.js").then((m) => m.default || m)
       },
       {
         name: "base-tests",
@@ -1060,7 +1060,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$5 == null ? void 0 : __nuxt_page_meta$5.redirect,
-        component: () => import("./_nuxt/index-DFfyw-52.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/index-t4DTJDyR.js").then((m) => m.default || m)
       },
       {
         name: "base-tree",
@@ -1068,7 +1068,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$4 == null ? void 0 : __nuxt_page_meta$4.redirect,
-        component: () => import("./_nuxt/index-DYqXgk2e.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/index-DU0u-T0U.js").then((m) => m.default || m)
       },
       {
         name: "base-users-slug",
@@ -1076,7 +1076,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$3 == null ? void 0 : __nuxt_page_meta$3.redirect,
-        component: () => import("./_nuxt/_slug_-ItFNGHFj.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/_slug_-eq2Zfpit.js").then((m) => m.default || m)
       },
       {
         name: "base-users",
@@ -1084,7 +1084,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$2 == null ? void 0 : __nuxt_page_meta$2.redirect,
-        component: () => import("./_nuxt/index-B2ATYJqT.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/index-ByyiCsum.js").then((m) => m.default || m)
       }
     ]
   },
@@ -1094,7 +1094,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: __nuxt_page_meta == null ? void 0 : __nuxt_page_meta.redirect,
-    component: () => import("./_nuxt/index-M4M13Jcn.js").then((m) => m.default || m)
+    component: () => import("./_nuxt/index-BavJ-WPq.js").then((m) => m.default || m)
   }
 ];
 const _wrapIf = (component, props, slots) => {
@@ -1244,7 +1244,7 @@ const globalMiddleware = [
   manifest_45route_45rule
 ];
 const namedMiddleware = {
-  authorized: () => import("./_nuxt/authorized-B2KR22B2.js")
+  authorized: () => import("./_nuxt/authorized-DsTrJBTP.js")
 };
 const plugin$3 = /* @__PURE__ */ defineNuxtPlugin({
   name: "nuxt:router",
@@ -2741,8 +2741,8 @@ const revive_payload_server_eJ33V7gbc6 = /* @__PURE__ */ defineNuxtPlugin({
     }
   }
 });
-const LazyIcon = defineAsyncComponent(() => import("./_nuxt/Icon-CEQu5tsF.js").then((r) => r.default));
-const LazyIconCSS = defineAsyncComponent(() => import("./_nuxt/IconCSS-Oh054k0U.js").then((r) => r.default));
+const LazyIcon = defineAsyncComponent(() => import("./_nuxt/Icon-0volylWR.js").then((r) => r.default));
+const LazyIconCSS = defineAsyncComponent(() => import("./_nuxt/IconCSS-Bte9Vc5J.js").then((r) => r.default));
 const lazyGlobalComponents = [
   ["Icon", LazyIcon],
   ["IconCSS", LazyIconCSS]
@@ -10502,16 +10502,17 @@ let entry;
 }
 const entry$1 = (ssrContext) => entry(ssrContext);
 export {
-  onClickOutside as A,
-  useAppConfig as B,
-  useNuxtApp as C,
-  useDebounceFn as D,
-  computedAsync as E,
-  useMediaQuery as F,
-  useParallax as G,
-  useRoute as H,
-  defineNuxtRouteMiddleware as I,
-  useRequestHeader as J,
+  appConfig as A,
+  onClickOutside as B,
+  useAppConfig as C,
+  useNuxtApp as D,
+  useDebounceFn as E,
+  computedAsync as F,
+  useMediaQuery as G,
+  useParallax as H,
+  useRoute as I,
+  defineNuxtRouteMiddleware as J,
+  useRequestHeader as K,
   __nuxt_component_0 as _,
   useRouter as a,
   parseQuery as b,
@@ -10524,21 +10525,21 @@ export {
   hasProtocol as h,
   defineStore as i,
   joinURL as j,
-  useSeoMeta as k,
-  __nuxt_component_0$1 as l,
-  directiveHooks as m,
+  useI18n as k,
+  useSeoMeta as l,
+  __nuxt_component_0$1 as m,
   nuxtLinkDefaults as n,
-  notNullish as o,
+  directiveHooks as o,
   parseURL as p,
-  noop as q,
-  tryOnScopeDispose as r,
-  toRef as s,
+  notNullish as q,
+  noop as r,
+  tryOnScopeDispose as s,
   toValue as t,
   useHead as u,
-  useMouse as v,
+  toRef as v,
   withTrailingSlash as w,
-  useWindowScroll as x,
-  mergeConfig as y,
-  appConfig as z
+  useMouse as x,
+  useWindowScroll as y,
+  mergeConfig as z
 };
 //# sourceMappingURL=server.mjs.map
