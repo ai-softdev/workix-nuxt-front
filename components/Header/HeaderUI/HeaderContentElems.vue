@@ -120,7 +120,7 @@
       </div>
       <Transition
         name="slide-fade"
-        class="absolute w-[500px] right-0 max-[800px]:fixed p-4 z-[100] top-12 max-[800px]:top-0 max-[800px]:h-screen max-[800px]:w-screen max-[900px]:-right-44 max-[800px]:left-0 dark:shadow-white dark:shadow-md transition-all duration-200 rounded-md shadow-lg bg-gray-100 dark:bg-gray-600"
+        class="absolute border bg-white w-[500px] right-0 max-[800px]:fixed p-8 z-[100] top-12 max-[800px]:top-0 max-[800px]:h-screen max-[800px]:w-screen max-[900px]:-right-44 max-[800px]:left-0 dark:shadow-white dark:shadow-md transition-all duration-200 rounded-3xl shadow-notifications dark:bg-gray-600"
         :class="{'min-h-full' : loadCurrentUser.openNotification === true, 'min-h-0 opacity-0' : loadCurrentUser.openNotification === false}">
         <HeaderContentNotification class="select-none " v-if="loadCurrentUser.openNotification" :key="readCount"
                                    @openNotification="loadCurrentUser.openNotification = false"/>
@@ -161,45 +161,27 @@
       </div>
       <Transition
         name="slide-fade"
-        class="absolute max-md:fixed max-md:left-0 right-0 p-4 z-[100] top-12 max-[800px]:-top-0 max-[800px]:h-screen max-[800px]:w-screen max-[800px]:-right-10 dark:shadow-white dark:shadow-md transition-all duration-200 rounded-md shadow-lg bg-gray-100 dark:bg-gray-600 w-[300px]"
+        class="absolute max-md:fixed max-md:left-0 right-0 p-8 z-[100] top-12 max-[800px]:-top-0 max-[800px]:h-screen max-[800px]:w-screen max-[800px]:-right-10 dark:shadow-white dark:shadow-md transition-all duration-200 rounded-3xl shadow-profile bg-white border dark:bg-gray-600 w-[300px]"
         :class="{'min-h-full' : loadCurrentUser.openSettings === true, 'min-h-0 opacity-0 ' : loadCurrentUser.openSettings === false}">
         <div v-if="loadCurrentUser.openSettings" class="flex flex-col gap-y-6 select-none">
-          <div class="ml-auto justify-end hidden w-2/12 max-[800px]:flex" @click="loadCurrentUser.openSettings = false">
-            <svg width="25px" height="25px" class="fill-gray-400 dark:fill-white" viewBox="-2 0 32 32" version="1.1"
-                 xmlns="http://www.w3.org/2000/svg">
-              <g id="Page-1" stroke="none" stroke-width="1" fill-rule="evenodd">
-                <g id="Icon-Set" transform="translate(-466.000000, -931.000000)">
-                  <path
-                    d="M490,931 L470,931 C467.791,931 466,932.791 466,935 L466,955 C466,957.209 467.791,959 470,959 L473,959 L473,957 L470,957 C468.896,957 468,956.104 468,955 L468,935 C468,933.896 468.896,933 470,933 L490,933 C491.104,933 492,933.896 492,935 L492,955 C492,956.104 491.104,957 490,957 L487,957 L487,959 L490,959 C492.209,959 494,957.209 494,955 L494,935 C494,932.791 492.209,931 490,931 L490,931 Z M487.657,944.243 L480.758,937.343 C480.549,937.135 480.272,937.046 480,937.06 C479.728,937.046 479.451,937.135 479.243,937.343 L472.343,944.243 C471.952,944.633 471.952,945.267 472.343,945.657 C472.733,946.048 473.367,946.048 473.758,945.657 L479,940.414 L479,962 C479,962.553 479.447,963 480,963 C480.552,963 481,962.553 481,962 L481,940.414 L486.243,945.657 C486.633,946.048 487.267,946.048 487.657,945.657 C488.048,945.267 488.048,944.633 487.657,944.243 L487.657,944.243 Z"
-                    id="arrow-top">
-                  </path>
-                </g>
-              </g>
-            </svg>
-          </div>
+<!--          <div class="ml-auto justify-end hidden w-2/12 max-[800px]:flex" @click="loadCurrentUser.openSettings = false">-->
+<!--            <svg width="25px" height="25px" class="fill-gray-400 dark:fill-white" viewBox="-2 0 32 32" version="1.1"-->
+<!--                 xmlns="http://www.w3.org/2000/svg">-->
+<!--              <g id="Page-1" stroke="none" stroke-width="1" fill-rule="evenodd">-->
+<!--                <g id="Icon-Set" transform="translate(-466.000000, -931.000000)">-->
+<!--                  <path-->
+<!--                    d="M490,931 L470,931 C467.791,931 466,932.791 466,935 L466,955 C466,957.209 467.791,959 470,959 L473,959 L473,957 L470,957 C468.896,957 468,956.104 468,955 L468,935 C468,933.896 468.896,933 470,933 L490,933 C491.104,933 492,933.896 492,935 L492,955 C492,956.104 491.104,957 490,957 L487,957 L487,959 L490,959 C492.209,959 494,957.209 494,955 L494,935 C494,932.791 492.209,931 490,931 L490,931 Z M487.657,944.243 L480.758,937.343 C480.549,937.135 480.272,937.046 480,937.06 C479.728,937.046 479.451,937.135 479.243,937.343 L472.343,944.243 C471.952,944.633 471.952,945.267 472.343,945.657 C472.733,946.048 473.367,946.048 473.758,945.657 L479,940.414 L479,962 C479,962.553 479.447,963 480,963 C480.552,963 481,962.553 481,962 L481,940.414 L486.243,945.657 C486.633,946.048 487.267,946.048 487.657,945.657 C488.048,945.267 488.048,944.633 487.657,944.243 L487.657,944.243 Z"-->
+<!--                    id="arrow-top">-->
+<!--                  </path>-->
+<!--                </g>-->
+<!--              </g>-->
+<!--            </svg>-->
+<!--          </div>-->
           <HeaderContentLink>
             <template v-slot:headerContentIcon>
               <div>
-                <svg width="30px" height="30px" viewBox="0 -4 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g clip-path="url(#clip0_503_2726)">
-                    <rect x="0.25" y="0.25" width="27.5" height="19.5" rx="1.75" fill="white" stroke="#F5F5F5"
-                          stroke-width="0.5"/>
-                    <mask id="mask0_503_2726" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0"
-                          width="28" height="20">
-                      <rect x="0.25" y="0.25" width="27.5" height="19.5" rx="1.75" fill="white" stroke="white"
-                            stroke-width="0.5"/>
-                    </mask>
-                    <g mask="url(#mask0_503_2726)">
-                      <path fill-rule="evenodd" clip-rule="evenodd" d="M0 13.3333H28V6.66667H0V13.3333Z"
-                            fill="#0C47B7"/>
-                      <path fill-rule="evenodd" clip-rule="evenodd" d="M0 20H28V13.3333H0V20Z" fill="#E53B35"/>
-                    </g>
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_503_2726">
-                      <rect width="28" height="20" rx="2" fill="white"/>
-                    </clipPath>
-                  </defs>
+                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12.913 17.5H20.087M12.913 17.5L11 21.5M12.913 17.5L15.7783 11.509C16.0092 11.0263 16.1246 10.7849 16.2826 10.7086C16.4199 10.6423 16.5801 10.6423 16.7174 10.7086C16.8754 10.7849 16.9908 11.0263 17.2217 11.509L20.087 17.5M20.087 17.5L22 21.5M2 5.5H8M8 5.5H11.5M8 5.5V3.5M11.5 5.5H14M11.5 5.5C11.0039 8.45729 9.85259 11.1362 8.16555 13.3844M8.16555 13.3844C8.76265 13.8421 9.38747 14.2248 10 14.5M8.16555 13.3844C6.81302 12.3478 5.60276 10.9266 5 9.5M8.16555 13.3844C6.56086 15.5229 4.47143 17.2718 2 18.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
             </template>
@@ -209,20 +191,16 @@
           </HeaderContentLink>
           <HeaderContentLink v-if="loadCurrentUser.user.role.name_en !== 'admin'" to="profile">
             <template v-slot:headerContentIcon>
-              <svg width="30px" height="30px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M3 21C3 21.5523 3.44772 22 4 22C4.55228 22 5 21.5523 5 21H3ZM11.8584 15.0608C12.4051 15.139 12.9117 14.7592 12.9899 14.2125C13.0681 13.6658 12.6883 13.1592 12.1416 13.081L11.8584 15.0608ZM17.29 17.2929C16.8994 17.6834 16.8994 18.3166 17.29 18.7071C17.6805 19.0976 18.3137 19.0976 18.7042 18.7071L17.29 17.2929ZM15.0916 14.7507C14.954 15.2856 15.2759 15.8308 15.8108 15.9684C16.3457 16.1061 16.8908 15.7841 17.0285 15.2493L15.0916 14.7507ZM17.9971 20C17.4448 20 16.9971 20.4477 16.9971 21C16.9971 21.5523 17.4448 22 17.9971 22V20ZM18.0071 22C18.5594 22 19.0071 21.5523 19.0071 21C19.0071 20.4477 18.5594 20 18.0071 20V22ZM14 7C14 8.65685 12.6569 10 11 10V12C13.7614 12 16 9.76142 16 7H14ZM11 10C9.34315 10 8 8.65685 8 7H6C6 9.76142 8.23858 12 11 12V10ZM8 7C8 5.34315 9.34315 4 11 4V2C8.23858 2 6 4.23858 6 7H8ZM11 4C12.6569 4 14 5.34315 14 7H16C16 4.23858 13.7614 2 11 2V4ZM5 21C5 17.6863 7.68629 15 11 15V13C6.58172 13 3 16.5817 3 21H5ZM11 15C11.292 15 11.5786 15.0208 11.8584 15.0608L12.1416 13.081C11.7682 13.0276 11.387 13 11 13V15ZM18.997 15.5C18.997 15.6732 18.9516 15.8053 18.6776 16.0697C18.5239 16.218 18.3429 16.3653 18.0919 16.574C17.8536 16.7723 17.5741 17.0087 17.29 17.2929L18.7042 18.7071C18.92 18.4913 19.1405 18.3033 19.3709 18.1116C19.5887 17.9305 19.8452 17.7223 20.0665 17.5087C20.5426 17.0493 20.997 16.4314 20.997 15.5H18.997ZM17.997 14.5C18.5493 14.5 18.997 14.9477 18.997 15.5H20.997C20.997 13.8431 19.6539 12.5 17.997 12.5V14.5ZM17.0285 15.2493C17.1396 14.8177 17.5325 14.5 17.997 14.5V12.5C16.5978 12.5 15.4246 13.457 15.0916 14.7507L17.0285 15.2493ZM17.9971 22H18.0071V20H17.9971V22Z"
-                />
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.3163 19.4384C5.92462 18.0052 7.34492 17 9 17H15C16.6551 17 18.0754 18.0052 18.6837 19.4384M16 9.5C16 11.7091 14.2091 13.5 12 13.5C9.79086 13.5 8 11.7091 8 9.5C8 7.29086 9.79086 5.5 12 5.5C14.2091 5.5 16 7.29086 16 9.5ZM22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </template>
             <template v-slot:headerContentText>{{ $t('Личная информация') }}</template>
           </HeaderContentLink>
           <HeaderContentLink v-if="loadCurrentUser.user.role.name_en !== 'admin'" to="companies">
             <template v-slot:headerContentIcon>
-              <svg width="30px" height="30px" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg"
-                   xmlns:xlink="http://www.w3.org/1999/xlink">
-                <path
-                  d="M8 2L8 6L4 6L4 48L46 48L46 14L30 14L30 6L26 6L26 2 Z M 10 4L24 4L24 8L28 8L28 46L19 46L19 39L15 39L15 46L6 46L6 8L10 8 Z M 10 10L10 12L12 12L12 10 Z M 14 10L14 12L16 12L16 10 Z M 18 10L18 12L20 12L20 10 Z M 22 10L22 12L24 12L24 10 Z M 10 15L10 19L12 19L12 15 Z M 14 15L14 19L16 19L16 15 Z M 18 15L18 19L20 19L20 15 Z M 22 15L22 19L24 19L24 15 Z M 30 16L44 16L44 46L30 46 Z M 32 18L32 20L34 20L34 18 Z M 36 18L36 20L38 20L38 18 Z M 40 18L40 20L42 20L42 18 Z M 10 21L10 25L12 25L12 21 Z M 14 21L14 25L16 25L16 21 Z M 18 21L18 25L20 25L20 21 Z M 22 21L22 25L24 25L24 21 Z M 32 22L32 24L34 24L34 22 Z M 36 22L36 24L38 24L38 22 Z M 40 22L40 24L42 24L42 22 Z M 32 26L32 28L34 28L34 26 Z M 36 26L36 28L38 28L38 26 Z M 40 26L40 28L42 28L42 26 Z M 10 27L10 31L12 31L12 27 Z M 14 27L14 31L16 31L16 27 Z M 18 27L18 31L20 31L20 27 Z M 22 27L22 31L24 31L24 27 Z M 32 30L32 32L34 32L34 30 Z M 36 30L36 32L38 32L38 30 Z M 40 30L40 32L42 32L42 30 Z M 10 33L10 37L12 37L12 33 Z M 14 33L14 37L16 37L16 33 Z M 18 33L18 37L20 37L20 33 Z M 22 33L22 37L24 37L24 33 Z M 32 34L32 36L34 36L34 34 Z M 36 34L36 36L38 36L38 34 Z M 40 34L40 36L42 36L42 34 Z M 32 38L32 40L34 40L34 38 Z M 36 38L36 40L38 40L38 38 Z M 40 38L40 40L42 40L42 38 Z M 10 39L10 44L12 44L12 39 Z M 22 39L22 44L24 44L24 39 Z M 32 42L32 44L34 44L34 42 Z M 36 42L36 44L38 44L38 42 Z M 40 42L40 44L42 44L42 42Z"/>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 16V12M12 8H12.01M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </template>
             <template v-slot:headerContentText>
@@ -231,23 +209,15 @@
           </HeaderContentLink>
           <HeaderContentLink v-if="loadCurrentUser.user.role.name_en !== 'admin'" to="tasks">
             <template v-slot:headerContentIcon>
-              <svg width="30px" class="dark:stroke-white stroke-black" height="30px" viewBox="0 0 24 24" fill="none"
-                   xmlns="http://www.w3.org/2000/svg">
-                <path d="M12.37 8.87988H17.62" stroke-width="1.5" stroke-linecap="round"
-                      stroke-linejoin="round"/>
-                <path d="M6.38 8.87988L7.13 9.62988L9.38 7.37988" stroke-width="1.5"
-                      stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M12.37 15.8799H17.62" stroke-width="1.5" stroke-linecap="round"
-                      stroke-linejoin="round"/>
-                <path d="M6.38 15.8799L7.13 16.6299L9.38 14.3799" stroke-width="1.5"
-                      stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z"
-                      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 15L8 17L12.5 12.5M8 8V5.2C8 4.0799 8 3.51984 8.21799 3.09202C8.40973 2.71569 8.71569 2.40973 9.09202 2.21799C9.51984 2 10.0799 2 11.2 2H18.8C19.9201 2 20.4802 2 20.908 2.21799C21.2843 2.40973 21.5903 2.71569 21.782 3.09202C22 3.51984 22 4.0799 22 5.2V12.8C22 13.9201 22 14.4802 21.782 14.908C21.5903 15.2843 21.2843 15.5903 20.908 15.782C20.4802 16 19.9201 16 18.8 16H16M5.2 22H12.8C13.9201 22 14.4802 22 14.908 21.782C15.2843 21.5903 15.5903 21.2843 15.782 20.908C16 20.4802 16 19.9201 16 18.8V11.2C16 10.0799 16 9.51984 15.782 9.09202C15.5903 8.71569 15.2843 8.40973 14.908 8.21799C14.4802 8 13.9201 8 12.8 8H5.2C4.0799 8 3.51984 8 3.09202 8.21799C2.71569 8.40973 2.40973 8.71569 2.21799 9.09202C2 9.51984 2 10.0799 2 11.2V18.8C2 19.9201 2 20.4802 2.21799 20.908C2.40973 21.2843 2.71569 21.5903 3.09202 21.782C3.51984 22 4.07989 22 5.2 22Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </template>
             <template v-slot:headerContentText>{{ $t('Мои задания') }}</template>
           </HeaderContentLink>
-          <TheButton class="rounded-full py-2" :type="'danger'" @click="nuxtStorage.localStorage.removeItem('token'); router.push('/')">
+          <TheButton class="rounded-full flex items-center justify-center hover:bg-gray-200 gap-3 py-2 bg-porcelain border !text-sunset transition-all ease-in-out duration-300"
+                     @click="nuxtStorage.localStorage.removeItem('token'); router.push('/')">
+            <img src="/icons/exit.svg" alt="exit">
             {{ $t('Выйти') }}
           </TheButton>
         </div>

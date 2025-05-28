@@ -175,7 +175,8 @@ useHead({
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-semiCyan
+  @apply bg-golden;
+  @apply rounded-lg
 }
 
 .left-fade-enter-active {

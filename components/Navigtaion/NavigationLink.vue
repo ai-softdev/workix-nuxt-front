@@ -28,17 +28,17 @@ const props = defineProps({
 </script>
 
 <style lang="scss">
-.router-link-active {
+.router-link-active.router-link {
   position: relative;
   color: #F4C107;
   //background-color: rgba(244, 193, 7, 1);
 }
 
-.router-link-active svg {
+.router-link-active.router-link svg {
   stroke: #F4C107;
 }
 
-.router-link-active .link-icon {
+.router-link-active.router-link .link-icon {
   border-color: #F4C107;
 }
 
@@ -54,7 +54,7 @@ const props = defineProps({
   border-color: #F4C107 !important;
 }
 
-.router-link-active::after {
+.router-link-active.router-link::after {
   content: "";
   position: absolute;
   top: 40%;

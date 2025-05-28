@@ -4,63 +4,63 @@
     {
       "name": "vite:load-fallback",
       "result": "import {defineStore} from \"pinia\";\nimport axios from \"~/composables/axios\";\nimport {toast} from \"vue3-toastify\";\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\n\nexport const useNotification = defineStore('notification', {\n  state:()=>({\n    notification: []\n  }),\n  getters: {\n    get_notification: (state) => state.notification\n  },\n  actions: {\n    loadNotification(){\n      axios.get(`notification/list`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res=>{\n        this.notification = res.data\n      })\n    },\n    readNotice(params: {id: any}){\n      axios.post(`notification/make-read/${params.id}`, {}, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\n        }\n      }).then(res => {\n        this.notification = res.data\n        this.loadNotification()\n        toast.success('Прочитано', {autoClose: 1500, theme: \"auto\"})\n      })\n    }\n  }\n})",
-      "start": 1748346377194,
-      "end": 1748346378115,
+      "start": 1748415731100,
+      "end": 1748415731364,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1748346378115,
-      "end": 1748346378115,
+      "start": 1748415731364,
+      "end": 1748415731364,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1748346378115,
-      "end": 1748346378115,
+      "start": 1748415731364,
+      "end": 1748415731364,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1748346378115,
-      "end": 1748346378115,
+      "start": 1748415731364,
+      "end": 1748415731364,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1748346378115,
-      "end": 1748346378115,
+      "start": 1748415731364,
+      "end": 1748415731364,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1748346378115,
-      "end": 1748346378115,
+      "start": 1748415731364,
+      "end": 1748415731364,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1748346378115,
-      "end": 1748346378115,
+      "start": 1748415731364,
+      "end": 1748415731364,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1748346378115,
-      "end": 1748346378115,
+      "start": 1748415731364,
+      "end": 1748415731364,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1748346378115,
-      "end": 1748346378115,
+      "start": 1748415731364,
+      "end": 1748415731364,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineStore } from \"pinia\";\nimport axios from \"~/composables/axios\";\nimport { toast } from \"vue3-toastify\";\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\nexport const useNotification = defineStore(\"notification\", {\n  state: () => ({\n    notification: []\n  }),\n  getters: {\n    get_notification: (state) => state.notification\n  },\n  actions: {\n    loadNotification() {\n      axios.get(`notification/list`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.notification = res.data;\n      });\n    },\n    readNotice(params) {\n      axios.post(`notification/make-read/${params.id}`, {}, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.notification = res.data;\n        this.loadNotification();\n        toast.success(\"Прочитано\", { autoClose: 1500, theme: \"auto\" });\n      });\n    }\n  }\n});\n",
-      "start": 1748346378115,
-      "end": 1748346378886,
+      "start": 1748415731364,
+      "end": 1748415732067,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -76,230 +76,230 @@
     },
     {
       "name": "vite:json",
-      "start": 1748346378886,
-      "end": 1748346378886,
+      "start": 1748415732067,
+      "end": 1748415732067,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1748346378886,
-      "end": 1748346378886,
+      "start": 1748415732068,
+      "end": 1748415732068,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1748346378887,
-      "end": 1748346378887,
+      "start": 1748415732068,
+      "end": 1748415732068,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1748346378887,
-      "end": 1748346378887,
+      "start": 1748415732068,
+      "end": 1748415732068,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748346378887,
-      "end": 1748346378887,
+      "start": 1748415732068,
+      "end": 1748415732068,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748346378887,
-      "end": 1748346378887,
+      "start": 1748415732068,
+      "end": 1748415732068,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1748346378887,
-      "end": 1748346378887,
+      "start": 1748415732068,
+      "end": 1748415732068,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1748346378887,
-      "end": 1748346378887,
+      "start": 1748415732068,
+      "end": 1748415732068,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1748346378887,
-      "end": 1748346378888,
+      "start": 1748415732068,
+      "end": 1748415732068,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748346378888,
-      "end": 1748346378888,
+      "start": 1748415732068,
+      "end": 1748415732069,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1748346378889,
-      "end": 1748346378889,
+      "start": 1748415732069,
+      "end": 1748415732069,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1748346378890,
-      "end": 1748346378890,
+      "start": 1748415732070,
+      "end": 1748415732070,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1748346378890,
-      "end": 1748346378890,
+      "start": 1748415732070,
+      "end": 1748415732070,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1748346378890,
-      "end": 1748346378891,
+      "start": 1748415732070,
+      "end": 1748415732070,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1748346378892,
-      "end": 1748346378892,
+      "start": 1748415732071,
+      "end": 1748415732071,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1748346378893,
-      "end": 1748346378893,
+      "start": 1748415732071,
+      "end": 1748415732072,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1748346378894,
-      "end": 1748346378894,
+      "start": 1748415732072,
+      "end": 1748415732072,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1748346378894,
-      "end": 1748346378894,
+      "start": 1748415732072,
+      "end": 1748415732072,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1748346378894,
-      "end": 1748346378894,
+      "start": 1748415732072,
+      "end": 1748415732072,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1748346378894,
-      "end": 1748346378894,
+      "start": 1748415732072,
+      "end": 1748415732072,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1748346378894,
-      "end": 1748346378894,
+      "start": 1748415732072,
+      "end": 1748415732072,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1748346378895,
-      "end": 1748346378895,
+      "start": 1748415732073,
+      "end": 1748415732073,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1748346378895,
-      "end": 1748346378895,
+      "start": 1748415732073,
+      "end": 1748415732073,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1748346378898,
-      "end": 1748346378898,
+      "start": 1748415732075,
+      "end": 1748415732075,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1748346378898,
-      "end": 1748346378898,
+      "start": 1748415732075,
+      "end": 1748415732075,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1748346378899,
-      "end": 1748346378899,
+      "start": 1748415732075,
+      "end": 1748415732075,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1748346378899,
-      "end": 1748346378899,
+      "start": 1748415732075,
+      "end": 1748415732075,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1748346378904,
-      "end": 1748346378909,
+      "start": 1748415732075,
+      "end": 1748415732080,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1748346378904,
-      "end": 1748346378909,
+      "start": 1748415732075,
+      "end": 1748415732080,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1748346378910,
-      "end": 1748346378910,
+      "start": 1748415732080,
+      "end": 1748415732080,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1748346378910,
-      "end": 1748346378910,
+      "start": 1748415732080,
+      "end": 1748415732080,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1748346378910,
-      "end": 1748346378910,
+      "start": 1748415732080,
+      "end": 1748415732080,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1748346378910,
-      "end": 1748346378910,
+      "start": 1748415732080,
+      "end": 1748415732080,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1748346378911,
-      "end": 1748346378911,
+      "start": 1748415732080,
+      "end": 1748415732080,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1748346378911,
-      "end": 1748346378911,
+      "start": 1748415732080,
+      "end": 1748415732080,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1748346378912,
-      "end": 1748346378912,
+      "start": 1748415732081,
+      "end": 1748415732081,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1748346378912,
-      "end": 1748346378912,
+      "start": 1748415732081,
+      "end": 1748415732081,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1748346378912,
-      "end": 1748346378912,
+      "start": 1748415732081,
+      "end": 1748415732081,
       "order": "normal"
     }
   ]

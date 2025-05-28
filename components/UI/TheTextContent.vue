@@ -8,9 +8,7 @@ defineProps({
 </script>
 
 <template>
-  <div>
-    <p class="text-center dark:text-white text-black text-lg tracking-widest " :class="{'mb-10' : textType === 'pageTitle'}"><slot/></p>
-  </div>
+    <p class="text-center dark:text-white text-black text-lg " :class="{'mb-10' : textType === 'pageTitle'}"><slot/></p>
 </template>
 
 <style scoped lang="scss">

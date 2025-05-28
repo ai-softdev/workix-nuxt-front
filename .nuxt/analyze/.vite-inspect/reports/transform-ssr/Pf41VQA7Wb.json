@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { resolveComponent as _resolveComponent, withCtx as _withCtx, openBlock as _openBlock, createBlock as _createBlock, createCommentVNode as _createCommentVNode, createVNode as _createVNode, toDisplayString as _toDisplayString, mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderAttr as _ssrRenderAttr, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\"\n\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'CurrentCompanyNewsList',\n  __ssrInlineRender: true,\n  props: {\n  newsItem: {\n    type: Object,\n    default: () => {\n    }\n  }\n},\n  setup(__props) {\n\n\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  const _component_NuxtLink = _resolveComponent(\"NuxtLink\")!\n\n  _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"mt-10\" }, _attrs))}>`)\n  _push(_ssrRenderComponent(_component_NuxtLink, {\n    to: `/base/companies/news/${__props.newsItem.id}`,\n    class: \"transition-all cursor-pointer p-4 dark:border-gray-500 dark:hover:bg-gray-700 hover:bg-gray-200 hover:rounded-lg flex gap-x-4 border-b\"\n  }, {\n    default: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(`<div class=\"\"${_scopeId}>`)\n        if (__props.newsItem.photo) {\n          _push(`<img class=\"w-[150px] h-[150px] rounded-lg\"${\n            _ssrRenderAttr(\"src\", __props.newsItem.photo)\n          } alt=\"\"${\n            _scopeId\n          }>`)\n        } else {\n          _push(`<!---->`)\n        }\n        _push(`</div><div class=\"w-7/12\"${\n          _scopeId\n        }><h1 class=\"tracking-widest text-2xl\"${\n          _scopeId\n        }>${\n          _ssrInterpolate(__props.newsItem.title)\n        }</h1><p class=\"break-words my-4\"${\n          _scopeId\n        }>${\n          _ssrInterpolate(__props.newsItem.description)\n        }</p></div>`)\n      } else {\n        return [\n          _createVNode(\"div\", { class: \"\" }, [\n            (__props.newsItem.photo)\n              ? (_openBlock(), _createBlock(\"img\", {\n                  key: 0,\n                  class: \"w-[150px] h-[150px] rounded-lg\",\n                  src: __props.newsItem.photo,\n                  alt: \"\"\n                }, null, 8, [\"src\"]))\n              : _createCommentVNode(\"\", true)\n          ]),\n          _createVNode(\"div\", { class: \"w-7/12\" }, [\n            _createVNode(\"h1\", { class: \"tracking-widest text-2xl\" }, _toDisplayString(__props.newsItem.title), 1),\n            _createVNode(\"p\", { class: \"break-words my-4\" }, _toDisplayString(__props.newsItem.description), 1)\n          ])\n        ]\n      }\n    }),\n    _: 1\n  }, _parent))\n  _push(`</div>`)\n}\n}\n\n})",
-      "start": 1748346382775,
-      "end": 1748346382775,
+      "start": 1748415735558,
+      "end": 1748415735558,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1748346382775,
-      "end": 1748346382775,
+      "start": 1748415735558,
+      "end": 1748415735558,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1748346382775,
-      "end": 1748346382775,
+      "start": 1748415735558,
+      "end": 1748415735558,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1748346382775,
-      "end": 1748346382775,
+      "start": 1748415735558,
+      "end": 1748415735558,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1748346382775,
-      "end": 1748346382775,
+      "start": 1748415735558,
+      "end": 1748415735558,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1748346382775,
-      "end": 1748346382775,
+      "start": 1748415735558,
+      "end": 1748415735558,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1748346382775,
-      "end": 1748346382775,
+      "start": 1748415735558,
+      "end": 1748415735558,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1748346382775,
-      "end": 1748346382775,
+      "start": 1748415735558,
+      "end": 1748415735558,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1748346382775,
-      "end": 1748346382775,
+      "start": 1748415735558,
+      "end": 1748415735558,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { resolveComponent as _resolveComponent, withCtx as _withCtx, openBlock as _openBlock, createBlock as _createBlock, createCommentVNode as _createCommentVNode, createVNode as _createVNode, toDisplayString as _toDisplayString, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderAttr as _ssrRenderAttr, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"CurrentCompanyNewsList\",\n  __ssrInlineRender: true,\n  props: {\n    newsItem: {\n      type: Object,\n      default: () => {\n      }\n    }\n  },\n  setup(__props) {\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_NuxtLink = _resolveComponent(\"NuxtLink\");\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"mt-10\" }, _attrs))}>`);\n      _push(_ssrRenderComponent(_component_NuxtLink, {\n        to: `/base/companies/news/${__props.newsItem.id}`,\n        class: \"transition-all cursor-pointer p-4 dark:border-gray-500 dark:hover:bg-gray-700 hover:bg-gray-200 hover:rounded-lg flex gap-x-4 border-b\"\n      }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`<div class=\"\"${_scopeId}>`);\n            if (__props.newsItem.photo) {\n              _push2(`<img class=\"w-[150px] h-[150px] rounded-lg\"${_ssrRenderAttr(\"src\", __props.newsItem.photo)} alt=\"\"${_scopeId}>`);\n            } else {\n              _push2(`<!---->`);\n            }\n            _push2(`</div><div class=\"w-7/12\"${_scopeId}><h1 class=\"tracking-widest text-2xl\"${_scopeId}>${_ssrInterpolate(__props.newsItem.title)}</h1><p class=\"break-words my-4\"${_scopeId}>${_ssrInterpolate(__props.newsItem.description)}</p></div>`);\n          } else {\n            return [\n              _createVNode(\"div\", { class: \"\" }, [\n                __props.newsItem.photo ? (_openBlock(), _createBlock(\"img\", {\n                  key: 0,\n                  class: \"w-[150px] h-[150px] rounded-lg\",\n                  src: __props.newsItem.photo,\n                  alt: \"\"\n                }, null, 8, [\"src\"])) : _createCommentVNode(\"\", true)\n              ]),\n              _createVNode(\"div\", { class: \"w-7/12\" }, [\n                _createVNode(\"h1\", { class: \"tracking-widest text-2xl\" }, _toDisplayString(__props.newsItem.title), 1),\n                _createVNode(\"p\", { class: \"break-words my-4\" }, _toDisplayString(__props.newsItem.description), 1)\n              ])\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1748346382775,
-      "end": 1748346382872,
+      "start": 1748415735558,
+      "end": 1748415735570,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -89,213 +89,213 @@
     },
     {
       "name": "vite:json",
-      "start": 1748346382872,
-      "end": 1748346382872,
+      "start": 1748415735570,
+      "end": 1748415735570,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1748346382873,
-      "end": 1748346382873,
+      "start": 1748415735570,
+      "end": 1748415735570,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1748346382873,
-      "end": 1748346382873,
+      "start": 1748415735571,
+      "end": 1748415735571,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1748346382873,
-      "end": 1748346382873,
+      "start": 1748415735571,
+      "end": 1748415735571,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748346382874,
-      "end": 1748346382874,
+      "start": 1748415735571,
+      "end": 1748415735572,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748346382874,
-      "end": 1748346382874,
+      "start": 1748415735571,
+      "end": 1748415735572,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1748346382874,
-      "end": 1748346382874,
+      "start": 1748415735572,
+      "end": 1748415735572,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1748346382874,
-      "end": 1748346382874,
+      "start": 1748415735572,
+      "end": 1748415735572,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1748346382874,
-      "end": 1748346382874,
+      "start": 1748415735572,
+      "end": 1748415735572,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748346382874,
-      "end": 1748346382874,
+      "start": 1748415735572,
+      "end": 1748415735572,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1748346382875,
-      "end": 1748346382876,
+      "start": 1748415735572,
+      "end": 1748415735573,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1748346382876,
-      "end": 1748346382877,
+      "start": 1748415735573,
+      "end": 1748415735574,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1748346382877,
-      "end": 1748346382877,
+      "start": 1748415735574,
+      "end": 1748415735574,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1748346382877,
-      "end": 1748346382877,
+      "start": 1748415735574,
+      "end": 1748415735574,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1748346382877,
-      "end": 1748346382877,
+      "start": 1748415735577,
+      "end": 1748415735577,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1748346382877,
-      "end": 1748346382877,
+      "start": 1748415735578,
+      "end": 1748415735578,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1748346382877,
-      "end": 1748346382877,
+      "start": 1748415735578,
+      "end": 1748415735579,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1748346382877,
-      "end": 1748346382877,
+      "start": 1748415735579,
+      "end": 1748415735579,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1748346382877,
-      "end": 1748346382877,
+      "start": 1748415735579,
+      "end": 1748415735579,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1748346382877,
-      "end": 1748346382877,
+      "start": 1748415735579,
+      "end": 1748415735579,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1748346382877,
-      "end": 1748346382877,
+      "start": 1748415735579,
+      "end": 1748415735579,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1748346382877,
-      "end": 1748346382878,
+      "start": 1748415735579,
+      "end": 1748415735579,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1748346382877,
-      "end": 1748346382878,
+      "start": 1748415735579,
+      "end": 1748415735584,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1748346382879,
-      "end": 1748346382879,
+      "start": 1748415735585,
+      "end": 1748415735585,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1748346382879,
-      "end": 1748346382879,
+      "start": 1748415735585,
+      "end": 1748415735586,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1748346382880,
-      "end": 1748346382880,
+      "start": 1748415735586,
+      "end": 1748415735586,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1748346382880,
-      "end": 1748346382880,
+      "start": 1748415735586,
+      "end": 1748415735586,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1748346382880,
-      "end": 1748346382881,
+      "start": 1748415735589,
+      "end": 1748415735591,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1748346382880,
-      "end": 1748346382881,
+      "start": 1748415735589,
+      "end": 1748415735591,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1748346382881,
-      "end": 1748346382881,
+      "start": 1748415735592,
+      "end": 1748415735592,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1748346382881,
-      "end": 1748346382881,
+      "start": 1748415735592,
+      "end": 1748415735592,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1748346382881,
-      "end": 1748346382881,
+      "start": 1748415735592,
+      "end": 1748415735592,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1748346382881,
-      "end": 1748346382881,
+      "start": 1748415735592,
+      "end": 1748415735592,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1748346382882,
-      "end": 1748346382882,
+      "start": 1748415735592,
+      "end": 1748415735592,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
       "result": "import { default as __nuxt_component_0 } from \"D:/projects/nuxt/workix-nuxt-front/node_modules/nuxt/dist/app/components/nuxt-link\";\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { resolveComponent as _resolveComponent, withCtx as _withCtx, openBlock as _openBlock, createBlock as _createBlock, createCommentVNode as _createCommentVNode, createVNode as _createVNode, toDisplayString as _toDisplayString, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderAttr as _ssrRenderAttr, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"CurrentCompanyNewsList\",\n  __ssrInlineRender: true,\n  props: {\n    newsItem: {\n      type: Object,\n      default: () => {\n      }\n    }\n  },\n  setup(__props) {\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_NuxtLink = __nuxt_component_0;\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"mt-10\" }, _attrs))}>`);\n      _push(_ssrRenderComponent(_component_NuxtLink, {\n        to: `/base/companies/news/${__props.newsItem.id}`,\n        class: \"transition-all cursor-pointer p-4 dark:border-gray-500 dark:hover:bg-gray-700 hover:bg-gray-200 hover:rounded-lg flex gap-x-4 border-b\"\n      }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`<div class=\"\"${_scopeId}>`);\n            if (__props.newsItem.photo) {\n              _push2(`<img class=\"w-[150px] h-[150px] rounded-lg\"${_ssrRenderAttr(\"src\", __props.newsItem.photo)} alt=\"\"${_scopeId}>`);\n            } else {\n              _push2(`<!---->`);\n            }\n            _push2(`</div><div class=\"w-7/12\"${_scopeId}><h1 class=\"tracking-widest text-2xl\"${_scopeId}>${_ssrInterpolate(__props.newsItem.title)}</h1><p class=\"break-words my-4\"${_scopeId}>${_ssrInterpolate(__props.newsItem.description)}</p></div>`);\n          } else {\n            return [\n              _createVNode(\"div\", { class: \"\" }, [\n                __props.newsItem.photo ? (_openBlock(), _createBlock(\"img\", {\n                  key: 0,\n                  class: \"w-[150px] h-[150px] rounded-lg\",\n                  src: __props.newsItem.photo,\n                  alt: \"\"\n                }, null, 8, [\"src\"])) : _createCommentVNode(\"\", true)\n              ]),\n              _createVNode(\"div\", { class: \"w-7/12\" }, [\n                _createVNode(\"h1\", { class: \"tracking-widest text-2xl\" }, _toDisplayString(__props.newsItem.title), 1),\n                _createVNode(\"p\", { class: \"break-words my-4\" }, _toDisplayString(__props.newsItem.description), 1)\n              ])\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1748346382882,
-      "end": 1748346382882,
+      "start": 1748415735593,
+      "end": 1748415735593,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -308,20 +308,20 @@
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1748346382882,
-      "end": 1748346382883,
+      "start": 1748415735598,
+      "end": 1748415735598,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1748346382883,
-      "end": 1748346382883,
+      "start": 1748415735598,
+      "end": 1748415735598,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1748346382883,
-      "end": 1748346382883,
+      "start": 1748415735598,
+      "end": 1748415735598,
       "order": "normal"
     }
   ]

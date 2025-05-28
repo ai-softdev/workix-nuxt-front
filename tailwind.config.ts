@@ -16,6 +16,10 @@ export default <Partial<Config>>{
         golden: "#F4C107",
         sunset: "#FF5852"
       },
+      boxShadow: {
+        notifications: '0 6px 12px 0 rgba(0, 0, 0, 0.05)',
+        profile: '0 23px 23px 0 rgba(0, 0, 0, 0.04)',
+      }
     }
   },
   plugins: [
