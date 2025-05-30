@@ -29,7 +29,7 @@
         <img src="/icons/notifications.svg" alt="tasks">
         <h2 class="dark:text-white">{{ $t('Уведомления') }}</h2>
       </div>
-      <ProfileContentNotification></ProfileContentNotification>
+      <ProfileContentNotification/>
     </TheContentBlock>
   </div>
 </template>

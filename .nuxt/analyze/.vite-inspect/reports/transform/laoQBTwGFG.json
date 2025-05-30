@@ -1,0 +1,60 @@
+{
+  "resolvedId": "C:/project/nuxt/workix-nuxt-front/components/Tasks/TaskUI/TasksContentBlock.vue",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "<template>\r\n  <div class=\"mt-6\">\r\n    <NuxtLink :to=\"`/base/tasks/${task.id}`\"\r\n      class=\"shadow-xl dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 dark:shadow-none dark:border-none cursor-pointer hover:translate-x-4 transition-all px-6 py-2 rounded-lg w-11/12 max-lg:w-full max-[425px]:flex-wrap flex flex-col justify-between\">\r\n      <div class=\"flex relative justify-between max-[425px]:gap-y-6\">\r\n        <div class=\"flex w-full max-sm:flex-col max-sm:gap-y-6 max-sm:items-center max-sm:text-center justify-around\">\r\n          <TaskTable>\r\n            <template v-slot:tableHead>{{ $t('Наименование') }}</template>\r\n            <template v-slot:tableBody>{{ task.title }}</template>\r\n          </TaskTable>\r\n          <TaskTable>\r\n            <template v-slot:tableHead>{{ $t('Дата') }}</template>\r\n            <template v-slot:tableBody>{{ new Date(task.created_at).toLocaleDateString() }}</template>\r\n          </TaskTable>\r\n          <TaskTable class=\"text-center\">\r\n            <template v-slot:tableHead>{{ $t('Срок выполнения') }}</template>\r\n            <template v-slot:tableBody>{{ new Date(task.deadline).toLocaleDateString() }}</template>\r\n          </TaskTable>\r\n          <TaskTable class=\"text-center\" v-if=\"loadCurrentUser.user.role_en === 'company_admin'\">\r\n            <template v-slot:tableHead>{{ $t('Ответственный') }}</template>\r\n            <template v-slot:tableBody>{{ task.main_performer.first_name + ' ' + task.main_performer.last_name }}</template>\r\n          </TaskTable>\r\n        </div>\r\n        <div class=\"absolute z-0 -right-6 -top-2 w-[30px] h-[30px] opacity-80 rounded-bl-2xl rounded-tr-lg\"\r\n             :class=\"{'bg-orange-500' : task.status === 'performing', 'bg-red-500' : task.status === 'rejected', 'bg-green-500' : task.status === 'completed', 'bg-blue-500' : task.status === 'watching'}\">\r\n        </div>\r\n      </div>\r\n      <div class=\"my-10 font-bold tracking-widest\">\r\n        <p>{{ task.description}}</p>\r\n      </div>\r\n    </NuxtLink>\r\n  </div>\r\n</template>\r\n\r\n<script setup lang=\"ts\">\r\nimport TaskTable from '/components/Tasks/TaskUI/TasksTable.vue'\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nconst loadCurrentUser = useAuthStore()\r\nconst props = defineProps({\r\n  task: {\r\n    type: Object,\r\n    required: true,\r\n  }\r\n})\r\n\r\n</script>\r\n\r\n<style lang=\"scss\" scoped>\r\n\r\n</style>",
+      "start": 1748596933842,
+      "end": 1748596934474,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1748596934474,
+      "end": 1748596934474,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1748596934474,
+      "end": 1748596934474,
+      "order": "pre"
+    },
+    {
+      "name": "unplugin-vue-i18n",
+      "start": 1748596934474,
+      "end": 1748596934474,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1748596934474,
+      "end": 1748596934474,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1748596934474,
+      "end": 1748596934474,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1748596934474,
+      "end": 1748596934474,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1748596934474,
+      "end": 1748596934474,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1748596934474,
+      "end": 1748596934474,
+      "order": "normal"
+    }
+  ]
+}

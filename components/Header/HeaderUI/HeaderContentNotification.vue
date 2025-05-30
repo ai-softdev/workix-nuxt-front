@@ -22,11 +22,18 @@ const notification = useNotification()
     <TheTextContent class="text-start font-bold mb-6">{{ $t('Уведомления') }}</TheTextContent>
     <div
       class="my-2 flex flex-col gap-y-4 h-full max-md:h-full max-[800px]:max-h-[90%] max-h-[400px] overflow-y-scroll pr-2">
+      <div
+          v-if="!notification.get_notification.length"
+          class="text-center"
+      >
+        {{ $t('Уведомлений пока нет') }}
+      </div>
       <div v-for="(notice, i) in notification.get_notification" :key="i"
            @click="notification.readNotice({id: notice.id})"
-           class="p-4 relative dark:hover:bg-gray-700 bg-gray-100 hover:bg-gray-200 cursor-pointer transition-all duration-200 rounded-lg dark:border-gray-500"
-           :class="{'dark:bg-gray-700 bg-gray-300' : notice.read === true}">
-        <div v-if="notice.read" class="absolute bottom-1 left-2 text-[11px]">
+           class="p-4 relative dark:hover:bg-gray-700 !bg-whiteSmoke border hover:bg-gray-100 cursor-pointer transition-all duration-200 rounded-lg dark:border-gray-500"
+           :class="{'dark:bg-gray-700 bg-gray-100' : notice.read === true}"
+      >
+        <div v-if="notice.read" class="absolute bottom-1 right-2 text-[11px]">
           <svg class="fill-semiCyan" width="20px" height="20px" viewBox="0 0 24 24" fill="none"
                xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -35,12 +42,11 @@ const notification = useNotification()
                   d="M20.5175 7.01946C20.8174 7.30513 20.829 7.77986 20.5433 8.07981L11.9716 17.0798C11.8201 17.2389 11.6065 17.3235 11.3872 17.3114C11.1679 17.2993 10.9649 17.1917 10.8318 17.0169L10.4035 16.4544C10.1526 16.1249 10.2163 15.6543 10.5458 15.4034C10.8289 15.1878 11.2161 15.2044 11.4787 15.4223L19.4571 7.04531C19.7428 6.74537 20.2175 6.73379 20.5175 7.01946Z"/>
           </svg>
         </div>
-        <div class="flex justify-between gap-x-4 dark:text-white text-black">
+        <div class="flex flex-col gap-4 dark:text-white text-black">
           <div class="w-full">
             <p class="text-sm text-start">{{ notice.text }}</p>
           </div>
-          <div class="border-r"></div>
-          <div class="text-end text-[12px]">
+          <div class="text-sm flex items-center gap-2">
             <p>{{ new Date(notice.created_at).toLocaleDateString() }}</p>
             <p>{{ new Date(notice.created_at).toLocaleTimeString().slice(0, 5) }}</p>
           </div>

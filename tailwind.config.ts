@@ -15,7 +15,8 @@ export default <Partial<Config>>{
         porcelain: "#F2F2F2",
         golden: "#F4C107",
         sunset: "#FF5852",
-        mediumGray: "#7D7D7D"
+        mediumGray: "#7D7D7D",
+        whiteSmoke: "#F5F4F7"
       },
       boxShadow: {
         notifications: '0 6px 12px 0 rgba(0, 0, 0, 0.05)',

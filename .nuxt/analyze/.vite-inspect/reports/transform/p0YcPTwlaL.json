@@ -1,0 +1,60 @@
+{
+  "resolvedId": "C:/project/nuxt/workix-nuxt-front/components/Chat/ChatNav/ChatNavHeader.vue",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "<script setup lang=\"ts\">\r\nimport {useRoute} from \"vue-router\";\r\nimport {useUserStore} from \"~/stores/users\";\r\nimport {useChat} from \"~/stores/chat\";\r\nimport ChatNavHeaderElem from \"~/components/Chat/ChatNav/UI/ChatNavHeaderElem.vue\";\r\nimport TheButton from \"~/components/UI/TheButton.vue\";\r\nimport ChatGroupCreate from \"~/components/Chat/ChatGroup/ChatGroupCreate.vue\";\r\nconst userStore = useUserStore()\r\nconst chat = useChat()\r\nconst route = useRoute()\r\ndefineProps({\r\n  activeNav: {\r\n    type: Boolean,\r\n    default: false\r\n  },\r\n})\r\n</script>\r\n\r\n<template>\r\n <div class=\"\">\r\n   <form @submit.prevent=\"userStore.searchUser({search: chat.searchElem})\" class=\"px-4 mb-2 pb-4\">\r\n     <input v-model=\"chat.searchElem\"\r\n            class=\"w-full hover:bg-active px-4 py-1 rounded-full max-md:w-9/12 max-md:mx-auto block text-sm bg-gray-100 focus:bg-gray-300 text-black tracking-widest dark:focus:opacity-100 transition-all dark:bg-gray-600 dark:text-white outline-none\"\r\n            type=\"text\" placeholder=\"Поиск...\" :class=\"{'max-md:hidden' : !chat.activeChatNav && route.path !== '/base/chat'}\">\r\n   </form>\r\n   <div class=\"mx-4 \" v-if=\"chat.windowWidth < 768 || chat.windowWidth > 768\">\r\n      <ChatGroupCreate/>\r\n      <ChatNavHeaderElem/>\r\n   </div>\r\n </div>\r\n</template>\r\n\r\n<style scoped lang=\"scss\">\r\n\r\n</style>",
+      "start": 1748596933849,
+      "end": 1748596934489,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1748596934489,
+      "end": 1748596934489,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1748596934489,
+      "end": 1748596934489,
+      "order": "pre"
+    },
+    {
+      "name": "unplugin-vue-i18n",
+      "start": 1748596934489,
+      "end": 1748596934489,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1748596934490,
+      "end": 1748596934490,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1748596934490,
+      "end": 1748596934490,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1748596934490,
+      "end": 1748596934490,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1748596934490,
+      "end": 1748596934490,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1748596934490,
+      "end": 1748596934490,
+      "order": "normal"
+    }
+  ]
+}

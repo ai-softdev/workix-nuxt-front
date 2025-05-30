@@ -148,7 +148,6 @@ onMounted(()=>{
     <Transition name="fade">
       <TheModal
           v-if="showInfo"
-          :type="'resizeInfoWindow'"
           @showModal="showInfo = false; getCode = false"
       >
         <form @submit.prevent="loadCurrentUser.update_my({user: userEdit})">
