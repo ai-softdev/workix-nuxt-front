@@ -119,7 +119,7 @@ watchSyncEffect(() => {
 
 <template>
   <div class="flex flex-col gap-4">
-    <div :class="{'flex flex-wrap items-center justify-between' :['company_admin', 'admin'].includes( loadCurrentUser.user.role?.name_en )}">
+    <div :class="{'flex items-center justify-between' :['company_admin', 'admin'].includes( loadCurrentUser.user.role?.name_en )}">
       <div class="text-lg flex gap-x-10">
         <p
             class="dark:text-white text-3xl font-bold"
@@ -135,7 +135,7 @@ watchSyncEffect(() => {
         </p>
       </div>
       <div
-        :class="{'flex items-center justify-evenly' : loadCurrentUser.user.role?.name_en === 'admin', 'w-2/12 max-lg:w-4/12 max-sm:w-full max-sm:mb-6 max-sm:mx-auto' : loadCurrentUser.user.role_en !== 'admin'}">
+          :class="{'flex items-center justify-evenly' : loadCurrentUser.user.role?.name_en === 'admin', 'w-2/12 max-lg:w-4/12 max-sm:w-full max-sm:mb-6 max-sm:mx-auto' : loadCurrentUser.user.role_en !== 'admin'}">
         <div class="flex gap-x-10" v-if="loadCurrentUser?.user.role === 'Администратор сайта'">
           <button class="p-2 rounded-xl dark:text-white tracking-widest font-bold"
                   :class="{'bg-blueDarkSemiLight text-white' : userChecked === 'user-list'}"
