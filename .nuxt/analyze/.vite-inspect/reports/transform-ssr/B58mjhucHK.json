@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\"\n\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\r\nimport ObjectContent from \"~/components/Objects/ObjectContent.vue\";\r\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\r\nimport TheFilter from \"~/components/UI/TheFilter.vue\";\r\nimport ObjectCreate from \"~/components/Objects/ObjectCreate.vue\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport {useCompanies} from \"~/stores/companies\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'index',\n  __ssrInlineRender: true,\n  setup(__props) {\n\r\nconst router = useRouter()\r\nconst loadAuthStore = useAuthStore()\r\nconst company = useCompanies()\r\n\r\nwatch(() => loadAuthStore.user, (newValue) => {\r\n  if(loadAuthStore?.user?.role?.name_en === 'admin'){\r\n    if (window.history.length > 1) {\r\n      router.push('/base/profile');\r\n    } else {\r\n      router.push('/');\r\n    }\r\n  }\r\n})\r\nwatch(() => company.company, (newValue) => {\r\n  let permission = company.company.modules?.find(item => item.name_en === 'objects')\r\n  if(!permission){\r\n    if (window.history.length > 1) {\r\n      router.push('/base/profile');\r\n    } else {\r\n      router.push('/');\r\n    }\r\n  }\r\n})\r\n\r\nuseSeoMeta({\r\n  title: 'Объекты',\r\n  description: 'Объекты компании'\r\n})\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  _push(`<div${_ssrRenderAttrs(_attrs)}>`)\n  _push(_ssrRenderComponent(TheTextContent, { \"text-type\": 'pageTitle' }, {\n    default: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(`${_ssrInterpolate(_ctx.$t('Страница с объектами'))}`)\n      } else {\n        return [\n          _createTextVNode(_toDisplayString(_ctx.$t('Страница с объектами')), 1)\n        ]\n      }\n    }),\n    _: 1\n  }, _parent))\n  _push(`<div class=\"flex items-center gap-x-6\">`)\n  _push(_ssrRenderComponent(TheSearch, { class: \"w-8/12\" }, null, _parent))\n  _push(_ssrRenderComponent(TheFilter, null, null, _parent))\n  _push(_ssrRenderComponent(ObjectCreate, { class: \"w-2/12 ml-auto\" }, null, _parent))\n  _push(`</div>`)\n  _push(_ssrRenderComponent(ObjectContent, null, null, _parent))\n  _push(`</div>`)\n}\n}\n\n})",
-      "start": 1748427062674,
-      "end": 1748427062674,
+      "start": 1748593817819,
+      "end": 1748593817819,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1748427062675,
-      "end": 1748427062675,
+      "start": 1748593817819,
+      "end": 1748593817819,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1748427062675,
-      "end": 1748427062675,
+      "start": 1748593817819,
+      "end": 1748593817819,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1748427062675,
-      "end": 1748427062675,
+      "start": 1748593817819,
+      "end": 1748593817819,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1748427062675,
-      "end": 1748427062675,
+      "start": 1748593817819,
+      "end": 1748593817819,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1748427062675,
-      "end": 1748427062675,
+      "start": 1748593817819,
+      "end": 1748593817819,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1748427062675,
-      "end": 1748427062675,
+      "start": 1748593817819,
+      "end": 1748593817819,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1748427062675,
-      "end": 1748427062675,
+      "start": 1748593817819,
+      "end": 1748593817819,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1748427062675,
-      "end": 1748427062675,
+      "start": 1748593817819,
+      "end": 1748593817819,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport ObjectContent from \"~/components/Objects/ObjectContent.vue\";\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\nimport TheFilter from \"~/components/UI/TheFilter.vue\";\nimport ObjectCreate from \"~/components/Objects/ObjectCreate.vue\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    const company = useCompanies();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if (window.history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    watch(() => company.company, (newValue) => {\n      let permission = company.company.modules?.find((item) => item.name_en === \"objects\");\n      if (!permission) {\n        if (window.history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Объекты\",\n      description: \"Объекты компании\"\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(TheTextContent, { \"text-type\": \"pageTitle\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Страница с объектами\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Страница с объектами\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<div class=\"flex items-center gap-x-6\">`);\n      _push(_ssrRenderComponent(TheSearch, { class: \"w-8/12\" }, null, _parent));\n      _push(_ssrRenderComponent(TheFilter, null, null, _parent));\n      _push(_ssrRenderComponent(ObjectCreate, { class: \"w-2/12 ml-auto\" }, null, _parent));\n      _push(`</div>`);\n      _push(_ssrRenderComponent(ObjectContent, null, null, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1748427062675,
-      "end": 1748427063663,
+      "start": 1748593817819,
+      "end": 1748593818539,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -89,173 +89,173 @@
     },
     {
       "name": "vite:json",
-      "start": 1748427063663,
-      "end": 1748427063663,
+      "start": 1748593818539,
+      "end": 1748593818539,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1748427063663,
-      "end": 1748427063663,
+      "start": 1748593818540,
+      "end": 1748593818540,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1748427063663,
-      "end": 1748427063664,
+      "start": 1748593818540,
+      "end": 1748593818540,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1748427063664,
-      "end": 1748427063664,
+      "start": 1748593818540,
+      "end": 1748593818540,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748427063664,
-      "end": 1748427063664,
+      "start": 1748593818540,
+      "end": 1748593818540,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748427063664,
-      "end": 1748427063664,
+      "start": 1748593818540,
+      "end": 1748593818540,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1748427063664,
-      "end": 1748427063664,
+      "start": 1748593818540,
+      "end": 1748593818540,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1748427063664,
-      "end": 1748427063664,
+      "start": 1748593818540,
+      "end": 1748593818540,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1748427063664,
-      "end": 1748427063664,
+      "start": 1748593818540,
+      "end": 1748593818540,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748427063664,
-      "end": 1748427063664,
+      "start": 1748593818540,
+      "end": 1748593818540,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1748427063664,
-      "end": 1748427063666,
+      "start": 1748593818541,
+      "end": 1748593818542,
       "order": "normal"
     },
     {
       "name": "vite:define",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport ObjectContent from \"~/components/Objects/ObjectContent.vue\";\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\nimport TheFilter from \"~/components/UI/TheFilter.vue\";\nimport ObjectCreate from \"~/components/Objects/ObjectCreate.vue\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    const company = useCompanies();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    watch(() => company.company, (newValue) => {\n      let permission = company.company.modules?.find((item) => item.name_en === \"objects\");\n      if (!permission) {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Объекты\",\n      description: \"Объекты компании\"\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(TheTextContent, { \"text-type\": \"pageTitle\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Страница с объектами\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Страница с объектами\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<div class=\"flex items-center gap-x-6\">`);\n      _push(_ssrRenderComponent(TheSearch, { class: \"w-8/12\" }, null, _parent));\n      _push(_ssrRenderComponent(TheFilter, null, null, _parent));\n      _push(_ssrRenderComponent(ObjectCreate, { class: \"w-2/12 ml-auto\" }, null, _parent));\n      _push(`</div>`);\n      _push(_ssrRenderComponent(ObjectContent, null, null, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1748427063666,
-      "end": 1748427065090,
+      "start": 1748593818542,
+      "end": 1748593819632,
       "order": "normal",
       "sourcemaps": "{\n  \"version\": 3,\n  \"sources\": [\"D:/projects/nuxt/workix-nuxt-front/pages/base/objects/index.vue?vue&type=script&setup=true&lang.ts\"],\n  \"sourcesContent\": [\"import { defineComponent as _defineComponent } from \\\"vue\\\";\\nimport { withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode } from \\\"vue\\\";\\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \\\"vue/server-renderer\\\";\\nimport TheTextContent from \\\"~/components/UI/TheTextContent.vue\\\";\\nimport ObjectContent from \\\"~/components/Objects/ObjectContent.vue\\\";\\nimport TheSearch from \\\"~/components/UI/TheSearch.vue\\\";\\nimport TheFilter from \\\"~/components/UI/TheFilter.vue\\\";\\nimport ObjectCreate from \\\"~/components/Objects/ObjectCreate.vue\\\";\\nimport { useAuthStore } from \\\"~/stores/auth\\\";\\nimport { useCompanies } from \\\"~/stores/companies\\\";\\nexport default /* @__PURE__ */ _defineComponent({\\n  __name: \\\"index\\\",\\n  __ssrInlineRender: true,\\n  setup(__props) {\\n    const router = useRouter();\\n    const loadAuthStore = useAuthStore();\\n    const company = useCompanies();\\n    watch(() => loadAuthStore.user, (newValue) => {\\n      if (loadAuthStore?.user?.role?.name_en === \\\"admin\\\") {\\n        if (window.history.length > 1) {\\n          router.push(\\\"/base/profile\\\");\\n        } else {\\n          router.push(\\\"/\\\");\\n        }\\n      }\\n    });\\n    watch(() => company.company, (newValue) => {\\n      let permission = company.company.modules?.find((item) => item.name_en === \\\"objects\\\");\\n      if (!permission) {\\n        if (window.history.length > 1) {\\n          router.push(\\\"/base/profile\\\");\\n        } else {\\n          router.push(\\\"/\\\");\\n        }\\n      }\\n    });\\n    useSeoMeta({\\n      title: \\\"Объекты\\\",\\n      description: \\\"Объекты компании\\\"\\n    });\\n    return (_ctx, _push, _parent, _attrs) => {\\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\\n      _push(_ssrRenderComponent(TheTextContent, { \\\"text-type\\\": \\\"pageTitle\\\" }, {\\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\\n          if (_push2) {\\n            _push2(`${_ssrInterpolate(_ctx.$t(\\\"Страница с объектами\\\"))}`);\\n          } else {\\n            return [\\n              _createTextVNode(_toDisplayString(_ctx.$t(\\\"Страница с объектами\\\")), 1)\\n            ];\\n          }\\n        }),\\n        _: 1\\n      }, _parent));\\n      _push(`<div class=\\\"flex items-center gap-x-6\\\">`);\\n      _push(_ssrRenderComponent(TheSearch, { class: \\\"w-8/12\\\" }, null, _parent));\\n      _push(_ssrRenderComponent(TheFilter, null, null, _parent));\\n      _push(_ssrRenderComponent(ObjectCreate, { class: \\\"w-2/12 ml-auto\\\" }, null, _parent));\\n      _push(`</div>`);\\n      _push(_ssrRenderComponent(ObjectContent, null, null, _parent));\\n      _push(`</div>`);\\n    };\\n  }\\n});\\n\"],\n  \"mappings\": \"AAAA,SAAS,mBAAmB,wBAAwB;AACpD,SAAS,WAAW,UAAU,mBAAmB,kBAAkB,mBAAmB,wBAAwB;AAC9G,SAAS,sBAAsB,qBAAqB,kBAAkB,iBAAiB,kBAAkB,uBAAuB;AAChI,OAAO,oBAAoB;AAC3B,OAAO,mBAAmB;AAC1B,OAAO,eAAe;AACtB,OAAO,eAAe;AACtB,OAAO,kBAAkB;AACzB,SAAS,oBAAoB;AAC7B,SAAS,oBAAoB;AAC7B,eAA+B,iCAAiB;AAAA,EAC9C,QAAQ;AAAA,EACR,mBAAmB;AAAA,EACnB,MAAM,SAAS;AACb,UAAM,SAAS,UAAU;AACzB,UAAM,gBAAgB,aAAa;AACnC,UAAM,UAAU,aAAa;AAC7B,UAAM,MAAM,cAAc,MAAM,CAAC,aAAa;AAC5C,UAAI,eAAe,MAAM,MAAM,YAAY,SAAS;AAClD,YAAI,SAAO,QAAQ,SAAS,GAAG;AAC7B,iBAAO,KAAK,eAAe;AAAA,QAC7B,OAAO;AACL,iBAAO,KAAK,GAAG;AAAA,QACjB;AAAA,MACF;AAAA,IACF,CAAC;AACD,UAAM,MAAM,QAAQ,SAAS,CAAC,aAAa;AACzC,UAAI,aAAa,QAAQ,QAAQ,SAAS,KAAK,CAAC,SAAS,KAAK,YAAY,SAAS;AACnF,UAAI,CAAC,YAAY;AACf,YAAI,SAAO,QAAQ,SAAS,GAAG;AAC7B,iBAAO,KAAK,eAAe;AAAA,QAC7B,OAAO;AACL,iBAAO,KAAK,GAAG;AAAA,QACjB;AAAA,MACF;AAAA,IACF,CAAC;AACD,eAAW;AAAA,MACT,OAAO;AAAA,MACP,aAAa;AAAA,IACf,CAAC;AACD,WAAO,CAAC,MAAM,OAAO,SAAS,WAAW;AACvC,YAAM,OAAO,gBAAgB,MAAM,CAAC,GAAG;AACvC,YAAM,oBAAoB,gBAAgB,EAAE,aAAa,YAAY,GAAG;AAAA,QACtE,SAAS,SAAS,CAAC,GAAG,QAAQ,UAAU,aAAa;AACnD,cAAI,QAAQ;AACV,mBAAO,GAAG,gBAAgB,KAAK,GAAG,sBAAsB,CAAC,CAAC,EAAE;AAAA,UAC9D,OAAO;AACL,mBAAO;AAAA,cACL,iBAAiB,iBAAiB,KAAK,GAAG,sBAAsB,CAAC,GAAG,CAAC;AAAA,YACvE;AAAA,UACF;AAAA,QACF,CAAC;AAAA,QACD,GAAG;AAAA,MACL,GAAG,OAAO,CAAC;AACX,YAAM,yCAAyC;AAC/C,YAAM,oBAAoB,WAAW,EAAE,OAAO,SAAS,GAAG,MAAM,OAAO,CAAC;AACxE,YAAM,oBAAoB,WAAW,MAAM,MAAM,OAAO,CAAC;AACzD,YAAM,oBAAoB,cAAc,EAAE,OAAO,iBAAiB,GAAG,MAAM,OAAO,CAAC;AACnF,YAAM,QAAQ;AACd,YAAM,oBAAoB,eAAe,MAAM,MAAM,OAAO,CAAC;AAC7D,YAAM,QAAQ;AAAA,IAChB;AAAA,EACF;AACF,CAAC;\",\n  \"names\": []\n}\n"
     },
     {
       "name": "vite:css-post",
-      "start": 1748427065091,
-      "end": 1748427065091,
+      "start": 1748593819632,
+      "end": 1748593819632,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1748427065091,
-      "end": 1748427065091,
+      "start": 1748593819632,
+      "end": 1748593819632,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1748427065091,
-      "end": 1748427065091,
+      "start": 1748593819632,
+      "end": 1748593819632,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1748427065091,
-      "end": 1748427065091,
+      "start": 1748593819632,
+      "end": 1748593819632,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1748427065091,
-      "end": 1748427065091,
+      "start": 1748593819633,
+      "end": 1748593819633,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1748427065091,
-      "end": 1748427065091,
+      "start": 1748593819633,
+      "end": 1748593819633,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1748427065091,
-      "end": 1748427065091,
+      "start": 1748593819633,
+      "end": 1748593819633,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1748427065091,
-      "end": 1748427065091,
+      "start": 1748593819633,
+      "end": 1748593819633,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1748427065091,
-      "end": 1748427065091,
+      "start": 1748593819633,
+      "end": 1748593819633,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1748427065091,
-      "end": 1748427065091,
+      "start": 1748593819633,
+      "end": 1748593819633,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1748427065091,
-      "end": 1748427065091,
+      "start": 1748593819633,
+      "end": 1748593819633,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1748427065092,
-      "end": 1748427065092,
+      "start": 1748593819633,
+      "end": 1748593819633,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1748427065092,
-      "end": 1748427065092,
+      "start": 1748593819633,
+      "end": 1748593819633,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1748427065092,
-      "end": 1748427065092,
+      "start": 1748593819633,
+      "end": 1748593819633,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1748427065092,
-      "end": 1748427065092,
+      "start": 1748593819633,
+      "end": 1748593819633,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { useRouter } from '#app/composables/router';\nimport { watch } from 'vue';\nimport { useSeoMeta } from '@unhead/vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport ObjectContent from \"~/components/Objects/ObjectContent.vue\";\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\nimport TheFilter from \"~/components/UI/TheFilter.vue\";\nimport ObjectCreate from \"~/components/Objects/ObjectCreate.vue\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    const company = useCompanies();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    watch(() => company.company, (newValue) => {\n      let permission = company.company.modules?.find((item) => item.name_en === \"objects\");\n      if (!permission) {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Объекты\",\n      description: \"Объекты компании\"\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(TheTextContent, { \"text-type\": \"pageTitle\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Страница с объектами\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Страница с объектами\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<div class=\"flex items-center gap-x-6\">`);\n      _push(_ssrRenderComponent(TheSearch, { class: \"w-8/12\" }, null, _parent));\n      _push(_ssrRenderComponent(TheFilter, null, null, _parent));\n      _push(_ssrRenderComponent(ObjectCreate, { class: \"w-2/12 ml-auto\" }, null, _parent));\n      _push(`</div>`);\n      _push(_ssrRenderComponent(ObjectContent, null, null, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1748427065093,
-      "end": 1748427065096,
+      "start": 1748593819633,
+      "end": 1748593819640,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -269,8 +269,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { useRouter } from '#app/composables/router';\nimport { watch } from 'vue';\nimport { useSeoMeta } from '@unhead/vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport ObjectContent from \"~/components/Objects/ObjectContent.vue\";\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\nimport TheFilter from \"~/components/UI/TheFilter.vue\";\nimport ObjectCreate from \"~/components/Objects/ObjectCreate.vue\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    const company = useCompanies();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    watch(() => company.company, (newValue) => {\n      let permission = company.company.modules?.find((item) => item.name_en === \"objects\");\n      if (!permission) {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Объекты\",\n      description: \"Объекты компании\"\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(TheTextContent, { \"text-type\": \"pageTitle\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Страница с объектами\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Страница с объектами\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<div class=\"flex items-center gap-x-6\">`);\n      _push(_ssrRenderComponent(TheSearch, { class: \"w-8/12\" }, null, _parent));\n      _push(_ssrRenderComponent(TheFilter, null, null, _parent));\n      _push(_ssrRenderComponent(ObjectCreate, { class: \"w-2/12 ml-auto\" }, null, _parent));\n      _push(`</div>`);\n      _push(_ssrRenderComponent(ObjectContent, null, null, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1748427065093,
-      "end": 1748427065096,
+      "start": 1748593819633,
+      "end": 1748593819640,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -283,56 +283,56 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1748427065096,
-      "end": 1748427065096,
+      "start": 1748593819640,
+      "end": 1748593819640,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1748427065096,
-      "end": 1748427065097,
+      "start": 1748593819640,
+      "end": 1748593819640,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1748427065097,
-      "end": 1748427065097,
+      "start": 1748593819641,
+      "end": 1748593819641,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1748427065097,
-      "end": 1748427065097,
+      "start": 1748593819641,
+      "end": 1748593819641,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1748427065097,
-      "end": 1748427065097,
+      "start": 1748593819641,
+      "end": 1748593819644,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1748427065097,
-      "end": 1748427065097,
+      "start": 1748593819644,
+      "end": 1748593819644,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1748427065097,
-      "end": 1748427065097,
+      "start": 1748593819645,
+      "end": 1748593819646,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1748427065097,
-      "end": 1748427065098,
+      "start": 1748593819646,
+      "end": 1748593819647,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1748427065098,
-      "end": 1748427065098,
+      "start": 1748593819647,
+      "end": 1748593819647,
       "order": "normal"
     }
   ]

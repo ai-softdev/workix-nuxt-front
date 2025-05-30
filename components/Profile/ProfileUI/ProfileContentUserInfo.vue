@@ -66,24 +66,38 @@ onMounted(()=>{
 </script>
 
 <template>
-  <div class="w-full p-6 relative col-span-2 max-sm:col-auto shadow-lg dark:shadow-md dark:border-t dark:border-t-gray-500 cursor-pointer dark:shadow-gray-500 rounded-md transition-all duration-200">
+  <div class="w-full p-6 relative bg-white shadow-cards max-sm:col-auto dark:shadow-md dark:border-t dark:border-t-gray-500 dark:shadow-gray-500 rounded-3xl hover:transform hover:-translate-y-2 transition-all duration-200">
     <div
-      @click="showInfo = true; userEdit={...loadCurrentUser.user}">
-      <h2 class="mb-8 dark:text-white tracking-widest">{{ $t('Личные данные') }}</h2>
-      <div :class="{'blur' : !loadCurrentUser.user.id}" class="flex gap-x-10 max-lg:flex-wrap gap-y-10 justify-around">
-        <div class="flex flex-col gap-y-6">
+    >
+      <div class="flex items-center justify-between mb-8">
+        <div class="border rounded-full px-3 py-2 w-fit flex items-center gap-3">
+          <img src="/icons/profile.svg" alt="profile">
+          <h2 class="dark:text-white">{{ $t('Личные данные') }}</h2>
+        </div>
+        <button
+            @click="showInfo = true; userEdit={...loadCurrentUser.user}"
+            class="w-10 h-10 rounded-lg flex items-center justify-center bg-porcelain hover:bg-gray-300 transition-all ease-in-out duration-300"
+        >
+          <img src="/icons/edit.svg" alt="profile">
+        </button>
+      </div>
+      <div
+          :class="{'blur' : !loadCurrentUser.user.id}"
+      >
+        <div class="flex flex-col">
           <div v-if="loadCurrentUser.user.id"
-               class="flex max-sm:flex-wrap max-sm:justify-center select-none text-gray-600 gap-x-2 ">
-            <div class="">
-              <img class="w-[100px] h-[100px] rounded-full shadow-lg dark:shadow-none"
-                   :src="loadCurrentUser.user.photo" alt="">
-            </div>
+               class="flex max-sm:flex-wrap max-sm:justify-center select-none text-gray-600 gap-x-2 mb-5 pb-5 border-b">
+            <img class="block w-[60px] h-[60px] border-2 border-golden rounded-full shadow-lg dark:shadow-none"
+                 :src="loadCurrentUser.user.photo" alt="logo">
             <div class="my-2 mx-2">
-              <h3 class="text-xl dark:text-white select-none tracking-wide">{{ loadCurrentUser.user.first_name }}
-                {{ loadCurrentUser.user.last_name }}</h3>
-              <p class="dark:text-white">
-                {{ Math.trunc((new Date() - new Date(loadCurrentUser.user.date_of_birth)) / 1000 / 3600 / 24 / 365) + ' лет'
-                }}</p>
+              <h3 class="text-md font-bold dark:text-white select-none">{{ loadCurrentUser.user.first_name }}
+                {{ loadCurrentUser.user.last_name }}
+              </h3>
+              <p class="dark:text-white text-sm text-mediumGray">
+                {{
+                  Math.trunc((new Date() - new Date(loadCurrentUser.user.date_of_birth)) / 1000 / 3600 / 24 / 365) + ' лет'
+                }}
+              </p>
               <p v-if="loadCurrentUser.user.role.name === 'Администратор сайта'"
                  class="dark:text-white tracking-widest font-bold">{{ loadCurrentUser.user.role.name }}</p>
               <p v-else-if="loadCurrentUser.user.role.name === 'Сотрудник'"
@@ -98,29 +112,31 @@ onMounted(()=>{
             </div>
           </div>
           <div class="flex flex-col gap-y-2 ml-2 w-full">
-            <div class="text-sm">
-              <p class="text-gray-500 dark:text-white font-mono">{{ $t('Email') }}:
-                <span v-if="loadCurrentUser.user.id" class="font-bold tracking-widest">{{loadCurrentUser.user.email}}</span>
+            <div class="text-sm flex items-center justify-between">
+              <p class="dark:text-white font-bold">
+                {{ $t('Email') }}:
               </p>
+              <p v-if="loadCurrentUser.user.id">{{loadCurrentUser.user.email}}</p>
             </div>
-            <div class="text-sm">
-              <p class="text-gray-500 dark:text-white font-mono">{{ $t('Номер') }}:
-                <span class="font-bold tracking-widest">{{ loadCurrentUser.user.phone?.slice(4, 13) }}</span></p>
-            </div>
-            <div class="text-sm">
-              <p class="text-gray-500 flex gap-x-2 dark:text-white font-mono">{{ $t('Зароботная плата') }}:
-                <span v-if="loadCurrentUser.user.id" class="font-bold tracking-widest">{{ loadCurrentUser.user.salary + ' сум' }}</span>
-                <span v-else> </span>
+            <div class="text-sm flex items-center justify-between">
+              <p class="dark:text-white font-bold">
+                {{ $t('Номер') }}:
               </p>
+              <p>{{loadCurrentUser.user.phone?.slice(4, 13)}}</p>
             </div>
-          </div>
-        </div>
-        <div class="w-6/12 max-lg:w-full flex flex-col gap-y-10">
-          <div class="">
-            <p class="text-gray-500 dark:text-white font-mono">{{ $t('Компания') }}:</p>
-            <p class="dark:text-white font-bold tracking-wide mt-2">
-              {{company.company.description}}
-            </p>
+            <div class="text-sm flex items-center justify-between">
+              <p class="dark:text-white font-bold">
+                {{ $t('Заработная плата') }}:
+              </p>
+              <p v-if="loadCurrentUser.user.salary">{{ loadCurrentUser.user.salary + ' сум' }}</p>
+              <p v-else>{{ $t('Не назначена') }}</p>
+            </div>
+            <div v-if="company.company.name" class="text-sm flex items-center justify-between">
+              <p class="dark:text-white font-bold">
+                {{ $t('Компания') }}:
+              </p>
+              <p>{{ company.company.name }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -129,8 +145,12 @@ onMounted(()=>{
         <ThePreloader></ThePreloader>
       </div>
     </div>
-    <Transition name="slide-down">
-      <TheModal v-if="showInfo" @showModal="showInfo = false; getCode = false">
+    <Transition name="fade">
+      <TheModal
+          v-if="showInfo"
+          :type="'resizeInfoWindow'"
+          @showModal="showInfo = false; getCode = false"
+      >
         <form @submit.prevent="loadCurrentUser.update_my({user: userEdit})">
           <div>
             <h2 class="text-center text-xl tracking-widest font-bold dark:text-white">Личная информация</h2>

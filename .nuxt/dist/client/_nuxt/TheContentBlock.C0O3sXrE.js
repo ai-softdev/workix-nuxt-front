@@ -1,1 +1,0 @@
-import{_ as o}from"./_plugin-vue_export-helper.DlAUqK2U.js";import{N as r,O as t,a5 as s}from"./swiper-vue.yO-n0JsZ.js";const a={},c={class:"p-4 dark:text-white rounded-lg border-[#8E959E] border-opacity-10 border shadow-[0_2px_20px_-16px_rgba(0,0,0,0.3)]"};function n(e,_){return r(),t("div",c,[s(e.$slots,"default")])}const l=o(a,[["render",n]]);export{l as T};

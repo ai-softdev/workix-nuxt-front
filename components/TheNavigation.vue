@@ -1,5 +1,5 @@
 <template>
-  <div class="container z-50 relative dark:border-none"
+  <div class="container z-10 relative dark:border-none"
        :class="{'blur' : useTreeStore().treeFullScreen === true}">
     <div class="flex w-full items-center pt-8 transition-all justify-between text-center dark:bg-gray-600"
          :class="{'px-3 py-[33px]' : !loadCurrentUser.activeNav, 'px-6 py-[23px]' : loadCurrentUser.activeNav}">

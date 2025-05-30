@@ -1,33 +1,35 @@
 <template>
-  <div class="w-full grid gap-y-10 gap-x-10 grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1"
-       :class="{'max-[1150px]:grid-cols-2' : activeNav, 'max-[1150px]:grid-cols-3' : !activeNav}">
+  <div class="w-full grid grid-cols-3 gap-x-5"
+       :class="{'max-[1150px]:grid-cols-2' : activeNav, 'max-[1150px]:grid-cols-3' : !activeNav}"
+  >
     <ProfileContentUserInfo/>
     <div
-      class="w-full p-6 dark:border-t  dark:border-t-gray-500 dark:shadow-md shadow-lg dark:shadow-gray-500 cursor-pointer rounded-md hover:transform hover:-translate-y-2 transition-all duration-200">
-      <h2 class="dark:text-white tracking-widest">{{ $t('Личная статистика') }}</h2>
+      class="w-full col-span-2 p-6 bg-white dark:border-t dark:border-t-gray-500 dark:shadow-md shadow-cards dark:shadow-gray-500 rounded-3xl hover:transform hover:-translate-y-2 transition-all duration-200">
+      <div class="border rounded-full px-3 py-2 w-fit flex items-center gap-3 mb-8">
+        <img src="/icons/statistic.svg" alt="statistic">
+        <h2 class="dark:text-white">{{ $t('Личная статистика') }}</h2>
+      </div>
       <ProfileContentChart/>
     </div>
+  </div>
+  <div class="grid grid-cols-3 gap-x-5 mt-5">
     <TheContentBlock
-      class="">
-      <TheTextContent>
-        {{ $t('Последние задания') }}
-      </TheTextContent>
-      <div>
-        <ProfileTasks></ProfileTasks>
+        class="bg-white shadow-cards hover:transform hover:-translate-y-2 transition-all duration-200"
+    >
+      <div class="border rounded-full px-3 py-2 w-fit flex items-center gap-3 mb-8">
+        <img src="/icons/tasks.svg" alt="tasks">
+        <h2 class="dark:text-white">{{ $t('Последние задания') }}</h2>
       </div>
+      <ProfileTasks></ProfileTasks>
     </TheContentBlock>
     <TheContentBlock
-      class="">
-      <TheTextContent>
-        {{ $t('Уведомления') }}
-      </TheTextContent>
+        class="bg-white shadow-cards hover:transform hover:-translate-y-2 transition-all duration-200"
+    >
+      <div class="border rounded-full px-3 py-2 w-fit flex items-center gap-3 mb-8">
+        <img src="/icons/notifications.svg" alt="tasks">
+        <h2 class="dark:text-white">{{ $t('Уведомления') }}</h2>
+      </div>
       <ProfileContentNotification></ProfileContentNotification>
-    </TheContentBlock>
-    <TheContentBlock
-      class="">
-      <TheTextContent>
-        {{ $t('') }}
-      </TheTextContent>
     </TheContentBlock>
   </div>
 </template>
