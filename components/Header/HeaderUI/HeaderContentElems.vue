@@ -265,6 +265,7 @@
       <TheModal
           v-if="showExitModal"
           @showModal="showExitModal = false"
+          type="resizeSendWindow"
       >
         <div class="p-8">
           <p class="font-bold text-2xl text-center">

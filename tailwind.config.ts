@@ -16,12 +16,16 @@ export default <Partial<Config>>{
         golden: "#F4C107",
         sunset: "#FF5852",
         mediumGray: "#7D7D7D",
-        whiteSmoke: "#F5F4F7"
+        whiteSmoke: "#F5F4F7",
+        whiteLilia: "#F7F6F9"
       },
       boxShadow: {
         notifications: '0 6px 12px 0 rgba(0, 0, 0, 0.05)',
+        golden: '0 6px 12px 0 #F4C107',
         profile: '0 23px 23px 0 rgba(0, 0, 0, 0.04)',
-        cards: "0 23px 23px 0 rgba(0, 0, 0, 0.01)"
+        cards: "0 23px 23px 0 rgba(0, 0, 0, 0.01)",
+        hoverCards: "0 29px 29px 0 rgba(0, 0, 0, 0.03)",
+        icons: "0 1px 1px 0 rgba(0, 0, 0, 0.04)"
       }
     }
   },

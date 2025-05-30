@@ -1,6 +1,0 @@
-const TheCheckbox_vue_vue_type_style_index_0_scoped_fc64ac97_lang = '.container[data-v-fc64ac97]{cursor:pointer;display:block;font-size:16px;margin-bottom:12px;padding-left:35px;position:relative;-webkit-user-select:none;-moz-user-select:none;user-select:none}.container input[data-v-fc64ac97]{cursor:pointer;height:0;opacity:0;position:absolute;width:0}.checkmark[data-v-fc64ac97]{background-color:#eee;height:25px;left:0;position:absolute;top:0;width:25px}.container input~.checkmark[data-v-fc64ac97]{border:1px solid #2988c8;border-radius:5px;transition:.3s ease-in-out}.container:hover input~.checkmark[data-v-fc64ac97]{background-color:#3498db}.container input:checked~.checkmark[data-v-fc64ac97]{background-color:#2988c8}.checkmark[data-v-fc64ac97]:after{content:"";display:none;position:absolute}.container input:checked~.checkmark[data-v-fc64ac97]:after{display:block}.container .checkmark[data-v-fc64ac97]:after{border:solid #fff;border-width:0 3px 3px 0;height:10px;left:9px;top:5px;transform:rotate(45deg);width:5px}';
-
-const TheCheckboxStyles_hoFe6dVH = [TheCheckbox_vue_vue_type_style_index_0_scoped_fc64ac97_lang];
-
-export { TheCheckboxStyles_hoFe6dVH as default };
-//# sourceMappingURL=TheCheckbox-styles.hoFe6dVH.mjs.map

@@ -920,7 +920,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0 ,
-    component: () => import('./base-dSC_2KJQ.mjs').then((m) => m.default || m),
+    component: () => import('./base-Q76mFuH-.mjs').then((m) => m.default || m),
     children: [
       {
         name: "base-chat",
@@ -928,7 +928,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./chat-CEQvniCI.mjs').then((m) => m.default || m),
+        component: () => import('./chat-CwZGsR0d.mjs').then((m) => m.default || m),
         children: [
           {
             name: "base-chat-id",
@@ -936,7 +936,7 @@ const _routes = [
             meta: {},
             alias: [],
             redirect: void 0 ,
-            component: () => import('./_id_-D1gpjb6K.mjs').then((m) => m.default || m)
+            component: () => import('./_id_-BvNiQgAr.mjs').then((m) => m.default || m)
           }
         ]
       },
@@ -946,7 +946,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-DUkZXl4Y.mjs').then((m) => m.default || m)
+        component: () => import('./index-BKH3g1Lz.mjs').then((m) => m.default || m)
       },
       {
         name: "base-companies-id",
@@ -954,7 +954,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./_id_-Bmm7P8Pg.mjs').then((m) => m.default || m)
+        component: () => import('./_id_-g_n3rEs5.mjs').then((m) => m.default || m)
       },
       {
         name: "base-companies-department-id",
@@ -962,7 +962,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./_id_-C-Mosgae.mjs').then((m) => m.default || m)
+        component: () => import('./_id_-PEmDE-17.mjs').then((m) => m.default || m)
       },
       {
         name: "base-companies-department",
@@ -970,7 +970,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-BoD04eM3.mjs').then((m) => m.default || m)
+        component: () => import('./index-DOqK_CRh.mjs').then((m) => m.default || m)
       },
       {
         name: "base-companies",
@@ -978,7 +978,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-BSVLMu2m.mjs').then((m) => m.default || m)
+        component: () => import('./index-BGXuMB0k.mjs').then((m) => m.default || m)
       },
       {
         name: "base-companies-news-id",
@@ -986,7 +986,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./_id_-BHS9HFjv.mjs').then((m) => m.default || m)
+        component: () => import('./_id_-zu6ZMkCw.mjs').then((m) => m.default || m)
       },
       {
         name: "base-companies-news",
@@ -1002,7 +1002,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./_slug_-iTbN9zhg.mjs').then((m) => m.default || m)
+        component: () => import('./_slug_-BfqQsQY1.mjs').then((m) => m.default || m)
       },
       {
         name: "base-documents",
@@ -1010,7 +1010,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-DKpbva_0.mjs').then((m) => m.default || m)
+        component: () => import('./index-CLrDg39g.mjs').then((m) => m.default || m)
       },
       {
         name: "base-documents-signification-slug",
@@ -1018,7 +1018,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./_slug_-JEsed2aW.mjs').then((m) => m.default || m)
+        component: () => import('./_slug_-Cd0pXmTe.mjs').then((m) => m.default || m)
       },
       {
         name: "base-graph",
@@ -1034,7 +1034,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./_id_-D_GHFZEJ.mjs').then((m) => m.default || m)
+        component: () => import('./_id_-DiYEG3Ew.mjs').then((m) => m.default || m)
       },
       {
         name: "base-objects",
@@ -1042,7 +1042,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-DzwRlm_A.mjs').then((m) => m.default || m)
+        component: () => import('./index-DOI97OK_.mjs').then((m) => m.default || m)
       },
       {
         name: "base-profile",
@@ -1050,7 +1050,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./profile-CaB6jItB.mjs').then((m) => m.default || m)
+        component: () => import('./profile-BUtiCl6X.mjs').then((m) => m.default || m)
       },
       {
         name: "base-sales",
@@ -1058,7 +1058,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-BcfmgX95.mjs').then((m) => m.default || m)
+        component: () => import('./index-n13eThJY.mjs').then((m) => m.default || m)
       },
       {
         name: "base-sales-item-create",
@@ -1066,7 +1066,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-Olh9l5Pj.mjs').then((m) => m.default || m)
+        component: () => import('./index-BNoVrFGt.mjs').then((m) => m.default || m)
       },
       {
         name: "base-storage",
@@ -1074,7 +1074,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./storage-V9y_KB55.mjs').then((m) => m.default || m),
+        component: () => import('./storage-DDane2z4.mjs').then((m) => m.default || m),
         children: [
           {
             name: "base-storage-slug-nestedSlug",
@@ -1082,7 +1082,7 @@ const _routes = [
             meta: {},
             alias: [],
             redirect: void 0 ,
-            component: () => import('./index-DNs-dcGm.mjs').then((m) => m.default || m)
+            component: () => import('./index-B2sO5cv_.mjs').then((m) => m.default || m)
           },
           {
             name: "base-storage-slug",
@@ -1090,7 +1090,7 @@ const _routes = [
             meta: {},
             alias: [],
             redirect: void 0 ,
-            component: () => import('./index-CzLi76xU.mjs').then((m) => m.default || m)
+            component: () => import('./index-DQS39Qm1.mjs').then((m) => m.default || m)
           }
         ]
       },
@@ -1100,7 +1100,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./_id_-D5tRTL0G.mjs').then((m) => m.default || m)
+        component: () => import('./_id_-vB5Q40-I.mjs').then((m) => m.default || m)
       },
       {
         name: "base-tasks",
@@ -1108,7 +1108,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-Bro7IJpt.mjs').then((m) => m.default || m)
+        component: () => import('./index-BZhNVdgg.mjs').then((m) => m.default || m)
       },
       {
         name: "base-tests-exam",
@@ -1116,7 +1116,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./exam-CXbMgzS3.mjs').then((m) => m.default || m)
+        component: () => import('./exam-BCqKpfRN.mjs').then((m) => m.default || m)
       },
       {
         name: "base-tests",
@@ -1124,7 +1124,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-DqYQu-Uv.mjs').then((m) => m.default || m)
+        component: () => import('./index-DdQMiaki.mjs').then((m) => m.default || m)
       },
       {
         name: "base-tree",
@@ -1132,7 +1132,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-DU0u-T0U.mjs').then((m) => m.default || m)
+        component: () => import('./index-b4Zoa0YT.mjs').then((m) => m.default || m)
       },
       {
         name: "base-users-slug",
@@ -1140,7 +1140,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./_slug_-Dv84GFdz.mjs').then((m) => m.default || m)
+        component: () => import('./_slug_-_vXhG5qT.mjs').then((m) => m.default || m)
       },
       {
         name: "base-users",
@@ -1148,7 +1148,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-SEahumMB.mjs').then((m) => m.default || m)
+        component: () => import('./index-BLWRV3nh.mjs').then((m) => m.default || m)
       }
     ]
   },
@@ -1158,7 +1158,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0 ,
-    component: () => import('./index-BavJ-WPq.mjs').then((m) => m.default || m)
+    component: () => import('./index-DGoJJj-U.mjs').then((m) => m.default || m)
   }
 ];
 const _wrapIf = (component, props, slots) => {
@@ -1263,7 +1263,7 @@ const validate = /* @__PURE__ */ defineNuxtRouteMiddleware(async (to) => {
 });
 const inlineConfig = {
   "nuxt": {
-    "buildId": "3adfebaa-c62f-4736-ab11-4516c18565c1"
+    "buildId": "e3996ca0-843f-4467-be05-d8d92994acec"
   },
   "ui": {
     "primary": "green",
@@ -3204,9 +3204,11 @@ const _porcelain = "#F2F2F2";
 const _golden = "#F4C107";
 const _sunset = "#FF5852";
 const _mediumGray = "#7D7D7D";
+const _whiteSmoke = "#F5F4F7";
+const _whiteLilia = "#F7F6F9";
 const _primary = { "50": "rgb(var(--color-primary-50) / <alpha-value>)", "100": "rgb(var(--color-primary-100) / <alpha-value>)", "200": "rgb(var(--color-primary-200) / <alpha-value>)", "300": "rgb(var(--color-primary-300) / <alpha-value>)", "400": "rgb(var(--color-primary-400) / <alpha-value>)", "500": "rgb(var(--color-primary-500) / <alpha-value>)", "600": "rgb(var(--color-primary-600) / <alpha-value>)", "700": "rgb(var(--color-primary-700) / <alpha-value>)", "800": "rgb(var(--color-primary-800) / <alpha-value>)", "900": "rgb(var(--color-primary-900) / <alpha-value>)", "950": "rgb(var(--color-primary-950) / <alpha-value>)", "DEFAULT": "rgb(var(--color-primary-DEFAULT) / <alpha-value>)" };
 const _cool = { "50": "#f9fafb", "100": "#f3f4f6", "200": "#e5e7eb", "300": "#d1d5db", "400": "#9ca3af", "500": "#6b7280", "600": "#4b5563", "700": "#374151", "800": "#1f2937", "900": "#111827", "950": "#030712" };
-const config = { "inherit": _inherit, "current": _current, "transparent": _transparent, "black": _black, "white": _white, "slate": _slate, "gray": _gray, "zinc": _zinc, "neutral": _neutral, "stone": _stone, "red": _red, "orange": _orange, "amber": _amber, "yellow": _yellow, "lime": _lime, "green": _green, "emerald": _emerald, "teal": _teal, "cyan": _cyan, "sky": _sky, "blue": _blue, "indigo": _indigo, "violet": _violet, "purple": _purple, "fuchsia": _fuchsia, "pink": _pink, "rose": _rose, "bgWhite": _bgWhite, "blueDark": _blueDark, "blueDarkSemiLight": _blueDarkSemiLight, "blueSemiLight": _blueSemiLight, "semiCyan": _semiCyan, "bgPages": _bgPages, "porcelain": _porcelain, "golden": _golden, "sunset": _sunset, "mediumGray": _mediumGray, "primary": _primary, "cool": _cool };
+const config = { "inherit": _inherit, "current": _current, "transparent": _transparent, "black": _black, "white": _white, "slate": _slate, "gray": _gray, "zinc": _zinc, "neutral": _neutral, "stone": _stone, "red": _red, "orange": _orange, "amber": _amber, "yellow": _yellow, "lime": _lime, "green": _green, "emerald": _emerald, "teal": _teal, "cyan": _cyan, "sky": _sky, "blue": _blue, "indigo": _indigo, "violet": _violet, "purple": _purple, "fuchsia": _fuchsia, "pink": _pink, "rose": _rose, "bgWhite": _bgWhite, "blueDark": _blueDark, "blueDarkSemiLight": _blueDarkSemiLight, "blueSemiLight": _blueSemiLight, "semiCyan": _semiCyan, "bgPages": _bgPages, "porcelain": _porcelain, "golden": _golden, "sunset": _sunset, "mediumGray": _mediumGray, "whiteSmoke": _whiteSmoke, "whiteLilia": _whiteLilia, "primary": _primary, "cool": _cool };
 const colors_244lXBzhnM = /* @__PURE__ */ defineNuxtPlugin(() => {
   const appConfig2 = useAppConfig();
   const root = computed(() => {
@@ -8850,5 +8852,5 @@ let entry;
 }
 const entry$1 = (ssrContext) => entry(ssrContext);
 
-export { appConfig as A, onClickOutside as B, useAppConfig as C, useNuxtApp as D, useDebounceFn as E, computedAsync as F, useMediaQuery as G, useParallax as H, useRoute as I, defineNuxtRouteMiddleware as J, useRequestHeader as K, __nuxt_component_0 as _, useRouter as a, parseQuery as b, createError as c, useRuntimeConfig as d, entry$1 as default, navigateTo as e, withoutTrailingSlash as f, useState as g, hasProtocol as h, defineStore as i, joinURL as j, useI18n as k, useSeoMeta as l, __nuxt_component_0$1 as m, nuxtLinkDefaults as n, directiveHooks as o, parseURL as p, notNullish as q, noop as r, tryOnScopeDispose as s, toValue as t, useHead as u, toRef as v, withTrailingSlash as w, useMouse as x, useWindowScroll as y, mergeConfig as z };
+export { appConfig as A, onClickOutside as B, useAppConfig as C, useNuxtApp as D, useDebounceFn as E, computedAsync as F, useMediaQuery as G, useParallax as H, useRoute as I, defineNuxtRouteMiddleware as J, useRequestHeader as K, __nuxt_component_0 as _, useRouter as a, parseQuery as b, createError as c, useRuntimeConfig as d, entry$1 as default, navigateTo as e, withoutTrailingSlash as f, useState as g, hasProtocol as h, useI18n as i, joinURL as j, defineStore as k, useSeoMeta as l, __nuxt_component_0$1 as m, nuxtLinkDefaults as n, directiveHooks as o, parseURL as p, notNullish as q, noop as r, tryOnScopeDispose as s, toValue as t, useHead as u, toRef as v, withTrailingSlash as w, useMouse as x, useWindowScroll as y, mergeConfig as z };
 //# sourceMappingURL=server.mjs.map

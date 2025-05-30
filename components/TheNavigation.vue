@@ -406,7 +406,7 @@ const isValidLink = (nameEn) => {
 
 onMounted(() => {
   window.onscroll = (e) => {
-    (loadCurrentUser.my_scroll) = window.scrollY;
+    // (loadCurrentUser.my_scroll) = window.scrollY;
   }
 })
 

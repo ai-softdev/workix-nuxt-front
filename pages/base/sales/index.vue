@@ -376,30 +376,7 @@ watch(() => company.company, (newValue) => {
   background-color: #8881;
 }
 
-.pagination {
-  display: flex;
-  align-content: center;
-  justify-content: end;
-  gap: 10px;
-}
 
-.page-link {
-  padding: 10px 15px !important;
-  border: 1px solid #ddd !important;
-  border-radius: 8px;
-  background: #8881;
-  cursor: pointer;
-}
-.dark .page-item.active .page-link{
-  border: 1px solid rgba(255,255,255, 0.3) !important;
-  background: rgba(255,255,255, 0.3) !important;
-}
-.page-item.active .page-link{
-  background: #E5E7EB !important;
-}
-.page-item.disabled .page-link{
-  opacity: 0.5 !important;
-}
 
 @media (max-width: 2100px) {
   .sales-up-table {

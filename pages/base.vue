@@ -3,7 +3,7 @@
     <div class="w-screen h-screen z-20 fixed bg-black opacity-30 hidden"
          :class="{'hidden' : !user.activeNav, 'max-[1150px]:block' : user.activeNav}"
          @click="user.activeNav = false"/>
-    <div class="flex w-full h-full bg-porcelain dark:bg-bgPages">
+    <div class="flex w-full h-full bg-[#F7F6F9] dark:bg-bgPages">
       <div
         class="bg-white transition-all duration-300 dark:bg-black max-[880px]:h-screen max-[1150px]:fixed z-50"
         :class="{'max-[1150px]:-translate-x-24 transition-all duration-200' : !user.activeNav, 'max-[600px]:w-full transition-all' : user.activeNav}">

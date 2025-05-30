@@ -6,13 +6,25 @@ import {useAuthStore} from "~/stores/auth";
 import TheModal from "~/components/UI/TheModal.vue";
 import TheSearch from "~/components/UI/TheSearch.vue";
 
+import Paginate from 'vuejs-paginate-next';
+import {useRoute, useRouter} from "vue-router";
+
 const loadCurrentUser = useAuthStore()
 const userList = useUserStore()
 const phone = ref('')
+
+const route = useRoute();
+const router = useRouter();
+
+const page = ref(Number(route.query.page) || 1);
+const limit = ref(Number(route.query.limit) || 10);
+const pageCount = ref(0)
+const limitItems = ref([5, 10, 20, 30, 50])
+
 const params = {
   page: 1,
-  limit: 15,
-  query: '',
+  limit: 10,
+  query: ref(''),
   user_type: 'user-list'
 }
 
@@ -25,6 +37,41 @@ defineProps({
     type: Boolean,
     default: false,
   }
+})
+
+const clickCallback = (pageNum) => {
+  page.value = pageNum;
+  updateQueryParams();
+};
+
+const changePageLimit = () => {
+  updateQueryParams();
+};
+
+const searchByName = () => {
+  page.value = 1;
+  updateQueryParams();
+};
+
+const updateQueryParams = () => {
+  router.push({
+    query: {
+      page: page.value,
+      limit: limit.value,
+      itemName: params.query.value || undefined,
+    }
+  });
+};
+
+watch(() => route.query, (newQuery) => {
+  page.value = Number(newQuery.page) || 1;
+  limit.value = Number(newQuery.limit) || 10;
+  params.query.value = newQuery.itemName || '';
+  userList.loadUserList({page: page.value, limit: limit.value, query: params.query.value})
+});
+
+watch(() => userList.user, (newValue) => {
+  pageCount.value = Math.ceil(userList.user.count / limit.value);
 })
 
 function loadPage(page) {
@@ -59,27 +106,36 @@ onMounted(() => {
 })
 watchSyncEffect(() => {
   if (loadCurrentUser.user.role?.name_en === 'admin') {
-    userList.loadAdminList({page: params.page, limit: params.limit, query: params.query})
+    userList.loadAdminList({page: params.page, limit: params.limit, query: params.query.value})
   } else if(loadCurrentUser.user.role?.name_en === 'company_admin') {
     userList.loadUserList({
       page: params.page,
       limit: params.limit,
-      query: params.query
+      query: params.query.value
     })
   }
 })
 </script>
 
 <template>
-  <div class="">
+  <div class="flex flex-col gap-4">
     <div :class="{'flex flex-wrap items-center justify-between' :['company_admin', 'admin'].includes( loadCurrentUser.user.role?.name_en )}">
-      <div class="mb-10 mt-12 text-lg flex gap-x-10">
-        <p class="dark:text-white tracking-widest" v-if="loadCurrentUser.user.role?.name_en === 'admin'">
-          {{ $t('Список администраторов компании') }}</p>
-        <p class="dark:text-white tracking-widest " v-else>{{ $t('Список всех пользователей компании') }}</p>
+      <div class="text-lg flex gap-x-10">
+        <p
+            class="dark:text-white text-3xl font-bold"
+            v-if="loadCurrentUser.user.role?.name_en === 'admin'"
+        >
+          {{ $t('Список администраторов компании') }}
+        </p>
+        <p
+            class="dark:text-white text-3xl font-bold"
+            v-else
+        >
+          {{ $t('Список всех пользователей компании') }}
+        </p>
       </div>
       <div
-        :class="{'flex items-center justify-evenly my-10' : loadCurrentUser.user.role?.name_en === 'admin', 'w-2/12 max-lg:w-4/12 max-sm:w-full max-sm:mb-6 max-sm:mx-auto' : loadCurrentUser.user.role_en !== 'admin'}">
+        :class="{'flex items-center justify-evenly' : loadCurrentUser.user.role?.name_en === 'admin', 'w-2/12 max-lg:w-4/12 max-sm:w-full max-sm:mb-6 max-sm:mx-auto' : loadCurrentUser.user.role_en !== 'admin'}">
         <div class="flex gap-x-10" v-if="loadCurrentUser?.user.role === 'Администратор сайта'">
           <button class="p-2 rounded-xl dark:text-white tracking-widest font-bold"
                   :class="{'bg-blueDarkSemiLight text-white' : userChecked === 'user-list'}"
@@ -95,27 +151,72 @@ watchSyncEffect(() => {
         <UserCreate></UserCreate>
       </div>
     </div>
-    <div class="w-full ">
-      <div class="flex gap-x-10 max-lg:flex-wrap max-md:justify-center">
-        <div class="flex w-9/12 justify-between max-lg:justify-center gap-x-10 items-center max-md:flex-wrap max-md:mt-10 max-md:justify-center">
-          <TheSearch class="w-full" v-model:model-value="params.query" @search="userList.loadUserList(params)"/>
-          <TheFilter></TheFilter>
+    <div class="w-full mt-4">
+      <div class="flex items-center justify-between gap-x-10 max-lg:flex-wrap max-md:justify-center">
+        <p class="text-mediumGray w-5/12">
+          {{ $t('Данная страница хранит информацию о пользователях данной платформы') }}
+        </p>
+        <div class="w-5/12 flex items-center gap-3 h-10">
+          <TheSearch
+              class="w-full"
+              v-model:model-value="params.query"
+              @search="searchByName"
+          />
+<!--          @search="userList.loadUserList(params)"-->
+<!--          <TheFilter></TheFilter>-->
         </div>
       </div>
-      <div class="flex max-md:flex-wrap justify-center max-md:mt-10">
-        <div class="flex flex-wrap gap-x-6 max-md:order-2 max-lg:justify-center">
-          <UserContentList v-if="userList?.get_user_list.count > 0" v-for="userItem in userList?.get_user_list.results" :user-item="userItem" class="max-md:w-full"></UserContentList>
-        </div>
+      <div class="mt-8 grid grid-cols-4 gap-5 max-md:mt-10">
+          <UserContentList
+              v-for="userItem in userList?.get_user_list.results"
+              v-if="userList?.get_user_list.count > 0"
+              :user-item="userItem"
+              class="max-md:w-full"/>
+      </div>
+      <div v-if="!userList?.get_user_list?.results?.length">
+        <p class="text-center">
+          {{ $t('По вашему запросу никого не найдено.') }}
+        </p>
       </div>
     </div>
-    <div class="flex flex-wrap justify-center gap-x-4 mt-10">
-      <div v-if="userList.get_user_list.count > 5" v-for="(page, id) in userList?.get_user_list?.links" :key="id"
-           class="px-4 py-2 rounded-full cursor-pointer"
-           :class="{'bg-blue-400 text-white' : page.active, 'bg-gray-200 text-black' : !page.active}"
-           @click="loadPage(page.label); userList?.loadUserList({page: params.page, limit: params.limit, user_type: loadCurrentUser.user.role_en !== 'admin' ? 'user-list/my-company' : userChecked, query: params.query})">
-        {{ page.label }}
+<!--    <div class="flex flex-wrap justify-center gap-x-4 mt-10">-->
+<!--      <div v-if="userList.get_user_list.count > 5" v-for="(page, id) in userList?.get_user_list?.links" :key="id"-->
+<!--           class="px-4 py-2 rounded-full cursor-pointer"-->
+<!--           :class="{'bg-blue-400 text-white' : page.active, 'bg-gray-200 text-black' : !page.active}"-->
+<!--           @click="loadPage(page.label); userList?.loadUserList({page: params.page, limit: params.limit, user_type: loadCurrentUser.user.role_en !== 'admin' ? 'user-list/my-company' : userChecked, query: params.query})">-->
+<!--        {{ page.label }}-->
+<!--      </div>-->
+<!--    </div>-->
+    <div class="w-full flex items-center justify-end border-t gap-4 pr-10 pb-5 pt-5 max-md:pr-3 max-md:flex-col max-md:items-end">
+      <paginate
+          :page-count="pageCount"
+          :page-range="3"
+          :margin-pages="2"
+          :click-handler="clickCallback"
+          :prev-text="'<'"
+          :next-text="'>'"
+          :container-class="'pagination'"
+          :page-class="'page-item'"
+          :force-page="page"
+      >
+      </paginate>
+      <div class="flex items-center gap-3">
+        <p>Строк на странице:</p>
+        <select
+            v-model="limit"
+            @change="changePageLimit"
+            class="w-fit p-2.5 rounded-md border bg-white dark:bg-bgWhite text-black"
+        >
+          <option
+              v-for="item in limitItems"
+              :value="item"
+          >
+            {{item}}
+          </option>
+        </select>
       </div>
     </div>
+
   </div>
 </template>
 

@@ -15,7 +15,7 @@ defineProps({
           @click="$emit('showModal')"
       ></div>
       <div
-          class="dark:bg-gray-600 bg-white z-[10000] rounded-lg w-7/12 max-md:w-10/12 max-sm:w-11/12 max-h-[70%] relative p-5 max-sm:p-3 overflow-y-auto"
+          class="dark:bg-gray-600 bg-white z-[10000] rounded-3xl w-7/12 max-md:w-10/12 max-sm:w-11/12 max-h-[70%] relative p-5 max-sm:p-3 overflow-y-auto"
           :class="{
           '!w-max dark:!bg-gray-700': type === 'resize',
           '!w-4/12 dark:!bg-gray-700 !p-0': type === 'resizeSendWindow',

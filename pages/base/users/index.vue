@@ -17,12 +17,7 @@ onMounted(()=> {
 
 <template>
   <div>
-    <TheTextContent :text-type="'pageTitle'">{{ $t('Страница с пользователями') }}</TheTextContent>
-    <p class="dark:text-gray-300 tracking-widest text-sm">
-      {{ $t('Данная страница хранит информацию о пользователях данной платформы') }}</p>
-    <div>
       <UserContent></UserContent>
-    </div>
   </div>
 </template>
 
