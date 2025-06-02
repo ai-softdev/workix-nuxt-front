@@ -1,0 +1,245 @@
+{
+  "resolvedId": "D:/projects/nuxt/workix-nuxt-front/components/Navigtaion/NavigationBlock.vue?vue&type=script&setup=true&lang.ts",
+  "transforms": [
+    {
+      "name": "vite:vue",
+      "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { renderSlot as _renderSlot, createElementVNode as _createElementVNode, unref as _unref, openBlock as _openBlock, createElementBlock as _createElementBlock, createCommentVNode as _createCommentVNode, normalizeClass as _normalizeClass, Transition as _Transition, withCtx as _withCtx, createVNode as _createVNode } from \"vue\"\n\nconst _hoisted_1 = { class: \"items-center justify-between flex gap-4 max-sm:!justify-start\" }\nconst _hoisted_2 = { class: \"flex items-center\" }\nconst _hoisted_3 = { class: \"bg-white w-10 h-10 rounded-lg border flex items-center justify-center mr-2\" }\nconst _hoisted_4 = {\n  key: 0,\n  class: \"dark:text-white text-black\"\n}\nconst _hoisted_5 = /*#__PURE__*/_createElementVNode(\"svg\", {\n  class: \"dark:fill-white fill-black\",\n  width: \"15px\",\n  height: \"15px\",\n  viewBox: \"0 0 24 24\",\n  fill: \"none\",\n  xmlns: \"http://www.w3.org/2000/svg\"\n}, [\n  /*#__PURE__*/_createElementVNode(\"path\", { d: \"M5.70711 9.71069C5.31658 10.1012 5.31658 10.7344 5.70711 11.1249L10.5993 16.0123C11.3805 16.7927 12.6463 16.7924 13.4271 16.0117L18.3174 11.1213C18.708 10.7308 18.708 10.0976 18.3174 9.70708C17.9269 9.31655 17.2937 9.31655 16.9032 9.70708L12.7176 13.8927C12.3271 14.2833 11.6939 14.2832 11.3034 13.8927L7.12132 9.71069C6.7308 9.32016 6.09763 9.32016 5.70711 9.71069Z\" })\n], -1)\nconst _hoisted_6 = [\n  _hoisted_5\n]\nconst _hoisted_7 = {\n  key: 0,\n  class: \"flex flex-col gap-y-1\"\n}\n\nimport {useAuthStore} from \"~/stores/auth\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'NavigationBlock',\n  props: {\r\n  active: {\r\n    type: Boolean,\r\n    default: false\r\n  },\r\n  activeNav: {\r\n    type: Boolean,\r\n  },\r\n  navId: {\r\n    type: Number,\r\n    default: null\r\n  },\r\n  hoverActive: {\r\n    type: Boolean,\r\n    default: false\r\n  }\r\n},\n  setup(__props) {\n\r\n\r\nconst authStore = useAuthStore()\r\nconst props = __props\r\n\nreturn (_ctx: any,_cache: any) => {\n  return (_openBlock(), _createElementBlock(\"div\", null, [\n    _createElementVNode(\"button\", {\n      onClick: _cache[0] || (_cache[0] = ($event: any) => (__props.active = !__props.active)),\n      class: _normalizeClass([\"block w-full text-start transition-all rounded-lg px-4 py-2\", {\r\n              'bg-golden' : __props.active\r\n          }])\n    }, [\n      _createElementVNode(\"div\", _hoisted_1, [\n        _createElementVNode(\"div\", _hoisted_2, [\n          _createElementVNode(\"div\", _hoisted_3, [\n            _renderSlot(_ctx.$slots, \"navTitleIcon\")\n          ]),\n          (_unref(authStore).activeNav)\n            ? (_openBlock(), _createElementBlock(\"span\", _hoisted_4, [\n                _renderSlot(_ctx.$slots, \"navTitle\")\n              ]))\n            : _createCommentVNode(\"\", true)\n        ]),\n        _createElementVNode(\"div\", {\n          class: _normalizeClass({'rotate-180 transition-all' : __props.active, '-rotate-0 transition-all' : !__props.active})\n        }, _hoisted_6, 2)\n      ])\n    ], 2),\n    _createVNode(_Transition, { name: \"slide-down\" }, {\n      default: _withCtx(() => [\n        (__props.active)\n          ? (_openBlock(), _createElementBlock(\"div\", _hoisted_7, [\n              _renderSlot(_ctx.$slots, \"navContent\")\n            ]))\n          : _createCommentVNode(\"\", true)\n      ]),\n      _: 3\n    })\n  ]))\n}\n}\n\n})",
+      "start": 1748867593801,
+      "end": 1748867593802
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1748867593802,
+      "end": 1748867593802,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1748867593802,
+      "end": 1748867593802,
+      "order": "pre"
+    },
+    {
+      "name": "unplugin-vue-i18n",
+      "start": 1748867593802,
+      "end": 1748867593802,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1748867593802,
+      "end": 1748867593802,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1748867593802,
+      "end": 1748867593802,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { renderSlot as _renderSlot, createElementVNode as _createElementVNode, unref as _unref, openBlock as _openBlock, createElementBlock as _createElementBlock, createCommentVNode as _createCommentVNode, normalizeClass as _normalizeClass, Transition as _Transition, withCtx as _withCtx, createVNode as _createVNode } from \"vue\";\nconst _hoisted_1 = { class: \"items-center justify-between flex gap-4 max-sm:!justify-start\" };\nconst _hoisted_2 = { class: \"flex items-center\" };\nconst _hoisted_3 = { class: \"bg-white w-10 h-10 rounded-lg border flex items-center justify-center mr-2\" };\nconst _hoisted_4 = {\n  key: 0,\n  class: \"dark:text-white text-black\"\n};\nconst _hoisted_5 = /* @__PURE__ */ _createElementVNode(\"svg\", {\n  class: \"dark:fill-white fill-black\",\n  width: \"15px\",\n  height: \"15px\",\n  viewBox: \"0 0 24 24\",\n  fill: \"none\",\n  xmlns: \"http://www.w3.org/2000/svg\"\n}, [\n  /* @__PURE__ */ _createElementVNode(\"path\", { d: \"M5.70711 9.71069C5.31658 10.1012 5.31658 10.7344 5.70711 11.1249L10.5993 16.0123C11.3805 16.7927 12.6463 16.7924 13.4271 16.0117L18.3174 11.1213C18.708 10.7308 18.708 10.0976 18.3174 9.70708C17.9269 9.31655 17.2937 9.31655 16.9032 9.70708L12.7176 13.8927C12.3271 14.2833 11.6939 14.2832 11.3034 13.8927L7.12132 9.71069C6.7308 9.32016 6.09763 9.32016 5.70711 9.71069Z\" })\n], -1);\nconst _hoisted_6 = [\n  _hoisted_5\n];\nconst _hoisted_7 = {\n  key: 0,\n  class: \"flex flex-col gap-y-1\"\n};\nimport { useAuthStore } from \"~/stores/auth\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"NavigationBlock\",\n  props: {\n    active: {\n      type: Boolean,\n      default: false\n    },\n    activeNav: {\n      type: Boolean\n    },\n    navId: {\n      type: Number,\n      default: null\n    },\n    hoverActive: {\n      type: Boolean,\n      default: false\n    }\n  },\n  setup(__props) {\n    const authStore = useAuthStore();\n    const props = __props;\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", null, [\n        _createElementVNode(\"button\", {\n          onClick: _cache[0] || (_cache[0] = ($event) => __props.active = !__props.active),\n          class: _normalizeClass([\"block w-full text-start transition-all rounded-lg px-4 py-2\", {\n            \"bg-golden\": __props.active\n          }])\n        }, [\n          _createElementVNode(\"div\", _hoisted_1, [\n            _createElementVNode(\"div\", _hoisted_2, [\n              _createElementVNode(\"div\", _hoisted_3, [\n                _renderSlot(_ctx.$slots, \"navTitleIcon\")\n              ]),\n              _unref(authStore).activeNav ? (_openBlock(), _createElementBlock(\"span\", _hoisted_4, [\n                _renderSlot(_ctx.$slots, \"navTitle\")\n              ])) : _createCommentVNode(\"\", true)\n            ]),\n            _createElementVNode(\"div\", {\n              class: _normalizeClass({ \"rotate-180 transition-all\": __props.active, \"-rotate-0 transition-all\": !__props.active })\n            }, _hoisted_6, 2)\n          ])\n        ], 2),\n        _createVNode(_Transition, { name: \"slide-down\" }, {\n          default: _withCtx(() => [\n            __props.active ? (_openBlock(), _createElementBlock(\"div\", _hoisted_7, [\n              _renderSlot(_ctx.$slots, \"navContent\")\n            ])) : _createCommentVNode(\"\", true)\n          ]),\n          _: 3\n        })\n      ]);\n    };\n  }\n});\n",
+      "start": 1748867593802,
+      "end": 1748867593898,
+      "order": "normal",
+      "sourcemaps": {
+        "version": 3,
+        "sources": [
+          "D:/projects/nuxt/workix-nuxt-front/components/Navigtaion/NavigationBlock.vue?vue&type=script&setup=true&lang.ts"
+        ],
+        "sourcesContent": [
+          "import { defineComponent as _defineComponent } from 'vue'\nimport { renderSlot as _renderSlot, createElementVNode as _createElementVNode, unref as _unref, openBlock as _openBlock, createElementBlock as _createElementBlock, createCommentVNode as _createCommentVNode, normalizeClass as _normalizeClass, Transition as _Transition, withCtx as _withCtx, createVNode as _createVNode } from \"vue\"\n\nconst _hoisted_1 = { class: \"items-center justify-between flex gap-4 max-sm:!justify-start\" }\nconst _hoisted_2 = { class: \"flex items-center\" }\nconst _hoisted_3 = { class: \"bg-white w-10 h-10 rounded-lg border flex items-center justify-center mr-2\" }\nconst _hoisted_4 = {\n  key: 0,\n  class: \"dark:text-white text-black\"\n}\nconst _hoisted_5 = /*#__PURE__*/_createElementVNode(\"svg\", {\n  class: \"dark:fill-white fill-black\",\n  width: \"15px\",\n  height: \"15px\",\n  viewBox: \"0 0 24 24\",\n  fill: \"none\",\n  xmlns: \"http://www.w3.org/2000/svg\"\n}, [\n  /*#__PURE__*/_createElementVNode(\"path\", { d: \"M5.70711 9.71069C5.31658 10.1012 5.31658 10.7344 5.70711 11.1249L10.5993 16.0123C11.3805 16.7927 12.6463 16.7924 13.4271 16.0117L18.3174 11.1213C18.708 10.7308 18.708 10.0976 18.3174 9.70708C17.9269 9.31655 17.2937 9.31655 16.9032 9.70708L12.7176 13.8927C12.3271 14.2833 11.6939 14.2832 11.3034 13.8927L7.12132 9.71069C6.7308 9.32016 6.09763 9.32016 5.70711 9.71069Z\" })\n], -1)\nconst _hoisted_6 = [\n  _hoisted_5\n]\nconst _hoisted_7 = {\n  key: 0,\n  class: \"flex flex-col gap-y-1\"\n}\n\nimport {useAuthStore} from \"~/stores/auth\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'NavigationBlock',\n  props: {\r\n  active: {\r\n    type: Boolean,\r\n    default: false\r\n  },\r\n  activeNav: {\r\n    type: Boolean,\r\n  },\r\n  navId: {\r\n    type: Number,\r\n    default: null\r\n  },\r\n  hoverActive: {\r\n    type: Boolean,\r\n    default: false\r\n  }\r\n},\n  setup(__props) {\n\r\n\r\nconst authStore = useAuthStore()\r\nconst props = __props\r\n\nreturn (_ctx: any,_cache: any) => {\n  return (_openBlock(), _createElementBlock(\"div\", null, [\n    _createElementVNode(\"button\", {\n      onClick: _cache[0] || (_cache[0] = ($event: any) => (__props.active = !__props.active)),\n      class: _normalizeClass([\"block w-full text-start transition-all rounded-lg px-4 py-2\", {\r\n              'bg-golden' : __props.active\r\n          }])\n    }, [\n      _createElementVNode(\"div\", _hoisted_1, [\n        _createElementVNode(\"div\", _hoisted_2, [\n          _createElementVNode(\"div\", _hoisted_3, [\n            _renderSlot(_ctx.$slots, \"navTitleIcon\")\n          ]),\n          (_unref(authStore).activeNav)\n            ? (_openBlock(), _createElementBlock(\"span\", _hoisted_4, [\n                _renderSlot(_ctx.$slots, \"navTitle\")\n              ]))\n            : _createCommentVNode(\"\", true)\n        ]),\n        _createElementVNode(\"div\", {\n          class: _normalizeClass({'rotate-180 transition-all' : __props.active, '-rotate-0 transition-all' : !__props.active})\n        }, _hoisted_6, 2)\n      ])\n    ], 2),\n    _createVNode(_Transition, { name: \"slide-down\" }, {\n      default: _withCtx(() => [\n        (__props.active)\n          ? (_openBlock(), _createElementBlock(\"div\", _hoisted_7, [\n              _renderSlot(_ctx.$slots, \"navContent\")\n            ]))\n          : _createCommentVNode(\"\", true)\n      ]),\n      _: 3\n    })\n  ]))\n}\n}\n\n})"
+        ],
+        "mappings": "AAAA,SAAS,mBAAmB,wBAAwB;AACpD,SAAS,cAAc,aAAa,sBAAsB,qBAAqB,SAAS,QAAQ,aAAa,YAAY,sBAAsB,qBAAqB,sBAAsB,qBAAqB,kBAAkB,iBAAiB,cAAc,aAAa,WAAW,UAAU,eAAe,oBAAoB;AAErU,MAAM,aAAa,EAAE,OAAO,gEAAgE;AAC5F,MAAM,aAAa,EAAE,OAAO,oBAAoB;AAChD,MAAM,aAAa,EAAE,OAAO,6EAA6E;AACzG,MAAM,aAAa;AAAA,EACjB,KAAK;AAAA,EACL,OAAO;AACT;AACA,MAAM,aAA0B,oCAAoB,OAAO;AAAA,EACzD,OAAO;AAAA,EACP,OAAO;AAAA,EACP,QAAQ;AAAA,EACR,SAAS;AAAA,EACT,MAAM;AAAA,EACN,OAAO;AACT,GAAG;AAAA,EACY,oCAAoB,QAAQ,EAAE,GAAG,iXAAiX,CAAC;AACla,GAAG,EAAE;AACL,MAAM,aAAa;AAAA,EACjB;AACF;AACA,MAAM,aAAa;AAAA,EACjB,KAAK;AAAA,EACL,OAAO;AACT;AAEA,SAAQ,oBAAmB;AAG3B,eAA4B,iCAAiB;AAAA,EAC3C,QAAQ;AAAA,EACR,OAAO;AAAA,IACP,QAAQ;AAAA,MACN,MAAM;AAAA,MACN,SAAS;AAAA,IACX;AAAA,IACA,WAAW;AAAA,MACT,MAAM;AAAA,IACR;AAAA,IACA,OAAO;AAAA,MACL,MAAM;AAAA,MACN,SAAS;AAAA,IACX;AAAA,IACA,aAAa;AAAA,MACX,MAAM;AAAA,MACN,SAAS;AAAA,IACX;AAAA,EACF;AAAA,EACE,MAAM,SAAS;AAGjB,UAAM,YAAY,aAAa;AAC/B,UAAM,QAAQ;AAEd,WAAO,CAAC,MAAU,WAAgB;AAChC,aAAQ,WAAW,GAAG,oBAAoB,OAAO,MAAM;AAAA,QACrD,oBAAoB,UAAU;AAAA,UAC5B,SAAS,OAAO,CAAC,MAAM,OAAO,CAAC,IAAI,CAAC,WAAiB,QAAQ,SAAS,CAAC,QAAQ;AAAA,UAC/E,OAAO,gBAAgB,CAAC,+DAA+D;AAAA,YAC/E,aAAc,QAAQ;AAAA,UAC1B,CAAC,CAAC;AAAA,QACR,GAAG;AAAA,UACD,oBAAoB,OAAO,YAAY;AAAA,YACrC,oBAAoB,OAAO,YAAY;AAAA,cACrC,oBAAoB,OAAO,YAAY;AAAA,gBACrC,YAAY,KAAK,QAAQ,cAAc;AAAA,cACzC,CAAC;AAAA,cACA,OAAO,SAAS,EAAE,aACd,WAAW,GAAG,oBAAoB,QAAQ,YAAY;AAAA,gBACrD,YAAY,KAAK,QAAQ,UAAU;AAAA,cACrC,CAAC,KACD,oBAAoB,IAAI,IAAI;AAAA,YAClC,CAAC;AAAA,YACD,oBAAoB,OAAO;AAAA,cACzB,OAAO,gBAAgB,EAAC,6BAA8B,QAAQ,QAAQ,4BAA6B,CAAC,QAAQ,OAAM,CAAC;AAAA,YACrH,GAAG,YAAY,CAAC;AAAA,UAClB,CAAC;AAAA,QACH,GAAG,CAAC;AAAA,QACJ,aAAa,aAAa,EAAE,MAAM,aAAa,GAAG;AAAA,UAChD,SAAS,SAAS,MAAM;AAAA,YACrB,QAAQ,UACJ,WAAW,GAAG,oBAAoB,OAAO,YAAY;AAAA,cACpD,YAAY,KAAK,QAAQ,YAAY;AAAA,YACvC,CAAC,KACD,oBAAoB,IAAI,IAAI;AAAA,UAClC,CAAC;AAAA,UACD,GAAG;AAAA,QACL,CAAC;AAAA,MACH,CAAC;AAAA,IACH;AAAA,EACA;AAEA,CAAC;",
+        "names": []
+      }
+    },
+    {
+      "name": "vite:json",
+      "start": 1748867593898,
+      "end": 1748867593898,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1748867593899,
+      "end": 1748867593899,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "start": 1748867593899,
+      "end": 1748867593899,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1748867593899,
+      "end": 1748867593899,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1748867593899,
+      "end": 1748867593899,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1748867593899,
+      "end": 1748867593899,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:chunk-error",
+      "start": 1748867593899,
+      "end": 1748867593899,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1748867593899,
+      "end": 1748867593899,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1748867593899,
+      "end": 1748867593899,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1748867593899,
+      "end": 1748867593899,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1748867593899,
+      "end": 1748867593899,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1748867593899,
+      "end": 1748867593899,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1748867593899,
+      "end": 1748867593899,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1748867593899,
+      "end": 1748867593899,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1748867593899,
+      "end": 1748867593899,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1748867593899,
+      "end": 1748867593899,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1748867593900,
+      "end": 1748867593900,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1748867593900,
+      "end": 1748867593900,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1748867593900,
+      "end": 1748867593900,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-macros-transform",
+      "start": 1748867593900,
+      "end": 1748867593900,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-resource",
+      "start": 1748867593900,
+      "end": 1748867593900,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-meta-deprecation",
+      "start": 1748867593900,
+      "end": 1748867593900,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1748867593900,
+      "end": 1748867593905,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1748867593906,
+      "end": 1748867593906,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1748867593906,
+      "end": 1748867593906,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:runtime-paths-dep",
+      "start": 1748867593907,
+      "end": 1748867593907,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:route-injection-plugin",
+      "start": 1748867593907,
+      "end": 1748867593907,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1748867593907,
+      "end": 1748867593907,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1748867593907,
+      "end": 1748867593907,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1748867593907,
+      "end": 1748867593908,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1748867593908,
+      "end": 1748867593908,
+      "order": "normal"
+    }
+  ]
+}

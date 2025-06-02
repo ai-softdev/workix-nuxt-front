@@ -134,55 +134,63 @@ watch(() => company.company, (newValue) => {
 
 <template>
   <div>
-    <TheTextContent>
-      {{ $t('Страница продаж') }}
-    </TheTextContent>
+    <div class="flex items-center justify-between">
+      <p
+          class="dark:text-white text-3xl font-bold"
+      >
+        {{ $t('Страница продаж') }}
+      </p>
+      <div class="ml-auto flex items-center gap-6">
+        <button
+            @click="downloadFile"
+            class="flex items-center gap-3"
+        >
+          <img src="/icons/export.svg" alt="export">
+          <p class="text-azure font-medium">
+            {{ $t('Экспортировать в файл') }}
+          </p>
+        </button>
+        <NuxtLink
+            to="/base/sales/item-create"
+            class="ml-auto"
+        >
+          <UITheButton
+              class="border border-golden bg-golden py-3 px-10 rounded-full !text-black dark:!text-white"
+          >
+            + Добавить товар
+          </UITheButton>
+        </NuxtLink>
+      </div>
+    </div>
     <div>
       <div class="flex items-center gap-x-4 max-md:mt-10 max-md:flex-col max-md:items-start max-md:gap-y-4">
-        <div class="flex items-center gap-x-4">
-          <TheBreadcrumbs :breadcrumb-link="'/base/profile'">
-            {{ $t('Профиль') }}
-          </TheBreadcrumbs>
-          <div>
-            <svg width="15px" height="15px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path class="dark:stroke-white stroke-black"
-                    d="M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5"
-                    stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <TheBreadcrumbs>
-            {{ $t('Продажи') }}
-          </TheBreadcrumbs>
-        </div>
-        <div class="ml-auto flex items-center gap-3">
-          <NuxtLink
-              to="/base/sales/item-create"
-              class="ml-auto"
-          >
-            <UITheButton
-                class="border p-3 rounded-lg !text-black dark:!text-white"
-            >
-              Добавить товар
-            </UITheButton>
-          </NuxtLink>
-          <UITheButton
-              @click="downloadFile"
-              class="border p-3 rounded-lg !text-black dark:!text-white"
-          >
-            Экспортировать в файл
-          </UITheButton>
-        </div>
+<!--        <div class="flex items-center gap-x-4">-->
+<!--          <TheBreadcrumbs :breadcrumb-link="'/base/profile'">-->
+<!--            {{ $t('Профиль') }}-->
+<!--          </TheBreadcrumbs>-->
+<!--          <div>-->
+<!--            <svg width="15px" height="15px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">-->
+<!--              <path class="dark:stroke-white stroke-black"-->
+<!--                    d="M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5"-->
+<!--                    stroke-width="2" stroke-linecap="round"/>-->
+<!--            </svg>-->
+<!--          </div>-->
+<!--          <TheBreadcrumbs>-->
+<!--            {{ $t('Продажи') }}-->
+<!--          </TheBreadcrumbs>-->
+<!--        </div>-->
       </div>
-      <div class="w-fit sales-up-table rounded-lg border mt-10 overflow-hidden">
-        <div class="p-4 flex items-center gap-3">
+      <div class="w-fit sales-up-table rounded-lg mt-10 overflow-hidden">
+        <div class="flex items-center justify-between gap-3 mb-4">
           <UITheButton
               @click="openFiltersModal"
-              class="border p-3 rounded-lg !text-black dark:!text-white"
+              class="border bg-white flex items-center gap-1 p-3 rounded-full !text-black dark:!text-white"
           >
+            <img src="/icons/filters.svg" alt="filters">
             Фильтры
           </UITheButton>
           <div class="w-4/12 max-md:w-full relative flex items-center">
-            <div class="absolute rotate-90 ml-2">
+            <div class="absolute rotate-90 ml-3">
               <svg class="dark:stroke-white stroke-black" width="25px" height="25px" viewBox="0 0 24 24" fill="none"
                    xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -194,12 +202,12 @@ watch(() => company.company, (newValue) => {
                 v-model="itemName"
                 @input="searchByName"
                 type="text"
-                class="w-full rounded-lg dark:bg-gray-500 outline-none pl-10 h-[50px]"
+                class="w-full rounded-full border dark:bg-gray-500 outline-none pl-12 h-[50px]"
                 placeholder="Найти товар..."
             />
           </div>
         </div>
-        <div class="w-full sales-table">
+        <div class="w-full sales-table rounded-3xl bg-white overflow-hidden">
           <table v-if="sales.sales?.results?.length">
             <thead class="bg-gray-200 dark:bg-bgWhite">
             <tr>
@@ -281,7 +289,7 @@ watch(() => company.company, (newValue) => {
             <ThePreloader></ThePreloader>
           </div>
         </div>
-        <div class="w-full flex items-center justify-end border-t gap-4 pr-10 pb-5 pt-5 max-md:pr-3 max-md:flex-col max-md:items-end">
+        <div class="w-full flex items-center justify-end gap-4 pr-10 pb-5 pt-5 max-md:pr-3 max-md:flex-col max-md:items-end">
           <paginate
               :page-count="pageCount"
               :page-range="3"
@@ -299,7 +307,7 @@ watch(() => company.company, (newValue) => {
             <select
                 v-model="limit"
                 @change="changePageLimit"
-                class="w-fit p-2.5 rounded-md bg-[#8881] dark:bg-bgWhite text-black"
+                class="w-fit p-2.5 rounded-md border bg-white dark:bg-bgWhite text-black"
             >
               <option
                   v-for="item in limitItems"
@@ -353,7 +361,7 @@ watch(() => company.company, (newValue) => {
               label="Максимальное количество"
           />
           <UITheButton
-              class="mt-2 !text-black dark:!text-white"
+              class="mt-2 bg-golden rounded-full !p-3 !text-black dark:!text-white"
           >
             Сохранить
           </UITheButton>
@@ -380,11 +388,11 @@ watch(() => company.company, (newValue) => {
 
 @media (max-width: 2100px) {
   .sales-up-table {
-    max-width: 87vw;
+    max-width: 85vw;
   }
   .sales-table {
     overflow: auto;
-    max-width: 87vw;
+    max-width: 85vw;
   }
   .sales-table table {
     width: 2000px;
@@ -392,11 +400,11 @@ watch(() => company.company, (newValue) => {
 }
 @media (max-width: 1800px) {
   .sales-up-table {
-    max-width: 80vw;
+    max-width: 77vw;
   }
   .sales-table {
     overflow: auto;
-    max-width: 80vw;
+    max-width: 77vw;
   }
   .sales-table table {
     width: 2000px;
@@ -417,10 +425,10 @@ watch(() => company.company, (newValue) => {
 
 @media (max-width: 920px) {
   .sales-up-table {
-    width: 96vw !important;
+    width: 95vw !important;
   }
   .sales-table {
-    max-width: 96vw !important;
+    max-width: 95vw !important;
   }
   .pagination {
     flex-wrap: wrap;

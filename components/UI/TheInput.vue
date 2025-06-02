@@ -29,7 +29,7 @@ defineProps({
               @input="$emit('update:modelValue', $event.target.value)"
               :required="required"
               :value="modelValue"
-              class="text-lg bg-whiteSmoke dark:text-black resize-none border outline-3 rounded-full focus:outline-golden focus:outline-1 outline-none px-4 py-2 dark:bg-gray-300"
+              class="text-lg bg-whiteSmoke dark:text-black resize-none border outline-3 rounded-3xl focus:outline-golden focus:outline-1 outline-none px-4 py-2 dark:bg-gray-300"
               :class="{'!bg-red-200 border-red-400 dark:border !outline-none' : trimi && required}"
               :placeholder="label"
     ></textarea>

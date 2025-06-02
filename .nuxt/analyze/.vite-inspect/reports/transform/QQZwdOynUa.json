@@ -1,0 +1,246 @@
+{
+  "resolvedId": "D:/projects/nuxt/workix-nuxt-front/components/User/UserContentList.vue?vue&type=script&setup=true&lang.ts",
+  "transforms": [
+    {
+      "name": "vite:vue",
+      "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, unref as _unref, openBlock as _openBlock, createElementBlock as _createElementBlock, createCommentVNode as _createCommentVNode, resolveComponent as _resolveComponent, withCtx as _withCtx, createBlock as _createBlock } from \"vue\"\n\nconst _hoisted_1 = { class: \"flex items-center max-md:w-4/12 gap-x-2 max-lg:mx-auto pb-4 border-b\" }\nconst _hoisted_2 = { class: \"flex items-center justify-center rounded-md px-1 w-[33px] h-[33px] shadow-md\" }\nconst _hoisted_3 = [\"src\"]\nconst _hoisted_4 = { class: \"font-bold text-sm break-words\" }\nconst _hoisted_5 = { class: \"mt-4 flex flex-col gap-2\" }\nconst _hoisted_6 = {\n  key: 0,\n  class: \"flex items-start justify-between gap-10 min-h-10\"\n}\nconst _hoisted_7 = { class: \"font-bold\" }\nconst _hoisted_8 = { class: \"text-mediumGray text-right\" }\nconst _hoisted_9 = {\n  key: 1,\n  class: \"flex items-start justify-between gap-10 min-h-10\"\n}\nconst _hoisted_10 = { class: \"font-bold\" }\nconst _hoisted_11 = { class: \"text-mediumGray text-right\" }\nconst _hoisted_12 = { class: \"flex items-center justify-between gap-10 mt-2\" }\nconst _hoisted_13 = { class: \"font-bold\" }\nconst _hoisted_14 = { class: \"text-mediumGray\" }\n\nimport {useAuthStore} from \"~/stores/auth\";\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'UserContentList',\n  props: {\r\n  userItem: {\r\n    type: Object,\r\n    required: true,\r\n  },\r\n},\n  setup(__props) {\n\r\nconst loadCurrentUser = useAuthStore()\r\n\r\n\r\n\nreturn (_ctx: any,_cache: any) => {\n  const _component_NuxtLink = _resolveComponent(\"NuxtLink\")!\n\n  return (_openBlock(), _createBlock(_component_NuxtLink, {\n    to: `/base/users/${__props.userItem.id}`,\n    class: \"transition-all bg-white shadow-cards hover:shadow-hoverCards border border-white hover:border-golden dark:border-none dark:shadow-none dark:bg-gray-700 dark:hover:bg-gray-800 py-6 px-5 rounded-3xl items-center max-md:flex max-md:w-full max-sm:flex-col max-sm:gap-y-4\"\n  }, {\n    default: _withCtx(() => [\n      _createElementVNode(\"div\", _hoisted_1, [\n        _createElementVNode(\"div\", _hoisted_2, [\n          _createElementVNode(\"img\", {\n            class: \"w-[22px] h-[22px] rounded-full\",\n            src: __props.userItem.photo,\n            alt: \"logo\"\n          }, null, 8, _hoisted_3)\n        ]),\n        _createElementVNode(\"h2\", _hoisted_4, _toDisplayString(__props.userItem.first_name + ' ' + __props.userItem.last_name), 1)\n      ]),\n      _createElementVNode(\"div\", _hoisted_5, [\n        (_unref(loadCurrentUser).user.role_en === 'admin')\n          ? (_openBlock(), _createElementBlock(\"div\", _hoisted_6, [\n              _createElementVNode(\"p\", _hoisted_7, _toDisplayString(_ctx.$t('Роль | Должность')) + \": \", 1),\n              _createElementVNode(\"p\", _hoisted_8, \" (\" + _toDisplayString(__props.userItem.role) + \") \", 1)\n            ]))\n          : (_openBlock(), _createElementBlock(\"div\", _hoisted_9, [\n              _createElementVNode(\"p\", _hoisted_10, _toDisplayString(_ctx.$t('Должность')) + \": \", 1),\n              _createElementVNode(\"p\", _hoisted_11, _toDisplayString(__props.userItem.position), 1)\n            ]))\n      ]),\n      _createElementVNode(\"div\", _hoisted_12, [\n        _createElementVNode(\"p\", _hoisted_13, _toDisplayString(_ctx.$t('Дата регистрации')) + \": \", 1),\n        _createElementVNode(\"p\", _hoisted_14, _toDisplayString(new Date(__props.userItem.created_at).toLocaleString().slice(0, 10)), 1)\n      ])\n    ]),\n    _: 1\n  }, 8, [\"to\"]))\n}\n}\n\n})",
+      "start": 1748867590000,
+      "end": 1748867590000
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1748867590000,
+      "end": 1748867590000,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1748867590000,
+      "end": 1748867590000,
+      "order": "pre"
+    },
+    {
+      "name": "unplugin-vue-i18n",
+      "start": 1748867590000,
+      "end": 1748867590000,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1748867590000,
+      "end": 1748867590001,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1748867590003,
+      "end": 1748867590003,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, unref as _unref, openBlock as _openBlock, createElementBlock as _createElementBlock, resolveComponent as _resolveComponent, withCtx as _withCtx, createBlock as _createBlock } from \"vue\";\nconst _hoisted_1 = { class: \"flex items-center max-md:w-4/12 gap-x-2 max-lg:mx-auto pb-4 border-b\" };\nconst _hoisted_2 = { class: \"flex items-center justify-center rounded-md px-1 w-[33px] h-[33px] shadow-md\" };\nconst _hoisted_3 = [\"src\"];\nconst _hoisted_4 = { class: \"font-bold text-sm break-words\" };\nconst _hoisted_5 = { class: \"mt-4 flex flex-col gap-2\" };\nconst _hoisted_6 = {\n  key: 0,\n  class: \"flex items-start justify-between gap-10 min-h-10\"\n};\nconst _hoisted_7 = { class: \"font-bold\" };\nconst _hoisted_8 = { class: \"text-mediumGray text-right\" };\nconst _hoisted_9 = {\n  key: 1,\n  class: \"flex items-start justify-between gap-10 min-h-10\"\n};\nconst _hoisted_10 = { class: \"font-bold\" };\nconst _hoisted_11 = { class: \"text-mediumGray text-right\" };\nconst _hoisted_12 = { class: \"flex items-center justify-between gap-10 mt-2\" };\nconst _hoisted_13 = { class: \"font-bold\" };\nconst _hoisted_14 = { class: \"text-mediumGray\" };\nimport { useAuthStore } from \"~/stores/auth\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"UserContentList\",\n  props: {\n    userItem: {\n      type: Object,\n      required: true\n    }\n  },\n  setup(__props) {\n    const loadCurrentUser = useAuthStore();\n    return (_ctx, _cache) => {\n      const _component_NuxtLink = _resolveComponent(\"NuxtLink\");\n      return _openBlock(), _createBlock(_component_NuxtLink, {\n        to: `/base/users/${__props.userItem.id}`,\n        class: \"transition-all bg-white shadow-cards hover:shadow-hoverCards border border-white hover:border-golden dark:border-none dark:shadow-none dark:bg-gray-700 dark:hover:bg-gray-800 py-6 px-5 rounded-3xl items-center max-md:flex max-md:w-full max-sm:flex-col max-sm:gap-y-4\"\n      }, {\n        default: _withCtx(() => [\n          _createElementVNode(\"div\", _hoisted_1, [\n            _createElementVNode(\"div\", _hoisted_2, [\n              _createElementVNode(\"img\", {\n                class: \"w-[22px] h-[22px] rounded-full\",\n                src: __props.userItem.photo,\n                alt: \"logo\"\n              }, null, 8, _hoisted_3)\n            ]),\n            _createElementVNode(\"h2\", _hoisted_4, _toDisplayString(__props.userItem.first_name + \" \" + __props.userItem.last_name), 1)\n          ]),\n          _createElementVNode(\"div\", _hoisted_5, [\n            _unref(loadCurrentUser).user.role_en === \"admin\" ? (_openBlock(), _createElementBlock(\"div\", _hoisted_6, [\n              _createElementVNode(\"p\", _hoisted_7, _toDisplayString(_ctx.$t(\"Роль | Должность\")) + \": \", 1),\n              _createElementVNode(\"p\", _hoisted_8, \" (\" + _toDisplayString(__props.userItem.role) + \") \", 1)\n            ])) : (_openBlock(), _createElementBlock(\"div\", _hoisted_9, [\n              _createElementVNode(\"p\", _hoisted_10, _toDisplayString(_ctx.$t(\"Должность\")) + \": \", 1),\n              _createElementVNode(\"p\", _hoisted_11, _toDisplayString(__props.userItem.position), 1)\n            ]))\n          ]),\n          _createElementVNode(\"div\", _hoisted_12, [\n            _createElementVNode(\"p\", _hoisted_13, _toDisplayString(_ctx.$t(\"Дата регистрации\")) + \": \", 1),\n            _createElementVNode(\"p\", _hoisted_14, _toDisplayString(new Date(__props.userItem.created_at).toLocaleString().slice(0, 10)), 1)\n          ])\n        ]),\n        _: 1\n      }, 8, [\"to\"]);\n    };\n  }\n});\n",
+      "start": 1748867590003,
+      "end": 1748867590208,
+      "order": "normal",
+      "sourcemaps": {
+        "version": 3,
+        "sources": [
+          "D:/projects/nuxt/workix-nuxt-front/components/User/UserContentList.vue?vue&type=script&setup=true&lang.ts"
+        ],
+        "sourcesContent": [
+          "import { defineComponent as _defineComponent } from 'vue'\nimport { createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, unref as _unref, openBlock as _openBlock, createElementBlock as _createElementBlock, createCommentVNode as _createCommentVNode, resolveComponent as _resolveComponent, withCtx as _withCtx, createBlock as _createBlock } from \"vue\"\n\nconst _hoisted_1 = { class: \"flex items-center max-md:w-4/12 gap-x-2 max-lg:mx-auto pb-4 border-b\" }\nconst _hoisted_2 = { class: \"flex items-center justify-center rounded-md px-1 w-[33px] h-[33px] shadow-md\" }\nconst _hoisted_3 = [\"src\"]\nconst _hoisted_4 = { class: \"font-bold text-sm break-words\" }\nconst _hoisted_5 = { class: \"mt-4 flex flex-col gap-2\" }\nconst _hoisted_6 = {\n  key: 0,\n  class: \"flex items-start justify-between gap-10 min-h-10\"\n}\nconst _hoisted_7 = { class: \"font-bold\" }\nconst _hoisted_8 = { class: \"text-mediumGray text-right\" }\nconst _hoisted_9 = {\n  key: 1,\n  class: \"flex items-start justify-between gap-10 min-h-10\"\n}\nconst _hoisted_10 = { class: \"font-bold\" }\nconst _hoisted_11 = { class: \"text-mediumGray text-right\" }\nconst _hoisted_12 = { class: \"flex items-center justify-between gap-10 mt-2\" }\nconst _hoisted_13 = { class: \"font-bold\" }\nconst _hoisted_14 = { class: \"text-mediumGray\" }\n\nimport {useAuthStore} from \"~/stores/auth\";\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'UserContentList',\n  props: {\r\n  userItem: {\r\n    type: Object,\r\n    required: true,\r\n  },\r\n},\n  setup(__props) {\n\r\nconst loadCurrentUser = useAuthStore()\r\n\r\n\r\n\nreturn (_ctx: any,_cache: any) => {\n  const _component_NuxtLink = _resolveComponent(\"NuxtLink\")!\n\n  return (_openBlock(), _createBlock(_component_NuxtLink, {\n    to: `/base/users/${__props.userItem.id}`,\n    class: \"transition-all bg-white shadow-cards hover:shadow-hoverCards border border-white hover:border-golden dark:border-none dark:shadow-none dark:bg-gray-700 dark:hover:bg-gray-800 py-6 px-5 rounded-3xl items-center max-md:flex max-md:w-full max-sm:flex-col max-sm:gap-y-4\"\n  }, {\n    default: _withCtx(() => [\n      _createElementVNode(\"div\", _hoisted_1, [\n        _createElementVNode(\"div\", _hoisted_2, [\n          _createElementVNode(\"img\", {\n            class: \"w-[22px] h-[22px] rounded-full\",\n            src: __props.userItem.photo,\n            alt: \"logo\"\n          }, null, 8, _hoisted_3)\n        ]),\n        _createElementVNode(\"h2\", _hoisted_4, _toDisplayString(__props.userItem.first_name + ' ' + __props.userItem.last_name), 1)\n      ]),\n      _createElementVNode(\"div\", _hoisted_5, [\n        (_unref(loadCurrentUser).user.role_en === 'admin')\n          ? (_openBlock(), _createElementBlock(\"div\", _hoisted_6, [\n              _createElementVNode(\"p\", _hoisted_7, _toDisplayString(_ctx.$t('Роль | Должность')) + \": \", 1),\n              _createElementVNode(\"p\", _hoisted_8, \" (\" + _toDisplayString(__props.userItem.role) + \") \", 1)\n            ]))\n          : (_openBlock(), _createElementBlock(\"div\", _hoisted_9, [\n              _createElementVNode(\"p\", _hoisted_10, _toDisplayString(_ctx.$t('Должность')) + \": \", 1),\n              _createElementVNode(\"p\", _hoisted_11, _toDisplayString(__props.userItem.position), 1)\n            ]))\n      ]),\n      _createElementVNode(\"div\", _hoisted_12, [\n        _createElementVNode(\"p\", _hoisted_13, _toDisplayString(_ctx.$t('Дата регистрации')) + \": \", 1),\n        _createElementVNode(\"p\", _hoisted_14, _toDisplayString(new Date(__props.userItem.created_at).toLocaleString().slice(0, 10)), 1)\n      ])\n    ]),\n    _: 1\n  }, 8, [\"to\"]))\n}\n}\n\n})"
+        ],
+        "mappings": "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",
+        "names": []
+      }
+    },
+    {
+      "name": "vite:json",
+      "start": 1748867590208,
+      "end": 1748867590208,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1748867590208,
+      "end": 1748867590208,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "start": 1748867590209,
+      "end": 1748867590209,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1748867590209,
+      "end": 1748867590209,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1748867590220,
+      "end": 1748867590221,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1748867590221,
+      "end": 1748867590221,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:chunk-error",
+      "start": 1748867590222,
+      "end": 1748867590222,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1748867590237,
+      "end": 1748867590237,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1748867590238,
+      "end": 1748867590238,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1748867590238,
+      "end": 1748867590238,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1748867590238,
+      "end": 1748867590238,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1748867590239,
+      "end": 1748867590239,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1748867590239,
+      "end": 1748867590239,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1748867590239,
+      "end": 1748867590239,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1748867590239,
+      "end": 1748867590239,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1748867590240,
+      "end": 1748867590240,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1748867590240,
+      "end": 1748867590240,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1748867590240,
+      "end": 1748867590240,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1748867590241,
+      "end": 1748867590248,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-macros-transform",
+      "start": 1748867590249,
+      "end": 1748867590249,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-resource",
+      "start": 1748867590251,
+      "end": 1748867590251,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-meta-deprecation",
+      "start": 1748867590251,
+      "end": 1748867590251,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1748867590251,
+      "end": 1748867590272,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1748867590273,
+      "end": 1748867590273,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1748867590273,
+      "end": 1748867590273,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:runtime-paths-dep",
+      "start": 1748867590273,
+      "end": 1748867590274,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:route-injection-plugin",
+      "start": 1748867590274,
+      "end": 1748867590274,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "result": "import { default as __nuxt_component_0 } from \"D:/projects/nuxt/workix-nuxt-front/node_modules/nuxt/dist/app/components/nuxt-link\";\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, unref as _unref, openBlock as _openBlock, createElementBlock as _createElementBlock, resolveComponent as _resolveComponent, withCtx as _withCtx, createBlock as _createBlock } from \"vue\";\nconst _hoisted_1 = { class: \"flex items-center max-md:w-4/12 gap-x-2 max-lg:mx-auto pb-4 border-b\" };\nconst _hoisted_2 = { class: \"flex items-center justify-center rounded-md px-1 w-[33px] h-[33px] shadow-md\" };\nconst _hoisted_3 = [\"src\"];\nconst _hoisted_4 = { class: \"font-bold text-sm break-words\" };\nconst _hoisted_5 = { class: \"mt-4 flex flex-col gap-2\" };\nconst _hoisted_6 = {\n  key: 0,\n  class: \"flex items-start justify-between gap-10 min-h-10\"\n};\nconst _hoisted_7 = { class: \"font-bold\" };\nconst _hoisted_8 = { class: \"text-mediumGray text-right\" };\nconst _hoisted_9 = {\n  key: 1,\n  class: \"flex items-start justify-between gap-10 min-h-10\"\n};\nconst _hoisted_10 = { class: \"font-bold\" };\nconst _hoisted_11 = { class: \"text-mediumGray text-right\" };\nconst _hoisted_12 = { class: \"flex items-center justify-between gap-10 mt-2\" };\nconst _hoisted_13 = { class: \"font-bold\" };\nconst _hoisted_14 = { class: \"text-mediumGray\" };\nimport { useAuthStore } from \"~/stores/auth\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"UserContentList\",\n  props: {\n    userItem: {\n      type: Object,\n      required: true\n    }\n  },\n  setup(__props) {\n    const loadCurrentUser = useAuthStore();\n    return (_ctx, _cache) => {\n      const _component_NuxtLink = __nuxt_component_0;\n      return _openBlock(), _createBlock(_component_NuxtLink, {\n        to: `/base/users/${__props.userItem.id}`,\n        class: \"transition-all bg-white shadow-cards hover:shadow-hoverCards border border-white hover:border-golden dark:border-none dark:shadow-none dark:bg-gray-700 dark:hover:bg-gray-800 py-6 px-5 rounded-3xl items-center max-md:flex max-md:w-full max-sm:flex-col max-sm:gap-y-4\"\n      }, {\n        default: _withCtx(() => [\n          _createElementVNode(\"div\", _hoisted_1, [\n            _createElementVNode(\"div\", _hoisted_2, [\n              _createElementVNode(\"img\", {\n                class: \"w-[22px] h-[22px] rounded-full\",\n                src: __props.userItem.photo,\n                alt: \"logo\"\n              }, null, 8, _hoisted_3)\n            ]),\n            _createElementVNode(\"h2\", _hoisted_4, _toDisplayString(__props.userItem.first_name + \" \" + __props.userItem.last_name), 1)\n          ]),\n          _createElementVNode(\"div\", _hoisted_5, [\n            _unref(loadCurrentUser).user.role_en === \"admin\" ? (_openBlock(), _createElementBlock(\"div\", _hoisted_6, [\n              _createElementVNode(\"p\", _hoisted_7, _toDisplayString(_ctx.$t(\"Роль | Должность\")) + \": \", 1),\n              _createElementVNode(\"p\", _hoisted_8, \" (\" + _toDisplayString(__props.userItem.role) + \") \", 1)\n            ])) : (_openBlock(), _createElementBlock(\"div\", _hoisted_9, [\n              _createElementVNode(\"p\", _hoisted_10, _toDisplayString(_ctx.$t(\"Должность\")) + \": \", 1),\n              _createElementVNode(\"p\", _hoisted_11, _toDisplayString(__props.userItem.position), 1)\n            ]))\n          ]),\n          _createElementVNode(\"div\", _hoisted_12, [\n            _createElementVNode(\"p\", _hoisted_13, _toDisplayString(_ctx.$t(\"Дата регистрации\")) + \": \", 1),\n            _createElementVNode(\"p\", _hoisted_14, _toDisplayString(new Date(__props.userItem.created_at).toLocaleString().slice(0, 10)), 1)\n          ])\n        ]),\n        _: 1\n      }, 8, [\"to\"]);\n    };\n  }\n});\n",
+      "start": 1748867590275,
+      "end": 1748867590275,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1748867590276,
+      "end": 1748867590276,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1748867590276,
+      "end": 1748867590277,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1748867590277,
+      "end": 1748867590277,
+      "order": "normal"
+    }
+  ]
+}

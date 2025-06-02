@@ -4,8 +4,7 @@ import DocumentContentHeader from "~/components/documents/DocumentContent/Docume
 </script>
 
 <template>
-  <div>
-    <DocumentContentHeader/>
+  <div class="w-full">
     <DocumentContentList/>
   </div>
 </template>

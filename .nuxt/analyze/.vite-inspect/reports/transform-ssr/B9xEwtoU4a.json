@@ -1,0 +1,325 @@
+{
+  "resolvedId": "D:/projects/nuxt/workix-nuxt-front/app.vue?vue&type=script&setup=true&lang.ts",
+  "transforms": [
+    {
+      "name": "vite:vue",
+      "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { resolveComponent as _resolveComponent, mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\"\n\nimport 'vue3-toastify/dist/index.css';\r\nimport {useI18n} from \"vue-i18n\";\r\nimport {useColorMode} from \"@vueuse/core\";\r\nimport {useRoute} from \"vue-router\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'app',\n  __ssrInlineRender: true,\n  setup(__props) {\n\r\nconst colorMode = useColorMode()\r\nconst {locale} = useI18n()\r\nconst route = useRoute()\r\n\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  const _component_NuxtPage = _resolveComponent(\"NuxtPage\")!\n\n  _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"\" }, _attrs))}>`)\n  _push(_ssrRenderComponent(_component_NuxtPage, null, null, _parent))\n  _push(`</div>`)\n}\n}\n\n})",
+      "start": 1748867631206,
+      "end": 1748867631206,
+      "sourcemaps": {
+        "version": 3,
+        "sources": [
+          "D:/projects/nuxt/workix-nuxt-front/app.vue"
+        ],
+        "sourcesContent": [
+          "<template>\r\n  <div class=\"\">\r\n    <NuxtPage/>\r\n  </div>\r\n</template>\r\n\r\n\r\n<style lang=\"scss\">\r\n\r\n\r\n.fade-enter-active,\r\n.fade-leave-active {\r\n  transition: opacity 0.3s ease;\r\n}\r\n\r\n.fade-enter-from,\r\n.fade-leave-to {\r\n  opacity: 0;\r\n}\r\n\r\n.page-enter-active,\r\n.page-leave-active {\r\n  transition: all .3s;\r\n}\r\n\r\n.page-enter-from,\r\n.page-leave-to {\r\n  opacity: .9;\r\n  filter: blur(10px);\r\n}\r\n\r\n\r\n.slide-fade-enter-active {\r\n  transition: all 0.3s ease-out;\r\n}\r\n\r\n.slide-fade-leave-active {\r\n  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);\r\n}\r\n\r\n.slide-fade-enter-from,\r\n.slide-fade-leave-to {\r\n  transform: translateY(-10px);\r\n  opacity: 0;\r\n}\r\n\r\n\r\n\r\n.slide-right-enter-active {\r\n  transition: all 0.3s ease-out;\r\n}\r\n\r\n.slide-right-leave-active {\r\n  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);\r\n}\r\n\r\n.slide-right-enter-from,\r\n.slide-right-leave-to {\r\n  transform: translateX(5px);\r\n  opacity: 0;\r\n}\r\n\r\n\r\n.slide-up-enter-active {\r\n  transition: all 0.3s ease-out;\r\n}\r\n\r\n.slide-up-leave-active {\r\n  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);\r\n}\r\n\r\n.slide-up-enter-from,\r\n.slide-up-leave-to {\r\n  transform: translateY(10px);\r\n  opacity: 0;\r\n}\r\n\r\n.slide-down-enter-active {\r\n  transition: all 0.3s ease-out;\r\n}\r\n\r\n.slide-down-leave-active {\r\n  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);\r\n}\r\n\r\n.slide-down-enter-from,\r\n.slide-down-leave-to {\r\n  transform: translateY(-10px);\r\n  opacity: 0;\r\n}\r\n\r\n\r\n</style>\r\n\r\n\r\n<script lang=\"ts\" setup>\r\nimport 'vue3-toastify/dist/index.css';\r\nimport {useI18n} from \"vue-i18n\";\r\nimport {useColorMode} from \"@vueuse/core\";\r\nimport {useRoute} from \"vue-router\";\r\n\r\nconst colorMode = useColorMode()\r\nconst {locale} = useI18n()\r\nconst route = useRoute()\r\n\r\n</script>"
+        ],
+        "names": [],
+        "mappings": ";;;;AAgGA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACvC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAClC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC3C,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACrC,CAAC;;;;;;AALuB,CAAC;AAMzB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACjC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC3B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACzB,CAAC;;;;;;;;;;;"
+      }
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1748867631206,
+      "end": 1748867631206,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1748867631206,
+      "end": 1748867631206,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1748867631206,
+      "end": 1748867631206,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1748867631206,
+      "end": 1748867631206,
+      "order": "pre"
+    },
+    {
+      "name": "unplugin-vue-i18n",
+      "start": 1748867631207,
+      "end": 1748867631207,
+      "order": "pre"
+    },
+    {
+      "name": "unplugin-vue-i18n",
+      "start": 1748867631207,
+      "end": 1748867631207,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1748867631207,
+      "end": 1748867631207,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1748867631207,
+      "end": 1748867631207,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { resolveComponent as _resolveComponent, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport \"vue3-toastify/dist/index.css\";\nimport { useI18n } from \"vue-i18n\";\nimport { useColorMode } from \"@vueuse/core\";\nimport { useRoute } from \"vue-router\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"app\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const colorMode = useColorMode();\n    const { locale } = useI18n();\n    const route = useRoute();\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_NuxtPage = _resolveComponent(\"NuxtPage\");\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"\" }, _attrs))}>`);\n      _push(_ssrRenderComponent(_component_NuxtPage, null, null, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
+      "start": 1748867631207,
+      "end": 1748867631568,
+      "order": "normal",
+      "sourcemaps": {
+        "version": 3,
+        "sources": [
+          "D:/projects/nuxt/workix-nuxt-front/app.vue?vue&type=script&setup=true&lang.ts"
+        ],
+        "sourcesContent": [
+          "import { defineComponent as _defineComponent } from 'vue'\nimport { resolveComponent as _resolveComponent, mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\"\n\nimport 'vue3-toastify/dist/index.css';\r\nimport {useI18n} from \"vue-i18n\";\r\nimport {useColorMode} from \"@vueuse/core\";\r\nimport {useRoute} from \"vue-router\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'app',\n  __ssrInlineRender: true,\n  setup(__props) {\n\r\nconst colorMode = useColorMode()\r\nconst {locale} = useI18n()\r\nconst route = useRoute()\r\n\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  const _component_NuxtPage = _resolveComponent(\"NuxtPage\")!\n\n  _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"\" }, _attrs))}>`)\n  _push(_ssrRenderComponent(_component_NuxtPage, null, null, _parent))\n  _push(`</div>`)\n}\n}\n\n})"
+        ],
+        "mappings": "AAAA,SAAS,mBAAmB,wBAAwB;AACpD,SAAS,oBAAoB,mBAAmB,cAAc,mBAAmB;AACjF,SAAS,sBAAsB,qBAAqB,kBAAkB,uBAAuB;AAE7F,OAAO;AACP,SAAQ,eAAc;AACtB,SAAQ,oBAAmB;AAC3B,SAAQ,gBAAe;AAGvB,eAA4B,iCAAiB;AAAA,EAC3C,QAAQ;AAAA,EACR,mBAAmB;AAAA,EACnB,MAAM,SAAS;AAEjB,UAAM,YAAY,aAAa;AAC/B,UAAM,EAAC,OAAM,IAAI,QAAQ;AACzB,UAAM,QAAQ,SAAS;AAGvB,WAAO,CAAC,MAAU,OAAW,SAAa,WAAgB;AACxD,YAAM,sBAAsB,kBAAkB,UAAU;AAExD,YAAM,OAAO,gBAAgB,YAAY,EAAE,OAAO,GAAG,GAAG,MAAM,CAAC,CAAC,GAAG;AACnE,YAAM,oBAAoB,qBAAqB,MAAM,MAAM,OAAO,CAAC;AACnE,YAAM,QAAQ;AAAA,IAChB;AAAA,EACA;AAEA,CAAC;",
+        "names": []
+      }
+    },
+    {
+      "name": "vite:json",
+      "start": 1748867631569,
+      "end": 1748867631569,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1748867631569,
+      "end": 1748867631569,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "start": 1748867631569,
+      "end": 1748867631569,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1748867631569,
+      "end": 1748867631569,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1748867631570,
+      "end": 1748867631570,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1748867631570,
+      "end": 1748867631570,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1748867631571,
+      "end": 1748867631571,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1748867631571,
+      "end": 1748867631571,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1748867631572,
+      "end": 1748867631572,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1748867631572,
+      "end": 1748867631572,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1748867631572,
+      "end": 1748867631590,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1748867631590,
+      "end": 1748867631590,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1748867631591,
+      "end": 1748867631591,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1748867631596,
+      "end": 1748867631596,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1748867631597,
+      "end": 1748867631597,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1748867631598,
+      "end": 1748867631598,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1748867631598,
+      "end": 1748867631598,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1748867631598,
+      "end": 1748867631598,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1748867631599,
+      "end": 1748867631600,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1748867631600,
+      "end": 1748867631600,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1748867631600,
+      "end": 1748867631600,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-macros-transform",
+      "start": 1748867631600,
+      "end": 1748867631600,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-macros-transform",
+      "start": 1748867631600,
+      "end": 1748867631600,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-resource",
+      "start": 1748867631600,
+      "end": 1748867631600,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-resource",
+      "start": 1748867631600,
+      "end": 1748867631601,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-meta-deprecation",
+      "start": 1748867631601,
+      "end": 1748867631601,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-meta-deprecation",
+      "start": 1748867631601,
+      "end": 1748867631601,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1748867631601,
+      "end": 1748867631601,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1748867631601,
+      "end": 1748867631601,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1748867631601,
+      "end": 1748867631602,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1748867631601,
+      "end": 1748867631602,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1748867631602,
+      "end": 1748867631602,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1748867631602,
+      "end": 1748867631602,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-template",
+      "start": 1748867631602,
+      "end": 1748867631602,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "result": "import { default as __nuxt_component_0 } from \"D:/projects/nuxt/workix-nuxt-front/node_modules/nuxt/dist/pages/runtime/page\";\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { resolveComponent as _resolveComponent, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport \"vue3-toastify/dist/index.css\";\nimport { useI18n } from \"vue-i18n\";\nimport { useColorMode } from \"@vueuse/core\";\nimport { useRoute } from \"vue-router\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"app\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const colorMode = useColorMode();\n    const { locale } = useI18n();\n    const route = useRoute();\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_NuxtPage = __nuxt_component_0;\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"\" }, _attrs))}>`);\n      _push(_ssrRenderComponent(_component_NuxtPage, null, null, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
+      "start": 1748867631602,
+      "end": 1748867631602,
+      "order": "post",
+      "sourcemaps": {
+        "version": 3,
+        "sources": [
+          ""
+        ],
+        "names": [],
+        "mappings": ";AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC1D,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACvF,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACnH,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACtC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACnC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC5C,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACtC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACjD,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAChB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC1B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAClB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACrC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACjC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC7B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC9C,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,kBAA6B,CAAC;AAChE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC3E,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC3E,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACtB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACN,CAAC,CAAC,CAAC;AACH,CAAC,CAAC,CAAC;"
+      }
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1748867631602,
+      "end": 1748867631602,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1748867631672,
+      "end": 1748867631672,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1748867631672,
+      "end": 1748867631672,
+      "order": "normal"
+    }
+  ]
+}

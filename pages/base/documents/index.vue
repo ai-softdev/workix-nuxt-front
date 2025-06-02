@@ -6,11 +6,13 @@ import DocumentInfo from "~/components/documents/DocumentInfo.vue";
 import {useDocumentStore} from "~/stores/documents";
 import {useAuthStore} from "~/stores/auth";
 import {useCompanies} from "~/stores/companies";
+import DocumentContentHeaderCreate from "~/components/documents/DocumentContent/DocumentContentHeaderCreate.vue";
+import TheModal from "~/components/UI/TheModal.vue";
 
 const document = useDocumentStore()
 
 onMounted(()=>{
-  document.loadAllDocument({page: 1, limit: 15})
+  document.loadAllDocument({page: 1, limit: 5, type: "from-me"})
 })
 
 const router = useRouter()
@@ -44,14 +46,30 @@ useSeoMeta({
 
 <template>
  <div>
-   <DocumentHeader class="w-6/12 mx-auto max-md:w-full"></DocumentHeader>
-   <div class="flex gap-x-10 justify-center">
-     <TheContentBlock class="w-9/12">
-      <DocumentContent/>
-     </TheContentBlock>
-     <TheContentBlock>
-      <DocumentInfo/>
-     </TheContentBlock>
+<!--   <DocumentHeader class="w-6/12 mx-auto max-md:w-full"></DocumentHeader>-->
+   <div class="flex items-center gap-4 justify-between">
+     <p
+         class="dark:text-white text-3xl font-bold"
+     >
+       {{ $t('Документы') }}
+     </p>
+     <button
+         @click="document.showCreateDoc = true"
+         class="rounded-full py-3 px-8 font-medium bg-golden flex items-center gap-x-2 transition-all"
+     >
+       + {{ $t('Добавить документ') }}
+     </button>
+     <TheModal :type="'resize'" v-if="document.showCreateDoc" @showModal="document.showCreateDoc = false">
+       <DocumentContentHeaderCreate/>
+     </TheModal>
+   </div>
+   <div class="flex justify-between gap-5 mt-8">
+      <DocumentContent
+          class="!w-9/12"
+      />
+      <DocumentInfo
+          class="!w-3/12"
+      />
    </div>
  </div>
 </template>

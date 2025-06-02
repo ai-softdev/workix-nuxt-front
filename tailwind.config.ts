@@ -17,7 +17,9 @@ export default <Partial<Config>>{
         sunset: "#FF5852",
         mediumGray: "#7D7D7D",
         whiteSmoke: "#F5F4F7",
-        whiteLilia: "#F7F6F9"
+        whiteLilia: "#F7F6F9",
+        azure: "#2196F3",
+        gainsboro: "#DFDFDF"
       },
       boxShadow: {
         notifications: '0 6px 12px 0 rgba(0, 0, 0, 0.05)',
