@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { unref as _unref, withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, createVNode as _createVNode, mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderAttr as _ssrRenderAttr, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\"\nimport _imports_0 from '/icons/info.svg'\nimport _imports_1 from '/icons/tick.svg'\nimport _imports_2 from '/icons/processed.svg'\n\n\nimport DocumentInfoElem from \"~/components/documents/DocumentInfo/DocumentInfoElem.vue\";\r\nimport {useDocumentStore} from \"~/stores/documents\";\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'DocumentInfo',\n  __ssrInlineRender: true,\n  setup(__props) {\n\r\n\r\nconst documentStore = useDocumentStore()\r\n\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  _push(`<div${\n    _ssrRenderAttrs(_mergeProps({ class: \"w-full h-fit bg-white px-5 py-6 rounded-3xl shadow-cards\" }, _attrs))\n  }><div class=\"w-full p-2 flex items-center gap-2 justify-center border rounded-full mb-8\"><img${\n    _ssrRenderAttr(\"src\", _imports_0)\n  } alt=\"info\"><p>${\n    _ssrInterpolate(_ctx.$t('Информация'))\n  }</p></div><div class=\"flex flex-col gap-y-4\">`)\n  _push(_ssrRenderComponent(DocumentInfoElem, null, {\n    infoText: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(`${_ssrInterpolate(_ctx.$t('Количество'))}`)\n      } else {\n        return [\n          _createTextVNode(_toDisplayString(_ctx.$t('Количество')), 1)\n        ]\n      }\n    }),\n    infoCount: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(`${_ssrInterpolate(_unref(documentStore).documentList.count || 0)}`)\n      } else {\n        return [\n          _createTextVNode(_toDisplayString(_unref(documentStore).documentList.count || 0), 1)\n        ]\n      }\n    }),\n    _: 1\n  }, _parent))\n  _push(_ssrRenderComponent(DocumentInfoElem, null, {\n    infoIcon: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(`<img${\n          _ssrRenderAttr(\"src\", _imports_1)\n        } alt=\"tick\"${\n          _scopeId\n        }>`)\n      } else {\n        return [\n          _createVNode(\"img\", {\n            src: _imports_1,\n            alt: \"tick\"\n          })\n        ]\n      }\n    }),\n    infoText: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(`${_ssrInterpolate(_ctx.$t('Одобренные'))}`)\n      } else {\n        return [\n          _createTextVNode(_toDisplayString(_ctx.$t('Одобренные')), 1)\n        ]\n      }\n    }),\n    infoCount: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(`${_ssrInterpolate(_unref(documentStore).documentList.approved_count || 0)}`)\n      } else {\n        return [\n          _createTextVNode(_toDisplayString(_unref(documentStore).documentList.approved_count || 0), 1)\n        ]\n      }\n    }),\n    _: 1\n  }, _parent))\n  _push(_ssrRenderComponent(DocumentInfoElem, null, {\n    infoIcon: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(`<img${\n          _ssrRenderAttr(\"src\", _imports_2)\n        } alt=\"processed\"${\n          _scopeId\n        }>`)\n      } else {\n        return [\n          _createVNode(\"img\", {\n            src: _imports_2,\n            alt: \"processed\"\n          })\n        ]\n      }\n    }),\n    infoText: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(`${_ssrInterpolate(_ctx.$t('На рассмотрении'))}`)\n      } else {\n        return [\n          _createTextVNode(_toDisplayString(_ctx.$t('На рассмотрении')), 1)\n        ]\n      }\n    }),\n    infoCount: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(`${_ssrInterpolate(_unref(documentStore).documentList.waiting_count || 0)}`)\n      } else {\n        return [\n          _createTextVNode(_toDisplayString(_unref(documentStore).documentList.waiting_count || 0), 1)\n        ]\n      }\n    }),\n    _: 1\n  }, _parent))\n  _push(`</div></div>`)\n}\n}\n\n})",
-      "start": 1748867635753,
-      "end": 1748867635753,
+      "start": 1748868481594,
+      "end": 1748868481594,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1748867635753,
-      "end": 1748867635753,
+      "start": 1748868481594,
+      "end": 1748868481594,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1748867635753,
-      "end": 1748867635753,
+      "start": 1748868481594,
+      "end": 1748868481594,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1748867635753,
-      "end": 1748867635753,
+      "start": 1748868481594,
+      "end": 1748868481594,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1748867635753,
-      "end": 1748867635753,
+      "start": 1748868481594,
+      "end": 1748868481594,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1748867635753,
-      "end": 1748867635753,
+      "start": 1748868481594,
+      "end": 1748868481594,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1748867635753,
-      "end": 1748867635753,
+      "start": 1748868481594,
+      "end": 1748868481594,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1748867635754,
-      "end": 1748867635754,
+      "start": 1748868481594,
+      "end": 1748868481594,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1748867635754,
-      "end": 1748867635754,
+      "start": 1748868481594,
+      "end": 1748868481594,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, createVNode as _createVNode, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderAttr as _ssrRenderAttr, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport _imports_0 from \"/icons/info.svg\";\nimport _imports_1 from \"/icons/tick.svg\";\nimport _imports_2 from \"/icons/processed.svg\";\nimport DocumentInfoElem from \"~/components/documents/DocumentInfo/DocumentInfoElem.vue\";\nimport { useDocumentStore } from \"~/stores/documents\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"DocumentInfo\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const documentStore = useDocumentStore();\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"w-full h-fit bg-white px-5 py-6 rounded-3xl shadow-cards\" }, _attrs))}><div class=\"w-full p-2 flex items-center gap-2 justify-center border rounded-full mb-8\"><img${_ssrRenderAttr(\"src\", _imports_0)} alt=\"info\"><p>${_ssrInterpolate(_ctx.$t(\"Информация\"))}</p></div><div class=\"flex flex-col gap-y-4\">`);\n      _push(_ssrRenderComponent(DocumentInfoElem, null, {\n        infoText: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Количество\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Количество\")), 1)\n            ];\n          }\n        }),\n        infoCount: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_unref(documentStore).documentList.count || 0)}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_unref(documentStore).documentList.count || 0), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(_ssrRenderComponent(DocumentInfoElem, null, {\n        infoIcon: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`<img${_ssrRenderAttr(\"src\", _imports_1)} alt=\"tick\"${_scopeId}>`);\n          } else {\n            return [\n              _createVNode(\"img\", {\n                src: _imports_1,\n                alt: \"tick\"\n              })\n            ];\n          }\n        }),\n        infoText: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Одобренные\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Одобренные\")), 1)\n            ];\n          }\n        }),\n        infoCount: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_unref(documentStore).documentList.approved_count || 0)}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_unref(documentStore).documentList.approved_count || 0), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(_ssrRenderComponent(DocumentInfoElem, null, {\n        infoIcon: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`<img${_ssrRenderAttr(\"src\", _imports_2)} alt=\"processed\"${_scopeId}>`);\n          } else {\n            return [\n              _createVNode(\"img\", {\n                src: _imports_2,\n                alt: \"processed\"\n              })\n            ];\n          }\n        }),\n        infoText: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"На рассмотрении\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"На рассмотрении\")), 1)\n            ];\n          }\n        }),\n        infoCount: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_unref(documentStore).documentList.waiting_count || 0)}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_unref(documentStore).documentList.waiting_count || 0), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`</div></div>`);\n    };\n  }\n});\n",
-      "start": 1748867635754,
-      "end": 1748867636167,
+      "start": 1748868481594,
+      "end": 1748868482056,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -89,232 +89,232 @@
     },
     {
       "name": "vite:json",
-      "start": 1748867636167,
-      "end": 1748867636167,
+      "start": 1748868482056,
+      "end": 1748868482056,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1748867636167,
-      "end": 1748867636167,
+      "start": 1748868482056,
+      "end": 1748868482056,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1748867636167,
-      "end": 1748867636167,
+      "start": 1748868482056,
+      "end": 1748868482056,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1748867636167,
-      "end": 1748867636168,
+      "start": 1748868482056,
+      "end": 1748868482056,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748867636168,
-      "end": 1748867636168,
+      "start": 1748868482056,
+      "end": 1748868482056,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748867636168,
-      "end": 1748867636168,
+      "start": 1748868482056,
+      "end": 1748868482056,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1748867636168,
-      "end": 1748867636168,
+      "start": 1748868482056,
+      "end": 1748868482056,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1748867636168,
-      "end": 1748867636168,
+      "start": 1748868482056,
+      "end": 1748868482056,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1748867636168,
-      "end": 1748867636168,
+      "start": 1748868482056,
+      "end": 1748868482056,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748867636168,
-      "end": 1748867636168,
+      "start": 1748868482056,
+      "end": 1748868482056,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1748867636168,
-      "end": 1748867636170,
+      "start": 1748868482057,
+      "end": 1748868482057,
       "order": "normal"
     },
     {
       "name": "vite:define",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, createVNode as _createVNode, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderAttr as _ssrRenderAttr, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport _imports_0 from \"/icons/info.svg\";\nimport _imports_1 from \"/icons/tick.svg\";\nimport _imports_2 from \"/icons/processed.svg\";\nimport DocumentInfoElem from \"~/components/documents/DocumentInfo/DocumentInfoElem.vue\";\nimport { useDocumentStore } from \"~/stores/documents\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"DocumentInfo\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const documentStore = useDocumentStore();\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"w-full h-fit bg-white px-5 py-6 rounded-3xl shadow-cards\" }, _attrs))}><div class=\"w-full p-2 flex items-center gap-2 justify-center border rounded-full mb-8\"><img${_ssrRenderAttr(\"src\", _imports_0)} alt=\"info\"><p>${_ssrInterpolate(_ctx.$t(\"Информация\"))}</p></div><div class=\"flex flex-col gap-y-4\">`);\n      _push(_ssrRenderComponent(DocumentInfoElem, null, {\n        infoText: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Количество\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Количество\")), 1)\n            ];\n          }\n        }),\n        infoCount: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_unref(documentStore).documentList.count || 0)}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_unref(documentStore).documentList.count || 0), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(_ssrRenderComponent(DocumentInfoElem, null, {\n        infoIcon: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`<img${_ssrRenderAttr(\"src\", _imports_1)} alt=\"tick\"${_scopeId}>`);\n          } else {\n            return [\n              _createVNode(\"img\", {\n                src: _imports_1,\n                alt: \"tick\"\n              })\n            ];\n          }\n        }),\n        infoText: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Одобренные\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Одобренные\")), 1)\n            ];\n          }\n        }),\n        infoCount: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_unref(documentStore).documentList.approved_count || 0)}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_unref(documentStore).documentList.approved_count || 0), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(_ssrRenderComponent(DocumentInfoElem, null, {\n        infoIcon: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`<img${_ssrRenderAttr(\"src\", _imports_2)} alt=\"processed\"${_scopeId}>`);\n          } else {\n            return [\n              _createVNode(\"img\", {\n                src: _imports_2,\n                alt: \"processed\"\n              })\n            ];\n          }\n        }),\n        infoText: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"На рассмотрении\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"На рассмотрении\")), 1)\n            ];\n          }\n        }),\n        infoCount: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_unref(documentStore).documentList.waiting_count || 0)}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_unref(documentStore).documentList.waiting_count || 0), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`</div></div>`);\n    };\n  }\n});\n",
-      "start": 1748867636170,
-      "end": 1748867636704,
+      "start": 1748868482057,
+      "end": 1748868482272,
       "order": "normal",
       "sourcemaps": "{\n  \"version\": 3,\n  \"sources\": [\"D:/projects/nuxt/workix-nuxt-front/components/documents/DocumentInfo.vue?vue&type=script&setup=true&lang.ts\"],\n  \"sourcesContent\": [\"import { defineComponent as _defineComponent } from \\\"vue\\\";\\nimport { unref as _unref, withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, createVNode as _createVNode, mergeProps as _mergeProps } from \\\"vue\\\";\\nimport { ssrRenderAttr as _ssrRenderAttr, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \\\"vue/server-renderer\\\";\\nimport _imports_0 from \\\"/icons/info.svg\\\";\\nimport _imports_1 from \\\"/icons/tick.svg\\\";\\nimport _imports_2 from \\\"/icons/processed.svg\\\";\\nimport DocumentInfoElem from \\\"~/components/documents/DocumentInfo/DocumentInfoElem.vue\\\";\\nimport { useDocumentStore } from \\\"~/stores/documents\\\";\\nexport default /* @__PURE__ */ _defineComponent({\\n  __name: \\\"DocumentInfo\\\",\\n  __ssrInlineRender: true,\\n  setup(__props) {\\n    const documentStore = useDocumentStore();\\n    return (_ctx, _push, _parent, _attrs) => {\\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \\\"w-full h-fit bg-white px-5 py-6 rounded-3xl shadow-cards\\\" }, _attrs))}><div class=\\\"w-full p-2 flex items-center gap-2 justify-center border rounded-full mb-8\\\"><img${_ssrRenderAttr(\\\"src\\\", _imports_0)} alt=\\\"info\\\"><p>${_ssrInterpolate(_ctx.$t(\\\"Информация\\\"))}</p></div><div class=\\\"flex flex-col gap-y-4\\\">`);\\n      _push(_ssrRenderComponent(DocumentInfoElem, null, {\\n        infoText: _withCtx((_, _push2, _parent2, _scopeId) => {\\n          if (_push2) {\\n            _push2(`${_ssrInterpolate(_ctx.$t(\\\"Количество\\\"))}`);\\n          } else {\\n            return [\\n              _createTextVNode(_toDisplayString(_ctx.$t(\\\"Количество\\\")), 1)\\n            ];\\n          }\\n        }),\\n        infoCount: _withCtx((_, _push2, _parent2, _scopeId) => {\\n          if (_push2) {\\n            _push2(`${_ssrInterpolate(_unref(documentStore).documentList.count || 0)}`);\\n          } else {\\n            return [\\n              _createTextVNode(_toDisplayString(_unref(documentStore).documentList.count || 0), 1)\\n            ];\\n          }\\n        }),\\n        _: 1\\n      }, _parent));\\n      _push(_ssrRenderComponent(DocumentInfoElem, null, {\\n        infoIcon: _withCtx((_, _push2, _parent2, _scopeId) => {\\n          if (_push2) {\\n            _push2(`<img${_ssrRenderAttr(\\\"src\\\", _imports_1)} alt=\\\"tick\\\"${_scopeId}>`);\\n          } else {\\n            return [\\n              _createVNode(\\\"img\\\", {\\n                src: _imports_1,\\n                alt: \\\"tick\\\"\\n              })\\n            ];\\n          }\\n        }),\\n        infoText: _withCtx((_, _push2, _parent2, _scopeId) => {\\n          if (_push2) {\\n            _push2(`${_ssrInterpolate(_ctx.$t(\\\"Одобренные\\\"))}`);\\n          } else {\\n            return [\\n              _createTextVNode(_toDisplayString(_ctx.$t(\\\"Одобренные\\\")), 1)\\n            ];\\n          }\\n        }),\\n        infoCount: _withCtx((_, _push2, _parent2, _scopeId) => {\\n          if (_push2) {\\n            _push2(`${_ssrInterpolate(_unref(documentStore).documentList.approved_count || 0)}`);\\n          } else {\\n            return [\\n              _createTextVNode(_toDisplayString(_unref(documentStore).documentList.approved_count || 0), 1)\\n            ];\\n          }\\n        }),\\n        _: 1\\n      }, _parent));\\n      _push(_ssrRenderComponent(DocumentInfoElem, null, {\\n        infoIcon: _withCtx((_, _push2, _parent2, _scopeId) => {\\n          if (_push2) {\\n            _push2(`<img${_ssrRenderAttr(\\\"src\\\", _imports_2)} alt=\\\"processed\\\"${_scopeId}>`);\\n          } else {\\n            return [\\n              _createVNode(\\\"img\\\", {\\n                src: _imports_2,\\n                alt: \\\"processed\\\"\\n              })\\n            ];\\n          }\\n        }),\\n        infoText: _withCtx((_, _push2, _parent2, _scopeId) => {\\n          if (_push2) {\\n            _push2(`${_ssrInterpolate(_ctx.$t(\\\"На рассмотрении\\\"))}`);\\n          } else {\\n            return [\\n              _createTextVNode(_toDisplayString(_ctx.$t(\\\"На рассмотрении\\\")), 1)\\n            ];\\n          }\\n        }),\\n        infoCount: _withCtx((_, _push2, _parent2, _scopeId) => {\\n          if (_push2) {\\n            _push2(`${_ssrInterpolate(_unref(documentStore).documentList.waiting_count || 0)}`);\\n          } else {\\n            return [\\n              _createTextVNode(_toDisplayString(_unref(documentStore).documentList.waiting_count || 0), 1)\\n            ];\\n          }\\n        }),\\n        _: 1\\n      }, _parent));\\n      _push(`</div></div>`);\\n    };\\n  }\\n});\\n\"],\n  \"mappings\": \"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\",\n  \"names\": []\n}\n"
     },
     {
       "name": "vite:css-post",
-      "start": 1748867636704,
-      "end": 1748867636704,
+      "start": 1748868482272,
+      "end": 1748868482272,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1748867636705,
-      "end": 1748867636705,
+      "start": 1748868482272,
+      "end": 1748868482272,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1748867636705,
-      "end": 1748867636705,
+      "start": 1748868482272,
+      "end": 1748868482273,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1748867636705,
-      "end": 1748867636705,
+      "start": 1748868482273,
+      "end": 1748868482273,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1748867636705,
-      "end": 1748867636705,
+      "start": 1748868482273,
+      "end": 1748868482273,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1748867636705,
-      "end": 1748867636705,
+      "start": 1748868482273,
+      "end": 1748868482273,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1748867636705,
-      "end": 1748867636705,
+      "start": 1748868482273,
+      "end": 1748868482273,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1748867636705,
-      "end": 1748867636705,
+      "start": 1748868482273,
+      "end": 1748868482273,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1748867636705,
-      "end": 1748867636705,
+      "start": 1748868482273,
+      "end": 1748868482273,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1748867636705,
-      "end": 1748867636705,
+      "start": 1748868482274,
+      "end": 1748868482274,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1748867636705,
-      "end": 1748867636705,
+      "start": 1748868482274,
+      "end": 1748868482274,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1748867636705,
-      "end": 1748867636705,
+      "start": 1748868482274,
+      "end": 1748868482274,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1748867636705,
-      "end": 1748867636705,
+      "start": 1748868482274,
+      "end": 1748868482274,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1748867636705,
-      "end": 1748867636705,
+      "start": 1748868482274,
+      "end": 1748868482274,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1748867636705,
-      "end": 1748867636705,
+      "start": 1748868482274,
+      "end": 1748868482274,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1748867636705,
-      "end": 1748867636714,
+      "start": 1748868482274,
+      "end": 1748868482278,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1748867636705,
-      "end": 1748867636714,
+      "start": 1748868482274,
+      "end": 1748868482278,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1748867636716,
-      "end": 1748867636716,
+      "start": 1748868482282,
+      "end": 1748868482282,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1748867636716,
-      "end": 1748867636716,
+      "start": 1748868482282,
+      "end": 1748868482282,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1748867636716,
-      "end": 1748867636716,
+      "start": 1748868482282,
+      "end": 1748868482282,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1748867636716,
-      "end": 1748867636716,
+      "start": 1748868482282,
+      "end": 1748868482282,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1748867636716,
-      "end": 1748867636716,
+      "start": 1748868482283,
+      "end": 1748868482283,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1748867636717,
-      "end": 1748867636717,
+      "start": 1748868482283,
+      "end": 1748868482283,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1748867636718,
-      "end": 1748867636718,
+      "start": 1748868482284,
+      "end": 1748868482284,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1748867636723,
-      "end": 1748867636724,
+      "start": 1748868482284,
+      "end": 1748868482284,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1748867636724,
-      "end": 1748867636724,
+      "start": 1748868482285,
+      "end": 1748868482285,
       "order": "normal"
     }
   ]

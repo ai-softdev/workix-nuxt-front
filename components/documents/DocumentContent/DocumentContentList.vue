@@ -96,6 +96,11 @@ watch(() => documentStore.documentList, (newValue) => {
             {{item.author.first_name + ' ' + item.author.last_name}}
           </template>
         </DocumentContentListElem>
+        <div v-if="!documentStore.documentList.results?.length" class="flex items-center justify-center text-center">
+          <p class="text-gray-500 text-center w-full py-10">
+            Документов пока нет
+          </p>
+        </div>
       </div>
     </div>
     <div class="w-full flex items-center justify-end gap-4 pr-10 pb-5 max-md:pr-3 max-md:flex-col max-md:items-end">

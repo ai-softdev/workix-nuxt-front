@@ -1010,7 +1010,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-ql6-qBJG.mjs').then((m) => m.default || m)
+        component: () => import('./index-Bp-PDmch.mjs').then((m) => m.default || m)
       },
       {
         name: "base-documents-signification-slug",
@@ -1263,7 +1263,7 @@ const validate = /* @__PURE__ */ defineNuxtRouteMiddleware(async (to) => {
 });
 const inlineConfig = {
   "nuxt": {
-    "buildId": "dev"
+    "buildId": "a37acb94-7053-4a1a-96ee-ee7f7bb79dd7"
   },
   "ui": {
     "primary": "green",

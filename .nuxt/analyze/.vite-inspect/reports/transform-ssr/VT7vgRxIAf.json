@@ -4,81 +4,81 @@
     {
       "name": "vite:load-fallback",
       "result": "<script setup>\r\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\r\nimport TreeContent from \"~/components/Tree/TreeContent.vue\";\r\nimport {useCompanies} from \"~/stores/companies\";\r\nimport {useTreeStore} from \"~/stores/tree\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nconst treeStore = useTreeStore()\r\nconst companies = useCompanies()\r\ncompanies.loadCurrentCompany()\r\ndefineProps({\r\n  treeFullScreen: {\r\n    type: Boolean,\r\n    default: false\r\n  }\r\n})\r\n\r\nconst router = useRouter()\r\nconst loadAuthStore = useAuthStore()\r\n\r\nwatch(() => loadAuthStore.user, (newValue) => {\r\n  if(loadAuthStore?.user?.role?.name_en === 'admin'){\r\n    if (window.history.length > 1) {\r\n      router.push('/base/profile');\r\n    } else {\r\n      router.push('/');\r\n    }\r\n  }\r\n})\r\n\r\nuseSeoMeta({\r\n  title: 'Дерево',\r\n  description: `Древовидная структура компании ${companies.company.name}`\r\n})\r\n</script>\r\n<template>\r\n  <div>\r\n    <TheTextContent :text-type=\"'pageTitle'\" :class=\"{'blur' : useTreeStore().treeFullScreen === true}\">\r\n      {{$t('Дерево ' + companies.company.name )}}\r\n    </TheTextContent>\r\n    <TreeContent />\r\n  </div>\r\n</template>\r\n\r\n<style scoped>\r\n\r\n</style>",
-      "start": 1748867630437,
-      "end": 1748867630840,
+      "start": 1748868477149,
+      "end": 1748868477304,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1748867630840,
-      "end": 1748867630840,
+      "start": 1748868477304,
+      "end": 1748868477304,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1748867630840,
-      "end": 1748867630840,
+      "start": 1748868477304,
+      "end": 1748868477304,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1748867630840,
-      "end": 1748867630840,
+      "start": 1748868477304,
+      "end": 1748868477304,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1748867630840,
-      "end": 1748867630840,
+      "start": 1748868477304,
+      "end": 1748868477304,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1748867630840,
-      "end": 1748867630840,
+      "start": 1748868477304,
+      "end": 1748868477304,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1748867630840,
-      "end": 1748867630840,
+      "start": 1748868477304,
+      "end": 1748868477304,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1748867630840,
-      "end": 1748867630840,
+      "start": 1748868477304,
+      "end": 1748868477304,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1748867630840,
-      "end": 1748867630840,
+      "start": 1748868477304,
+      "end": 1748868477304,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1748867630840,
-      "end": 1748867630840,
+      "start": 1748868477304,
+      "end": 1748868477304,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1748867630840,
-      "end": 1748867630840,
+      "start": 1748868477304,
+      "end": 1748868477304,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1748867630840,
-      "end": 1748867630840,
+      "start": 1748868477304,
+      "end": 1748868477304,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "import { unref as _unref, withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\"\n\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\r\nimport TreeContent from \"~/components/Tree/TreeContent.vue\";\r\nimport {useCompanies} from \"~/stores/companies\";\r\nimport {useTreeStore} from \"~/stores/tree\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\n\nconst _sfc_main = {\n  __name: 'index',\n  __ssrInlineRender: true,\n  props: {\r\n  treeFullScreen: {\r\n    type: Boolean,\r\n    default: false\r\n  }\r\n},\n  setup(__props) {\n\r\nconst treeStore = useTreeStore()\r\nconst companies = useCompanies()\r\ncompanies.loadCurrentCompany()\r\n\r\n\r\nconst router = useRouter()\r\nconst loadAuthStore = useAuthStore()\r\n\r\nwatch(() => loadAuthStore.user, (newValue) => {\r\n  if(loadAuthStore?.user?.role?.name_en === 'admin'){\r\n    if (window.history.length > 1) {\r\n      router.push('/base/profile');\r\n    } else {\r\n      router.push('/');\r\n    }\r\n  }\r\n})\r\n\r\nuseSeoMeta({\r\n  title: 'Дерево',\r\n  description: `Древовидная структура компании ${companies.company.name}`\r\n})\r\n\nreturn (_ctx, _push, _parent, _attrs) => {\n  _push(`<div${_ssrRenderAttrs(_attrs)}>`)\n  _push(_ssrRenderComponent(TheTextContent, {\n    \"text-type\": 'pageTitle',\n    class: {'blur' : _unref(useTreeStore)().treeFullScreen === true}\n  }, {\n    default: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(`${_ssrInterpolate(_ctx.$t('Дерево ' + _unref(companies).company.name ))}`)\n      } else {\n        return [\n          _createTextVNode(_toDisplayString(_ctx.$t('Дерево ' + _unref(companies).company.name )), 1)\n        ]\n      }\n    }),\n    _: 1\n  }, _parent))\n  _push(_ssrRenderComponent(TreeContent, null, null, _parent))\n  _push(`</div>`)\n}\n}\n\n}\n\n\n\nimport { useSSRContext as __vite_useSSRContext } from 'vue'\nconst _sfc_setup = _sfc_main.setup\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext()\n  ;(ssrContext.modules || (ssrContext.modules = new Set())).add(\"pages/base/tree/index.vue\")\n  return _sfc_setup ? _sfc_setup(props, ctx) : undefined\n}\nexport default _sfc_main",
-      "start": 1748867630840,
-      "end": 1748867630842,
+      "start": 1748868477304,
+      "end": 1748868477308,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -94,155 +94,155 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1748867630842,
-      "end": 1748867630842,
+      "start": 1748868477308,
+      "end": 1748868477308,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748867630842,
-      "end": 1748867630842,
+      "start": 1748868477308,
+      "end": 1748868477308,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748867630842,
-      "end": 1748867630842,
+      "start": 1748868477308,
+      "end": 1748868477308,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1748867630842,
-      "end": 1748867630842,
+      "start": 1748868477308,
+      "end": 1748868477308,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1748867630842,
-      "end": 1748867630842,
+      "start": 1748868477308,
+      "end": 1748868477308,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1748867630842,
-      "end": 1748867630842,
+      "start": 1748868477308,
+      "end": 1748868477308,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748867630842,
-      "end": 1748867630842,
+      "start": 1748868477308,
+      "end": 1748868477308,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1748867630842,
-      "end": 1748867630842,
+      "start": 1748868477308,
+      "end": 1748868477308,
       "order": "normal"
     },
     {
       "name": "vite:define",
       "result": "import { unref as _unref, withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport TreeContent from \"~/components/Tree/TreeContent.vue\";\nimport { useCompanies } from \"~/stores/companies\";\nimport { useTreeStore } from \"~/stores/tree\";\nimport { useAuthStore } from \"~/stores/auth\";\nconst _sfc_main = {\n  __name: \"index\",\n  __ssrInlineRender: true,\n  props: {\n    treeFullScreen: {\n      type: Boolean,\n      default: false\n    }\n  },\n  setup(__props) {\n    const treeStore = useTreeStore();\n    const companies = useCompanies();\n    companies.loadCurrentCompany();\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Дерево\",\n      description: `Древовидная структура компании ${companies.company.name}`\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(TheTextContent, {\n        \"text-type\": \"pageTitle\",\n        class: { \"blur\": _unref(useTreeStore)().treeFullScreen === true }\n      }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Дерево \" + _unref(companies).company.name))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Дерево \" + _unref(companies).company.name)), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(_ssrRenderComponent(TreeContent, null, null, _parent));\n      _push(`</div>`);\n    };\n  }\n};\nimport { useSSRContext as __vite_useSSRContext } from \"vue\";\nconst _sfc_setup = _sfc_main.setup;\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext();\n  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(\"pages/base/tree/index.vue\");\n  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;\n};\nexport default _sfc_main;\n",
-      "start": 1748867630842,
-      "end": 1748867630891,
+      "start": 1748868477308,
+      "end": 1748868477337,
       "order": "normal",
       "sourcemaps": "{\n  \"version\": 3,\n  \"sources\": [\"D:/projects/nuxt/workix-nuxt-front/pages/base/tree/index.vue?macro=true\"],\n  \"sourcesContent\": [\"import { unref as _unref, withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode } from \\\"vue\\\"\\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \\\"vue/server-renderer\\\"\\n\\nimport TheTextContent from \\\"~/components/UI/TheTextContent.vue\\\";\\r\\nimport TreeContent from \\\"~/components/Tree/TreeContent.vue\\\";\\r\\nimport {useCompanies} from \\\"~/stores/companies\\\";\\r\\nimport {useTreeStore} from \\\"~/stores/tree\\\";\\r\\nimport {useAuthStore} from \\\"~/stores/auth\\\";\\r\\n\\nconst _sfc_main = {\\n  __name: 'index',\\n  __ssrInlineRender: true,\\n  props: {\\r\\n  treeFullScreen: {\\r\\n    type: Boolean,\\r\\n    default: false\\r\\n  }\\r\\n},\\n  setup(__props) {\\n\\r\\nconst treeStore = useTreeStore()\\r\\nconst companies = useCompanies()\\r\\ncompanies.loadCurrentCompany()\\r\\n\\r\\n\\r\\nconst router = useRouter()\\r\\nconst loadAuthStore = useAuthStore()\\r\\n\\r\\nwatch(() => loadAuthStore.user, (newValue) => {\\r\\n  if(loadAuthStore?.user?.role?.name_en === 'admin'){\\r\\n    if (window.history.length > 1) {\\r\\n      router.push('/base/profile');\\r\\n    } else {\\r\\n      router.push('/');\\r\\n    }\\r\\n  }\\r\\n})\\r\\n\\r\\nuseSeoMeta({\\r\\n  title: 'Дерево',\\r\\n  description: `Древовидная структура компании ${companies.company.name}`\\r\\n})\\r\\n\\nreturn (_ctx, _push, _parent, _attrs) => {\\n  _push(`<div${_ssrRenderAttrs(_attrs)}>`)\\n  _push(_ssrRenderComponent(TheTextContent, {\\n    \\\"text-type\\\": 'pageTitle',\\n    class: {'blur' : _unref(useTreeStore)().treeFullScreen === true}\\n  }, {\\n    default: _withCtx((_, _push, _parent, _scopeId) => {\\n      if (_push) {\\n        _push(`${_ssrInterpolate(_ctx.$t('Дерево ' + _unref(companies).company.name ))}`)\\n      } else {\\n        return [\\n          _createTextVNode(_toDisplayString(_ctx.$t('Дерево ' + _unref(companies).company.name )), 1)\\n        ]\\n      }\\n    }),\\n    _: 1\\n  }, _parent))\\n  _push(_ssrRenderComponent(TreeContent, null, null, _parent))\\n  _push(`</div>`)\\n}\\n}\\n\\n}\\n\\n\\n\\nimport { useSSRContext as __vite_useSSRContext } from 'vue'\\nconst _sfc_setup = _sfc_main.setup\\n_sfc_main.setup = (props, ctx) => {\\n  const ssrContext = __vite_useSSRContext()\\n  ;(ssrContext.modules || (ssrContext.modules = new Set())).add(\\\"pages/base/tree/index.vue\\\")\\n  return _sfc_setup ? _sfc_setup(props, ctx) : undefined\\n}\\nexport default _sfc_main\"],\n  \"mappings\": \"AAAA,SAAS,SAAS,QAAQ,WAAW,UAAU,mBAAmB,kBAAkB,mBAAmB,wBAAwB;AAC/H,SAAS,sBAAsB,qBAAqB,kBAAkB,iBAAiB,kBAAkB,uBAAuB;AAEhI,OAAO,oBAAoB;AAC3B,OAAO,iBAAiB;AACxB,SAAQ,oBAAmB;AAC3B,SAAQ,oBAAmB;AAC3B,SAAQ,oBAAmB;AAE3B,MAAM,YAAY;AAAA,EAChB,QAAQ;AAAA,EACR,mBAAmB;AAAA,EACnB,OAAO;AAAA,IACP,gBAAgB;AAAA,MACd,MAAM;AAAA,MACN,SAAS;AAAA,IACX;AAAA,EACF;AAAA,EACE,MAAM,SAAS;AAEjB,UAAM,YAAY,aAAa;AAC/B,UAAM,YAAY,aAAa;AAC/B,cAAU,mBAAmB;AAG7B,UAAM,SAAS,UAAU;AACzB,UAAM,gBAAgB,aAAa;AAEnC,UAAM,MAAM,cAAc,MAAM,CAAC,aAAa;AAC5C,UAAG,eAAe,MAAM,MAAM,YAAY,SAAQ;AAChD,YAAI,SAAO,QAAQ,SAAS,GAAG;AAC7B,iBAAO,KAAK,eAAe;AAAA,QAC7B,OAAO;AACL,iBAAO,KAAK,GAAG;AAAA,QACjB;AAAA,MACF;AAAA,IACF,CAAC;AAED,eAAW;AAAA,MACT,OAAO;AAAA,MACP,aAAa,kCAAkC,UAAU,QAAQ,IAAI;AAAA,IACvE,CAAC;AAED,WAAO,CAAC,MAAM,OAAO,SAAS,WAAW;AACvC,YAAM,OAAO,gBAAgB,MAAM,CAAC,GAAG;AACvC,YAAM,oBAAoB,gBAAgB;AAAA,QACxC,aAAa;AAAA,QACb,OAAO,EAAC,QAAS,OAAO,YAAY,EAAE,EAAE,mBAAmB,KAAI;AAAA,MACjE,GAAG;AAAA,QACD,SAAS,SAAS,CAAC,GAAGA,QAAOC,UAAS,aAAa;AACjD,cAAID,QAAO;AACT,YAAAA,OAAM,GAAG,gBAAgB,KAAK,GAAG,YAAY,OAAO,SAAS,EAAE,QAAQ,IAAK,CAAC,CAAC,EAAE;AAAA,UAClF,OAAO;AACL,mBAAO;AAAA,cACL,iBAAiB,iBAAiB,KAAK,GAAG,YAAY,OAAO,SAAS,EAAE,QAAQ,IAAK,CAAC,GAAG,CAAC;AAAA,YAC5F;AAAA,UACF;AAAA,QACF,CAAC;AAAA,QACD,GAAG;AAAA,MACL,GAAG,OAAO,CAAC;AACX,YAAM,oBAAoB,aAAa,MAAM,MAAM,OAAO,CAAC;AAC3D,YAAM,QAAQ;AAAA,IAChB;AAAA,EACA;AAEA;AAIA,SAAS,iBAAiB,4BAA4B;AACtD,MAAM,aAAa,UAAU;AAC7B,UAAU,QAAQ,CAAC,OAAO,QAAQ;AAChC,QAAM,aAAa,qBAAqB;AACvC,GAAC,WAAW,YAAY,WAAW,UAAU,oBAAI,IAAI,IAAI,IAAI,2BAA2B;AACzF,SAAO,aAAa,WAAW,OAAO,GAAG,IAAI;AAC/C;AACA,eAAe;\",\n  \"names\": [\"_push\", \"_parent\"]\n}\n"
     },
     {
       "name": "vite:css-post",
-      "start": 1748867630891,
-      "end": 1748867630892,
+      "start": 1748868477338,
+      "end": 1748868477338,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1748867630892,
-      "end": 1748867630892,
+      "start": 1748868477338,
+      "end": 1748868477338,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1748867630892,
-      "end": 1748867630893,
+      "start": 1748868477338,
+      "end": 1748868477338,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1748867630893,
-      "end": 1748867630893,
+      "start": 1748868477338,
+      "end": 1748868477338,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1748867630893,
-      "end": 1748867630893,
+      "start": 1748868477338,
+      "end": 1748868477338,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1748867630894,
-      "end": 1748867630894,
+      "start": 1748868477339,
+      "end": 1748868477339,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1748867630894,
-      "end": 1748867630894,
+      "start": 1748868477339,
+      "end": 1748868477339,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1748867630895,
-      "end": 1748867630895,
+      "start": 1748868477339,
+      "end": 1748868477339,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1748867630895,
-      "end": 1748867630895,
+      "start": 1748868477339,
+      "end": 1748868477339,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1748867630896,
-      "end": 1748867630896,
+      "start": 1748868477339,
+      "end": 1748868477339,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1748867630896,
-      "end": 1748867630896,
+      "start": 1748868477339,
+      "end": 1748868477339,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1748867630896,
-      "end": 1748867630896,
+      "start": 1748868477340,
+      "end": 1748868477340,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1748867630896,
-      "end": 1748867630896,
+      "start": 1748868477340,
+      "end": 1748868477340,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1748867630896,
-      "end": 1748867630897,
+      "start": 1748868477340,
+      "end": 1748868477340,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1748867630896,
-      "end": 1748867630897,
+      "start": 1748868477340,
+      "end": 1748868477340,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { useRouter } from '#app/composables/router';\nimport { watch } from 'vue';\nimport { useSeoMeta } from '@unhead/vue';\nimport { unref as _unref, withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport TreeContent from \"~/components/Tree/TreeContent.vue\";\nimport { useCompanies } from \"~/stores/companies\";\nimport { useTreeStore } from \"~/stores/tree\";\nimport { useAuthStore } from \"~/stores/auth\";\nconst _sfc_main = {\n  __name: \"index\",\n  __ssrInlineRender: true,\n  props: {\n    treeFullScreen: {\n      type: Boolean,\n      default: false\n    }\n  },\n  setup(__props) {\n    const treeStore = useTreeStore();\n    const companies = useCompanies();\n    companies.loadCurrentCompany();\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Дерево\",\n      description: `Древовидная структура компании ${companies.company.name}`\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(TheTextContent, {\n        \"text-type\": \"pageTitle\",\n        class: { \"blur\": _unref(useTreeStore)().treeFullScreen === true }\n      }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Дерево \" + _unref(companies).company.name))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Дерево \" + _unref(companies).company.name)), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(_ssrRenderComponent(TreeContent, null, null, _parent));\n      _push(`</div>`);\n    };\n  }\n};\nimport { useSSRContext as __vite_useSSRContext } from \"vue\";\nconst _sfc_setup = _sfc_main.setup;\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext();\n  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(\"pages/base/tree/index.vue\");\n  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;\n};\nexport default _sfc_main;\n",
-      "start": 1748867630897,
-      "end": 1748867630901,
+      "start": 1748868477340,
+      "end": 1748868477346,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -256,8 +256,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { useRouter } from '#app/composables/router';\nimport { watch } from 'vue';\nimport { useSeoMeta } from '@unhead/vue';\nimport { unref as _unref, withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport TreeContent from \"~/components/Tree/TreeContent.vue\";\nimport { useCompanies } from \"~/stores/companies\";\nimport { useTreeStore } from \"~/stores/tree\";\nimport { useAuthStore } from \"~/stores/auth\";\nconst _sfc_main = {\n  __name: \"index\",\n  __ssrInlineRender: true,\n  props: {\n    treeFullScreen: {\n      type: Boolean,\n      default: false\n    }\n  },\n  setup(__props) {\n    const treeStore = useTreeStore();\n    const companies = useCompanies();\n    companies.loadCurrentCompany();\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Дерево\",\n      description: `Древовидная структура компании ${companies.company.name}`\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(TheTextContent, {\n        \"text-type\": \"pageTitle\",\n        class: { \"blur\": _unref(useTreeStore)().treeFullScreen === true }\n      }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Дерево \" + _unref(companies).company.name))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Дерево \" + _unref(companies).company.name)), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(_ssrRenderComponent(TreeContent, null, null, _parent));\n      _push(`</div>`);\n    };\n  }\n};\nimport { useSSRContext as __vite_useSSRContext } from \"vue\";\nconst _sfc_setup = _sfc_main.setup;\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext();\n  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(\"pages/base/tree/index.vue\");\n  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;\n};\nexport default _sfc_main;\n",
-      "start": 1748867630897,
-      "end": 1748867630901,
+      "start": 1748868477340,
+      "end": 1748868477346,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -270,21 +270,21 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1748867630902,
-      "end": 1748867630903,
+      "start": 1748868477347,
+      "end": 1748868477347,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1748867630902,
-      "end": 1748867630903,
+      "start": 1748868477347,
+      "end": 1748868477347,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
       "result": "\nconst __nuxt_page_meta = null\nexport default __nuxt_page_meta\n",
-      "start": 1748867630905,
-      "end": 1748867630906,
+      "start": 1748868477347,
+      "end": 1748868477348,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -298,8 +298,8 @@
     {
       "name": "nuxt:pages-macros-transform",
       "result": "\nconst __nuxt_page_meta = null\nexport default __nuxt_page_meta\n",
-      "start": 1748867630905,
-      "end": 1748867630906,
+      "start": 1748868477347,
+      "end": 1748868477348,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -312,32 +312,32 @@
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1748867630907,
-      "end": 1748867630907,
+      "start": 1748868477348,
+      "end": 1748868477348,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1748867630908,
-      "end": 1748867630908,
+      "start": 1748868477349,
+      "end": 1748868477349,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1748867630909,
-      "end": 1748867630910,
+      "start": 1748868477349,
+      "end": 1748868477350,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1748867630914,
-      "end": 1748867630916,
+      "start": 1748868477351,
+      "end": 1748868477351,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1748867630916,
-      "end": 1748867630916,
+      "start": 1748868477351,
+      "end": 1748868477351,
       "order": "normal"
     }
   ]
