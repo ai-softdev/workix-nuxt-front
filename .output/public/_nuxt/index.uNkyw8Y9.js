@@ -1,0 +1,1 @@
+import{u as t}from"./storage._xEy6SpX.js";import{b as r}from"./entry.D5Sy51vS.js";import{j as s,H as a,N as m,O as n}from"./swiper-vue.CpIVhgAG.js";import"./nuxt-storage.hATfV0XZ.js";const f=s({__name:"index",setup(u){const e=t(),o=r();return a(()=>{e.loadItem({itemSlug:o.params.slug})}),(p,c)=>(m(),n("div",null," Lorem, ipsum. "))}});export{f as default};

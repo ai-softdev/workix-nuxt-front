@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { unref as _unref, withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode } from \"vue\"\nimport { ssrRenderClass as _ssrRenderClass, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttr as _ssrRenderAttr, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\"\n\nimport {useDocumentStore} from \"~/stores/documents\";\r\nimport DocumentContentListElem from \"~/components/documents/DocumentContent/DocumentContentList/DocumentContentListElem.vue\";\r\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\r\n\r\nimport Paginate from 'vuejs-paginate-next';\r\nimport {useRoute, useRouter} from \"vue-router\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'DocumentContentList',\n  __ssrInlineRender: true,\n  setup(__props) {\n\r\nconst route = useRoute();\r\nconst router = useRouter();\r\nconst documentStore = useDocumentStore()\r\nconst pageCount = ref(0)\r\nconst limitItems = ref([5, 10, 20, 30, 50])\r\nconst page = ref(Number(route.query.page) || 1)\r\nconst limit = ref(Number(route.query.limit) || 5)\r\nconst query = ref(route.query.query || '')\r\nconst type = ref((route.query.type as string) || 'from-me')\r\n\r\nconst clickCallback = (pageNum: number) => {\r\n  page.value = pageNum;\r\n  updateQueryParams();\r\n};\r\n\r\nconst changePageLimit = () => {\r\n  page.value = 1;\r\n  updateQueryParams();\r\n};\r\n\r\nconst changeType = (newType: string) => {\r\n  type.value = newType;\r\n  page.value = 1;\r\n  updateQueryParams();\r\n};\r\n\r\nconst updateQueryParams = () => {\r\n  router.push({\r\n    query: {\r\n      page: page.value,\r\n      limit: limit.value,\r\n      query: query.value || undefined,\r\n      type: type.value || undefined,\r\n    }\r\n  });\r\n  documentStore.loadAllDocument({\r\n    page: page.value,\r\n    limit: limit.value,\r\n    query: query.value,\r\n    type: type.value,\r\n  });\r\n};\r\n\r\nwatch(() => documentStore.documentList, (newValue) => {\r\n  if (newValue && newValue.count && limit.value) {\r\n    pageCount.value = Math.ceil(newValue.count / limit.value);\r\n  }\r\n}, { immediate: true });\r\n\r\n\r\n  // documentStore.loadAllDocument({page: 1, limit: 5, type: \"from-me\"})\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  _push(`<div${\n    _ssrRenderAttrs(_attrs)\n  }><div class=\"p-6 rounded-3xl shadow-cards bg-white mb-8\"><div class=\"flex items-center gap-10 justify-between\"><div class=\"flex items-center gap-x-3 p-2 rounded-full border w-fit\"><button class=\"${\n    _ssrRenderClass(['py-3 px-10 rounded-full font-medium', _unref(type) === 'from-me' ? 'bg-golden' : ''])\n  }\">${\n    _ssrInterpolate(_ctx.$t('Мои документы'))\n  }</button><button class=\"${\n    _ssrRenderClass(['py-3 px-10 rounded-full font-medium', _unref(type) === 'through-me' ? 'bg-golden' : ''])\n  }\">${\n    _ssrInterpolate(_ctx.$t('Ожидающие подтверждения'))\n  }</button></div>`)\n  _push(_ssrRenderComponent(TheSearch, {\n    class: \"w-4/12\",\n    \"model-value\": _unref(query),\n    \"onUpdate:modelValue\": ($event: any) => (query.value = $event),\n    onSearch: updateQueryParams\n  }, null, _parent))\n  _push(`</div><div class=\"flex gap-x-2 gap-y-2 flex-wrap mt-6\"><!--[-->`)\n  _ssrRenderList(_unref(documentStore).get_all_document.results, (item) => {\n    _push(_ssrRenderComponent(DocumentContentListElem, { item: item }, {\n      documentTitle: _withCtx((_, _push, _parent, _scopeId) => {\n        if (_push) {\n          _push(`${_ssrInterpolate(item.title)}`)\n        } else {\n          return [\n            _createTextVNode(_toDisplayString(item.title), 1)\n          ]\n        }\n      }),\n      documentFileName: _withCtx((_, _push, _parent, _scopeId) => {\n        if (_push) {\n          _push(`${_ssrInterpolate(item.file_name)}`)\n        } else {\n          return [\n            _createTextVNode(_toDisplayString(item.file_name), 1)\n          ]\n        }\n      }),\n      documentUserName: _withCtx((_, _push, _parent, _scopeId) => {\n        if (_push) {\n          _push(`${_ssrInterpolate(item.author.first_name + ' ' + item.author.last_name)}`)\n        } else {\n          return [\n            _createTextVNode(_toDisplayString(item.author.first_name + ' ' + item.author.last_name), 1)\n          ]\n        }\n      }),\n      _: 2\n    }, _parent))\n  })\n  _push(`<!--]-->`)\n  if (!_unref(documentStore).documentList.results?.length) {\n    _push(`<div class=\"flex items-center justify-center text-center\"><p class=\"text-gray-500 text-center w-full py-10\"> Документов пока нет </p></div>`)\n  } else {\n    _push(`<!---->`)\n  }\n  _push(`</div></div><div class=\"w-full flex items-center justify-end gap-4 pr-10 pb-5 max-md:pr-3 max-md:flex-col max-md:items-end\">`)\n  _push(_ssrRenderComponent(_unref(Paginate), {\n    \"page-count\": _unref(pageCount),\n    \"page-range\": 3,\n    \"margin-pages\": 2,\n    \"click-handler\": clickCallback,\n    \"prev-text\": '<',\n    \"next-text\": '>',\n    \"container-class\": 'pagination',\n    \"page-class\": 'page-item',\n    \"force-page\": _unref(page)\n  }, null, _parent))\n  _push(`<div class=\"flex items-center gap-3\"><p>Строк на странице:</p><select class=\"w-fit p-2.5 rounded-md border bg-white dark:bg-bgWhite text-black\"><!--[-->`)\n  _ssrRenderList(_unref(limitItems), (item) => {\n    _push(`<option${\n      _ssrRenderAttr(\"value\", item)\n    }>${\n      _ssrInterpolate(item)\n    }</option>`)\n  })\n  _push(`<!--]--></select></div></div></div>`)\n}\n}\n\n})",
-      "start": 1748868483295,
-      "end": 1748868483295,
+      "start": 1748868836258,
+      "end": 1748868836258,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1748868483295,
-      "end": 1748868483295,
+      "start": 1748868836258,
+      "end": 1748868836258,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1748868483295,
-      "end": 1748868483295,
+      "start": 1748868836258,
+      "end": 1748868836258,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1748868483295,
-      "end": 1748868483295,
+      "start": 1748868836258,
+      "end": 1748868836258,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1748868483295,
-      "end": 1748868483295,
+      "start": 1748868836258,
+      "end": 1748868836258,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1748868483295,
-      "end": 1748868483295,
+      "start": 1748868836258,
+      "end": 1748868836258,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1748868483295,
-      "end": 1748868483295,
+      "start": 1748868836258,
+      "end": 1748868836258,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1748868483295,
-      "end": 1748868483295,
+      "start": 1748868836258,
+      "end": 1748868836258,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1748868483295,
-      "end": 1748868483295,
+      "start": 1748868836258,
+      "end": 1748868836258,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode } from \"vue\";\nimport { ssrRenderClass as _ssrRenderClass, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttr as _ssrRenderAttr, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport { useDocumentStore } from \"~/stores/documents\";\nimport DocumentContentListElem from \"~/components/documents/DocumentContent/DocumentContentList/DocumentContentListElem.vue\";\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\nimport Paginate from \"vuejs-paginate-next\";\nimport { useRoute, useRouter } from \"vue-router\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"DocumentContentList\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const route = useRoute();\n    const router = useRouter();\n    const documentStore = useDocumentStore();\n    const pageCount = ref(0);\n    const limitItems = ref([5, 10, 20, 30, 50]);\n    const page = ref(Number(route.query.page) || 1);\n    const limit = ref(Number(route.query.limit) || 5);\n    const query = ref(route.query.query || \"\");\n    const type = ref(route.query.type || \"from-me\");\n    const clickCallback = (pageNum) => {\n      page.value = pageNum;\n      updateQueryParams();\n    };\n    const changePageLimit = () => {\n      page.value = 1;\n      updateQueryParams();\n    };\n    const changeType = (newType) => {\n      type.value = newType;\n      page.value = 1;\n      updateQueryParams();\n    };\n    const updateQueryParams = () => {\n      router.push({\n        query: {\n          page: page.value,\n          limit: limit.value,\n          query: query.value || void 0,\n          type: type.value || void 0\n        }\n      });\n      documentStore.loadAllDocument({\n        page: page.value,\n        limit: limit.value,\n        query: query.value,\n        type: type.value\n      });\n    };\n    watch(() => documentStore.documentList, (newValue) => {\n      if (newValue && newValue.count && limit.value) {\n        pageCount.value = Math.ceil(newValue.count / limit.value);\n      }\n    }, { immediate: true });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}><div class=\"p-6 rounded-3xl shadow-cards bg-white mb-8\"><div class=\"flex items-center gap-10 justify-between\"><div class=\"flex items-center gap-x-3 p-2 rounded-full border w-fit\"><button class=\"${_ssrRenderClass([\"py-3 px-10 rounded-full font-medium\", _unref(type) === \"from-me\" ? \"bg-golden\" : \"\"])}\">${_ssrInterpolate(_ctx.$t(\"Мои документы\"))}</button><button class=\"${_ssrRenderClass([\"py-3 px-10 rounded-full font-medium\", _unref(type) === \"through-me\" ? \"bg-golden\" : \"\"])}\">${_ssrInterpolate(_ctx.$t(\"Ожидающие подтверждения\"))}</button></div>`);\n      _push(_ssrRenderComponent(TheSearch, {\n        class: \"w-4/12\",\n        \"model-value\": _unref(query),\n        \"onUpdate:modelValue\": ($event) => query.value = $event,\n        onSearch: updateQueryParams\n      }, null, _parent));\n      _push(`</div><div class=\"flex gap-x-2 gap-y-2 flex-wrap mt-6\"><!--[-->`);\n      _ssrRenderList(_unref(documentStore).get_all_document.results, (item) => {\n        _push(_ssrRenderComponent(DocumentContentListElem, { item }, {\n          documentTitle: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(`${_ssrInterpolate(item.title)}`);\n            } else {\n              return [\n                _createTextVNode(_toDisplayString(item.title), 1)\n              ];\n            }\n          }),\n          documentFileName: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(`${_ssrInterpolate(item.file_name)}`);\n            } else {\n              return [\n                _createTextVNode(_toDisplayString(item.file_name), 1)\n              ];\n            }\n          }),\n          documentUserName: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(`${_ssrInterpolate(item.author.first_name + \" \" + item.author.last_name)}`);\n            } else {\n              return [\n                _createTextVNode(_toDisplayString(item.author.first_name + \" \" + item.author.last_name), 1)\n              ];\n            }\n          }),\n          _: 2\n        }, _parent));\n      });\n      _push(`<!--]-->`);\n      if (!_unref(documentStore).documentList.results?.length) {\n        _push(`<div class=\"flex items-center justify-center text-center\"><p class=\"text-gray-500 text-center w-full py-10\"> Документов пока нет </p></div>`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div></div><div class=\"w-full flex items-center justify-end gap-4 pr-10 pb-5 max-md:pr-3 max-md:flex-col max-md:items-end\">`);\n      _push(_ssrRenderComponent(_unref(Paginate), {\n        \"page-count\": _unref(pageCount),\n        \"page-range\": 3,\n        \"margin-pages\": 2,\n        \"click-handler\": clickCallback,\n        \"prev-text\": \"<\",\n        \"next-text\": \">\",\n        \"container-class\": \"pagination\",\n        \"page-class\": \"page-item\",\n        \"force-page\": _unref(page)\n      }, null, _parent));\n      _push(`<div class=\"flex items-center gap-3\"><p>Строк на странице:</p><select class=\"w-fit p-2.5 rounded-md border bg-white dark:bg-bgWhite text-black\"><!--[-->`);\n      _ssrRenderList(_unref(limitItems), (item) => {\n        _push(`<option${_ssrRenderAttr(\"value\", item)}>${_ssrInterpolate(item)}</option>`);\n      });\n      _push(`<!--]--></select></div></div></div>`);\n    };\n  }\n});\n",
-      "start": 1748868483295,
-      "end": 1748868483402,
+      "start": 1748868836258,
+      "end": 1748868836572,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -89,173 +89,173 @@
     },
     {
       "name": "vite:json",
-      "start": 1748868483402,
-      "end": 1748868483402,
+      "start": 1748868836572,
+      "end": 1748868836572,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1748868483402,
-      "end": 1748868483402,
+      "start": 1748868836572,
+      "end": 1748868836572,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1748868483403,
-      "end": 1748868483403,
+      "start": 1748868836572,
+      "end": 1748868836572,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1748868483403,
-      "end": 1748868483403,
+      "start": 1748868836572,
+      "end": 1748868836572,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748868483403,
-      "end": 1748868483403,
+      "start": 1748868836572,
+      "end": 1748868836572,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748868483403,
-      "end": 1748868483403,
+      "start": 1748868836572,
+      "end": 1748868836572,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1748868483403,
-      "end": 1748868483403,
+      "start": 1748868836573,
+      "end": 1748868836573,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1748868483403,
-      "end": 1748868483403,
+      "start": 1748868836573,
+      "end": 1748868836573,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1748868483403,
-      "end": 1748868483403,
+      "start": 1748868836573,
+      "end": 1748868836573,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748868483403,
-      "end": 1748868483403,
+      "start": 1748868836573,
+      "end": 1748868836573,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1748868483403,
-      "end": 1748868483404,
+      "start": 1748868836573,
+      "end": 1748868836573,
       "order": "normal"
     },
     {
       "name": "vite:define",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode } from \"vue\";\nimport { ssrRenderClass as _ssrRenderClass, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttr as _ssrRenderAttr, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport { useDocumentStore } from \"~/stores/documents\";\nimport DocumentContentListElem from \"~/components/documents/DocumentContent/DocumentContentList/DocumentContentListElem.vue\";\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\nimport Paginate from \"vuejs-paginate-next\";\nimport { useRoute, useRouter } from \"vue-router\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"DocumentContentList\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const route = useRoute();\n    const router = useRouter();\n    const documentStore = useDocumentStore();\n    const pageCount = ref(0);\n    const limitItems = ref([5, 10, 20, 30, 50]);\n    const page = ref(Number(route.query.page) || 1);\n    const limit = ref(Number(route.query.limit) || 5);\n    const query = ref(route.query.query || \"\");\n    const type = ref(route.query.type || \"from-me\");\n    const clickCallback = (pageNum) => {\n      page.value = pageNum;\n      updateQueryParams();\n    };\n    const changePageLimit = () => {\n      page.value = 1;\n      updateQueryParams();\n    };\n    const changeType = (newType) => {\n      type.value = newType;\n      page.value = 1;\n      updateQueryParams();\n    };\n    const updateQueryParams = () => {\n      router.push({\n        query: {\n          page: page.value,\n          limit: limit.value,\n          query: query.value || void 0,\n          type: type.value || void 0\n        }\n      });\n      documentStore.loadAllDocument({\n        page: page.value,\n        limit: limit.value,\n        query: query.value,\n        type: type.value\n      });\n    };\n    watch(() => documentStore.documentList, (newValue) => {\n      if (newValue && newValue.count && limit.value) {\n        pageCount.value = Math.ceil(newValue.count / limit.value);\n      }\n    }, { immediate: true });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}><div class=\"p-6 rounded-3xl shadow-cards bg-white mb-8\"><div class=\"flex items-center gap-10 justify-between\"><div class=\"flex items-center gap-x-3 p-2 rounded-full border w-fit\"><button class=\"${_ssrRenderClass([\"py-3 px-10 rounded-full font-medium\", _unref(type) === \"from-me\" ? \"bg-golden\" : \"\"])}\">${_ssrInterpolate(_ctx.$t(\"Мои документы\"))}</button><button class=\"${_ssrRenderClass([\"py-3 px-10 rounded-full font-medium\", _unref(type) === \"through-me\" ? \"bg-golden\" : \"\"])}\">${_ssrInterpolate(_ctx.$t(\"Ожидающие подтверждения\"))}</button></div>`);\n      _push(_ssrRenderComponent(TheSearch, {\n        class: \"w-4/12\",\n        \"model-value\": _unref(query),\n        \"onUpdate:modelValue\": ($event) => query.value = $event,\n        onSearch: updateQueryParams\n      }, null, _parent));\n      _push(`</div><div class=\"flex gap-x-2 gap-y-2 flex-wrap mt-6\"><!--[-->`);\n      _ssrRenderList(_unref(documentStore).get_all_document.results, (item) => {\n        _push(_ssrRenderComponent(DocumentContentListElem, { item }, {\n          documentTitle: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(`${_ssrInterpolate(item.title)}`);\n            } else {\n              return [\n                _createTextVNode(_toDisplayString(item.title), 1)\n              ];\n            }\n          }),\n          documentFileName: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(`${_ssrInterpolate(item.file_name)}`);\n            } else {\n              return [\n                _createTextVNode(_toDisplayString(item.file_name), 1)\n              ];\n            }\n          }),\n          documentUserName: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(`${_ssrInterpolate(item.author.first_name + \" \" + item.author.last_name)}`);\n            } else {\n              return [\n                _createTextVNode(_toDisplayString(item.author.first_name + \" \" + item.author.last_name), 1)\n              ];\n            }\n          }),\n          _: 2\n        }, _parent));\n      });\n      _push(`<!--]-->`);\n      if (!_unref(documentStore).documentList.results?.length) {\n        _push(`<div class=\"flex items-center justify-center text-center\"><p class=\"text-gray-500 text-center w-full py-10\"> Документов пока нет </p></div>`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div></div><div class=\"w-full flex items-center justify-end gap-4 pr-10 pb-5 max-md:pr-3 max-md:flex-col max-md:items-end\">`);\n      _push(_ssrRenderComponent(_unref(Paginate), {\n        \"page-count\": _unref(pageCount),\n        \"page-range\": 3,\n        \"margin-pages\": 2,\n        \"click-handler\": clickCallback,\n        \"prev-text\": \"<\",\n        \"next-text\": \">\",\n        \"container-class\": \"pagination\",\n        \"page-class\": \"page-item\",\n        \"force-page\": _unref(page)\n      }, null, _parent));\n      _push(`<div class=\"flex items-center gap-3\"><p>Строк на странице:</p><select class=\"w-fit p-2.5 rounded-md border bg-white dark:bg-bgWhite text-black\"><!--[-->`);\n      _ssrRenderList(_unref(limitItems), (item) => {\n        _push(`<option${_ssrRenderAttr(\"value\", item)}>${_ssrInterpolate(item)}</option>`);\n      });\n      _push(`<!--]--></select></div></div></div>`);\n    };\n  }\n});\n",
-      "start": 1748868483404,
-      "end": 1748868483469,
+      "start": 1748868836573,
+      "end": 1748868836735,
       "order": "normal",
       "sourcemaps": "{\n  \"version\": 3,\n  \"sources\": [\"D:/projects/nuxt/workix-nuxt-front/components/documents/DocumentContent/DocumentContentList.vue?vue&type=script&setup=true&lang.ts\"],\n  \"sourcesContent\": [\"import { defineComponent as _defineComponent } from \\\"vue\\\";\\nimport { unref as _unref, withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode } from \\\"vue\\\";\\nimport { ssrRenderClass as _ssrRenderClass, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttr as _ssrRenderAttr, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \\\"vue/server-renderer\\\";\\nimport { useDocumentStore } from \\\"~/stores/documents\\\";\\nimport DocumentContentListElem from \\\"~/components/documents/DocumentContent/DocumentContentList/DocumentContentListElem.vue\\\";\\nimport TheSearch from \\\"~/components/UI/TheSearch.vue\\\";\\nimport Paginate from \\\"vuejs-paginate-next\\\";\\nimport { useRoute, useRouter } from \\\"vue-router\\\";\\nexport default /* @__PURE__ */ _defineComponent({\\n  __name: \\\"DocumentContentList\\\",\\n  __ssrInlineRender: true,\\n  setup(__props) {\\n    const route = useRoute();\\n    const router = useRouter();\\n    const documentStore = useDocumentStore();\\n    const pageCount = ref(0);\\n    const limitItems = ref([5, 10, 20, 30, 50]);\\n    const page = ref(Number(route.query.page) || 1);\\n    const limit = ref(Number(route.query.limit) || 5);\\n    const query = ref(route.query.query || \\\"\\\");\\n    const type = ref(route.query.type || \\\"from-me\\\");\\n    const clickCallback = (pageNum) => {\\n      page.value = pageNum;\\n      updateQueryParams();\\n    };\\n    const changePageLimit = () => {\\n      page.value = 1;\\n      updateQueryParams();\\n    };\\n    const changeType = (newType) => {\\n      type.value = newType;\\n      page.value = 1;\\n      updateQueryParams();\\n    };\\n    const updateQueryParams = () => {\\n      router.push({\\n        query: {\\n          page: page.value,\\n          limit: limit.value,\\n          query: query.value || void 0,\\n          type: type.value || void 0\\n        }\\n      });\\n      documentStore.loadAllDocument({\\n        page: page.value,\\n        limit: limit.value,\\n        query: query.value,\\n        type: type.value\\n      });\\n    };\\n    watch(() => documentStore.documentList, (newValue) => {\\n      if (newValue && newValue.count && limit.value) {\\n        pageCount.value = Math.ceil(newValue.count / limit.value);\\n      }\\n    }, { immediate: true });\\n    return (_ctx, _push, _parent, _attrs) => {\\n      _push(`<div${_ssrRenderAttrs(_attrs)}><div class=\\\"p-6 rounded-3xl shadow-cards bg-white mb-8\\\"><div class=\\\"flex items-center gap-10 justify-between\\\"><div class=\\\"flex items-center gap-x-3 p-2 rounded-full border w-fit\\\"><button class=\\\"${_ssrRenderClass([\\\"py-3 px-10 rounded-full font-medium\\\", _unref(type) === \\\"from-me\\\" ? \\\"bg-golden\\\" : \\\"\\\"])}\\\">${_ssrInterpolate(_ctx.$t(\\\"Мои документы\\\"))}</button><button class=\\\"${_ssrRenderClass([\\\"py-3 px-10 rounded-full font-medium\\\", _unref(type) === \\\"through-me\\\" ? \\\"bg-golden\\\" : \\\"\\\"])}\\\">${_ssrInterpolate(_ctx.$t(\\\"Ожидающие подтверждения\\\"))}</button></div>`);\\n      _push(_ssrRenderComponent(TheSearch, {\\n        class: \\\"w-4/12\\\",\\n        \\\"model-value\\\": _unref(query),\\n        \\\"onUpdate:modelValue\\\": ($event) => query.value = $event,\\n        onSearch: updateQueryParams\\n      }, null, _parent));\\n      _push(`</div><div class=\\\"flex gap-x-2 gap-y-2 flex-wrap mt-6\\\"><!--[-->`);\\n      _ssrRenderList(_unref(documentStore).get_all_document.results, (item) => {\\n        _push(_ssrRenderComponent(DocumentContentListElem, { item }, {\\n          documentTitle: _withCtx((_, _push2, _parent2, _scopeId) => {\\n            if (_push2) {\\n              _push2(`${_ssrInterpolate(item.title)}`);\\n            } else {\\n              return [\\n                _createTextVNode(_toDisplayString(item.title), 1)\\n              ];\\n            }\\n          }),\\n          documentFileName: _withCtx((_, _push2, _parent2, _scopeId) => {\\n            if (_push2) {\\n              _push2(`${_ssrInterpolate(item.file_name)}`);\\n            } else {\\n              return [\\n                _createTextVNode(_toDisplayString(item.file_name), 1)\\n              ];\\n            }\\n          }),\\n          documentUserName: _withCtx((_, _push2, _parent2, _scopeId) => {\\n            if (_push2) {\\n              _push2(`${_ssrInterpolate(item.author.first_name + \\\" \\\" + item.author.last_name)}`);\\n            } else {\\n              return [\\n                _createTextVNode(_toDisplayString(item.author.first_name + \\\" \\\" + item.author.last_name), 1)\\n              ];\\n            }\\n          }),\\n          _: 2\\n        }, _parent));\\n      });\\n      _push(`<!--]-->`);\\n      if (!_unref(documentStore).documentList.results?.length) {\\n        _push(`<div class=\\\"flex items-center justify-center text-center\\\"><p class=\\\"text-gray-500 text-center w-full py-10\\\"> Документов пока нет </p></div>`);\\n      } else {\\n        _push(`<!---->`);\\n      }\\n      _push(`</div></div><div class=\\\"w-full flex items-center justify-end gap-4 pr-10 pb-5 max-md:pr-3 max-md:flex-col max-md:items-end\\\">`);\\n      _push(_ssrRenderComponent(_unref(Paginate), {\\n        \\\"page-count\\\": _unref(pageCount),\\n        \\\"page-range\\\": 3,\\n        \\\"margin-pages\\\": 2,\\n        \\\"click-handler\\\": clickCallback,\\n        \\\"prev-text\\\": \\\"<\\\",\\n        \\\"next-text\\\": \\\">\\\",\\n        \\\"container-class\\\": \\\"pagination\\\",\\n        \\\"page-class\\\": \\\"page-item\\\",\\n        \\\"force-page\\\": _unref(page)\\n      }, null, _parent));\\n      _push(`<div class=\\\"flex items-center gap-3\\\"><p>Строк на странице:</p><select class=\\\"w-fit p-2.5 rounded-md border bg-white dark:bg-bgWhite text-black\\\"><!--[-->`);\\n      _ssrRenderList(_unref(limitItems), (item) => {\\n        _push(`<option${_ssrRenderAttr(\\\"value\\\", item)}>${_ssrInterpolate(item)}</option>`);\\n      });\\n      _push(`<!--]--></select></div></div></div>`);\\n    };\\n  }\\n});\\n\"],\n  \"mappings\": \"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\",\n  \"names\": []\n}\n"
     },
     {
       "name": "vite:css-post",
-      "start": 1748868483469,
-      "end": 1748868483469,
+      "start": 1748868836736,
+      "end": 1748868836736,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1748868483469,
-      "end": 1748868483469,
+      "start": 1748868836736,
+      "end": 1748868836736,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1748868483470,
-      "end": 1748868483470,
+      "start": 1748868836736,
+      "end": 1748868836736,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1748868483470,
-      "end": 1748868483470,
+      "start": 1748868836736,
+      "end": 1748868836736,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1748868483470,
-      "end": 1748868483470,
+      "start": 1748868836736,
+      "end": 1748868836736,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1748868483470,
-      "end": 1748868483470,
+      "start": 1748868836737,
+      "end": 1748868836737,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1748868483470,
-      "end": 1748868483470,
+      "start": 1748868836737,
+      "end": 1748868836737,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1748868483470,
-      "end": 1748868483470,
+      "start": 1748868836737,
+      "end": 1748868836737,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1748868483470,
-      "end": 1748868483470,
+      "start": 1748868836737,
+      "end": 1748868836737,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1748868483470,
-      "end": 1748868483470,
+      "start": 1748868836737,
+      "end": 1748868836738,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1748868483470,
-      "end": 1748868483470,
+      "start": 1748868836737,
+      "end": 1748868836738,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1748868483470,
-      "end": 1748868483470,
+      "start": 1748868836738,
+      "end": 1748868836738,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1748868483470,
-      "end": 1748868483470,
+      "start": 1748868836738,
+      "end": 1748868836738,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1748868483470,
-      "end": 1748868483470,
+      "start": 1748868836738,
+      "end": 1748868836738,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1748868483470,
-      "end": 1748868483470,
+      "start": 1748868836738,
+      "end": 1748868836738,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref, watch } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode } from \"vue\";\nimport { ssrRenderClass as _ssrRenderClass, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttr as _ssrRenderAttr, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport { useDocumentStore } from \"~/stores/documents\";\nimport DocumentContentListElem from \"~/components/documents/DocumentContent/DocumentContentList/DocumentContentListElem.vue\";\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\nimport Paginate from \"vuejs-paginate-next\";\nimport { useRoute, useRouter } from \"vue-router\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"DocumentContentList\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const route = useRoute();\n    const router = useRouter();\n    const documentStore = useDocumentStore();\n    const pageCount = ref(0);\n    const limitItems = ref([5, 10, 20, 30, 50]);\n    const page = ref(Number(route.query.page) || 1);\n    const limit = ref(Number(route.query.limit) || 5);\n    const query = ref(route.query.query || \"\");\n    const type = ref(route.query.type || \"from-me\");\n    const clickCallback = (pageNum) => {\n      page.value = pageNum;\n      updateQueryParams();\n    };\n    const changePageLimit = () => {\n      page.value = 1;\n      updateQueryParams();\n    };\n    const changeType = (newType) => {\n      type.value = newType;\n      page.value = 1;\n      updateQueryParams();\n    };\n    const updateQueryParams = () => {\n      router.push({\n        query: {\n          page: page.value,\n          limit: limit.value,\n          query: query.value || void 0,\n          type: type.value || void 0\n        }\n      });\n      documentStore.loadAllDocument({\n        page: page.value,\n        limit: limit.value,\n        query: query.value,\n        type: type.value\n      });\n    };\n    watch(() => documentStore.documentList, (newValue) => {\n      if (newValue && newValue.count && limit.value) {\n        pageCount.value = Math.ceil(newValue.count / limit.value);\n      }\n    }, { immediate: true });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}><div class=\"p-6 rounded-3xl shadow-cards bg-white mb-8\"><div class=\"flex items-center gap-10 justify-between\"><div class=\"flex items-center gap-x-3 p-2 rounded-full border w-fit\"><button class=\"${_ssrRenderClass([\"py-3 px-10 rounded-full font-medium\", _unref(type) === \"from-me\" ? \"bg-golden\" : \"\"])}\">${_ssrInterpolate(_ctx.$t(\"Мои документы\"))}</button><button class=\"${_ssrRenderClass([\"py-3 px-10 rounded-full font-medium\", _unref(type) === \"through-me\" ? \"bg-golden\" : \"\"])}\">${_ssrInterpolate(_ctx.$t(\"Ожидающие подтверждения\"))}</button></div>`);\n      _push(_ssrRenderComponent(TheSearch, {\n        class: \"w-4/12\",\n        \"model-value\": _unref(query),\n        \"onUpdate:modelValue\": ($event) => query.value = $event,\n        onSearch: updateQueryParams\n      }, null, _parent));\n      _push(`</div><div class=\"flex gap-x-2 gap-y-2 flex-wrap mt-6\"><!--[-->`);\n      _ssrRenderList(_unref(documentStore).get_all_document.results, (item) => {\n        _push(_ssrRenderComponent(DocumentContentListElem, { item }, {\n          documentTitle: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(`${_ssrInterpolate(item.title)}`);\n            } else {\n              return [\n                _createTextVNode(_toDisplayString(item.title), 1)\n              ];\n            }\n          }),\n          documentFileName: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(`${_ssrInterpolate(item.file_name)}`);\n            } else {\n              return [\n                _createTextVNode(_toDisplayString(item.file_name), 1)\n              ];\n            }\n          }),\n          documentUserName: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(`${_ssrInterpolate(item.author.first_name + \" \" + item.author.last_name)}`);\n            } else {\n              return [\n                _createTextVNode(_toDisplayString(item.author.first_name + \" \" + item.author.last_name), 1)\n              ];\n            }\n          }),\n          _: 2\n        }, _parent));\n      });\n      _push(`<!--]-->`);\n      if (!_unref(documentStore).documentList.results?.length) {\n        _push(`<div class=\"flex items-center justify-center text-center\"><p class=\"text-gray-500 text-center w-full py-10\"> Документов пока нет </p></div>`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div></div><div class=\"w-full flex items-center justify-end gap-4 pr-10 pb-5 max-md:pr-3 max-md:flex-col max-md:items-end\">`);\n      _push(_ssrRenderComponent(_unref(Paginate), {\n        \"page-count\": _unref(pageCount),\n        \"page-range\": 3,\n        \"margin-pages\": 2,\n        \"click-handler\": clickCallback,\n        \"prev-text\": \"<\",\n        \"next-text\": \">\",\n        \"container-class\": \"pagination\",\n        \"page-class\": \"page-item\",\n        \"force-page\": _unref(page)\n      }, null, _parent));\n      _push(`<div class=\"flex items-center gap-3\"><p>Строк на странице:</p><select class=\"w-fit p-2.5 rounded-md border bg-white dark:bg-bgWhite text-black\"><!--[-->`);\n      _ssrRenderList(_unref(limitItems), (item) => {\n        _push(`<option${_ssrRenderAttr(\"value\", item)}>${_ssrInterpolate(item)}</option>`);\n      });\n      _push(`<!--]--></select></div></div></div>`);\n    };\n  }\n});\n",
-      "start": 1748868483470,
-      "end": 1748868483475,
+      "start": 1748868836738,
+      "end": 1748868836740,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -269,8 +269,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref, watch } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode } from \"vue\";\nimport { ssrRenderClass as _ssrRenderClass, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttr as _ssrRenderAttr, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport { useDocumentStore } from \"~/stores/documents\";\nimport DocumentContentListElem from \"~/components/documents/DocumentContent/DocumentContentList/DocumentContentListElem.vue\";\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\nimport Paginate from \"vuejs-paginate-next\";\nimport { useRoute, useRouter } from \"vue-router\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"DocumentContentList\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const route = useRoute();\n    const router = useRouter();\n    const documentStore = useDocumentStore();\n    const pageCount = ref(0);\n    const limitItems = ref([5, 10, 20, 30, 50]);\n    const page = ref(Number(route.query.page) || 1);\n    const limit = ref(Number(route.query.limit) || 5);\n    const query = ref(route.query.query || \"\");\n    const type = ref(route.query.type || \"from-me\");\n    const clickCallback = (pageNum) => {\n      page.value = pageNum;\n      updateQueryParams();\n    };\n    const changePageLimit = () => {\n      page.value = 1;\n      updateQueryParams();\n    };\n    const changeType = (newType) => {\n      type.value = newType;\n      page.value = 1;\n      updateQueryParams();\n    };\n    const updateQueryParams = () => {\n      router.push({\n        query: {\n          page: page.value,\n          limit: limit.value,\n          query: query.value || void 0,\n          type: type.value || void 0\n        }\n      });\n      documentStore.loadAllDocument({\n        page: page.value,\n        limit: limit.value,\n        query: query.value,\n        type: type.value\n      });\n    };\n    watch(() => documentStore.documentList, (newValue) => {\n      if (newValue && newValue.count && limit.value) {\n        pageCount.value = Math.ceil(newValue.count / limit.value);\n      }\n    }, { immediate: true });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}><div class=\"p-6 rounded-3xl shadow-cards bg-white mb-8\"><div class=\"flex items-center gap-10 justify-between\"><div class=\"flex items-center gap-x-3 p-2 rounded-full border w-fit\"><button class=\"${_ssrRenderClass([\"py-3 px-10 rounded-full font-medium\", _unref(type) === \"from-me\" ? \"bg-golden\" : \"\"])}\">${_ssrInterpolate(_ctx.$t(\"Мои документы\"))}</button><button class=\"${_ssrRenderClass([\"py-3 px-10 rounded-full font-medium\", _unref(type) === \"through-me\" ? \"bg-golden\" : \"\"])}\">${_ssrInterpolate(_ctx.$t(\"Ожидающие подтверждения\"))}</button></div>`);\n      _push(_ssrRenderComponent(TheSearch, {\n        class: \"w-4/12\",\n        \"model-value\": _unref(query),\n        \"onUpdate:modelValue\": ($event) => query.value = $event,\n        onSearch: updateQueryParams\n      }, null, _parent));\n      _push(`</div><div class=\"flex gap-x-2 gap-y-2 flex-wrap mt-6\"><!--[-->`);\n      _ssrRenderList(_unref(documentStore).get_all_document.results, (item) => {\n        _push(_ssrRenderComponent(DocumentContentListElem, { item }, {\n          documentTitle: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(`${_ssrInterpolate(item.title)}`);\n            } else {\n              return [\n                _createTextVNode(_toDisplayString(item.title), 1)\n              ];\n            }\n          }),\n          documentFileName: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(`${_ssrInterpolate(item.file_name)}`);\n            } else {\n              return [\n                _createTextVNode(_toDisplayString(item.file_name), 1)\n              ];\n            }\n          }),\n          documentUserName: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(`${_ssrInterpolate(item.author.first_name + \" \" + item.author.last_name)}`);\n            } else {\n              return [\n                _createTextVNode(_toDisplayString(item.author.first_name + \" \" + item.author.last_name), 1)\n              ];\n            }\n          }),\n          _: 2\n        }, _parent));\n      });\n      _push(`<!--]-->`);\n      if (!_unref(documentStore).documentList.results?.length) {\n        _push(`<div class=\"flex items-center justify-center text-center\"><p class=\"text-gray-500 text-center w-full py-10\"> Документов пока нет </p></div>`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div></div><div class=\"w-full flex items-center justify-end gap-4 pr-10 pb-5 max-md:pr-3 max-md:flex-col max-md:items-end\">`);\n      _push(_ssrRenderComponent(_unref(Paginate), {\n        \"page-count\": _unref(pageCount),\n        \"page-range\": 3,\n        \"margin-pages\": 2,\n        \"click-handler\": clickCallback,\n        \"prev-text\": \"<\",\n        \"next-text\": \">\",\n        \"container-class\": \"pagination\",\n        \"page-class\": \"page-item\",\n        \"force-page\": _unref(page)\n      }, null, _parent));\n      _push(`<div class=\"flex items-center gap-3\"><p>Строк на странице:</p><select class=\"w-fit p-2.5 rounded-md border bg-white dark:bg-bgWhite text-black\"><!--[-->`);\n      _ssrRenderList(_unref(limitItems), (item) => {\n        _push(`<option${_ssrRenderAttr(\"value\", item)}>${_ssrInterpolate(item)}</option>`);\n      });\n      _push(`<!--]--></select></div></div></div>`);\n    };\n  }\n});\n",
-      "start": 1748868483470,
-      "end": 1748868483475,
+      "start": 1748868836738,
+      "end": 1748868836740,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -283,56 +283,56 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1748868483476,
-      "end": 1748868483476,
+      "start": 1748868836740,
+      "end": 1748868836740,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1748868483476,
-      "end": 1748868483476,
+      "start": 1748868836740,
+      "end": 1748868836740,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1748868483476,
-      "end": 1748868483476,
+      "start": 1748868836740,
+      "end": 1748868836740,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1748868483476,
-      "end": 1748868483476,
+      "start": 1748868836740,
+      "end": 1748868836740,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1748868483476,
-      "end": 1748868483476,
+      "start": 1748868836740,
+      "end": 1748868836740,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1748868483476,
-      "end": 1748868483476,
+      "start": 1748868836752,
+      "end": 1748868836752,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1748868483476,
-      "end": 1748868483484,
+      "start": 1748868836753,
+      "end": 1748868836753,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1748868483485,
-      "end": 1748868483485,
+      "start": 1748868836753,
+      "end": 1748868836757,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1748868483485,
-      "end": 1748868483485,
+      "start": 1748868836757,
+      "end": 1748868836757,
       "order": "normal"
     }
   ]

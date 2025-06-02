@@ -928,7 +928,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./chat-Cr72ZF4p.mjs').then((m) => m.default || m),
+        component: () => import('./chat-DZv5MS-B.mjs').then((m) => m.default || m),
         children: [
           {
             name: "base-chat-id",
@@ -1002,7 +1002,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./_slug_-BeeLZjuJ.mjs').then((m) => m.default || m)
+        component: () => import('./_slug_-DooCXwVY.mjs').then((m) => m.default || m)
       },
       {
         name: "base-documents",
@@ -1010,7 +1010,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-Bp-PDmch.mjs').then((m) => m.default || m)
+        component: () => import('./index-BKn7aXgS.mjs').then((m) => m.default || m)
       },
       {
         name: "base-documents-signification-slug",
@@ -1018,7 +1018,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./_slug_-CYMOchnA.mjs').then((m) => m.default || m)
+        component: () => import('./_slug_-CDsYEASE.mjs').then((m) => m.default || m)
       },
       {
         name: "base-graph",
@@ -1263,7 +1263,7 @@ const validate = /* @__PURE__ */ defineNuxtRouteMiddleware(async (to) => {
 });
 const inlineConfig = {
   "nuxt": {
-    "buildId": "a37acb94-7053-4a1a-96ee-ee7f7bb79dd7"
+    "buildId": "61cecf4b-1691-4192-a6a2-6e32d59ba72a"
   },
   "ui": {
     "primary": "green",

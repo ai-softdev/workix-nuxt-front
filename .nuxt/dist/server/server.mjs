@@ -864,7 +864,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$s == null ? void 0 : __nuxt_page_meta$s.redirect,
-        component: () => import("./_nuxt/chat-Cr72ZF4p.js").then((m) => m.default || m),
+        component: () => import("./_nuxt/chat-DZv5MS-B.js").then((m) => m.default || m),
         children: [
           {
             name: "base-chat-id",
@@ -938,7 +938,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$k == null ? void 0 : __nuxt_page_meta$k.redirect,
-        component: () => import("./_nuxt/_slug_-BeeLZjuJ.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/_slug_-DooCXwVY.js").then((m) => m.default || m)
       },
       {
         name: "base-documents",
@@ -946,7 +946,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$j == null ? void 0 : __nuxt_page_meta$j.redirect,
-        component: () => import("./_nuxt/index-Bp-PDmch.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/index-BKn7aXgS.js").then((m) => m.default || m)
       },
       {
         name: "base-documents-signification-slug",
@@ -954,7 +954,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$i == null ? void 0 : __nuxt_page_meta$i.redirect,
-        component: () => import("./_nuxt/_slug_-CYMOchnA.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/_slug_-CDsYEASE.js").then((m) => m.default || m)
       },
       {
         name: "base-graph",
@@ -1199,7 +1199,7 @@ const validate = /* @__PURE__ */ defineNuxtRouteMiddleware(async (to) => {
 });
 const inlineConfig = {
   "nuxt": {
-    "buildId": "a37acb94-7053-4a1a-96ee-ee7f7bb79dd7"
+    "buildId": "61cecf4b-1691-4192-a6a2-6e32d59ba72a"
   },
   "ui": {
     "primary": "green",
