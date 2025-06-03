@@ -914,7 +914,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$n == null ? void 0 : __nuxt_page_meta$n.redirect,
-        component: () => import("./_nuxt/index-ATl7-h9f.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/index-kbgUwkAk.js").then((m) => m.default || m)
       },
       {
         name: "base-companies-news-id",
@@ -1199,7 +1199,7 @@ const validate = /* @__PURE__ */ defineNuxtRouteMiddleware(async (to) => {
 });
 const inlineConfig = {
   "nuxt": {
-    "buildId": "61cecf4b-1691-4192-a6a2-6e32d59ba72a"
+    "buildId": "dev"
   },
   "ui": {
     "primary": "green",

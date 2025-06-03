@@ -59,10 +59,11 @@ useSeoMeta({
   <div>
     <div v-if="currentUser.user.role?.name_en !== 'admin'">
       <div class="">
-        <div class="flex items-center tracking-widest  gap-x-2 justify-center max-sm:flex-col mb-10">
-          <p class="text-lg">{{ $t('Страница информации о ') }}</p>
-          <p class="font-bold text-white bg-blueSemiLight p-2 px-4 rounded-full">{{ companies.company.name}}</p>
-        </div>
+        <p
+            class="dark:text-white text-3xl font-bold mb-6"
+        >
+          {{ $t('Страница информации о ') }} {{ companies.company.name}}
+        </p>
         <CurrentCompanyChangeInfo v-if="['company_admin', 'director', 'vice_director'].includes(currentUser.user.role?.name_en)"/>
       </div>
       <div class="">

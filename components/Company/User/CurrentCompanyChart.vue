@@ -23,10 +23,7 @@ const chartOptions = ref({
 </script>
 
 <template>
-  <div>
     <PolarArea class="text-white" style="{color: white;}" :data="chartData" :options="chartOptions"></PolarArea>
-
-  </div>
 </template>
 
 <style scoped lang="scss">

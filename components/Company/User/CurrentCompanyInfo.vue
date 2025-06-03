@@ -9,50 +9,52 @@ import CurrentCompanyNews from "~/components/Company/User/CurrentCompanyNews.vue
 import CurrentCompanyFiles from "~/components/Company/User/CurrentCompanyFiles.vue";
 import CurrentCompanyDepartment from "~/components/Company/User/CurrentCompanyDepartment.vue";
 import CurrentCompanyChart from "~/components/Company/User/CurrentCompanyChart.vue";
+import ruLocale from '@fullcalendar/core/locales/ru';
 
 const currentCompany = useCompanies()
 const calendarOptions = {
   plugins: [dayGridPlugin, interactionPlugin],
-  theme: 'darkly',
+  initialView: 'dayGridMonth',
+  locales: [ruLocale],
+  locale: 'ru',
   events: [
-    {title: "event 1", date: "2022-12-26"},
-    {title: "event 2", date: "2022-12-27"},
+    { title: 'Событие 1', date: '2022-12-26' },
+    { title: 'Событие 2', date: '2022-12-27' },
   ],
-}
+};
 </script>
 
 <template>
-  <div class="flex flex-col overflow-hidden gap-y-10 ">
-    <div class="flex w-11/12 max-[1400px]:flex-wrap gap-x-6 max-[1400px]:gap-y-10 mx-auto">
-      <CurrentCompanyElems
-          class="w-4/12 ml-auto max-[1400px]:mx-auto max-[1400px]:w-6/12 max-md:w-full max-[1400px]:order-3">
-        <template v-slot:blockTitle>
+  <div class="flex flex-col overflow-hidden gap-y-10">
+    <div class="grid grid-cols-3 gap-5 w-full">
+      <div class="p-6 bg-white rounded-3xl">
+        <div class="flex items-center gap-4 py-2 px-3 border rounded-full justify-center w-fit">
+          <img src="/icons/chart.svg" alt="chart">
           {{ $t('График') }}
-        </template>
-        <template v-slot:blockContent>
-          <div>
-            <CurrentCompanyChart/>
-          </div>
-        </template>
-      </CurrentCompanyElems>
-      <CurrentCompanyElems class="w-full mx-auto max-[1400px]:mx-auto max-[1400px]:w-full">
-        <template v-slot:blockTitle>
+        </div>
+        <div class="mt-8">
+          <CurrentCompanyChart/>
+        </div>
+      </div>
+      <div class="p-6 bg-white rounded-3xl">
+        <div class="flex items-center gap-4 py-2 px-3 border rounded-full justify-center w-fit">
+          <img src="/icons/chart.svg" alt="chart">
           {{ $t('О компании') }}
-        </template>
-        <template v-slot:blockContent>
-          <div>{{ currentCompany.company.description }}
-          </div>
-        </template>
-      </CurrentCompanyElems>
-      <CurrentCompanyElems class="w-5/12 mr-auto max-[1400px]:mx-auto max-[1400px]:w-5/12 max-md:w-full">
-        <template v-slot:blockTitle>
+        </div>
+        <div class="mt-8">
+          {{ currentCompany.company.description || $t('Нет описания')}}
+        </div>
+      </div>
+      <div class="p-6 bg-white rounded-3xl">
+        <div class="flex items-center gap-4 py-2 px-3 border rounded-full justify-center w-fit">
+          <img src="/icons/company-statistic.svg" alt="company-statistic">
           {{ $t('Статистика компании') }}
-        </template>
-        <template v-slot:blockContent>
-          <div class="flex items-center my-4 gap-x-5 justify-center">
+        </div>
+        <div class="mt-8">
+          <div class="w-full flex items-center justify-between my-4 py-4 px-5 rounded-full gap-x-5 bg-porcelain">
             <div class="flex items-center gap-x-2 w-8/12 max-md:w-9/12 ">
               <div>
-                <svg width="35px" height="35px" class="stroke-black dark:stroke-white" viewBox="0 0 24 24" fill="none"
+                <svg width="24" height="24" class="stroke-black dark:stroke-white" viewBox="0 0 24 24" fill="none"
                      xmlns="http://www.w3.org/2000/svg">
                   <path d="M20.3873 7.1575L11.9999 12L3.60913 7.14978" stroke-width="1" stroke-linecap="round"
                         stroke-linejoin="round"></path>
@@ -62,73 +64,68 @@ const calendarOptions = {
                       stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
                 </svg>
               </div>
-              <p class="tracking-widest">{{ $t('Объекты') }}: {{}}</p>
+              <p class="font-medium">{{ $t('Объекты') }}:</p>
             </div>
             <div>
-              <p class="rounded-full border border-gray-400 dark:border-white w-10 h-10 flex items-center justify-center dark:text-white">{{currentCompany.company.objects_count}}</p>
+              <p class="w-10 h-10 flex items-center justify-center dark:text-white">{{currentCompany.company.objects_count || 0}}</p>
             </div>
           </div>
-          <div class="flex items-center my-4 gap-x-5 justify-center">
+          <div class="w-full flex items-center justify-between my-4 py-4 px-5 rounded-full gap-x-5 bg-porcelain">
             <div class="flex items-center gap-x-2 w-8/12 max-md:w-9/12 ">
               <div>
-                <svg width="35px" height="35px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                >
-                  <g id="User / Users_Group">
-                    <path id="Vector" class="dark:stroke-white stroke-black"
-                          d="M17 20C17 18.3431 14.7614 17 12 17C9.23858 17 7 18.3431 7 20M21 17.0004C21 15.7702 19.7659 14.7129 18 14.25M3 17.0004C3 15.7702 4.2341 14.7129 6 14.25M18 10.2361C18.6137 9.68679 19 8.8885 19 8C19 6.34315 17.6569 5 16 5C15.2316 5 14.5308 5.28885 14 5.76389M6 10.2361C5.38625 9.68679 5 8.8885 5 8C5 6.34315 6.34315 5 8 5C8.76835 5 9.46924 5.28885 10 5.76389M12 14C10.3431 14 9 12.6569 9 11C9 9.34315 10.3431 8 12 8C13.6569 8 15 9.34315 15 11C15 12.6569 13.6569 14 12 14Z"
-                          stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
-                    ></path>
-                  </g>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16 18L19 15M19 15L22 18M19 15V21M15.5 3.29076C16.9659 3.88415 18 5.32131 18 7C18 8.67869 16.9659 10.1159 15.5 10.7092M12 15H8C6.13623 15 5.20435 15 4.46927 15.3045C3.48915 15.7105 2.71046 16.4892 2.30448 17.4693C2 18.2044 2 19.1362 2 21M13.5 7C13.5 9.20914 11.7091 11 9.5 11C7.29086 11 5.5 9.20914 5.5 7C5.5 4.79086 7.29086 3 9.5 3C11.7091 3 13.5 4.79086 13.5 7Z" stroke="black" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
-              <p class="tracking-widest">{{ $t('Сотрудники') }}:</p>
+              <p>{{ $t('Сотрудники') }}:</p>
             </div>
             <div>
-              <p class="rounded-full border border-gray-400 dark:border-white w-10 h-10 flex items-center justify-center dark:text-white">{{currentCompany.company.users_count}}</p>
+              <p class="w-10 h-10 flex items-center justify-center dark:text-white">{{currentCompany.company.users_count || 0}}</p>
             </div>
           </div>
-          <div class="flex items-center my-4 gap-x-5 justify-center">
+          <div class="w-full flex items-center justify-between my-4 py-4 px-5 rounded-full gap-x-5 bg-porcelain">
             <div class="flex items-center gap-x-2 w-8/12 max-md:w-9/12 ">
               <div>
-                <svg class="dark:stroke-white stroke-black" fill="none" width="35px" height="35px" viewBox="0 0 24 24"
-                     xmlns="http://www.w3.org/2000/svg">
-                  <path
-                      d="M5.04146 3C5.22009 2.6906 5.55022 2.5 5.90748 2.5L9.75278 2.5C10.11 2.5 10.4402 2.6906 10.6188 3L12.5415 6.33013C12.7201 6.63953 12.7201 7.02073 12.5415 7.33013L10.6188 10.6603C10.4402 10.9697 10.11 11.1603 9.75278 11.1603H5.90748C5.55022 11.1603 5.22009 10.9697 5.04146 10.6603L3.11881 7.33013C2.94017 7.02073 2.94017 6.63953 3.11881 6.33013L5.04146 3Z"/>
-                  <path
-                      d="M5.1216 13.2272C5.30023 12.9178 5.63036 12.7272 5.98762 12.7272H9.83292C10.1902 12.7272 10.5203 12.9178 10.6989 13.2272L12.6216 16.5574C12.8002 16.8668 12.8002 17.248 12.6216 17.5574L10.6989 20.8875C10.5203 21.1969 10.1902 21.3875 9.83292 21.3875H5.98762C5.63036 21.3875 5.30023 21.1969 5.1216 20.8875L3.19895 17.5574C3.02031 17.248 3.02031 16.8668 3.19895 16.5574L5.1216 13.2272Z"/>
-                  <path
-                      d="M14.1216 8.22723C14.3002 7.91783 14.6304 7.72723 14.9876 7.72723L18.8329 7.72723C19.1902 7.72723 19.5203 7.91783 19.6989 8.22723L21.6216 11.5574C21.8002 11.8668 21.8002 12.248 21.6216 12.5574L19.6989 15.8875C19.5203 16.1969 19.1902 16.3875 18.8329 16.3875H14.9876C14.6304 16.3875 14.3002 16.1969 14.1216 15.8875L12.1989 12.5574C12.0203 12.248 12.0203 11.8668 12.1989 11.5574L14.1216 8.22723Z"/>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M13 19V13.6C13 13.0399 13 12.7599 12.891 12.546C12.7951 12.3578 12.6422 12.2049 12.454 12.109C12.2401 12 11.9601 12 11.4 12H8.6C8.0399 12 7.75992 12 7.54601 12.109C7.35785 12.2049 7.20487 12.3578 7.10899 12.546C7 12.7599 7 13.0399 7 13.6V19M17 19V4.2C17 3.0799 17 2.51984 16.782 2.09202C16.5903 1.71569 16.2843 1.40973 15.908 1.21799C15.4802 1 14.9201 1 13.8 1H6.2C5.07989 1 4.51984 1 4.09202 1.21799C3.71569 1.40973 3.40973 1.71569 3.21799 2.09202C3 2.51984 3 3.0799 3 4.2V19M19 19H1M7.5 6H7.51M12.5 6H12.51M8 6C8 6.27614 7.77614 6.5 7.5 6.5C7.22386 6.5 7 6.27614 7 6C7 5.72386 7.22386 5.5 7.5 5.5C7.77614 5.5 8 5.72386 8 6ZM13 6C13 6.27614 12.7761 6.5 12.5 6.5C12.2239 6.5 12 6.27614 12 6C12 5.72386 12.2239 5.5 12.5 5.5C12.7761 5.5 13 5.72386 13 6Z" stroke="black" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
-              <p class="tracking-widest">{{ $t('Департаменты') }}: {{}}</p>
+              <p>{{ $t('Департаменты') }}:</p>
             </div>
             <div>
-              <p class="rounded-full border border-gray-400 dark:border-white w-10 h-10 flex items-center justify-center dark:text-white">{{currentCompany.company.departments_count}}</p>
+              <p class="w-10 h-10 flex items-center justify-center dark:text-white">{{currentCompany.company.departments_count || 0}}</p>
             </div>
           </div>
-        </template>
-      </CurrentCompanyElems>
+        </div>
+      </div>
     </div>
-    <div class="w-11/12 mx-auto">
-      <CurrentCompanyFiles/>
-    </div>
-    <div class="w-11/12 mx-auto">
+    <div class="w-full">
       <CurrentCompanyDepartment/>
     </div>
-    <div>
-      <CurrentCompanyNews/>
-    </div>
-    <div class="w-11/12 mx-auto">
-      <CurrentCompanyElems class="w-10/12 mx-auto ">
-        <template v-slot:blockTitle>
-          {{ $t('Календарь событий') }}
-        </template>
-        <template v-slot:blockContent>
-          <div>
-            <FullCalendar :options="calendarOptions"></FullCalendar>
-          </div>
-        </template>
-      </CurrentCompanyElems>
+<!--    <div>-->
+<!--      <CurrentCompanyNews/>-->
+<!--    </div>-->
+    <div class="w-full mx-auto">
+      <p
+          class="dark:text-white text-3xl font-bold mb-6"
+      >
+        {{ $t('Календарь событий') }}
+      </p>
+      <div class="bg-white rounded-3xl mt-6 p-6 shadow-cards">
+        <FullCalendar
+            :options="calendarOptions"
+        />
+      </div>
+<!--      <CurrentCompanyElems class="w-10/12 mx-auto ">-->
+<!--        <template v-slot:blockTitle>-->
+<!--          {{ $t('Календарь событий') }}-->
+<!--        </template>-->
+<!--        <template v-slot:blockContent>-->
+<!--          <div>-->
+<!--            -->
+<!--          </div>-->
+<!--        </template>-->
+<!--      </CurrentCompanyElems>-->
     </div>
   </div>
 </template>
