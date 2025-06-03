@@ -4,81 +4,81 @@
     {
       "name": "vite:load-fallback",
       "result": "<script setup lang=\"ts\">\r\nimport {useCompanies} from \"~/stores/companies\";\r\nimport CurrentCompanyElems from \"~/components/Company/CompanyUI/CurrentCompanyElems.vue\";\r\n\r\nimport FullCalendar from '@fullcalendar/vue3'\r\nimport dayGridPlugin from \"@fullcalendar/daygrid\";\r\nimport interactionPlugin from \"@fullcalendar/interaction\";\r\nimport CurrentCompanyNews from \"~/components/Company/User/CurrentCompanyNews.vue\";\r\nimport CurrentCompanyFiles from \"~/components/Company/User/CurrentCompanyFiles.vue\";\r\nimport CurrentCompanyDepartment from \"~/components/Company/User/CurrentCompanyDepartment.vue\";\r\nimport CurrentCompanyChart from \"~/components/Company/User/CurrentCompanyChart.vue\";\r\nimport ruLocale from '@fullcalendar/core/locales/ru';\r\n\r\nconst currentCompany = useCompanies()\r\nconst calendarOptions = {\r\n  plugins: [dayGridPlugin, interactionPlugin],\r\n  initialView: 'dayGridMonth',\r\n  locales: [ruLocale],\r\n  locale: 'ru',\r\n  events: [\r\n    { title: 'Событие 1', date: '2022-12-26' },\r\n    { title: 'Событие 2', date: '2022-12-27' },\r\n  ],\r\n};\r\n</script>\r\n\r\n<template>\r\n  <div class=\"flex flex-col overflow-hidden gap-y-10\">\r\n    <div class=\"grid grid-cols-3 gap-5 w-full\">\r\n      <div class=\"p-6 bg-white rounded-3xl\">\r\n        <div class=\"flex items-center gap-4 py-2 px-3 border rounded-full justify-center w-fit\">\r\n          <img src=\"/icons/chart.svg\" alt=\"chart\">\r\n          {{ $t('График') }}\r\n        </div>\r\n        <div class=\"mt-8\">\r\n          <CurrentCompanyChart/>\r\n        </div>\r\n      </div>\r\n      <div class=\"p-6 bg-white rounded-3xl\">\r\n        <div class=\"flex items-center gap-4 py-2 px-3 border rounded-full justify-center w-fit\">\r\n          <img src=\"/icons/chart.svg\" alt=\"chart\">\r\n          {{ $t('О компании') }}\r\n        </div>\r\n        <div class=\"mt-8\">\r\n          {{ currentCompany.company.description || $t('Нет описания')}}\r\n        </div>\r\n      </div>\r\n      <div class=\"p-6 bg-white rounded-3xl\">\r\n        <div class=\"flex items-center gap-4 py-2 px-3 border rounded-full justify-center w-fit\">\r\n          <img src=\"/icons/company-statistic.svg\" alt=\"company-statistic\">\r\n          {{ $t('Статистика компании') }}\r\n        </div>\r\n        <div class=\"mt-8\">\r\n          <div class=\"w-full flex items-center justify-between my-4 py-4 px-5 rounded-full gap-x-5 bg-porcelain\">\r\n            <div class=\"flex items-center gap-x-2 w-8/12 max-md:w-9/12 \">\r\n              <div>\r\n                <svg width=\"24\" height=\"24\" class=\"stroke-black dark:stroke-white\" viewBox=\"0 0 24 24\" fill=\"none\"\r\n                     xmlns=\"http://www.w3.org/2000/svg\">\r\n                  <path d=\"M20.3873 7.1575L11.9999 12L3.60913 7.14978\" stroke-width=\"1\" stroke-linecap=\"round\"\r\n                        stroke-linejoin=\"round\"></path>\r\n                  <path d=\"M12 12V21\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>\r\n                  <path\r\n                      d=\"M11 2.57735C11.6188 2.22008 12.3812 2.22008 13 2.57735L19.6603 6.42265C20.2791 6.77992 20.6603 7.44017 20.6603 8.1547V15.8453C20.6603 16.5598 20.2791 17.2201 19.6603 17.5774L13 21.4226C12.3812 21.7799 11.6188 21.7799 11 21.4226L4.33975 17.5774C3.72094 17.2201 3.33975 16.5598 3.33975 15.8453V8.1547C3.33975 7.44017 3.72094 6.77992 4.33975 6.42265L11 2.57735Z\"\r\n                      stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>\r\n                </svg>\r\n              </div>\r\n              <p class=\"font-medium\">{{ $t('Объекты') }}:</p>\r\n            </div>\r\n            <div>\r\n              <p class=\"w-10 h-10 flex items-center justify-center dark:text-white\">{{currentCompany.company.objects_count || 0}}</p>\r\n            </div>\r\n          </div>\r\n          <div class=\"w-full flex items-center justify-between my-4 py-4 px-5 rounded-full gap-x-5 bg-porcelain\">\r\n            <div class=\"flex items-center gap-x-2 w-8/12 max-md:w-9/12 \">\r\n              <div>\r\n                <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\r\n                  <path d=\"M16 18L19 15M19 15L22 18M19 15V21M15.5 3.29076C16.9659 3.88415 18 5.32131 18 7C18 8.67869 16.9659 10.1159 15.5 10.7092M12 15H8C6.13623 15 5.20435 15 4.46927 15.3045C3.48915 15.7105 2.71046 16.4892 2.30448 17.4693C2 18.2044 2 19.1362 2 21M13.5 7C13.5 9.20914 11.7091 11 9.5 11C7.29086 11 5.5 9.20914 5.5 7C5.5 4.79086 7.29086 3 9.5 3C11.7091 3 13.5 4.79086 13.5 7Z\" stroke=\"black\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\r\n                </svg>\r\n              </div>\r\n              <p>{{ $t('Сотрудники') }}:</p>\r\n            </div>\r\n            <div>\r\n              <p class=\"w-10 h-10 flex items-center justify-center dark:text-white\">{{currentCompany.company.users_count || 0}}</p>\r\n            </div>\r\n          </div>\r\n          <div class=\"w-full flex items-center justify-between my-4 py-4 px-5 rounded-full gap-x-5 bg-porcelain\">\r\n            <div class=\"flex items-center gap-x-2 w-8/12 max-md:w-9/12 \">\r\n              <div>\r\n                <svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\r\n                  <path d=\"M13 19V13.6C13 13.0399 13 12.7599 12.891 12.546C12.7951 12.3578 12.6422 12.2049 12.454 12.109C12.2401 12 11.9601 12 11.4 12H8.6C8.0399 12 7.75992 12 7.54601 12.109C7.35785 12.2049 7.20487 12.3578 7.10899 12.546C7 12.7599 7 13.0399 7 13.6V19M17 19V4.2C17 3.0799 17 2.51984 16.782 2.09202C16.5903 1.71569 16.2843 1.40973 15.908 1.21799C15.4802 1 14.9201 1 13.8 1H6.2C5.07989 1 4.51984 1 4.09202 1.21799C3.71569 1.40973 3.40973 1.71569 3.21799 2.09202C3 2.51984 3 3.0799 3 4.2V19M19 19H1M7.5 6H7.51M12.5 6H12.51M8 6C8 6.27614 7.77614 6.5 7.5 6.5C7.22386 6.5 7 6.27614 7 6C7 5.72386 7.22386 5.5 7.5 5.5C7.77614 5.5 8 5.72386 8 6ZM13 6C13 6.27614 12.7761 6.5 12.5 6.5C12.2239 6.5 12 6.27614 12 6C12 5.72386 12.2239 5.5 12.5 5.5C12.7761 5.5 13 5.72386 13 6Z\" stroke=\"black\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\r\n                </svg>\r\n              </div>\r\n              <p>{{ $t('Департаменты') }}:</p>\r\n            </div>\r\n            <div>\r\n              <p class=\"w-10 h-10 flex items-center justify-center dark:text-white\">{{currentCompany.company.departments_count || 0}}</p>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"w-full\">\r\n      <CurrentCompanyDepartment/>\r\n    </div>\r\n<!--    <div>-->\r\n<!--      <CurrentCompanyNews/>-->\r\n<!--    </div>-->\r\n    <div class=\"w-full mx-auto\">\r\n      <p\r\n          class=\"dark:text-white text-3xl font-bold mb-6\"\r\n      >\r\n        {{ $t('Календарь событий') }}\r\n      </p>\r\n      <div class=\"bg-white rounded-3xl mt-6 p-6 shadow-cards\">\r\n        <FullCalendar\r\n            :options=\"calendarOptions\"\r\n        />\r\n      </div>\r\n<!--      <CurrentCompanyElems class=\"w-10/12 mx-auto \">-->\r\n<!--        <template v-slot:blockTitle>-->\r\n<!--          {{ $t('Календарь событий') }}-->\r\n<!--        </template>-->\r\n<!--        <template v-slot:blockContent>-->\r\n<!--          <div>-->\r\n<!--            -->\r\n<!--          </div>-->\r\n<!--        </template>-->\r\n<!--      </CurrentCompanyElems>-->\r\n    </div>\r\n  </div>\r\n</template>\r\n\r\n<style scoped lang=\"scss\">\r\n\r\n</style>",
-      "start": 1748952491965,
-      "end": 1748952492394,
+      "start": 1748953373852,
+      "end": 1748953376986,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1748952492394,
-      "end": 1748952492394,
+      "start": 1748953376986,
+      "end": 1748953376986,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1748952492394,
-      "end": 1748952492394,
+      "start": 1748953376986,
+      "end": 1748953376986,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1748952492394,
-      "end": 1748952492394,
+      "start": 1748953376986,
+      "end": 1748953376986,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1748952492394,
-      "end": 1748952492394,
+      "start": 1748953376986,
+      "end": 1748953376986,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1748952492394,
-      "end": 1748952492394,
+      "start": 1748953376987,
+      "end": 1748953376987,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1748952492394,
-      "end": 1748952492394,
+      "start": 1748953376987,
+      "end": 1748953376987,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1748952492394,
-      "end": 1748952492394,
+      "start": 1748953376987,
+      "end": 1748953376987,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1748952492394,
-      "end": 1748952492394,
+      "start": 1748953376987,
+      "end": 1748953376987,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1748952492394,
-      "end": 1748952492394,
+      "start": 1748953376987,
+      "end": 1748953376987,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1748952492394,
-      "end": 1748952492394,
+      "start": 1748953376987,
+      "end": 1748953376987,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1748952492394,
-      "end": 1748952492394,
+      "start": 1748953376987,
+      "end": 1748953376987,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "import _sfc_main from \"D:/projects/nuxt/workix-nuxt-front/components/Company/User/CurrentCompanyInfo.vue?vue&type=script&setup=true&lang.ts\";\nexport * from \"D:/projects/nuxt/workix-nuxt-front/components/Company/User/CurrentCompanyInfo.vue?vue&type=script&setup=true&lang.ts\";\nimport { useSSRContext as __vite_useSSRContext } from \"vue\";\nconst _sfc_setup = _sfc_main.setup;\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext();\n  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(\"components/Company/User/CurrentCompanyInfo.vue\");\n  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;\n};\nexport default _sfc_main;\n",
-      "start": 1748952492394,
-      "end": 1748952493231,
+      "start": 1748953376987,
+      "end": 1748953379319,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -86,212 +86,212 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1748952493231,
-      "end": 1748952493231,
+      "start": 1748953379319,
+      "end": 1748953379319,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748952493232,
-      "end": 1748952493232,
+      "start": 1748953379319,
+      "end": 1748953379319,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748952493232,
-      "end": 1748952493232,
+      "start": 1748953379319,
+      "end": 1748953379319,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1748952493232,
-      "end": 1748952493232,
+      "start": 1748953379320,
+      "end": 1748953379320,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1748952493232,
-      "end": 1748952493232,
+      "start": 1748953379320,
+      "end": 1748953379320,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1748952493232,
-      "end": 1748952493232,
+      "start": 1748953379320,
+      "end": 1748953379320,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748952493232,
-      "end": 1748952493232,
+      "start": 1748953379320,
+      "end": 1748953379320,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1748952493233,
-      "end": 1748952493233,
+      "start": 1748953379320,
+      "end": 1748953379321,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1748952493233,
-      "end": 1748952493233,
+      "start": 1748953379321,
+      "end": 1748953379321,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1748952493233,
-      "end": 1748952493234,
+      "start": 1748953379321,
+      "end": 1748953379321,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1748952493234,
-      "end": 1748952493235,
+      "start": 1748953379321,
+      "end": 1748953379321,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1748952493236,
-      "end": 1748952493236,
+      "start": 1748953379324,
+      "end": 1748953379324,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1748952493236,
-      "end": 1748952493236,
+      "start": 1748953379324,
+      "end": 1748953379324,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1748952493236,
-      "end": 1748952493236,
+      "start": 1748953379324,
+      "end": 1748953379324,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1748952493237,
-      "end": 1748952493237,
+      "start": 1748953379325,
+      "end": 1748953379325,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1748952493237,
-      "end": 1748952493237,
+      "start": 1748953379325,
+      "end": 1748953379325,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1748952493237,
-      "end": 1748952493237,
+      "start": 1748953379325,
+      "end": 1748953379325,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1748952493237,
-      "end": 1748952493237,
+      "start": 1748953379325,
+      "end": 1748953379325,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1748952493237,
-      "end": 1748952493237,
+      "start": 1748953379325,
+      "end": 1748953379325,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1748952493237,
-      "end": 1748952493237,
+      "start": 1748953379325,
+      "end": 1748953379325,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1748952493237,
-      "end": 1748952493237,
+      "start": 1748953379325,
+      "end": 1748953379325,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1748952493237,
-      "end": 1748952493237,
+      "start": 1748953379325,
+      "end": 1748953379325,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1748952493238,
-      "end": 1748952493238,
+      "start": 1748953379325,
+      "end": 1748953379326,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1748952493238,
-      "end": 1748952493238,
+      "start": 1748953379325,
+      "end": 1748953379326,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1748952493241,
-      "end": 1748952493242,
+      "start": 1748953379326,
+      "end": 1748953379327,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1748952493241,
-      "end": 1748952493242,
+      "start": 1748953379326,
+      "end": 1748953379327,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1748952493243,
-      "end": 1748952493243,
+      "start": 1748953379328,
+      "end": 1748953379328,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1748952493243,
-      "end": 1748952493243,
+      "start": 1748953379328,
+      "end": 1748953379328,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1748952493244,
-      "end": 1748952493244,
+      "start": 1748953379331,
+      "end": 1748953379331,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1748952493244,
-      "end": 1748952493244,
+      "start": 1748953379331,
+      "end": 1748953379331,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1748952493246,
-      "end": 1748952493247,
+      "start": 1748953379335,
+      "end": 1748953379337,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1748952493247,
-      "end": 1748952493247,
+      "start": 1748953379345,
+      "end": 1748953379345,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1748952493247,
-      "end": 1748952493247,
+      "start": 1748953379346,
+      "end": 1748953379346,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1748952493247,
-      "end": 1748952493248,
+      "start": 1748953379346,
+      "end": 1748953379346,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1748952493248,
-      "end": 1748952493248,
+      "start": 1748953379347,
+      "end": 1748953379347,
       "order": "normal"
     }
   ]

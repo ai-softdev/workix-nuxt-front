@@ -914,7 +914,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$n == null ? void 0 : __nuxt_page_meta$n.redirect,
-        component: () => import("./_nuxt/index-kbgUwkAk.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/index-DCDcCPTN.js").then((m) => m.default || m)
       },
       {
         name: "base-companies-news-id",

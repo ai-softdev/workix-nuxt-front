@@ -4,44 +4,44 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, unref as _unref, withCtx as _withCtx, createVNode as _createVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\"\nimport _imports_0 from '/icons/info.svg'\nimport _imports_1 from '/icons/tick.svg'\nimport _imports_2 from '/icons/processed.svg'\n\n\nconst _hoisted_1 = { class: \"w-full h-fit bg-white px-5 py-6 rounded-3xl shadow-cards\" }\nconst _hoisted_2 = { class: \"w-full p-2 flex items-center gap-2 justify-center border rounded-full mb-8\" }\nconst _hoisted_3 = /*#__PURE__*/_createElementVNode(\"img\", {\n  src: _imports_0,\n  alt: \"info\"\n}, null, -1)\nconst _hoisted_4 = { class: \"flex flex-col gap-y-4\" }\nconst _hoisted_5 = /*#__PURE__*/_createElementVNode(\"img\", {\n  src: _imports_1,\n  alt: \"tick\"\n}, null, -1)\nconst _hoisted_6 = /*#__PURE__*/_createElementVNode(\"img\", {\n  src: _imports_2,\n  alt: \"processed\"\n}, null, -1)\n\nimport DocumentInfoElem from \"~/components/documents/DocumentInfo/DocumentInfoElem.vue\";\r\nimport {useDocumentStore} from \"~/stores/documents\";\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'DocumentInfo',\n  setup(__props) {\n\r\n\r\nconst documentStore = useDocumentStore()\r\n\r\n\nreturn (_ctx: any,_cache: any) => {\n  return (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n    _createElementVNode(\"div\", _hoisted_2, [\n      _hoisted_3,\n      _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t('Информация')), 1)\n    ]),\n    _createElementVNode(\"div\", _hoisted_4, [\n      _createVNode(DocumentInfoElem, null, {\n        infoText: _withCtx(() => [\n          _createTextVNode(_toDisplayString(_ctx.$t('Количество')), 1)\n        ]),\n        infoCount: _withCtx(() => [\n          _createTextVNode(_toDisplayString(_unref(documentStore).documentList.count || 0), 1)\n        ]),\n        _: 1\n      }),\n      _createVNode(DocumentInfoElem, null, {\n        infoIcon: _withCtx(() => [\n          _hoisted_5\n        ]),\n        infoText: _withCtx(() => [\n          _createTextVNode(_toDisplayString(_ctx.$t('Одобренные')), 1)\n        ]),\n        infoCount: _withCtx(() => [\n          _createTextVNode(_toDisplayString(_unref(documentStore).documentList.approved_count || 0), 1)\n        ]),\n        _: 1\n      }),\n      _createVNode(DocumentInfoElem, null, {\n        infoIcon: _withCtx(() => [\n          _hoisted_6\n        ]),\n        infoText: _withCtx(() => [\n          _createTextVNode(_toDisplayString(_ctx.$t('На рассмотрении')), 1)\n        ]),\n        infoCount: _withCtx(() => [\n          _createTextVNode(_toDisplayString(_unref(documentStore).documentList.waiting_count || 0), 1)\n        ]),\n        _: 1\n      })\n    ])\n  ]))\n}\n}\n\n})",
-      "start": 1748952463309,
-      "end": 1748952463309
+      "start": 1748953343553,
+      "end": 1748953343553
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1748952463309,
-      "end": 1748952463309,
+      "start": 1748953343553,
+      "end": 1748953343553,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1748952463309,
-      "end": 1748952463309,
+      "start": 1748953343553,
+      "end": 1748953343553,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1748952463309,
-      "end": 1748952463309,
+      "start": 1748953343553,
+      "end": 1748953343553,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1748952463309,
-      "end": 1748952463309,
+      "start": 1748953343553,
+      "end": 1748953343553,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1748952463309,
-      "end": 1748952463309,
+      "start": 1748953343553,
+      "end": 1748953343553,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, unref as _unref, withCtx as _withCtx, createVNode as _createVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\";\nimport _imports_0 from \"/icons/info.svg\";\nimport _imports_1 from \"/icons/tick.svg\";\nimport _imports_2 from \"/icons/processed.svg\";\nconst _hoisted_1 = { class: \"w-full h-fit bg-white px-5 py-6 rounded-3xl shadow-cards\" };\nconst _hoisted_2 = { class: \"w-full p-2 flex items-center gap-2 justify-center border rounded-full mb-8\" };\nconst _hoisted_3 = /* @__PURE__ */ _createElementVNode(\"img\", {\n  src: _imports_0,\n  alt: \"info\"\n}, null, -1);\nconst _hoisted_4 = { class: \"flex flex-col gap-y-4\" };\nconst _hoisted_5 = /* @__PURE__ */ _createElementVNode(\"img\", {\n  src: _imports_1,\n  alt: \"tick\"\n}, null, -1);\nconst _hoisted_6 = /* @__PURE__ */ _createElementVNode(\"img\", {\n  src: _imports_2,\n  alt: \"processed\"\n}, null, -1);\nimport DocumentInfoElem from \"~/components/documents/DocumentInfo/DocumentInfoElem.vue\";\nimport { useDocumentStore } from \"~/stores/documents\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"DocumentInfo\",\n  setup(__props) {\n    const documentStore = useDocumentStore();\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n        _createElementVNode(\"div\", _hoisted_2, [\n          _hoisted_3,\n          _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t(\"Информация\")), 1)\n        ]),\n        _createElementVNode(\"div\", _hoisted_4, [\n          _createVNode(DocumentInfoElem, null, {\n            infoText: _withCtx(() => [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Количество\")), 1)\n            ]),\n            infoCount: _withCtx(() => [\n              _createTextVNode(_toDisplayString(_unref(documentStore).documentList.count || 0), 1)\n            ]),\n            _: 1\n          }),\n          _createVNode(DocumentInfoElem, null, {\n            infoIcon: _withCtx(() => [\n              _hoisted_5\n            ]),\n            infoText: _withCtx(() => [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Одобренные\")), 1)\n            ]),\n            infoCount: _withCtx(() => [\n              _createTextVNode(_toDisplayString(_unref(documentStore).documentList.approved_count || 0), 1)\n            ]),\n            _: 1\n          }),\n          _createVNode(DocumentInfoElem, null, {\n            infoIcon: _withCtx(() => [\n              _hoisted_6\n            ]),\n            infoText: _withCtx(() => [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"На рассмотрении\")), 1)\n            ]),\n            infoCount: _withCtx(() => [\n              _createTextVNode(_toDisplayString(_unref(documentStore).documentList.waiting_count || 0), 1)\n            ]),\n            _: 1\n          })\n        ])\n      ]);\n    };\n  }\n});\n",
-      "start": 1748952463309,
-      "end": 1748952463940,
+      "start": 1748953343553,
+      "end": 1748953344062,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -57,188 +57,188 @@
     },
     {
       "name": "vite:json",
-      "start": 1748952463940,
-      "end": 1748952463940,
+      "start": 1748953344062,
+      "end": 1748953344062,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1748952463941,
-      "end": 1748952463941,
+      "start": 1748953344062,
+      "end": 1748953344062,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1748952463941,
-      "end": 1748952463941,
+      "start": 1748953344062,
+      "end": 1748953344062,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1748952463941,
-      "end": 1748952463941,
+      "start": 1748953344062,
+      "end": 1748953344063,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748952463942,
-      "end": 1748952463942,
+      "start": 1748953344063,
+      "end": 1748953344063,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1748952463942,
-      "end": 1748952463942,
+      "start": 1748953344063,
+      "end": 1748953344063,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1748952463942,
-      "end": 1748952463942,
+      "start": 1748953344063,
+      "end": 1748953344063,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1748952463943,
-      "end": 1748952463943,
+      "start": 1748953344063,
+      "end": 1748953344063,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748952463943,
-      "end": 1748952463943,
+      "start": 1748953344063,
+      "end": 1748953344063,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1748952463943,
-      "end": 1748952463943,
+      "start": 1748953344063,
+      "end": 1748953344063,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1748952463943,
-      "end": 1748952463943,
+      "start": 1748953344063,
+      "end": 1748953344063,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1748952463943,
-      "end": 1748952463943,
+      "start": 1748953344063,
+      "end": 1748953344063,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1748952463943,
-      "end": 1748952463943,
+      "start": 1748953344063,
+      "end": 1748953344063,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1748952463943,
-      "end": 1748952463943,
+      "start": 1748953344063,
+      "end": 1748953344063,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1748952463944,
-      "end": 1748952463944,
+      "start": 1748953344063,
+      "end": 1748953344063,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1748952463944,
-      "end": 1748952463944,
+      "start": 1748953344063,
+      "end": 1748953344063,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1748952463945,
-      "end": 1748952463945,
+      "start": 1748953344063,
+      "end": 1748953344063,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1748952463945,
-      "end": 1748952463945,
+      "start": 1748953344063,
+      "end": 1748953344063,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1748952463946,
-      "end": 1748952463946,
+      "start": 1748953344064,
+      "end": 1748953344064,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1748952463947,
-      "end": 1748952463948,
+      "start": 1748953344064,
+      "end": 1748953344064,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1748952463949,
-      "end": 1748952463949,
+      "start": 1748953344064,
+      "end": 1748953344064,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1748952463949,
-      "end": 1748952463950,
+      "start": 1748953344064,
+      "end": 1748953344064,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1748952463950,
-      "end": 1748952463958,
+      "start": 1748953344064,
+      "end": 1748953344071,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1748952463968,
-      "end": 1748952463968,
+      "start": 1748953344077,
+      "end": 1748953344077,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1748952463969,
-      "end": 1748952463969,
+      "start": 1748953344077,
+      "end": 1748953344077,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1748952463969,
-      "end": 1748952463969,
+      "start": 1748953344078,
+      "end": 1748953344078,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1748952463970,
-      "end": 1748952463970,
+      "start": 1748953344078,
+      "end": 1748953344078,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1748952463971,
-      "end": 1748952463971,
+      "start": 1748953344078,
+      "end": 1748953344078,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1748952463973,
-      "end": 1748952463973,
+      "start": 1748953344078,
+      "end": 1748953344078,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1748952463973,
-      "end": 1748952463974,
+      "start": 1748953344078,
+      "end": 1748953344079,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1748952463974,
-      "end": 1748952463974,
+      "start": 1748953344079,
+      "end": 1748953344079,
       "order": "normal"
     }
   ]

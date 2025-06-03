@@ -4,63 +4,63 @@
     {
       "name": "vite:load-fallback",
       "result": "<script setup lang=\"ts\">\r\nimport TheContentBlock from \"~/components/UI/TheContentBlock.vue\";\r\nimport {useRoute} from \"vue-router\";\r\nimport {viewSelect} from \"~/hooks/ElemUI\";\r\nimport {QrcodeStream} from \"vue-qrcode-reader\";\r\nimport {useStorageStore} from \"~/stores/storage\";\r\nimport TheModal from \"~/components/UI/TheModal.vue\";\r\nimport TheBreadcrumbs from \"~/components/UI/TheBreadcrumbs.vue\";\r\nimport type {IScannedBarcode} from \"~/types/storage\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport {useCompanies} from \"~/stores/companies\";\r\n\r\nconst route = useRoute()\r\nconst storageStore = useStorageStore()\r\nconst scanning = ref('')\r\nconst selected = ref(viewSelect[0])\r\nconst inWidth = ref()\r\nconst scannedBarcode = ref<IScannedBarcode | null>(null)\r\nconst onDecode = (value: any) => {\r\n  scannedBarcode.value = value\r\n  storageStore.searchGoods = value\r\n  storageStore.loadAllListSearch({search: JSON.stringify(storageStore.searchGoods[0].rawValue)})\r\n  console.log(storageStore.searchGoods);\r\n  \r\n  storageStore.streaming = false\r\n}\r\n\r\nconst router = useRouter()\r\nconst loadAuthStore = useAuthStore()\r\nconst company = useCompanies()\r\n\r\nwatch(() => loadAuthStore.user, (newValue) => {\r\n  if(loadAuthStore?.user?.role?.name_en === 'admin'){\r\n    if (window.history.length > 1) {\r\n      router.push('/base/profile');\r\n    } else {\r\n      router.push('/');\r\n    }\r\n  }\r\n})\r\nwatch(() => company.company, (newValue) => {\r\n  let permission = company.company.modules?.find(item => item.name_en === 'task.create')\r\n  if(!permission){\r\n    if (window.history.length > 1) {\r\n      router.push('/base/profile');\r\n    } else {\r\n      router.push('/');\r\n    }\r\n  }\r\n})\r\n\r\nonMounted(() => {\r\n  inWidth.value = window.innerWidth\r\n  storageStore.loadStorageCategoryList()\r\n});\r\n\r\nonUpdated(() => {\r\n  if(route.path === `/base/storage`) {\r\n    storageStore.loadAllList()\r\n  }\r\n})\r\n\r\n</script>\r\n\r\n<template>\r\n  <div class=\"flex max-[800px]:flex-wrap justify-between max-[800px]:h-full gap-y-10 gap-x-6\">\r\n    <div v-if=\"inWidth <= 800\">\r\n    </div>\r\n    <div class=\"w-4/12 max-lg:w-5/12 max-[800px]:w-full\">\r\n      <StorageNav/>\r\n    </div>\r\n    <div class=\"w-full flex flex-col gap-y-2\">\r\n      <TheContentBlock @scroll.prevent @wheel.prevent @touch.prevent>\r\n        <StorageHeader :ref=\"storageStore.scan\" @openStreamSearch=\"storageStore.streaming = true\"/>\r\n        <TheModal type=\"resize\" v-if=\"storageStore.streaming\"\r\n                  @showModal=\"storageStore.streaming = false; scannedBarcode = null\">\r\n          <p>{{ scannedBarcode ? JSON.stringify(scannedBarcode[0].rawValue) : 'not working' }}</p>\r\n          <QrcodeStream @detect=\"onDecode\"\r\n                        :formats=\"['qr_code', 'aztec', 'code_128', 'code_39', 'code_93', 'databar', 'codabar', 'linear_codes', 'micro_qr_code', 'databar_expanded', 'ean_13', 'ean_8','itf']\"/>\r\n        </TheModal>\r\n      </TheContentBlock>\r\n      <TheContentBlock class=\"w-full\">\r\n        <div class=\"flex justify-between items-center\">\r\n          <div class=\"flex items-center gap-x-4 mb-4\">\r\n            <TheBreadcrumbs\r\n              :breadcrumb-link=\"route.path === `/base/storage/${route.params.slug}` || route.path === `/base/storage/${route.params.slug}/${route.params.nestedSlug}` ?`/base/storage` : ''\">\r\n              {{ $t('Главная') }}\r\n            </TheBreadcrumbs>\r\n            <div\r\n              v-if=\"route.path === `/base/storage/${route.params.slug}` || route.path === `/base/storage/${route.params.slug}/${route.params.nestedSlug}`\">\r\n              <svg width=\"15px\" height=\"15px\" viewBox=\"0 0 24 24\" fill=\"none\">\r\n                <path class=\"dark:stroke-white stroke-black\"\r\n                      d=\"M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5\"\r\n                      stroke-width=\"2\" stroke-linecap=\"round\"></path>\r\n              </svg>\r\n            </div>\r\n            <TheBreadcrumbs v-if=\"route.path === `/base/storage/${route.params.slug}` || route.path === `/base/storage/${route.params.slug}/${route.params.nestedSlug}`\"\r\n              :breadcrumb-link=\"route.path === `/base/storage/${route.params.slug}/${route.params.nestedSlug}`?`/base/storage/${route.params.slug}`: ''\">\r\n              {{ storageStore.currentCategory.name ? storageStore.currentCategory.name : storageStore.storageItem.name }}\r\n            </TheBreadcrumbs>\r\n            <div v-if=\"route.path === `/base/storage/${route.params.slug}/${route.params.nestedSlug}`\">\r\n              <svg width=\"15px\" height=\"15px\" viewBox=\"0 0 24 24\" fill=\"none\">\r\n                <path class=\"dark:stroke-white stroke-black\"\r\n                      d=\"M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5\"\r\n                      stroke-width=\"2\" stroke-linecap=\"round\"></path>\r\n              </svg>\r\n            </div>\r\n            <TheBreadcrumbs v-if=\"route.path === `/base/storage/${route.params.slug}/${route.params.nestedSlug}`\">\r\n              {{ route.params.nestedSlug }}\r\n            </TheBreadcrumbs>\r\n          </div>\r\n          <div>\r\n            <USelectMenu v-model=\"selected\" :options=\"viewSelect\">\r\n              <template #label>\r\n                <UIcon :name=\"selected.icon\" class=\"w-4 h-4\">\r\n                </UIcon>\r\n                {{ selected.label }}\r\n              </template>\r\n            </USelectMenu>\r\n          </div>\r\n        </div>\r\n        <div v-if=\"!route.params.slug\" >\r\n          <StorageContent/>\r\n        </div>\r\n        <div v-else>\r\n          <NuxtPage/>\r\n        </div>\r\n      </TheContentBlock>\r\n    </div>\r\n  </div>\r\n</template>\r\n\r\n<style scoped lang=\"scss\">\r\n\r\n</style>",
-      "start": 1748952447736,
-      "end": 1748952456120,
+      "start": 1748953332274,
+      "end": 1748953339246,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1748952456120,
-      "end": 1748952456120,
+      "start": 1748953339246,
+      "end": 1748953339246,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1748952456120,
-      "end": 1748952456120,
+      "start": 1748953339246,
+      "end": 1748953339246,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1748952456120,
-      "end": 1748952456120,
+      "start": 1748953339247,
+      "end": 1748953339247,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1748952456120,
-      "end": 1748952456120,
+      "start": 1748953339247,
+      "end": 1748953339247,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1748952456120,
-      "end": 1748952456120,
+      "start": 1748953339247,
+      "end": 1748953339247,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1748952456120,
-      "end": 1748952456120,
+      "start": 1748953339247,
+      "end": 1748953339247,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1748952456120,
-      "end": 1748952456120,
+      "start": 1748953339247,
+      "end": 1748953339247,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1748952456120,
-      "end": 1748952456120,
+      "start": 1748953339247,
+      "end": 1748953339247,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "import _sfc_main from \"D:/projects/nuxt/workix-nuxt-front/pages/base/storage.vue?vue&type=script&setup=true&lang.ts\";\nexport * from \"D:/projects/nuxt/workix-nuxt-front/pages/base/storage.vue?vue&type=script&setup=true&lang.ts\";\nexport default _sfc_main;\n",
-      "start": 1748952456120,
-      "end": 1748952456305,
+      "start": 1748953339247,
+      "end": 1748953339398,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -68,135 +68,135 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1748952456306,
-      "end": 1748952456306,
+      "start": 1748953339399,
+      "end": 1748953339399,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748952456307,
-      "end": 1748952456307,
+      "start": 1748953339400,
+      "end": 1748953339401,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1748952456307,
-      "end": 1748952456307,
+      "start": 1748953339401,
+      "end": 1748953339402,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1748952456308,
-      "end": 1748952456308,
+      "start": 1748953339402,
+      "end": 1748953339402,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1748952456308,
-      "end": 1748952456309,
+      "start": 1748953339403,
+      "end": 1748953339405,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748952456310,
-      "end": 1748952456310,
+      "start": 1748953339405,
+      "end": 1748953339406,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1748952456310,
-      "end": 1748952456310,
+      "start": 1748953339406,
+      "end": 1748953339406,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1748952456310,
-      "end": 1748952456311,
+      "start": 1748953339407,
+      "end": 1748953339407,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1748952456311,
-      "end": 1748952456311,
+      "start": 1748953339408,
+      "end": 1748953339408,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1748952456312,
-      "end": 1748952456312,
+      "start": 1748953339408,
+      "end": 1748953339408,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1748952456313,
-      "end": 1748952456313,
+      "start": 1748953339409,
+      "end": 1748953339409,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1748952456313,
-      "end": 1748952456314,
+      "start": 1748953339409,
+      "end": 1748953339409,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1748952456314,
-      "end": 1748952456314,
+      "start": 1748953339409,
+      "end": 1748953339409,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1748952456315,
-      "end": 1748952456315,
+      "start": 1748953339409,
+      "end": 1748953339410,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1748952456316,
-      "end": 1748952456316,
+      "start": 1748953339410,
+      "end": 1748953339410,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1748952456316,
-      "end": 1748952456317,
+      "start": 1748953339410,
+      "end": 1748953339411,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1748952456318,
-      "end": 1748952456319,
+      "start": 1748953339412,
+      "end": 1748953339417,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1748952456319,
-      "end": 1748952456319,
+      "start": 1748953339417,
+      "end": 1748953339418,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1748952456320,
-      "end": 1748952456321,
+      "start": 1748953339418,
+      "end": 1748953339419,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1748952456322,
-      "end": 1748952456331,
+      "start": 1748953339420,
+      "end": 1748953339424,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1748952456332,
-      "end": 1748952456332,
+      "start": 1748953339424,
+      "end": 1748953339425,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
       "result": "export { default } from \"D:/projects/nuxt/workix-nuxt-front/pages/base/storage.vue?macro=true&vue&type=script&setup=true&lang.ts\"",
-      "start": 1748952456334,
-      "end": 1748952456336,
+      "start": 1748953339426,
+      "end": 1748953339429,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -209,38 +209,38 @@
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1748952456337,
-      "end": 1748952456337,
+      "start": 1748953339430,
+      "end": 1748953339430,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1748952456337,
-      "end": 1748952456338,
+      "start": 1748953339431,
+      "end": 1748953339431,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1748952456339,
-      "end": 1748952456339,
+      "start": 1748953339432,
+      "end": 1748953339433,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1748952456340,
-      "end": 1748952456340,
+      "start": 1748953339433,
+      "end": 1748953339433,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1748952456340,
-      "end": 1748952456341,
+      "start": 1748953339434,
+      "end": 1748953339435,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1748952456341,
-      "end": 1748952456341,
+      "start": 1748953339436,
+      "end": 1748953339436,
       "order": "normal"
     }
   ]

@@ -978,7 +978,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-kbgUwkAk.mjs').then((m) => m.default || m)
+        component: () => import('./index-DCDcCPTN.mjs').then((m) => m.default || m)
       },
       {
         name: "base-companies-news-id",

@@ -24,8 +24,8 @@ defineProps({
       <div
           v-for="department in departments.get_all_department.results"
           class="relative border p-5 rounded-3xl bg-white dark:border-gray-400"
-          @mouseenter="more = department.id" @mouseleave="more = null"
       >
+<!--        @mouseenter="more = department.id" @mouseleave="more = null"-->
         <div :class="{'blur-[1px]' : more === department.id}">
           <div class="font-bold pb-6 mb-6 border-b">
             <h2 class="text-md">{{ department.name }}</h2>
@@ -41,9 +41,11 @@ defineProps({
               <p class="break-words text-mediumGray">
                 {{ department.vice_department_director_name ? department.vice_department_director_name : 'Отсутсвует' }}</p>
             </div>
-            <button class="p-2.5 rounded-full bg-golden">
+            <NuxtLink
+                :to="`/base/companies/department/${department.id}`"
+                class="block p-2.5 rounded-full bg-golden text-center">
               {{ $t('Подробнее') }}
-            </button>
+            </NuxtLink>
           </div>
         </div>
 <!--        <Transition name="fade">-->

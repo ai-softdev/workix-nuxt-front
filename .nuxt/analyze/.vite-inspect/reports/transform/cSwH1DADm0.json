@@ -4,44 +4,44 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { unref as _unref, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, withCtx as _withCtx, createVNode as _createVNode, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\"\n\nconst _hoisted_1 = { class: \"flex items-center gap-x-4\" }\nconst _hoisted_2 = /*#__PURE__*/_createElementVNode(\"div\", null, [\n  /*#__PURE__*/_createElementVNode(\"svg\", {\n    width: \"15px\",\n    height: \"15px\",\n    viewBox: \"0 0 24 24\",\n    fill: \"none\",\n    xmlns: \"http://www.w3.org/2000/svg\"\n  }, [\n    /*#__PURE__*/_createElementVNode(\"path\", {\n      class: \"dark:stroke-white stroke-black\",\n      d: \"M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5\",\n      \"stroke-width\": \"2\",\n      \"stroke-linecap\": \"round\"\n    })\n  ])\n], -1)\nconst _hoisted_3 = /*#__PURE__*/_createElementVNode(\"div\", null, null, -1)\n\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\r\nimport TheBreadcrumbs from \"~/components/UI/TheBreadcrumbs.vue\";\r\nimport {useCompanies} from \"~/stores/companies\";\r\nimport {useRoute} from \"vue-router\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: '[id]',\n  setup(__props) {\n\r\n\r\nconst newsItem = useCompanies()\r\nconst route = useRoute()\r\nwatchEffect(()=> {\r\n  newsItem.loadNews({id: route.params.id})\r\n})\r\n\nreturn (_ctx: any,_cache: any) => {\n  return (_openBlock(), _createElementBlock(\"div\", null, [\n    _createVNode(TheTextContent, null, {\n      default: _withCtx(() => [\n        _createTextVNode(_toDisplayString(_unref(newsItem).news.title), 1)\n      ]),\n      _: 1\n    }),\n    _createElementVNode(\"div\", null, [\n      _createElementVNode(\"div\", _hoisted_1, [\n        _createVNode(TheBreadcrumbs, { \"breadcrumb-link\": '/base/companies' }, {\n          default: _withCtx(() => [\n            _createTextVNode(_toDisplayString(_ctx.$t('Компания')), 1)\n          ]),\n          _: 1\n        }),\n        _hoisted_2,\n        _createVNode(TheBreadcrumbs, null, {\n          default: _withCtx(() => [\n            _createTextVNode(_toDisplayString(_unref(newsItem).news.title), 1)\n          ]),\n          _: 1\n        })\n      ])\n    ]),\n    _hoisted_3\n  ]))\n}\n}\n\n})",
-      "start": 1748952456481,
-      "end": 1748952456481
+      "start": 1748953339714,
+      "end": 1748953339714
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1748952456481,
-      "end": 1748952456481,
+      "start": 1748953339714,
+      "end": 1748953339714,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1748952456482,
-      "end": 1748952456482,
+      "start": 1748953339714,
+      "end": 1748953339714,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1748952456482,
-      "end": 1748952456482,
+      "start": 1748953339714,
+      "end": 1748953339714,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1748952456482,
-      "end": 1748952456482,
+      "start": 1748953339714,
+      "end": 1748953339714,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1748952456482,
-      "end": 1748952456482,
+      "start": 1748953339714,
+      "end": 1748953339714,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, withCtx as _withCtx, createVNode as _createVNode, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\";\nconst _hoisted_1 = { class: \"flex items-center gap-x-4\" };\nconst _hoisted_2 = /* @__PURE__ */ _createElementVNode(\"div\", null, [\n  /* @__PURE__ */ _createElementVNode(\"svg\", {\n    width: \"15px\",\n    height: \"15px\",\n    viewBox: \"0 0 24 24\",\n    fill: \"none\",\n    xmlns: \"http://www.w3.org/2000/svg\"\n  }, [\n    /* @__PURE__ */ _createElementVNode(\"path\", {\n      class: \"dark:stroke-white stroke-black\",\n      d: \"M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5\",\n      \"stroke-width\": \"2\",\n      \"stroke-linecap\": \"round\"\n    })\n  ])\n], -1);\nconst _hoisted_3 = /* @__PURE__ */ _createElementVNode(\"div\", null, null, -1);\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport TheBreadcrumbs from \"~/components/UI/TheBreadcrumbs.vue\";\nimport { useCompanies } from \"~/stores/companies\";\nimport { useRoute } from \"vue-router\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"[id]\",\n  setup(__props) {\n    const newsItem = useCompanies();\n    const route = useRoute();\n    watchEffect(() => {\n      newsItem.loadNews({ id: route.params.id });\n    });\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", null, [\n        _createVNode(TheTextContent, null, {\n          default: _withCtx(() => [\n            _createTextVNode(_toDisplayString(_unref(newsItem).news.title), 1)\n          ]),\n          _: 1\n        }),\n        _createElementVNode(\"div\", null, [\n          _createElementVNode(\"div\", _hoisted_1, [\n            _createVNode(TheBreadcrumbs, { \"breadcrumb-link\": \"/base/companies\" }, {\n              default: _withCtx(() => [\n                _createTextVNode(_toDisplayString(_ctx.$t(\"Компания\")), 1)\n              ]),\n              _: 1\n            }),\n            _hoisted_2,\n            _createVNode(TheBreadcrumbs, null, {\n              default: _withCtx(() => [\n                _createTextVNode(_toDisplayString(_unref(newsItem).news.title), 1)\n              ]),\n              _: 1\n            })\n          ])\n        ]),\n        _hoisted_3\n      ]);\n    };\n  }\n});\n",
-      "start": 1748952456482,
-      "end": 1748952458129,
+      "start": 1748953339714,
+      "end": 1748953339973,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -57,141 +57,141 @@
     },
     {
       "name": "vite:json",
-      "start": 1748952458129,
-      "end": 1748952458129,
+      "start": 1748953339973,
+      "end": 1748953339973,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1748952458129,
-      "end": 1748952458129,
+      "start": 1748953339973,
+      "end": 1748953339973,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1748952458129,
-      "end": 1748952458130,
+      "start": 1748953339973,
+      "end": 1748953339973,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1748952458130,
-      "end": 1748952458130,
+      "start": 1748953339973,
+      "end": 1748953339973,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748952458130,
-      "end": 1748952458130,
+      "start": 1748953339973,
+      "end": 1748953339973,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1748952458130,
-      "end": 1748952458130,
+      "start": 1748953339973,
+      "end": 1748953339973,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1748952458130,
-      "end": 1748952458130,
+      "start": 1748953339973,
+      "end": 1748953339973,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1748952458130,
-      "end": 1748952458130,
+      "start": 1748953339973,
+      "end": 1748953339974,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748952458131,
-      "end": 1748952458131,
+      "start": 1748953339982,
+      "end": 1748953339982,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1748952458131,
-      "end": 1748952458131,
+      "start": 1748953339983,
+      "end": 1748953339983,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1748952458131,
-      "end": 1748952458131,
+      "start": 1748953339983,
+      "end": 1748953339983,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1748952458131,
-      "end": 1748952458131,
+      "start": 1748953339983,
+      "end": 1748953339983,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1748952458131,
-      "end": 1748952458131,
+      "start": 1748953339983,
+      "end": 1748953339983,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1748952458131,
-      "end": 1748952458131,
+      "start": 1748953339983,
+      "end": 1748953339983,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1748952458131,
-      "end": 1748952458131,
+      "start": 1748953339984,
+      "end": 1748953339984,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1748952458131,
-      "end": 1748952458131,
+      "start": 1748953339984,
+      "end": 1748953339984,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1748952458131,
-      "end": 1748952458131,
+      "start": 1748953339984,
+      "end": 1748953339984,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1748952458131,
-      "end": 1748952458131,
+      "start": 1748953339984,
+      "end": 1748953339984,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1748952458131,
-      "end": 1748952458131,
+      "start": 1748953339986,
+      "end": 1748953339986,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1748952458132,
-      "end": 1748952458132,
+      "start": 1748953339987,
+      "end": 1748953339987,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1748952458132,
-      "end": 1748952458132,
+      "start": 1748953339987,
+      "end": 1748953339987,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1748952458132,
-      "end": 1748952458132,
+      "start": 1748953339987,
+      "end": 1748953339987,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { watchEffect } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, withCtx as _withCtx, createVNode as _createVNode, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\";\nconst _hoisted_1 = { class: \"flex items-center gap-x-4\" };\nconst _hoisted_2 = /* @__PURE__ */ _createElementVNode(\"div\", null, [\n  /* @__PURE__ */ _createElementVNode(\"svg\", {\n    width: \"15px\",\n    height: \"15px\",\n    viewBox: \"0 0 24 24\",\n    fill: \"none\",\n    xmlns: \"http://www.w3.org/2000/svg\"\n  }, [\n    /* @__PURE__ */ _createElementVNode(\"path\", {\n      class: \"dark:stroke-white stroke-black\",\n      d: \"M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5\",\n      \"stroke-width\": \"2\",\n      \"stroke-linecap\": \"round\"\n    })\n  ])\n], -1);\nconst _hoisted_3 = /* @__PURE__ */ _createElementVNode(\"div\", null, null, -1);\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport TheBreadcrumbs from \"~/components/UI/TheBreadcrumbs.vue\";\nimport { useCompanies } from \"~/stores/companies\";\nimport { useRoute } from \"vue-router\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"[id]\",\n  setup(__props) {\n    const newsItem = useCompanies();\n    const route = useRoute();\n    watchEffect(() => {\n      newsItem.loadNews({ id: route.params.id });\n    });\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", null, [\n        _createVNode(TheTextContent, null, {\n          default: _withCtx(() => [\n            _createTextVNode(_toDisplayString(_unref(newsItem).news.title), 1)\n          ]),\n          _: 1\n        }),\n        _createElementVNode(\"div\", null, [\n          _createElementVNode(\"div\", _hoisted_1, [\n            _createVNode(TheBreadcrumbs, { \"breadcrumb-link\": \"/base/companies\" }, {\n              default: _withCtx(() => [\n                _createTextVNode(_toDisplayString(_ctx.$t(\"Компания\")), 1)\n              ]),\n              _: 1\n            }),\n            _hoisted_2,\n            _createVNode(TheBreadcrumbs, null, {\n              default: _withCtx(() => [\n                _createTextVNode(_toDisplayString(_unref(newsItem).news.title), 1)\n              ]),\n              _: 1\n            })\n          ])\n        ]),\n        _hoisted_3\n      ]);\n    };\n  }\n});\n",
-      "start": 1748952458132,
-      "end": 1748952458139,
+      "start": 1748953339988,
+      "end": 1748953339993,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -204,50 +204,50 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1748952458140,
-      "end": 1748952458140,
+      "start": 1748953339993,
+      "end": 1748953339994,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1748952458141,
-      "end": 1748952458141,
+      "start": 1748953339994,
+      "end": 1748953339994,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1748952458142,
-      "end": 1748952458142,
+      "start": 1748953339994,
+      "end": 1748953339994,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1748952458142,
-      "end": 1748952458142,
+      "start": 1748953339995,
+      "end": 1748953339995,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1748952458142,
-      "end": 1748952458142,
+      "start": 1748953339996,
+      "end": 1748953339996,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1748952458142,
-      "end": 1748952458143,
+      "start": 1748953339996,
+      "end": 1748953339996,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1748952458143,
-      "end": 1748952458143,
+      "start": 1748953339996,
+      "end": 1748953339997,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1748952458143,
-      "end": 1748952458143,
+      "start": 1748953339997,
+      "end": 1748953339997,
       "order": "normal"
     }
   ]
