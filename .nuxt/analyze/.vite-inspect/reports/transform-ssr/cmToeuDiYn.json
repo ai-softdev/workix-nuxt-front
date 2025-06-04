@@ -4,63 +4,63 @@
     {
       "name": "vite:load-fallback",
       "result": "import {defineStore} from \"pinia\";\r\nimport axios from \"~/composables/axios\";\r\nimport {toast} from \"vue3-toastify\";\r\nimport {Router} from \"vue-router\";\r\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\r\nexport const useTaskList = defineStore('task-list', {\r\n  state: () => ({\r\n    searchList: {},\r\n    task: {\r\n      id: '',\r\n      title: '',\r\n      description: '',\r\n      status: '',\r\n      author_name: '',\r\n      author_file: '',\r\n      created_at: '',\r\n      updates_at: '',\r\n      deadline: '',\r\n      author_file_file: '',\r\n      performers: [],\r\n      main_performer: {},\r\n      respondent: {},\r\n      worth: '',\r\n      performer_file: [],\r\n      task_type: ''\r\n    },\r\n    stats: {\r\n      id: '',\r\n      status: '',\r\n      count: {}\r\n    },\r\n  }),\r\n  getters: {\r\n    get_tasks: (state) => state.task,\r\n    get_task: (state) => state.task,\r\n    get_stats: (state) => state.stats,\r\n    get_search_task: (state) => state.searchList\r\n  },\r\n  actions: {\r\n    async loadTasksLists(params: { page: number, limit: number, query?: string | number}) {\r\n     await axios.get(`task/list?query=${params.query}&page=${params.page}&limit=${params.limit}`, {\r\n        headers: {\r\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\r\n        }\r\n      }).then(response => {\r\n        this.task = response.data\r\n        this.searchList = response.data\r\n      })\r\n    },\r\n    async loadCurrentTask(params: {id: any}){\r\n       await axios.get(`task/${params.id}`, {\r\n         headers: {\r\n           Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\r\n         }\r\n       }).then(res => {\r\n         this.task = res.data\r\n       })\r\n    },\r\n    async create_task(params: { task: any, performers: any }) {\r\n      let formD = new FormData();\r\n      formD.set('title', params.title)\r\n      formD.set('description', params.description)\r\n      formD.append('deadline', params.deadline.toISOString())\r\n      formD.set('main_performer_id', params.main_performer_id)\r\n\r\n      if (Array.isArray(params.performers)) {\r\n        params.performers.forEach(id => {\r\n          formD.append('performers', id);\r\n        });\r\n      }\r\n\r\n      formD.set('worth', params.worth)\r\n      if (typeof params.author_file_file !== 'string') {\r\n        for(let i of params.author_file_file){\r\n          formD.append('author_files', i)\r\n\r\n        }\r\n      }\r\n      console.log(params.performers)\r\n      console.log(typeof params.performers)\r\n      axios.post(`task/create`, formD, {\r\n        headers: {\r\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\r\n        }\r\n      }).then(response => {\r\n        this.task = response.data\r\n        this.loadTasksLists({task_type: 'task-list', query: '', limit: 5, page: 1})\r\n        toast.success('Вы успешно создали задание', {autoClose: 1500, theme: 'auto'})\r\n      }).catch(e => {\r\n        toast.error(e, {autoClose: 1500, theme: 'auto'})\r\n      })\r\n    },\r\n    async update_task(params: { task: any }) {\r\n      let fd = new FormData();\r\n      fd.set('title', params.task.title)\r\n      fd.set('description', params.task.description)\r\n      fd.set('status', params.task.status)\r\n      fd.set('performers', params.task.performers)\r\n      fd.set('respondent', params.task.respondent)\r\n      if (params.task.author_file) {\r\n        fd.set('author_file', params.task.author_file)\r\n      }\r\n      await axios.patch(`task/update/${params.task.id}`, fd, {\r\n        headers: {\r\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\r\n        }\r\n      }).then(response => {\r\n        this.task = response.data\r\n        this.loadCurrentTask({id: this.task.id})\r\n        toast.success('Данные успешно обновлены', {autoClose: 1500, theme: 'auto'})\r\n      }).catch(e => {\r\n        toast.error(e, {autoClose: 1500, theme: 'auto'})\r\n      })\r\n    },\r\n    async addUser_task(params: {id: any, performers: any}){\r\n      let fd = new FormData()\r\n      fd.set('performers', params.performers)\r\n      await axios.patch(`task/add-by-users/${params.id}`, fd, {\r\n        headers: {\r\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\r\n        }\r\n      }).then(res => {\r\n        this.task = res.data\r\n        this.loadTasksLists()\r\n        toast.success('Успешно добавлены', {autoClose: 1500, theme: 'auto'})\r\n      })\r\n    },\r\n    async deleteUser_task(params: {id: any, user_id: any}) {\r\n      await axios.patch(`task/remove-user/${params.id}`, {\r\n        user_id: params.user_id\r\n      }, {\r\n        headers: {\r\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\r\n        }\r\n      }).then(res => {\r\n        this.task = res.data\r\n        this.loadTasksLists()\r\n        toast.success('Успешно удалены', {autoClose: 1500, theme: 'auto'})\r\n      })\r\n    },\r\n    async delete_task(params: {id: any}, router: Router) {\r\n      await axios.delete(`task/delete/${params.id}`, {\r\n        headers: {\r\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\r\n        }\r\n      }).then(res => {\r\n        this.task = res.data\r\n        router.push('/base/tasks').then(res=>{\r\n          toast.success('Успешно удалён', {theme: 'auto', autoClose: 1500})\r\n        })\r\n      })\r\n    },\r\n    async loadTasksStats(params: { task_filter: string }) {\r\n     await axios.get(`task/stats?${params.task_filter}`, {\r\n        headers: {\r\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\r\n        }\r\n      }).then(response => {\r\n        this.stats = response.data\r\n      })\r\n    },\r\n    async taskWatching(params: { task_status: any, id: any, performer_files: any}) {\r\n      let fd = new FormData()\r\n      if (typeof params.performer_files !== 'string') {\r\n        for(let i of params.performer_files){\r\n          fd.append('performer_files', i)\r\n        }\r\n      }\r\n      await axios.post(`task/${params.task_status}/${params.id}`,fd, {\r\n        headers: {\r\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\r\n        }\r\n      }).then(response => {\r\n        this.task = response.data\r\n        this.loadCurrentTask({id: params.id})\r\n        toast.success('Статус успешно изменён', {autoClose: 1500, theme: \"auto\"})\r\n      }).catch(e => {\r\n        toast.error(e, {autoClose: 1500, theme: 'auto'})\r\n      })\r\n    },\r\n    async change_taskStatus(params: { task_status: any, id: any, comment: any}) {\r\n      let form = new FormData()\r\n      form.set('comment', params.comment)\r\n      await axios.post(`task/${params.task_status}/${params.id}`, form , {\r\n        headers: {\r\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\r\n        }\r\n      }).then(response => {\r\n        this.task = response.data\r\n        this.loadCurrentTask({id: params.id})\r\n        toast.success('Статус успешно изменён', {autoClose: 1500, theme: \"auto\"})\r\n      }).catch(e => {\r\n        toast.error(e, {autoClose: 1500, theme: 'auto'})\r\n      })\r\n    }\r\n  }\r\n})\r\n// task/make-performing/id      performer\r\n// task/make-completed/id       performed {performer_file: FILE}\r\n// task/make-rejected/id        author {comment: 'asdas'}\r\n",
-      "start": 1748953371320,
-      "end": 1748953372564,
+      "start": 1749037069202,
+      "end": 1749037069450,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1748953372565,
-      "end": 1748953372565,
+      "start": 1749037069450,
+      "end": 1749037069450,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1748953372565,
-      "end": 1748953372565,
+      "start": 1749037069450,
+      "end": 1749037069450,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1748953372565,
-      "end": 1748953372566,
+      "start": 1749037069450,
+      "end": 1749037069450,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1748953372565,
-      "end": 1748953372566,
+      "start": 1749037069450,
+      "end": 1749037069450,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1748953372566,
-      "end": 1748953372566,
+      "start": 1749037069450,
+      "end": 1749037069450,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1748953372566,
-      "end": 1748953372566,
+      "start": 1749037069450,
+      "end": 1749037069450,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1748953372566,
-      "end": 1748953372566,
+      "start": 1749037069450,
+      "end": 1749037069450,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1748953372566,
-      "end": 1748953372566,
+      "start": 1749037069450,
+      "end": 1749037069450,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineStore } from \"pinia\";\nimport axios from \"~/composables/axios\";\nimport { toast } from \"vue3-toastify\";\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\nexport const useTaskList = defineStore(\"task-list\", {\n  state: () => ({\n    searchList: {},\n    task: {\n      id: \"\",\n      title: \"\",\n      description: \"\",\n      status: \"\",\n      author_name: \"\",\n      author_file: \"\",\n      created_at: \"\",\n      updates_at: \"\",\n      deadline: \"\",\n      author_file_file: \"\",\n      performers: [],\n      main_performer: {},\n      respondent: {},\n      worth: \"\",\n      performer_file: [],\n      task_type: \"\"\n    },\n    stats: {\n      id: \"\",\n      status: \"\",\n      count: {}\n    }\n  }),\n  getters: {\n    get_tasks: (state) => state.task,\n    get_task: (state) => state.task,\n    get_stats: (state) => state.stats,\n    get_search_task: (state) => state.searchList\n  },\n  actions: {\n    async loadTasksLists(params) {\n      await axios.get(`task/list?query=${params.query}&page=${params.page}&limit=${params.limit}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((response) => {\n        this.task = response.data;\n        this.searchList = response.data;\n      });\n    },\n    async loadCurrentTask(params) {\n      await axios.get(`task/${params.id}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.task = res.data;\n      });\n    },\n    async create_task(params) {\n      let formD = new FormData();\n      formD.set(\"title\", params.title);\n      formD.set(\"description\", params.description);\n      formD.append(\"deadline\", params.deadline.toISOString());\n      formD.set(\"main_performer_id\", params.main_performer_id);\n      if (Array.isArray(params.performers)) {\n        params.performers.forEach((id) => {\n          formD.append(\"performers\", id);\n        });\n      }\n      formD.set(\"worth\", params.worth);\n      if (typeof params.author_file_file !== \"string\") {\n        for (let i of params.author_file_file) {\n          formD.append(\"author_files\", i);\n        }\n      }\n      console.log(params.performers);\n      console.log(typeof params.performers);\n      axios.post(`task/create`, formD, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((response) => {\n        this.task = response.data;\n        this.loadTasksLists({ task_type: \"task-list\", query: \"\", limit: 5, page: 1 });\n        toast.success(\"Вы успешно создали задание\", { autoClose: 1500, theme: \"auto\" });\n      }).catch((e) => {\n        toast.error(e, { autoClose: 1500, theme: \"auto\" });\n      });\n    },\n    async update_task(params) {\n      let fd = new FormData();\n      fd.set(\"title\", params.task.title);\n      fd.set(\"description\", params.task.description);\n      fd.set(\"status\", params.task.status);\n      fd.set(\"performers\", params.task.performers);\n      fd.set(\"respondent\", params.task.respondent);\n      if (params.task.author_file) {\n        fd.set(\"author_file\", params.task.author_file);\n      }\n      await axios.patch(`task/update/${params.task.id}`, fd, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((response) => {\n        this.task = response.data;\n        this.loadCurrentTask({ id: this.task.id });\n        toast.success(\"Данные успешно обновлены\", { autoClose: 1500, theme: \"auto\" });\n      }).catch((e) => {\n        toast.error(e, { autoClose: 1500, theme: \"auto\" });\n      });\n    },\n    async addUser_task(params) {\n      let fd = new FormData();\n      fd.set(\"performers\", params.performers);\n      await axios.patch(`task/add-by-users/${params.id}`, fd, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.task = res.data;\n        this.loadTasksLists();\n        toast.success(\"Успешно добавлены\", { autoClose: 1500, theme: \"auto\" });\n      });\n    },\n    async deleteUser_task(params) {\n      await axios.patch(`task/remove-user/${params.id}`, {\n        user_id: params.user_id\n      }, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.task = res.data;\n        this.loadTasksLists();\n        toast.success(\"Успешно удалены\", { autoClose: 1500, theme: \"auto\" });\n      });\n    },\n    async delete_task(params, router) {\n      await axios.delete(`task/delete/${params.id}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((res) => {\n        this.task = res.data;\n        router.push(\"/base/tasks\").then((res2) => {\n          toast.success(\"Успешно удалён\", { theme: \"auto\", autoClose: 1500 });\n        });\n      });\n    },\n    async loadTasksStats(params) {\n      await axios.get(`task/stats?${params.task_filter}`, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((response) => {\n        this.stats = response.data;\n      });\n    },\n    async taskWatching(params) {\n      let fd = new FormData();\n      if (typeof params.performer_files !== \"string\") {\n        for (let i of params.performer_files) {\n          fd.append(\"performer_files\", i);\n        }\n      }\n      await axios.post(`task/${params.task_status}/${params.id}`, fd, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((response) => {\n        this.task = response.data;\n        this.loadCurrentTask({ id: params.id });\n        toast.success(\"Статус успешно изменён\", { autoClose: 1500, theme: \"auto\" });\n      }).catch((e) => {\n        toast.error(e, { autoClose: 1500, theme: \"auto\" });\n      });\n    },\n    async change_taskStatus(params) {\n      let form = new FormData();\n      form.set(\"comment\", params.comment);\n      await axios.post(`task/${params.task_status}/${params.id}`, form, {\n        headers: {\n          Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n        }\n      }).then((response) => {\n        this.task = response.data;\n        this.loadCurrentTask({ id: params.id });\n        toast.success(\"Статус успешно изменён\", { autoClose: 1500, theme: \"auto\" });\n      }).catch((e) => {\n        toast.error(e, { autoClose: 1500, theme: \"auto\" });\n      });\n    }\n  }\n});\n",
-      "start": 1748953372566,
-      "end": 1748953377681,
+      "start": 1749037069450,
+      "end": 1749037069990,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -78,230 +78,230 @@
     },
     {
       "name": "vite:json",
-      "start": 1748953377682,
-      "end": 1748953377682,
+      "start": 1749037069991,
+      "end": 1749037069991,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1748953377682,
-      "end": 1748953377682,
+      "start": 1749037069991,
+      "end": 1749037069991,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1748953377682,
-      "end": 1748953377682,
+      "start": 1749037069991,
+      "end": 1749037069991,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1748953377682,
-      "end": 1748953377682,
+      "start": 1749037069991,
+      "end": 1749037069991,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748953377683,
-      "end": 1748953377683,
+      "start": 1749037069991,
+      "end": 1749037069992,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748953377683,
-      "end": 1748953377683,
+      "start": 1749037069991,
+      "end": 1749037069992,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1748953377683,
-      "end": 1748953377687,
+      "start": 1749037069992,
+      "end": 1749037069992,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1748953377683,
-      "end": 1748953377687,
+      "start": 1749037069992,
+      "end": 1749037069992,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1748953377688,
-      "end": 1748953377688,
+      "start": 1749037069992,
+      "end": 1749037069992,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748953377688,
-      "end": 1748953377688,
+      "start": 1749037069993,
+      "end": 1749037069993,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1748953377688,
-      "end": 1748953377700,
+      "start": 1749037069995,
+      "end": 1749037069996,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1748953377700,
-      "end": 1748953377702,
+      "start": 1749037069997,
+      "end": 1749037069997,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1748953377704,
-      "end": 1748953377704,
+      "start": 1749037069997,
+      "end": 1749037069997,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1748953377706,
-      "end": 1748953377706,
+      "start": 1749037069998,
+      "end": 1749037069998,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1748953377706,
-      "end": 1748953377706,
+      "start": 1749037069998,
+      "end": 1749037069998,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1748953377706,
-      "end": 1748953377706,
+      "start": 1749037069998,
+      "end": 1749037069998,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1748953377706,
-      "end": 1748953377706,
+      "start": 1749037069998,
+      "end": 1749037069998,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1748953377706,
-      "end": 1748953377706,
+      "start": 1749037069998,
+      "end": 1749037069998,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1748953377706,
-      "end": 1748953377707,
+      "start": 1749037069998,
+      "end": 1749037069998,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1748953377707,
-      "end": 1748953377707,
+      "start": 1749037069999,
+      "end": 1749037069999,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1748953377707,
-      "end": 1748953377707,
+      "start": 1749037069999,
+      "end": 1749037069999,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1748953377707,
-      "end": 1748953377708,
+      "start": 1749037069999,
+      "end": 1749037069999,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1748953377707,
-      "end": 1748953377708,
+      "start": 1749037069999,
+      "end": 1749037069999,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1748953377714,
-      "end": 1748953377714,
+      "start": 1749037070000,
+      "end": 1749037070000,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1748953377714,
-      "end": 1748953377714,
+      "start": 1749037070000,
+      "end": 1749037070000,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1748953377720,
-      "end": 1748953377720,
+      "start": 1749037070000,
+      "end": 1749037070000,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1748953377720,
-      "end": 1748953377720,
+      "start": 1749037070000,
+      "end": 1749037070000,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1748953377721,
-      "end": 1748953377749,
+      "start": 1749037070001,
+      "end": 1749037070009,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1748953377721,
-      "end": 1748953377750,
+      "start": 1749037070001,
+      "end": 1749037070009,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1748953377753,
-      "end": 1748953377753,
+      "start": 1749037070010,
+      "end": 1749037070010,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1748953377753,
-      "end": 1748953377753,
+      "start": 1749037070010,
+      "end": 1749037070010,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1748953377754,
-      "end": 1748953377754,
+      "start": 1749037070018,
+      "end": 1749037070018,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1748953377754,
-      "end": 1748953377754,
+      "start": 1749037070018,
+      "end": 1749037070018,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1748953377754,
-      "end": 1748953377754,
+      "start": 1749037070018,
+      "end": 1749037070019,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1748953377754,
-      "end": 1748953377754,
+      "start": 1749037070019,
+      "end": 1749037070019,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1748953377762,
-      "end": 1748953377762,
+      "start": 1749037070020,
+      "end": 1749037070020,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1748953377762,
-      "end": 1748953377763,
+      "start": 1749037070020,
+      "end": 1749037070021,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1748953377763,
-      "end": 1748953377763,
+      "start": 1749037070021,
+      "end": 1749037070021,
       "order": "normal"
     }
   ]

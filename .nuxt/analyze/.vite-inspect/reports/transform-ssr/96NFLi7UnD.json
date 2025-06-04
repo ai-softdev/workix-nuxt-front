@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { unref as _unref, resolveComponent as _resolveComponent, withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderClass as _ssrRenderClass, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\"\n\nimport CurrentCompanyElems from \"~/components/Company/CompanyUI/CurrentCompanyElems.vue\";\r\nimport {useCompanies} from \"~/stores/companies\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'CurrentCompanyDepartment',\n  __ssrInlineRender: true,\n  props: {\r\n  more: {\r\n    type: Number,\r\n    default: null\r\n  }\r\n},\n  setup(__props) {\n\r\nconst departments = useCompanies()\r\ndepartments.loadDepartmentList()\r\n\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  const _component_NuxtLink = _resolveComponent(\"NuxtLink\")!\n\n  _push(`<div${\n    _ssrRenderAttrs(_attrs)\n  }><p class=\"dark:text-white text-3xl font-bold mb-6\">${\n    _ssrInterpolate(_ctx.$t('Отделы компании'))\n  }</p><div class=\"grid grid-cols-4 max-[1750px]:grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 mt-10 items-center gap-x-4 gap-y-4\"><!--[-->`)\n  _ssrRenderList(_unref(departments).get_all_department.results, (department) => {\n    _push(`<div class=\"relative border p-5 rounded-3xl bg-white dark:border-gray-400\"><div class=\"${\n      _ssrRenderClass({'blur-[1px]' : __props.more === department.id})\n    }\"><div class=\"font-bold pb-6 mb-6 border-b\"><h2 class=\"text-md\">${\n      _ssrInterpolate(department.name)\n    }</h2></div><div class=\"flex flex-col gap-6\"><div class=\"flex items-center justify-between gap-3\"><p>${\n      _ssrInterpolate(_ctx.$t('Руководитель'))\n    }</p><p class=\"break-words text-mediumGray\">${\n      _ssrInterpolate(department.department_director_name ? department.department_director_name : 'Отсутсвует')\n    }</p></div><div class=\"flex items-center justify-between gap-3\"><p>${\n      _ssrInterpolate(_ctx.$t('Заместитель'))\n    }</p><p class=\"break-words text-mediumGray\">${\n      _ssrInterpolate(department.vice_department_director_name ? department.vice_department_director_name : 'Отсутсвует')\n    }</p></div>`)\n    _push(_ssrRenderComponent(_component_NuxtLink, {\n      to: `/base/companies/department/${department.id}`,\n      class: \"block p-2.5 rounded-full bg-golden text-center\"\n    }, {\n      default: _withCtx((_, _push, _parent, _scopeId) => {\n        if (_push) {\n          _push(`${_ssrInterpolate(_ctx.$t('Подробнее'))}`)\n        } else {\n          return [\n            _createTextVNode(_toDisplayString(_ctx.$t('Подробнее')), 1)\n          ]\n        }\n      }),\n      _: 2\n    }, _parent))\n    _push(`</div></div></div>`)\n  })\n  _push(`<!--]--></div></div>`)\n}\n}\n\n})",
-      "start": 1748953381320,
-      "end": 1748953381320,
+      "start": 1749037072201,
+      "end": 1749037072201,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1748953381320,
-      "end": 1748953381320,
+      "start": 1749037072203,
+      "end": 1749037072203,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1748953381320,
-      "end": 1748953381320,
+      "start": 1749037072203,
+      "end": 1749037072203,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1748953381320,
-      "end": 1748953381320,
+      "start": 1749037072203,
+      "end": 1749037072203,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1748953381320,
-      "end": 1748953381320,
+      "start": 1749037072203,
+      "end": 1749037072203,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1748953381320,
-      "end": 1748953381320,
+      "start": 1749037072203,
+      "end": 1749037072203,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1748953381320,
-      "end": 1748953381320,
+      "start": 1749037072203,
+      "end": 1749037072203,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1748953381320,
-      "end": 1748953381320,
+      "start": 1749037072205,
+      "end": 1749037072205,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1748953381320,
-      "end": 1748953381320,
+      "start": 1749037072205,
+      "end": 1749037072205,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, resolveComponent as _resolveComponent, withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderClass as _ssrRenderClass, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"CurrentCompanyDepartment\",\n  __ssrInlineRender: true,\n  props: {\n    more: {\n      type: Number,\n      default: null\n    }\n  },\n  setup(__props) {\n    const departments = useCompanies();\n    departments.loadDepartmentList();\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_NuxtLink = _resolveComponent(\"NuxtLink\");\n      _push(`<div${_ssrRenderAttrs(_attrs)}><p class=\"dark:text-white text-3xl font-bold mb-6\">${_ssrInterpolate(_ctx.$t(\"Отделы компании\"))}</p><div class=\"grid grid-cols-4 max-[1750px]:grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 mt-10 items-center gap-x-4 gap-y-4\"><!--[-->`);\n      _ssrRenderList(_unref(departments).get_all_department.results, (department) => {\n        _push(`<div class=\"relative border p-5 rounded-3xl bg-white dark:border-gray-400\"><div class=\"${_ssrRenderClass({ \"blur-[1px]\": __props.more === department.id })}\"><div class=\"font-bold pb-6 mb-6 border-b\"><h2 class=\"text-md\">${_ssrInterpolate(department.name)}</h2></div><div class=\"flex flex-col gap-6\"><div class=\"flex items-center justify-between gap-3\"><p>${_ssrInterpolate(_ctx.$t(\"Руководитель\"))}</p><p class=\"break-words text-mediumGray\">${_ssrInterpolate(department.department_director_name ? department.department_director_name : \"Отсутсвует\")}</p></div><div class=\"flex items-center justify-between gap-3\"><p>${_ssrInterpolate(_ctx.$t(\"Заместитель\"))}</p><p class=\"break-words text-mediumGray\">${_ssrInterpolate(department.vice_department_director_name ? department.vice_department_director_name : \"Отсутсвует\")}</p></div>`);\n        _push(_ssrRenderComponent(_component_NuxtLink, {\n          to: `/base/companies/department/${department.id}`,\n          class: \"block p-2.5 rounded-full bg-golden text-center\"\n        }, {\n          default: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(`${_ssrInterpolate(_ctx.$t(\"Подробнее\"))}`);\n            } else {\n              return [\n                _createTextVNode(_toDisplayString(_ctx.$t(\"Подробнее\")), 1)\n              ];\n            }\n          }),\n          _: 2\n        }, _parent));\n        _push(`</div></div></div>`);\n      });\n      _push(`<!--]--></div></div>`);\n    };\n  }\n});\n",
-      "start": 1748953381320,
-      "end": 1748953381775,
+      "start": 1749037072205,
+      "end": 1749037072634,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -89,213 +89,213 @@
     },
     {
       "name": "vite:json",
-      "start": 1748953381775,
-      "end": 1748953381775,
+      "start": 1749037072634,
+      "end": 1749037072634,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1748953381775,
-      "end": 1748953381775,
+      "start": 1749037072634,
+      "end": 1749037072634,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1748953381776,
-      "end": 1748953381776,
+      "start": 1749037072634,
+      "end": 1749037072634,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1748953381776,
-      "end": 1748953381776,
+      "start": 1749037072634,
+      "end": 1749037072634,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748953381776,
-      "end": 1748953381776,
+      "start": 1749037072634,
+      "end": 1749037072635,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748953381776,
-      "end": 1748953381776,
+      "start": 1749037072634,
+      "end": 1749037072635,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1748953381776,
-      "end": 1748953381776,
+      "start": 1749037072635,
+      "end": 1749037072635,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1748953381776,
-      "end": 1748953381776,
+      "start": 1749037072635,
+      "end": 1749037072635,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1748953381777,
-      "end": 1748953381777,
+      "start": 1749037072635,
+      "end": 1749037072635,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748953381777,
-      "end": 1748953381777,
+      "start": 1749037072635,
+      "end": 1749037072636,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1748953381780,
-      "end": 1748953381780,
+      "start": 1749037072637,
+      "end": 1749037072640,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1748953381780,
-      "end": 1748953381781,
+      "start": 1749037072640,
+      "end": 1749037072640,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1748953381781,
-      "end": 1748953381781,
+      "start": 1749037072641,
+      "end": 1749037072641,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1748953381781,
-      "end": 1748953381781,
+      "start": 1749037072641,
+      "end": 1749037072641,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1748953381783,
-      "end": 1748953381783,
+      "start": 1749037072641,
+      "end": 1749037072641,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1748953381784,
-      "end": 1748953381784,
+      "start": 1749037072641,
+      "end": 1749037072641,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1748953381784,
-      "end": 1748953381784,
+      "start": 1749037072641,
+      "end": 1749037072641,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1748953381784,
-      "end": 1748953381784,
+      "start": 1749037072641,
+      "end": 1749037072641,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1748953381784,
-      "end": 1748953381784,
+      "start": 1749037072641,
+      "end": 1749037072641,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1748953381785,
-      "end": 1748953381785,
+      "start": 1749037072641,
+      "end": 1749037072642,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1748953381785,
-      "end": 1748953381785,
+      "start": 1749037072641,
+      "end": 1749037072642,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1748953381786,
-      "end": 1748953381786,
+      "start": 1749037072642,
+      "end": 1749037072642,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1748953381786,
-      "end": 1748953381786,
+      "start": 1749037072642,
+      "end": 1749037072642,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1748953381786,
-      "end": 1748953381786,
+      "start": 1749037072643,
+      "end": 1749037072643,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1748953381786,
-      "end": 1748953381786,
+      "start": 1749037072643,
+      "end": 1749037072643,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1748953381786,
-      "end": 1748953381786,
+      "start": 1749037072643,
+      "end": 1749037072643,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1748953381786,
-      "end": 1748953381786,
+      "start": 1749037072643,
+      "end": 1749037072643,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1748953381788,
-      "end": 1748953381794,
+      "start": 1749037072644,
+      "end": 1749037072656,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1748953381788,
-      "end": 1748953381794,
+      "start": 1749037072644,
+      "end": 1749037072656,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1748953381794,
-      "end": 1748953381794,
+      "start": 1749037072663,
+      "end": 1749037072663,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1748953381794,
-      "end": 1748953381794,
+      "start": 1749037072663,
+      "end": 1749037072663,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1748953381795,
-      "end": 1748953381795,
+      "start": 1749037072663,
+      "end": 1749037072663,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1748953381795,
-      "end": 1748953381795,
+      "start": 1749037072663,
+      "end": 1749037072663,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1748953381795,
-      "end": 1748953381795,
+      "start": 1749037072663,
+      "end": 1749037072663,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
       "result": "import { default as __nuxt_component_0 } from \"D:/projects/nuxt/workix-nuxt-front/node_modules/nuxt/dist/app/components/nuxt-link\";\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, resolveComponent as _resolveComponent, withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderClass as _ssrRenderClass, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"CurrentCompanyDepartment\",\n  __ssrInlineRender: true,\n  props: {\n    more: {\n      type: Number,\n      default: null\n    }\n  },\n  setup(__props) {\n    const departments = useCompanies();\n    departments.loadDepartmentList();\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_NuxtLink = __nuxt_component_0;\n      _push(`<div${_ssrRenderAttrs(_attrs)}><p class=\"dark:text-white text-3xl font-bold mb-6\">${_ssrInterpolate(_ctx.$t(\"Отделы компании\"))}</p><div class=\"grid grid-cols-4 max-[1750px]:grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 mt-10 items-center gap-x-4 gap-y-4\"><!--[-->`);\n      _ssrRenderList(_unref(departments).get_all_department.results, (department) => {\n        _push(`<div class=\"relative border p-5 rounded-3xl bg-white dark:border-gray-400\"><div class=\"${_ssrRenderClass({ \"blur-[1px]\": __props.more === department.id })}\"><div class=\"font-bold pb-6 mb-6 border-b\"><h2 class=\"text-md\">${_ssrInterpolate(department.name)}</h2></div><div class=\"flex flex-col gap-6\"><div class=\"flex items-center justify-between gap-3\"><p>${_ssrInterpolate(_ctx.$t(\"Руководитель\"))}</p><p class=\"break-words text-mediumGray\">${_ssrInterpolate(department.department_director_name ? department.department_director_name : \"Отсутсвует\")}</p></div><div class=\"flex items-center justify-between gap-3\"><p>${_ssrInterpolate(_ctx.$t(\"Заместитель\"))}</p><p class=\"break-words text-mediumGray\">${_ssrInterpolate(department.vice_department_director_name ? department.vice_department_director_name : \"Отсутсвует\")}</p></div>`);\n        _push(_ssrRenderComponent(_component_NuxtLink, {\n          to: `/base/companies/department/${department.id}`,\n          class: \"block p-2.5 rounded-full bg-golden text-center\"\n        }, {\n          default: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(`${_ssrInterpolate(_ctx.$t(\"Подробнее\"))}`);\n            } else {\n              return [\n                _createTextVNode(_toDisplayString(_ctx.$t(\"Подробнее\")), 1)\n              ];\n            }\n          }),\n          _: 2\n        }, _parent));\n        _push(`</div></div></div>`);\n      });\n      _push(`<!--]--></div></div>`);\n    };\n  }\n});\n",
-      "start": 1748953381796,
-      "end": 1748953381797,
+      "start": 1749037072664,
+      "end": 1749037072665,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -308,20 +308,20 @@
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1748953381799,
-      "end": 1748953381799,
+      "start": 1749037072665,
+      "end": 1749037072665,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1748953381799,
-      "end": 1748953381800,
+      "start": 1749037072670,
+      "end": 1749037072671,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1748953381800,
-      "end": 1748953381800,
+      "start": 1749037072671,
+      "end": 1749037072671,
       "order": "normal"
     }
   ]

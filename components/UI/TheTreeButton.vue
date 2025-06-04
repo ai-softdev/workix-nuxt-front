@@ -3,16 +3,14 @@
 </script>
 
 <template>
-  <button class="tree-button flex justify-center"><slot/></button>
+  <button class="flex items-center justify-center w-9 h-9 !rounded-xl !border"><slot/></button>
 </template>
 
 <style scoped>
 .tree-button {
   position: relative;
-  background-color: #2988c8;
   border: none;
   font-size: 28px;
-  color: #FFFFFF;
   padding: 5px 0;
   width: 70px;
   text-align: center;
@@ -24,7 +22,6 @@
 }
 .tree-button:after {
   content: "";
-  background: #5ac8fa;
   display: block;
   position: absolute;
   padding-top: 300%;

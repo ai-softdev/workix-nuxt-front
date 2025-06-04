@@ -4,44 +4,44 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { createVNode as _createVNode, unref as _unref, openBlock as _openBlock, createElementBlock as _createElementBlock, pushScopeId as _pushScopeId, popScopeId as _popScopeId } from \"vue\"\n\nconst _withScopeId = n => (_pushScopeId(\"data-v-a2cc5a54\"),n=n(),_popScopeId(),n)\nconst _hoisted_1 = { class: \"h-full\" }\n\nimport {useChat} from \"~/stores/chat\";\r\nimport {useUserStore} from \"~/stores/users\";\r\nimport {useRoute} from \"vue-router\";\r\nimport {useRouter} from \"vue-router\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport TheSceleton from \"~/components/UI/TheSceleton.vue\";\r\nimport ChatNavHeader from \"~/components/Chat/ChatNav/ChatNavHeader.vue\";\r\nimport ChatNavContent from \"~/components/Chat/ChatNav/ChatNavContent.vue\";\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'ChatNav',\n  props: {\r\n  activeNav: {\r\n    type:Boolean,\r\n    default: true\r\n  }\r\n},\n  setup(__props) {\n\r\n\r\nconst router = useRouter()\r\nconst route = useRoute()\r\nconst userStore = useUserStore()\r\nconst chatStore = useChat()\r\nconst user = useAuthStore()\r\nonMounted(()=>{\r\n  chatStore.windowWidth = window.innerWidth\r\n})\r\n\nreturn (_ctx: any,_cache: any) => {\n  return (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n    _createVNode(ChatNavHeader, { class: \"pt-6\" }),\n    _createVNode(ChatNavContent, {\n      class: \"\",\n      onDragenter: _cache[0] || (_cache[0] = ($event: any) => (_unref(chatStore).showDragInfo = false))\n    })\n  ]))\n}\n}\n\n})",
-      "start": 1748953343553,
-      "end": 1748953343561
+      "start": 1749037027568,
+      "end": 1749037027568
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1748953343561,
-      "end": 1748953343561,
+      "start": 1749037027568,
+      "end": 1749037027568,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1748953343561,
-      "end": 1748953343561,
+      "start": 1749037027568,
+      "end": 1749037027568,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1748953343561,
-      "end": 1748953343561,
+      "start": 1749037027568,
+      "end": 1749037027568,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1748953343562,
-      "end": 1748953343564,
+      "start": 1749037027568,
+      "end": 1749037027568,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1748953343565,
-      "end": 1748953343565,
+      "start": 1749037027568,
+      "end": 1749037027568,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { createVNode as _createVNode, unref as _unref, openBlock as _openBlock, createElementBlock as _createElementBlock, pushScopeId as _pushScopeId, popScopeId as _popScopeId } from \"vue\";\nconst _withScopeId = (n) => (_pushScopeId(\"data-v-a2cc5a54\"), n = n(), _popScopeId(), n);\nconst _hoisted_1 = { class: \"h-full\" };\nimport { useChat } from \"~/stores/chat\";\nimport { useUserStore } from \"~/stores/users\";\nimport { useRoute } from \"vue-router\";\nimport { useRouter } from \"vue-router\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport ChatNavHeader from \"~/components/Chat/ChatNav/ChatNavHeader.vue\";\nimport ChatNavContent from \"~/components/Chat/ChatNav/ChatNavContent.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ChatNav\",\n  props: {\n    activeNav: {\n      type: Boolean,\n      default: true\n    }\n  },\n  setup(__props) {\n    const router = useRouter();\n    const route = useRoute();\n    const userStore = useUserStore();\n    const chatStore = useChat();\n    const user = useAuthStore();\n    onMounted(() => {\n      chatStore.windowWidth = window.innerWidth;\n    });\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n        _createVNode(ChatNavHeader, { class: \"pt-6\" }),\n        _createVNode(ChatNavContent, {\n          class: \"\",\n          onDragenter: _cache[0] || (_cache[0] = ($event) => _unref(chatStore).showDragInfo = false)\n        })\n      ]);\n    };\n  }\n});\n",
-      "start": 1748953343569,
-      "end": 1748953343788,
+      "start": 1749037027568,
+      "end": 1749037028252,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -57,141 +57,141 @@
     },
     {
       "name": "vite:json",
-      "start": 1748953343788,
-      "end": 1748953343788,
+      "start": 1749037028253,
+      "end": 1749037028253,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1748953343788,
-      "end": 1748953343788,
+      "start": 1749037028254,
+      "end": 1749037028254,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1748953343788,
-      "end": 1748953343788,
+      "start": 1749037028254,
+      "end": 1749037028255,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1748953343788,
-      "end": 1748953343788,
+      "start": 1749037028255,
+      "end": 1749037028256,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748953343789,
-      "end": 1748953343789,
+      "start": 1749037028256,
+      "end": 1749037028257,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1748953343789,
-      "end": 1748953343789,
+      "start": 1749037028257,
+      "end": 1749037028257,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1748953343789,
-      "end": 1748953343789,
+      "start": 1749037028257,
+      "end": 1749037028257,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1748953343789,
-      "end": 1748953343789,
+      "start": 1749037028258,
+      "end": 1749037028262,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1748953343789,
-      "end": 1748953343789,
+      "start": 1749037028263,
+      "end": 1749037028263,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1748953343790,
-      "end": 1748953343790,
+      "start": 1749037028263,
+      "end": 1749037028263,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1748953343790,
-      "end": 1748953343790,
+      "start": 1749037028263,
+      "end": 1749037028264,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1748953343790,
-      "end": 1748953343790,
+      "start": 1749037028264,
+      "end": 1749037028264,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1748953343790,
-      "end": 1748953343790,
+      "start": 1749037028267,
+      "end": 1749037028267,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1748953343791,
-      "end": 1748953343791,
+      "start": 1749037028267,
+      "end": 1749037028267,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1748953343791,
-      "end": 1748953343791,
+      "start": 1749037028268,
+      "end": 1749037028268,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1748953343791,
-      "end": 1748953343791,
+      "start": 1749037028268,
+      "end": 1749037028268,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1748953343791,
-      "end": 1748953343791,
+      "start": 1749037028269,
+      "end": 1749037028269,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1748953343791,
-      "end": 1748953343791,
+      "start": 1749037028269,
+      "end": 1749037028269,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1748953343792,
-      "end": 1748953343792,
+      "start": 1749037028270,
+      "end": 1749037028270,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1748953343792,
-      "end": 1748953343792,
+      "start": 1749037028271,
+      "end": 1749037028272,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1748953343793,
-      "end": 1748953343793,
+      "start": 1749037028272,
+      "end": 1749037028273,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1748953343793,
-      "end": 1748953343793,
+      "start": 1749037028273,
+      "end": 1749037028274,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { onMounted } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { createVNode as _createVNode, unref as _unref, openBlock as _openBlock, createElementBlock as _createElementBlock, pushScopeId as _pushScopeId, popScopeId as _popScopeId } from \"vue\";\nconst _withScopeId = (n) => (_pushScopeId(\"data-v-a2cc5a54\"), n = n(), _popScopeId(), n);\nconst _hoisted_1 = { class: \"h-full\" };\nimport { useChat } from \"~/stores/chat\";\nimport { useUserStore } from \"~/stores/users\";\nimport { useRoute } from \"vue-router\";\nimport { useRouter } from \"vue-router\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport ChatNavHeader from \"~/components/Chat/ChatNav/ChatNavHeader.vue\";\nimport ChatNavContent from \"~/components/Chat/ChatNav/ChatNavContent.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ChatNav\",\n  props: {\n    activeNav: {\n      type: Boolean,\n      default: true\n    }\n  },\n  setup(__props) {\n    const router = useRouter();\n    const route = useRoute();\n    const userStore = useUserStore();\n    const chatStore = useChat();\n    const user = useAuthStore();\n    onMounted(() => {\n      chatStore.windowWidth = window.innerWidth;\n    });\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n        _createVNode(ChatNavHeader, { class: \"pt-6\" }),\n        _createVNode(ChatNavContent, {\n          class: \"\",\n          onDragenter: _cache[0] || (_cache[0] = ($event) => _unref(chatStore).showDragInfo = false)\n        })\n      ]);\n    };\n  }\n});\n",
-      "start": 1748953343794,
-      "end": 1748953343802,
+      "start": 1749037028275,
+      "end": 1749037028304,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -204,50 +204,50 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1748953343803,
-      "end": 1748953343803,
+      "start": 1749037028308,
+      "end": 1749037028308,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1748953343804,
-      "end": 1748953343804,
+      "start": 1749037028309,
+      "end": 1749037028309,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1748953343804,
-      "end": 1748953343804,
+      "start": 1749037028310,
+      "end": 1749037028310,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1748953343804,
-      "end": 1748953343804,
+      "start": 1749037028310,
+      "end": 1749037028311,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1748953343805,
-      "end": 1748953343805,
+      "start": 1749037028311,
+      "end": 1749037028320,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1748953343806,
-      "end": 1748953343806,
+      "start": 1749037028321,
+      "end": 1749037028321,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1748953343806,
-      "end": 1748953343806,
+      "start": 1749037028322,
+      "end": 1749037028322,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1748953343807,
-      "end": 1748953343807,
+      "start": 1749037028323,
+      "end": 1749037028323,
       "order": "normal"
     }
   ]

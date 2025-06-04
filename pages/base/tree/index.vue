@@ -34,9 +34,11 @@ useSeoMeta({
 </script>
 <template>
   <div>
-    <TheTextContent :text-type="'pageTitle'" :class="{'blur' : useTreeStore().treeFullScreen === true}">
+    <p
+        class="dark:text-white text-3xl font-bold mb-6"
+    >
       {{$t('Дерево ' + companies.company.name )}}
-    </TheTextContent>
+    </p>
     <TreeContent />
   </div>
 </template>

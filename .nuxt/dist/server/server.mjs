@@ -1068,7 +1068,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$4 == null ? void 0 : __nuxt_page_meta$4.redirect,
-        component: () => import("./_nuxt/index-b4Zoa0YT.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/index-CBq0OC7r.js").then((m) => m.default || m)
       },
       {
         name: "base-users-slug",
@@ -1199,7 +1199,7 @@ const validate = /* @__PURE__ */ defineNuxtRouteMiddleware(async (to) => {
 });
 const inlineConfig = {
   "nuxt": {
-    "buildId": "dev"
+    "buildId": "8bc17ace-fe27-4f8b-a15e-37f2827ed044"
   },
   "ui": {
     "primary": "green",
