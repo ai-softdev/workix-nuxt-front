@@ -898,7 +898,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$p == null ? void 0 : __nuxt_page_meta$p.redirect,
-        component: () => import("./_nuxt/_id_-PEmDE-17.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/_id_-FY2hGI79.js").then((m) => m.default || m)
       },
       {
         name: "base-companies-department",
@@ -978,7 +978,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$f == null ? void 0 : __nuxt_page_meta$f.redirect,
-        component: () => import("./_nuxt/index-BrDKkjQf.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/index-Dfb78Cch.js").then((m) => m.default || m)
       },
       {
         name: "base-profile",

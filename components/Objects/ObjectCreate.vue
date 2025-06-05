@@ -25,8 +25,12 @@ defineProps({
 
 <template>
   <div>
-    <button v-if="currentUser.user.permissions?.find(e=>e.name_en === 'object.create')" class="font-bold tracking-widest text-white bg-blue-400 mx-auto py-4 rounded-xl w-full px-4 text-sm"
-            @click="showCreate = true">{{ $t('Создать объект') }}
+    <button
+        v-if="currentUser.user.permissions?.find(e=>e.name_en === 'object.create')"
+        class="font-bold bg-golden rounded-full py-2.5 px-10"
+        @click="showCreate = true"
+    >
+      + {{ $t('Создать объект') }}
     </button>
     <TheModal v-if="showCreate" @showModal="showCreate = !showCreate">
       <TheTextContent>{{ $t('Создание объекта') }}</TheTextContent>

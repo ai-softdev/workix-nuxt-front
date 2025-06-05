@@ -4,81 +4,81 @@
     {
       "name": "vite:load-fallback",
       "result": "<script setup lang=\"ts\">\r\n\r\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\r\nimport TheBreadcrumbs from \"~/components/UI/TheBreadcrumbs.vue\";\r\nimport TheInput from \"~/components/UI/TheInput.vue\";\r\nimport {useSales} from \"~/stores/sales\";\r\nconst sales = useSales();\r\n\r\nlet salesForm = ref({\r\n  name: '',\r\n  sales_count: '',\r\n  price_per_count: '',\r\n  vat: '',\r\n  company_sale_to: '',\r\n  agent: {\r\n    first_name: '',\r\n    last_name: '',\r\n    patronymic: '',\r\n  }\r\n})\r\n\r\nconst createItem = () => {\r\n  sales.createItem({ form: salesForm.value })\r\n      .then(() => clearForm())\r\n      .catch((error) => console.error(\"Ошибка при создании товара:\", error));\r\n};\r\n\r\nconst clearForm = () => {\r\n  salesForm.value = {\r\n    name: \"\",\r\n    sales_count: \"\",\r\n    price_per_count: \"\",\r\n    vat: \"\",\r\n    company_sale_to: \"\",\r\n    agent: {\r\n      first_name: \"\",\r\n      last_name: \"\",\r\n      patronymic: \"\",\r\n    },\r\n  };\r\n};\r\n\r\n</script>\r\n\r\n<template>\r\n  <div>\r\n    <TheTextContent>\r\n      {{ $t('Страница создания товара') }}\r\n    </TheTextContent>\r\n    <div class=\"flex items-center gap-x-4 max-lg:mt-5\">\r\n      <TheBreadcrumbs :breadcrumb-link=\"'/base/profile'\">\r\n        {{ $t('Профиль') }}\r\n      </TheBreadcrumbs>\r\n      <div>\r\n        <svg width=\"15px\" height=\"15px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\r\n          <path class=\"dark:stroke-white stroke-black\"\r\n                d=\"M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5\"\r\n                stroke-width=\"2\" stroke-linecap=\"round\"/>\r\n        </svg>\r\n      </div>\r\n      <TheBreadcrumbs :breadcrumb-link=\"'/base/sales'\">\r\n        {{ $t('Продажи') }}\r\n      </TheBreadcrumbs>\r\n      <div>\r\n        <svg width=\"15px\" height=\"15px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\r\n          <path class=\"dark:stroke-white stroke-black\"\r\n                d=\"M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5\"\r\n                stroke-width=\"2\" stroke-linecap=\"round\"/>\r\n        </svg>\r\n      </div>\r\n      <TheBreadcrumbs>\r\n        {{ $t('Создание товара') }}\r\n      </TheBreadcrumbs>\r\n    </div>\r\n    <div class=\"mt-10 w-6/12 flex flex-col gap-4 max-lg:w-full\">\r\n      <p class=\"font-medium text-xl mb-3\">\r\n        Создание товара:\r\n      </p>\r\n      <form\r\n          @submit.prevent=\"createItem\"\r\n          class=\"grid grid-cols-2 gap-4 max-lg:grid-cols-1\"\r\n      >\r\n        <TheInput\r\n            :label=\"$t('Название товара')\"\r\n            :placeholder=\"salesForm.name\"\r\n            v-model=\"salesForm.name\"\r\n            type=\"text\"\r\n        />\r\n        <TheInput\r\n            :label=\"$t('Количество продаж')\"\r\n            :placeholder=\"salesForm.sales_count\"\r\n            v-model=\"salesForm.sales_count\"\r\n            type=\"number\"\r\n        />\r\n        <TheInput\r\n            :label=\"$t('Цена за единицу')\"\r\n            :placeholder=\"salesForm.price_per_count\"\r\n            v-model=\"salesForm.price_per_count\"\r\n            type=\"number\"\r\n        />\r\n        <TheInput\r\n            :label=\"$t('НДС')\"\r\n            :placeholder=\"salesForm.vat\"\r\n            v-model=\"salesForm.vat\"\r\n            type=\"number\"\r\n        />\r\n        <TheInput\r\n            :label=\"$t('Контрагент')\"\r\n            :placeholder=\"salesForm.company_sale_to\"\r\n            v-model=\"salesForm.company_sale_to\"\r\n            type=\"text\"\r\n        />\r\n<!--        <TheInput-->\r\n<!--            :label=\"$t('Имя агентадядя')\"-->\r\n<!--            :placeholder=\"salesForm.agent.first_name\"-->\r\n<!--            v-model=\"salesForm.agent.first_name\"-->\r\n<!--            type=\"text\"-->\r\n<!--        />-->\r\n<!--        <TheInput-->\r\n<!--            :label=\"$t('Фамилия агента')\"-->\r\n<!--            :placeholder=\"salesForm.agent.last_name\"-->\r\n<!--            v-model=\"salesForm.agent.last_name\"-->\r\n<!--            type=\"text\"-->\r\n<!--        />-->\r\n<!--        <TheInput-->\r\n<!--            :label=\"$t('Отчество агента')\"-->\r\n<!--            :placeholder=\"salesForm.agent.patronymic\"-->\r\n<!--            v-model=\"salesForm.agent.patronymic\"-->\r\n<!--            type=\"text\"-->\r\n<!--        />-->\r\n        <UITheButton\r\n            type=\"submit\"\r\n            class=\"mb-2 border p-3 rounded-lg !text-black dark:!text-white\"\r\n        >\r\n          Добавить\r\n        </UITheButton>\r\n      </form>\r\n    </div>\r\n  </div>\r\n</template>\r\n\r\n<style scoped lang=\"scss\">\r\n\r\n</style>",
-      "start": 1749106979149,
-      "end": 1749106979271,
+      "start": 1749116022085,
+      "end": 1749116022204,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1749106979272,
-      "end": 1749106979272,
+      "start": 1749116022204,
+      "end": 1749116022204,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1749106979272,
-      "end": 1749106979272,
+      "start": 1749116022204,
+      "end": 1749116022204,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1749106979272,
-      "end": 1749106979272,
+      "start": 1749116022204,
+      "end": 1749116022204,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1749106979272,
-      "end": 1749106979272,
+      "start": 1749116022204,
+      "end": 1749116022204,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1749106979272,
-      "end": 1749106979272,
+      "start": 1749116022204,
+      "end": 1749116022204,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1749106979272,
-      "end": 1749106979272,
+      "start": 1749116022204,
+      "end": 1749116022204,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1749106979272,
-      "end": 1749106979272,
+      "start": 1749116022204,
+      "end": 1749116022204,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1749106979272,
-      "end": 1749106979272,
+      "start": 1749116022204,
+      "end": 1749116022204,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1749106979272,
-      "end": 1749106979272,
+      "start": 1749116022204,
+      "end": 1749116022204,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1749106979272,
-      "end": 1749106979272,
+      "start": 1749116022204,
+      "end": 1749116022204,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1749106979272,
-      "end": 1749106979272,
+      "start": 1749116022204,
+      "end": 1749116022204,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "import _sfc_main from \"D:/projects/nuxt/workix-nuxt-front/pages/base/sales/item-create/index.vue?vue&type=script&setup=true&lang.ts\";\nexport * from \"D:/projects/nuxt/workix-nuxt-front/pages/base/sales/item-create/index.vue?vue&type=script&setup=true&lang.ts\";\nimport { useSSRContext as __vite_useSSRContext } from \"vue\";\nconst _sfc_setup = _sfc_main.setup;\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext();\n  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(\"pages/base/sales/item-create/index.vue\");\n  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;\n};\nexport default _sfc_main;\n",
-      "start": 1749106979272,
-      "end": 1749106979667,
+      "start": 1749116022204,
+      "end": 1749116022696,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -86,212 +86,212 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1749106979667,
-      "end": 1749106979667,
+      "start": 1749116022696,
+      "end": 1749116022696,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749106979667,
-      "end": 1749106979667,
+      "start": 1749116022696,
+      "end": 1749116022696,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749106979667,
-      "end": 1749106979667,
+      "start": 1749116022696,
+      "end": 1749116022696,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1749106979667,
-      "end": 1749106979667,
+      "start": 1749116022696,
+      "end": 1749116022696,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1749106979667,
-      "end": 1749106979667,
+      "start": 1749116022696,
+      "end": 1749116022696,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1749106979667,
-      "end": 1749106979667,
+      "start": 1749116022697,
+      "end": 1749116022697,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749106979667,
-      "end": 1749106979667,
+      "start": 1749116022697,
+      "end": 1749116022697,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1749106979667,
-      "end": 1749106979667,
+      "start": 1749116022697,
+      "end": 1749116022698,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1749106979668,
-      "end": 1749106979668,
+      "start": 1749116022699,
+      "end": 1749116022699,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1749106979668,
-      "end": 1749106979668,
+      "start": 1749116022699,
+      "end": 1749116022699,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1749106979668,
-      "end": 1749106979668,
+      "start": 1749116022699,
+      "end": 1749116022699,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1749106979668,
-      "end": 1749106979668,
+      "start": 1749116022700,
+      "end": 1749116022700,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1749106979668,
-      "end": 1749106979668,
+      "start": 1749116022701,
+      "end": 1749116022701,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1749106979668,
-      "end": 1749106979668,
+      "start": 1749116022701,
+      "end": 1749116022702,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1749106979669,
-      "end": 1749106979669,
+      "start": 1749116022702,
+      "end": 1749116022702,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1749106979670,
-      "end": 1749106979670,
+      "start": 1749116022703,
+      "end": 1749116022703,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1749106979670,
-      "end": 1749106979670,
+      "start": 1749116022703,
+      "end": 1749116022703,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1749106979670,
-      "end": 1749106979670,
+      "start": 1749116022703,
+      "end": 1749116022705,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1749106979670,
-      "end": 1749106979670,
+      "start": 1749116022705,
+      "end": 1749116022705,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1749106979670,
-      "end": 1749106979670,
+      "start": 1749116022705,
+      "end": 1749116022705,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1749106979670,
-      "end": 1749106979670,
+      "start": 1749116022706,
+      "end": 1749116022706,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1749106979670,
-      "end": 1749106979670,
+      "start": 1749116022706,
+      "end": 1749116022706,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1749106979670,
-      "end": 1749106979670,
+      "start": 1749116022707,
+      "end": 1749116022708,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1749106979670,
-      "end": 1749106979670,
+      "start": 1749116022707,
+      "end": 1749116022708,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1749106979670,
-      "end": 1749106979671,
+      "start": 1749116022708,
+      "end": 1749116022711,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1749106979670,
-      "end": 1749106979671,
+      "start": 1749116022708,
+      "end": 1749116022711,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1749106979672,
-      "end": 1749106979672,
+      "start": 1749116022711,
+      "end": 1749116022711,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1749106979672,
-      "end": 1749106979672,
+      "start": 1749116022711,
+      "end": 1749116022712,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1749106979672,
-      "end": 1749106979672,
+      "start": 1749116022713,
+      "end": 1749116022713,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1749106979672,
-      "end": 1749106979672,
+      "start": 1749116022713,
+      "end": 1749116022713,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1749106979672,
-      "end": 1749106979672,
+      "start": 1749116022714,
+      "end": 1749116022714,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1749106979672,
-      "end": 1749106979672,
+      "start": 1749116022715,
+      "end": 1749116022715,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1749106979672,
-      "end": 1749106979672,
+      "start": 1749116022715,
+      "end": 1749116022715,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1749106979672,
-      "end": 1749106979672,
+      "start": 1749116022716,
+      "end": 1749116022716,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1749106979672,
-      "end": 1749106979672,
+      "start": 1749116022716,
+      "end": 1749116022716,
       "order": "normal"
     }
   ]

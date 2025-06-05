@@ -4,63 +4,63 @@
     {
       "name": "vite:load-fallback",
       "result": "<script setup>\r\n\r\nimport {useTaskList} from \"~/stores/tasks\";\r\n\r\nconst tasksList = useTaskList()\r\n\r\nonMounted(() => {\r\n  tasksList.loadTasksLists({page: 1, limit: 15, query: ''})\r\n})\r\n</script>\r\n\r\n<template>\r\n  <div class=\"gap-3 flex items-center flex-col justify-center\">\r\n    <div\r\n        v-if=\"!tasksList?.get_tasks.results\"\r\n        class=\"text-center\"\r\n    >\r\n      {{ $t('Задач пока нет') }}\r\n    </div>\r\n\r\n    <template v-else>\r\n      <div\r\n          v-for=\"task in tasksList?.get_tasks.results\"\r\n          :key=\"task.id\"\r\n          class=\"p-4 border flex items-center justify-between gap-3 !bg-whiteSmoke rounded-lg w-full\"\r\n      >\r\n        <div class=\"flex flex-col gap-4 w-full\">\r\n          <p class=\"font-bold text-md\">\r\n            {{ task.title }}\r\n          </p>\r\n          <p class=\"text-sm\">\r\n            {{ task.author_name }}\r\n          </p>\r\n          <p class=\"text-sm\">\r\n            {{ new Date(task.created_at).toLocaleDateString() }}\r\n          </p>\r\n        </div>\r\n        <img class=\"w-6 block\" src=\"/icons/mini-task.svg\" alt=\"task\">\r\n      </div>\r\n    </template>\r\n  </div>\r\n</template>\r\n\r\n<style scoped lang=\"scss\">\r\n\r\n</style>",
-      "start": 1749106942471,
-      "end": 1749106942975,
+      "start": 1749115978948,
+      "end": 1749115979050,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1749106942975,
-      "end": 1749106942975,
+      "start": 1749115979051,
+      "end": 1749115979051,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1749106942975,
-      "end": 1749106942975,
+      "start": 1749115979056,
+      "end": 1749115979056,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1749106942975,
-      "end": 1749106942975,
+      "start": 1749115979056,
+      "end": 1749115979056,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1749106942975,
-      "end": 1749106942975,
+      "start": 1749115979056,
+      "end": 1749115979056,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1749106942975,
-      "end": 1749106942975,
+      "start": 1749115979056,
+      "end": 1749115979056,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1749106942975,
-      "end": 1749106942975,
+      "start": 1749115979056,
+      "end": 1749115979056,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1749106942975,
-      "end": 1749106942975,
+      "start": 1749115979056,
+      "end": 1749115979056,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1749106942975,
-      "end": 1749106942975,
+      "start": 1749115979056,
+      "end": 1749115979056,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "import { unref as _unref, toDisplayString as _toDisplayString, openBlock as _openBlock, createElementBlock as _createElementBlock, createCommentVNode as _createCommentVNode, renderList as _renderList, Fragment as _Fragment, createElementVNode as _createElementVNode } from \"vue\"\nimport _imports_0 from '/icons/mini-task.svg'\n\n\nconst _hoisted_1 = { class: \"gap-3 flex items-center flex-col justify-center\" }\nconst _hoisted_2 = {\n  key: 0,\n  class: \"text-center\"\n}\nconst _hoisted_3 = { class: \"flex flex-col gap-4 w-full\" }\nconst _hoisted_4 = { class: \"font-bold text-md\" }\nconst _hoisted_5 = { class: \"text-sm\" }\nconst _hoisted_6 = { class: \"text-sm\" }\nconst _hoisted_7 = /*#__PURE__*/_createElementVNode(\"img\", {\n  class: \"w-6 block\",\n  src: _imports_0,\n  alt: \"task\"\n}, null, -1)\n\nimport {useTaskList} from \"~/stores/tasks\";\r\n\r\n\nconst _sfc_main = {\n  __name: 'ProfileTasks',\n  setup(__props) {\n\r\n\r\nconst tasksList = useTaskList()\r\n\r\nonMounted(() => {\r\n  tasksList.loadTasksLists({page: 1, limit: 15, query: ''})\r\n})\r\n\nreturn (_ctx, _cache) => {\n  return (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n    (!_unref(tasksList)?.get_tasks.results)\n      ? (_openBlock(), _createElementBlock(\"div\", _hoisted_2, _toDisplayString(_ctx.$t('Задач пока нет')), 1))\n      : (_openBlock(true), _createElementBlock(_Fragment, { key: 1 }, _renderList(_unref(tasksList)?.get_tasks.results, (task) => {\n          return (_openBlock(), _createElementBlock(\"div\", {\n            key: task.id,\n            class: \"p-4 border flex items-center justify-between gap-3 !bg-whiteSmoke rounded-lg w-full\"\n          }, [\n            _createElementVNode(\"div\", _hoisted_3, [\n              _createElementVNode(\"p\", _hoisted_4, _toDisplayString(task.title), 1),\n              _createElementVNode(\"p\", _hoisted_5, _toDisplayString(task.author_name), 1),\n              _createElementVNode(\"p\", _hoisted_6, _toDisplayString(new Date(task.created_at).toLocaleDateString()), 1)\n            ]),\n            _hoisted_7\n          ]))\n        }), 128))\n  ]))\n}\n}\n\n}\n\n\n\nexport default _sfc_main",
-      "start": 1749106942975,
-      "end": 1749106942978,
+      "start": 1749115979056,
+      "end": 1749115979059,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -68,123 +68,123 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1749106942978,
-      "end": 1749106942978,
+      "start": 1749115979059,
+      "end": 1749115979059,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749106942978,
-      "end": 1749106942978,
+      "start": 1749115979059,
+      "end": 1749115979059,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1749106942978,
-      "end": 1749106942978,
+      "start": 1749115979059,
+      "end": 1749115979059,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1749106942978,
-      "end": 1749106942978,
+      "start": 1749115979059,
+      "end": 1749115979059,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1749106942978,
-      "end": 1749106942978,
+      "start": 1749115979059,
+      "end": 1749115979059,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749106942978,
-      "end": 1749106942978,
+      "start": 1749115979059,
+      "end": 1749115979059,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1749106942978,
-      "end": 1749106942978,
+      "start": 1749115979059,
+      "end": 1749115979059,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1749106942978,
-      "end": 1749106942978,
+      "start": 1749115979059,
+      "end": 1749115979059,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1749106942978,
-      "end": 1749106942978,
+      "start": 1749115979059,
+      "end": 1749115979059,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1749106942978,
-      "end": 1749106942978,
+      "start": 1749115979059,
+      "end": 1749115979059,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1749106942978,
-      "end": 1749106942978,
+      "start": 1749115979059,
+      "end": 1749115979059,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1749106942978,
-      "end": 1749106942978,
+      "start": 1749115979059,
+      "end": 1749115979059,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1749106942978,
-      "end": 1749106942978,
+      "start": 1749115979059,
+      "end": 1749115979059,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1749106942978,
-      "end": 1749106942978,
+      "start": 1749115979059,
+      "end": 1749115979059,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1749106942978,
-      "end": 1749106942978,
+      "start": 1749115979059,
+      "end": 1749115979059,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1749106942978,
-      "end": 1749106942978,
+      "start": 1749115979059,
+      "end": 1749115979059,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1749106942978,
-      "end": 1749106942979,
+      "start": 1749115979059,
+      "end": 1749115979060,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1749106942979,
-      "end": 1749106942979,
+      "start": 1749115979060,
+      "end": 1749115979060,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1749106942979,
-      "end": 1749106942979,
+      "start": 1749115979060,
+      "end": 1749115979060,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { onMounted } from 'vue';\nimport { unref as _unref, toDisplayString as _toDisplayString, openBlock as _openBlock, createElementBlock as _createElementBlock, createCommentVNode as _createCommentVNode, renderList as _renderList, Fragment as _Fragment, createElementVNode as _createElementVNode } from \"vue\"\nimport _imports_0 from '/icons/mini-task.svg'\n\n\nconst _hoisted_1 = { class: \"gap-3 flex items-center flex-col justify-center\" }\nconst _hoisted_2 = {\n  key: 0,\n  class: \"text-center\"\n}\nconst _hoisted_3 = { class: \"flex flex-col gap-4 w-full\" }\nconst _hoisted_4 = { class: \"font-bold text-md\" }\nconst _hoisted_5 = { class: \"text-sm\" }\nconst _hoisted_6 = { class: \"text-sm\" }\nconst _hoisted_7 = /*#__PURE__*/_createElementVNode(\"img\", {\n  class: \"w-6 block\",\n  src: _imports_0,\n  alt: \"task\"\n}, null, -1)\n\nimport {useTaskList} from \"~/stores/tasks\";\r\n\r\n\nconst _sfc_main = {\n  __name: 'ProfileTasks',\n  setup(__props) {\n\r\n\r\nconst tasksList = useTaskList()\r\n\r\nonMounted(() => {\r\n  tasksList.loadTasksLists({page: 1, limit: 15, query: ''})\r\n})\r\n\nreturn (_ctx, _cache) => {\n  return (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n    (!_unref(tasksList)?.get_tasks.results)\n      ? (_openBlock(), _createElementBlock(\"div\", _hoisted_2, _toDisplayString(_ctx.$t('Задач пока нет')), 1))\n      : (_openBlock(true), _createElementBlock(_Fragment, { key: 1 }, _renderList(_unref(tasksList)?.get_tasks.results, (task) => {\n          return (_openBlock(), _createElementBlock(\"div\", {\n            key: task.id,\n            class: \"p-4 border flex items-center justify-between gap-3 !bg-whiteSmoke rounded-lg w-full\"\n          }, [\n            _createElementVNode(\"div\", _hoisted_3, [\n              _createElementVNode(\"p\", _hoisted_4, _toDisplayString(task.title), 1),\n              _createElementVNode(\"p\", _hoisted_5, _toDisplayString(task.author_name), 1),\n              _createElementVNode(\"p\", _hoisted_6, _toDisplayString(new Date(task.created_at).toLocaleDateString()), 1)\n            ]),\n            _hoisted_7\n          ]))\n        }), 128))\n  ]))\n}\n}\n\n}\n\n\n\nexport default _sfc_main",
-      "start": 1749106942979,
-      "end": 1749106942980,
+      "start": 1749115979060,
+      "end": 1749115979062,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -197,50 +197,50 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1749106942980,
-      "end": 1749106942980,
+      "start": 1749115979062,
+      "end": 1749115979062,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1749106942980,
-      "end": 1749106942980,
+      "start": 1749115979062,
+      "end": 1749115979062,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1749106942980,
-      "end": 1749106942980,
+      "start": 1749115979062,
+      "end": 1749115979062,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1749106942980,
-      "end": 1749106942980,
+      "start": 1749115979062,
+      "end": 1749115979062,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1749106942980,
-      "end": 1749106942980,
+      "start": 1749115979062,
+      "end": 1749115979062,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1749106942980,
-      "end": 1749106942980,
+      "start": 1749115979062,
+      "end": 1749115979062,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1749106942980,
-      "end": 1749106942980,
+      "start": 1749115979062,
+      "end": 1749115979062,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1749106942980,
-      "end": 1749106942980,
+      "start": 1749115979062,
+      "end": 1749115979062,
       "order": "normal"
     }
   ]

@@ -962,7 +962,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./_id_-PEmDE-17.mjs').then((m) => m.default || m)
+        component: () => import('./_id_-FY2hGI79.mjs').then((m) => m.default || m)
       },
       {
         name: "base-companies-department",
@@ -1042,7 +1042,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-BrDKkjQf.mjs').then((m) => m.default || m)
+        component: () => import('./index-Dfb78Cch.mjs').then((m) => m.default || m)
       },
       {
         name: "base-profile",

@@ -9,13 +9,48 @@ defineProps({
 </script>
 
 <template>
-  <div>
-    <NuxtLink :to="`/base/objects/${object.id}`"  class="transition-all cursor-pointer dark:bg-gray-400 dark:hover:bg-gray-300 dark:shadow-none shadow-xl hover:bg-gray-100 dark:border-none border-t border-t-gray-100 p-4 rounded-xl flex items-center gap-x-4 ">
-      <!--     <img v-if="object.logo" class="w-[50px] h-[50px]" :src="object.logo" alt="">-->
-      <img class="w-[50px] h-[50px]" src="/img/logo-company.png" alt="">
-      <h1 class="tracking-widest">{{object.name}}</h1>
-    </NuxtLink>
-  </div>
+  <NuxtLink
+      :to="`/base/objects/${object.id}`"
+      class="block rounded-3xl shadow-cards bg-white p-6"
+  >
+    <!--      <img-->
+    <!--          class="w-[50px] h-[50px]" src="/img/logo-company.png"-->
+    <!--          alt=""-->
+    <!--      >-->
+    <h1
+        class="font-bold mb-6 pb-6 border-b"
+    >
+      {{object.name}}
+    </h1>
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <img src="/icons/address.svg" alt="address">
+        <p>
+          {{$t('Адрес')}}:
+        </p>
+      </div>
+      <p class="text-mediumGray">
+        {{object.address}}
+      </p>
+    </div>
+    <div class="flex items-center justify-between mt-4">
+      <div class="flex items-center gap-2">
+        <img src="/icons/workers-count.svg" alt="workers-count">
+        <p>
+          {{$t('Кол-во участников')}}:
+        </p>
+      </div>
+      <p class="text-mediumGray">
+        {{object.participants_count || 0}}
+      </p>
+    </div>
+    <button
+        class="flex items-center gap-2.5 py-2.5 px-5 rounded-full border bg-porcelain hover:bg-golden mx-auto mt-6 font-bold transition-all ease-in-out duration-300"
+    >
+      <img src="/icons/download.svg" alt="download">
+      {{$t('Скачать документ')}}
+    </button>
+  </NuxtLink>
 </template>
 
 <style scoped lang="scss">

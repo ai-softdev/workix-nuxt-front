@@ -39,14 +39,18 @@ useSeoMeta({
 
 <template>
   <div>
-    <TheTextContent :text-type="'pageTitle'">
-      {{ $t('Страница с объектами') }}
-    </TheTextContent>
-    <div class="flex items-center gap-x-6">
-      <TheSearch class="w-8/12"></TheSearch>
-      <TheFilter></TheFilter>
-      <ObjectCreate class="w-2/12 ml-auto"></ObjectCreate>
+    <div class="flex items-center justify-between mb-6">
+      <p
+          class="dark:text-white text-3xl font-bold"
+      >
+        {{$t('Страница с объектами')}}
+      </p>
+      <ObjectCreate></ObjectCreate>
     </div>
+<!--    <div class="flex items-center gap-x-6">-->
+<!--      <TheSearch class="w-8/12"></TheSearch>-->
+<!--      <TheFilter></TheFilter>-->
+<!--    </div>-->
     <ObjectContent />
   </div>
 
