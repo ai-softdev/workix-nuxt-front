@@ -970,7 +970,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-BeVOflM0.mjs').then((m) => m.default || m)
+        component: () => import('./index-Dmr22p32.mjs').then((m) => m.default || m)
       },
       {
         name: "base-companies",

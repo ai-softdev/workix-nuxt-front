@@ -4,81 +4,81 @@
     {
       "name": "vite:load-fallback",
       "result": "<script setup lang=\"ts\">\r\nimport { useRoute, useRouter } from 'vue-router';\r\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\r\nimport TheBreadcrumbs from \"~/components/UI/TheBreadcrumbs.vue\";\r\nimport Paginate from 'vuejs-paginate-next';\r\nimport {useSales} from \"~/stores/sales\";\r\nimport ThePreloader from \"~/components/UI/ThePreloader.vue\";\r\nimport {useCompanies} from \"~/stores/companies\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport TheInput from \"~/components/UI/TheInput.vue\";\r\nimport TheModal from \"~/components/UI/TheModal.vue\";\r\nconst loadAuthStore = useAuthStore()\r\nconst company = useCompanies()\r\n\r\nconst route = useRoute();\r\nconst router = useRouter();\r\nconst sales = useSales();\r\n\r\nconst showFiltersModal = ref(false);\r\n\r\nconst page = ref(Number(route.query.page) || 1);\r\nconst limit = ref(Number(route.query.limit) || 5);\r\nconst itemName = ref(route.query.itemName || '');\r\nconst min_price = ref(Number(route.query.min_price) || '');\r\nconst max_price = ref(Number(route.query.max_price) || '');\r\nconst min_count = ref(Number(route.query.min_count) || '');\r\nconst max_count = ref(Number(route.query.max_count) || '');\r\nconst limitItems = ref([5, 10, 20, 30, 50])\r\nconst orderBy = ref([]);\r\nconst orderString = ref('')\r\n\r\nconst updateQueryParams = () => {\r\n  router.push({\r\n    query: {\r\n      page: page.value,\r\n      limit: limit.value,\r\n      itemName: itemName.value || undefined,\r\n      min_price: min_price.value || '',\r\n      max_price: max_price.value || '',\r\n      min_count: min_count.value || '',\r\n      max_count: max_count.value || '',\r\n      order_by: orderString.value || '',\r\n    }\r\n  });\r\n};\r\n\r\nconst clickCallback = (pageNum: number) => {\r\n  page.value = pageNum;\r\n  updateQueryParams();\r\n};\r\n\r\nconst changePageLimit = () => {\r\n  updateQueryParams();\r\n};\r\n\r\nconst searchByName = () => {\r\n  page.value = 1;\r\n  updateQueryParams();\r\n};\r\n\r\nconst openFiltersModal = () => {\r\n  showFiltersModal.value = !showFiltersModal.value\r\n}\r\n\r\nconst submitFilters = () => {\r\n  console.log('submit')\r\n  updateQueryParams();\r\n}\r\n\r\nconst pageCount = ref(0)\r\n\r\nconst toggleSort = (field) => {\r\n  const index = orderBy.value.findIndex((item) => item === field || item === `-${field}`);\r\n\r\n  if (index !== -1) {\r\n    orderBy.value[index] = orderBy.value[index].startsWith('-') ? field : `-${field}`;\r\n  } else {\r\n    orderBy.value.push(field);\r\n  }\r\n\r\n  updateQueryParams()\r\n};\r\n\r\nconst getSortDirection = (field) => {\r\n  if (orderBy.value.includes(field)) return 'rotate-0';\r\n  if (orderBy.value.includes(`-${field}`)) return 'rotate-180';\r\n  return 'rotate-180';\r\n};\r\n\r\nconst downloadFile = () => {\r\n  sales.loadSalesListFile()\r\n}\r\n\r\nonMounted(()=> {\r\n  sales.loadSalesList({page: page.value, limit: limit.value, name: itemName.value, min_price: min_price.value, max_price: max_price.value, min_count: min_count.value, max_count: max_count.value, order_by: orderString.value})\r\n})\r\n\r\nwatch(orderBy.value, (newVal) => {\r\n  orderString.value = newVal.join(',');\r\n});\r\n\r\nwatch(() => sales.sales, (newValue) => {\r\n  pageCount.value = Math.ceil(sales.sales.count / limit.value);\r\n})\r\n\r\nwatch(() => route.query, (newQuery) => {\r\n  page.value = Number(newQuery.page) || 1;\r\n  limit.value = Number(newQuery.limit) || 5;\r\n  itemName.value = newQuery.itemName || '';\r\n  sales.loadSalesList({page: page.value, limit: limit.value, name: itemName.value, min_price: min_price.value, max_price: max_price.value, min_count: min_count.value, max_count: max_count.value, order_by: orderString.value})\r\n});\r\n\r\nwatch(() => loadAuthStore.user, (newValue) => {\r\n  if(loadAuthStore?.user?.role?.name_en === 'admin'){\r\n    if (window.history.length > 1) {\r\n      router.push('/base/profile');\r\n    } else {\r\n      router.push('/');\r\n    }\r\n  }\r\n})\r\n\r\nwatch(() => company.company, (newValue) => {\r\n  let permission = company.company.modules?.find(item => item.name_en === 'sales')\r\n  if(!permission){\r\n    if (window.history.length > 1) {\r\n      router.push('/base/profile');\r\n    } else {\r\n      router.push('/');\r\n    }\r\n  }\r\n})\r\n</script>\r\n\r\n<template>\r\n  <div>\r\n    <div class=\"flex items-center justify-between\">\r\n      <p\r\n          class=\"dark:text-white text-3xl font-bold\"\r\n      >\r\n        {{ $t('Страница продаж') }}\r\n      </p>\r\n      <div class=\"ml-auto flex items-center gap-6\">\r\n        <button\r\n            @click=\"downloadFile\"\r\n            class=\"flex items-center gap-3\"\r\n        >\r\n          <img src=\"/icons/export.svg\" alt=\"export\">\r\n          <p class=\"text-azure font-medium\">\r\n            {{ $t('Экспортировать в файл') }}\r\n          </p>\r\n        </button>\r\n        <NuxtLink\r\n            to=\"/base/sales/item-create\"\r\n            class=\"ml-auto\"\r\n        >\r\n          <UITheButton\r\n              class=\"border border-golden bg-golden py-3 px-10 rounded-full !text-black dark:!text-white\"\r\n          >\r\n            + Добавить товар\r\n          </UITheButton>\r\n        </NuxtLink>\r\n      </div>\r\n    </div>\r\n    <div>\r\n      <div class=\"flex items-center gap-x-4 max-md:mt-10 max-md:flex-col max-md:items-start max-md:gap-y-4\">\r\n<!--        <div class=\"flex items-center gap-x-4\">-->\r\n<!--          <TheBreadcrumbs :breadcrumb-link=\"'/base/profile'\">-->\r\n<!--            {{ $t('Профиль') }}-->\r\n<!--          </TheBreadcrumbs>-->\r\n<!--          <div>-->\r\n<!--            <svg width=\"15px\" height=\"15px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">-->\r\n<!--              <path class=\"dark:stroke-white stroke-black\"-->\r\n<!--                    d=\"M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5\"-->\r\n<!--                    stroke-width=\"2\" stroke-linecap=\"round\"/>-->\r\n<!--            </svg>-->\r\n<!--          </div>-->\r\n<!--          <TheBreadcrumbs>-->\r\n<!--            {{ $t('Продажи') }}-->\r\n<!--          </TheBreadcrumbs>-->\r\n<!--        </div>-->\r\n      </div>\r\n      <div class=\"w-fit sales-up-table rounded-lg mt-10 overflow-hidden\">\r\n        <div class=\"flex items-center justify-between gap-3 mb-4\">\r\n          <UITheButton\r\n              @click=\"openFiltersModal\"\r\n              class=\"border bg-white flex items-center gap-1 p-3 rounded-full !text-black dark:!text-white\"\r\n          >\r\n            <img src=\"/icons/filters.svg\" alt=\"filters\">\r\n            Фильтры\r\n          </UITheButton>\r\n          <div class=\"w-4/12 max-md:w-full relative flex items-center\">\r\n            <div class=\"absolute rotate-90 ml-3\">\r\n              <svg class=\"dark:stroke-white stroke-black\" width=\"25px\" height=\"25px\" viewBox=\"0 0 24 24\" fill=\"none\"\r\n                   xmlns=\"http://www.w3.org/2000/svg\">\r\n                <path\r\n                    d=\"M14.9536 14.9458L21 21M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z\"\r\n                    stroke-width=\"1.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\r\n              </svg>\r\n            </div>\r\n            <input\r\n                v-model=\"itemName\"\r\n                @input=\"searchByName\"\r\n                type=\"text\"\r\n                class=\"w-full rounded-full border dark:bg-gray-500 outline-none pl-12 h-[50px]\"\r\n                placeholder=\"Найти товар...\"\r\n            />\r\n          </div>\r\n        </div>\r\n        <div class=\"w-full sales-table rounded-3xl bg-white overflow-hidden\">\r\n          <table v-if=\"sales.sales?.results?.length\">\r\n            <thead class=\"bg-gray-200 dark:bg-bgWhite\">\r\n            <tr>\r\n              <th>\r\n                №\r\n              </th>\r\n              <th>\r\n                <button @click=\"toggleSort('name')\" class=\"flex items-center gap-3\">\r\n                  Наименование\r\n                  <img :class=\"getSortDirection('name')\" src=\"/icons/table-arrow.svg\" alt=\"table-arrow\" />\r\n                </button>\r\n              </th>\r\n              <th>\r\n                <button @click=\"toggleSort('sales_count')\" class=\"flex items-center gap-3\">\r\n                  Кол-во продаж\r\n                  <img :class=\"getSortDirection('sales_count')\" src=\"/icons/table-arrow.svg\" alt=\"table-arrow\" />\r\n                </button>\r\n              </th>\r\n              <th>\r\n                <button @click=\"toggleSort('price_per_count')\" class=\"flex items-center gap-3\">\r\n                  Цена за единицу\r\n                  <img :class=\"getSortDirection('price_per_count')\" src=\"/icons/table-arrow.svg\" alt=\"table-arrow\" />\r\n                </button>\r\n              </th>\r\n              <th>\r\n                <button @click=\"toggleSort('total')\" class=\"flex items-center gap-3\">\r\n                  Сумма\r\n                  <img :class=\"getSortDirection('total')\" src=\"/icons/table-arrow.svg\" alt=\"table-arrow\" />\r\n                </button>\r\n              </th>\r\n              <th>\r\n                <button @click=\"toggleSort('vat')\" class=\"flex items-center gap-3\">\r\n                  НДС\r\n                  <img :class=\"getSortDirection('vat')\" src=\"/icons/table-arrow.svg\" alt=\"table-arrow\" />\r\n                </button>\r\n              </th>\r\n              <th>\r\n                <button @click=\"toggleSort('total_with_vat')\" class=\"flex items-center gap-3\">\r\n                  Сумма с НДС\r\n                  <img :class=\"getSortDirection('total_with_vat')\" src=\"/icons/table-arrow.svg\" alt=\"table-arrow\" />\r\n                </button>\r\n              </th>\r\n              <th>\r\n                <button @click=\"toggleSort('company_sale_to')\" class=\"flex items-center gap-3\">\r\n                  Наименование компании\r\n                  <img :class=\"getSortDirection('company_sale_to')\" src=\"/icons/table-arrow.svg\" alt=\"table-arrow\" />\r\n                </button>\r\n              </th>\r\n              <th>\r\n                <button @click=\"toggleSort('agent')\" class=\"flex items-center gap-3\">\r\n                  Агент\r\n                  <img :class=\"getSortDirection('agent')\" src=\"/icons/table-arrow.svg\" alt=\"table-arrow\" />\r\n                </button>\r\n              </th>\r\n            </tr>\r\n            </thead>\r\n            <tbody>\r\n            <tr v-for=\"(item, index) in sales.sales.results\">\r\n              <td>{{ limit * (page -1) + index+1 }}</td>\r\n              <td>{{item.name}}</td>\r\n              <td>{{ item.sales_count }}</td>\r\n              <td>{{ item.price_per_count }}</td>\r\n              <td>{{ item.total }}</td>\r\n              <td>{{ item.vat }}</td>\r\n              <td>{{ item.total_with_vat }}</td>\r\n              <td>{{ item.company_sale_to }}</td>\r\n              <td>{{ item.agent.last_name + ' ' + item.agent.first_name + ' ' + item.agent.patronymic }}</td>\r\n            </tr>\r\n            </tbody>\r\n          </table>\r\n          <div\r\n              v-if=\"sales.sales?.results?.length === 0\"\r\n              class=\"min-h-[300px] min-w-[89vw] bg-gray-200 dark:bg-bgWhite text-center flex items-center justify-center\"\r\n          >\r\n            Товаров пока нет\r\n          </div>\r\n          <div v-if=\"!sales.sales?.results\" class=\"relative min-h-[400px] min-w-[89vw]\">\r\n            <div class=\"bg-black w-full h-full absolute top-0 left-0 opacity-40 rounded-lg\"></div>\r\n            <ThePreloader></ThePreloader>\r\n          </div>\r\n        </div>\r\n        <div class=\"w-full flex items-center justify-end gap-4 pr-10 pb-5 pt-5 max-md:pr-3 max-md:flex-col max-md:items-end\">\r\n          <paginate\r\n              :page-count=\"pageCount\"\r\n              :page-range=\"3\"\r\n              :margin-pages=\"2\"\r\n              :click-handler=\"clickCallback\"\r\n              :prev-text=\"'<'\"\r\n              :next-text=\"'>'\"\r\n              :container-class=\"'pagination'\"\r\n              :page-class=\"'page-item'\"\r\n              :force-page=\"page\"\r\n          >\r\n          </paginate>\r\n          <div class=\"flex items-center gap-3\">\r\n            <p>Строк на странице:</p>\r\n            <select\r\n                v-model=\"limit\"\r\n                @change=\"changePageLimit\"\r\n                class=\"w-fit p-2.5 rounded-md border bg-white dark:bg-bgWhite text-black\"\r\n            >\r\n              <option\r\n                  v-for=\"item in limitItems\"\r\n                  :value=\"item\"\r\n              >\r\n                {{item}}\r\n              </option>\r\n            </select>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <TheModal\r\n        :type=\"'resize'\"\r\n        v-if=\"showFiltersModal\"\r\n        @showModal=\"\"\r\n    >\r\n      <button class=\"absolute top-3 right-3\" @click=\"openFiltersModal\">\r\n        x\r\n      </button>\r\n      <div\r\n          class=\"flex flex-col gap-5\"\r\n      >\r\n        <p>\r\n          Фильтры:\r\n        </p>\r\n        <form @submit.prevent=\"updateQueryParams(); showFiltersModal = false\" class=\"flex items-center gap-5 flex-col\">\r\n          <TheInput\r\n              v-model=\"min_price\"\r\n              class=\"bg-transparent bg-opacity-0 rounded-lg outline-none max-md:w-full\"\r\n              type=\"number\"\r\n              label=\"Минимальная цена\"\r\n          />\r\n          <TheInput\r\n              v-model=\"max_price\"\r\n              class=\"bg-transparent bg-opacity-0 rounded-lg outline-none max-md:w-full\"\r\n              type=\"number\"\r\n              label=\"Максимальная цена\"\r\n          />\r\n          <TheInput\r\n              v-model=\"min_count\"\r\n              class=\"bg-transparent bg-opacity-0 rounded-lg outline-none max-md:w-full\"\r\n              type=\"number\"\r\n              label=\"Минимальное количество\"\r\n          />\r\n          <TheInput\r\n              v-model=\"max_count\"\r\n              class=\"w-full bg-transparent bg-opacity-0 rounded-lg outline-none\"\r\n              type=\"number\"\r\n              label=\"Максимальное количество\"\r\n          />\r\n          <UITheButton\r\n              class=\"mt-2 bg-golden rounded-full !p-3 !text-black dark:!text-white\"\r\n          >\r\n            Сохранить\r\n          </UITheButton>\r\n        </form>\r\n      </div>\r\n    </TheModal>\r\n  </div>\r\n</template>\r\n\r\n<style>\r\n.sales-table th, td {\r\n  padding: 20px;\r\n}\r\n\r\n.sales-table th {\r\n  text-align: start;\r\n}\r\n\r\n.sales-table tr:nth-child(even) {\r\n  background-color: #8881;\r\n}\r\n\r\n\r\n\r\n@media (max-width: 2100px) {\r\n  .sales-up-table {\r\n    max-width: 85vw;\r\n  }\r\n  .sales-table {\r\n    overflow: auto;\r\n    max-width: 85vw;\r\n  }\r\n  .sales-table table {\r\n    width: 2000px;\r\n  }\r\n}\r\n@media (max-width: 1800px) {\r\n  .sales-up-table {\r\n    max-width: 77vw;\r\n  }\r\n  .sales-table {\r\n    overflow: auto;\r\n    max-width: 77vw;\r\n  }\r\n  .sales-table table {\r\n    width: 2000px;\r\n  }\r\n}\r\n@media (max-width: 1150px) {\r\n  .sales-up-table {\r\n    max-width: 93vw;\r\n  }\r\n  .sales-table {\r\n    overflow: auto;\r\n    max-width: 93vw;\r\n  }\r\n  .sales-table table {\r\n    width: 2000px;\r\n  }\r\n}\r\n\r\n@media (max-width: 920px) {\r\n  .sales-up-table {\r\n    width: 95vw !important;\r\n  }\r\n  .sales-table {\r\n    max-width: 95vw !important;\r\n  }\r\n  .pagination {\r\n    flex-wrap: wrap;\r\n  }\r\n}\r\n</style>",
-      "start": 1749106372361,
-      "end": 1749106372519,
+      "start": 1749106979109,
+      "end": 1749106979252,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1749106372520,
-      "end": 1749106372520,
+      "start": 1749106979252,
+      "end": 1749106979252,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1749106372520,
-      "end": 1749106372520,
+      "start": 1749106979252,
+      "end": 1749106979252,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1749106372520,
-      "end": 1749106372520,
+      "start": 1749106979252,
+      "end": 1749106979252,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1749106372520,
-      "end": 1749106372520,
+      "start": 1749106979252,
+      "end": 1749106979252,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1749106372520,
-      "end": 1749106372520,
+      "start": 1749106979252,
+      "end": 1749106979253,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1749106372520,
-      "end": 1749106372520,
+      "start": 1749106979252,
+      "end": 1749106979253,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1749106372520,
-      "end": 1749106372520,
+      "start": 1749106979253,
+      "end": 1749106979253,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1749106372520,
-      "end": 1749106372520,
+      "start": 1749106979253,
+      "end": 1749106979253,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1749106372520,
-      "end": 1749106372520,
+      "start": 1749106979253,
+      "end": 1749106979253,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1749106372520,
-      "end": 1749106372520,
+      "start": 1749106979253,
+      "end": 1749106979253,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1749106372520,
-      "end": 1749106372520,
+      "start": 1749106979253,
+      "end": 1749106979253,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "import _sfc_main from \"D:/projects/nuxt/workix-nuxt-front/pages/base/sales/index.vue?vue&type=script&setup=true&lang.ts\";\nexport * from \"D:/projects/nuxt/workix-nuxt-front/pages/base/sales/index.vue?vue&type=script&setup=true&lang.ts\";\nimport \"D:/projects/nuxt/workix-nuxt-front/pages/base/sales/index.vue?vue&type=style&index=0&lang.css\";\nimport { useSSRContext as __vite_useSSRContext } from \"vue\";\nconst _sfc_setup = _sfc_main.setup;\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext();\n  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(\"pages/base/sales/index.vue\");\n  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;\n};\nexport default _sfc_main;\n",
-      "start": 1749106372520,
-      "end": 1749106373069,
+      "start": 1749106979253,
+      "end": 1749106979667,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -86,212 +86,212 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1749106373069,
-      "end": 1749106373069,
+      "start": 1749106979667,
+      "end": 1749106979667,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749106373069,
-      "end": 1749106373069,
+      "start": 1749106979667,
+      "end": 1749106979667,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749106373069,
-      "end": 1749106373069,
+      "start": 1749106979667,
+      "end": 1749106979667,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1749106373069,
-      "end": 1749106373069,
+      "start": 1749106979667,
+      "end": 1749106979667,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1749106373069,
-      "end": 1749106373069,
+      "start": 1749106979667,
+      "end": 1749106979667,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1749106373069,
-      "end": 1749106373070,
+      "start": 1749106979667,
+      "end": 1749106979667,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749106373070,
-      "end": 1749106373070,
+      "start": 1749106979667,
+      "end": 1749106979667,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1749106373070,
-      "end": 1749106373081,
+      "start": 1749106979667,
+      "end": 1749106979672,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1749106373082,
-      "end": 1749106373082,
+      "start": 1749106979672,
+      "end": 1749106979672,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1749106373082,
-      "end": 1749106373082,
+      "start": 1749106979672,
+      "end": 1749106979672,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1749106373082,
-      "end": 1749106373082,
+      "start": 1749106979672,
+      "end": 1749106979672,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1749106373082,
-      "end": 1749106373082,
+      "start": 1749106979672,
+      "end": 1749106979672,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1749106373082,
-      "end": 1749106373082,
+      "start": 1749106979672,
+      "end": 1749106979672,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1749106373082,
-      "end": 1749106373082,
+      "start": 1749106979672,
+      "end": 1749106979672,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1749106373083,
-      "end": 1749106373083,
+      "start": 1749106979673,
+      "end": 1749106979673,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1749106373083,
-      "end": 1749106373083,
+      "start": 1749106979673,
+      "end": 1749106979673,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1749106373083,
-      "end": 1749106373083,
+      "start": 1749106979673,
+      "end": 1749106979673,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1749106373083,
-      "end": 1749106373083,
+      "start": 1749106979673,
+      "end": 1749106979673,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1749106373083,
-      "end": 1749106373083,
+      "start": 1749106979673,
+      "end": 1749106979673,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1749106373083,
-      "end": 1749106373083,
+      "start": 1749106979673,
+      "end": 1749106979673,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1749106373083,
-      "end": 1749106373083,
+      "start": 1749106979673,
+      "end": 1749106979673,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1749106373083,
-      "end": 1749106373083,
+      "start": 1749106979673,
+      "end": 1749106979673,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1749106373083,
-      "end": 1749106373083,
+      "start": 1749106979673,
+      "end": 1749106979673,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1749106373083,
-      "end": 1749106373083,
+      "start": 1749106979673,
+      "end": 1749106979673,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1749106373083,
-      "end": 1749106373084,
+      "start": 1749106979673,
+      "end": 1749106979674,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1749106373083,
-      "end": 1749106373084,
+      "start": 1749106979673,
+      "end": 1749106979674,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1749106373084,
-      "end": 1749106373084,
+      "start": 1749106979674,
+      "end": 1749106979674,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1749106373084,
-      "end": 1749106373084,
+      "start": 1749106979674,
+      "end": 1749106979674,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1749106373084,
-      "end": 1749106373084,
+      "start": 1749106979674,
+      "end": 1749106979674,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1749106373084,
-      "end": 1749106373084,
+      "start": 1749106979674,
+      "end": 1749106979674,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1749106373084,
-      "end": 1749106373084,
+      "start": 1749106979674,
+      "end": 1749106979674,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1749106373084,
-      "end": 1749106373084,
+      "start": 1749106979674,
+      "end": 1749106979674,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1749106373084,
-      "end": 1749106373084,
+      "start": 1749106979674,
+      "end": 1749106979674,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1749106373084,
-      "end": 1749106373085,
+      "start": 1749106979674,
+      "end": 1749106979674,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1749106373085,
-      "end": 1749106373085,
+      "start": 1749106979674,
+      "end": 1749106979674,
       "order": "normal"
     }
   ]

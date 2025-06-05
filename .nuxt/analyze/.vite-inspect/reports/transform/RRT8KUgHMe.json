@@ -4,44 +4,44 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { unref as _unref, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, withCtx as _withCtx, createVNode as _createVNode, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock, resolveComponent as _resolveComponent, renderList as _renderList, Fragment as _Fragment, createBlock as _createBlock, createCommentVNode as _createCommentVNode } from \"vue\"\n\nconst _hoisted_1 = { class: \"flex items-center gap-x-4\" }\nconst _hoisted_2 = /*#__PURE__*/_createElementVNode(\"div\", null, [\n  /*#__PURE__*/_createElementVNode(\"svg\", {\n    width: \"15px\",\n    height: \"15px\",\n    viewBox: \"0 0 24 24\",\n    fill: \"none\",\n    xmlns: \"http://www.w3.org/2000/svg\"\n  }, [\n    /*#__PURE__*/_createElementVNode(\"path\", {\n      class: \"dark:stroke-white stroke-black\",\n      d: \"M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5\",\n      \"stroke-width\": \"2\",\n      \"stroke-linecap\": \"round\"\n    })\n  ])\n], -1)\nconst _hoisted_3 = { class: \"flex items-start gap-10 w-full max-md:flex-col\" }\nconst _hoisted_4 = { class: \"flex flex-col gap-4 mt-10 w-8/12 max-md:w-full\" }\nconst _hoisted_5 = { class: \"flex flex-col gap-2\" }\nconst _hoisted_6 = { class: \"flex flex-col gap-2\" }\nconst _hoisted_7 = { class: \"flex flex-col gap-2\" }\nconst _hoisted_8 = { class: \"flex flex-col gap-2\" }\nconst _hoisted_9 = { class: \"bg-bgWhite p-3 rounded-lg flex flex-col gap-3 items-start\" }\nconst _hoisted_10 = { class: \"bg-bgWhite p-3 w-full border rounded-lg\" }\nconst _hoisted_11 = { class: \"flex flex-col gap-2 w-4/12 max-md:w-full\" }\nconst _hoisted_12 = { class: \"flex flex-col gap-3 bg-bgWhite p-3 rounded-lg max-h-[400px] min-h-[400px] h-full overflow-y-scroll\" }\nconst _hoisted_13 = { class: \"bg-bgWhite p-3 w-full border rounded-lg\" }\nconst _hoisted_14 = { class: \"flex flex-col gap-2 min-h-[400px] min-w-[400px] max-md:min-w-full\" }\nconst _hoisted_15 = { class: \"grid grid-cols-2 gap-3 max-md:grid-cols-1\" }\nconst _hoisted_16 = { class: \"bg-[#8881] p-3 w-full border rounded-lg\" }\nconst _hoisted_17 = { class: \"flex flex-col gap-5\" }\nconst _hoisted_18 = /*#__PURE__*/_createElementVNode(\"p\", null, \" Создание администратора: \", -1)\nconst _hoisted_19 = { class: \"flex items-center gap-5 max-md:flex-col\" }\nconst _hoisted_20 = { class: \"grid grid-cols-2 items-center gap-5 max-md:grid-cols-1\" }\n\nimport { useCompanies } from '~/stores/companies';\r\nimport {useRoute} from \"vue-router\";\r\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\r\nimport TheBreadcrumbs from \"~/components/UI/TheBreadcrumbs.vue\";\r\nimport ChatWindowSettingContent from \"~/components/Chat/ChatContent/ChatWindowSetting/ChatWindowSettingContent.vue\";\r\nimport TheModal from \"~/components/UI/TheModal.vue\";\r\nimport TheCheckbox from \"~/components/UI/TheCheckbox.vue\";\r\nimport TheInput from \"~/components/UI/TheInput.vue\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: '[id]',\n  setup(__props) {\n\r\nconst route = useRoute()\r\nconst currentCompany = useCompanies();\r\nconst params = {\r\n  page: 1,\r\n  limit: 1,\r\n}\r\n\r\nconst showModuleModal = ref(false)\r\nconst showAdminModal = ref(false)\r\nconst companyModules = ref([])\r\nlet adminForm = ref({\r\n  email: '',\r\n  password: '',\r\n  first_name: '',\r\n  last_name: '',\r\n  patronymic: '',\r\n  phone: '',\r\n  company_id: ''\r\n})\r\n\r\nconst openModuleModal = () => {\r\n  showModuleModal.value = !showModuleModal.value\r\n}\r\nconst openAdminModal = () => {\r\n  showAdminModal.value = !showAdminModal.value\r\n}\r\n\r\nconst changeModules = () => {\r\n  openModuleModal()\r\n  let array = []\r\n  companyModules.value.forEach((item) => {\r\n    if(item.value){\r\n      array.push(item.id)\r\n    }\r\n  })\r\n  currentCompany.editModules({id: route.params.id, data: array})\r\n}\r\n\r\nconst createAdministrator = () => {\r\n  openAdminModal()\r\n  adminForm.value.company_id = route.params.id\r\n  currentCompany.createAdministrator({data: adminForm.value, company_id: route.params.id})\r\n}\r\n\r\nwatchEffect(() => {\r\n  currentCompany.loadCompany({id: route.params.id})\r\n  currentCompany.loadModules()\r\n  currentCompany.loadCompanyAdministrators({company_id: route.params.id})\r\n})\r\n\r\nwatch(() => currentCompany.modules, (newModules) => {\r\n  companyModules.value = [];\r\n\r\n  currentCompany.modules.forEach((module) => {\r\n    const isModuleExists = currentCompany.company.modules.some(companyModule => companyModule.id === module.id);\r\n\r\n    companyModules.value.push({\r\n      ...module,\r\n      value: isModuleExists\r\n    });\r\n  });\r\n});\r\n\r\nwatchSyncEffect(() => {\r\n  useSeoMeta({\r\n    title: `${currentCompany.company.name}`\r\n  })\r\n})\r\n\nreturn (_ctx: any,_cache: any) => {\n  const _component_UITheButton = _resolveComponent(\"UITheButton\")!\n\n  return (_openBlock(), _createElementBlock(\"div\", null, [\n    _createVNode(TheTextContent, null, {\n      default: _withCtx(() => [\n        _createTextVNode(_toDisplayString(_ctx.$t('Страница компании ' + _unref(currentCompany).company.name)), 1)\n      ]),\n      _: 1\n    }),\n    _createElementVNode(\"div\", null, [\n      _createElementVNode(\"div\", _hoisted_1, [\n        _createVNode(TheBreadcrumbs, { \"breadcrumb-link\": '/base/companies' }, {\n          default: _withCtx(() => [\n            _createTextVNode(_toDisplayString(_ctx.$t('Список компаний')), 1)\n          ]),\n          _: 1\n        }),\n        _hoisted_2,\n        _createVNode(TheBreadcrumbs, null, {\n          default: _withCtx(() => [\n            _createTextVNode(_toDisplayString(_unref(currentCompany).company.name), 1)\n          ]),\n          _: 1\n        })\n      ]),\n      _createElementVNode(\"div\", _hoisted_3, [\n        _createElementVNode(\"div\", _hoisted_4, [\n          _createElementVNode(\"div\", _hoisted_5, [\n            _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t('Описание')) + \": \", 1),\n            _createElementVNode(\"p\", null, _toDisplayString(_unref(currentCompany).company.description), 1)\n          ]),\n          _createElementVNode(\"div\", _hoisted_6, [\n            _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t('Email')) + \": \", 1),\n            _createElementVNode(\"p\", null, _toDisplayString(_unref(currentCompany).company.email), 1)\n          ]),\n          _createElementVNode(\"div\", _hoisted_7, [\n            _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t('Адрес')) + \": \", 1),\n            _createElementVNode(\"p\", null, _toDisplayString(_unref(currentCompany).company.address), 1)\n          ]),\n          _createElementVNode(\"div\", _hoisted_8, [\n            _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t('Администраторы компании')) + \": \", 1),\n            _createElementVNode(\"div\", _hoisted_9, [\n              _createVNode(_component_UITheButton, {\n                onClick: openAdminModal,\n                class: \"mb-2 border p-3 rounded-lg !text-black dark:!text-white\"\n              }, {\n                default: _withCtx(() => [\n                  _createTextVNode(\" Добавить \")\n                ]),\n                _: 1\n              }),\n              (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(currentCompany).company_administrators, (item, index) => {\n                return (_openBlock(), _createElementBlock(\"div\", _hoisted_10, _toDisplayString(item.last_name + ' ' + item.first_name), 1))\n              }), 256))\n            ])\n          ])\n        ]),\n        _createElementVNode(\"div\", _hoisted_11, [\n          _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t('Модули компании')) + \": \", 1),\n          _createElementVNode(\"div\", _hoisted_12, [\n            _createVNode(_component_UITheButton, {\n              onClick: openModuleModal,\n              class: \"mb-2 border p-3 rounded-lg !text-black dark:!text-white\"\n            }, {\n              default: _withCtx(() => [\n                _createTextVNode(\" Изменить \")\n              ]),\n              _: 1\n            }),\n            (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(currentCompany).company.modules, (item, index) => {\n              return (_openBlock(), _createElementBlock(\"div\", _hoisted_13, _toDisplayString(item.name), 1))\n            }), 256))\n          ])\n        ])\n      ])\n    ]),\n    (_unref(showModuleModal))\n      ? (_openBlock(), _createBlock(TheModal, {\n          key: 0,\n          type: 'resize',\n          onShowModal: _cache[0] || (_cache[0] = () => {})\n        }, {\n          default: _withCtx(() => [\n            _createElementVNode(\"button\", {\n              class: \"absolute top-3 right-3\",\n              onClick: openModuleModal\n            }, \" x \"),\n            _createElementVNode(\"div\", _hoisted_14, [\n              _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t('Модули')) + \": \", 1),\n              _createElementVNode(\"div\", _hoisted_15, [\n                (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(companyModules), (item, index) => {\n                  return (_openBlock(), _createElementBlock(\"div\", _hoisted_16, [\n                    _createVNode(TheCheckbox, { item: item }, null, 8, [\"item\"])\n                  ]))\n                }), 256))\n              ]),\n              _createVNode(_component_UITheButton, {\n                class: \"mt-2 !text-black dark:!text-white\",\n                onClick: changeModules\n              }, {\n                default: _withCtx(() => [\n                  _createTextVNode(\" Сохранить \")\n                ]),\n                _: 1\n              })\n            ])\n          ]),\n          _: 1\n        }))\n      : _createCommentVNode(\"\", true),\n    (_unref(showAdminModal))\n      ? (_openBlock(), _createBlock(TheModal, {\n          key: 1,\n          type: 'resize',\n          onShowModal: _cache[7] || (_cache[7] = () => {})\n        }, {\n          default: _withCtx(() => [\n            _createElementVNode(\"button\", {\n              class: \"absolute top-3 right-3\",\n              onClick: openAdminModal\n            }, \" x \"),\n            _createElementVNode(\"div\", _hoisted_17, [\n              _hoisted_18,\n              _createElementVNode(\"div\", _hoisted_19, [\n                _createVNode(TheInput, {\n                  type: 'default',\n                  modelValue: _unref(adminForm).first_name,\n                  \"onUpdate:modelValue\": _cache[1] || (_cache[1] = ($event: any) => ((_unref(adminForm).first_name) = $event)),\n                  class: \"bg-transparent bg-opacity-0 rounded-lg border-2 border-semiCyan outline-none max-md:w-full\",\n                  placeholder: \"Имя\"\n                }, null, 8, [\"modelValue\"]),\n                _createVNode(TheInput, {\n                  type: 'default',\n                  modelValue: _unref(adminForm).last_name,\n                  \"onUpdate:modelValue\": _cache[2] || (_cache[2] = ($event: any) => ((_unref(adminForm).last_name) = $event)),\n                  class: \"bg-transparent bg-opacity-0 rounded-lg border-2 border-semiCyan outline-none max-md:w-full\",\n                  placeholder: \"Фамилия\"\n                }, null, 8, [\"modelValue\"]),\n                _createVNode(TheInput, {\n                  type: 'default',\n                  modelValue: _unref(adminForm).patronymic,\n                  \"onUpdate:modelValue\": _cache[3] || (_cache[3] = ($event: any) => ((_unref(adminForm).patronymic) = $event)),\n                  class: \"bg-transparent bg-opacity-0 rounded-lg border-2 border-semiCyan outline-none max-md:w-full\",\n                  placeholder: \"Отчество\"\n                }, null, 8, [\"modelValue\"])\n              ]),\n              _createElementVNode(\"div\", _hoisted_20, [\n                _createVNode(TheInput, {\n                  type: 'default',\n                  modelValue: _unref(adminForm).email,\n                  \"onUpdate:modelValue\": _cache[4] || (_cache[4] = ($event: any) => ((_unref(adminForm).email) = $event)),\n                  class: \"w-full bg-transparent bg-opacity-0 rounded-lg border-2 border-semiCyan outline-none\",\n                  placeholder: \"Email\"\n                }, null, 8, [\"modelValue\"]),\n                _createVNode(TheInput, {\n                  type: 'default',\n                  modelValue: _unref(adminForm).password,\n                  \"onUpdate:modelValue\": _cache[5] || (_cache[5] = ($event: any) => ((_unref(adminForm).password) = $event)),\n                  class: \"w-full bg-transparent bg-opacity-0 rounded-lg border-2 border-semiCyan outline-none\",\n                  placeholder: \"Пароль\"\n                }, null, 8, [\"modelValue\"])\n              ]),\n              _createVNode(TheInput, {\n                type: 'default',\n                modelValue: _unref(adminForm).phone,\n                \"onUpdate:modelValue\": _cache[6] || (_cache[6] = ($event: any) => ((_unref(adminForm).phone) = $event)),\n                class: \"w-[300px] max-md:w-full mx-auto bg-transparent bg-opacity-0 rounded-lg border-2 border-semiCyan outline-none\",\n                placeholder: \"Номер телефона\"\n              }, null, 8, [\"modelValue\"]),\n              _createVNode(_component_UITheButton, {\n                class: \"mt-2 !text-black dark:!text-white\",\n                onClick: createAdministrator\n              }, {\n                default: _withCtx(() => [\n                  _createTextVNode(\" Сохранить \")\n                ]),\n                _: 1\n              })\n            ])\n          ]),\n          _: 1\n        }))\n      : _createCommentVNode(\"\", true)\n  ]))\n}\n}\n\n})",
-      "start": 1749106329655,
-      "end": 1749106329655
+      "start": 1749106937598,
+      "end": 1749106937598
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1749106329655,
-      "end": 1749106329655,
+      "start": 1749106937598,
+      "end": 1749106937598,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1749106329655,
-      "end": 1749106329655,
+      "start": 1749106937598,
+      "end": 1749106937599,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1749106329655,
-      "end": 1749106329655,
+      "start": 1749106937599,
+      "end": 1749106937599,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1749106329655,
-      "end": 1749106329655,
+      "start": 1749106937599,
+      "end": 1749106937599,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1749106329655,
-      "end": 1749106329655,
+      "start": 1749106937599,
+      "end": 1749106937599,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, withCtx as _withCtx, createVNode as _createVNode, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock, resolveComponent as _resolveComponent, renderList as _renderList, Fragment as _Fragment, createBlock as _createBlock, createCommentVNode as _createCommentVNode } from \"vue\";\nconst _hoisted_1 = { class: \"flex items-center gap-x-4\" };\nconst _hoisted_2 = /* @__PURE__ */ _createElementVNode(\"div\", null, [\n  /* @__PURE__ */ _createElementVNode(\"svg\", {\n    width: \"15px\",\n    height: \"15px\",\n    viewBox: \"0 0 24 24\",\n    fill: \"none\",\n    xmlns: \"http://www.w3.org/2000/svg\"\n  }, [\n    /* @__PURE__ */ _createElementVNode(\"path\", {\n      class: \"dark:stroke-white stroke-black\",\n      d: \"M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5\",\n      \"stroke-width\": \"2\",\n      \"stroke-linecap\": \"round\"\n    })\n  ])\n], -1);\nconst _hoisted_3 = { class: \"flex items-start gap-10 w-full max-md:flex-col\" };\nconst _hoisted_4 = { class: \"flex flex-col gap-4 mt-10 w-8/12 max-md:w-full\" };\nconst _hoisted_5 = { class: \"flex flex-col gap-2\" };\nconst _hoisted_6 = { class: \"flex flex-col gap-2\" };\nconst _hoisted_7 = { class: \"flex flex-col gap-2\" };\nconst _hoisted_8 = { class: \"flex flex-col gap-2\" };\nconst _hoisted_9 = { class: \"bg-bgWhite p-3 rounded-lg flex flex-col gap-3 items-start\" };\nconst _hoisted_10 = { class: \"bg-bgWhite p-3 w-full border rounded-lg\" };\nconst _hoisted_11 = { class: \"flex flex-col gap-2 w-4/12 max-md:w-full\" };\nconst _hoisted_12 = { class: \"flex flex-col gap-3 bg-bgWhite p-3 rounded-lg max-h-[400px] min-h-[400px] h-full overflow-y-scroll\" };\nconst _hoisted_13 = { class: \"bg-bgWhite p-3 w-full border rounded-lg\" };\nconst _hoisted_14 = { class: \"flex flex-col gap-2 min-h-[400px] min-w-[400px] max-md:min-w-full\" };\nconst _hoisted_15 = { class: \"grid grid-cols-2 gap-3 max-md:grid-cols-1\" };\nconst _hoisted_16 = { class: \"bg-[#8881] p-3 w-full border rounded-lg\" };\nconst _hoisted_17 = { class: \"flex flex-col gap-5\" };\nconst _hoisted_18 = /* @__PURE__ */ _createElementVNode(\"p\", null, \" Создание администратора: \", -1);\nconst _hoisted_19 = { class: \"flex items-center gap-5 max-md:flex-col\" };\nconst _hoisted_20 = { class: \"grid grid-cols-2 items-center gap-5 max-md:grid-cols-1\" };\nimport { useCompanies } from \"~/stores/companies\";\nimport { useRoute } from \"vue-router\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport TheBreadcrumbs from \"~/components/UI/TheBreadcrumbs.vue\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nimport TheCheckbox from \"~/components/UI/TheCheckbox.vue\";\nimport TheInput from \"~/components/UI/TheInput.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"[id]\",\n  setup(__props) {\n    const route = useRoute();\n    const currentCompany = useCompanies();\n    const params = {\n      page: 1,\n      limit: 1\n    };\n    const showModuleModal = ref(false);\n    const showAdminModal = ref(false);\n    const companyModules = ref([]);\n    let adminForm = ref({\n      email: \"\",\n      password: \"\",\n      first_name: \"\",\n      last_name: \"\",\n      patronymic: \"\",\n      phone: \"\",\n      company_id: \"\"\n    });\n    const openModuleModal = () => {\n      showModuleModal.value = !showModuleModal.value;\n    };\n    const openAdminModal = () => {\n      showAdminModal.value = !showAdminModal.value;\n    };\n    const changeModules = () => {\n      openModuleModal();\n      let array = [];\n      companyModules.value.forEach((item) => {\n        if (item.value) {\n          array.push(item.id);\n        }\n      });\n      currentCompany.editModules({ id: route.params.id, data: array });\n    };\n    const createAdministrator = () => {\n      openAdminModal();\n      adminForm.value.company_id = route.params.id;\n      currentCompany.createAdministrator({ data: adminForm.value, company_id: route.params.id });\n    };\n    watchEffect(() => {\n      currentCompany.loadCompany({ id: route.params.id });\n      currentCompany.loadModules();\n      currentCompany.loadCompanyAdministrators({ company_id: route.params.id });\n    });\n    watch(() => currentCompany.modules, (newModules) => {\n      companyModules.value = [];\n      currentCompany.modules.forEach((module) => {\n        const isModuleExists = currentCompany.company.modules.some((companyModule) => companyModule.id === module.id);\n        companyModules.value.push({\n          ...module,\n          value: isModuleExists\n        });\n      });\n    });\n    watchSyncEffect(() => {\n      useSeoMeta({\n        title: `${currentCompany.company.name}`\n      });\n    });\n    return (_ctx, _cache) => {\n      const _component_UITheButton = _resolveComponent(\"UITheButton\");\n      return _openBlock(), _createElementBlock(\"div\", null, [\n        _createVNode(TheTextContent, null, {\n          default: _withCtx(() => [\n            _createTextVNode(_toDisplayString(_ctx.$t(\"Страница компании \" + _unref(currentCompany).company.name)), 1)\n          ]),\n          _: 1\n        }),\n        _createElementVNode(\"div\", null, [\n          _createElementVNode(\"div\", _hoisted_1, [\n            _createVNode(TheBreadcrumbs, { \"breadcrumb-link\": \"/base/companies\" }, {\n              default: _withCtx(() => [\n                _createTextVNode(_toDisplayString(_ctx.$t(\"Список компаний\")), 1)\n              ]),\n              _: 1\n            }),\n            _hoisted_2,\n            _createVNode(TheBreadcrumbs, null, {\n              default: _withCtx(() => [\n                _createTextVNode(_toDisplayString(_unref(currentCompany).company.name), 1)\n              ]),\n              _: 1\n            })\n          ]),\n          _createElementVNode(\"div\", _hoisted_3, [\n            _createElementVNode(\"div\", _hoisted_4, [\n              _createElementVNode(\"div\", _hoisted_5, [\n                _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t(\"Описание\")) + \": \", 1),\n                _createElementVNode(\"p\", null, _toDisplayString(_unref(currentCompany).company.description), 1)\n              ]),\n              _createElementVNode(\"div\", _hoisted_6, [\n                _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t(\"Email\")) + \": \", 1),\n                _createElementVNode(\"p\", null, _toDisplayString(_unref(currentCompany).company.email), 1)\n              ]),\n              _createElementVNode(\"div\", _hoisted_7, [\n                _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t(\"Адрес\")) + \": \", 1),\n                _createElementVNode(\"p\", null, _toDisplayString(_unref(currentCompany).company.address), 1)\n              ]),\n              _createElementVNode(\"div\", _hoisted_8, [\n                _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t(\"Администраторы компании\")) + \": \", 1),\n                _createElementVNode(\"div\", _hoisted_9, [\n                  _createVNode(_component_UITheButton, {\n                    onClick: openAdminModal,\n                    class: \"mb-2 border p-3 rounded-lg !text-black dark:!text-white\"\n                  }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(\" Добавить \")\n                    ]),\n                    _: 1\n                  }),\n                  (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(currentCompany).company_administrators, (item, index) => {\n                    return _openBlock(), _createElementBlock(\"div\", _hoisted_10, _toDisplayString(item.last_name + \" \" + item.first_name), 1);\n                  }), 256))\n                ])\n              ])\n            ]),\n            _createElementVNode(\"div\", _hoisted_11, [\n              _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t(\"Модули компании\")) + \": \", 1),\n              _createElementVNode(\"div\", _hoisted_12, [\n                _createVNode(_component_UITheButton, {\n                  onClick: openModuleModal,\n                  class: \"mb-2 border p-3 rounded-lg !text-black dark:!text-white\"\n                }, {\n                  default: _withCtx(() => [\n                    _createTextVNode(\" Изменить \")\n                  ]),\n                  _: 1\n                }),\n                (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(currentCompany).company.modules, (item, index) => {\n                  return _openBlock(), _createElementBlock(\"div\", _hoisted_13, _toDisplayString(item.name), 1);\n                }), 256))\n              ])\n            ])\n          ])\n        ]),\n        _unref(showModuleModal) ? (_openBlock(), _createBlock(TheModal, {\n          key: 0,\n          type: \"resize\",\n          onShowModal: _cache[0] || (_cache[0] = () => {\n          })\n        }, {\n          default: _withCtx(() => [\n            _createElementVNode(\"button\", {\n              class: \"absolute top-3 right-3\",\n              onClick: openModuleModal\n            }, \" x \"),\n            _createElementVNode(\"div\", _hoisted_14, [\n              _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t(\"Модули\")) + \": \", 1),\n              _createElementVNode(\"div\", _hoisted_15, [\n                (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(companyModules), (item, index) => {\n                  return _openBlock(), _createElementBlock(\"div\", _hoisted_16, [\n                    _createVNode(TheCheckbox, { item }, null, 8, [\"item\"])\n                  ]);\n                }), 256))\n              ]),\n              _createVNode(_component_UITheButton, {\n                class: \"mt-2 !text-black dark:!text-white\",\n                onClick: changeModules\n              }, {\n                default: _withCtx(() => [\n                  _createTextVNode(\" Сохранить \")\n                ]),\n                _: 1\n              })\n            ])\n          ]),\n          _: 1\n        })) : _createCommentVNode(\"\", true),\n        _unref(showAdminModal) ? (_openBlock(), _createBlock(TheModal, {\n          key: 1,\n          type: \"resize\",\n          onShowModal: _cache[7] || (_cache[7] = () => {\n          })\n        }, {\n          default: _withCtx(() => [\n            _createElementVNode(\"button\", {\n              class: \"absolute top-3 right-3\",\n              onClick: openAdminModal\n            }, \" x \"),\n            _createElementVNode(\"div\", _hoisted_17, [\n              _hoisted_18,\n              _createElementVNode(\"div\", _hoisted_19, [\n                _createVNode(TheInput, {\n                  type: \"default\",\n                  modelValue: _unref(adminForm).first_name,\n                  \"onUpdate:modelValue\": _cache[1] || (_cache[1] = ($event) => _unref(adminForm).first_name = $event),\n                  class: \"bg-transparent bg-opacity-0 rounded-lg border-2 border-semiCyan outline-none max-md:w-full\",\n                  placeholder: \"Имя\"\n                }, null, 8, [\"modelValue\"]),\n                _createVNode(TheInput, {\n                  type: \"default\",\n                  modelValue: _unref(adminForm).last_name,\n                  \"onUpdate:modelValue\": _cache[2] || (_cache[2] = ($event) => _unref(adminForm).last_name = $event),\n                  class: \"bg-transparent bg-opacity-0 rounded-lg border-2 border-semiCyan outline-none max-md:w-full\",\n                  placeholder: \"Фамилия\"\n                }, null, 8, [\"modelValue\"]),\n                _createVNode(TheInput, {\n                  type: \"default\",\n                  modelValue: _unref(adminForm).patronymic,\n                  \"onUpdate:modelValue\": _cache[3] || (_cache[3] = ($event) => _unref(adminForm).patronymic = $event),\n                  class: \"bg-transparent bg-opacity-0 rounded-lg border-2 border-semiCyan outline-none max-md:w-full\",\n                  placeholder: \"Отчество\"\n                }, null, 8, [\"modelValue\"])\n              ]),\n              _createElementVNode(\"div\", _hoisted_20, [\n                _createVNode(TheInput, {\n                  type: \"default\",\n                  modelValue: _unref(adminForm).email,\n                  \"onUpdate:modelValue\": _cache[4] || (_cache[4] = ($event) => _unref(adminForm).email = $event),\n                  class: \"w-full bg-transparent bg-opacity-0 rounded-lg border-2 border-semiCyan outline-none\",\n                  placeholder: \"Email\"\n                }, null, 8, [\"modelValue\"]),\n                _createVNode(TheInput, {\n                  type: \"default\",\n                  modelValue: _unref(adminForm).password,\n                  \"onUpdate:modelValue\": _cache[5] || (_cache[5] = ($event) => _unref(adminForm).password = $event),\n                  class: \"w-full bg-transparent bg-opacity-0 rounded-lg border-2 border-semiCyan outline-none\",\n                  placeholder: \"Пароль\"\n                }, null, 8, [\"modelValue\"])\n              ]),\n              _createVNode(TheInput, {\n                type: \"default\",\n                modelValue: _unref(adminForm).phone,\n                \"onUpdate:modelValue\": _cache[6] || (_cache[6] = ($event) => _unref(adminForm).phone = $event),\n                class: \"w-[300px] max-md:w-full mx-auto bg-transparent bg-opacity-0 rounded-lg border-2 border-semiCyan outline-none\",\n                placeholder: \"Номер телефона\"\n              }, null, 8, [\"modelValue\"]),\n              _createVNode(_component_UITheButton, {\n                class: \"mt-2 !text-black dark:!text-white\",\n                onClick: createAdministrator\n              }, {\n                default: _withCtx(() => [\n                  _createTextVNode(\" Сохранить \")\n                ]),\n                _: 1\n              })\n            ])\n          ]),\n          _: 1\n        })) : _createCommentVNode(\"\", true)\n      ]);\n    };\n  }\n});\n",
-      "start": 1749106329655,
-      "end": 1749106331924,
+      "start": 1749106937599,
+      "end": 1749106940958,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -57,141 +57,141 @@
     },
     {
       "name": "vite:json",
-      "start": 1749106331924,
-      "end": 1749106331924,
+      "start": 1749106940958,
+      "end": 1749106940958,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1749106331924,
-      "end": 1749106331924,
+      "start": 1749106940958,
+      "end": 1749106940958,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1749106331924,
-      "end": 1749106331924,
+      "start": 1749106940958,
+      "end": 1749106940958,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1749106331924,
-      "end": 1749106331924,
+      "start": 1749106940958,
+      "end": 1749106940958,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749106331924,
-      "end": 1749106331924,
+      "start": 1749106940958,
+      "end": 1749106940959,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1749106331924,
-      "end": 1749106331924,
+      "start": 1749106940959,
+      "end": 1749106940959,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1749106331924,
-      "end": 1749106331924,
+      "start": 1749106940959,
+      "end": 1749106940959,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1749106331925,
-      "end": 1749106331925,
+      "start": 1749106940959,
+      "end": 1749106940959,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749106331925,
-      "end": 1749106331925,
+      "start": 1749106940959,
+      "end": 1749106940959,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1749106331925,
-      "end": 1749106331925,
+      "start": 1749106940959,
+      "end": 1749106940959,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1749106331925,
-      "end": 1749106331925,
+      "start": 1749106940959,
+      "end": 1749106940959,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1749106331925,
-      "end": 1749106331925,
+      "start": 1749106940959,
+      "end": 1749106940959,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1749106331925,
-      "end": 1749106331925,
+      "start": 1749106940959,
+      "end": 1749106940959,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1749106331925,
-      "end": 1749106331925,
+      "start": 1749106940959,
+      "end": 1749106940959,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1749106331925,
-      "end": 1749106331925,
+      "start": 1749106940959,
+      "end": 1749106940959,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1749106331925,
-      "end": 1749106331925,
+      "start": 1749106940960,
+      "end": 1749106940960,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1749106331925,
-      "end": 1749106331925,
+      "start": 1749106940960,
+      "end": 1749106940960,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1749106331925,
-      "end": 1749106331925,
+      "start": 1749106940960,
+      "end": 1749106940960,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1749106331926,
-      "end": 1749106331926,
+      "start": 1749106940960,
+      "end": 1749106940960,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1749106331926,
-      "end": 1749106331926,
+      "start": 1749106940960,
+      "end": 1749106940960,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1749106331926,
-      "end": 1749106331926,
+      "start": 1749106940960,
+      "end": 1749106940960,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1749106331926,
-      "end": 1749106331926,
+      "start": 1749106940960,
+      "end": 1749106940960,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref, watchEffect, watch, watchSyncEffect } from 'vue';\nimport { useSeoMeta } from '@unhead/vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, withCtx as _withCtx, createVNode as _createVNode, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock, resolveComponent as _resolveComponent, renderList as _renderList, Fragment as _Fragment, createBlock as _createBlock, createCommentVNode as _createCommentVNode } from \"vue\";\nconst _hoisted_1 = { class: \"flex items-center gap-x-4\" };\nconst _hoisted_2 = /* @__PURE__ */ _createElementVNode(\"div\", null, [\n  /* @__PURE__ */ _createElementVNode(\"svg\", {\n    width: \"15px\",\n    height: \"15px\",\n    viewBox: \"0 0 24 24\",\n    fill: \"none\",\n    xmlns: \"http://www.w3.org/2000/svg\"\n  }, [\n    /* @__PURE__ */ _createElementVNode(\"path\", {\n      class: \"dark:stroke-white stroke-black\",\n      d: \"M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5\",\n      \"stroke-width\": \"2\",\n      \"stroke-linecap\": \"round\"\n    })\n  ])\n], -1);\nconst _hoisted_3 = { class: \"flex items-start gap-10 w-full max-md:flex-col\" };\nconst _hoisted_4 = { class: \"flex flex-col gap-4 mt-10 w-8/12 max-md:w-full\" };\nconst _hoisted_5 = { class: \"flex flex-col gap-2\" };\nconst _hoisted_6 = { class: \"flex flex-col gap-2\" };\nconst _hoisted_7 = { class: \"flex flex-col gap-2\" };\nconst _hoisted_8 = { class: \"flex flex-col gap-2\" };\nconst _hoisted_9 = { class: \"bg-bgWhite p-3 rounded-lg flex flex-col gap-3 items-start\" };\nconst _hoisted_10 = { class: \"bg-bgWhite p-3 w-full border rounded-lg\" };\nconst _hoisted_11 = { class: \"flex flex-col gap-2 w-4/12 max-md:w-full\" };\nconst _hoisted_12 = { class: \"flex flex-col gap-3 bg-bgWhite p-3 rounded-lg max-h-[400px] min-h-[400px] h-full overflow-y-scroll\" };\nconst _hoisted_13 = { class: \"bg-bgWhite p-3 w-full border rounded-lg\" };\nconst _hoisted_14 = { class: \"flex flex-col gap-2 min-h-[400px] min-w-[400px] max-md:min-w-full\" };\nconst _hoisted_15 = { class: \"grid grid-cols-2 gap-3 max-md:grid-cols-1\" };\nconst _hoisted_16 = { class: \"bg-[#8881] p-3 w-full border rounded-lg\" };\nconst _hoisted_17 = { class: \"flex flex-col gap-5\" };\nconst _hoisted_18 = /* @__PURE__ */ _createElementVNode(\"p\", null, \" Создание администратора: \", -1);\nconst _hoisted_19 = { class: \"flex items-center gap-5 max-md:flex-col\" };\nconst _hoisted_20 = { class: \"grid grid-cols-2 items-center gap-5 max-md:grid-cols-1\" };\nimport { useCompanies } from \"~/stores/companies\";\nimport { useRoute } from \"vue-router\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport TheBreadcrumbs from \"~/components/UI/TheBreadcrumbs.vue\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nimport TheCheckbox from \"~/components/UI/TheCheckbox.vue\";\nimport TheInput from \"~/components/UI/TheInput.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"[id]\",\n  setup(__props) {\n    const route = useRoute();\n    const currentCompany = useCompanies();\n    const params = {\n      page: 1,\n      limit: 1\n    };\n    const showModuleModal = ref(false);\n    const showAdminModal = ref(false);\n    const companyModules = ref([]);\n    let adminForm = ref({\n      email: \"\",\n      password: \"\",\n      first_name: \"\",\n      last_name: \"\",\n      patronymic: \"\",\n      phone: \"\",\n      company_id: \"\"\n    });\n    const openModuleModal = () => {\n      showModuleModal.value = !showModuleModal.value;\n    };\n    const openAdminModal = () => {\n      showAdminModal.value = !showAdminModal.value;\n    };\n    const changeModules = () => {\n      openModuleModal();\n      let array = [];\n      companyModules.value.forEach((item) => {\n        if (item.value) {\n          array.push(item.id);\n        }\n      });\n      currentCompany.editModules({ id: route.params.id, data: array });\n    };\n    const createAdministrator = () => {\n      openAdminModal();\n      adminForm.value.company_id = route.params.id;\n      currentCompany.createAdministrator({ data: adminForm.value, company_id: route.params.id });\n    };\n    watchEffect(() => {\n      currentCompany.loadCompany({ id: route.params.id });\n      currentCompany.loadModules();\n      currentCompany.loadCompanyAdministrators({ company_id: route.params.id });\n    });\n    watch(() => currentCompany.modules, (newModules) => {\n      companyModules.value = [];\n      currentCompany.modules.forEach((module) => {\n        const isModuleExists = currentCompany.company.modules.some((companyModule) => companyModule.id === module.id);\n        companyModules.value.push({\n          ...module,\n          value: isModuleExists\n        });\n      });\n    });\n    watchSyncEffect(() => {\n      useSeoMeta({\n        title: `${currentCompany.company.name}`\n      });\n    });\n    return (_ctx, _cache) => {\n      const _component_UITheButton = _resolveComponent(\"UITheButton\");\n      return _openBlock(), _createElementBlock(\"div\", null, [\n        _createVNode(TheTextContent, null, {\n          default: _withCtx(() => [\n            _createTextVNode(_toDisplayString(_ctx.$t(\"Страница компании \" + _unref(currentCompany).company.name)), 1)\n          ]),\n          _: 1\n        }),\n        _createElementVNode(\"div\", null, [\n          _createElementVNode(\"div\", _hoisted_1, [\n            _createVNode(TheBreadcrumbs, { \"breadcrumb-link\": \"/base/companies\" }, {\n              default: _withCtx(() => [\n                _createTextVNode(_toDisplayString(_ctx.$t(\"Список компаний\")), 1)\n              ]),\n              _: 1\n            }),\n            _hoisted_2,\n            _createVNode(TheBreadcrumbs, null, {\n              default: _withCtx(() => [\n                _createTextVNode(_toDisplayString(_unref(currentCompany).company.name), 1)\n              ]),\n              _: 1\n            })\n          ]),\n          _createElementVNode(\"div\", _hoisted_3, [\n            _createElementVNode(\"div\", _hoisted_4, [\n              _createElementVNode(\"div\", _hoisted_5, [\n                _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t(\"Описание\")) + \": \", 1),\n                _createElementVNode(\"p\", null, _toDisplayString(_unref(currentCompany).company.description), 1)\n              ]),\n              _createElementVNode(\"div\", _hoisted_6, [\n                _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t(\"Email\")) + \": \", 1),\n                _createElementVNode(\"p\", null, _toDisplayString(_unref(currentCompany).company.email), 1)\n              ]),\n              _createElementVNode(\"div\", _hoisted_7, [\n                _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t(\"Адрес\")) + \": \", 1),\n                _createElementVNode(\"p\", null, _toDisplayString(_unref(currentCompany).company.address), 1)\n              ]),\n              _createElementVNode(\"div\", _hoisted_8, [\n                _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t(\"Администраторы компании\")) + \": \", 1),\n                _createElementVNode(\"div\", _hoisted_9, [\n                  _createVNode(_component_UITheButton, {\n                    onClick: openAdminModal,\n                    class: \"mb-2 border p-3 rounded-lg !text-black dark:!text-white\"\n                  }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(\" Добавить \")\n                    ]),\n                    _: 1\n                  }),\n                  (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(currentCompany).company_administrators, (item, index) => {\n                    return _openBlock(), _createElementBlock(\"div\", _hoisted_10, _toDisplayString(item.last_name + \" \" + item.first_name), 1);\n                  }), 256))\n                ])\n              ])\n            ]),\n            _createElementVNode(\"div\", _hoisted_11, [\n              _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t(\"Модули компании\")) + \": \", 1),\n              _createElementVNode(\"div\", _hoisted_12, [\n                _createVNode(_component_UITheButton, {\n                  onClick: openModuleModal,\n                  class: \"mb-2 border p-3 rounded-lg !text-black dark:!text-white\"\n                }, {\n                  default: _withCtx(() => [\n                    _createTextVNode(\" Изменить \")\n                  ]),\n                  _: 1\n                }),\n                (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(currentCompany).company.modules, (item, index) => {\n                  return _openBlock(), _createElementBlock(\"div\", _hoisted_13, _toDisplayString(item.name), 1);\n                }), 256))\n              ])\n            ])\n          ])\n        ]),\n        _unref(showModuleModal) ? (_openBlock(), _createBlock(TheModal, {\n          key: 0,\n          type: \"resize\",\n          onShowModal: _cache[0] || (_cache[0] = () => {\n          })\n        }, {\n          default: _withCtx(() => [\n            _createElementVNode(\"button\", {\n              class: \"absolute top-3 right-3\",\n              onClick: openModuleModal\n            }, \" x \"),\n            _createElementVNode(\"div\", _hoisted_14, [\n              _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t(\"Модули\")) + \": \", 1),\n              _createElementVNode(\"div\", _hoisted_15, [\n                (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(companyModules), (item, index) => {\n                  return _openBlock(), _createElementBlock(\"div\", _hoisted_16, [\n                    _createVNode(TheCheckbox, { item }, null, 8, [\"item\"])\n                  ]);\n                }), 256))\n              ]),\n              _createVNode(_component_UITheButton, {\n                class: \"mt-2 !text-black dark:!text-white\",\n                onClick: changeModules\n              }, {\n                default: _withCtx(() => [\n                  _createTextVNode(\" Сохранить \")\n                ]),\n                _: 1\n              })\n            ])\n          ]),\n          _: 1\n        })) : _createCommentVNode(\"\", true),\n        _unref(showAdminModal) ? (_openBlock(), _createBlock(TheModal, {\n          key: 1,\n          type: \"resize\",\n          onShowModal: _cache[7] || (_cache[7] = () => {\n          })\n        }, {\n          default: _withCtx(() => [\n            _createElementVNode(\"button\", {\n              class: \"absolute top-3 right-3\",\n              onClick: openAdminModal\n            }, \" x \"),\n            _createElementVNode(\"div\", _hoisted_17, [\n              _hoisted_18,\n              _createElementVNode(\"div\", _hoisted_19, [\n                _createVNode(TheInput, {\n                  type: \"default\",\n                  modelValue: _unref(adminForm).first_name,\n                  \"onUpdate:modelValue\": _cache[1] || (_cache[1] = ($event) => _unref(adminForm).first_name = $event),\n                  class: \"bg-transparent bg-opacity-0 rounded-lg border-2 border-semiCyan outline-none max-md:w-full\",\n                  placeholder: \"Имя\"\n                }, null, 8, [\"modelValue\"]),\n                _createVNode(TheInput, {\n                  type: \"default\",\n                  modelValue: _unref(adminForm).last_name,\n                  \"onUpdate:modelValue\": _cache[2] || (_cache[2] = ($event) => _unref(adminForm).last_name = $event),\n                  class: \"bg-transparent bg-opacity-0 rounded-lg border-2 border-semiCyan outline-none max-md:w-full\",\n                  placeholder: \"Фамилия\"\n                }, null, 8, [\"modelValue\"]),\n                _createVNode(TheInput, {\n                  type: \"default\",\n                  modelValue: _unref(adminForm).patronymic,\n                  \"onUpdate:modelValue\": _cache[3] || (_cache[3] = ($event) => _unref(adminForm).patronymic = $event),\n                  class: \"bg-transparent bg-opacity-0 rounded-lg border-2 border-semiCyan outline-none max-md:w-full\",\n                  placeholder: \"Отчество\"\n                }, null, 8, [\"modelValue\"])\n              ]),\n              _createElementVNode(\"div\", _hoisted_20, [\n                _createVNode(TheInput, {\n                  type: \"default\",\n                  modelValue: _unref(adminForm).email,\n                  \"onUpdate:modelValue\": _cache[4] || (_cache[4] = ($event) => _unref(adminForm).email = $event),\n                  class: \"w-full bg-transparent bg-opacity-0 rounded-lg border-2 border-semiCyan outline-none\",\n                  placeholder: \"Email\"\n                }, null, 8, [\"modelValue\"]),\n                _createVNode(TheInput, {\n                  type: \"default\",\n                  modelValue: _unref(adminForm).password,\n                  \"onUpdate:modelValue\": _cache[5] || (_cache[5] = ($event) => _unref(adminForm).password = $event),\n                  class: \"w-full bg-transparent bg-opacity-0 rounded-lg border-2 border-semiCyan outline-none\",\n                  placeholder: \"Пароль\"\n                }, null, 8, [\"modelValue\"])\n              ]),\n              _createVNode(TheInput, {\n                type: \"default\",\n                modelValue: _unref(adminForm).phone,\n                \"onUpdate:modelValue\": _cache[6] || (_cache[6] = ($event) => _unref(adminForm).phone = $event),\n                class: \"w-[300px] max-md:w-full mx-auto bg-transparent bg-opacity-0 rounded-lg border-2 border-semiCyan outline-none\",\n                placeholder: \"Номер телефона\"\n              }, null, 8, [\"modelValue\"]),\n              _createVNode(_component_UITheButton, {\n                class: \"mt-2 !text-black dark:!text-white\",\n                onClick: createAdministrator\n              }, {\n                default: _withCtx(() => [\n                  _createTextVNode(\" Сохранить \")\n                ]),\n                _: 1\n              })\n            ])\n          ]),\n          _: 1\n        })) : _createCommentVNode(\"\", true)\n      ]);\n    };\n  }\n});\n",
-      "start": 1749106331927,
-      "end": 1749106331948,
+      "start": 1749106940960,
+      "end": 1749106940967,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -204,15 +204,15 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1749106331948,
-      "end": 1749106331948,
+      "start": 1749106940968,
+      "end": 1749106940968,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
       "result": "\nconst __nuxt_page_meta = null\nexport default __nuxt_page_meta\n",
-      "start": 1749106331950,
-      "end": 1749106331952,
+      "start": 1749106940968,
+      "end": 1749106940970,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -225,38 +225,38 @@
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1749106331953,
-      "end": 1749106331953,
+      "start": 1749106940970,
+      "end": 1749106940970,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1749106331953,
-      "end": 1749106331953,
+      "start": 1749106940970,
+      "end": 1749106940970,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1749106331953,
-      "end": 1749106331953,
+      "start": 1749106940970,
+      "end": 1749106940970,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1749106331954,
-      "end": 1749106331954,
+      "start": 1749106940970,
+      "end": 1749106940970,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1749106331954,
-      "end": 1749106331954,
+      "start": 1749106940971,
+      "end": 1749106940971,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1749106331955,
-      "end": 1749106331955,
+      "start": 1749106940971,
+      "end": 1749106940971,
       "order": "normal"
     }
   ]

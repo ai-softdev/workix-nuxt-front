@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { resolveComponent as _resolveComponent } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\"\n\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\n\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'index',\n  __ssrInlineRender: true,\n  setup(__props) {\n\r\nconst currentUser = useAuthStore()\r\n\r\nuseSeoMeta({\r\n  title: 'Пользователи',\r\n  description: 'Список пользователей данной платформы'\r\n})\r\n\r\nonMounted(()=> {\r\n  currentUser.loadCurrentUserWorker()\r\n})\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  const _component_UserContent = _resolveComponent(\"UserContent\")!\n\n  _push(`<div${_ssrRenderAttrs(_attrs)}>`)\n  _push(_ssrRenderComponent(_component_UserContent, null, null, _parent))\n  _push(`</div>`)\n}\n}\n\n})",
-      "start": 1749106373200,
-      "end": 1749106373200,
+      "start": 1749106979521,
+      "end": 1749106979521,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1749106373200,
-      "end": 1749106373200,
+      "start": 1749106979521,
+      "end": 1749106979521,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1749106373200,
-      "end": 1749106373200,
+      "start": 1749106979521,
+      "end": 1749106979521,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1749106373200,
-      "end": 1749106373201,
+      "start": 1749106979521,
+      "end": 1749106979521,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1749106373200,
-      "end": 1749106373201,
+      "start": 1749106979521,
+      "end": 1749106979521,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1749106373201,
-      "end": 1749106373201,
+      "start": 1749106979521,
+      "end": 1749106979521,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1749106373201,
-      "end": 1749106373201,
+      "start": 1749106979521,
+      "end": 1749106979521,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1749106373201,
-      "end": 1749106373201,
+      "start": 1749106979521,
+      "end": 1749106979521,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1749106373201,
-      "end": 1749106373201,
+      "start": 1749106979521,
+      "end": 1749106979521,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { resolveComponent as _resolveComponent } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport { useAuthStore } from \"~/stores/auth\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const currentUser = useAuthStore();\n    useSeoMeta({\n      title: \"Пользователи\",\n      description: \"Список пользователей данной платформы\"\n    });\n    onMounted(() => {\n      currentUser.loadCurrentUserWorker();\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_UserContent = _resolveComponent(\"UserContent\");\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(_component_UserContent, null, null, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1749106373201,
-      "end": 1749106374117,
+      "start": 1749106979521,
+      "end": 1749106981208,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -86,171 +86,171 @@
     },
     {
       "name": "vite:json",
-      "start": 1749106374117,
-      "end": 1749106374117,
+      "start": 1749106981208,
+      "end": 1749106981208,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1749106374118,
-      "end": 1749106374118,
+      "start": 1749106981208,
+      "end": 1749106981209,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1749106374118,
-      "end": 1749106374118,
+      "start": 1749106981209,
+      "end": 1749106981209,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1749106374118,
-      "end": 1749106374118,
+      "start": 1749106981209,
+      "end": 1749106981209,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749106374118,
-      "end": 1749106374118,
+      "start": 1749106981209,
+      "end": 1749106981209,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749106374118,
-      "end": 1749106374118,
+      "start": 1749106981209,
+      "end": 1749106981209,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1749106374118,
-      "end": 1749106374118,
+      "start": 1749106981209,
+      "end": 1749106981209,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1749106374118,
-      "end": 1749106374118,
+      "start": 1749106981209,
+      "end": 1749106981209,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1749106374118,
-      "end": 1749106374118,
+      "start": 1749106981209,
+      "end": 1749106981210,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749106374118,
-      "end": 1749106374119,
+      "start": 1749106981210,
+      "end": 1749106981210,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1749106374119,
-      "end": 1749106374120,
+      "start": 1749106981211,
+      "end": 1749106981211,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1749106374121,
-      "end": 1749106374121,
+      "start": 1749106981211,
+      "end": 1749106981212,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1749106374121,
-      "end": 1749106374121,
+      "start": 1749106981212,
+      "end": 1749106981212,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1749106374121,
-      "end": 1749106374121,
+      "start": 1749106981212,
+      "end": 1749106981212,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1749106374121,
-      "end": 1749106374121,
+      "start": 1749106981212,
+      "end": 1749106981213,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1749106374121,
-      "end": 1749106374121,
+      "start": 1749106981213,
+      "end": 1749106981213,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1749106374121,
-      "end": 1749106374121,
+      "start": 1749106981213,
+      "end": 1749106981213,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1749106374121,
-      "end": 1749106374121,
+      "start": 1749106981213,
+      "end": 1749106981213,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1749106374121,
-      "end": 1749106374121,
+      "start": 1749106981213,
+      "end": 1749106981213,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1749106374121,
-      "end": 1749106374121,
+      "start": 1749106981213,
+      "end": 1749106981213,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1749106374121,
-      "end": 1749106374121,
+      "start": 1749106981213,
+      "end": 1749106981213,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1749106374121,
-      "end": 1749106374121,
+      "start": 1749106981213,
+      "end": 1749106981214,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1749106374121,
-      "end": 1749106374121,
+      "start": 1749106981213,
+      "end": 1749106981214,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1749106374121,
-      "end": 1749106374121,
+      "start": 1749106981214,
+      "end": 1749106981214,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1749106374121,
-      "end": 1749106374121,
+      "start": 1749106981214,
+      "end": 1749106981214,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1749106374121,
-      "end": 1749106374121,
+      "start": 1749106981214,
+      "end": 1749106981214,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1749106374121,
-      "end": 1749106374121,
+      "start": 1749106981214,
+      "end": 1749106981214,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { useSeoMeta } from '@unhead/vue';\nimport { onMounted } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { resolveComponent as _resolveComponent } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport { useAuthStore } from \"~/stores/auth\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const currentUser = useAuthStore();\n    useSeoMeta({\n      title: \"Пользователи\",\n      description: \"Список пользователей данной платформы\"\n    });\n    onMounted(() => {\n      currentUser.loadCurrentUserWorker();\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_UserContent = _resolveComponent(\"UserContent\");\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(_component_UserContent, null, null, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1749106374121,
-      "end": 1749106374129,
+      "start": 1749106981214,
+      "end": 1749106981216,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -264,8 +264,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { useSeoMeta } from '@unhead/vue';\nimport { onMounted } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { resolveComponent as _resolveComponent } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport { useAuthStore } from \"~/stores/auth\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const currentUser = useAuthStore();\n    useSeoMeta({\n      title: \"Пользователи\",\n      description: \"Список пользователей данной платформы\"\n    });\n    onMounted(() => {\n      currentUser.loadCurrentUserWorker();\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_UserContent = _resolveComponent(\"UserContent\");\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(_component_UserContent, null, null, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1749106374121,
-      "end": 1749106374129,
+      "start": 1749106981214,
+      "end": 1749106981216,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -278,21 +278,21 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1749106374130,
-      "end": 1749106374130,
+      "start": 1749106981216,
+      "end": 1749106981216,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1749106374130,
-      "end": 1749106374130,
+      "start": 1749106981216,
+      "end": 1749106981216,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
       "result": "\nconst __nuxt_page_meta = null\nexport default __nuxt_page_meta\n",
-      "start": 1749106374130,
-      "end": 1749106374130,
+      "start": 1749106981216,
+      "end": 1749106981217,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -306,8 +306,8 @@
     {
       "name": "nuxt:pages-macros-transform",
       "result": "\nconst __nuxt_page_meta = null\nexport default __nuxt_page_meta\n",
-      "start": 1749106374130,
-      "end": 1749106374130,
+      "start": 1749106981216,
+      "end": 1749106981217,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -320,32 +320,32 @@
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1749106374130,
-      "end": 1749106374130,
+      "start": 1749106981217,
+      "end": 1749106981217,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1749106374131,
-      "end": 1749106374131,
+      "start": 1749106981217,
+      "end": 1749106981217,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1749106374131,
-      "end": 1749106374131,
+      "start": 1749106981217,
+      "end": 1749106981217,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1749106374131,
-      "end": 1749106374131,
+      "start": 1749106981217,
+      "end": 1749106981217,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1749106374131,
-      "end": 1749106374131,
+      "start": 1749106981217,
+      "end": 1749106981217,
       "order": "normal"
     }
   ]

@@ -906,7 +906,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$o == null ? void 0 : __nuxt_page_meta$o.redirect,
-        component: () => import("./_nuxt/index-BeVOflM0.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/index-Dmr22p32.js").then((m) => m.default || m)
       },
       {
         name: "base-companies",

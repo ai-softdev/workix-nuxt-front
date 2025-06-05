@@ -4,44 +4,44 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { createVNode as _createVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\"\n\nconst _hoisted_1 = { class: \"h-screen\" }\n\nimport CloudContent from \"~/components/Cloud/CloudContent.vue\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport {useCompanies} from \"~/stores/companies\";\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'index',\n  setup(__props) {\n\r\nconst router = useRouter()\r\nconst loadAuthStore = useAuthStore()\r\nconst company = useCompanies()\r\n\r\nwatch(() => loadAuthStore.user, (newValue) => {\r\n  if(loadAuthStore?.user?.role?.name_en === 'admin'){\r\n    if (window.history.length > 1) {\r\n      router.push('/base/profile');\r\n    } else {\r\n      router.push('/');\r\n    }\r\n  }\r\n})\r\n\r\nwatch(() => company.company, (newValue) => {\r\n  let permission = company.company.modules?.find(item => item.name_en === 'file_manager')\r\n  if(!permission){\r\n    if (window.history.length > 1) {\r\n      router.push('/base/profile');\r\n    } else {\r\n      router.push('/');\r\n    }\r\n  }\r\n})\r\n\r\nuseSeoMeta({\r\n  title: 'Файл менеджер',\r\n  description: 'Файловый менеджер для хранения или взаимодействия с файлами'\r\n})\r\n\nreturn (_ctx: any,_cache: any) => {\n  return (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n    _createVNode(CloudContent)\n  ]))\n}\n}\n\n})",
-      "start": 1749106329651,
-      "end": 1749106329651
+      "start": 1749106937484,
+      "end": 1749106937484
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1749106329651,
-      "end": 1749106329651,
+      "start": 1749106937484,
+      "end": 1749106937484,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1749106329651,
-      "end": 1749106329652,
+      "start": 1749106937484,
+      "end": 1749106937484,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1749106329652,
-      "end": 1749106329652,
+      "start": 1749106937484,
+      "end": 1749106937484,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1749106329652,
-      "end": 1749106329652,
+      "start": 1749106937484,
+      "end": 1749106937484,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1749106329652,
-      "end": 1749106329652,
+      "start": 1749106937484,
+      "end": 1749106937484,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { createVNode as _createVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\";\nconst _hoisted_1 = { class: \"h-screen\" };\nimport CloudContent from \"~/components/Cloud/CloudContent.vue\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  setup(__props) {\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    const company = useCompanies();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if (window.history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    watch(() => company.company, (newValue) => {\n      let permission = company.company.modules?.find((item) => item.name_en === \"file_manager\");\n      if (!permission) {\n        if (window.history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Файл менеджер\",\n      description: \"Файловый менеджер для хранения или взаимодействия с файлами\"\n    });\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n        _createVNode(CloudContent)\n      ]);\n    };\n  }\n});\n",
-      "start": 1749106329652,
-      "end": 1749106332127,
+      "start": 1749106937484,
+      "end": 1749106939553,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -57,141 +57,141 @@
     },
     {
       "name": "vite:json",
-      "start": 1749106332127,
-      "end": 1749106332127,
+      "start": 1749106939553,
+      "end": 1749106939553,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1749106332127,
-      "end": 1749106332127,
+      "start": 1749106939553,
+      "end": 1749106939553,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1749106332127,
-      "end": 1749106332127,
+      "start": 1749106939553,
+      "end": 1749106939553,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1749106332128,
-      "end": 1749106332128,
+      "start": 1749106939554,
+      "end": 1749106939554,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749106332128,
-      "end": 1749106332128,
+      "start": 1749106939554,
+      "end": 1749106939554,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1749106332128,
-      "end": 1749106332128,
+      "start": 1749106939554,
+      "end": 1749106939554,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1749106332128,
-      "end": 1749106332128,
+      "start": 1749106939554,
+      "end": 1749106939554,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1749106332129,
-      "end": 1749106332129,
+      "start": 1749106939554,
+      "end": 1749106939555,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749106332129,
-      "end": 1749106332129,
+      "start": 1749106939555,
+      "end": 1749106939555,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1749106332129,
-      "end": 1749106332129,
+      "start": 1749106939555,
+      "end": 1749106939555,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1749106332129,
-      "end": 1749106332129,
+      "start": 1749106939555,
+      "end": 1749106939555,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1749106332129,
-      "end": 1749106332129,
+      "start": 1749106939555,
+      "end": 1749106939555,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1749106332129,
-      "end": 1749106332129,
+      "start": 1749106939555,
+      "end": 1749106939555,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1749106332130,
-      "end": 1749106332130,
+      "start": 1749106939555,
+      "end": 1749106939555,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1749106332130,
-      "end": 1749106332130,
+      "start": 1749106939555,
+      "end": 1749106939555,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1749106332130,
-      "end": 1749106332130,
+      "start": 1749106939555,
+      "end": 1749106939556,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1749106332130,
-      "end": 1749106332130,
+      "start": 1749106939556,
+      "end": 1749106939556,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1749106332131,
-      "end": 1749106332131,
+      "start": 1749106939556,
+      "end": 1749106939556,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1749106332131,
-      "end": 1749106332131,
+      "start": 1749106939556,
+      "end": 1749106939556,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1749106332131,
-      "end": 1749106332132,
+      "start": 1749106939556,
+      "end": 1749106939556,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1749106332132,
-      "end": 1749106332132,
+      "start": 1749106939556,
+      "end": 1749106939557,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1749106332132,
-      "end": 1749106332132,
+      "start": 1749106939557,
+      "end": 1749106939557,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { useRouter } from '#app/composables/router';\nimport { watch } from 'vue';\nimport { useSeoMeta } from '@unhead/vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { createVNode as _createVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\";\nconst _hoisted_1 = { class: \"h-screen\" };\nimport CloudContent from \"~/components/Cloud/CloudContent.vue\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  setup(__props) {\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    const company = useCompanies();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if (window.history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    watch(() => company.company, (newValue) => {\n      let permission = company.company.modules?.find((item) => item.name_en === \"file_manager\");\n      if (!permission) {\n        if (window.history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Файл менеджер\",\n      description: \"Файловый менеджер для хранения или взаимодействия с файлами\"\n    });\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n        _createVNode(CloudContent)\n      ]);\n    };\n  }\n});\n",
-      "start": 1749106332132,
-      "end": 1749106332143,
+      "start": 1749106939557,
+      "end": 1749106939573,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -204,50 +204,50 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1749106332144,
-      "end": 1749106332144,
+      "start": 1749106939577,
+      "end": 1749106939577,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1749106332144,
-      "end": 1749106332144,
+      "start": 1749106939577,
+      "end": 1749106939577,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1749106332146,
-      "end": 1749106332146,
+      "start": 1749106939580,
+      "end": 1749106939580,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1749106332146,
-      "end": 1749106332146,
+      "start": 1749106939580,
+      "end": 1749106939580,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1749106332146,
-      "end": 1749106332146,
+      "start": 1749106939580,
+      "end": 1749106939580,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1749106332146,
-      "end": 1749106332146,
+      "start": 1749106939581,
+      "end": 1749106939581,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1749106332147,
-      "end": 1749106332147,
+      "start": 1749106939581,
+      "end": 1749106939581,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1749106332148,
-      "end": 1749106332148,
+      "start": 1749106939582,
+      "end": 1749106939582,
       "order": "normal"
     }
   ]

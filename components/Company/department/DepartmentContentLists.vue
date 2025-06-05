@@ -28,10 +28,9 @@ defineProps({
           {{ $t('Руководитель') }}
         </p>
         <p
-            class="mt-2"
-            v-if="departmentItem.department_director_name"
+            class="mt-2 text-mediumGray text-sm"
         >
-          {{ departmentItem.department_director_name || '---' }}</p>
+          {{ departmentItem.department_director_name || $t('Отсутствует') }}</p>
       </div>
       <div class="flex items-center justify-between">
         <p
@@ -40,10 +39,9 @@ defineProps({
           {{ $t('Заместитель') }}
         </p>
         <p
-            class="mt-2"
-            v-if="departmentItem.vice_department_director_name"
+            class="mt-2 text-mediumGray text-sm"
         >
-          {{ departmentItem.vice_department_director_name || '---' }}
+          {{ departmentItem.vice_department_director_name || $t('Отсутствует') }}
         </p>
       </div>
     </div>
