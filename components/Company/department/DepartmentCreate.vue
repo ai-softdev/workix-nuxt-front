@@ -24,7 +24,13 @@ const createForm = ref({
 
 <template>
   <div>
-    <TheButton class="w-full mr-auto" type="signIn" @click="showCreate = true">{{ $t('Создать департамент') }}</TheButton>
+    <TheButton
+        class="w-full mr-auto !rounded-full !bg-golden !text-black"
+        type="signIn"
+        @click="showCreate = true"
+    >
+      + {{ $t('Создать департамент') }}
+    </TheButton>
     <TheModal v-if="showCreate" @showModal="showCreate = !showCreate">
       <TheTextContent>{{ $t('Создать департамент') }}</TheTextContent>
       <form @submit.prevent="department.createDepartment({department: createForm}); showCreate = false; createForm.name = ' ' ">
