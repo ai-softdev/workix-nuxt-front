@@ -126,10 +126,21 @@ function dragLeave(event: any) {
 
 }
 
+function formatDate(data){
+  const date = new Date(data);
+  const formatted = date.toLocaleDateString('ru-RU', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  });
+
+  return formatted;
+}
+
 </script>
 
 <template>
-  <div class="w-full ">
+  <div class="w-full">
     <div class="absolute w-full h-full z-0 left-0 top-0"
          @contextmenu.prevent="function cloudContextMenu() {
                                 const top = unref(y) - unref(windowY)
@@ -188,15 +199,20 @@ function dragLeave(event: any) {
         </template>
       </TheCloudUIContextMenuItem>
     </UContextMenu>
-    <div class="my-10 w-full h-full">
-      <div class="flex max-[500px]:flex-col justify-between items-center">
-        <h2 class="text-lg dark:text-white tracking-widest mb-6">{{ $t('Файлы и папки') }}</h2>
+    <div class="mb-10 w-full h-full">
+      <div class="flex max-[500px]:flex-col justify-end items-center">
         <div>
-          <USelectMenu v-model="selected" :options="viewSelect">
+<!--          селект-->
+          <USelectMenu class="select" v-model="selected" :options="viewSelect">
             <template #label>
-              <UIcon :name="selected.icon" class="w-4 h-4">
-              </UIcon>
+              <div v-html="selected.svg" />
               {{ selected.label }}
+            </template>
+            <template #option="{ option }">
+              <div class="flex items-center gap-2">
+                <div v-html="option.svg" class="w-5 h-5"></div>
+                {{ option.label }}
+              </div>
             </template>
           </USelectMenu>
         </div>
@@ -204,7 +220,7 @@ function dragLeave(event: any) {
       <Transition name="slide-down">
         <div v-if="cloudStore.showObjectElem && elemObject?.id !== cloudStore.get_all_folders?.id"
              class="relative z-[20] w-7/12 flex justify-center mx-auto px-4 py-3 h-[50px] border rounded-lg text-center">
-          <p class="tracking-widest w-full">{{ $t('Наименование') + ': ' + elemObject?.name }}</p>
+          <p class="w-full">{{ $t('Наименование') + ': ' + elemObject?.name }}</p>
           <div class="flex gap-x-10">
             <button type="button" class="px-4 tracking-wider bg-blueSemiLight rounded-full"
                     @click="cloudStore.showObjectElem = false, elemObject = {}">{{ $t('Отмена') }}
@@ -238,6 +254,12 @@ function dragLeave(event: any) {
       <div class="flex mt-4 gap-x-2 gap-y-3 max-md:justify-center select-none pr-2 mb-20"
            :class="{'flex-col flex w-full ' : selected.type === 'list', 'flex-wrap max-[400px]:flex-col max-[400px]:items-center ' : selected.type ==='tile'}"
            @contextmenu.prevent>
+        <div
+            v-if="selected.type ==='list'"
+            class="flex items-center justify-between px-3">
+          <p>Имя</p>
+          <p>Дата создания</p>
+        </div>
         <div v-for="(folders, i) in cloudStore?.get_folder.folders"
              :class="{'w-2/12 max-[1300px]:w-3/12 max-lg:w-4/12 max-md:w-6/12 max-sm:w-8/12' : selected.type === 'tile'}">
           <div class="relative " :class="{'w-full' : selected.type === 'list'}">
@@ -274,19 +296,19 @@ function dragLeave(event: any) {
                                                       }
                                                     }"
                                    @click="activeElem.id = folders?.id; activeElem.type = 'folder'; activeElem.id === folderObject?.id ? showRead = true : showRead = false; showRead && folderObject ? folderObject = {} : folderObject"
-                                   :class="{'dark:bg-gray-700 bg-gray-200' : activeElem?.id === folders?.id, 'hover:dark:bg-gray-700 hover:bg-gray-100' : activeElem?.id === folders?.id, 'relative' : selected.type === 'tile' }"
+                                   :class="{'dark:bg-gray-700 bg-gray-200' : activeElem?.id === folders?.id, 'hover:dark:bg-gray-700 hover:bg-whiteLilia' : activeElem?.id === folders?.id, 'relative' : selected.type === 'tile' }"
             >
               <template v-slot:folderSvg>
                 <div>
-                  <svg :class="{'w-[100px] h-[100px]' : selected.type === 'tile'}" width="50px" height="50px"
-                       viewBox="0 0 1024 1024" class="icon" version="1.1"
-                       xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M853.333333 256H469.333333l-85.333333-85.333333H170.666667c-46.933333 0-85.333333   38.4-85.333334 85.333333v170.666667h853.333334v-85.333334c0-46.933333-38.4-85.333333-85.333334-85.333333z"
-                      fill="#FFA000"/>
-                    <path
-                      d="M853.333333 256H170.666667c-46.933333 0-85.333333 38.4-85.333334 85.333333v426.666667c0 46.933333 38.4 85.333333 85.333334 85.333333h682.666666c46.933333 0 85.333333-38.4 85.333334-85.333333V341.333333c0-46.933333-38.4-85.333333-85.333334-85.333333z"
-                      fill="#FFCA28"/>
+<!--                  <svg-->
+<!--                      :class="{'w-[100px] h-[100px]' : selected.type === 'tile'}"-->
+<!--                      viewBox="0 0 86 78" fill="none" xmlns="http://www.w3.org/2000/svg">-->
+<!--                    <path d="M47.1654 18.1667L42.5174 8.8705C41.1795 6.195 40.5108 4.85721 39.5129 3.87983C38.6304 3.01554 37.5666 2.35821 36.3991 1.95546C35.0787 1.5 33.5829 1.5 30.5916 1.5H14.6654C9.99828 1.5 7.6647 1.5 5.88211 2.40829C4.31407 3.20721 3.03924 4.48204 2.24032 6.05008C1.33203 7.83267 1.33203 10.1662 1.33203 14.8333V18.1667M1.33203 18.1667H64.6654C71.6662 18.1667 75.1662 18.1667 77.8404 19.5291C80.1925 20.7275 82.1045 22.6397 83.3029 24.9918C84.6654 27.6657 84.6654 31.1658 84.6654 38.1667V56.5C84.6654 63.5008 84.6654 67.0008 83.3029 69.675C82.1045 72.0271 80.1925 73.9392 77.8404 75.1375C75.1662 76.5 71.6662 76.5 64.6654 76.5H21.332C14.3314 76.5 10.831 76.5 8.15716 75.1375C5.80512 73.9392 3.89287 72.0271 2.69445 69.675C1.33203 67.0008 1.33203 63.5008 1.33203 56.5V18.1667Z" fill="#FDEFB2"/>-->
+<!--                    <path d="M47.1654 18.1667L42.5174 8.8705C41.1795 6.195 40.5108 4.85721 39.5129 3.87983C38.6304 3.01554 37.5666 2.35821 36.3991 1.95546C35.0787 1.5 33.5829 1.5 30.5916 1.5H14.6654C9.99828 1.5 7.6647 1.5 5.88212 2.40829C4.31407 3.20721 3.03924 4.48204 2.24032 6.05008C1.33203 7.83267 1.33203 10.1662 1.33203 14.8333V18.1667M1.33203 18.1667H64.6654C71.6662 18.1667 75.1662 18.1667 77.8404 19.5291C80.1925 20.7275 82.1045 22.6397 83.3029 24.9918C84.6654 27.6657 84.6654 31.1658 84.6654 38.1667V56.5C84.6654 63.5008 84.6654 67.0008 83.3029 69.675C82.1045 72.0271 80.1925 73.9392 77.8404 75.1375C75.1662 76.5 71.6662 76.5 64.6654 76.5H21.332C14.3314 76.5 10.831 76.5 8.15716 75.1375C5.80512 73.9392 3.89287 72.0271 2.69445 69.675C1.33203 67.0008 1.33203 63.5008 1.33203 56.5V18.1667Z" stroke="#EAB70A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>-->
+<!--                  </svg>-->
+                  <svg :class="{'!w-[100px] !h-[100px]' : selected.type === 'tile'}" width="30" height="30" viewBox="0 0 86 78" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M47.1654 18.1667L42.5174 8.8705C41.1795 6.195 40.5108 4.85721 39.5129 3.87983C38.6304 3.01554 37.5666 2.35821 36.3991 1.95546C35.0787 1.5 33.5829 1.5 30.5916 1.5H14.6654C9.99828 1.5 7.6647 1.5 5.88211 2.40829C4.31407 3.20721 3.03924 4.48204 2.24032 6.05008C1.33203 7.83267 1.33203 10.1662 1.33203 14.8333V18.1667M1.33203 18.1667H64.6654C71.6662 18.1667 75.1662 18.1667 77.8404 19.5291C80.1925 20.7275 82.1045 22.6397 83.3029 24.9918C84.6654 27.6657 84.6654 31.1658 84.6654 38.1667V56.5C84.6654 63.5008 84.6654 67.0008 83.3029 69.675C82.1045 72.0271 80.1925 73.9392 77.8404 75.1375C75.1662 76.5 71.6662 76.5 64.6654 76.5H21.332C14.3314 76.5 10.831 76.5 8.15716 75.1375C5.80512 73.9392 3.89287 72.0271 2.69445 69.675C1.33203 67.0008 1.33203 63.5008 1.33203 56.5V18.1667Z" fill="#FDEFB2"/>
+                    <path d="M47.1654 18.1667L42.5174 8.8705C41.1795 6.195 40.5108 4.85721 39.5129 3.87983C38.6304 3.01554 37.5666 2.35821 36.3991 1.95546C35.0787 1.5 33.5829 1.5 30.5916 1.5H14.6654C9.99828 1.5 7.6647 1.5 5.88212 2.40829C4.31407 3.20721 3.03924 4.48204 2.24032 6.05008C1.33203 7.83267 1.33203 10.1662 1.33203 14.8333V18.1667M1.33203 18.1667H64.6654C71.6662 18.1667 75.1662 18.1667 77.8404 19.5291C80.1925 20.7275 82.1045 22.6397 83.3029 24.9918C84.6654 27.6657 84.6654 31.1658 84.6654 38.1667V56.5C84.6654 63.5008 84.6654 67.0008 83.3029 69.675C82.1045 72.0271 80.1925 73.9392 77.8404 75.1375C75.1662 76.5 71.6662 76.5 64.6654 76.5H21.332C14.3314 76.5 10.831 76.5 8.15716 75.1375C5.80512 73.9392 3.89287 72.0271 2.69445 69.675C1.33203 67.0008 1.33203 63.5008 1.33203 56.5V18.1667Z" stroke="#EAB70A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </div>
               </template>
@@ -310,6 +332,9 @@ function dragLeave(event: any) {
                 <div v-else>
                   {{ folders.name?.length > 20 ? folders.name.slice(0, 30) + '...' : folders.name }}
                 </div>
+              </template>
+              <template v-slot:folderDate>
+                {{formatDate(folders.created_at)}}
               </template>
             </TheCloudUIFoldersItem>
             <Transition name="fade">
@@ -673,30 +698,45 @@ function dragLeave(event: any) {
           v-if="cart"
         >
           <template v-slot:folderSvg>
+<!--            мусорка-->
             <svg
-              v-if="cloudStore.get_hasFileInBin || cloudStore.get_bin.files.length > 0 || cloudStore.get_bin.folders.length > 0 "
-              class="" :class="{'w-[100px] h-[100px]' : selected.type === 'tile'}"
-              width="50px" height="50px"
-              viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
-              <path d="M512 454.4L270.933333 213.333333 554.666667 36.266667 817.066667 213.333333z" fill="#FFA000"/>
-              <path d="M512 454.4L270.933333 213.333333 362.666667 100.266667 817.066667 213.333333z" fill="#FFCA28"/>
-              <path
-                d="M652.8 938.666667H371.2c-42.666667 0-78.933333-29.866667-85.333333-72.533334L192 234.666667h640l-96 631.466666c-6.4 42.666667-42.666667 72.533333-83.2 72.533334z"
-                fill="#3fb1c9"/>
-              <path
-                d="M810.666667 277.333333H213.333333c-23.466667 0-42.666667-19.2-42.666666-42.666666s19.2-42.666667 42.666666-42.666667h597.333334c23.466667 0 42.666667 19.2 42.666666 42.666667s-19.2 42.666667-42.666666 42.666666z"
-                fill="#0077B6"/>
+                v-if="cloudStore.get_hasFileInBin || cloudStore.get_bin.files.length > 0 || cloudStore.get_bin.folders.length > 0 "
+                :class="{'!w-[100px] !h-[100px]' : selected.type === 'tile'}"
+                width="30" height="30" viewBox="0 0 78 79" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M26.5 2H51.5H26.5ZM1.5 14.5H76.5H1.5ZM68.1667 14.5L65.2446 58.3304C64.8062 64.9062 64.5871 68.1946 63.1667 70.6875C61.9162 72.8825 60.03 74.6471 57.7571 75.7487C55.175 77 51.8796 77 45.2887 77H32.7112C26.1205 77 22.8251 77 20.2431 75.7487C17.9698 74.6471 16.0837 72.8825 14.8332 70.6875C13.413 68.1946 13.1938 64.9062 12.7554 58.3304L9.83333 14.5" fill="#8DC6FF"/>
+              <path d="M26.5 2H51.5M1.5 14.5H76.5M68.1667 14.5L65.2446 58.3304C64.8062 64.9062 64.5871 68.1946 63.1667 70.6875C61.9162 72.8825 60.03 74.6471 57.7571 75.7487C55.175 77 51.8796 77 45.2887 77H32.7112C26.1205 77 22.8251 77 20.2431 75.7487C17.9698 74.6471 16.0837 72.8825 14.8332 70.6875C13.413 68.1946 13.1938 64.9062 12.7554 58.3304L9.83333 14.5" stroke="#1976D2" stroke-width="2.41" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            <svg v-else
-                 :class="{'w-[100px] h-[100px]' : selected.type == 'tile', 'w-[50px] h-[50px]' : selected.type == 'list'}"
-                 viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M652.8 938.666667H371.2c-42.666667 0-78.933333-29.866667-85.333333-72.533334L192 234.666667h640l-96 631.466666c-6.4 42.666667-42.666667 72.533333-83.2 72.533334z"
-                fill="#3fb1c9"/>
-              <path
-                d="M810.666667 277.333333H213.333333c-23.466667 0-42.666667-19.2-42.666666-42.666666s19.2-42.666667 42.666666-42.666667h597.333334c23.466667 0 42.666667 19.2 42.666666 42.666667s-19.2 42.666667-42.666666 42.666666z"
-                fill="#0077B6"/>
+<!--            <svg-->
+<!--              v-if="cloudStore.get_hasFileInBin || cloudStore.get_bin.files.length > 0 || cloudStore.get_bin.folders.length > 0 "-->
+<!--              class="" :class="{'w-[100px] h-[100px]' : selected.type === 'tile'}"-->
+<!--              width="50px" height="50px"-->
+<!--              viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">-->
+<!--              <path d="M512 454.4L270.933333 213.333333 554.666667 36.266667 817.066667 213.333333z" fill="#FFA000"/>-->
+<!--              <path d="M512 454.4L270.933333 213.333333 362.666667 100.266667 817.066667 213.333333z" fill="#FFCA28"/>-->
+<!--              <path-->
+<!--                d="M652.8 938.666667H371.2c-42.666667 0-78.933333-29.866667-85.333333-72.533334L192 234.666667h640l-96 631.466666c-6.4 42.666667-42.666667 72.533333-83.2 72.533334z"-->
+<!--                fill="#3fb1c9"/>-->
+<!--              <path-->
+<!--                d="M810.666667 277.333333H213.333333c-23.466667 0-42.666667-19.2-42.666666-42.666666s19.2-42.666667 42.666666-42.666667h597.333334c23.466667 0 42.666667 19.2 42.666666 42.666667s-19.2 42.666667-42.666666 42.666666z"-->
+<!--                fill="#0077B6"/>-->
+<!--            </svg>-->
+            <svg
+                v-else
+                :class="{'!w-[100px] !h-[100px]' : selected.type === 'tile'}"
+                width="30" height="30" viewBox="0 0 78 79" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M26.5 2H51.5H26.5ZM1.5 14.5H76.5H1.5ZM68.1667 14.5L65.2446 58.3304C64.8062 64.9062 64.5871 68.1946 63.1667 70.6875C61.9162 72.8825 60.03 74.6471 57.7571 75.7487C55.175 77 51.8796 77 45.2887 77H32.7112C26.1205 77 22.8251 77 20.2431 75.7487C17.9698 74.6471 16.0837 72.8825 14.8332 70.6875C13.413 68.1946 13.1938 64.9062 12.7554 58.3304L9.83333 14.5" fill="#8DC6FF"/>
+              <path d="M26.5 2H51.5M1.5 14.5H76.5M68.1667 14.5L65.2446 58.3304C64.8062 64.9062 64.5871 68.1946 63.1667 70.6875C61.9162 72.8825 60.03 74.6471 57.7571 75.7487C55.175 77 51.8796 77 45.2887 77H32.7112C26.1205 77 22.8251 77 20.2431 75.7487C17.9698 74.6471 16.0837 72.8825 14.8332 70.6875C13.413 68.1946 13.1938 64.9062 12.7554 58.3304L9.83333 14.5" stroke="#1976D2" stroke-width="2.41" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
+<!--            <svg v-else-->
+<!--                 :class="{'w-[100px] h-[100px]' : selected.type == 'tile', 'w-[50px] h-[50px]' : selected.type == 'list'}"-->
+<!--                 viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">-->
+<!--              <path-->
+<!--                d="M652.8 938.666667H371.2c-42.666667 0-78.933333-29.866667-85.333333-72.533334L192 234.666667h640l-96 631.466666c-6.4 42.666667-42.666667 72.533333-83.2 72.533334z"-->
+<!--                fill="#3fb1c9"/>-->
+<!--              <path-->
+<!--                d="M810.666667 277.333333H213.333333c-23.466667 0-42.666667-19.2-42.666666-42.666666s19.2-42.666667 42.666666-42.666667h597.333334c23.466667 0 42.666667 19.2 42.666666 42.666667s-19.2 42.666667-42.666666 42.666666z"-->
+<!--                fill="#0077B6"/>-->
+<!--            </svg>-->
           </template>
           <template v-slot:folderName>
             {{ $t('Корзина') }}
@@ -724,7 +764,7 @@ function dragLeave(event: any) {
   </div>
 </template>
 
-<style scoped lang="scss">
+<style>
 .dragged-enter {
   opacity: 0.3;
 }
@@ -746,5 +786,37 @@ function dragLeave(event: any) {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+.select button{
+  cursor: pointer;
+  padding: 11px 16px;
+  width: 150px !important;
+  border-radius: 30px !important;
+}
+.select .group  ul{
+  border-radius: 18px !important;
+}
+.select .group  ul li{
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-right: 40px !important;
+  border-radius: 18px !important;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+.select .group  ul li .i-heroicons-check-20-solid{
+  color: #4CAF50;
+}
+.select .group  ul li:hover {
+  color: #F4C107;
+  background-color: transparent !important;
+}
+
+[data-headlessui-state="active selected"] {
+  color: #F4C107;
+  background-color: transparent !important;
 }
 </style>

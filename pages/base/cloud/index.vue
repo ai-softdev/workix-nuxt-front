@@ -36,6 +36,11 @@ useSeoMeta({
 <template>
 
   <div class="h-screen">
+    <p
+        class="dark:text-white text-3xl font-bold"
+    >
+      {{$t('Структура файлов')}}
+    </p>
     <CloudContent/>
   </div>
 </template>

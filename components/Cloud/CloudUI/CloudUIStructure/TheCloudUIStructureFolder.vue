@@ -12,14 +12,18 @@ defineProps({
 </script>
 
 <template>
-  <div class="p-2 flex items-center gap-x-4 hover:bg-gray-700 transition-all duration-200 cursor-pointer rounded-lg ">
-    <div>
+  <div class="folder-box p-2 flex items-center text-black hover:text-golden gap-x-4 transition-all duration-200 cursor-pointer rounded-lg ">
+    <div class="rounded-lg border folder-border p-1 shrink-0">
       <slot name="structureSvg"/>
     </div>
-    <p class="tracking-widest text-sm"><slot name="structureName"/></p>
+    <p class="text-sm text-current">
+      <slot name="structureName"/>
+    </p>
   </div>
 </template>
 
-<style scoped lang="scss">
-
+<style scoped>
+.folder-box:hover .folder-border {
+  border-color: #F4C107;
+}
 </style>

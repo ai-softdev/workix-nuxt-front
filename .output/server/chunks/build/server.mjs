@@ -946,7 +946,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-D5DSZIZx.mjs').then((m) => m.default || m)
+        component: () => import('./index-CClcYwhf.mjs').then((m) => m.default || m)
       },
       {
         name: "base-companies-id",
@@ -1074,7 +1074,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./storage-BxVIW5ko.mjs').then((m) => m.default || m),
+        component: () => import('./storage-aDYoh5_W.mjs').then((m) => m.default || m),
         children: [
           {
             name: "base-storage-slug-nestedSlug",

@@ -4,44 +4,44 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, createVNode as _createVNode, unref as _unref, renderList as _renderList, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock, createCommentVNode as _createCommentVNode, createBlock as _createBlock } from \"vue\"\n\nconst _hoisted_1 = { class: \"flex items-center justify-between\" }\nconst _hoisted_2 = { class: \"dark:text-white text-3xl font-bold mb-6\" }\nconst _hoisted_3 = { class: \"flex relative items-center justify-between w-full gap-x-10 mt-4\" }\nconst _hoisted_4 = { class: \"text-mediumGray w-6/12\" }\nconst _hoisted_5 = { class: \"mt-8\" }\nconst _hoisted_6 = {\n  key: 0,\n  class: \"flex w-full gap-y-4 gap-x-4 flex-wrap\"\n}\nconst _hoisted_7 = {\n  key: 1,\n  class: \"grid grid-cols-4 gap-5\"\n}\nconst _hoisted_8 = { class: \"mt-6 flex items-center justify-end gap-1\" }\nconst _hoisted_9 = { class: \"font-bold\" }\n\nimport DepartmentContentLists from \"~/components/Company/department/DepartmentContentLists.vue\";\r\nimport DepartmentCreate from \"~/components/Company/department/DepartmentCreate.vue\";\r\nimport {useCompanies} from \"~/stores/companies\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\r\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\r\nimport TheFilter from \"~/components/UI/TheFilter.vue\";\r\nimport TheBreadcrumbs from \"~/components/UI/TheBreadcrumbs.vue\";\r\nimport TheContentBlock from \"~/components/UI/TheContentBlock.vue\";\r\nimport TheSceleton from \"~/components/UI/TheSceleton.vue\";\r\nimport TheTextarea from \"~/components/UI/TheTextareaAutosize.vue\";\r\nimport {useChat} from \"~/stores/chat\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'index',\n  props: {\r\n  formTitle: String\r\n},\n  setup(__props) {\n\r\nconst chat = useChat()\r\nconst currentUser = useAuthStore()\r\nconst departmentList = useCompanies()\r\ndepartmentList.loadDepartmentList()\r\n\r\n\r\nconst router = useRouter()\r\nconst loadAuthStore = useAuthStore()\r\n\r\nwatch(() => loadAuthStore.user, (newValue) => {\r\n  if(loadAuthStore?.user?.role?.name_en === 'admin'){\r\n    if (window.history.length > 1) {\r\n      router.push('/base/profile');\r\n    } else {\r\n      router.push('/');\r\n    }\r\n  }\r\n})\r\n\r\nuseSeoMeta({\r\n  title: 'Департаменты',\r\n  description: 'Список департаментов компании'\r\n})\r\n\nreturn (_ctx: any,_cache: any) => {\n  return (_openBlock(), _createElementBlock(\"div\", null, [\n    _createElementVNode(\"div\", _hoisted_1, [\n      _createElementVNode(\"p\", _hoisted_2, _toDisplayString(_ctx.$t('Страница департаментов компании')), 1),\n      _createVNode(DepartmentCreate, { class: \"w-3/12 max-md:w-9/12 max-md:mb-4 text-sm\" })\n    ]),\n    _createElementVNode(\"div\", _hoisted_3, [\n      _createElementVNode(\"p\", _hoisted_4, _toDisplayString(_ctx.$t('Кликните на отдел, чтобы посмотреть доступные должности.')), 1)\n    ]),\n    _createElementVNode(\"div\", _hoisted_5, [\n      (!_unref(departmentList).get_all_department.results)\n        ? (_openBlock(), _createElementBlock(\"div\", _hoisted_6, [\n            (_openBlock(), _createElementBlock(_Fragment, null, _renderList(6, (item) => {\n              return _createVNode(TheSceleton, {\n                \"border-radius\": \"10px\",\n                width: \"30%\",\n                height: \"100px\"\n              })\n            }), 64))\n          ]))\n        : (_openBlock(), _createElementBlock(\"div\", _hoisted_7, [\n            (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(departmentList)?.get_all_department.results, (department) => {\n              return (_openBlock(), _createBlock(DepartmentContentLists, { \"department-item\": department }, null, 8, [\"department-item\"]))\n            }), 256))\n          ])),\n      _createElementVNode(\"div\", _hoisted_8, [\n        _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t('Количество департаментов')) + \": \", 1),\n        _createElementVNode(\"p\", _hoisted_9, _toDisplayString(_unref(departmentList).get_all_department.count), 1)\n      ])\n    ])\n  ]))\n}\n}\n\n})",
-      "start": 1749115970994,
-      "end": 1749115970994
+      "start": 1749645712704,
+      "end": 1749645712704
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1749115970994,
-      "end": 1749115970994,
+      "start": 1749645712704,
+      "end": 1749645712704,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1749115970994,
-      "end": 1749115970994,
+      "start": 1749645712704,
+      "end": 1749645712704,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1749115970994,
-      "end": 1749115970994,
+      "start": 1749645712704,
+      "end": 1749645712704,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1749115970994,
-      "end": 1749115970994,
+      "start": 1749645712704,
+      "end": 1749645712704,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1749115970994,
-      "end": 1749115970994,
+      "start": 1749645712704,
+      "end": 1749645712704,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, createVNode as _createVNode, unref as _unref, renderList as _renderList, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock, createBlock as _createBlock } from \"vue\";\nconst _hoisted_1 = { class: \"flex items-center justify-between\" };\nconst _hoisted_2 = { class: \"dark:text-white text-3xl font-bold mb-6\" };\nconst _hoisted_3 = { class: \"flex relative items-center justify-between w-full gap-x-10 mt-4\" };\nconst _hoisted_4 = { class: \"text-mediumGray w-6/12\" };\nconst _hoisted_5 = { class: \"mt-8\" };\nconst _hoisted_6 = {\n  key: 0,\n  class: \"flex w-full gap-y-4 gap-x-4 flex-wrap\"\n};\nconst _hoisted_7 = {\n  key: 1,\n  class: \"grid grid-cols-4 gap-5\"\n};\nconst _hoisted_8 = { class: \"mt-6 flex items-center justify-end gap-1\" };\nconst _hoisted_9 = { class: \"font-bold\" };\nimport DepartmentContentLists from \"~/components/Company/department/DepartmentContentLists.vue\";\nimport DepartmentCreate from \"~/components/Company/department/DepartmentCreate.vue\";\nimport { useCompanies } from \"~/stores/companies\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport TheSceleton from \"~/components/UI/TheSceleton.vue\";\nimport { useChat } from \"~/stores/chat\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  props: {\n    formTitle: String\n  },\n  setup(__props) {\n    const chat = useChat();\n    const currentUser = useAuthStore();\n    const departmentList = useCompanies();\n    departmentList.loadDepartmentList();\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if (window.history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Департаменты\",\n      description: \"Список департаментов компании\"\n    });\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", null, [\n        _createElementVNode(\"div\", _hoisted_1, [\n          _createElementVNode(\"p\", _hoisted_2, _toDisplayString(_ctx.$t(\"Страница департаментов компании\")), 1),\n          _createVNode(DepartmentCreate, { class: \"w-3/12 max-md:w-9/12 max-md:mb-4 text-sm\" })\n        ]),\n        _createElementVNode(\"div\", _hoisted_3, [\n          _createElementVNode(\"p\", _hoisted_4, _toDisplayString(_ctx.$t(\"Кликните на отдел, чтобы посмотреть доступные должности.\")), 1)\n        ]),\n        _createElementVNode(\"div\", _hoisted_5, [\n          !_unref(departmentList).get_all_department.results ? (_openBlock(), _createElementBlock(\"div\", _hoisted_6, [\n            (_openBlock(), _createElementBlock(_Fragment, null, _renderList(6, (item) => {\n              return _createVNode(TheSceleton, {\n                \"border-radius\": \"10px\",\n                width: \"30%\",\n                height: \"100px\"\n              });\n            }), 64))\n          ])) : (_openBlock(), _createElementBlock(\"div\", _hoisted_7, [\n            (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(departmentList)?.get_all_department.results, (department) => {\n              return _openBlock(), _createBlock(DepartmentContentLists, { \"department-item\": department }, null, 8, [\"department-item\"]);\n            }), 256))\n          ])),\n          _createElementVNode(\"div\", _hoisted_8, [\n            _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t(\"Количество департаментов\")) + \": \", 1),\n            _createElementVNode(\"p\", _hoisted_9, _toDisplayString(_unref(departmentList).get_all_department.count), 1)\n          ])\n        ])\n      ]);\n    };\n  }\n});\n",
-      "start": 1749115970994,
-      "end": 1749115971505,
+      "start": 1749645712704,
+      "end": 1749645714794,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -57,141 +57,141 @@
     },
     {
       "name": "vite:json",
-      "start": 1749115971505,
-      "end": 1749115971505,
+      "start": 1749645714794,
+      "end": 1749645714794,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1749115971506,
-      "end": 1749115971506,
+      "start": 1749645714794,
+      "end": 1749645714794,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1749115971506,
-      "end": 1749115971506,
+      "start": 1749645714794,
+      "end": 1749645714794,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1749115971506,
-      "end": 1749115971506,
+      "start": 1749645714794,
+      "end": 1749645714794,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749115971506,
-      "end": 1749115971506,
+      "start": 1749645714794,
+      "end": 1749645714794,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1749115971507,
-      "end": 1749115971507,
+      "start": 1749645714794,
+      "end": 1749645714794,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1749115971507,
-      "end": 1749115971507,
+      "start": 1749645714794,
+      "end": 1749645714794,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1749115971507,
-      "end": 1749115971507,
+      "start": 1749645714795,
+      "end": 1749645714795,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749115971507,
-      "end": 1749115971507,
+      "start": 1749645714795,
+      "end": 1749645714795,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1749115971507,
-      "end": 1749115971507,
+      "start": 1749645714795,
+      "end": 1749645714795,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1749115971507,
-      "end": 1749115971507,
+      "start": 1749645714795,
+      "end": 1749645714795,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1749115971508,
-      "end": 1749115971508,
+      "start": 1749645714795,
+      "end": 1749645714795,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1749115971508,
-      "end": 1749115971508,
+      "start": 1749645714795,
+      "end": 1749645714795,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1749115971508,
-      "end": 1749115971508,
+      "start": 1749645714795,
+      "end": 1749645714795,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1749115971508,
-      "end": 1749115971508,
+      "start": 1749645714795,
+      "end": 1749645714795,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1749115971508,
-      "end": 1749115971508,
+      "start": 1749645714795,
+      "end": 1749645714795,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1749115971508,
-      "end": 1749115971508,
+      "start": 1749645714795,
+      "end": 1749645714795,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1749115971509,
-      "end": 1749115971509,
+      "start": 1749645714795,
+      "end": 1749645714795,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1749115971509,
-      "end": 1749115971509,
+      "start": 1749645714796,
+      "end": 1749645714796,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1749115971509,
-      "end": 1749115971509,
+      "start": 1749645714796,
+      "end": 1749645714796,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1749115971509,
-      "end": 1749115971510,
+      "start": 1749645714796,
+      "end": 1749645714796,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1749115971510,
-      "end": 1749115971510,
+      "start": 1749645714796,
+      "end": 1749645714796,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { useRouter } from '#app/composables/router';\nimport { watch } from 'vue';\nimport { useSeoMeta } from '@unhead/vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, createVNode as _createVNode, unref as _unref, renderList as _renderList, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock, createBlock as _createBlock } from \"vue\";\nconst _hoisted_1 = { class: \"flex items-center justify-between\" };\nconst _hoisted_2 = { class: \"dark:text-white text-3xl font-bold mb-6\" };\nconst _hoisted_3 = { class: \"flex relative items-center justify-between w-full gap-x-10 mt-4\" };\nconst _hoisted_4 = { class: \"text-mediumGray w-6/12\" };\nconst _hoisted_5 = { class: \"mt-8\" };\nconst _hoisted_6 = {\n  key: 0,\n  class: \"flex w-full gap-y-4 gap-x-4 flex-wrap\"\n};\nconst _hoisted_7 = {\n  key: 1,\n  class: \"grid grid-cols-4 gap-5\"\n};\nconst _hoisted_8 = { class: \"mt-6 flex items-center justify-end gap-1\" };\nconst _hoisted_9 = { class: \"font-bold\" };\nimport DepartmentContentLists from \"~/components/Company/department/DepartmentContentLists.vue\";\nimport DepartmentCreate from \"~/components/Company/department/DepartmentCreate.vue\";\nimport { useCompanies } from \"~/stores/companies\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport TheSceleton from \"~/components/UI/TheSceleton.vue\";\nimport { useChat } from \"~/stores/chat\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  props: {\n    formTitle: String\n  },\n  setup(__props) {\n    const chat = useChat();\n    const currentUser = useAuthStore();\n    const departmentList = useCompanies();\n    departmentList.loadDepartmentList();\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if (window.history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Департаменты\",\n      description: \"Список департаментов компании\"\n    });\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", null, [\n        _createElementVNode(\"div\", _hoisted_1, [\n          _createElementVNode(\"p\", _hoisted_2, _toDisplayString(_ctx.$t(\"Страница департаментов компании\")), 1),\n          _createVNode(DepartmentCreate, { class: \"w-3/12 max-md:w-9/12 max-md:mb-4 text-sm\" })\n        ]),\n        _createElementVNode(\"div\", _hoisted_3, [\n          _createElementVNode(\"p\", _hoisted_4, _toDisplayString(_ctx.$t(\"Кликните на отдел, чтобы посмотреть доступные должности.\")), 1)\n        ]),\n        _createElementVNode(\"div\", _hoisted_5, [\n          !_unref(departmentList).get_all_department.results ? (_openBlock(), _createElementBlock(\"div\", _hoisted_6, [\n            (_openBlock(), _createElementBlock(_Fragment, null, _renderList(6, (item) => {\n              return _createVNode(TheSceleton, {\n                \"border-radius\": \"10px\",\n                width: \"30%\",\n                height: \"100px\"\n              });\n            }), 64))\n          ])) : (_openBlock(), _createElementBlock(\"div\", _hoisted_7, [\n            (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(departmentList)?.get_all_department.results, (department) => {\n              return _openBlock(), _createBlock(DepartmentContentLists, { \"department-item\": department }, null, 8, [\"department-item\"]);\n            }), 256))\n          ])),\n          _createElementVNode(\"div\", _hoisted_8, [\n            _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t(\"Количество департаментов\")) + \": \", 1),\n            _createElementVNode(\"p\", _hoisted_9, _toDisplayString(_unref(departmentList).get_all_department.count), 1)\n          ])\n        ])\n      ]);\n    };\n  }\n});\n",
-      "start": 1749115971511,
-      "end": 1749115971534,
+      "start": 1749645714797,
+      "end": 1749645714807,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -204,50 +204,50 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1749115971534,
-      "end": 1749115971534,
+      "start": 1749645714807,
+      "end": 1749645714807,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1749115971535,
-      "end": 1749115971535,
+      "start": 1749645714811,
+      "end": 1749645714811,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1749115971535,
-      "end": 1749115971535,
+      "start": 1749645714811,
+      "end": 1749645714811,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1749115971535,
-      "end": 1749115971535,
+      "start": 1749645714812,
+      "end": 1749645714812,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1749115971536,
-      "end": 1749115971536,
+      "start": 1749645714812,
+      "end": 1749645714812,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1749115971536,
-      "end": 1749115971536,
+      "start": 1749645714812,
+      "end": 1749645714812,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1749115971537,
-      "end": 1749115971537,
+      "start": 1749645714812,
+      "end": 1749645714813,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1749115971537,
-      "end": 1749115971537,
+      "start": 1749645714813,
+      "end": 1749645714813,
       "order": "normal"
     }
   ]

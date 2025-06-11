@@ -33,9 +33,9 @@ defineProps({
 
 <template>
   <div
-       class="flex relative  cursor-pointer rounded-xl p-2 hover:bg-gray-200 dark:hover:bg-gray-700 items-center justify-between tracking-widest text-sm dark:text-white"
-       :class="{'flex-col' : changeView === 'tile'}">
-    <div class="flex items-center gap-x-6" :class="{'flex-col' : changeView === 'tile'}">
+       class="flex relative  cursor-pointer rounded-xl p-2 hover:bg-whiteLilia dark:hover:bg-gray-700 items-center justify-between text-sm dark:text-white"
+       :class="{'flex-col !p-4' : changeView === 'tile'}">
+    <div class="flex items-center gap-6" :class="{'flex-col' : changeView === 'tile'}">
       <div>
         <slot name="folderSvg"/>
       </div>
@@ -44,7 +44,7 @@ defineProps({
       </div>
     </div>
     <div class="flex justify-evenly gap-x-10 items-center" :class="{'hidden' : changeView === 'tile'}">
-      <p>
+      <p class="text-mediumGray">
         <slot name="folderDate"/>
       </p>
       <p>

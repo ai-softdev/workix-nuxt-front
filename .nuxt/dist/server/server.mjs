@@ -882,7 +882,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$r == null ? void 0 : __nuxt_page_meta$r.redirect,
-        component: () => import("./_nuxt/index-D5DSZIZx.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/index-CClcYwhf.js").then((m) => m.default || m)
       },
       {
         name: "base-companies-id",
@@ -1010,7 +1010,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$9 == null ? void 0 : __nuxt_page_meta$9.redirect,
-        component: () => import("./_nuxt/storage-BxVIW5ko.js").then((m) => m.default || m),
+        component: () => import("./_nuxt/storage-aDYoh5_W.js").then((m) => m.default || m),
         children: [
           {
             name: "base-storage-slug-nestedSlug",
