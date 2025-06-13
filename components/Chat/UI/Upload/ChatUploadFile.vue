@@ -8,8 +8,8 @@ const chat = useChat()
 
 <template>
   <label for="loadFiles"
-         class="mx-auto absolute bottom-2 z-0 cursor-pointer flex justify-center"
-         :class="{'right-12' : !chat.messageUpdate.file}">
+         class="mx-auto absolute bottom-5 z-0 cursor-pointer flex justify-center"
+         :class="{'right-16' : !chat.messageUpdate.file}">
     <Transition name="fade">
       <div v-if="!chat.messageUpdate.file && !chat.messageUpdate.id && !chat.recordingVoice" class="flex justify-center w-full mx-auto ml-2">
         <svg class="fill-gray-500 dark:hover:fill-gray-300 hover:fill-gray-700 transition-all" width="35px" height="35px"

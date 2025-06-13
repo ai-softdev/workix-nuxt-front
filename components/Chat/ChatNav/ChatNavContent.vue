@@ -17,8 +17,13 @@ const route = useRoute()
 
 <template>
   <div class="h-[80%] max-md:h-[80%] overflow-y-auto mt-4 max-md:w-full">
-    <div v-if="chatStore.searchElem === ''" class="flex flex-col mb-20">
-      <ChatNavContentUser v-if="userStore.get_user_list.results"></ChatNavContentUser>
+    <div
+        v-if="chatStore.searchElem === ''"
+        class="flex flex-col mb-20"
+    >
+      <ChatNavContentUser
+          v-if="userStore.get_user_list.results"
+      />
       <div v-for="i in 4" v-else class="flex justify-center relative flex-col items-center mb-2">
         <TheSceleton class="dark:opacity-20 opacity-60" width="90%" height="70px" border-radius="10px">
         </TheSceleton>
@@ -40,10 +45,10 @@ const route = useRoute()
                     chatStore.flag = true
                   })
                 }; chatStore.showPinnedWindow = false; chatStore.searchElem = '' ; chatStore.activeChatNav = false"
-                class="flex items-center px-4 gap-x-2 dark:hover:bg-gray-500 hover:bg-gray-300 cursor-pointer transition-all duration-200 p-1"
+                class="flex items-center px-4 gap-x-2 dark:hover:bg-gray-500 hover:bg-azure !bg-opacity-10 cursor-pointer transition-all duration-200 p-1"
                 :class="{'dark:hover:!bg-semiCyan' : route.path === `/base/chat/${userSearchList.id}`, 'hover:!bg-cyan' : route.path === `/base/chat/${userSearchList.id}`}">
-        <img class="w-[50px] h-[50px] rounded-full" :src="user.get_server_domain + userSearchList.photo_url" alt="">
-        <p class="text-sm break-words">{{ userSearchList.first_name + ' ' + userSearchList.last_name }}</p>
+        <img class="w-[50px] h-[50px] rounded-full" :src="userSearchList.photo" alt="use-photo">
+        <p class="text-sm break-words font-bold">{{ userSearchList.first_name + ' ' + userSearchList.last_name }}</p>
       </NuxtLink>
     </div>
   </div>

@@ -64,13 +64,13 @@ useSeoMeta({
 
 
 <template>
-  <div class="!mx-0 !py-0">
+  <div class="!mx-0 !p-10">
     <div
-      class="dark:border-t-gray-500 dark:shadow-gray-500 dark:bg-gray-800 bg-gray-300 flex w-full border-t border-t-gray-100 dark:text-white rounded-lg shadow-md">
+      class="bg-white border flex w-full border-t border-t-gray-100 dark:text-white rounded-3xl shadow-chat overflow-hidden">
       <div
-        class="max-md:absolute h-screen overflow-hidden relative z-[12] rounded-l-lg dark:bg-gray-700 bg-gray-200 transition-all duration-300 w-[320px]"
+        class="max-md:absolute h-screen overflow-hidden relative z-[12] rounded-l-3xl dark:bg-gray-700 border-r bg-white transition-all duration-300 w-[320px]"
         :class="{'max-md:w-0' : !chatStore.activeChatNav || route.path === `/base/chat/${route.params.id}`, 'max-md:w-full ' : route.path === `/base/chat`, 'w-[320px]' : !userStore.get_user_list.results || !chatStore.activeChatNav}">
-        <ChatNav class=""/>
+        <ChatNav/>
       </div>
       <div class="w-11/12 relative overflow-hidden max-lg:w-9/12 max-md:w-full h-screen">
         <ClientOnly>
@@ -79,8 +79,8 @@ useSeoMeta({
         </ClientOnly>
         <div v-if="route.path === '/base/chat'"
              class="flex items-center justify-center my-auto w-full h-full text-center rounded-full px-2">
-          <p class="bg-black text-white bg-opacity-40 px-10 py-2 rounded-full">
-            {{ $t('Выберите пользователя для того чтобы открыть чат') }}</p>
+          <p class="bg-black bg-opacity-5 px-10 py-2 rounded-full">
+            {{ $t('Выберите контакт для сообщения') }}</p>
         </div>
       </div>
     </div>

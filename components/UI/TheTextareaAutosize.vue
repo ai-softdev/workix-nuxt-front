@@ -32,7 +32,7 @@ const props = defineProps({
    :v-model="modelValue"
    :value="modelValue"
    ref="el"
-   class=" placeholder-style p-4 resize-none example break-words dark:bg-gray-700 bg-gray-200 w-full max-h-[300px] items-center border-l border-black dark:border-opacity-20 border-opacity-10 outline-none text-sm tracking-wide"
+   class="bg-whiteLilia placeholder-style p-4 resize-none example break-words dark:bg-gray-700 w-full max-h-[300px] items-center outline-none text-sm"
    placeholder="Написать сообщение..."/>
 </template>
 

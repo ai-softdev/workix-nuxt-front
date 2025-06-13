@@ -3,82 +3,82 @@
   "transforms": [
     {
       "name": "vite:load-fallback",
-      "result": "<script setup lang=\"ts\">\r\nimport TheSceleton from \"~/components/UI/TheSceleton.vue\";\r\nimport {useUserStore} from \"~/stores/users\";\r\nimport {useChat} from \"~/stores/chat\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport {useRoute} from \"vue-router\";\r\nimport ChatNavContentUser from \"~/components/Chat/ChatNav/ChatNavContentUser.vue\";\r\nimport {setFocus} from \"~/hooks/ElemUI\";\r\n\r\nconst userStore = useUserStore()\r\nconst chatStore = useChat()\r\nconst user = useAuthStore()\r\nconst route = useRoute()\r\n\r\n</script>\r\n\r\n\r\n<template>\r\n  <div class=\"h-[80%] max-md:h-[80%] overflow-y-auto mt-4 max-md:w-full\">\r\n    <div v-if=\"chatStore.searchElem === ''\" class=\"flex flex-col mb-20\">\r\n      <ChatNavContentUser v-if=\"userStore.get_user_list.results\"></ChatNavContentUser>\r\n      <div v-for=\"i in 4\" v-else class=\"flex justify-center relative flex-col items-center mb-2\">\r\n        <TheSceleton class=\"dark:opacity-20 opacity-60\" width=\"90%\" height=\"70px\" border-radius=\"10px\">\r\n        </TheSceleton>\r\n        <div class=\"absolute left-6 max-md:left-10 flex items-center\">\r\n          <TheSceleton class=\"dark:opacity-20\" width=\"50px\" height=\"50px\" border-radius=\"100%\"></TheSceleton>\r\n          <div class=\"ml-4 flex flex-col dark:opacity-20 gap-y-2\">\r\n            <TheSceleton class=\"\" width=\"150px\" height=\"10px\" border-radius=\"4px\"></TheSceleton>\r\n            <TheSceleton class=\"\" width=\"150px\" height=\"10px\" border-radius=\"4px\"></TheSceleton>\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div v-if=\"chatStore.searchElem !== ''\" class=\"\">\r\n      <NuxtLink :to=\"`/base/chat/${chatStore.get_user_chat?.id}`\" v-for=\"userSearchList in userStore.get_user_search.results\"\r\n                @click=\"userSearchList.id !== chatStore.get_user_chat.user?.id ? chatStore.createChatUser({user_id: userSearchList.id}) : ()=>{\r\n                  chatStore.flag = false;\r\n                  nextTick(()=>{\r\n                    chatStore.flag = true\r\n                  })\r\n                }; chatStore.showPinnedWindow = false; chatStore.searchElem = '' ; chatStore.activeChatNav = false\"\r\n                class=\"flex items-center px-4 gap-x-2 dark:hover:bg-gray-500 hover:bg-gray-300 cursor-pointer transition-all duration-200 p-1\"\r\n                :class=\"{'dark:hover:!bg-semiCyan' : route.path === `/base/chat/${userSearchList.id}`, 'hover:!bg-cyan' : route.path === `/base/chat/${userSearchList.id}`}\">\r\n        <img class=\"w-[50px] h-[50px] rounded-full\" :src=\"user.get_server_domain + userSearchList.photo_url\" alt=\"\">\r\n        <p class=\"text-sm break-words\">{{ userSearchList.first_name + ' ' + userSearchList.last_name }}</p>\r\n      </NuxtLink>\r\n    </div>\r\n  </div>\r\n</template>\r\n\r\n<style scoped lang=\"scss\">\r\n\r\n</style>",
-      "start": 1749645769761,
-      "end": 1749645770171,
+      "result": "<script setup lang=\"ts\">\r\nimport TheSceleton from \"~/components/UI/TheSceleton.vue\";\r\nimport {useUserStore} from \"~/stores/users\";\r\nimport {useChat} from \"~/stores/chat\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport {useRoute} from \"vue-router\";\r\nimport ChatNavContentUser from \"~/components/Chat/ChatNav/ChatNavContentUser.vue\";\r\nimport {setFocus} from \"~/hooks/ElemUI\";\r\n\r\nconst userStore = useUserStore()\r\nconst chatStore = useChat()\r\nconst user = useAuthStore()\r\nconst route = useRoute()\r\n\r\n</script>\r\n\r\n\r\n<template>\r\n  <div class=\"h-[80%] max-md:h-[80%] overflow-y-auto mt-4 max-md:w-full\">\r\n    <div\r\n        v-if=\"chatStore.searchElem === ''\"\r\n        class=\"flex flex-col mb-20\"\r\n    >\r\n      <ChatNavContentUser\r\n          v-if=\"userStore.get_user_list.results\"\r\n      />\r\n      <div v-for=\"i in 4\" v-else class=\"flex justify-center relative flex-col items-center mb-2\">\r\n        <TheSceleton class=\"dark:opacity-20 opacity-60\" width=\"90%\" height=\"70px\" border-radius=\"10px\">\r\n        </TheSceleton>\r\n        <div class=\"absolute left-6 max-md:left-10 flex items-center\">\r\n          <TheSceleton class=\"dark:opacity-20\" width=\"50px\" height=\"50px\" border-radius=\"100%\"></TheSceleton>\r\n          <div class=\"ml-4 flex flex-col dark:opacity-20 gap-y-2\">\r\n            <TheSceleton class=\"\" width=\"150px\" height=\"10px\" border-radius=\"4px\"></TheSceleton>\r\n            <TheSceleton class=\"\" width=\"150px\" height=\"10px\" border-radius=\"4px\"></TheSceleton>\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div v-if=\"chatStore.searchElem !== ''\" class=\"\">\r\n      <NuxtLink :to=\"`/base/chat/${chatStore.get_user_chat?.id}`\" v-for=\"userSearchList in userStore.get_user_search.results\"\r\n                @click=\"userSearchList.id !== chatStore.get_user_chat.user?.id ? chatStore.createChatUser({user_id: userSearchList.id}) : ()=>{\r\n                  chatStore.flag = false;\r\n                  nextTick(()=>{\r\n                    chatStore.flag = true\r\n                  })\r\n                }; chatStore.showPinnedWindow = false; chatStore.searchElem = '' ; chatStore.activeChatNav = false\"\r\n                class=\"flex items-center px-4 gap-x-2 dark:hover:bg-gray-500 hover:bg-azure !bg-opacity-10 cursor-pointer transition-all duration-200 p-1\"\r\n                :class=\"{'dark:hover:!bg-semiCyan' : route.path === `/base/chat/${userSearchList.id}`, 'hover:!bg-cyan' : route.path === `/base/chat/${userSearchList.id}`}\">\r\n        <img class=\"w-[50px] h-[50px] rounded-full\" :src=\"userSearchList.photo\" alt=\"use-photo\">\r\n        <p class=\"text-sm break-words font-bold\">{{ userSearchList.first_name + ' ' + userSearchList.last_name }}</p>\r\n      </NuxtLink>\r\n    </div>\r\n  </div>\r\n</template>\r\n\r\n<style scoped lang=\"scss\">\r\n\r\n</style>",
+      "start": 1749796924125,
+      "end": 1749796924656,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1749645770171,
-      "end": 1749645770171,
+      "start": 1749796924656,
+      "end": 1749796924656,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1749645770171,
-      "end": 1749645770171,
+      "start": 1749796924656,
+      "end": 1749796924656,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1749645770171,
-      "end": 1749645770171,
+      "start": 1749796924656,
+      "end": 1749796924656,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1749645770171,
-      "end": 1749645770171,
+      "start": 1749796924656,
+      "end": 1749796924656,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1749645770171,
-      "end": 1749645770171,
+      "start": 1749796924656,
+      "end": 1749796924656,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1749645770171,
-      "end": 1749645770171,
+      "start": 1749796924656,
+      "end": 1749796924656,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1749645770171,
-      "end": 1749645770171,
+      "start": 1749796924656,
+      "end": 1749796924656,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1749645770171,
-      "end": 1749645770171,
+      "start": 1749796924656,
+      "end": 1749796924656,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1749645770171,
-      "end": 1749645770171,
+      "start": 1749796924656,
+      "end": 1749796924656,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1749645770171,
-      "end": 1749645770171,
+      "start": 1749796924656,
+      "end": 1749796924656,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1749645770171,
-      "end": 1749645770171,
+      "start": 1749796924656,
+      "end": 1749796924656,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "import _sfc_main from \"D:/projects/nuxt/workix-nuxt-front/components/Chat/ChatNav/ChatNavContent.vue?vue&type=script&setup=true&lang.ts\";\nexport * from \"D:/projects/nuxt/workix-nuxt-front/components/Chat/ChatNav/ChatNavContent.vue?vue&type=script&setup=true&lang.ts\";\nimport { useSSRContext as __vite_useSSRContext } from \"vue\";\nconst _sfc_setup = _sfc_main.setup;\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext();\n  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(\"components/Chat/ChatNav/ChatNavContent.vue\");\n  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;\n};\nexport default _sfc_main;\n",
-      "start": 1749645770171,
-      "end": 1749645770487,
+      "start": 1749796924656,
+      "end": 1749796925246,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -86,212 +86,212 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1749645770487,
-      "end": 1749645770487,
+      "start": 1749796925247,
+      "end": 1749796925247,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749645770487,
-      "end": 1749645770487,
+      "start": 1749796925247,
+      "end": 1749796925247,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749645770487,
-      "end": 1749645770487,
+      "start": 1749796925247,
+      "end": 1749796925247,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1749645770487,
-      "end": 1749645770487,
+      "start": 1749796925247,
+      "end": 1749796925247,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1749645770487,
-      "end": 1749645770487,
+      "start": 1749796925247,
+      "end": 1749796925247,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1749645770488,
-      "end": 1749645770488,
+      "start": 1749796925248,
+      "end": 1749796925248,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749645770488,
-      "end": 1749645770488,
+      "start": 1749796925249,
+      "end": 1749796925249,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1749645770488,
-      "end": 1749645770488,
+      "start": 1749796925250,
+      "end": 1749796925250,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1749645770488,
-      "end": 1749645770489,
+      "start": 1749796925250,
+      "end": 1749796925250,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1749645770489,
-      "end": 1749645770489,
+      "start": 1749796925251,
+      "end": 1749796925251,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1749645770489,
-      "end": 1749645770489,
+      "start": 1749796925251,
+      "end": 1749796925251,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1749645770489,
-      "end": 1749645770489,
+      "start": 1749796925251,
+      "end": 1749796925251,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1749645770489,
-      "end": 1749645770489,
+      "start": 1749796925251,
+      "end": 1749796925251,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1749645770490,
-      "end": 1749645770490,
+      "start": 1749796925252,
+      "end": 1749796925252,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1749645770492,
-      "end": 1749645770493,
+      "start": 1749796925257,
+      "end": 1749796925259,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1749645770495,
-      "end": 1749645770495,
+      "start": 1749796925263,
+      "end": 1749796925263,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1749645770497,
-      "end": 1749645770497,
+      "start": 1749796925264,
+      "end": 1749796925265,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1749645770497,
-      "end": 1749645770497,
+      "start": 1749796925264,
+      "end": 1749796925265,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1749645770497,
-      "end": 1749645770497,
+      "start": 1749796925270,
+      "end": 1749796925270,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1749645770497,
-      "end": 1749645770497,
+      "start": 1749796925270,
+      "end": 1749796925270,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1749645770498,
-      "end": 1749645770498,
+      "start": 1749796925271,
+      "end": 1749796925271,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1749645770498,
-      "end": 1749645770498,
+      "start": 1749796925271,
+      "end": 1749796925271,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1749645770498,
-      "end": 1749645770499,
+      "start": 1749796925273,
+      "end": 1749796925273,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1749645770498,
-      "end": 1749645770504,
+      "start": 1749796925273,
+      "end": 1749796925276,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1749645770505,
-      "end": 1749645770511,
+      "start": 1749796925277,
+      "end": 1749796925288,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1749645770505,
-      "end": 1749645770511,
+      "start": 1749796925277,
+      "end": 1749796925288,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1749645770511,
-      "end": 1749645770511,
+      "start": 1749796925288,
+      "end": 1749796925288,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1749645770511,
-      "end": 1749645770512,
+      "start": 1749796925288,
+      "end": 1749796925288,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1749645770519,
-      "end": 1749645770519,
+      "start": 1749796925297,
+      "end": 1749796925304,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1749645770519,
-      "end": 1749645770519,
+      "start": 1749796925297,
+      "end": 1749796925304,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1749645770519,
-      "end": 1749645770519,
+      "start": 1749796925305,
+      "end": 1749796925305,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1749645770520,
-      "end": 1749645770520,
+      "start": 1749796925305,
+      "end": 1749796925305,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1749645770520,
-      "end": 1749645770520,
+      "start": 1749796925305,
+      "end": 1749796925305,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1749645770520,
-      "end": 1749645770520,
+      "start": 1749796925305,
+      "end": 1749796925306,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1749645770520,
-      "end": 1749645770520,
+      "start": 1749796925306,
+      "end": 1749796925306,
       "order": "normal"
     }
   ]

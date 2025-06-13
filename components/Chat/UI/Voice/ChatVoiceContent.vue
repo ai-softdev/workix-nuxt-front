@@ -39,7 +39,7 @@ const endClick = () => {
 <template>
   <div>
     <div class="absolute" id="mic"/>
-    <div class="absolute right-2 bottom-0.5 transition-all"
+    <div class="absolute right-6 bottom-3 transition-all"
          :class="{'rounded-full pt-1 px-1 bg-blueSemiLight' : chat.recordingVoice}" >
       <button @mousedown="startClick"
               @mouseup="endClick">

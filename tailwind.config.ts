@@ -19,7 +19,8 @@ export default <Partial<Config>>{
         whiteSmoke: "#F5F4F7",
         whiteLilia: "#F7F6F9",
         azure: "#2196F3",
-        gainsboro: "#DFDFDF"
+        gainsboro: "#DFDFDF",
+        mercury: "#E5E5E5"
       },
       boxShadow: {
         notifications: '0 6px 12px 0 rgba(0, 0, 0, 0.05)',
@@ -27,7 +28,8 @@ export default <Partial<Config>>{
         profile: '0 23px 23px 0 rgba(0, 0, 0, 0.04)',
         cards: "0 23px 23px 0 rgba(0, 0, 0, 0.01)",
         hoverCards: "0 29px 29px 0 rgba(0, 0, 0, 0.03)",
-        icons: "0 1px 1px 0 rgba(0, 0, 0, 0.04)"
+        icons: "0 1px 1px 0 rgba(0, 0, 0, 0.04)",
+        chat: "0 7px 16px 0 rgba(0, 0, 0, 0.01), 0 29px 29px 0 rgba(0, 0, 0, 0.01), 0 66px 40px 0 rgba(0, 0, 0, 0.01), 0 118px 47px 0 rgba(0, 0, 0, 0), 0 184px 51px 0 rgba(0, 0, 0, 0)"
       }
     }
   },

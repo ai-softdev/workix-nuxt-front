@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { unref as _unref, withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\"\n\nimport ChatWindowSettingContentHeader\r\n  from \"~/components/Chat/ChatContent/ChatWindowSetting/ChatWindowSettingContent/ChatWindowSettingContentHeader.vue\";\r\nimport ChatWindowSettingContentMain\r\n  from \"~/components/Chat/ChatContent/ChatWindowSetting/ChatWindowSettingContent/ChatWindowSettingContentMain.vue\";\r\nimport ChatWindowSettingContentUserList\r\n  from \"~/components/Chat/ChatContent/ChatWindowSetting/ChatWindowSettingContent/ChatWindowSettingContentUserList.vue\";\r\nimport {useChat} from \"~/stores/chat\";\r\nimport ChatUserCheckbox from \"~/components/Chat/UI/ChatUserCheckbox.vue\";\r\nimport TheButton from \"~/components/UI/TheButton.vue\";\r\nimport ChatWindowSettingContentHeaderChange\r\n  from \"~/components/Chat/ChatContent/ChatWindowSetting/ChatWindowSettingContent/ChatWindowSettingContentHeaderUI/ChatWindowSettingContentHeaderChange.vue\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'ChatWindowSettingContent',\n  __ssrInlineRender: true,\n  setup(__props) {\n\r\nconst chat = useChat()\r\n\r\nconst showGroupAdd = ref(false)\r\nconst groupTitle = ref('')\r\nconst userCount = []\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  _push(`<div${_ssrRenderAttrs(_attrs)}>`)\n  _push(_ssrRenderComponent(ChatWindowSettingContentHeader, {\n    onShowGroupAdd: ($event: any) => (showGroupAdd.value = true)\n  }, null, _parent))\n  _push(_ssrRenderComponent(ChatWindowSettingContentMain, null, null, _parent))\n  _push(_ssrRenderComponent(ChatWindowSettingContentUserList, null, null, _parent))\n  _push(_ssrRenderComponent(ChatWindowSettingContentHeaderChange, null, null, _parent))\n  if (_unref(showGroupAdd)) {\n    _push(`<div class=\"absolute z-30 w-full h-full top-0 left-0 flex items-center\"><div class=\"absolute bg-black left-0 top-0 w-full h-full bg-opacity-50\"></div><div class=\"bg-gray-700 w-10/12 mx-auto h-max rounded-lg relative\"><p class=\"tracking-wider px-4 pt-4\">${\n      _ssrInterpolate(_ctx.$t('Добавить участников'))\n    } <span class=\"text-sm text-gray-400 ml-2\">${\n      _ssrInterpolate(userCount.length + '/1000')\n    }</span></p><div class=\"w-full px-4 flex overflow-y-auto max-h-[300px] items-center\"><div class=\"absolute rotate-90 ml-2\"><svg class=\"dark:stroke-white stroke-black\" width=\"25px\" height=\"25px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M14.9536 14.9458L21 21M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z\" stroke-width=\"1.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg></div><input type=\"text\" class=\"w-full dark:bg-gray-700 outline-none pl-10 h-[50px]\" placeholder=\"Поиск...\"></div><div class=\"max-h-[300px] overflow-y-auto\"><!--[-->`)\n    _ssrRenderList(_unref(chat).get_chat_list.results.filter(e=> !e.is_group), (item) => {\n      _push(_ssrRenderComponent(ChatUserCheckbox, { item: item }, null, _parent))\n    })\n    _push(`<!--]--></div><div class=\"w-full px-4 h-[50px] flex items-center justify-end text-sm gap-x-4\">`)\n    _push(_ssrRenderComponent(TheButton, {\n      type: \"chat\",\n      onClick: ($event: any) => {showGroupAdd.value = false;}\n    }, {\n      default: _withCtx((_, _push, _parent, _scopeId) => {\n        if (_push) {\n          _push(`${_ssrInterpolate(_ctx.$t('Отмена'))}`)\n        } else {\n          return [\n            _createTextVNode(_toDisplayString(_ctx.$t('Отмена')), 1)\n          ]\n        }\n      }),\n      _: 1\n    }, _parent))\n    _push(_ssrRenderComponent(TheButton, {\n      type: \"chat\",\n      onClick: () => {}\n    }, {\n      default: _withCtx((_, _push, _parent, _scopeId) => {\n        if (_push) {\n          _push(`${_ssrInterpolate(_ctx.$t('Добавить'))}`)\n        } else {\n          return [\n            _createTextVNode(_toDisplayString(_ctx.$t('Добавить')), 1)\n          ]\n        }\n      }),\n      _: 1\n    }, _parent))\n    _push(`</div></div></div>`)\n  } else {\n    _push(`<!---->`)\n  }\n  _push(`</div>`)\n}\n}\n\n})",
-      "start": 1749645767826,
-      "end": 1749645767826,
+      "start": 1749796918933,
+      "end": 1749796918933,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1749645767826,
-      "end": 1749645767826,
+      "start": 1749796918933,
+      "end": 1749796918933,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1749645767826,
-      "end": 1749645767826,
+      "start": 1749796918933,
+      "end": 1749796918933,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1749645767826,
-      "end": 1749645767826,
+      "start": 1749796918933,
+      "end": 1749796918933,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1749645767826,
-      "end": 1749645767826,
+      "start": 1749796918933,
+      "end": 1749796918933,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1749645767826,
-      "end": 1749645767826,
+      "start": 1749796918933,
+      "end": 1749796918933,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1749645767826,
-      "end": 1749645767826,
+      "start": 1749796918933,
+      "end": 1749796918933,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1749645767826,
-      "end": 1749645767826,
+      "start": 1749796918933,
+      "end": 1749796918933,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1749645767826,
-      "end": 1749645767826,
+      "start": 1749796918933,
+      "end": 1749796918933,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport ChatWindowSettingContentHeader from \"~/components/Chat/ChatContent/ChatWindowSetting/ChatWindowSettingContent/ChatWindowSettingContentHeader.vue\";\nimport ChatWindowSettingContentMain from \"~/components/Chat/ChatContent/ChatWindowSetting/ChatWindowSettingContent/ChatWindowSettingContentMain.vue\";\nimport ChatWindowSettingContentUserList from \"~/components/Chat/ChatContent/ChatWindowSetting/ChatWindowSettingContent/ChatWindowSettingContentUserList.vue\";\nimport { useChat } from \"~/stores/chat\";\nimport ChatUserCheckbox from \"~/components/Chat/UI/ChatUserCheckbox.vue\";\nimport TheButton from \"~/components/UI/TheButton.vue\";\nimport ChatWindowSettingContentHeaderChange from \"~/components/Chat/ChatContent/ChatWindowSetting/ChatWindowSettingContent/ChatWindowSettingContentHeaderUI/ChatWindowSettingContentHeaderChange.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ChatWindowSettingContent\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const chat = useChat();\n    const showGroupAdd = ref(false);\n    const groupTitle = ref(\"\");\n    const userCount = [];\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(ChatWindowSettingContentHeader, {\n        onShowGroupAdd: ($event) => showGroupAdd.value = true\n      }, null, _parent));\n      _push(_ssrRenderComponent(ChatWindowSettingContentMain, null, null, _parent));\n      _push(_ssrRenderComponent(ChatWindowSettingContentUserList, null, null, _parent));\n      _push(_ssrRenderComponent(ChatWindowSettingContentHeaderChange, null, null, _parent));\n      if (_unref(showGroupAdd)) {\n        _push(`<div class=\"absolute z-30 w-full h-full top-0 left-0 flex items-center\"><div class=\"absolute bg-black left-0 top-0 w-full h-full bg-opacity-50\"></div><div class=\"bg-gray-700 w-10/12 mx-auto h-max rounded-lg relative\"><p class=\"tracking-wider px-4 pt-4\">${_ssrInterpolate(_ctx.$t(\"Добавить участников\"))} <span class=\"text-sm text-gray-400 ml-2\">${_ssrInterpolate(userCount.length + \"/1000\")}</span></p><div class=\"w-full px-4 flex overflow-y-auto max-h-[300px] items-center\"><div class=\"absolute rotate-90 ml-2\"><svg class=\"dark:stroke-white stroke-black\" width=\"25px\" height=\"25px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M14.9536 14.9458L21 21M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z\" stroke-width=\"1.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg></div><input type=\"text\" class=\"w-full dark:bg-gray-700 outline-none pl-10 h-[50px]\" placeholder=\"Поиск...\"></div><div class=\"max-h-[300px] overflow-y-auto\"><!--[-->`);\n        _ssrRenderList(_unref(chat).get_chat_list.results.filter((e) => !e.is_group), (item) => {\n          _push(_ssrRenderComponent(ChatUserCheckbox, { item }, null, _parent));\n        });\n        _push(`<!--]--></div><div class=\"w-full px-4 h-[50px] flex items-center justify-end text-sm gap-x-4\">`);\n        _push(_ssrRenderComponent(TheButton, {\n          type: \"chat\",\n          onClick: ($event) => {\n            showGroupAdd.value = false;\n          }\n        }, {\n          default: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(`${_ssrInterpolate(_ctx.$t(\"Отмена\"))}`);\n            } else {\n              return [\n                _createTextVNode(_toDisplayString(_ctx.$t(\"Отмена\")), 1)\n              ];\n            }\n          }),\n          _: 1\n        }, _parent));\n        _push(_ssrRenderComponent(TheButton, {\n          type: \"chat\",\n          onClick: () => {\n          }\n        }, {\n          default: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(`${_ssrInterpolate(_ctx.$t(\"Добавить\"))}`);\n            } else {\n              return [\n                _createTextVNode(_toDisplayString(_ctx.$t(\"Добавить\")), 1)\n              ];\n            }\n          }),\n          _: 1\n        }, _parent));\n        _push(`</div></div></div>`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1749645767826,
-      "end": 1749645768790,
+      "start": 1749796918933,
+      "end": 1749796921083,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -89,171 +89,171 @@
     },
     {
       "name": "vite:json",
-      "start": 1749645768790,
-      "end": 1749645768790,
+      "start": 1749796921083,
+      "end": 1749796921083,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1749645768790,
-      "end": 1749645768790,
+      "start": 1749796921083,
+      "end": 1749796921083,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1749645768790,
-      "end": 1749645768790,
+      "start": 1749796921083,
+      "end": 1749796921083,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1749645768790,
-      "end": 1749645768790,
+      "start": 1749796921083,
+      "end": 1749796921083,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749645768790,
-      "end": 1749645768790,
+      "start": 1749796921084,
+      "end": 1749796921084,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749645768790,
-      "end": 1749645768790,
+      "start": 1749796921084,
+      "end": 1749796921084,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1749645768790,
-      "end": 1749645768790,
+      "start": 1749796921084,
+      "end": 1749796921084,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1749645768790,
-      "end": 1749645768790,
+      "start": 1749796921084,
+      "end": 1749796921084,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1749645768790,
-      "end": 1749645768790,
+      "start": 1749796921084,
+      "end": 1749796921085,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749645768791,
-      "end": 1749645768791,
+      "start": 1749796921085,
+      "end": 1749796921085,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1749645768791,
-      "end": 1749645768792,
+      "start": 1749796921085,
+      "end": 1749796921090,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1749645768792,
-      "end": 1749645768792,
+      "start": 1749796921090,
+      "end": 1749796921091,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1749645768792,
-      "end": 1749645768792,
+      "start": 1749796921091,
+      "end": 1749796921091,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1749645768792,
-      "end": 1749645768792,
+      "start": 1749796921092,
+      "end": 1749796921092,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1749645768794,
-      "end": 1749645768794,
+      "start": 1749796921095,
+      "end": 1749796921095,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1749645768794,
-      "end": 1749645768794,
+      "start": 1749796921096,
+      "end": 1749796921096,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1749645768794,
-      "end": 1749645768794,
+      "start": 1749796921096,
+      "end": 1749796921096,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1749645768794,
-      "end": 1749645768794,
+      "start": 1749796921096,
+      "end": 1749796921097,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1749645768795,
-      "end": 1749645768795,
+      "start": 1749796921097,
+      "end": 1749796921097,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1749645768795,
-      "end": 1749645768795,
+      "start": 1749796921097,
+      "end": 1749796921097,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1749645768795,
-      "end": 1749645768795,
+      "start": 1749796921097,
+      "end": 1749796921097,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1749645768795,
-      "end": 1749645768795,
+      "start": 1749796921098,
+      "end": 1749796921098,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1749645768795,
-      "end": 1749645768795,
+      "start": 1749796921098,
+      "end": 1749796921098,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1749645768796,
-      "end": 1749645768796,
+      "start": 1749796921099,
+      "end": 1749796921099,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1749645768796,
-      "end": 1749645768796,
+      "start": 1749796921099,
+      "end": 1749796921099,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1749645768796,
-      "end": 1749645768796,
+      "start": 1749796921100,
+      "end": 1749796921100,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1749645768796,
-      "end": 1749645768796,
+      "start": 1749796921100,
+      "end": 1749796921100,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport ChatWindowSettingContentHeader from \"~/components/Chat/ChatContent/ChatWindowSetting/ChatWindowSettingContent/ChatWindowSettingContentHeader.vue\";\nimport ChatWindowSettingContentMain from \"~/components/Chat/ChatContent/ChatWindowSetting/ChatWindowSettingContent/ChatWindowSettingContentMain.vue\";\nimport ChatWindowSettingContentUserList from \"~/components/Chat/ChatContent/ChatWindowSetting/ChatWindowSettingContent/ChatWindowSettingContentUserList.vue\";\nimport { useChat } from \"~/stores/chat\";\nimport ChatUserCheckbox from \"~/components/Chat/UI/ChatUserCheckbox.vue\";\nimport TheButton from \"~/components/UI/TheButton.vue\";\nimport ChatWindowSettingContentHeaderChange from \"~/components/Chat/ChatContent/ChatWindowSetting/ChatWindowSettingContent/ChatWindowSettingContentHeaderUI/ChatWindowSettingContentHeaderChange.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ChatWindowSettingContent\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const chat = useChat();\n    const showGroupAdd = ref(false);\n    const groupTitle = ref(\"\");\n    const userCount = [];\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(ChatWindowSettingContentHeader, {\n        onShowGroupAdd: ($event) => showGroupAdd.value = true\n      }, null, _parent));\n      _push(_ssrRenderComponent(ChatWindowSettingContentMain, null, null, _parent));\n      _push(_ssrRenderComponent(ChatWindowSettingContentUserList, null, null, _parent));\n      _push(_ssrRenderComponent(ChatWindowSettingContentHeaderChange, null, null, _parent));\n      if (_unref(showGroupAdd)) {\n        _push(`<div class=\"absolute z-30 w-full h-full top-0 left-0 flex items-center\"><div class=\"absolute bg-black left-0 top-0 w-full h-full bg-opacity-50\"></div><div class=\"bg-gray-700 w-10/12 mx-auto h-max rounded-lg relative\"><p class=\"tracking-wider px-4 pt-4\">${_ssrInterpolate(_ctx.$t(\"Добавить участников\"))} <span class=\"text-sm text-gray-400 ml-2\">${_ssrInterpolate(userCount.length + \"/1000\")}</span></p><div class=\"w-full px-4 flex overflow-y-auto max-h-[300px] items-center\"><div class=\"absolute rotate-90 ml-2\"><svg class=\"dark:stroke-white stroke-black\" width=\"25px\" height=\"25px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M14.9536 14.9458L21 21M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z\" stroke-width=\"1.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg></div><input type=\"text\" class=\"w-full dark:bg-gray-700 outline-none pl-10 h-[50px]\" placeholder=\"Поиск...\"></div><div class=\"max-h-[300px] overflow-y-auto\"><!--[-->`);\n        _ssrRenderList(_unref(chat).get_chat_list.results.filter((e) => !e.is_group), (item) => {\n          _push(_ssrRenderComponent(ChatUserCheckbox, { item }, null, _parent));\n        });\n        _push(`<!--]--></div><div class=\"w-full px-4 h-[50px] flex items-center justify-end text-sm gap-x-4\">`);\n        _push(_ssrRenderComponent(TheButton, {\n          type: \"chat\",\n          onClick: ($event) => {\n            showGroupAdd.value = false;\n          }\n        }, {\n          default: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(`${_ssrInterpolate(_ctx.$t(\"Отмена\"))}`);\n            } else {\n              return [\n                _createTextVNode(_toDisplayString(_ctx.$t(\"Отмена\")), 1)\n              ];\n            }\n          }),\n          _: 1\n        }, _parent));\n        _push(_ssrRenderComponent(TheButton, {\n          type: \"chat\",\n          onClick: () => {\n          }\n        }, {\n          default: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(`${_ssrInterpolate(_ctx.$t(\"Добавить\"))}`);\n            } else {\n              return [\n                _createTextVNode(_toDisplayString(_ctx.$t(\"Добавить\")), 1)\n              ];\n            }\n          }),\n          _: 1\n        }, _parent));\n        _push(`</div></div></div>`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1749645768796,
-      "end": 1749645768801,
+      "start": 1749796921101,
+      "end": 1749796921112,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -267,8 +267,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport ChatWindowSettingContentHeader from \"~/components/Chat/ChatContent/ChatWindowSetting/ChatWindowSettingContent/ChatWindowSettingContentHeader.vue\";\nimport ChatWindowSettingContentMain from \"~/components/Chat/ChatContent/ChatWindowSetting/ChatWindowSettingContent/ChatWindowSettingContentMain.vue\";\nimport ChatWindowSettingContentUserList from \"~/components/Chat/ChatContent/ChatWindowSetting/ChatWindowSettingContent/ChatWindowSettingContentUserList.vue\";\nimport { useChat } from \"~/stores/chat\";\nimport ChatUserCheckbox from \"~/components/Chat/UI/ChatUserCheckbox.vue\";\nimport TheButton from \"~/components/UI/TheButton.vue\";\nimport ChatWindowSettingContentHeaderChange from \"~/components/Chat/ChatContent/ChatWindowSetting/ChatWindowSettingContent/ChatWindowSettingContentHeaderUI/ChatWindowSettingContentHeaderChange.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ChatWindowSettingContent\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const chat = useChat();\n    const showGroupAdd = ref(false);\n    const groupTitle = ref(\"\");\n    const userCount = [];\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(ChatWindowSettingContentHeader, {\n        onShowGroupAdd: ($event) => showGroupAdd.value = true\n      }, null, _parent));\n      _push(_ssrRenderComponent(ChatWindowSettingContentMain, null, null, _parent));\n      _push(_ssrRenderComponent(ChatWindowSettingContentUserList, null, null, _parent));\n      _push(_ssrRenderComponent(ChatWindowSettingContentHeaderChange, null, null, _parent));\n      if (_unref(showGroupAdd)) {\n        _push(`<div class=\"absolute z-30 w-full h-full top-0 left-0 flex items-center\"><div class=\"absolute bg-black left-0 top-0 w-full h-full bg-opacity-50\"></div><div class=\"bg-gray-700 w-10/12 mx-auto h-max rounded-lg relative\"><p class=\"tracking-wider px-4 pt-4\">${_ssrInterpolate(_ctx.$t(\"Добавить участников\"))} <span class=\"text-sm text-gray-400 ml-2\">${_ssrInterpolate(userCount.length + \"/1000\")}</span></p><div class=\"w-full px-4 flex overflow-y-auto max-h-[300px] items-center\"><div class=\"absolute rotate-90 ml-2\"><svg class=\"dark:stroke-white stroke-black\" width=\"25px\" height=\"25px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M14.9536 14.9458L21 21M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z\" stroke-width=\"1.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg></div><input type=\"text\" class=\"w-full dark:bg-gray-700 outline-none pl-10 h-[50px]\" placeholder=\"Поиск...\"></div><div class=\"max-h-[300px] overflow-y-auto\"><!--[-->`);\n        _ssrRenderList(_unref(chat).get_chat_list.results.filter((e) => !e.is_group), (item) => {\n          _push(_ssrRenderComponent(ChatUserCheckbox, { item }, null, _parent));\n        });\n        _push(`<!--]--></div><div class=\"w-full px-4 h-[50px] flex items-center justify-end text-sm gap-x-4\">`);\n        _push(_ssrRenderComponent(TheButton, {\n          type: \"chat\",\n          onClick: ($event) => {\n            showGroupAdd.value = false;\n          }\n        }, {\n          default: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(`${_ssrInterpolate(_ctx.$t(\"Отмена\"))}`);\n            } else {\n              return [\n                _createTextVNode(_toDisplayString(_ctx.$t(\"Отмена\")), 1)\n              ];\n            }\n          }),\n          _: 1\n        }, _parent));\n        _push(_ssrRenderComponent(TheButton, {\n          type: \"chat\",\n          onClick: () => {\n          }\n        }, {\n          default: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(`${_ssrInterpolate(_ctx.$t(\"Добавить\"))}`);\n            } else {\n              return [\n                _createTextVNode(_toDisplayString(_ctx.$t(\"Добавить\")), 1)\n              ];\n            }\n          }),\n          _: 1\n        }, _parent));\n        _push(`</div></div></div>`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1749645768796,
-      "end": 1749645768801,
+      "start": 1749796921101,
+      "end": 1749796921112,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -281,56 +281,56 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1749645768801,
-      "end": 1749645768801,
+      "start": 1749796921112,
+      "end": 1749796921112,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1749645768801,
-      "end": 1749645768801,
+      "start": 1749796921112,
+      "end": 1749796921112,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1749645768801,
-      "end": 1749645768801,
+      "start": 1749796921113,
+      "end": 1749796921113,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1749645768801,
-      "end": 1749645768801,
+      "start": 1749796921113,
+      "end": 1749796921113,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1749645768802,
-      "end": 1749645768802,
+      "start": 1749796921114,
+      "end": 1749796921114,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1749645768802,
-      "end": 1749645768802,
+      "start": 1749796921115,
+      "end": 1749796921115,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1749645768802,
-      "end": 1749645768802,
+      "start": 1749796921116,
+      "end": 1749796921116,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1749645768802,
-      "end": 1749645768803,
+      "start": 1749796921116,
+      "end": 1749796921116,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1749645768803,
-      "end": 1749645768803,
+      "start": 1749796921117,
+      "end": 1749796921117,
       "order": "normal"
     }
   ]

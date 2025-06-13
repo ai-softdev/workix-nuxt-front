@@ -30,17 +30,17 @@ function message(chat_id: Number) {
   <NuxtLink :to="`/base/chat/${chat.id}`"
             v-for="chat in chatStore.get_chat_list.results?.filter((e)=> chatStore.displayChat === 'all' || e.is_group === true && chatStore.displayChat === 'groups' || e.is_group === false && chatStore.displayChat === 'users')"
             @click="chatStore.activeChatNav = false; message(chat.id);  chatStore.showPinnedWindow = false; chatStore.messageUpdate = {}; chatStore.messageForwarded = {}; chatStore.messageReplied = { }; chatStore.showChatInfo = false; chatStore.showGroupCreateChoice = false"
-            class="flex justify-between px-4 gap-x-2 dark:hover:bg-gray-500 hover:bg-gray-300 cursor-pointer transition-all duration-200 py-2"
+            class="flex justify-between px-4 gap-x-2 dark:hover:bg-gray-500 hover:bg-azure  hover:!bg-opacity-10 cursor-pointer transition-all duration-200 py-2"
             @dragenter="chat.id ? dragClass = true : dragClass = false"
             @dragleave="dragClass = false"
             :class="{'dark:hover:!bg-semiCyan ' : route.path === `/base/chat/${chat.id}`, 'hover:!bg-cyan' : route.path === `/base/chat/${chat.id}`, '!bg-blue-400' : dragClass && chat.id === chat.id}">
     <div class="flex gap-x-2">
       <TheChatAvatar :chat="chat"/>
       <div class="text-sm break-words">
-        <p v-if="chat.user?.id !== user.user.id && chat.user?.id" class="text-black dark:text-white">
+        <p v-if="chat.user?.id !== user.user.id && chat.user?.id" class="text-black dark:text-white font-bold">
           {{ user.user.id !== chat.user?.id ? (chat.user.first_name + ' ' + chat.user.last_name) : (user.user.first_name + ' ' + user.user.last_name)}}</p>
-        <p v-else-if="!chat.user?.id && !chat.is_group" class="tracking-wider text-black dark:text-white">{{ $t('Избранное') }}</p>
-        <p v-else-if="chat.is_group" class="text-black dark:text-white">{{chat.name}}</p>
+        <p v-else-if="!chat.user?.id && !chat.is_group" class="text-black font-bold dark:text-white">{{ $t('Избранное') }}</p>
+        <p v-else-if="chat.is_group" class="text-black dark:text-white font-bold">{{chat.name}}</p>
         <p v-if="chat.last_message.text && !chat.last_message.file_name" class="text-gray-400" :class="{'text-gray-500 dark:text-white' : route.path === `/base/chat/${chat.id}`}">
           {{ chat.last_message.text?.length > 15 ? chat.last_message.text.slice(0, 15) + '...' : chat.last_message.text }}</p>
         <p v-else-if="chat.last_message.text && chat.last_message.file_name" class="text-gray-400" :class="{'text-gray-500 dark:text-white' : route.path === `/base/chat/${chat.id}`}"><span>{{chat.last_message.file_name.length > 20 ? chat.last_message.file_name.slice(0,15) + '...' : chat.last_message.file_name}}</span>{{', ' + chat.last_message.text}}</p>

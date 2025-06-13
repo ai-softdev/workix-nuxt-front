@@ -81,7 +81,7 @@ export const useUserStore = defineStore('user-list', {
       })
     },
     async searchUser(params: { search: any }) {
-      axios.get(`user/list?search=${params.search}`, {
+      axios.get(`user/list?query=${params.search}`, {
         headers: {
           Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
         }

@@ -90,7 +90,8 @@ useSeoMeta({
 <template>
   <div class="h-full w-full" @click="chat.showChangeWindowChat = false">
     <div
-      class="w-full flex items-center border-l max-h-[8%] max-md:pt-3 max-md:px-14 max-sm:px-2 h-[100px] px-10 border-black dark:border-opacity-20 border-opacity-10 bg-gray-200 dark:bg-gray-700">
+      class="w-full py-2.5 border-b flex items-center max-h-[8%] max-md:pt-3 max-md:px-14 max-sm:px-2 h-[100px] px-10 dark:border-opacity-20 bg-white dark:bg-gray-700"
+    >
       <div v-if="!chat.get_user_chat.user && !chat.get_user_chat.is_group || chat.get_user_chat.users?.id "
            class="flex gap-x-4 justify-center relative items-center mb-2">
         <sceleton class="opacity-50" width="40px" height="40px" border-radius="100%"></sceleton>
@@ -109,23 +110,30 @@ useSeoMeta({
                 ? loadAuthStore.get_server_domain + chat.get_user_chat.user?.photo
                 : loadAuthStore.get_server_domain + chat.get_user_chat?.photo_url"
                alt="">
-          <div v-else class="rounded-full bg-blueSemiLight flex items-center justify-center w-[42px] h-[42px]">
-            <svg v-if="!chat.get_user_chat.photo_url && !chat.get_user_chat.is_group" class="stroke-white" width="32px"
-                 height="32px" viewBox="0 -0.5 25 25" fill="none"
-                 xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                    d="M18.507 19.853V6.034C18.5116 5.49905 18.3034 4.98422 17.9283 4.60277C17.5532 4.22131 17.042 4.00449 16.507 4H8.50705C7.9721 4.00449 7.46085 4.22131 7.08577 4.60277C6.7107 4.98422 6.50252 5.49905 6.50705 6.034V19.853C6.45951 20.252 6.65541 20.6407 7.00441 20.8399C7.35342 21.039 7.78773 21.0099 8.10705 20.766L11.907 17.485C12.2496 17.1758 12.7705 17.1758 13.113 17.485L16.9071 20.767C17.2265 21.0111 17.6611 21.0402 18.0102 20.8407C18.3593 20.6413 18.5551 20.2522 18.507 19.853Z"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <div v-else class="rounded-full bg-azure flex items-center justify-center w-[42px] h-[42px]">
+            <svg v-if="!chat.get_user_chat.photo_url && !chat.get_user_chat.is_group" width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 5.8C1 4.11984 1 3.27976 1.32698 2.63803C1.6146 2.07354 2.07354 1.6146 2.63803 1.32698C3.27976 1 4.11984 1 5.8 1H10.2C11.8802 1 12.7202 1 13.362 1.32698C13.9265 1.6146 14.3854 2.07354 14.673 2.63803C15 3.27976 15 4.11984 15 5.8V19L8 15L1 19V5.8Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            <p class="uppercase font-bold" v-else v-for="chatName in chat.get_user_chat.name.split(' ').slice(0,2)"
+            <p
+                v-else
+                class="uppercase font-bold"
+                v-for="chatName in chat.get_user_chat.name.split(' ').slice(0,2)"
                @click="console.log(chatName[0])">{{ chatName[0] }}</p>
           </div>
-          <p v-if="!chat.get_user_chat.is_group">
+          <p
+              v-if="!chat.get_user_chat.is_group"
+              class="font-bold"
+          >
             {{ chat.get_user_chat.user?.last_name === '' ? $t('Избранное') : chat.get_user_chat.user?.first_name + ' ' + chat.get_user_chat.user?.last_name
-            }}</p>
-          <p v-else>
+            }}
+          </p>
+          <p
+              v-else
+              class="font-bold"
+          >
             {{ chat.get_user_chat?.name.length > 30 ? chat.get_user_chat?.name.slice(0, 30) + '...' : chat.get_user_chat?.name
-            }}</p>
+            }}
+          </p>
         </div>
         <ChatChangeWindow/>
       </div>
@@ -175,7 +183,7 @@ useSeoMeta({
             </div>
             <div>
               <div>
-                <p class="text-sm tracking-wider text-semiCyan">{{ $t('Название группы') }}</p>
+                <p class="text-sm text-semiCyan">{{ $t('Название группы') }}</p>
                 <TheInput :type="'default'" v-model="chat.updateChatName"
                           class="bg-transparent bg-opacity-0 border-b-2 border-b-semiCyan outline-none" type="text"/>
               </div>
