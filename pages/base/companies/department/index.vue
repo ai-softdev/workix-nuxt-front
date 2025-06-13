@@ -41,7 +41,7 @@ useSeoMeta({
 
 <template>
   <div>
-    <div class="flex items-center justify-between">
+    <div class="flex items-center justify-between max-[786px]:flex-col max-[786px]:items-start">
       <p
           class="dark:text-white text-3xl font-bold mb-6"
       >
@@ -65,7 +65,7 @@ useSeoMeta({
 <!--      </TheBreadcrumbs>-->
 <!--    </div>-->
     <div class="flex relative items-center justify-between w-full gap-x-10 mt-4">
-      <p class="text-mediumGray w-6/12">
+      <p class="text-mediumGray w-6/12 max-[786px]:w-full">
         {{$t('Кликните на отдел, чтобы посмотреть доступные должности.')}}
       </p>
 <!--      <TheSearch class="w-6/12 max-md:w-full max-md:mx-auto max-md:relative"/>-->
@@ -75,7 +75,7 @@ useSeoMeta({
       <div v-if="!departmentList.get_all_department.results" class="flex w-full gap-y-4 gap-x-4 flex-wrap">
         <TheSceleton v-for="item in 6" border-radius="10px" width="30%" height="100px" ></TheSceleton>
       </div>
-      <div v-else class="grid grid-cols-4 gap-5">
+      <div v-else class="grid grid-cols-4 max-[1250px]:grid-cols-3 max-[810px]:grid-cols-2 max-[636px]:grid-cols-1 gap-5">
         <DepartmentContentLists
             v-for="department in departmentList?.get_all_department.results"
             :department-item="department">

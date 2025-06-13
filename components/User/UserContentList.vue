@@ -13,9 +13,9 @@ defineProps({
 <template>
     <NuxtLink
         :to="`/base/users/${userItem.id}`"
-        class="transition-all bg-white shadow-cards hover:shadow-hoverCards border border-white hover:border-golden dark:border-none dark:shadow-none dark:bg-gray-700  dark:hover:bg-gray-800 py-6 px-5 rounded-3xl items-center max-md:flex  max-md:w-full max-sm:flex-col max-sm:gap-y-4"
+        class="transition-all bg-white shadow-cards hover:shadow-hoverCards border border-white hover:border-golden dark:border-none dark:shadow-none dark:bg-gray-700  dark:hover:bg-gray-800 py-6 px-5 rounded-3xl items-center"
     >
-      <div class="flex items-center max-md:w-4/12 gap-x-2 max-lg:mx-auto pb-4 border-b">
+      <div class="flex items-center gap-x-2 pb-4 border-b">
         <div class="flex items-center justify-center rounded-md px-1 w-[33px] h-[33px] shadow-md">
           <img class="w-[22px] h-[22px] rounded-full" :src="userItem.photo" alt="logo">
         </div>

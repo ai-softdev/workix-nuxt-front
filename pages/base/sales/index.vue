@@ -134,13 +134,13 @@ watch(() => company.company, (newValue) => {
 
 <template>
   <div>
-    <div class="flex items-center justify-between">
+    <div class="flex items-center justify-between max-[789px]:flex-col max-[789px]:items-start max-[789px]:gap-5">
       <p
           class="dark:text-white text-3xl font-bold"
       >
         {{ $t('Страница продаж') }}
       </p>
-      <div class="ml-auto flex items-center gap-6">
+      <div class="ml-auto max-[789px]:ml-0 flex items-center gap-6 max-[465px]:flex-col">
         <button
             @click="downloadFile"
             class="flex items-center gap-3"
@@ -163,7 +163,7 @@ watch(() => company.company, (newValue) => {
       </div>
     </div>
     <div>
-      <div class="flex items-center gap-x-4 max-md:mt-10 max-md:flex-col max-md:items-start max-md:gap-y-4">
+      <div class="flex mt-10 max-[789px]:mt-4 items-center gap-x-4 max-md:flex-col max-md:items-start max-md:gap-y-4">
 <!--        <div class="flex items-center gap-x-4">-->
 <!--          <TheBreadcrumbs :breadcrumb-link="'/base/profile'">-->
 <!--            {{ $t('Профиль') }}-->
@@ -180,11 +180,11 @@ watch(() => company.company, (newValue) => {
 <!--          </TheBreadcrumbs>-->
 <!--        </div>-->
       </div>
-      <div class="w-fit sales-up-table rounded-lg mt-10 overflow-hidden">
-        <div class="flex items-center justify-between gap-3 mb-4">
+      <div class="w-fit sales-up-table rounded-lg overflow-hidden">
+        <div class="flex items-center justify-between gap-3 mb-4 max-[465px]:flex-col max-[465px]:items-start">
           <UITheButton
               @click="openFiltersModal"
-              class="border bg-white flex items-center gap-1 p-3 rounded-full !text-black dark:!text-white"
+              class="border bg-white flex items-center gap-1 p-3 rounded-full !text-black dark:!text-white max-md:shrink-0"
           >
             <img src="/icons/filters.svg" alt="filters">
             Фильтры

@@ -3,82 +3,82 @@
   "transforms": [
     {
       "name": "vite:load-fallback",
-      "result": "<script setup lang=\"ts\">\r\nimport DepartmentContentLists from \"~/components/Company/department/DepartmentContentLists.vue\";\r\nimport DepartmentCreate from \"~/components/Company/department/DepartmentCreate.vue\";\r\nimport {useCompanies} from \"~/stores/companies\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\r\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\r\nimport TheFilter from \"~/components/UI/TheFilter.vue\";\r\nimport TheBreadcrumbs from \"~/components/UI/TheBreadcrumbs.vue\";\r\nimport TheContentBlock from \"~/components/UI/TheContentBlock.vue\";\r\nimport TheSceleton from \"~/components/UI/TheSceleton.vue\";\r\nimport TheTextarea from \"~/components/UI/TheTextareaAutosize.vue\";\r\nimport {useChat} from \"~/stores/chat\";\r\n\r\nconst chat = useChat()\r\nconst currentUser = useAuthStore()\r\nconst departmentList = useCompanies()\r\ndepartmentList.loadDepartmentList()\r\ndefineProps({\r\n  formTitle: String\r\n})\r\n\r\nconst router = useRouter()\r\nconst loadAuthStore = useAuthStore()\r\n\r\nwatch(() => loadAuthStore.user, (newValue) => {\r\n  if(loadAuthStore?.user?.role?.name_en === 'admin'){\r\n    if (window.history.length > 1) {\r\n      router.push('/base/profile');\r\n    } else {\r\n      router.push('/');\r\n    }\r\n  }\r\n})\r\n\r\nuseSeoMeta({\r\n  title: 'Департаменты',\r\n  description: 'Список департаментов компании'\r\n})\r\n</script>\r\n\r\n<template>\r\n  <div>\r\n    <div class=\"flex items-center justify-between\">\r\n      <p\r\n          class=\"dark:text-white text-3xl font-bold mb-6\"\r\n      >\r\n        {{$t('Страница департаментов компании')}}\r\n      </p>\r\n      <DepartmentCreate class=\"w-3/12 max-md:w-9/12 max-md:mb-4 text-sm\"></DepartmentCreate>\r\n    </div>\r\n<!--    <div class=\"flex items-center gap-x-4\" v-if=\"currentUser.user.role_en !== 'admin'\">-->\r\n<!--      <TheBreadcrumbs :breadcrumb-link=\"`/base/companies`\">-->\r\n<!--        {{ $t('Компания') }}-->\r\n<!--      </TheBreadcrumbs>-->\r\n<!--      <div>-->\r\n<!--        <svg width=\"15px\" height=\"15px\" viewBox=\"0 0 24 24\" fill=\"none\">-->\r\n<!--          <path class=\"dark:stroke-white stroke-black\"-->\r\n<!--                d=\"M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5\"-->\r\n<!--                stroke-width=\"2\" stroke-linecap=\"round\"></path>-->\r\n<!--        </svg>-->\r\n<!--      </div>-->\r\n<!--      <TheBreadcrumbs>-->\r\n<!--        {{ $t('Департаменты') }}-->\r\n<!--      </TheBreadcrumbs>-->\r\n<!--    </div>-->\r\n    <div class=\"flex relative items-center justify-between w-full gap-x-10 mt-4\">\r\n      <p class=\"text-mediumGray w-6/12\">\r\n        {{$t('Кликните на отдел, чтобы посмотреть доступные должности.')}}\r\n      </p>\r\n<!--      <TheSearch class=\"w-6/12 max-md:w-full max-md:mx-auto max-md:relative\"/>-->\r\n<!--      <TheFilter />-->\r\n    </div>\r\n    <div class=\"mt-8\">\r\n      <div v-if=\"!departmentList.get_all_department.results\" class=\"flex w-full gap-y-4 gap-x-4 flex-wrap\">\r\n        <TheSceleton v-for=\"item in 6\" border-radius=\"10px\" width=\"30%\" height=\"100px\" ></TheSceleton>\r\n      </div>\r\n      <div v-else class=\"grid grid-cols-4 gap-5\">\r\n        <DepartmentContentLists\r\n            v-for=\"department in departmentList?.get_all_department.results\"\r\n            :department-item=\"department\">\r\n\r\n        </DepartmentContentLists>\r\n      </div>\r\n      <div class=\"mt-6 flex items-center justify-end gap-1\">\r\n        <p>\r\n          {{ $t('Количество департаментов') }}:\r\n        </p>\r\n        <p class=\"font-bold\">\r\n          {{ departmentList.get_all_department.count }}\r\n        </p>\r\n      </div>\r\n<!--      <div class=\"w-3/12 max-lg:w-full max-lg:mb-8\">-->\r\n<!--        <TheContentBlock>-->\r\n<!--          <h2 class=\"text-center tracking-widest dark:text-white\">{{ $t('Информация о департамента') }}</h2>-->\r\n<!--          <div class=\"mt-6\">-->\r\n<!--            <div class=\"flex items-center my-4 gap-x-5 justify-center\">-->\r\n<!--              <div class=\"flex items-center gap-x-2 w-8/12 max-md:w-9/12\">-->\r\n<!--                <div>-->\r\n<!--                  <svg class=\"dark:stroke-white stroke-black\" fill=\"none\" width=\"35px\" height=\"35px\" viewBox=\"0 0 24 24\"-->\r\n<!--                       xmlns=\"http://www.w3.org/2000/svg\">-->\r\n<!--                    <path-->\r\n<!--                      d=\"M5.04146 3C5.22009 2.6906 5.55022 2.5 5.90748 2.5L9.75278 2.5C10.11 2.5 10.4402 2.6906 10.6188 3L12.5415 6.33013C12.7201 6.63953 12.7201 7.02073 12.5415 7.33013L10.6188 10.6603C10.4402 10.9697 10.11 11.1603 9.75278 11.1603H5.90748C5.55022 11.1603 5.22009 10.9697 5.04146 10.6603L3.11881 7.33013C2.94017 7.02073 2.94017 6.63953 3.11881 6.33013L5.04146 3Z\"></path>-->\r\n<!--                    <path-->\r\n<!--                      d=\"M5.1216 13.2272C5.30023 12.9178 5.63036 12.7272 5.98762 12.7272H9.83292C10.1902 12.7272 10.5203 12.9178 10.6989 13.2272L12.6216 16.5574C12.8002 16.8668 12.8002 17.248 12.6216 17.5574L10.6989 20.8875C10.5203 21.1969 10.1902 21.3875 9.83292 21.3875H5.98762C5.63036 21.3875 5.30023 21.1969 5.1216 20.8875L3.19895 17.5574C3.02031 17.248 3.02031 16.8668 3.19895 16.5574L5.1216 13.2272Z\"></path>-->\r\n<!--                    <path-->\r\n<!--                      d=\"M14.1216 8.22723C14.3002 7.91783 14.6304 7.72723 14.9876 7.72723L18.8329 7.72723C19.1902 7.72723 19.5203 7.91783 19.6989 8.22723L21.6216 11.5574C21.8002 11.8668 21.8002 12.248 21.6216 12.5574L19.6989 15.8875C19.5203 16.1969 19.1902 16.3875 18.8329 16.3875H14.9876C14.6304 16.3875 14.3002 16.1969 14.1216 15.8875L12.1989 12.5574C12.0203 12.248 12.0203 11.8668 12.1989 11.5574L14.1216 8.22723Z\"></path>-->\r\n<!--                  </svg>-->\r\n<!--                </div>-->\r\n<!--                <p class=\"tracking-widest\">{{ $t('Количество') }}: </p></div>-->\r\n<!--              <div>-->\r\n<!--                <p-->\r\n<!--                  class=\"rounded-full border border-gray-400 dark:border-white w-10 h-10 flex items-center justify-center dark:text-white\">-->\r\n<!--                  <span>{{ departmentList.get_all_department.count }}</span>-->\r\n<!--                </p>-->\r\n<!--              </div>-->\r\n<!--            </div>-->\r\n\r\n<!--          </div>-->\r\n<!--        </TheContentBlock>-->\r\n<!--      </div>-->\r\n    </div>\r\n  </div>\r\n\r\n</template>\r\n\r\n<style scoped lang=\"scss\">\r\n\r\n</style>",
-      "start": 1749796904142,
-      "end": 1749796909231,
+      "result": "<script setup lang=\"ts\">\r\nimport DepartmentContentLists from \"~/components/Company/department/DepartmentContentLists.vue\";\r\nimport DepartmentCreate from \"~/components/Company/department/DepartmentCreate.vue\";\r\nimport {useCompanies} from \"~/stores/companies\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\r\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\r\nimport TheFilter from \"~/components/UI/TheFilter.vue\";\r\nimport TheBreadcrumbs from \"~/components/UI/TheBreadcrumbs.vue\";\r\nimport TheContentBlock from \"~/components/UI/TheContentBlock.vue\";\r\nimport TheSceleton from \"~/components/UI/TheSceleton.vue\";\r\nimport TheTextarea from \"~/components/UI/TheTextareaAutosize.vue\";\r\nimport {useChat} from \"~/stores/chat\";\r\n\r\nconst chat = useChat()\r\nconst currentUser = useAuthStore()\r\nconst departmentList = useCompanies()\r\ndepartmentList.loadDepartmentList()\r\ndefineProps({\r\n  formTitle: String\r\n})\r\n\r\nconst router = useRouter()\r\nconst loadAuthStore = useAuthStore()\r\n\r\nwatch(() => loadAuthStore.user, (newValue) => {\r\n  if(loadAuthStore?.user?.role?.name_en === 'admin'){\r\n    if (window.history.length > 1) {\r\n      router.push('/base/profile');\r\n    } else {\r\n      router.push('/');\r\n    }\r\n  }\r\n})\r\n\r\nuseSeoMeta({\r\n  title: 'Департаменты',\r\n  description: 'Список департаментов компании'\r\n})\r\n</script>\r\n\r\n<template>\r\n  <div>\r\n    <div class=\"flex items-center justify-between max-[786px]:flex-col max-[786px]:items-start\">\r\n      <p\r\n          class=\"dark:text-white text-3xl font-bold mb-6\"\r\n      >\r\n        {{$t('Страница департаментов компании')}}\r\n      </p>\r\n      <DepartmentCreate class=\"w-3/12 max-md:w-9/12 max-md:mb-4 text-sm\"></DepartmentCreate>\r\n    </div>\r\n<!--    <div class=\"flex items-center gap-x-4\" v-if=\"currentUser.user.role_en !== 'admin'\">-->\r\n<!--      <TheBreadcrumbs :breadcrumb-link=\"`/base/companies`\">-->\r\n<!--        {{ $t('Компания') }}-->\r\n<!--      </TheBreadcrumbs>-->\r\n<!--      <div>-->\r\n<!--        <svg width=\"15px\" height=\"15px\" viewBox=\"0 0 24 24\" fill=\"none\">-->\r\n<!--          <path class=\"dark:stroke-white stroke-black\"-->\r\n<!--                d=\"M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5\"-->\r\n<!--                stroke-width=\"2\" stroke-linecap=\"round\"></path>-->\r\n<!--        </svg>-->\r\n<!--      </div>-->\r\n<!--      <TheBreadcrumbs>-->\r\n<!--        {{ $t('Департаменты') }}-->\r\n<!--      </TheBreadcrumbs>-->\r\n<!--    </div>-->\r\n    <div class=\"flex relative items-center justify-between w-full gap-x-10 mt-4\">\r\n      <p class=\"text-mediumGray w-6/12 max-[786px]:w-full\">\r\n        {{$t('Кликните на отдел, чтобы посмотреть доступные должности.')}}\r\n      </p>\r\n<!--      <TheSearch class=\"w-6/12 max-md:w-full max-md:mx-auto max-md:relative\"/>-->\r\n<!--      <TheFilter />-->\r\n    </div>\r\n    <div class=\"mt-8\">\r\n      <div v-if=\"!departmentList.get_all_department.results\" class=\"flex w-full gap-y-4 gap-x-4 flex-wrap\">\r\n        <TheSceleton v-for=\"item in 6\" border-radius=\"10px\" width=\"30%\" height=\"100px\" ></TheSceleton>\r\n      </div>\r\n      <div v-else class=\"grid grid-cols-4 max-[1250px]:grid-cols-3 max-[810px]:grid-cols-2 max-[636px]:grid-cols-1 gap-5\">\r\n        <DepartmentContentLists\r\n            v-for=\"department in departmentList?.get_all_department.results\"\r\n            :department-item=\"department\">\r\n\r\n        </DepartmentContentLists>\r\n      </div>\r\n      <div class=\"mt-6 flex items-center justify-end gap-1\">\r\n        <p>\r\n          {{ $t('Количество департаментов') }}:\r\n        </p>\r\n        <p class=\"font-bold\">\r\n          {{ departmentList.get_all_department.count }}\r\n        </p>\r\n      </div>\r\n<!--      <div class=\"w-3/12 max-lg:w-full max-lg:mb-8\">-->\r\n<!--        <TheContentBlock>-->\r\n<!--          <h2 class=\"text-center tracking-widest dark:text-white\">{{ $t('Информация о департамента') }}</h2>-->\r\n<!--          <div class=\"mt-6\">-->\r\n<!--            <div class=\"flex items-center my-4 gap-x-5 justify-center\">-->\r\n<!--              <div class=\"flex items-center gap-x-2 w-8/12 max-md:w-9/12\">-->\r\n<!--                <div>-->\r\n<!--                  <svg class=\"dark:stroke-white stroke-black\" fill=\"none\" width=\"35px\" height=\"35px\" viewBox=\"0 0 24 24\"-->\r\n<!--                       xmlns=\"http://www.w3.org/2000/svg\">-->\r\n<!--                    <path-->\r\n<!--                      d=\"M5.04146 3C5.22009 2.6906 5.55022 2.5 5.90748 2.5L9.75278 2.5C10.11 2.5 10.4402 2.6906 10.6188 3L12.5415 6.33013C12.7201 6.63953 12.7201 7.02073 12.5415 7.33013L10.6188 10.6603C10.4402 10.9697 10.11 11.1603 9.75278 11.1603H5.90748C5.55022 11.1603 5.22009 10.9697 5.04146 10.6603L3.11881 7.33013C2.94017 7.02073 2.94017 6.63953 3.11881 6.33013L5.04146 3Z\"></path>-->\r\n<!--                    <path-->\r\n<!--                      d=\"M5.1216 13.2272C5.30023 12.9178 5.63036 12.7272 5.98762 12.7272H9.83292C10.1902 12.7272 10.5203 12.9178 10.6989 13.2272L12.6216 16.5574C12.8002 16.8668 12.8002 17.248 12.6216 17.5574L10.6989 20.8875C10.5203 21.1969 10.1902 21.3875 9.83292 21.3875H5.98762C5.63036 21.3875 5.30023 21.1969 5.1216 20.8875L3.19895 17.5574C3.02031 17.248 3.02031 16.8668 3.19895 16.5574L5.1216 13.2272Z\"></path>-->\r\n<!--                    <path-->\r\n<!--                      d=\"M14.1216 8.22723C14.3002 7.91783 14.6304 7.72723 14.9876 7.72723L18.8329 7.72723C19.1902 7.72723 19.5203 7.91783 19.6989 8.22723L21.6216 11.5574C21.8002 11.8668 21.8002 12.248 21.6216 12.5574L19.6989 15.8875C19.5203 16.1969 19.1902 16.3875 18.8329 16.3875H14.9876C14.6304 16.3875 14.3002 16.1969 14.1216 15.8875L12.1989 12.5574C12.0203 12.248 12.0203 11.8668 12.1989 11.5574L14.1216 8.22723Z\"></path>-->\r\n<!--                  </svg>-->\r\n<!--                </div>-->\r\n<!--                <p class=\"tracking-widest\">{{ $t('Количество') }}: </p></div>-->\r\n<!--              <div>-->\r\n<!--                <p-->\r\n<!--                  class=\"rounded-full border border-gray-400 dark:border-white w-10 h-10 flex items-center justify-center dark:text-white\">-->\r\n<!--                  <span>{{ departmentList.get_all_department.count }}</span>-->\r\n<!--                </p>-->\r\n<!--              </div>-->\r\n<!--            </div>-->\r\n\r\n<!--          </div>-->\r\n<!--        </TheContentBlock>-->\r\n<!--      </div>-->\r\n    </div>\r\n  </div>\r\n\r\n</template>\r\n\r\n<style scoped lang=\"scss\">\r\n\r\n</style>",
+      "start": 1749812722225,
+      "end": 1749812725377,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1749796909232,
-      "end": 1749796909232,
+      "start": 1749812725377,
+      "end": 1749812725377,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1749796909232,
-      "end": 1749796909232,
+      "start": 1749812725377,
+      "end": 1749812725377,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1749796909232,
-      "end": 1749796909239,
+      "start": 1749812725377,
+      "end": 1749812725377,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1749796909232,
-      "end": 1749796909239,
+      "start": 1749812725377,
+      "end": 1749812725377,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1749796909239,
-      "end": 1749796909240,
+      "start": 1749812725377,
+      "end": 1749812725377,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1749796909239,
-      "end": 1749796909240,
+      "start": 1749812725377,
+      "end": 1749812725377,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1749796909240,
-      "end": 1749796909240,
+      "start": 1749812725377,
+      "end": 1749812725377,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1749796909240,
-      "end": 1749796909240,
+      "start": 1749812725377,
+      "end": 1749812725377,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1749796909240,
-      "end": 1749796909240,
+      "start": 1749812725377,
+      "end": 1749812725377,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1749796909240,
-      "end": 1749796909240,
+      "start": 1749812725377,
+      "end": 1749812725377,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1749796909240,
-      "end": 1749796909240,
+      "start": 1749812725377,
+      "end": 1749812725377,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "import _sfc_main from \"D:/projects/nuxt/workix-nuxt-front/pages/base/companies/department/index.vue?vue&type=script&setup=true&lang.ts\";\nexport * from \"D:/projects/nuxt/workix-nuxt-front/pages/base/companies/department/index.vue?vue&type=script&setup=true&lang.ts\";\nimport { useSSRContext as __vite_useSSRContext } from \"vue\";\nconst _sfc_setup = _sfc_main.setup;\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext();\n  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(\"pages/base/companies/department/index.vue\");\n  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;\n};\nexport default _sfc_main;\n",
-      "start": 1749796909240,
-      "end": 1749796910652,
+      "start": 1749812725377,
+      "end": 1749812725441,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -86,177 +86,177 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1749796910654,
-      "end": 1749796910656,
+      "start": 1749812725441,
+      "end": 1749812725441,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749796910657,
-      "end": 1749796910658,
+      "start": 1749812725441,
+      "end": 1749812725441,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749796910657,
-      "end": 1749796910658,
+      "start": 1749812725441,
+      "end": 1749812725441,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1749796910658,
-      "end": 1749796910659,
+      "start": 1749812725441,
+      "end": 1749812725441,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1749796910658,
-      "end": 1749796910659,
+      "start": 1749812725441,
+      "end": 1749812725441,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1749796910659,
-      "end": 1749796910660,
+      "start": 1749812725441,
+      "end": 1749812725441,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749796910660,
-      "end": 1749796910661,
+      "start": 1749812725441,
+      "end": 1749812725441,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1749796910661,
-      "end": 1749796910662,
+      "start": 1749812725441,
+      "end": 1749812725441,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1749796910675,
-      "end": 1749796910694,
+      "start": 1749812725441,
+      "end": 1749812725442,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1749796910752,
-      "end": 1749796910752,
+      "start": 1749812725442,
+      "end": 1749812725442,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1749796910755,
-      "end": 1749796910755,
+      "start": 1749812725442,
+      "end": 1749812725442,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1749796910755,
-      "end": 1749796910755,
+      "start": 1749812725442,
+      "end": 1749812725442,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1749796910756,
-      "end": 1749796910756,
+      "start": 1749812725442,
+      "end": 1749812725442,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1749796910756,
-      "end": 1749796910756,
+      "start": 1749812725442,
+      "end": 1749812725442,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1749796910766,
-      "end": 1749796910767,
+      "start": 1749812725442,
+      "end": 1749812725442,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1749796910775,
-      "end": 1749796910775,
+      "start": 1749812725442,
+      "end": 1749812725442,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1749796910776,
-      "end": 1749796910780,
+      "start": 1749812725442,
+      "end": 1749812725442,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1749796910776,
-      "end": 1749796910780,
+      "start": 1749812725442,
+      "end": 1749812725442,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1749796910781,
-      "end": 1749796910781,
+      "start": 1749812725442,
+      "end": 1749812725442,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1749796910781,
-      "end": 1749796910781,
+      "start": 1749812725442,
+      "end": 1749812725442,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1749796910784,
-      "end": 1749796910784,
+      "start": 1749812725442,
+      "end": 1749812725442,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1749796910784,
-      "end": 1749796910784,
+      "start": 1749812725442,
+      "end": 1749812725442,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1749796910784,
-      "end": 1749796910785,
+      "start": 1749812725442,
+      "end": 1749812725442,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1749796910784,
-      "end": 1749796910785,
+      "start": 1749812725442,
+      "end": 1749812725442,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1749796910785,
-      "end": 1749796910792,
+      "start": 1749812725442,
+      "end": 1749812725442,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1749796910785,
-      "end": 1749796910793,
+      "start": 1749812725442,
+      "end": 1749812725442,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1749796910793,
-      "end": 1749796910793,
+      "start": 1749812725442,
+      "end": 1749812725442,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1749796910793,
-      "end": 1749796910793,
+      "start": 1749812725442,
+      "end": 1749812725442,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
       "result": "export { default } from \"D:/projects/nuxt/workix-nuxt-front/pages/base/companies/department/index.vue?macro=true&vue&type=script&setup=true&lang.ts\"",
-      "start": 1749796910795,
-      "end": 1749796910798,
+      "start": 1749812725442,
+      "end": 1749812725443,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -270,8 +270,8 @@
     {
       "name": "nuxt:pages-macros-transform",
       "result": "export { default } from \"D:/projects/nuxt/workix-nuxt-front/pages/base/companies/department/index.vue?macro=true&vue&type=script&setup=true&lang.ts\"",
-      "start": 1749796910795,
-      "end": 1749796910798,
+      "start": 1749812725442,
+      "end": 1749812725443,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -284,32 +284,32 @@
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1749796910798,
-      "end": 1749796910799,
+      "start": 1749812725443,
+      "end": 1749812725443,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1749796910799,
-      "end": 1749796910799,
+      "start": 1749812725443,
+      "end": 1749812725443,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1749796910799,
-      "end": 1749796910800,
+      "start": 1749812725443,
+      "end": 1749812725443,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1749796910800,
-      "end": 1749796910800,
+      "start": 1749812725443,
+      "end": 1749812725443,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1749796910800,
-      "end": 1749796910800,
+      "start": 1749812725443,
+      "end": 1749812725443,
       "order": "normal"
     }
   ]

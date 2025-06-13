@@ -39,7 +39,7 @@ useSeoMeta({
 
 <template>
   <div>
-    <div class="flex items-center justify-between mb-6">
+    <div class="flex items-center justify-between mb-6 max-[678px]:flex-col max-[678px]:gap-3 max-[678px]:items-start">
       <p
           class="dark:text-white text-3xl font-bold"
       >

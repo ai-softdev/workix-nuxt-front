@@ -61,16 +61,18 @@ watch(() => documentStore.documentList, (newValue) => {
 
 <template>
   <div>
-    <div class="p-6 rounded-3xl shadow-cards bg-white mb-8">
-      <div class="flex items-center gap-10 justify-between">
-        <div class="flex items-center gap-x-3 p-2 rounded-full border w-fit">
+    <div class="p-6 rounded-3xl shadow-cards bg-white mb-8 max-[680px]:p-3">
+      <div class="flex items-center gap-10 justify-between max-[680px]:flex-col">
+        <div class="flex items-center gap-x-3 p-2 rounded-full border w-fit max-[680px]:gap-1">
           <button
+              class="text-sm max-[680px]:p-3"
               @click="changeType('from-me')"
               :class="['py-3 px-10 rounded-full font-medium', type === 'from-me' ? 'bg-golden' : '']"
           >
             {{ $t('Мои документы') }}
           </button>
           <button
+              class="text-sm max-[680px]:p-3"
               @click="changeType('through-me')"
               :class="['py-3 px-10 rounded-full font-medium', type === 'through-me' ? 'bg-golden' : '']"
           >
@@ -78,7 +80,7 @@ watch(() => documentStore.documentList, (newValue) => {
           </button>
         </div>
         <TheSearch
-            class="w-4/12"
+            class="w-4/12 max-[680px]:w-full"
             :model-value="query"
             @update:model-value="query = $event"
             @search="updateQueryParams"

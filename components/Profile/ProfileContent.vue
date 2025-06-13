@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full grid grid-cols-3 gap-x-5"
+  <div class="w-full grid grid-cols-3 gap-x-5 max-[1150px]:!grid-cols-1"
        :class="{'max-[1150px]:grid-cols-2' : activeNav, 'max-[1150px]:grid-cols-3' : !activeNav}"
   >
     <ProfileContentUserInfo/>
@@ -12,7 +12,7 @@
       <ProfileContentChart/>
     </div>
   </div>
-  <div class="grid grid-cols-3 gap-x-5 mt-5">
+  <div class="grid grid-cols-3 max-[1150px]:!grid-cols-1 gap-x-5 mt-5">
     <TheContentBlock
         class="bg-white shadow-cards hover:transform hover:-translate-y-2 transition-all duration-200"
     >

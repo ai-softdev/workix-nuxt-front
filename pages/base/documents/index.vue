@@ -47,7 +47,7 @@ useSeoMeta({
 <template>
  <div>
 <!--   <DocumentHeader class="w-6/12 mx-auto max-md:w-full"></DocumentHeader>-->
-   <div class="flex items-center gap-4 justify-between">
+   <div class="flex items-center gap-4 justify-between max-[680px]:flex-col max-[680px]:items-start max-[680px]:gap-5">
      <p
          class="dark:text-white text-3xl font-bold"
      >
@@ -63,12 +63,12 @@ useSeoMeta({
        <DocumentContentHeaderCreate/>
      </TheModal>
    </div>
-   <div class="flex justify-between gap-5 mt-8">
+   <div class="flex justify-between gap-5 mt-8 max-[1250px]:flex-col">
       <DocumentContent
-          class="!w-9/12"
+          class="!w-9/12 max-[1250px]:!w-full max-[1250px]:order-2"
       />
       <DocumentInfo
-          class="!w-3/12"
+          class="!w-3/12 max-[1250px]:!w-full"
       />
    </div>
  </div>

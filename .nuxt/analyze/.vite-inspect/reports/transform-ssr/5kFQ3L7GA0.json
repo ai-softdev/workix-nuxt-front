@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderClass as _ssrRenderClass, ssrRenderAttr as _ssrRenderAttr, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\"\nimport _imports_0 from '/icons/search.svg'\n\n\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'TheSearch',\n  __ssrInlineRender: true,\n  props: {\r\n  modelValue: String,\r\n  mode: {\r\n    type: String,\r\n    default: ''\r\n  }\r\n},\n  setup(__props) {\n\r\nconst props = __props\r\nconst focusInput = ref()\r\nconst timer = ref<number | null>(null)\r\nwatchSyncEffect(() => {\r\n  if (props.mode === 'scan') {\r\n    nextTick(() => {\r\n      focusInput.value.focus()\r\n    })\r\n  }\r\n})\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  _push(`<div${\n    _ssrRenderAttrs(_mergeProps({ class: \"relative\" }, _attrs))\n  }><input class=\"${\n    _ssrRenderClass([{ '': __props.mode === 'scan' }, \"w-full px-4 py-3 pr-10 border rounded-full bg-white focus:border-golden text-black dark:focus:opacity-100 transition-all dark:opacity-40 outline-none\"])\n  }\" type=\"text\"${\n    _ssrRenderAttr(\"placeholder\", __props.mode === 'scan' ? _ctx.$t('Сканирование') : _ctx.$t('Найти'))\n  }><img class=\"absolute top-3.5 right-4 z-10\"${\n    _ssrRenderAttr(\"src\", _imports_0)\n  } alt=\"search\"></div>`)\n}\n}\n\n})",
-      "start": 1749796920926,
-      "end": 1749796920926,
+      "start": 1749812728267,
+      "end": 1749812728267,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1749796920926,
-      "end": 1749796920926,
+      "start": 1749812728267,
+      "end": 1749812728267,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1749796920926,
-      "end": 1749796920926,
+      "start": 1749812728267,
+      "end": 1749812728267,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1749796920926,
-      "end": 1749796920926,
+      "start": 1749812728267,
+      "end": 1749812728267,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1749796920926,
-      "end": 1749796920926,
+      "start": 1749812728267,
+      "end": 1749812728267,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1749796920926,
-      "end": 1749796920926,
+      "start": 1749812728267,
+      "end": 1749812728267,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1749796920926,
-      "end": 1749796920926,
+      "start": 1749812728267,
+      "end": 1749812728267,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1749796920926,
-      "end": 1749796920926,
+      "start": 1749812728267,
+      "end": 1749812728267,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1749796920926,
-      "end": 1749796920926,
+      "start": 1749812728267,
+      "end": 1749812728267,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderClass as _ssrRenderClass, ssrRenderAttr as _ssrRenderAttr, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport _imports_0 from \"/icons/search.svg\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"TheSearch\",\n  __ssrInlineRender: true,\n  props: {\n    modelValue: String,\n    mode: {\n      type: String,\n      default: \"\"\n    }\n  },\n  setup(__props) {\n    const props = __props;\n    const focusInput = ref();\n    const timer = ref(null);\n    watchSyncEffect(() => {\n      if (props.mode === \"scan\") {\n        nextTick(() => {\n          focusInput.value.focus();\n        });\n      }\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"relative\" }, _attrs))}><input class=\"${_ssrRenderClass([{ \"\": __props.mode === \"scan\" }, \"w-full px-4 py-3 pr-10 border rounded-full bg-white focus:border-golden text-black dark:focus:opacity-100 transition-all dark:opacity-40 outline-none\"])}\" type=\"text\"${_ssrRenderAttr(\"placeholder\", __props.mode === \"scan\" ? _ctx.$t(\"Сканирование\") : _ctx.$t(\"Найти\"))}><img class=\"absolute top-3.5 right-4 z-10\"${_ssrRenderAttr(\"src\", _imports_0)} alt=\"search\"></div>`);\n    };\n  }\n});\n",
-      "start": 1749796920926,
-      "end": 1749796922328,
+      "start": 1749812728267,
+      "end": 1749812728859,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -86,171 +86,171 @@
     },
     {
       "name": "vite:json",
-      "start": 1749796922328,
-      "end": 1749796922328,
+      "start": 1749812728859,
+      "end": 1749812728859,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1749796922328,
-      "end": 1749796922328,
+      "start": 1749812728859,
+      "end": 1749812728859,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1749796922328,
-      "end": 1749796922329,
+      "start": 1749812728860,
+      "end": 1749812728860,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1749796922329,
-      "end": 1749796922329,
+      "start": 1749812728860,
+      "end": 1749812728860,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749796922329,
-      "end": 1749796922329,
+      "start": 1749812728860,
+      "end": 1749812728860,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749796922329,
-      "end": 1749796922329,
+      "start": 1749812728860,
+      "end": 1749812728860,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1749796922329,
-      "end": 1749796922329,
+      "start": 1749812728861,
+      "end": 1749812728861,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1749796922329,
-      "end": 1749796922329,
+      "start": 1749812728861,
+      "end": 1749812728861,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1749796922329,
-      "end": 1749796922329,
+      "start": 1749812728862,
+      "end": 1749812728862,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749796922329,
-      "end": 1749796922330,
+      "start": 1749812728862,
+      "end": 1749812728862,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1749796922330,
-      "end": 1749796922331,
+      "start": 1749812728863,
+      "end": 1749812728864,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1749796922331,
-      "end": 1749796922331,
+      "start": 1749812728864,
+      "end": 1749812728864,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1749796922331,
-      "end": 1749796922331,
+      "start": 1749812728864,
+      "end": 1749812728864,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1749796922331,
-      "end": 1749796922331,
+      "start": 1749812728864,
+      "end": 1749812728864,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1749796922331,
-      "end": 1749796922331,
+      "start": 1749812728865,
+      "end": 1749812728865,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1749796922331,
-      "end": 1749796922331,
+      "start": 1749812728865,
+      "end": 1749812728865,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1749796922332,
-      "end": 1749796922332,
+      "start": 1749812728865,
+      "end": 1749812728865,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1749796922332,
-      "end": 1749796922332,
+      "start": 1749812728865,
+      "end": 1749812728865,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1749796922332,
-      "end": 1749796922332,
+      "start": 1749812728865,
+      "end": 1749812728865,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1749796922332,
-      "end": 1749796922332,
+      "start": 1749812728865,
+      "end": 1749812728865,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1749796922332,
-      "end": 1749796922332,
+      "start": 1749812728865,
+      "end": 1749812728865,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1749796922332,
-      "end": 1749796922332,
+      "start": 1749812728866,
+      "end": 1749812728866,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1749796922332,
-      "end": 1749796922332,
+      "start": 1749812728866,
+      "end": 1749812728866,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1749796922332,
-      "end": 1749796922332,
+      "start": 1749812728867,
+      "end": 1749812728867,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1749796922332,
-      "end": 1749796922332,
+      "start": 1749812728867,
+      "end": 1749812728867,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1749796922332,
-      "end": 1749796922332,
+      "start": 1749812728867,
+      "end": 1749812728867,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1749796922332,
-      "end": 1749796922332,
+      "start": 1749812728867,
+      "end": 1749812728867,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref, watchSyncEffect, nextTick } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderClass as _ssrRenderClass, ssrRenderAttr as _ssrRenderAttr, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport _imports_0 from \"/icons/search.svg\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"TheSearch\",\n  __ssrInlineRender: true,\n  props: {\n    modelValue: String,\n    mode: {\n      type: String,\n      default: \"\"\n    }\n  },\n  setup(__props) {\n    const props = __props;\n    const focusInput = ref();\n    const timer = ref(null);\n    watchSyncEffect(() => {\n      if (props.mode === \"scan\") {\n        nextTick(() => {\n          focusInput.value.focus();\n        });\n      }\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"relative\" }, _attrs))}><input class=\"${_ssrRenderClass([{ \"\": __props.mode === \"scan\" }, \"w-full px-4 py-3 pr-10 border rounded-full bg-white focus:border-golden text-black dark:focus:opacity-100 transition-all dark:opacity-40 outline-none\"])}\" type=\"text\"${_ssrRenderAttr(\"placeholder\", __props.mode === \"scan\" ? _ctx.$t(\"Сканирование\") : _ctx.$t(\"Найти\"))}><img class=\"absolute top-3.5 right-4 z-10\"${_ssrRenderAttr(\"src\", _imports_0)} alt=\"search\"></div>`);\n    };\n  }\n});\n",
-      "start": 1749796922333,
-      "end": 1749796922343,
+      "start": 1749812728868,
+      "end": 1749812728875,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -264,8 +264,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref, watchSyncEffect, nextTick } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderClass as _ssrRenderClass, ssrRenderAttr as _ssrRenderAttr, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport _imports_0 from \"/icons/search.svg\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"TheSearch\",\n  __ssrInlineRender: true,\n  props: {\n    modelValue: String,\n    mode: {\n      type: String,\n      default: \"\"\n    }\n  },\n  setup(__props) {\n    const props = __props;\n    const focusInput = ref();\n    const timer = ref(null);\n    watchSyncEffect(() => {\n      if (props.mode === \"scan\") {\n        nextTick(() => {\n          focusInput.value.focus();\n        });\n      }\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"relative\" }, _attrs))}><input class=\"${_ssrRenderClass([{ \"\": __props.mode === \"scan\" }, \"w-full px-4 py-3 pr-10 border rounded-full bg-white focus:border-golden text-black dark:focus:opacity-100 transition-all dark:opacity-40 outline-none\"])}\" type=\"text\"${_ssrRenderAttr(\"placeholder\", __props.mode === \"scan\" ? _ctx.$t(\"Сканирование\") : _ctx.$t(\"Найти\"))}><img class=\"absolute top-3.5 right-4 z-10\"${_ssrRenderAttr(\"src\", _imports_0)} alt=\"search\"></div>`);\n    };\n  }\n});\n",
-      "start": 1749796922333,
-      "end": 1749796922343,
+      "start": 1749812728868,
+      "end": 1749812728875,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -278,56 +278,56 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1749796922343,
-      "end": 1749796922343,
+      "start": 1749812728876,
+      "end": 1749812728876,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1749796922343,
-      "end": 1749796922343,
+      "start": 1749812728876,
+      "end": 1749812728876,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1749796922343,
-      "end": 1749796922343,
+      "start": 1749812728876,
+      "end": 1749812728876,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1749796922343,
-      "end": 1749796922343,
+      "start": 1749812728876,
+      "end": 1749812728876,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1749796922343,
-      "end": 1749796922344,
+      "start": 1749812728876,
+      "end": 1749812728876,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1749796922344,
-      "end": 1749796922345,
+      "start": 1749812728877,
+      "end": 1749812728877,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1749796922345,
-      "end": 1749796922346,
+      "start": 1749812728878,
+      "end": 1749812728878,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1749796922346,
-      "end": 1749796922346,
+      "start": 1749812728878,
+      "end": 1749812728878,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1749796922346,
-      "end": 1749796922346,
+      "start": 1749812728878,
+      "end": 1749812728878,
       "order": "normal"
     }
   ]

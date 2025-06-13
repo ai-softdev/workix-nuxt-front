@@ -120,8 +120,9 @@ watchSyncEffect(() => {
 <template>
   <div class="flex flex-col gap-4">
     <div
-        class="flex items-center justify-between gap-10"
-        :class="{'flex items-center justify-between' :['company_admin', 'admin'].includes( loadCurrentUser.user.role?.name_en )}">
+        class="flex items-center justify-between gap-10 max-[768px]:flex-col max-[768px]:items-start"
+        :class="{'flex items-center justify-between' :['company_admin', 'admin'].includes( loadCurrentUser.user.role?.name_en )}"
+    >
       <div class="text-lg flex gap-x-10">
         <p
             class="dark:text-white text-3xl font-bold"
@@ -137,7 +138,8 @@ watchSyncEffect(() => {
         </p>
       </div>
       <div
-          :class="{'flex items-center justify-evenly' : loadCurrentUser.user.role?.name_en === 'admin', 'w-2/12 max-lg:w-4/12 max-sm:w-full max-sm:mb-6 max-sm:mx-auto' : loadCurrentUser.user.role_en !== 'admin'}">
+          :class="{'flex items-center justify-evenly' : loadCurrentUser.user.role?.name_en === 'admin', 'w-2/12 max-lg:w-4/12 max-sm:w-full max-sm:mb-6 max-sm:mx-auto' : loadCurrentUser.user.role_en !== 'admin'}"
+      >
         <div class="flex gap-x-10" v-if="loadCurrentUser?.user.role === 'Администратор сайта'">
           <button class="p-2 rounded-xl dark:text-white tracking-widest font-bold"
                   :class="{'bg-blueDarkSemiLight text-white' : userChecked === 'user-list'}"
@@ -153,12 +155,12 @@ watchSyncEffect(() => {
         <UserCreate></UserCreate>
       </div>
     </div>
-    <div class="w-full mt-4">
-      <div class="flex items-center justify-between gap-x-10 max-lg:flex-wrap max-md:justify-center">
-        <p class="text-mediumGray w-5/12">
+    <div class="w-full mt-4 max-[636px]:mt-0">
+      <div class="flex items-center justify-between max-[636px]:flex-col gap-x-10 max-lg:flex-wrap max-md:justify-center">
+        <p class="text-mediumGray w-5/12 max-[636px]:w-full">
           {{ $t('Данная страница хранит информацию о пользователях данной платформы') }}
         </p>
-        <div class="w-5/12 flex items-center gap-3 h-10">
+        <div class="w-5/12 max-[636px]:w-full max-[636px]:mt-5 flex items-center gap-3 h-10">
           <TheSearch
               class="w-full"
               v-model:model-value="params.query"
@@ -168,7 +170,7 @@ watchSyncEffect(() => {
 <!--          <TheFilter></TheFilter>-->
         </div>
       </div>
-      <div class="mt-8 grid grid-cols-4 gap-5 max-md:mt-10">
+      <div class="mt-8 grid grid-cols-4 max-[1350px]:grid-cols-2 max-[636px]:grid-cols-1 gap-5 max-md:mt-10">
           <UserContentList
               v-for="userItem in userList?.get_user_list.results"
               v-if="userList?.get_user_list.count > 0"

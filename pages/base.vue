@@ -5,31 +5,39 @@
          @click="user.activeNav = false"/>
     <div class="flex w-full h-full bg-[#F7F6F9] dark:bg-bgPages">
       <div
-        class="bg-white transition-all duration-300 dark:bg-black max-[880px]:h-screen max-[1150px]:fixed z-50"
-        :class="{'max-[1150px]:-translate-x-24 transition-all duration-200' : !user.activeNav, 'max-[600px]:w-full transition-all' : user.activeNav}">
+          class="bg-white transition-all duration-300 dark:bg-black max-[880px]:h-screen max-[1150px]:fixed z-50"
+          :class="{'max-[1150px]:-translate-x-32 transition-all duration-200' : !user.activeNav, 'max-[600px]:w-full transition-all' : user.activeNav}">
         <div
-          class="absolute bg-gray-300 rounded-l-lg px-2 py-1 z-[100] hidden max-[1150px]:block max-md:block right-2 top-6"
-          @click="user.activeNav = false">
+            class="absolute bg-gray-300 rounded-l-lg px-2 py-1 z-[100] hidden max-[1150px]:block max-md:block right-2 top-6"
+            @click="user.activeNav = false">
           <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
-              d="M16.9995 15.9995L20.9995 11.9995M20.9995 11.9995L16.9995 7.99951M20.9995 11.9995H8.99951M12.9995 20.9995H6.20029C5.08019 20.9995 4.52014 20.9995 4.09231 20.7815C3.71599 20.5898 3.41003 20.2838 3.21828 19.9075C3.00029 19.4797 3.00029 18.9196 3.00029 17.7995V6.19951C3.00029 5.07941 3.00029 4.51935 3.21828 4.09153C3.41003 3.71521 3.71599 3.40925 4.09231 3.2175C4.52014 2.99951 5.08019 2.99951 6.20029 2.99951L12.9995 2.99951"
-              stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                d="M16.9995 15.9995L20.9995 11.9995M20.9995 11.9995L16.9995 7.99951M20.9995 11.9995H8.99951M12.9995 20.9995H6.20029C5.08019 20.9995 4.52014 20.9995 4.09231 20.7815C3.71599 20.5898 3.41003 20.2838 3.21828 19.9075C3.00029 19.4797 3.00029 18.9196 3.00029 17.7995V6.19951C3.00029 5.07941 3.00029 4.51935 3.21828 4.09153C3.41003 3.71521 3.71599 3.40925 4.09231 3.2175C4.52014 2.99951 5.08019 2.99951 6.20029 2.99951L12.9995 2.99951"
+                stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
         <TheNavigation class="max-md:overflow-x-hidden" :class="{'mr-24' : user.activeNav && user.my_scroll>90}"
-                   :activeNav="user.activeNav"></TheNavigation>
+                       :activeNav="user.activeNav"></TheNavigation>
       </div>
       <div class="w-full relative">
-        <div class="cursor-pointer bg-porcelain h-10 w-10 flex items-center justify-center rounded-lg absolute top-5 max-[800px]:top-6 left-5 z-50 dark:fill-white fill-black"
-             :class="{'blur' : treeStore.treeFullScreen === true}"
-             @click="user.activeNav = !user.activeNav; user.openNotification = false; user.openSettings = false">
+        <div
+            class="cursor-pointer bg-porcelain h-10 w-10 flex items-center justify-center rounded-lg absolute top-5 max-[1150px]:top-3 left-5 z-50 dark:fill-white fill-black"
+            :class="{
+              'blur' : treeStore.treeFullScreen === true,
+              'max-[1150px]:!hidden': user.activeNav
+            }"
+            @click="user.activeNav = !user.activeNav; user.openNotification = false; user.openSettings = false">
           <svg width="22" height="16" viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd"
                   d="M0.999776 1.99957H20.9998C21.5177 1.99957 21.9845 1.46089 21.9845 0.9431C21.9845 0.425798 21.5607 0.00261796 21.0428 0.00261796H0.956408C0.43868 0.00261796 0.014912 0.425798 0.014912 0.9431C0.014912 1.46089 0.482048 1.99957 0.999776 1.99957ZM0.999776 8.99956H20.9998C21.5177 8.99956 21.9845 8.51664 21.9845 7.99933C21.9845 7.48203 21.5177 6.99958 20.9998 6.99958H0.999776C0.482048 6.99958 0.014912 7.48203 0.014912 7.99933C0.014912 8.51664 0.482048 8.99956 0.999776 8.99956ZM21.0428 15.9962H0.956408C0.43868 15.9962 0.014912 15.5727 0.014912 15.0551C0.014912 14.5379 0.482048 13.9997 0.999776 13.9997H20.9998C21.5177 13.9997 21.9845 14.5379 21.9845 15.0551C21.9845 15.5727 21.5607 15.9962 21.0428 15.9962Z"/>
           </svg>
         </div>
         <HeaderContent class="pl-14"/>
-        <div class="relative" @click="user.openSettings = false; user.openNotification = false">
+        <div
+            class="relative z-10"
+            :class="{'z-[1000]': treeStore.treeFullScreen}"
+            @click="user.openSettings = false; user.openNotification = false"
+        >
           <NuxtPage class="mx-6 max-sm:mx-1 py-10 h-full "></NuxtPage>
         </div>
         <!-- <allTips></allTips>-->
@@ -56,6 +64,7 @@ const notice = useNotification()
 const route = useRouter()
 const router = useRoute()
 const user = useAuthStore();
+
 function notification() {
   let ws = new WebSocket(`wss://api-buildwithus.ai-softdev.com/ws/notification?token=${nuxtStorage.localStorage.getData('token')}`)
   ws.onmessage = (data) => {
@@ -126,6 +135,7 @@ function notification() {
     ws.close();
   };
 }
+
 onMounted(() => {
   route.afterEach(() => {
     if (window.innerWidth <= 636) {
@@ -154,12 +164,11 @@ onUpdated(() => {
 })
 
 
-
 useHead({
   titleTemplate: (title) => {
     return title
-      ? `${title} • ERP`
-      : 'ERP'
+        ? `${title} • ERP`
+        : 'ERP'
   }
 })
 </script>
