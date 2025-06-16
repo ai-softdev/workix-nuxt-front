@@ -928,7 +928,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./chat-D1UVsVIE.mjs').then((m) => m.default || m),
+        component: () => import('./chat-9nhS_YSO.mjs').then((m) => m.default || m),
         children: [
           {
             name: "base-chat-id",
@@ -946,7 +946,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-CClcYwhf.mjs').then((m) => m.default || m)
+        component: () => import('./index-i1Vgua0r.mjs').then((m) => m.default || m)
       },
       {
         name: "base-companies-id",
@@ -1263,7 +1263,7 @@ const validate = /* @__PURE__ */ defineNuxtRouteMiddleware(async (to) => {
 });
 const inlineConfig = {
   "nuxt": {
-    "buildId": "65075b0b-737c-4bf9-8433-98bc7f47f804"
+    "buildId": "dev"
   },
   "ui": {
     "primary": "green",

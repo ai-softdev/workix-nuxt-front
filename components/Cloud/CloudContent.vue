@@ -18,12 +18,12 @@ defineProps({
   <div class="flex w-full gap-x-10 h-full relative rounded-3xl bg-white shadow-cards mt-8 p-6">
     <div class="absolute top-0 right-0 w-full z-[22] hidden max-[840px]:block"
          :class="{'!hidden' : !activeStructure}" @click="activeStructure = false"/>
-    <div class="w-2/12">
-      <p class="font-bold text-xl mb-5">
+    <div class="w-2/12 max-[1300px]:w-3/12 max-[840px]:absolute max-[840px]:bg-white">
+      <p class="font-bold text-xl mb-5 max-[840px]:hidden">
         Файлы и папки
       </p>
       <div
-          class="flex bg-porcelain shrink-0 border p-4 rounded-3xl flex-col h-full max-[840px]:absolute max-[840px]:z-40 max-[840px]:dark:bg-gray-600 max-[840px]:bg-white gap-y-10 !z-[23]"
+          class="flex bg-porcelain shrink-0 border p-4 rounded-3xl flex-col h-full max-[840px]:border-none max-[840px]:absolute max-[840px]:z-40 max-[840px]:dark:bg-gray-600 max-[840px]:bg-white gap-y-10 !z-[23]"
           :class="{'max-[425px]:w-full' : activeStructure}"
       >
         <TheCloudUiStructure
@@ -32,7 +32,7 @@ defineProps({
         />
         <div @click="activeStructure = !activeStructure" class="hidden"
              :class="{'max-[840px]:!block' : !activeStructure}">
-          <div class="cursor-pointer absolute top-8 max-[840px]:top-6 left-5 !z-0 dark:fill-white fill-black">
+          <div class="cursor-pointer bg-white border rounded-3xl flex items-center justify-center w-10 h-10 shadow absolute top-8 max-[840px]:top-3 left-3 !z-0 dark:fill-white fill-black">
             <svg width="22" height="16" viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" clip-rule="evenodd"
                     d="M0.999776 1.99957H20.9998C21.5177 1.99957 21.9845 1.46089 21.9845 0.9431C21.9845 0.425798 21.5607 0.00261796 21.0428 0.00261796H0.956408C0.43868 0.00261796 0.014912 0.425798 0.014912 0.9431C0.014912 1.46089 0.482048 1.99957 0.999776 1.99957ZM0.999776 8.99956H20.9998C21.5177 8.99956 21.9845 8.51664 21.9845 7.99933C21.9845 7.48203 21.5177 6.99958 20.9998 6.99958H0.999776C0.482048 6.99958 0.014912 7.48203 0.014912 7.99933C0.014912 8.51664 0.482048 8.99956 0.999776 8.99956ZM21.0428 15.9962H0.956408C0.43868 15.9962 0.014912 15.5727 0.014912 15.0551C0.014912 14.5379 0.482048 13.9997 0.999776 13.9997H20.9998C21.5177 13.9997 21.9845 14.5379 21.9845 15.0551C21.9845 15.5727 21.5607 15.9962 21.0428 15.9962Z"></path>
@@ -42,7 +42,7 @@ defineProps({
       </div>
     </div>
 <!--    середина-->
-    <TheContentBlock class="w-10/12 overflow-x-hidden relative p-10 max-[500px]:p-2 rounded-lg z-20" >
+    <TheContentBlock class="w-10/12 max-[1300px]:w-9/12 max-[840px]:w-full overflow-x-hidden relative p-10 max-[500px]:p-2 rounded-lg z-20" >
       <TheCloudUIFolders class="z-10"/>
     </TheContentBlock>
 <!--    середина-->

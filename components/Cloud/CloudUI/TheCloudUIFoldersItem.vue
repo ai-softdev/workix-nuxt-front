@@ -44,7 +44,7 @@ defineProps({
       </div>
     </div>
     <div class="flex justify-evenly gap-x-10 items-center" :class="{'hidden' : changeView === 'tile'}">
-      <p class="text-mediumGray">
+      <p class="text-mediumGray max-[400px]:hidden">
         <slot name="folderDate"/>
       </p>
       <p>

@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\"\n\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\r\nimport ObjectContent from \"~/components/Objects/ObjectContent.vue\";\r\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\r\nimport TheFilter from \"~/components/UI/TheFilter.vue\";\r\nimport ObjectCreate from \"~/components/Objects/ObjectCreate.vue\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport {useCompanies} from \"~/stores/companies\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'index',\n  __ssrInlineRender: true,\n  setup(__props) {\n\r\nconst router = useRouter()\r\nconst loadAuthStore = useAuthStore()\r\nconst company = useCompanies()\r\n\r\nwatch(() => loadAuthStore.user, (newValue) => {\r\n  if(loadAuthStore?.user?.role?.name_en === 'admin'){\r\n    if (window.history.length > 1) {\r\n      router.push('/base/profile');\r\n    } else {\r\n      router.push('/');\r\n    }\r\n  }\r\n})\r\nwatch(() => company.company, (newValue) => {\r\n  let permission = company.company.modules?.find(item => item.name_en === 'objects')\r\n  if(!permission){\r\n    if (window.history.length > 1) {\r\n      router.push('/base/profile');\r\n    } else {\r\n      router.push('/');\r\n    }\r\n  }\r\n})\r\n\r\nuseSeoMeta({\r\n  title: 'Объекты',\r\n  description: 'Объекты компании'\r\n})\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  _push(`<div${\n    _ssrRenderAttrs(_attrs)\n  }><div class=\"flex items-center justify-between mb-6 max-[678px]:flex-col max-[678px]:gap-3 max-[678px]:items-start\"><p class=\"dark:text-white text-3xl font-bold\">${\n    _ssrInterpolate(_ctx.$t('Страница с объектами'))\n  }</p>`)\n  _push(_ssrRenderComponent(ObjectCreate, null, null, _parent))\n  _push(`</div>`)\n  _push(_ssrRenderComponent(ObjectContent, null, null, _parent))\n  _push(`</div>`)\n}\n}\n\n})",
-      "start": 1749812725796,
-      "end": 1749812725796,
+      "start": 1750072404929,
+      "end": 1750072404929,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1749812725796,
-      "end": 1749812725796,
+      "start": 1750072404929,
+      "end": 1750072404929,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1749812725796,
-      "end": 1749812725796,
+      "start": 1750072404929,
+      "end": 1750072404929,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1749812725796,
-      "end": 1749812725796,
+      "start": 1750072404929,
+      "end": 1750072404929,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1749812725796,
-      "end": 1749812725796,
+      "start": 1750072404929,
+      "end": 1750072404929,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1749812725796,
-      "end": 1749812725796,
+      "start": 1750072404929,
+      "end": 1750072404929,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1749812725796,
-      "end": 1749812725796,
+      "start": 1750072404929,
+      "end": 1750072404929,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1749812725796,
-      "end": 1749812725796,
+      "start": 1750072404929,
+      "end": 1750072404929,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1749812725796,
-      "end": 1749812725796,
+      "start": 1750072404929,
+      "end": 1750072404929,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport ObjectContent from \"~/components/Objects/ObjectContent.vue\";\nimport ObjectCreate from \"~/components/Objects/ObjectCreate.vue\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    const company = useCompanies();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if (window.history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    watch(() => company.company, (newValue) => {\n      let permission = company.company.modules?.find((item) => item.name_en === \"objects\");\n      if (!permission) {\n        if (window.history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Объекты\",\n      description: \"Объекты компании\"\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}><div class=\"flex items-center justify-between mb-6 max-[678px]:flex-col max-[678px]:gap-3 max-[678px]:items-start\"><p class=\"dark:text-white text-3xl font-bold\">${_ssrInterpolate(_ctx.$t(\"Страница с объектами\"))}</p>`);\n      _push(_ssrRenderComponent(ObjectCreate, null, null, _parent));\n      _push(`</div>`);\n      _push(_ssrRenderComponent(ObjectContent, null, null, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1749812725796,
-      "end": 1749812726492,
+      "start": 1750072404929,
+      "end": 1750072405672,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -86,173 +86,173 @@
     },
     {
       "name": "vite:json",
-      "start": 1749812726492,
-      "end": 1749812726492,
+      "start": 1750072405672,
+      "end": 1750072405672,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1749812726492,
-      "end": 1749812726492,
+      "start": 1750072405672,
+      "end": 1750072405672,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1749812726493,
-      "end": 1749812726493,
+      "start": 1750072405672,
+      "end": 1750072405672,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1749812726493,
-      "end": 1749812726493,
+      "start": 1750072405672,
+      "end": 1750072405672,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749812726493,
-      "end": 1749812726493,
+      "start": 1750072405672,
+      "end": 1750072405672,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749812726493,
-      "end": 1749812726493,
+      "start": 1750072405672,
+      "end": 1750072405672,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1749812726493,
-      "end": 1749812726493,
+      "start": 1750072405672,
+      "end": 1750072405672,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1749812726493,
-      "end": 1749812726493,
+      "start": 1750072405672,
+      "end": 1750072405672,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1749812726493,
-      "end": 1749812726493,
+      "start": 1750072405672,
+      "end": 1750072405672,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1749812726494,
-      "end": 1749812726494,
+      "start": 1750072405673,
+      "end": 1750072405673,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1749812726495,
-      "end": 1749812726496,
+      "start": 1750072405673,
+      "end": 1750072405674,
       "order": "normal"
     },
     {
       "name": "vite:define",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport ObjectContent from \"~/components/Objects/ObjectContent.vue\";\nimport ObjectCreate from \"~/components/Objects/ObjectCreate.vue\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    const company = useCompanies();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    watch(() => company.company, (newValue) => {\n      let permission = company.company.modules?.find((item) => item.name_en === \"objects\");\n      if (!permission) {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Объекты\",\n      description: \"Объекты компании\"\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}><div class=\"flex items-center justify-between mb-6 max-[678px]:flex-col max-[678px]:gap-3 max-[678px]:items-start\"><p class=\"dark:text-white text-3xl font-bold\">${_ssrInterpolate(_ctx.$t(\"Страница с объектами\"))}</p>`);\n      _push(_ssrRenderComponent(ObjectCreate, null, null, _parent));\n      _push(`</div>`);\n      _push(_ssrRenderComponent(ObjectContent, null, null, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1749812726497,
-      "end": 1749812727537,
+      "start": 1750072405674,
+      "end": 1750072406930,
       "order": "normal",
       "sourcemaps": "{\n  \"version\": 3,\n  \"sources\": [\"D:/projects/nuxt/workix-nuxt-front/pages/base/objects/index.vue?macro=true&vue&type=script&setup=true&lang.ts\"],\n  \"sourcesContent\": [\"import { defineComponent as _defineComponent } from \\\"vue\\\";\\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \\\"vue/server-renderer\\\";\\nimport ObjectContent from \\\"~/components/Objects/ObjectContent.vue\\\";\\nimport ObjectCreate from \\\"~/components/Objects/ObjectCreate.vue\\\";\\nimport { useAuthStore } from \\\"~/stores/auth\\\";\\nimport { useCompanies } from \\\"~/stores/companies\\\";\\nexport default /* @__PURE__ */ _defineComponent({\\n  __name: \\\"index\\\",\\n  __ssrInlineRender: true,\\n  setup(__props) {\\n    const router = useRouter();\\n    const loadAuthStore = useAuthStore();\\n    const company = useCompanies();\\n    watch(() => loadAuthStore.user, (newValue) => {\\n      if (loadAuthStore?.user?.role?.name_en === \\\"admin\\\") {\\n        if (window.history.length > 1) {\\n          router.push(\\\"/base/profile\\\");\\n        } else {\\n          router.push(\\\"/\\\");\\n        }\\n      }\\n    });\\n    watch(() => company.company, (newValue) => {\\n      let permission = company.company.modules?.find((item) => item.name_en === \\\"objects\\\");\\n      if (!permission) {\\n        if (window.history.length > 1) {\\n          router.push(\\\"/base/profile\\\");\\n        } else {\\n          router.push(\\\"/\\\");\\n        }\\n      }\\n    });\\n    useSeoMeta({\\n      title: \\\"Объекты\\\",\\n      description: \\\"Объекты компании\\\"\\n    });\\n    return (_ctx, _push, _parent, _attrs) => {\\n      _push(`<div${_ssrRenderAttrs(_attrs)}><div class=\\\"flex items-center justify-between mb-6 max-[678px]:flex-col max-[678px]:gap-3 max-[678px]:items-start\\\"><p class=\\\"dark:text-white text-3xl font-bold\\\">${_ssrInterpolate(_ctx.$t(\\\"Страница с объектами\\\"))}</p>`);\\n      _push(_ssrRenderComponent(ObjectCreate, null, null, _parent));\\n      _push(`</div>`);\\n      _push(_ssrRenderComponent(ObjectContent, null, null, _parent));\\n      _push(`</div>`);\\n    };\\n  }\\n});\\n\"],\n  \"mappings\": \"AAAA,SAAS,mBAAmB,wBAAwB;AACpD,SAAS,sBAAsB,qBAAqB,kBAAkB,iBAAiB,kBAAkB,uBAAuB;AAChI,OAAO,mBAAmB;AAC1B,OAAO,kBAAkB;AACzB,SAAS,oBAAoB;AAC7B,SAAS,oBAAoB;AAC7B,eAA+B,iCAAiB;AAAA,EAC9C,QAAQ;AAAA,EACR,mBAAmB;AAAA,EACnB,MAAM,SAAS;AACb,UAAM,SAAS,UAAU;AACzB,UAAM,gBAAgB,aAAa;AACnC,UAAM,UAAU,aAAa;AAC7B,UAAM,MAAM,cAAc,MAAM,CAAC,aAAa;AAC5C,UAAI,eAAe,MAAM,MAAM,YAAY,SAAS;AAClD,YAAI,SAAO,QAAQ,SAAS,GAAG;AAC7B,iBAAO,KAAK,eAAe;AAAA,QAC7B,OAAO;AACL,iBAAO,KAAK,GAAG;AAAA,QACjB;AAAA,MACF;AAAA,IACF,CAAC;AACD,UAAM,MAAM,QAAQ,SAAS,CAAC,aAAa;AACzC,UAAI,aAAa,QAAQ,QAAQ,SAAS,KAAK,CAAC,SAAS,KAAK,YAAY,SAAS;AACnF,UAAI,CAAC,YAAY;AACf,YAAI,SAAO,QAAQ,SAAS,GAAG;AAC7B,iBAAO,KAAK,eAAe;AAAA,QAC7B,OAAO;AACL,iBAAO,KAAK,GAAG;AAAA,QACjB;AAAA,MACF;AAAA,IACF,CAAC;AACD,eAAW;AAAA,MACT,OAAO;AAAA,MACP,aAAa;AAAA,IACf,CAAC;AACD,WAAO,CAAC,MAAM,OAAO,SAAS,WAAW;AACvC,YAAM,OAAO,gBAAgB,MAAM,CAAC,qKAAqK,gBAAgB,KAAK,GAAG,sBAAsB,CAAC,CAAC,MAAM;AAC/P,YAAM,oBAAoB,cAAc,MAAM,MAAM,OAAO,CAAC;AAC5D,YAAM,QAAQ;AACd,YAAM,oBAAoB,eAAe,MAAM,MAAM,OAAO,CAAC;AAC7D,YAAM,QAAQ;AAAA,IAChB;AAAA,EACF;AACF,CAAC;\",\n  \"names\": []\n}\n"
     },
     {
       "name": "vite:css-post",
-      "start": 1749812727537,
-      "end": 1749812727537,
+      "start": 1750072406930,
+      "end": 1750072406930,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1749812727537,
-      "end": 1749812727537,
+      "start": 1750072406930,
+      "end": 1750072406930,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1749812727537,
-      "end": 1749812727538,
+      "start": 1750072406930,
+      "end": 1750072406930,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1749812727538,
-      "end": 1749812727538,
+      "start": 1750072406931,
+      "end": 1750072406931,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1749812727538,
-      "end": 1749812727539,
+      "start": 1750072406931,
+      "end": 1750072406931,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1749812727539,
-      "end": 1749812727539,
+      "start": 1750072406931,
+      "end": 1750072406931,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1749812727539,
-      "end": 1749812727539,
+      "start": 1750072406931,
+      "end": 1750072406931,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1749812727539,
-      "end": 1749812727539,
+      "start": 1750072406931,
+      "end": 1750072406931,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1749812727539,
-      "end": 1749812727539,
+      "start": 1750072406931,
+      "end": 1750072406931,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1749812727539,
-      "end": 1749812727539,
+      "start": 1750072406931,
+      "end": 1750072406931,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1749812727539,
-      "end": 1749812727539,
+      "start": 1750072406931,
+      "end": 1750072406931,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1749812727540,
-      "end": 1749812727540,
+      "start": 1750072406931,
+      "end": 1750072406931,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1749812727540,
-      "end": 1749812727541,
+      "start": 1750072406931,
+      "end": 1750072406931,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1749812727541,
-      "end": 1749812727541,
+      "start": 1750072406931,
+      "end": 1750072406931,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1749812727541,
-      "end": 1749812727541,
+      "start": 1750072406931,
+      "end": 1750072406931,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { useRouter } from '#app/composables/router';\nimport { watch } from 'vue';\nimport { useSeoMeta } from '@unhead/vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport ObjectContent from \"~/components/Objects/ObjectContent.vue\";\nimport ObjectCreate from \"~/components/Objects/ObjectCreate.vue\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    const company = useCompanies();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    watch(() => company.company, (newValue) => {\n      let permission = company.company.modules?.find((item) => item.name_en === \"objects\");\n      if (!permission) {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Объекты\",\n      description: \"Объекты компании\"\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}><div class=\"flex items-center justify-between mb-6 max-[678px]:flex-col max-[678px]:gap-3 max-[678px]:items-start\"><p class=\"dark:text-white text-3xl font-bold\">${_ssrInterpolate(_ctx.$t(\"Страница с объектами\"))}</p>`);\n      _push(_ssrRenderComponent(ObjectCreate, null, null, _parent));\n      _push(`</div>`);\n      _push(_ssrRenderComponent(ObjectContent, null, null, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1749812727541,
-      "end": 1749812727543,
+      "start": 1750072406932,
+      "end": 1750072406940,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -266,8 +266,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { useRouter } from '#app/composables/router';\nimport { watch } from 'vue';\nimport { useSeoMeta } from '@unhead/vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport ObjectContent from \"~/components/Objects/ObjectContent.vue\";\nimport ObjectCreate from \"~/components/Objects/ObjectCreate.vue\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    const company = useCompanies();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    watch(() => company.company, (newValue) => {\n      let permission = company.company.modules?.find((item) => item.name_en === \"objects\");\n      if (!permission) {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Объекты\",\n      description: \"Объекты компании\"\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}><div class=\"flex items-center justify-between mb-6 max-[678px]:flex-col max-[678px]:gap-3 max-[678px]:items-start\"><p class=\"dark:text-white text-3xl font-bold\">${_ssrInterpolate(_ctx.$t(\"Страница с объектами\"))}</p>`);\n      _push(_ssrRenderComponent(ObjectCreate, null, null, _parent));\n      _push(`</div>`);\n      _push(_ssrRenderComponent(ObjectContent, null, null, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1749812727541,
-      "end": 1749812727543,
+      "start": 1750072406932,
+      "end": 1750072406940,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -280,21 +280,21 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1749812727543,
-      "end": 1749812727543,
+      "start": 1750072406940,
+      "end": 1750072406940,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1749812727543,
-      "end": 1749812727543,
+      "start": 1750072406940,
+      "end": 1750072406940,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
       "result": "\nconst __nuxt_page_meta = null\nexport default __nuxt_page_meta\n",
-      "start": 1749812727543,
-      "end": 1749812727543,
+      "start": 1750072406941,
+      "end": 1750072406948,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -308,8 +308,8 @@
     {
       "name": "nuxt:pages-macros-transform",
       "result": "\nconst __nuxt_page_meta = null\nexport default __nuxt_page_meta\n",
-      "start": 1749812727543,
-      "end": 1749812727543,
+      "start": 1750072406941,
+      "end": 1750072406948,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -322,32 +322,32 @@
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1749812727544,
-      "end": 1749812727544,
+      "start": 1750072406948,
+      "end": 1750072406952,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1749812727545,
-      "end": 1749812727545,
+      "start": 1750072406952,
+      "end": 1750072406953,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1749812727545,
-      "end": 1749812727545,
+      "start": 1750072406953,
+      "end": 1750072406957,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1749812727546,
-      "end": 1749812727548,
+      "start": 1750072406957,
+      "end": 1750072406958,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1749812727548,
-      "end": 1749812727548,
+      "start": 1750072406958,
+      "end": 1750072406958,
       "order": "normal"
     }
   ]

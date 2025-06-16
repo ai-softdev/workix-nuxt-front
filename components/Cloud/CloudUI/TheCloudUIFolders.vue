@@ -200,7 +200,7 @@ function formatDate(data){
       </TheCloudUIContextMenuItem>
     </UContextMenu>
     <div class="mb-10 w-full h-full">
-      <div class="flex max-[500px]:flex-col justify-end items-center">
+      <div class="flex max-[500px]:items-end justify-end items-center">
         <div>
 <!--          селект-->
           <USelectMenu class="select" v-model="selected" :options="viewSelect">
@@ -258,7 +258,7 @@ function formatDate(data){
             v-if="selected.type ==='list'"
             class="flex items-center justify-between px-3">
           <p>Имя</p>
-          <p>Дата создания</p>
+          <p class="max-[400px]:hidden">Дата создания</p>
         </div>
         <div v-for="(folders, i) in cloudStore?.get_folder.folders"
              :class="{'w-2/12 max-[1300px]:w-3/12 max-lg:w-4/12 max-md:w-6/12 max-sm:w-8/12' : selected.type === 'tile'}">

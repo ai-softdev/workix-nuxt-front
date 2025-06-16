@@ -64,7 +64,7 @@ useSeoMeta({
 
 
 <template>
-  <div class="!mx-0 !p-10">
+  <div class="!mx-0 !p-10 max-[768px]:!p-0">
     <div
       class="bg-white border flex w-full border-t border-t-gray-100 dark:text-white rounded-3xl shadow-chat overflow-hidden">
       <div
