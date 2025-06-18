@@ -8,6 +8,7 @@ import TheSearch from "~/components/UI/TheSearch.vue";
 
 import Paginate from 'vuejs-paginate-next';
 import {useRoute, useRouter} from "vue-router";
+import {useCompanies} from "~/stores/companies";
 
 const loadCurrentUser = useAuthStore()
 const userList = useUserStore()
@@ -104,7 +105,9 @@ onMounted(() => {
     }
   })
 })
+const company = useCompanies()
 watchSyncEffect(() => {
+  console.log(company.company, loadCurrentUser.user)
   if (loadCurrentUser.user.role?.name_en === 'admin') {
     userList.loadAdminList({page: params.page, limit: params.limit, query: params.query.value})
   } else if(loadCurrentUser.user.role?.name_en === 'company_admin') {
@@ -115,6 +118,11 @@ watchSyncEffect(() => {
     })
   }
 })
+
+const isValidLink = (nameEn) => {
+  const foundItem = loadCurrentUser.user.permissions?.find(item => item.name_en === nameEn);
+  return foundItem !== undefined;
+}
 </script>
 
 <template>
@@ -138,6 +146,7 @@ watchSyncEffect(() => {
         </p>
       </div>
       <div
+          v-if="isValidLink('user.create')"
           :class="{'flex items-center justify-evenly' : loadCurrentUser.user.role?.name_en === 'admin', 'w-2/12 max-lg:w-4/12 max-sm:w-full max-sm:mb-6 max-sm:mx-auto' : loadCurrentUser.user.role_en !== 'admin'}"
       >
         <div class="flex gap-x-10" v-if="loadCurrentUser?.user.role === 'Администратор сайта'">

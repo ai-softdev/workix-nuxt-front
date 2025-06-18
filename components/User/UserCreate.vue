@@ -37,6 +37,7 @@ const createForm = ref({
 function loads() {
   userList.loadPositionList()
   userList.loadUserList()
+  userList.loadUserCreateList({page: 1, limit: 1000})
   company.loadDepartmentList();
 }
 
@@ -129,7 +130,6 @@ const hideDropdown = () => {
     showDropdown.value = false;
   }, 200);
 };
-
 
 </script>
 
@@ -279,13 +279,17 @@ const hideDropdown = () => {
               </select>
             </div>
           </UserContentCreateElems>
-          <UserContentCreateElems v-if="createForm.department?.participants?.length">
+<!--          исправить-->
+          <UserContentCreateElems >
             <div class="w-6/12 max-lg:w-full">
               <p class="text-md dark:text-white font-medium">{{ $t('Руководитель') }}</p>
               <TheInput v-if="!userList?.get_position_list" type="text" name="text" :label="'Руководитель'" class="dark:text-white cursor-pointer" v-model="createForm.head_user_id"/>
-              <select v-model="createForm.head_user_id"
-                      class="dark:text-white w-full dark:bg-gray-300 bg-whiteSmoke rounded-full p-2 dark:border-none text-black border focus:outline-golden mt-2 outline-1 ">
-                <option v-for="participant in createForm.department.participants" :key="participant.id" :value="participant.id">
+              <select
+                  v-model="createForm.head_user_id"
+                  class="dark:text-white w-full dark:bg-gray-300 bg-whiteSmoke rounded-full p-2 dark:border-none text-black border focus:outline-golden mt-2 outline-1 "
+                  :disabled="!userList?.get_user_create_list?.results"
+              >
+                <option v-for="participant in userList?.usersForCreate?.results" :key="participant.id" :value="participant.id">
                   {{ participant.first_name }} {{ participant.last_name }}
                 </option>
               </select>

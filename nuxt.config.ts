@@ -48,4 +48,7 @@ export default defineNuxtConfig({
     },
     global: true
   },
+  devServer: {
+    port: 8000
+  }
 })

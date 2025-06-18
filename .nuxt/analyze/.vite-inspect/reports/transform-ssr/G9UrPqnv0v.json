@@ -4,81 +4,81 @@
     {
       "name": "vite:load-fallback",
       "result": "<script setup lang=\"ts\">\r\nimport {useChat} from \"~/stores/chat\";\r\nimport ChatNavHeaderSlot from \"~/components/Chat/ChatNav/UI/ChatNavHeaderSlot.vue\";\r\n\r\nconst chat = useChat()\r\ndefineProps({\r\n  activeNav: {\r\n    type: Boolean,\r\n    default: false\r\n  }\r\n})\r\n</script>\r\n\r\n<template>\r\n  <div class=\"   select-none\">\r\n    <div\r\n        class=\"grid grid-cols-3 gap-2 transition-all duration-200 pb-3 border-b\"\r\n    >\r\n<!--      after:w-[60px] after:h-[5px] after:bg-semiCyan after:rounded-t-full after:transition-all after:absolute after:bottom-0-->\r\n<!--      :class=\"{'after:left-[0%]' : chat.displayChat === 'all', 'after:left-[36%] max-md:after:left-[45%] max-[625px]:after:left-[43%] max-[500px]:after:left-[42%] max-[488px]:after:left-[41.5%] max-[414px]:after:left-[40%] max-[385px]:after:left-[38%]' : chat.displayChat === 'users', 'after:left-[75%] max-md:after:left-[91%] max-[700px]:after:left-[89%] max-[580px]:after:left-[87%] max-[500px]:after:left-[85%] max-[500px]:after:left-[83%] max-[390px]:after:left-[81%] max-[345px]:after:left-[79%]' : chat.displayChat === 'groups'}\"-->\r\n      <ChatNavHeaderSlot\r\n          :active=\"chat.displayChat === 'all'\"\r\n          @click=\"chat.displayChat = 'all'\"\r\n      >\r\n        <template v-slot:ChatNavHeaderSvg>\r\n          <svg width=\"25\" height=\"26\" viewBox=\"0 0 25 26\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\r\n            <path d=\"M5.61123 12.1009C5.53872 11.6336 5.50109 11.1549 5.50109 10.6673C5.50109 5.51266 9.70726 1.33398 14.8958 1.33398C20.0844 1.33398 24.2905 5.51266 24.2905 10.6673C24.2905 11.8318 24.076 12.9464 23.6839 13.9742C23.6024 14.1877 23.5616 14.2945 23.5432 14.3778C23.5249 14.4604 23.5177 14.5185 23.5158 14.6031C23.5138 14.6884 23.5253 14.7824 23.5485 14.9703L24.0181 18.7856C24.069 19.1986 24.0944 19.4051 24.0257 19.5552C23.9655 19.6868 23.8586 19.7912 23.7258 19.8484C23.5741 19.9136 23.3682 19.8834 22.9565 19.8231L19.2404 19.2784C19.0463 19.2499 18.9493 19.2357 18.8609 19.2363C18.7735 19.2367 18.7131 19.2431 18.6274 19.2611C18.541 19.2793 18.4305 19.3207 18.2096 19.4034C17.1791 19.7895 16.0623 20.0007 14.8958 20.0007C14.4079 20.0007 13.9288 19.9637 13.461 19.8925M7.40465 24.6673C10.8637 24.6673 13.6678 21.7945 13.6678 18.2507C13.6678 14.7068 10.8637 11.834 7.40465 11.834C3.9456 11.834 1.14149 14.7068 1.14149 18.2507C1.14149 18.963 1.2548 19.6482 1.46395 20.2885C1.55236 20.5591 1.59656 20.6945 1.61108 20.7869C1.62622 20.8835 1.62887 20.9376 1.62323 21.0351C1.61783 21.1286 1.59445 21.2342 1.5477 21.4453L0.834473 24.6673L4.32841 24.1901C4.51912 24.1641 4.61447 24.1511 4.69774 24.1517C4.78541 24.1522 4.83195 24.157 4.91793 24.1742C4.99959 24.1904 5.12099 24.2332 5.36379 24.319C6.00349 24.5447 6.6901 24.6673 7.40465 24.6673Z\" stroke=\"black\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\r\n          </svg>\r\n        </template>\r\n        <template v-slot:ChatNavHeaderText>\r\n          {{ $t('Все') }}\r\n        </template>\r\n      </ChatNavHeaderSlot>\r\n      <ChatNavHeaderSlot\r\n          :active=\"chat.displayChat === 'users'\"\r\n          @click=\"chat.displayChat = 'users'\"\r\n      >\r\n        <template v-slot:ChatNavHeaderSvg>\r\n          <svg width=\"25\" height=\"26\" viewBox=\"0 0 25 26\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\r\n            <path d=\"M4.70349 21.6788C5.4132 20.0067 7.07021 18.834 9.00114 18.834H16.0011C17.9321 18.834 19.5891 20.0067 20.2988 21.6788M17.1678 10.084C17.1678 12.6613 15.0784 14.7507 12.5011 14.7507C9.92381 14.7507 7.83447 12.6613 7.83447 10.084C7.83447 7.50665 9.92381 5.41732 12.5011 5.41732C15.0784 5.41732 17.1678 7.50665 17.1678 10.084ZM24.1678 13.0007C24.1678 19.4439 18.9444 24.6673 12.5011 24.6673C6.05781 24.6673 0.834473 19.4439 0.834473 13.0007C0.834473 6.55733 6.05781 1.33398 12.5011 1.33398C18.9444 1.33398 24.1678 6.55733 24.1678 13.0007Z\" stroke=\"black\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\r\n          </svg>\r\n        </template>\r\n        <template v-slot:ChatNavHeaderText>\r\n          {{ $t('Личные') }}\r\n        </template>\r\n      </ChatNavHeaderSlot>\r\n      <ChatNavHeaderSlot\r\n          :active=\"chat.displayChat === 'groups'\"\r\n          @click=\"chat.displayChat = 'groups'\"\r\n      >\r\n        <template v-slot:ChatNavHeaderSvg>\r\n          <svg width=\"29\" height=\"28\" viewBox=\"0 0 29 28\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\r\n            <path d=\"M26.1678 24.5V22.1667C26.1678 19.9922 24.6805 18.1651 22.6678 17.647M18.5845 3.83922C20.2947 4.53151 21.5011 6.20819 21.5011 8.16667C21.5011 10.1251 20.2947 11.8019 18.5845 12.4941M20.3345 24.5C20.3345 22.3256 20.3345 21.2385 19.9792 20.3808C19.5056 19.2374 18.5971 18.3289 17.4536 17.8552C16.596 17.5 15.5089 17.5 13.3345 17.5H9.83447C7.66007 17.5 6.57288 17.5 5.71529 17.8552C4.57181 18.3289 3.66334 19.2374 3.1897 20.3808C2.83447 21.2385 2.83447 22.3256 2.83447 24.5M16.2511 8.16667C16.2511 10.744 14.1618 12.8333 11.5845 12.8333C9.00714 12.8333 6.91781 10.744 6.91781 8.16667C6.91781 5.58934 9.00714 3.5 11.5845 3.5C14.1618 3.5 16.2511 5.58934 16.2511 8.16667Z\" stroke=\"black\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\r\n          </svg>\r\n        </template>\r\n        <template v-slot:ChatNavHeaderText>\r\n          {{ $t('Группы') }}\r\n        </template>\r\n      </ChatNavHeaderSlot>\r\n    </div>\r\n  </div>\r\n</template>\r\n\r\n<style scoped lang=\"scss\">\r\n\r\n</style>",
-      "start": 1750175234119,
-      "end": 1750175234388,
+      "start": 1750248060565,
+      "end": 1750248060722,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750175234388,
-      "end": 1750175234388,
+      "start": 1750248060722,
+      "end": 1750248060722,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750175234388,
-      "end": 1750175234388,
+      "start": 1750248060722,
+      "end": 1750248060722,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750175234388,
-      "end": 1750175234388,
+      "start": 1750248060722,
+      "end": 1750248060722,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750175234388,
-      "end": 1750175234388,
+      "start": 1750248060722,
+      "end": 1750248060722,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750175234388,
-      "end": 1750175234388,
+      "start": 1750248060722,
+      "end": 1750248060722,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750175234388,
-      "end": 1750175234388,
+      "start": 1750248060722,
+      "end": 1750248060722,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1750175234388,
-      "end": 1750175234388,
+      "start": 1750248060722,
+      "end": 1750248060722,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1750175234388,
-      "end": 1750175234388,
+      "start": 1750248060722,
+      "end": 1750248060722,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1750175234388,
-      "end": 1750175234388,
+      "start": 1750248060722,
+      "end": 1750248060722,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1750175234388,
-      "end": 1750175234388,
+      "start": 1750248060722,
+      "end": 1750248060722,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1750175234388,
-      "end": 1750175234388,
+      "start": 1750248060722,
+      "end": 1750248060722,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "import _sfc_main from \"D:/projects/nuxt/workix-nuxt-front/components/Chat/ChatNav/UI/ChatNavHeaderElem.vue?vue&type=script&setup=true&lang.ts\";\nexport * from \"D:/projects/nuxt/workix-nuxt-front/components/Chat/ChatNav/UI/ChatNavHeaderElem.vue?vue&type=script&setup=true&lang.ts\";\nimport { useSSRContext as __vite_useSSRContext } from \"vue\";\nconst _sfc_setup = _sfc_main.setup;\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext();\n  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(\"components/Chat/ChatNav/UI/ChatNavHeaderElem.vue\");\n  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;\n};\nexport default _sfc_main;\n",
-      "start": 1750175234388,
-      "end": 1750175234456,
+      "start": 1750248060722,
+      "end": 1750248060759,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -86,212 +86,212 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1750175234456,
-      "end": 1750175234456,
+      "start": 1750248060760,
+      "end": 1750248060760,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750175234456,
-      "end": 1750175234456,
+      "start": 1750248060760,
+      "end": 1750248060760,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750175234456,
-      "end": 1750175234456,
+      "start": 1750248060760,
+      "end": 1750248060760,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750175234456,
-      "end": 1750175234456,
+      "start": 1750248060760,
+      "end": 1750248060760,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750175234456,
-      "end": 1750175234456,
+      "start": 1750248060760,
+      "end": 1750248060760,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1750175234456,
-      "end": 1750175234456,
+      "start": 1750248060760,
+      "end": 1750248060760,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750175234456,
-      "end": 1750175234456,
+      "start": 1750248060760,
+      "end": 1750248060760,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1750175234457,
-      "end": 1750175234457,
+      "start": 1750248060760,
+      "end": 1750248060760,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1750175234457,
-      "end": 1750175234457,
+      "start": 1750248060760,
+      "end": 1750248060760,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1750175234457,
-      "end": 1750175234457,
+      "start": 1750248060760,
+      "end": 1750248060760,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1750175234457,
-      "end": 1750175234457,
+      "start": 1750248060760,
+      "end": 1750248060760,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1750175234459,
-      "end": 1750175234459,
+      "start": 1750248060761,
+      "end": 1750248060761,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1750175234459,
-      "end": 1750175234459,
+      "start": 1750248060761,
+      "end": 1750248060761,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1750175234459,
-      "end": 1750175234459,
+      "start": 1750248060761,
+      "end": 1750248060761,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1750175234459,
-      "end": 1750175234459,
+      "start": 1750248060763,
+      "end": 1750248060763,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1750175234459,
-      "end": 1750175234459,
+      "start": 1750248060764,
+      "end": 1750248060764,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750175234459,
-      "end": 1750175234459,
+      "start": 1750248060764,
+      "end": 1750248060764,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750175234459,
-      "end": 1750175234459,
+      "start": 1750248060764,
+      "end": 1750248060764,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750175234459,
-      "end": 1750175234459,
+      "start": 1750248060764,
+      "end": 1750248060765,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750175234459,
-      "end": 1750175234459,
+      "start": 1750248060764,
+      "end": 1750248060765,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750175234460,
-      "end": 1750175234460,
+      "start": 1750248060765,
+      "end": 1750248060765,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750175234460,
-      "end": 1750175234460,
+      "start": 1750248060765,
+      "end": 1750248060765,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750175234460,
-      "end": 1750175234460,
+      "start": 1750248060765,
+      "end": 1750248060765,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750175234460,
-      "end": 1750175234460,
+      "start": 1750248060765,
+      "end": 1750248060765,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1750175234460,
-      "end": 1750175234460,
+      "start": 1750248060768,
+      "end": 1750248060769,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1750175234460,
-      "end": 1750175234460,
+      "start": 1750248060768,
+      "end": 1750248060769,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1750175234460,
-      "end": 1750175234461,
+      "start": 1750248060769,
+      "end": 1750248060769,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1750175234460,
-      "end": 1750175234461,
+      "start": 1750248060769,
+      "end": 1750248060769,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1750175234462,
-      "end": 1750175234462,
+      "start": 1750248060780,
+      "end": 1750248060780,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1750175234462,
-      "end": 1750175234462,
+      "start": 1750248060780,
+      "end": 1750248060780,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1750175234464,
-      "end": 1750175234464,
+      "start": 1750248060782,
+      "end": 1750248060782,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1750175234464,
-      "end": 1750175234464,
+      "start": 1750248060783,
+      "end": 1750248060783,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1750175234464,
-      "end": 1750175234464,
+      "start": 1750248060783,
+      "end": 1750248060783,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1750175234464,
-      "end": 1750175234464,
+      "start": 1750248060783,
+      "end": 1750248060783,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1750175234464,
-      "end": 1750175234464,
+      "start": 1750248060783,
+      "end": 1750248060783,
       "order": "normal"
     }
   ]

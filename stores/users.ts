@@ -36,12 +36,14 @@ export const useUserStore = defineStore('user-list', {
       permissions: [],
     },
     roleList: [],
+    usersForCreate: {},
     userSearch: {},
     permissions: [],
     page: 1
   }),
   getters: {
     get_user_list: (state) => state.user,
+    get_user_create_list: (state) => state.usersForCreate,
     get_user_search: (state) => state.userSearch,
     get_position_list: (state) => state.user.position,
     get_role_list: (state) => state.roleList,
@@ -68,6 +70,15 @@ export const useUserStore = defineStore('user-list', {
         }
       }).then(response => {
         this.user = response.data
+      })
+    },
+    async loadUserCreateList(params: {page: number, limit: number, query?: any}) {
+      await axios.get(`user/list?page=${params.page}&limit=${params.limit}`, {
+        headers: {
+          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
+        }
+      }).then(response => {
+        this.usersForCreate = response.data
       })
     },
     async loadUser(params: { id: any }) {

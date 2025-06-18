@@ -4,63 +4,63 @@
     {
       "name": "vite:load-fallback",
       "result": "<script setup lang=\"ts\">\r\nimport { useCompanies } from '~/stores/companies';\r\nimport {useRoute} from \"vue-router\";\r\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\r\nimport TheBreadcrumbs from \"~/components/UI/TheBreadcrumbs.vue\";\r\nimport ChatWindowSettingContent from \"~/components/Chat/ChatContent/ChatWindowSetting/ChatWindowSettingContent.vue\";\r\nimport TheModal from \"~/components/UI/TheModal.vue\";\r\nimport TheCheckbox from \"~/components/UI/TheCheckbox.vue\";\r\nimport TheInput from \"~/components/UI/TheInput.vue\";\r\n\r\nconst route = useRoute()\r\nconst currentCompany = useCompanies();\r\nconst params = {\r\n  page: 1,\r\n  limit: 1,\r\n}\r\n\r\nconst showModuleModal = ref(false)\r\nconst showAdminModal = ref(false)\r\nconst companyModules = ref([])\r\nlet adminForm = ref({\r\n  email: '',\r\n  password: '',\r\n  first_name: '',\r\n  last_name: '',\r\n  patronymic: '',\r\n  phone: '',\r\n  company_id: ''\r\n})\r\n\r\nconst openModuleModal = () => {\r\n  showModuleModal.value = !showModuleModal.value\r\n}\r\nconst openAdminModal = () => {\r\n  showAdminModal.value = !showAdminModal.value\r\n}\r\n\r\nconst changeModules = () => {\r\n  openModuleModal()\r\n  let array = []\r\n  companyModules.value.forEach((item) => {\r\n    if(item.value){\r\n      array.push(item.id)\r\n    }\r\n  })\r\n  currentCompany.editModules({id: route.params.id, data: array})\r\n}\r\n\r\nconst createAdministrator = () => {\r\n  openAdminModal()\r\n  adminForm.value.company_id = route.params.id\r\n  currentCompany.createAdministrator({data: adminForm.value, company_id: route.params.id})\r\n}\r\n\r\nwatchEffect(() => {\r\n  currentCompany.loadCompany({id: route.params.id})\r\n  currentCompany.loadModules()\r\n  currentCompany.loadCompanyAdministrators({company_id: route.params.id})\r\n})\r\n\r\nwatch(() => currentCompany.modules, (newModules) => {\r\n  companyModules.value = [];\r\n\r\n  currentCompany.modules.forEach((module) => {\r\n    const isModuleExists = currentCompany.company.modules.some(companyModule => companyModule.id === module.id);\r\n\r\n    companyModules.value.push({\r\n      ...module,\r\n      value: isModuleExists\r\n    });\r\n  });\r\n});\r\n\r\nwatchSyncEffect(() => {\r\n  useSeoMeta({\r\n    title: `${currentCompany.company.name}`\r\n  })\r\n})\r\n</script>\r\n\r\n<template>\r\n  <div>\r\n    <TheTextContent>\r\n      {{ $t('Страница компании ' + currentCompany.company.name) }}\r\n    </TheTextContent>\r\n    <div>\r\n      <div class=\"flex items-center gap-x-4\">\r\n        <TheBreadcrumbs :breadcrumb-link=\"'/base/companies'\">\r\n          {{ $t('Список компаний') }}\r\n        </TheBreadcrumbs>\r\n        <div>\r\n          <svg width=\"15px\" height=\"15px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\r\n            <path class=\"dark:stroke-white stroke-black\"\r\n                  d=\"M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5\"\r\n                  stroke-width=\"2\" stroke-linecap=\"round\"/>\r\n          </svg>\r\n        </div>\r\n        <TheBreadcrumbs>\r\n          {{ currentCompany.company.name }}\r\n        </TheBreadcrumbs>\r\n      </div>\r\n      <div class=\"flex items-start gap-10 w-full max-md:flex-col\">\r\n        <div class=\"flex flex-col gap-4 mt-10 w-8/12 max-md:w-full\">\r\n          <div class=\"flex flex-col gap-2\">\r\n            <p>\r\n              {{ $t('Описание') }}:\r\n            </p>\r\n            <p>\r\n              {{ currentCompany.company.description }}\r\n            </p>\r\n          </div>\r\n          <div class=\"flex flex-col gap-2\">\r\n            <p>\r\n              {{ $t('Email') }}:\r\n            </p>\r\n            <p>\r\n              {{ currentCompany.company.email }}\r\n            </p>\r\n          </div>\r\n          <div class=\"flex flex-col gap-2\">\r\n            <p>\r\n              {{ $t('Адрес') }}:\r\n            </p>\r\n            <p>\r\n              {{ currentCompany.company.address }}\r\n            </p>\r\n          </div>\r\n          <div class=\"flex flex-col gap-2\">\r\n            <p>\r\n              {{ $t('Администраторы компании') }}:\r\n            </p>\r\n            <div class=\"bg-bgWhite p-3 rounded-lg flex flex-col gap-3 items-start\">\r\n              <UITheButton\r\n                  @click=\"openAdminModal\"\r\n                  class=\"mb-2 border p-3 rounded-lg !text-black dark:!text-white\"\r\n              >\r\n                Добавить\r\n              </UITheButton>\r\n              <div\r\n                  v-for=\"(item, index) in currentCompany.company_administrators\"\r\n                  class=\"bg-bgWhite p-3 w-full border rounded-lg\"\r\n              >\r\n                {{ item.last_name + ' ' + item.first_name }}\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"flex flex-col gap-2 w-4/12 max-md:w-full\">\r\n          <p>\r\n            {{ $t('Модули компании') }}:\r\n          </p>\r\n          <div\r\n              class=\"flex flex-col gap-3 bg-bgWhite p-3 rounded-lg max-h-[400px] min-h-[400px] h-full overflow-y-scroll\">\r\n            <UITheButton\r\n                @click=\"openModuleModal\"\r\n                class=\"mb-2 border p-3 rounded-lg !text-black dark:!text-white\"\r\n            >\r\n              Изменить\r\n            </UITheButton>\r\n            <div\r\n                v-for=\"(item, index) in currentCompany.company.modules\"\r\n                class=\"bg-bgWhite p-3 w-full border rounded-lg\"\r\n            >\r\n              {{ item.name }}\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <TheModal\r\n        :type=\"'resize'\"\r\n        v-if=\"showModuleModal\"\r\n        @showModal=\"\"\r\n    >\r\n      <button class=\"absolute top-3 right-3\" @click=\"openModuleModal\">\r\n        x\r\n      </button>\r\n      <div\r\n          class=\"flex flex-col gap-2 min-h-[400px] min-w-[400px] max-md:min-w-full\"\r\n      >\r\n        <p>\r\n          {{ $t('Модули') }}:\r\n        </p>\r\n        <div class=\"grid grid-cols-2 gap-3 max-md:grid-cols-1\">\r\n          <div\r\n              v-for=\"(item, index) in companyModules\"\r\n              class=\"bg-[#8881] p-3 w-full border rounded-lg\"\r\n          >\r\n            <TheCheckbox\r\n                :item=\"item\"\r\n            />\r\n          </div>\r\n        </div>\r\n        <UITheButton\r\n            class=\"mt-2 !text-black dark:!text-white\"\r\n            @click=\"changeModules\"\r\n        >\r\n          Сохранить\r\n        </UITheButton>\r\n      </div>\r\n    </TheModal>\r\n    <TheModal\r\n        :type=\"'resize'\"\r\n        v-if=\"showAdminModal\"\r\n        @showModal=\"\"\r\n    >\r\n      <button class=\"absolute top-3 right-3\" @click=\"openAdminModal\">\r\n        x\r\n      </button>\r\n      <div\r\n          class=\"flex flex-col gap-5\"\r\n      >\r\n        <p>\r\n          Создание администратора:\r\n        </p>\r\n        <div class=\"flex items-center gap-5 max-md:flex-col\">\r\n          <TheInput\r\n              :type=\"'default'\"\r\n              v-model=\"adminForm.first_name\"\r\n              class=\"bg-transparent bg-opacity-0 rounded-lg border-2 border-semiCyan outline-none max-md:w-full\"\r\n              type=\"text\"\r\n              placeholder=\"Имя\"\r\n          />\r\n          <TheInput\r\n              :type=\"'default'\"\r\n              v-model=\"adminForm.last_name\"\r\n              class=\"bg-transparent bg-opacity-0 rounded-lg border-2 border-semiCyan outline-none max-md:w-full\"\r\n              type=\"text\"\r\n              placeholder=\"Фамилия\"\r\n          />\r\n          <TheInput\r\n              :type=\"'default'\"\r\n              v-model=\"adminForm.patronymic\"\r\n              class=\"bg-transparent bg-opacity-0 rounded-lg border-2 border-semiCyan outline-none max-md:w-full\"\r\n              type=\"text\"\r\n              placeholder=\"Отчество\"\r\n          />\r\n        </div>\r\n        <div class=\"grid grid-cols-2 items-center gap-5 max-md:grid-cols-1\">\r\n          <TheInput\r\n              :type=\"'default'\"\r\n              v-model=\"adminForm.email\"\r\n              class=\"w-full bg-transparent bg-opacity-0 rounded-lg border-2 border-semiCyan outline-none\"\r\n              type=\"email\"\r\n              placeholder=\"Email\"\r\n          />\r\n          <TheInput\r\n              :type=\"'default'\"\r\n              v-model=\"adminForm.password\"\r\n              class=\"w-full bg-transparent bg-opacity-0 rounded-lg border-2 border-semiCyan outline-none\"\r\n              type=\"password\"\r\n              placeholder=\"Пароль\"\r\n          />\r\n        </div>\r\n        <TheInput\r\n            :type=\"'default'\"\r\n            v-model=\"adminForm.phone\"\r\n            class=\"w-[300px] max-md:w-full mx-auto bg-transparent bg-opacity-0 rounded-lg border-2 border-semiCyan outline-none\"\r\n            type=\"phone\"\r\n            placeholder=\"Номер телефона\"\r\n        />\r\n        <UITheButton\r\n            class=\"mt-2 !text-black dark:!text-white\"\r\n            @click=\"createAdministrator\"\r\n        >\r\n          Сохранить\r\n        </UITheButton>\r\n      </div>\r\n    </TheModal>\r\n  </div>\r\n</template>\r\n\r\n<style scoped lang=\"scss\">\r\n\r\n</style>",
-      "start": 1750175196656,
-      "end": 1750175196806,
+      "start": 1750248008607,
+      "end": 1750248008705,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750175196806,
-      "end": 1750175196806,
+      "start": 1750248008705,
+      "end": 1750248008705,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750175196806,
-      "end": 1750175196806,
+      "start": 1750248008705,
+      "end": 1750248008705,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750175196806,
-      "end": 1750175196806,
+      "start": 1750248008705,
+      "end": 1750248008705,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1750175196806,
-      "end": 1750175196806,
+      "start": 1750248008705,
+      "end": 1750248008705,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1750175196806,
-      "end": 1750175196806,
+      "start": 1750248008705,
+      "end": 1750248008705,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1750175196806,
-      "end": 1750175196806,
+      "start": 1750248008705,
+      "end": 1750248008705,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1750175196806,
-      "end": 1750175196806,
+      "start": 1750248008705,
+      "end": 1750248008705,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1750175196806,
-      "end": 1750175196806,
+      "start": 1750248008705,
+      "end": 1750248008705,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "import _sfc_main from \"D:/projects/nuxt/workix-nuxt-front/pages/base/companies/[id].vue?vue&type=script&setup=true&lang.ts\";\nexport * from \"D:/projects/nuxt/workix-nuxt-front/pages/base/companies/[id].vue?vue&type=script&setup=true&lang.ts\";\nexport default _sfc_main;\n",
-      "start": 1750175196806,
-      "end": 1750175196881,
+      "start": 1750248008705,
+      "end": 1750248008788,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -68,170 +68,170 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1750175196882,
-      "end": 1750175196882,
+      "start": 1750248008789,
+      "end": 1750248008789,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750175196883,
-      "end": 1750175196883,
+      "start": 1750248008789,
+      "end": 1750248008790,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750175196884,
-      "end": 1750175196884,
+      "start": 1750248008790,
+      "end": 1750248008790,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1750175196884,
-      "end": 1750175196884,
+      "start": 1750248008790,
+      "end": 1750248008790,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1750175196886,
-      "end": 1750175196886,
+      "start": 1750248008791,
+      "end": 1750248008796,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750175196887,
-      "end": 1750175196887,
+      "start": 1750248008797,
+      "end": 1750248008797,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1750175196887,
-      "end": 1750175196887,
+      "start": 1750248008797,
+      "end": 1750248008797,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1750175196888,
-      "end": 1750175196888,
+      "start": 1750248008798,
+      "end": 1750248008798,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1750175196888,
-      "end": 1750175196888,
+      "start": 1750248008798,
+      "end": 1750248008798,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1750175196888,
-      "end": 1750175196888,
+      "start": 1750248008798,
+      "end": 1750248008798,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1750175196889,
-      "end": 1750175196889,
+      "start": 1750248008799,
+      "end": 1750248008799,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1750175196889,
-      "end": 1750175196889,
+      "start": 1750248008799,
+      "end": 1750248008799,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1750175196889,
-      "end": 1750175196889,
+      "start": 1750248008799,
+      "end": 1750248008799,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1750175196890,
-      "end": 1750175196890,
+      "start": 1750248008800,
+      "end": 1750248008800,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1750175196890,
-      "end": 1750175196890,
+      "start": 1750248008800,
+      "end": 1750248008800,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750175196891,
-      "end": 1750175196891,
+      "start": 1750248008800,
+      "end": 1750248008801,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750175196893,
-      "end": 1750175196893,
+      "start": 1750248008802,
+      "end": 1750248008803,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750175196894,
-      "end": 1750175196894,
+      "start": 1750248008803,
+      "end": 1750248008804,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750175196895,
-      "end": 1750175196895,
+      "start": 1750248008804,
+      "end": 1750248008805,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1750175196897,
-      "end": 1750175196902,
+      "start": 1750248008806,
+      "end": 1750248008810,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1750175196903,
-      "end": 1750175196904,
+      "start": 1750248008810,
+      "end": 1750248008811,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1750175196908,
-      "end": 1750175196909,
+      "start": 1750248008813,
+      "end": 1750248008815,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1750175196909,
-      "end": 1750175196910,
+      "start": 1750248008816,
+      "end": 1750248008816,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1750175196910,
-      "end": 1750175196911,
+      "start": 1750248008816,
+      "end": 1750248008817,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1750175196912,
-      "end": 1750175196913,
+      "start": 1750248008818,
+      "end": 1750248008818,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1750175196917,
-      "end": 1750175196918,
+      "start": 1750248008822,
+      "end": 1750248008822,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1750175196918,
-      "end": 1750175196919,
+      "start": 1750248008823,
+      "end": 1750248008823,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1750175196919,
-      "end": 1750175196919,
+      "start": 1750248008824,
+      "end": 1750248008824,
       "order": "normal"
     }
   ]
