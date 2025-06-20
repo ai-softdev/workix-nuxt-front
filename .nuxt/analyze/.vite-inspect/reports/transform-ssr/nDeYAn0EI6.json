@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { resolveComponent as _resolveComponent, withCtx as _withCtx, openBlock as _openBlock, createBlock as _createBlock, createCommentVNode as _createCommentVNode, toDisplayString as _toDisplayString, createVNode as _createVNode } from \"vue\"\nimport { ssrRenderAttr as _ssrRenderAttr, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\"\n\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'CompanyList',\n  __ssrInlineRender: true,\n  props: {\r\n  companyBlock: {\r\n    type: Object,\r\n    required: true,\r\n    default: () => {\r\n    }\r\n  }\r\n},\n  setup(__props) {\n\r\n\r\n\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  const _component_NuxtLink = _resolveComponent(\"NuxtLink\")!\n\n  _push(`<div${_ssrRenderAttrs(_attrs)}>`)\n  _push(_ssrRenderComponent(_component_NuxtLink, {\n    to: `/base/companies/${__props.companyBlock.id}`,\n    class: \"transition-all cursor-pointer dark:bg-gray-400 dark:hover:bg-gray-300 dark:shadow-none shadow-xl hover:bg-gray-100 dark:border-none border-t border-t-gray-100 p-4 rounded-xl flex items-center gap-x-4\"\n  }, {\n    default: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        if (__props.companyBlock.logo) {\n          _push(`<img class=\"w-[50px] h-[50px] rounded-full\"${\n            _ssrRenderAttr(\"src\", __props.companyBlock.logo.replace(/\\/png/g, '/webp'))\n          } alt=\"\"${\n            _scopeId\n          }>`)\n        } else {\n          _push(`<!---->`)\n        }\n        _push(`<h1 class=\"tracking-widest\"${\n          _scopeId\n        }>${\n          _ssrInterpolate(__props.companyBlock.name)\n        }</h1>`)\n      } else {\n        return [\n          (__props.companyBlock.logo)\n            ? (_openBlock(), _createBlock(\"img\", {\n                key: 0,\n                class: \"w-[50px] h-[50px] rounded-full\",\n                src: __props.companyBlock.logo.replace(/\\/png/g, '/webp'),\n                alt: \"\"\n              }, null, 8, [\"src\"]))\n            : _createCommentVNode(\"\", true),\n          _createVNode(\"h1\", { class: \"tracking-widest\" }, _toDisplayString(__props.companyBlock.name), 1)\n        ]\n      }\n    }),\n    _: 1\n  }, _parent))\n  _push(`</div>`)\n}\n}\n\n})",
-      "start": 1750248057898,
-      "end": 1750248057898,
+      "start": 1750404002752,
+      "end": 1750404002752,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750248057898,
-      "end": 1750248057898,
+      "start": 1750404002752,
+      "end": 1750404002752,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750248057898,
-      "end": 1750248057898,
+      "start": 1750404002752,
+      "end": 1750404002752,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750248057898,
-      "end": 1750248057898,
+      "start": 1750404002752,
+      "end": 1750404002752,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750248057898,
-      "end": 1750248057898,
+      "start": 1750404002752,
+      "end": 1750404002752,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750248057898,
-      "end": 1750248057898,
+      "start": 1750404002753,
+      "end": 1750404002753,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750248057898,
-      "end": 1750248057898,
+      "start": 1750404002753,
+      "end": 1750404002753,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1750248057898,
-      "end": 1750248057898,
+      "start": 1750404002753,
+      "end": 1750404002753,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1750248057898,
-      "end": 1750248057898,
+      "start": 1750404002753,
+      "end": 1750404002753,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { resolveComponent as _resolveComponent, withCtx as _withCtx, openBlock as _openBlock, createBlock as _createBlock, createCommentVNode as _createCommentVNode, toDisplayString as _toDisplayString, createVNode as _createVNode } from \"vue\";\nimport { ssrRenderAttr as _ssrRenderAttr, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"CompanyList\",\n  __ssrInlineRender: true,\n  props: {\n    companyBlock: {\n      type: Object,\n      required: true,\n      default: () => {\n      }\n    }\n  },\n  setup(__props) {\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_NuxtLink = _resolveComponent(\"NuxtLink\");\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(_component_NuxtLink, {\n        to: `/base/companies/${__props.companyBlock.id}`,\n        class: \"transition-all cursor-pointer dark:bg-gray-400 dark:hover:bg-gray-300 dark:shadow-none shadow-xl hover:bg-gray-100 dark:border-none border-t border-t-gray-100 p-4 rounded-xl flex items-center gap-x-4\"\n      }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            if (__props.companyBlock.logo) {\n              _push2(`<img class=\"w-[50px] h-[50px] rounded-full\"${_ssrRenderAttr(\"src\", __props.companyBlock.logo.replace(/\\/png/g, \"/webp\"))} alt=\"\"${_scopeId}>`);\n            } else {\n              _push2(`<!---->`);\n            }\n            _push2(`<h1 class=\"tracking-widest\"${_scopeId}>${_ssrInterpolate(__props.companyBlock.name)}</h1>`);\n          } else {\n            return [\n              __props.companyBlock.logo ? (_openBlock(), _createBlock(\"img\", {\n                key: 0,\n                class: \"w-[50px] h-[50px] rounded-full\",\n                src: __props.companyBlock.logo.replace(/\\/png/g, \"/webp\"),\n                alt: \"\"\n              }, null, 8, [\"src\"])) : _createCommentVNode(\"\", true),\n              _createVNode(\"h1\", { class: \"tracking-widest\" }, _toDisplayString(__props.companyBlock.name), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1750248057898,
-      "end": 1750248058512,
+      "start": 1750404002753,
+      "end": 1750404003015,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -89,213 +89,213 @@
     },
     {
       "name": "vite:json",
-      "start": 1750248058513,
-      "end": 1750248058513,
+      "start": 1750404003015,
+      "end": 1750404003015,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1750248058513,
-      "end": 1750248058513,
+      "start": 1750404003015,
+      "end": 1750404003015,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1750248058513,
-      "end": 1750248058513,
+      "start": 1750404003015,
+      "end": 1750404003015,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1750248058513,
-      "end": 1750248058513,
+      "start": 1750404003015,
+      "end": 1750404003015,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750248058513,
-      "end": 1750248058513,
+      "start": 1750404003015,
+      "end": 1750404003015,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750248058513,
-      "end": 1750248058513,
+      "start": 1750404003015,
+      "end": 1750404003015,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750248058514,
-      "end": 1750248058514,
+      "start": 1750404003015,
+      "end": 1750404003015,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750248058514,
-      "end": 1750248058514,
+      "start": 1750404003015,
+      "end": 1750404003015,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1750248058514,
-      "end": 1750248058514,
+      "start": 1750404003015,
+      "end": 1750404003016,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750248058515,
-      "end": 1750248058515,
+      "start": 1750404003016,
+      "end": 1750404003016,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1750248058516,
-      "end": 1750248058517,
+      "start": 1750404003016,
+      "end": 1750404003017,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1750248058517,
-      "end": 1750248058517,
+      "start": 1750404003017,
+      "end": 1750404003018,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1750248058517,
-      "end": 1750248058517,
+      "start": 1750404003018,
+      "end": 1750404003018,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1750248058517,
-      "end": 1750248058517,
+      "start": 1750404003018,
+      "end": 1750404003018,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1750248058518,
-      "end": 1750248058518,
+      "start": 1750404003018,
+      "end": 1750404003018,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1750248058518,
-      "end": 1750248058518,
+      "start": 1750404003018,
+      "end": 1750404003018,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1750248058518,
-      "end": 1750248058518,
+      "start": 1750404003018,
+      "end": 1750404003018,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1750248058518,
-      "end": 1750248058518,
+      "start": 1750404003018,
+      "end": 1750404003018,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1750248058518,
-      "end": 1750248058518,
+      "start": 1750404003018,
+      "end": 1750404003018,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750248058518,
-      "end": 1750248058519,
+      "start": 1750404003018,
+      "end": 1750404003018,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750248058518,
-      "end": 1750248058519,
+      "start": 1750404003018,
+      "end": 1750404003018,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750248058519,
-      "end": 1750248058519,
+      "start": 1750404003018,
+      "end": 1750404003018,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750248058519,
-      "end": 1750248058519,
+      "start": 1750404003018,
+      "end": 1750404003018,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750248058519,
-      "end": 1750248058519,
+      "start": 1750404003018,
+      "end": 1750404003018,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750248058519,
-      "end": 1750248058519,
+      "start": 1750404003018,
+      "end": 1750404003018,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750248058519,
-      "end": 1750248058520,
+      "start": 1750404003018,
+      "end": 1750404003018,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750248058519,
-      "end": 1750248058520,
+      "start": 1750404003018,
+      "end": 1750404003018,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1750248058520,
-      "end": 1750248058523,
+      "start": 1750404003018,
+      "end": 1750404003023,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1750248058520,
-      "end": 1750248058523,
+      "start": 1750404003018,
+      "end": 1750404003023,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1750248058523,
-      "end": 1750248058523,
+      "start": 1750404003030,
+      "end": 1750404003030,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1750248058523,
-      "end": 1750248058523,
+      "start": 1750404003030,
+      "end": 1750404003030,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1750248058523,
-      "end": 1750248058523,
+      "start": 1750404003030,
+      "end": 1750404003030,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1750248058523,
-      "end": 1750248058523,
+      "start": 1750404003030,
+      "end": 1750404003030,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1750248058524,
-      "end": 1750248058524,
+      "start": 1750404003030,
+      "end": 1750404003031,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
       "result": "import { default as __nuxt_component_0 } from \"D:/projects/nuxt/workix-nuxt-front/node_modules/nuxt/dist/app/components/nuxt-link\";\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { resolveComponent as _resolveComponent, withCtx as _withCtx, openBlock as _openBlock, createBlock as _createBlock, createCommentVNode as _createCommentVNode, toDisplayString as _toDisplayString, createVNode as _createVNode } from \"vue\";\nimport { ssrRenderAttr as _ssrRenderAttr, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"CompanyList\",\n  __ssrInlineRender: true,\n  props: {\n    companyBlock: {\n      type: Object,\n      required: true,\n      default: () => {\n      }\n    }\n  },\n  setup(__props) {\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_NuxtLink = __nuxt_component_0;\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(_component_NuxtLink, {\n        to: `/base/companies/${__props.companyBlock.id}`,\n        class: \"transition-all cursor-pointer dark:bg-gray-400 dark:hover:bg-gray-300 dark:shadow-none shadow-xl hover:bg-gray-100 dark:border-none border-t border-t-gray-100 p-4 rounded-xl flex items-center gap-x-4\"\n      }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            if (__props.companyBlock.logo) {\n              _push2(`<img class=\"w-[50px] h-[50px] rounded-full\"${_ssrRenderAttr(\"src\", __props.companyBlock.logo.replace(/\\/png/g, \"/webp\"))} alt=\"\"${_scopeId}>`);\n            } else {\n              _push2(`<!---->`);\n            }\n            _push2(`<h1 class=\"tracking-widest\"${_scopeId}>${_ssrInterpolate(__props.companyBlock.name)}</h1>`);\n          } else {\n            return [\n              __props.companyBlock.logo ? (_openBlock(), _createBlock(\"img\", {\n                key: 0,\n                class: \"w-[50px] h-[50px] rounded-full\",\n                src: __props.companyBlock.logo.replace(/\\/png/g, \"/webp\"),\n                alt: \"\"\n              }, null, 8, [\"src\"])) : _createCommentVNode(\"\", true),\n              _createVNode(\"h1\", { class: \"tracking-widest\" }, _toDisplayString(__props.companyBlock.name), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1750248058524,
-      "end": 1750248058524,
+      "start": 1750404003031,
+      "end": 1750404003031,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -308,20 +308,20 @@
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1750248058525,
-      "end": 1750248058525,
+      "start": 1750404003032,
+      "end": 1750404003032,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1750248058525,
-      "end": 1750248058525,
+      "start": 1750404003032,
+      "end": 1750404003032,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1750248058525,
-      "end": 1750248058525,
+      "start": 1750404003032,
+      "end": 1750404003032,
       "order": "normal"
     }
   ]

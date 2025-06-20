@@ -85,13 +85,18 @@ export const useAuthStore = defineStore('authUser', {
     },
 
     async loadCurrentUser() {
+      const router = useRouter();
+
      await axios.get('user/current-user', {
         headers: {
           Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
         }
       }).then(response => {
         this.user = response.data
-      })
+      }).catch(error=> {
+       nuxtStorage.localStorage.removeItem('token');
+       router.push('/')
+     })
     },
     async update_my(params: { user: any}) {
       let fd = new FormData();

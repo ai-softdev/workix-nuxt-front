@@ -4,123 +4,123 @@
     {
       "name": "vite:load-fallback",
       "result": "import { reactive } from \"vue\";\nimport { klona } from \"klona\";\nimport { useNuxtApp } from \"./nuxt.js\";\nimport __appConfig from \"#build/app.config.mjs\";\nexport const _getAppConfig = () => __appConfig;\nfunction deepDelete(obj, newObj) {\n  for (const key in obj) {\n    const val = newObj[key];\n    if (!(key in newObj)) {\n      delete obj[key];\n    }\n    if (val !== null && typeof val === \"object\") {\n      deepDelete(obj[key], newObj[key]);\n    }\n  }\n}\nfunction deepAssign(obj, newObj) {\n  for (const key in newObj) {\n    const val = newObj[key];\n    if (val !== null && typeof val === \"object\") {\n      obj[key] = obj[key] || {};\n      deepAssign(obj[key], val);\n    } else {\n      obj[key] = val;\n    }\n  }\n}\nexport function useAppConfig() {\n  const nuxtApp = useNuxtApp();\n  if (!nuxtApp._appConfig) {\n    nuxtApp._appConfig = import.meta.server ? klona(__appConfig) : reactive(__appConfig);\n  }\n  return nuxtApp._appConfig;\n}\nexport function updateAppConfig(appConfig) {\n  const _appConfig = useAppConfig();\n  deepAssign(_appConfig, appConfig);\n}\nif (import.meta.dev) {\n  const applyHMR = (newConfig) => {\n    const appConfig = useAppConfig();\n    if (newConfig && appConfig) {\n      deepAssign(appConfig, newConfig);\n      deepDelete(appConfig, newConfig);\n    }\n  };\n  if (import.meta.hot) {\n    import.meta.hot.accept((newModule) => {\n      const newConfig = newModule?._getAppConfig();\n      applyHMR(newConfig);\n    });\n  }\n  if (import.meta.webpackHot) {\n    import.meta.webpackHot.accept(\"#build/app.config.mjs\", () => {\n      applyHMR(__appConfig);\n    });\n  }\n}\n",
-      "start": 1750248049219,
-      "end": 1750248050125,
+      "start": 1750403987461,
+      "end": 1750403989981,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750248050125,
-      "end": 1750248050125,
+      "start": 1750403989981,
+      "end": 1750403989981,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750248050125,
-      "end": 1750248050125,
+      "start": 1750403989981,
+      "end": 1750403989981,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750248050125,
-      "end": 1750248050125,
+      "start": 1750403989981,
+      "end": 1750403989981,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750248050125,
-      "end": 1750248050125,
+      "start": 1750403989981,
+      "end": 1750403989981,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750248050125,
-      "end": 1750248050125,
+      "start": 1750403989981,
+      "end": 1750403989981,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750248050125,
-      "end": 1750248050125,
+      "start": 1750403989981,
+      "end": 1750403989981,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1750248050125,
-      "end": 1750248050125,
+      "start": 1750403989981,
+      "end": 1750403989981,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1750248050125,
-      "end": 1750248050125,
+      "start": 1750403989981,
+      "end": 1750403989981,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1750248050125,
-      "end": 1750248050125,
+      "start": 1750403989981,
+      "end": 1750403989981,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1750248050125,
-      "end": 1750248050125,
+      "start": 1750403989981,
+      "end": 1750403989981,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1750248050125,
-      "end": 1750248050125,
+      "start": 1750403989981,
+      "end": 1750403989981,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1750248050125,
-      "end": 1750248050125,
+      "start": 1750403989981,
+      "end": 1750403989981,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1750248050125,
-      "end": 1750248050125,
+      "start": 1750403989981,
+      "end": 1750403989981,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750248050125,
-      "end": 1750248050125,
+      "start": 1750403989981,
+      "end": 1750403989981,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750248050125,
-      "end": 1750248050125,
+      "start": 1750403989981,
+      "end": 1750403989981,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750248050125,
-      "end": 1750248050125,
+      "start": 1750403989981,
+      "end": 1750403989981,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750248050125,
-      "end": 1750248050125,
+      "start": 1750403989981,
+      "end": 1750403989981,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1750248050125,
-      "end": 1750248050125,
+      "start": 1750403989981,
+      "end": 1750403989982,
       "order": "normal"
     },
     {
       "name": "replace",
       "result": "import { reactive } from \"vue\";\nimport { klona } from \"klona\";\nimport { useNuxtApp } from \"./nuxt.js\";\nimport __appConfig from \"#build/app.config.mjs\";\nexport const _getAppConfig = () => __appConfig;\nfunction deepDelete(obj, newObj) {\n  for (const key in obj) {\n    const val = newObj[key];\n    if (!(key in newObj)) {\n      delete obj[key];\n    }\n    if (val !== null && typeof val === \"object\") {\n      deepDelete(obj[key], newObj[key]);\n    }\n  }\n}\nfunction deepAssign(obj, newObj) {\n  for (const key in newObj) {\n    const val = newObj[key];\n    if (val !== null && typeof val === \"object\") {\n      obj[key] = obj[key] || {};\n      deepAssign(obj[key], val);\n    } else {\n      obj[key] = val;\n    }\n  }\n}\nexport function useAppConfig() {\n  const nuxtApp = useNuxtApp();\n  if (!nuxtApp._appConfig) {\n    nuxtApp._appConfig = true ? klona(__appConfig) : reactive(__appConfig);\n  }\n  return nuxtApp._appConfig;\n}\nexport function updateAppConfig(appConfig) {\n  const _appConfig = useAppConfig();\n  deepAssign(_appConfig, appConfig);\n}\nif (false) {\n  const applyHMR = (newConfig) => {\n    const appConfig = useAppConfig();\n    if (newConfig && appConfig) {\n      deepAssign(appConfig, newConfig);\n      deepDelete(appConfig, newConfig);\n    }\n  };\n  if (import.meta.hot) {\n    import.meta.hot.accept((newModule) => {\n      const newConfig = newModule?._getAppConfig();\n      applyHMR(newConfig);\n    });\n  }\n  if (import.meta.webpackHot) {\n    import.meta.webpackHot.accept(\"#build/app.config.mjs\", () => {\n      applyHMR(__appConfig);\n    });\n  }\n}\n",
-      "start": 1750248050125,
-      "end": 1750248050125,
+      "start": 1750403989982,
+      "end": 1750403989982,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -133,172 +133,172 @@
     },
     {
       "name": "ssr-styles",
-      "start": 1750248050125,
-      "end": 1750248050125,
+      "start": 1750403989982,
+      "end": 1750403989982,
       "order": "normal"
     },
     {
       "name": "vite:define",
       "result": "import { reactive } from \"vue\";\nimport { klona } from \"klona\";\nimport { useNuxtApp } from \"./nuxt.js\";\nimport __appConfig from \"#build/app.config.mjs\";\nexport const _getAppConfig = () => __appConfig;\nfunction deepDelete(obj, newObj) {\n  for (const key in obj) {\n    const val = newObj[key];\n    if (!(key in newObj)) {\n      delete obj[key];\n    }\n    if (val !== null && typeof val === \"object\") {\n      deepDelete(obj[key], newObj[key]);\n    }\n  }\n}\nfunction deepAssign(obj, newObj) {\n  for (const key in newObj) {\n    const val = newObj[key];\n    if (val !== null && typeof val === \"object\") {\n      obj[key] = obj[key] || {};\n      deepAssign(obj[key], val);\n    } else {\n      obj[key] = val;\n    }\n  }\n}\nexport function useAppConfig() {\n  const nuxtApp = useNuxtApp();\n  if (!nuxtApp._appConfig) {\n    nuxtApp._appConfig = true ? klona(__appConfig) : reactive(__appConfig);\n  }\n  return nuxtApp._appConfig;\n}\nexport function updateAppConfig(appConfig) {\n  const _appConfig = useAppConfig();\n  deepAssign(_appConfig, appConfig);\n}\nif (false) {\n  const applyHMR = (newConfig) => {\n    const appConfig = useAppConfig();\n    if (newConfig && appConfig) {\n      deepAssign(appConfig, newConfig);\n      deepDelete(appConfig, newConfig);\n    }\n  };\n  if (void 0) {\n    (void 0).accept((newModule) => {\n      const newConfig = newModule?._getAppConfig();\n      applyHMR(newConfig);\n    });\n  }\n  if (import.meta.webpackHot) {\n    import.meta.webpackHot.accept(\"#build/app.config.mjs\", () => {\n      applyHMR(__appConfig);\n    });\n  }\n}\n",
-      "start": 1750248050125,
-      "end": 1750248050213,
+      "start": 1750403989982,
+      "end": 1750403990139,
       "order": "normal",
       "sourcemaps": "{\n  \"version\": 3,\n  \"sources\": [\"D:/projects/nuxt/workix-nuxt-front/node_modules/nuxt/dist/app/config.js\"],\n  \"sourcesContent\": [\"import { reactive } from \\\"vue\\\";\\nimport { klona } from \\\"klona\\\";\\nimport { useNuxtApp } from \\\"./nuxt.js\\\";\\nimport __appConfig from \\\"#build/app.config.mjs\\\";\\nexport const _getAppConfig = () => __appConfig;\\nfunction deepDelete(obj, newObj) {\\n  for (const key in obj) {\\n    const val = newObj[key];\\n    if (!(key in newObj)) {\\n      delete obj[key];\\n    }\\n    if (val !== null && typeof val === \\\"object\\\") {\\n      deepDelete(obj[key], newObj[key]);\\n    }\\n  }\\n}\\nfunction deepAssign(obj, newObj) {\\n  for (const key in newObj) {\\n    const val = newObj[key];\\n    if (val !== null && typeof val === \\\"object\\\") {\\n      obj[key] = obj[key] || {};\\n      deepAssign(obj[key], val);\\n    } else {\\n      obj[key] = val;\\n    }\\n  }\\n}\\nexport function useAppConfig() {\\n  const nuxtApp = useNuxtApp();\\n  if (!nuxtApp._appConfig) {\\n    nuxtApp._appConfig = true ? klona(__appConfig) : reactive(__appConfig);\\n  }\\n  return nuxtApp._appConfig;\\n}\\nexport function updateAppConfig(appConfig) {\\n  const _appConfig = useAppConfig();\\n  deepAssign(_appConfig, appConfig);\\n}\\nif (false) {\\n  const applyHMR = (newConfig) => {\\n    const appConfig = useAppConfig();\\n    if (newConfig && appConfig) {\\n      deepAssign(appConfig, newConfig);\\n      deepDelete(appConfig, newConfig);\\n    }\\n  };\\n  if (import.meta.hot) {\\n    import.meta.hot.accept((newModule) => {\\n      const newConfig = newModule?._getAppConfig();\\n      applyHMR(newConfig);\\n    });\\n  }\\n  if (import.meta.webpackHot) {\\n    import.meta.webpackHot.accept(\\\"#build/app.config.mjs\\\", () => {\\n      applyHMR(__appConfig);\\n    });\\n  }\\n}\\n\"],\n  \"mappings\": \"AAAA,SAAS,gBAAgB;AACzB,SAAS,aAAa;AACtB,SAAS,kBAAkB;AAC3B,OAAO,iBAAiB;AACjB,aAAM,gBAAgB,MAAM;AACnC,SAAS,WAAW,KAAK,QAAQ;AAC/B,aAAW,OAAO,KAAK;AACrB,UAAM,MAAM,OAAO,GAAG;AACtB,QAAI,EAAE,OAAO,SAAS;AACpB,aAAO,IAAI,GAAG;AAAA,IAChB;AACA,QAAI,QAAQ,QAAQ,OAAO,QAAQ,UAAU;AAC3C,iBAAW,IAAI,GAAG,GAAG,OAAO,GAAG,CAAC;AAAA,IAClC;AAAA,EACF;AACF;AACA,SAAS,WAAW,KAAK,QAAQ;AAC/B,aAAW,OAAO,QAAQ;AACxB,UAAM,MAAM,OAAO,GAAG;AACtB,QAAI,QAAQ,QAAQ,OAAO,QAAQ,UAAU;AAC3C,UAAI,GAAG,IAAI,IAAI,GAAG,KAAK,CAAC;AACxB,iBAAW,IAAI,GAAG,GAAG,GAAG;AAAA,IAC1B,OAAO;AACL,UAAI,GAAG,IAAI;AAAA,IACb;AAAA,EACF;AACF;AACO,gBAAS,eAAe;AAC7B,QAAM,UAAU,WAAW;AAC3B,MAAI,CAAC,QAAQ,YAAY;AACvB,YAAQ,aAAa,OAAO,MAAM,WAAW,IAAI,SAAS,WAAW;AAAA,EACvE;AACA,SAAO,QAAQ;AACjB;AACO,gBAAS,gBAAgB,WAAW;AACzC,QAAM,aAAa,aAAa;AAChC,aAAW,YAAY,SAAS;AAClC;AACA,IAAI,OAAO;AACT,QAAM,WAAW,CAAC,cAAc;AAC9B,UAAM,YAAY,aAAa;AAC/B,QAAI,aAAa,WAAW;AAC1B,iBAAW,WAAW,SAAS;AAC/B,iBAAW,WAAW,SAAS;AAAA,IACjC;AAAA,EACF;AACA,MAAI,QAAiB;AACnB,aAAgB,OAAO,CAAC,cAAc;AACpC,YAAM,YAAY,WAAW,cAAc;AAC3C,eAAS,SAAS;AAAA,IACpB,CAAC;AAAA,EACH;AACA,MAAI,YAAY,YAAY;AAC1B,gBAAY,WAAW,OAAO,yBAAyB,MAAM;AAC3D,eAAS,WAAW;AAAA,IACtB,CAAC;AAAA,EACH;AACF;\",\n  \"names\": []\n}\n"
     },
     {
       "name": "vite:css-post",
-      "start": 1750248050213,
-      "end": 1750248050213,
+      "start": 1750403990140,
+      "end": 1750403990140,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1750248050213,
-      "end": 1750248050213,
+      "start": 1750403990140,
+      "end": 1750403990140,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1750248050213,
-      "end": 1750248050213,
+      "start": 1750403990140,
+      "end": 1750403990140,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1750248050213,
-      "end": 1750248050214,
+      "start": 1750403990140,
+      "end": 1750403990140,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1750248050214,
-      "end": 1750248050214,
+      "start": 1750403990140,
+      "end": 1750403990141,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1750248050214,
-      "end": 1750248050214,
+      "start": 1750403990141,
+      "end": 1750403990141,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1750248050214,
-      "end": 1750248050214,
+      "start": 1750403990141,
+      "end": 1750403990141,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750248050214,
-      "end": 1750248050217,
+      "start": 1750403990142,
+      "end": 1750403990142,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750248050214,
-      "end": 1750248050217,
+      "start": 1750403990142,
+      "end": 1750403990142,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750248050217,
-      "end": 1750248050217,
+      "start": 1750403990142,
+      "end": 1750403990142,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750248050217,
-      "end": 1750248050217,
+      "start": 1750403990142,
+      "end": 1750403990142,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750248050217,
-      "end": 1750248050217,
+      "start": 1750403990142,
+      "end": 1750403990142,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750248050217,
-      "end": 1750248050217,
+      "start": 1750403990142,
+      "end": 1750403990142,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750248050217,
-      "end": 1750248050217,
+      "start": 1750403990142,
+      "end": 1750403990142,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750248050217,
-      "end": 1750248050217,
+      "start": 1750403990142,
+      "end": 1750403990142,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1750248050217,
-      "end": 1750248050217,
+      "start": 1750403990142,
+      "end": 1750403990143,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1750248050217,
-      "end": 1750248050218,
+      "start": 1750403990142,
+      "end": 1750403990143,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1750248050220,
-      "end": 1750248050220,
+      "start": 1750403990145,
+      "end": 1750403990145,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1750248050220,
-      "end": 1750248050221,
+      "start": 1750403990145,
+      "end": 1750403990146,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1750248050230,
-      "end": 1750248050230,
+      "start": 1750403990147,
+      "end": 1750403990147,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1750248050230,
-      "end": 1750248050230,
+      "start": 1750403990147,
+      "end": 1750403990147,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1750248050230,
-      "end": 1750248050230,
+      "start": 1750403990147,
+      "end": 1750403990147,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1750248050230,
-      "end": 1750248050230,
+      "start": 1750403990147,
+      "end": 1750403990147,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1750248050230,
-      "end": 1750248050230,
+      "start": 1750403990147,
+      "end": 1750403990148,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1750248050231,
-      "end": 1750248050231,
+      "start": 1750403990148,
+      "end": 1750403990148,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1750248050231,
-      "end": 1750248050231,
+      "start": 1750403990148,
+      "end": 1750403990148,
       "order": "normal"
     }
   ]
