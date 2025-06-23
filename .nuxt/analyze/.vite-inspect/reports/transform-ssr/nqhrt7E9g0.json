@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { unref as _unref, withCtx as _withCtx, createVNode as _createVNode, openBlock as _openBlock, createBlock as _createBlock, renderList as _renderList, Fragment as _Fragment } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\"\n\nimport TheContentBlock from \"~/components/UI/TheContentBlock.vue\";\r\nimport StorageNavElem from \"~/components/Storage/StorageNav/StorageNavElem.vue\";\r\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\r\nimport {useStorageStore} from \"~/stores/storage\";\r\nimport TheModal from \"~/components/UI/TheModal.vue\";\r\nimport StorageCreateCategory from \"~/components/Storage/UI/StorageCreateCategory.vue\";\r\nimport { handleSearch } from \"~/hooks/ElemUI\";\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'StorageNav',\n  __ssrInlineRender: true,\n  setup(__props) {\n\r\nconst router = useRouter()\r\nconst storageStore = useStorageStore()\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  _push(`<div${_ssrRenderAttrs(_attrs)}>`)\n  _push(_ssrRenderComponent(TheContentBlock, { class: \"!p-0 h-screen max-[800px]:h-full\" }, {\n    default: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(`<div class=\"flex px-10 py-4 gap-x-4 items-center justify-between\"${_scopeId}>`)\n        _push(_ssrRenderComponent(TheSearch, {\n          modelValue: _unref(storageStore).searchCategory,\n          \"onUpdate:modelValue\": ($event: any) => ((_unref(storageStore).searchCategory) = $event),\n          class: \"w-11/12\",\n          onSearch: ($event: any) => (_unref(handleSearch)(_unref(storageStore).searchCategory, _unref(storageStore).searchCategory.trim() !== '' ? _unref(storageStore).loadStorageCategorySearch({query: _unref(storageStore).searchCategory}) : _unref(storageStore).loadStorageCategoryList()))\n        }, null, _parent, _scopeId))\n        _push(`<button${\n          _scopeId\n        }><svg class=\"dark:stroke-white stroke-black dark:hover:stroke-green-300 hover:stroke-green-500 transition-all\" width=\"40px\" height=\"40px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"${\n          _scopeId\n        }><path d=\"M23 18C23 18.75 22.79 19.46 22.42 20.06C22.21 20.42 21.94 20.74 21.63 21C20.93 21.63 20.01 22 19 22C17.78 22 16.69 21.45 15.97 20.59C15.95 20.56 15.92 20.54 15.9 20.51C15.78 20.37 15.67 20.22 15.58 20.06C15.21 19.46 15 18.75 15 18C15 16.74 15.58 15.61 16.5 14.88C17.19 14.33 18.06 14 19 14C20 14 20.9 14.36 21.6 14.97C21.72 15.06 21.83 15.17 21.93 15.28C22.59 16 23 16.95 23 18Z\" stroke-width=\"1\" stroke-miterlimit=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"${\n          _scopeId\n        }></path><path d=\"M20.49 17.98H17.51\" stroke-width=\"1\" stroke-miterlimit=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"${\n          _scopeId\n        }></path><path d=\"M19 16.52V19.51\" stroke-width=\"1\" stroke-miterlimit=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"${\n          _scopeId\n        }></path><path d=\"M3.17004 7.43994L12 12.5499L20.7701 7.46991\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"${\n          _scopeId\n        }></path><path d=\"M12 21.6099V12.5399\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"${\n          _scopeId\n        }></path><path d=\"M21.61 9.17V14.83C21.61 14.88 21.61 14.92 21.6 14.97C20.9 14.36 20 14 19 14C18.06 14 17.19 14.33 16.5 14.88C15.58 15.61 15 16.74 15 18C15 18.75 15.21 19.46 15.58 20.06C15.67 20.22 15.78 20.37 15.9 20.51L14.07 21.52C12.93 22.16 11.07 22.16 9.93001 21.52L4.59001 18.56C3.38001 17.89 2.39001 16.21 2.39001 14.83V9.17C2.39001 7.79 3.38001 6.11002 4.59001 5.44002L9.93001 2.48C11.07 1.84 12.93 1.84 14.07 2.48L19.41 5.44002C20.62 6.11002 21.61 7.79 21.61 9.17Z\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"${\n          _scopeId\n        }></path></svg></button></div><div class=\"max-[800px]:max-h-[400px] overflow-auto\"${\n          _scopeId\n        }><!--[-->`)\n        _ssrRenderList(_unref(storageStore).storageCategoryList, (item) => {\n          _push(_ssrRenderComponent(StorageNavElem, {\n            class: \"mt-2 border-b pb-4 mx-4 dark:border-[#666D76] max-[800px]:last:border-none\",\n            isActive: _unref(storageStore).isActive,\n            item: item\n          }, null, _parent, _scopeId))\n        })\n        _push(`<!--]--></div>`)\n      } else {\n        return [\n          _createVNode(\"div\", { class: \"flex px-10 py-4 gap-x-4 items-center justify-between\" }, [\n            _createVNode(TheSearch, {\n              modelValue: _unref(storageStore).searchCategory,\n              \"onUpdate:modelValue\": ($event: any) => ((_unref(storageStore).searchCategory) = $event),\n              class: \"w-11/12\",\n              onSearch: ($event: any) => (_unref(handleSearch)(_unref(storageStore).searchCategory, _unref(storageStore).searchCategory.trim() !== '' ? _unref(storageStore).loadStorageCategorySearch({query: _unref(storageStore).searchCategory}) : _unref(storageStore).loadStorageCategoryList()))\n            }, null, 8, [\"modelValue\", \"onUpdate:modelValue\", \"onSearch\"]),\n            _createVNode(\"button\", {\n              onClick: ($event: any) => (_unref(storageStore).createCategory = true)\n            }, [\n              (_openBlock(), _createBlock(\"svg\", {\n                class: \"dark:stroke-white stroke-black dark:hover:stroke-green-300 hover:stroke-green-500 transition-all\",\n                width: \"40px\",\n                height: \"40px\",\n                viewBox: \"0 0 24 24\",\n                fill: \"none\",\n                xmlns: \"http://www.w3.org/2000/svg\"\n              }, [\n                _createVNode(\"path\", {\n                  d: \"M23 18C23 18.75 22.79 19.46 22.42 20.06C22.21 20.42 21.94 20.74 21.63 21C20.93 21.63 20.01 22 19 22C17.78 22 16.69 21.45 15.97 20.59C15.95 20.56 15.92 20.54 15.9 20.51C15.78 20.37 15.67 20.22 15.58 20.06C15.21 19.46 15 18.75 15 18C15 16.74 15.58 15.61 16.5 14.88C17.19 14.33 18.06 14 19 14C20 14 20.9 14.36 21.6 14.97C21.72 15.06 21.83 15.17 21.93 15.28C22.59 16 23 16.95 23 18Z\",\n                  \"stroke-width\": \"1\",\n                  \"stroke-miterlimit\": \"10\",\n                  \"stroke-linecap\": \"round\",\n                  \"stroke-linejoin\": \"round\"\n                }),\n                _createVNode(\"path\", {\n                  d: \"M20.49 17.98H17.51\",\n                  \"stroke-width\": \"1\",\n                  \"stroke-miterlimit\": \"10\",\n                  \"stroke-linecap\": \"round\",\n                  \"stroke-linejoin\": \"round\"\n                }),\n                _createVNode(\"path\", {\n                  d: \"M19 16.52V19.51\",\n                  \"stroke-width\": \"1\",\n                  \"stroke-miterlimit\": \"10\",\n                  \"stroke-linecap\": \"round\",\n                  \"stroke-linejoin\": \"round\"\n                }),\n                _createVNode(\"path\", {\n                  d: \"M3.17004 7.43994L12 12.5499L20.7701 7.46991\",\n                  \"stroke-width\": \"1\",\n                  \"stroke-linecap\": \"round\",\n                  \"stroke-linejoin\": \"round\"\n                }),\n                _createVNode(\"path\", {\n                  d: \"M12 21.6099V12.5399\",\n                  \"stroke-width\": \"1\",\n                  \"stroke-linecap\": \"round\",\n                  \"stroke-linejoin\": \"round\"\n                }),\n                _createVNode(\"path\", {\n                  d: \"M21.61 9.17V14.83C21.61 14.88 21.61 14.92 21.6 14.97C20.9 14.36 20 14 19 14C18.06 14 17.19 14.33 16.5 14.88C15.58 15.61 15 16.74 15 18C15 18.75 15.21 19.46 15.58 20.06C15.67 20.22 15.78 20.37 15.9 20.51L14.07 21.52C12.93 22.16 11.07 22.16 9.93001 21.52L4.59001 18.56C3.38001 17.89 2.39001 16.21 2.39001 14.83V9.17C2.39001 7.79 3.38001 6.11002 4.59001 5.44002L9.93001 2.48C11.07 1.84 12.93 1.84 14.07 2.48L19.41 5.44002C20.62 6.11002 21.61 7.79 21.61 9.17Z\",\n                  \"stroke-width\": \"1\",\n                  \"stroke-linecap\": \"round\",\n                  \"stroke-linejoin\": \"round\"\n                })\n              ]))\n            ], 8, [\"onClick\"])\n          ]),\n          _createVNode(\"div\", { class: \"max-[800px]:max-h-[400px] overflow-auto\" }, [\n            (_openBlock(true), _createBlock(_Fragment, null, _renderList(_unref(storageStore).storageCategoryList, (item) => {\n              return (_openBlock(), _createBlock(StorageNavElem, {\n                class: \"mt-2 border-b pb-4 mx-4 dark:border-[#666D76] max-[800px]:last:border-none\",\n                isActive: _unref(storageStore).isActive,\n                item: item\n              }, null, 8, [\"isActive\", \"item\"]))\n            }), 256))\n          ])\n        ]\n      }\n    }),\n    _: 1\n  }, _parent))\n  if (_unref(storageStore).createCategory) {\n    _push(_ssrRenderComponent(TheModal, {\n      type: \"resize\",\n      onShowModal: ($event: any) => (_unref(storageStore).createCategory = false)\n    }, {\n      default: _withCtx((_, _push, _parent, _scopeId) => {\n        if (_push) {\n          _push(_ssrRenderComponent(StorageCreateCategory, null, null, _parent, _scopeId))\n        } else {\n          return [\n            _createVNode(StorageCreateCategory)\n          ]\n        }\n      }),\n      _: 1\n    }, _parent))\n  } else {\n    _push(`<!---->`)\n  }\n  _push(`</div>`)\n}\n}\n\n})",
-      "start": 1750404002446,
-      "end": 1750404002446,
+      "start": 1750670600006,
+      "end": 1750670600006,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750404002446,
-      "end": 1750404002446,
+      "start": 1750670600006,
+      "end": 1750670600006,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750404002446,
-      "end": 1750404002446,
+      "start": 1750670600006,
+      "end": 1750670600006,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750404002446,
-      "end": 1750404002446,
+      "start": 1750670600006,
+      "end": 1750670600006,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750404002446,
-      "end": 1750404002446,
+      "start": 1750670600006,
+      "end": 1750670600006,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750404002446,
-      "end": 1750404002446,
+      "start": 1750670600006,
+      "end": 1750670600006,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750404002446,
-      "end": 1750404002446,
+      "start": 1750670600006,
+      "end": 1750670600006,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1750404002446,
-      "end": 1750404002446,
+      "start": 1750670600006,
+      "end": 1750670600006,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1750404002446,
-      "end": 1750404002446,
+      "start": 1750670600006,
+      "end": 1750670600006,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, withCtx as _withCtx, createVNode as _createVNode, openBlock as _openBlock, createBlock as _createBlock, renderList as _renderList, Fragment as _Fragment } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport TheContentBlock from \"~/components/UI/TheContentBlock.vue\";\nimport StorageNavElem from \"~/components/Storage/StorageNav/StorageNavElem.vue\";\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\nimport { useStorageStore } from \"~/stores/storage\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nimport StorageCreateCategory from \"~/components/Storage/UI/StorageCreateCategory.vue\";\nimport { handleSearch } from \"~/hooks/ElemUI\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"StorageNav\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const router = useRouter();\n    const storageStore = useStorageStore();\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(TheContentBlock, { class: \"!p-0 h-screen max-[800px]:h-full\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`<div class=\"flex px-10 py-4 gap-x-4 items-center justify-between\"${_scopeId}>`);\n            _push2(_ssrRenderComponent(TheSearch, {\n              modelValue: _unref(storageStore).searchCategory,\n              \"onUpdate:modelValue\": ($event) => _unref(storageStore).searchCategory = $event,\n              class: \"w-11/12\",\n              onSearch: ($event) => _unref(handleSearch)(_unref(storageStore).searchCategory, _unref(storageStore).searchCategory.trim() !== \"\" ? _unref(storageStore).loadStorageCategorySearch({ query: _unref(storageStore).searchCategory }) : _unref(storageStore).loadStorageCategoryList())\n            }, null, _parent2, _scopeId));\n            _push2(`<button${_scopeId}><svg class=\"dark:stroke-white stroke-black dark:hover:stroke-green-300 hover:stroke-green-500 transition-all\" width=\"40px\" height=\"40px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"${_scopeId}><path d=\"M23 18C23 18.75 22.79 19.46 22.42 20.06C22.21 20.42 21.94 20.74 21.63 21C20.93 21.63 20.01 22 19 22C17.78 22 16.69 21.45 15.97 20.59C15.95 20.56 15.92 20.54 15.9 20.51C15.78 20.37 15.67 20.22 15.58 20.06C15.21 19.46 15 18.75 15 18C15 16.74 15.58 15.61 16.5 14.88C17.19 14.33 18.06 14 19 14C20 14 20.9 14.36 21.6 14.97C21.72 15.06 21.83 15.17 21.93 15.28C22.59 16 23 16.95 23 18Z\" stroke-width=\"1\" stroke-miterlimit=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"${_scopeId}></path><path d=\"M20.49 17.98H17.51\" stroke-width=\"1\" stroke-miterlimit=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"${_scopeId}></path><path d=\"M19 16.52V19.51\" stroke-width=\"1\" stroke-miterlimit=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"${_scopeId}></path><path d=\"M3.17004 7.43994L12 12.5499L20.7701 7.46991\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"${_scopeId}></path><path d=\"M12 21.6099V12.5399\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"${_scopeId}></path><path d=\"M21.61 9.17V14.83C21.61 14.88 21.61 14.92 21.6 14.97C20.9 14.36 20 14 19 14C18.06 14 17.19 14.33 16.5 14.88C15.58 15.61 15 16.74 15 18C15 18.75 15.21 19.46 15.58 20.06C15.67 20.22 15.78 20.37 15.9 20.51L14.07 21.52C12.93 22.16 11.07 22.16 9.93001 21.52L4.59001 18.56C3.38001 17.89 2.39001 16.21 2.39001 14.83V9.17C2.39001 7.79 3.38001 6.11002 4.59001 5.44002L9.93001 2.48C11.07 1.84 12.93 1.84 14.07 2.48L19.41 5.44002C20.62 6.11002 21.61 7.79 21.61 9.17Z\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"${_scopeId}></path></svg></button></div><div class=\"max-[800px]:max-h-[400px] overflow-auto\"${_scopeId}><!--[-->`);\n            _ssrRenderList(_unref(storageStore).storageCategoryList, (item) => {\n              _push2(_ssrRenderComponent(StorageNavElem, {\n                class: \"mt-2 border-b pb-4 mx-4 dark:border-[#666D76] max-[800px]:last:border-none\",\n                isActive: _unref(storageStore).isActive,\n                item\n              }, null, _parent2, _scopeId));\n            });\n            _push2(`<!--]--></div>`);\n          } else {\n            return [\n              _createVNode(\"div\", { class: \"flex px-10 py-4 gap-x-4 items-center justify-between\" }, [\n                _createVNode(TheSearch, {\n                  modelValue: _unref(storageStore).searchCategory,\n                  \"onUpdate:modelValue\": ($event) => _unref(storageStore).searchCategory = $event,\n                  class: \"w-11/12\",\n                  onSearch: ($event) => _unref(handleSearch)(_unref(storageStore).searchCategory, _unref(storageStore).searchCategory.trim() !== \"\" ? _unref(storageStore).loadStorageCategorySearch({ query: _unref(storageStore).searchCategory }) : _unref(storageStore).loadStorageCategoryList())\n                }, null, 8, [\"modelValue\", \"onUpdate:modelValue\", \"onSearch\"]),\n                _createVNode(\"button\", {\n                  onClick: ($event) => _unref(storageStore).createCategory = true\n                }, [\n                  (_openBlock(), _createBlock(\"svg\", {\n                    class: \"dark:stroke-white stroke-black dark:hover:stroke-green-300 hover:stroke-green-500 transition-all\",\n                    width: \"40px\",\n                    height: \"40px\",\n                    viewBox: \"0 0 24 24\",\n                    fill: \"none\",\n                    xmlns: \"http://www.w3.org/2000/svg\"\n                  }, [\n                    _createVNode(\"path\", {\n                      d: \"M23 18C23 18.75 22.79 19.46 22.42 20.06C22.21 20.42 21.94 20.74 21.63 21C20.93 21.63 20.01 22 19 22C17.78 22 16.69 21.45 15.97 20.59C15.95 20.56 15.92 20.54 15.9 20.51C15.78 20.37 15.67 20.22 15.58 20.06C15.21 19.46 15 18.75 15 18C15 16.74 15.58 15.61 16.5 14.88C17.19 14.33 18.06 14 19 14C20 14 20.9 14.36 21.6 14.97C21.72 15.06 21.83 15.17 21.93 15.28C22.59 16 23 16.95 23 18Z\",\n                      \"stroke-width\": \"1\",\n                      \"stroke-miterlimit\": \"10\",\n                      \"stroke-linecap\": \"round\",\n                      \"stroke-linejoin\": \"round\"\n                    }),\n                    _createVNode(\"path\", {\n                      d: \"M20.49 17.98H17.51\",\n                      \"stroke-width\": \"1\",\n                      \"stroke-miterlimit\": \"10\",\n                      \"stroke-linecap\": \"round\",\n                      \"stroke-linejoin\": \"round\"\n                    }),\n                    _createVNode(\"path\", {\n                      d: \"M19 16.52V19.51\",\n                      \"stroke-width\": \"1\",\n                      \"stroke-miterlimit\": \"10\",\n                      \"stroke-linecap\": \"round\",\n                      \"stroke-linejoin\": \"round\"\n                    }),\n                    _createVNode(\"path\", {\n                      d: \"M3.17004 7.43994L12 12.5499L20.7701 7.46991\",\n                      \"stroke-width\": \"1\",\n                      \"stroke-linecap\": \"round\",\n                      \"stroke-linejoin\": \"round\"\n                    }),\n                    _createVNode(\"path\", {\n                      d: \"M12 21.6099V12.5399\",\n                      \"stroke-width\": \"1\",\n                      \"stroke-linecap\": \"round\",\n                      \"stroke-linejoin\": \"round\"\n                    }),\n                    _createVNode(\"path\", {\n                      d: \"M21.61 9.17V14.83C21.61 14.88 21.61 14.92 21.6 14.97C20.9 14.36 20 14 19 14C18.06 14 17.19 14.33 16.5 14.88C15.58 15.61 15 16.74 15 18C15 18.75 15.21 19.46 15.58 20.06C15.67 20.22 15.78 20.37 15.9 20.51L14.07 21.52C12.93 22.16 11.07 22.16 9.93001 21.52L4.59001 18.56C3.38001 17.89 2.39001 16.21 2.39001 14.83V9.17C2.39001 7.79 3.38001 6.11002 4.59001 5.44002L9.93001 2.48C11.07 1.84 12.93 1.84 14.07 2.48L19.41 5.44002C20.62 6.11002 21.61 7.79 21.61 9.17Z\",\n                      \"stroke-width\": \"1\",\n                      \"stroke-linecap\": \"round\",\n                      \"stroke-linejoin\": \"round\"\n                    })\n                  ]))\n                ], 8, [\"onClick\"])\n              ]),\n              _createVNode(\"div\", { class: \"max-[800px]:max-h-[400px] overflow-auto\" }, [\n                (_openBlock(true), _createBlock(_Fragment, null, _renderList(_unref(storageStore).storageCategoryList, (item) => {\n                  return _openBlock(), _createBlock(StorageNavElem, {\n                    class: \"mt-2 border-b pb-4 mx-4 dark:border-[#666D76] max-[800px]:last:border-none\",\n                    isActive: _unref(storageStore).isActive,\n                    item\n                  }, null, 8, [\"isActive\", \"item\"]);\n                }), 256))\n              ])\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      if (_unref(storageStore).createCategory) {\n        _push(_ssrRenderComponent(TheModal, {\n          type: \"resize\",\n          onShowModal: ($event) => _unref(storageStore).createCategory = false\n        }, {\n          default: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(_ssrRenderComponent(StorageCreateCategory, null, null, _parent2, _scopeId));\n            } else {\n              return [\n                _createVNode(StorageCreateCategory)\n              ];\n            }\n          }),\n          _: 1\n        }, _parent));\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1750404002446,
-      "end": 1750404002859,
+      "start": 1750670600006,
+      "end": 1750670600152,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -89,171 +89,171 @@
     },
     {
       "name": "vite:json",
-      "start": 1750404002859,
-      "end": 1750404002859,
+      "start": 1750670600152,
+      "end": 1750670600152,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1750404002859,
-      "end": 1750404002859,
+      "start": 1750670600152,
+      "end": 1750670600152,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1750404002859,
-      "end": 1750404002859,
+      "start": 1750670600153,
+      "end": 1750670600153,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1750404002859,
-      "end": 1750404002859,
+      "start": 1750670600153,
+      "end": 1750670600153,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750404002859,
-      "end": 1750404002859,
+      "start": 1750670600153,
+      "end": 1750670600153,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750404002859,
-      "end": 1750404002859,
+      "start": 1750670600153,
+      "end": 1750670600153,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750404002859,
-      "end": 1750404002859,
+      "start": 1750670600153,
+      "end": 1750670600153,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750404002859,
-      "end": 1750404002859,
+      "start": 1750670600153,
+      "end": 1750670600153,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1750404002859,
-      "end": 1750404002859,
+      "start": 1750670600153,
+      "end": 1750670600153,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750404002859,
-      "end": 1750404002859,
+      "start": 1750670600154,
+      "end": 1750670600154,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1750404002859,
-      "end": 1750404002860,
+      "start": 1750670600156,
+      "end": 1750670600157,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1750404002860,
-      "end": 1750404002860,
+      "start": 1750670600158,
+      "end": 1750670600158,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1750404002860,
-      "end": 1750404002860,
+      "start": 1750670600158,
+      "end": 1750670600158,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1750404002861,
-      "end": 1750404002861,
+      "start": 1750670600158,
+      "end": 1750670600158,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1750404002861,
-      "end": 1750404002861,
+      "start": 1750670600158,
+      "end": 1750670600158,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1750404002861,
-      "end": 1750404002861,
+      "start": 1750670600158,
+      "end": 1750670600158,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1750404002861,
-      "end": 1750404002861,
+      "start": 1750670600158,
+      "end": 1750670600158,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1750404002861,
-      "end": 1750404002861,
+      "start": 1750670600158,
+      "end": 1750670600158,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1750404002861,
-      "end": 1750404002861,
+      "start": 1750670600158,
+      "end": 1750670600158,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750404002861,
-      "end": 1750404002861,
+      "start": 1750670600158,
+      "end": 1750670600158,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750404002861,
-      "end": 1750404002861,
+      "start": 1750670600158,
+      "end": 1750670600158,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750404002861,
-      "end": 1750404002861,
+      "start": 1750670600159,
+      "end": 1750670600159,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750404002861,
-      "end": 1750404002861,
+      "start": 1750670600159,
+      "end": 1750670600159,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750404002861,
-      "end": 1750404002861,
+      "start": 1750670600159,
+      "end": 1750670600159,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750404002861,
-      "end": 1750404002861,
+      "start": 1750670600159,
+      "end": 1750670600159,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750404002861,
-      "end": 1750404002861,
+      "start": 1750670600159,
+      "end": 1750670600159,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750404002861,
-      "end": 1750404002861,
+      "start": 1750670600159,
+      "end": 1750670600159,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { useRouter } from '#app/composables/router';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, withCtx as _withCtx, createVNode as _createVNode, openBlock as _openBlock, createBlock as _createBlock, renderList as _renderList, Fragment as _Fragment } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport TheContentBlock from \"~/components/UI/TheContentBlock.vue\";\nimport StorageNavElem from \"~/components/Storage/StorageNav/StorageNavElem.vue\";\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\nimport { useStorageStore } from \"~/stores/storage\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nimport StorageCreateCategory from \"~/components/Storage/UI/StorageCreateCategory.vue\";\nimport { handleSearch } from \"~/hooks/ElemUI\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"StorageNav\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const router = useRouter();\n    const storageStore = useStorageStore();\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(TheContentBlock, { class: \"!p-0 h-screen max-[800px]:h-full\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`<div class=\"flex px-10 py-4 gap-x-4 items-center justify-between\"${_scopeId}>`);\n            _push2(_ssrRenderComponent(TheSearch, {\n              modelValue: _unref(storageStore).searchCategory,\n              \"onUpdate:modelValue\": ($event) => _unref(storageStore).searchCategory = $event,\n              class: \"w-11/12\",\n              onSearch: ($event) => _unref(handleSearch)(_unref(storageStore).searchCategory, _unref(storageStore).searchCategory.trim() !== \"\" ? _unref(storageStore).loadStorageCategorySearch({ query: _unref(storageStore).searchCategory }) : _unref(storageStore).loadStorageCategoryList())\n            }, null, _parent2, _scopeId));\n            _push2(`<button${_scopeId}><svg class=\"dark:stroke-white stroke-black dark:hover:stroke-green-300 hover:stroke-green-500 transition-all\" width=\"40px\" height=\"40px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"${_scopeId}><path d=\"M23 18C23 18.75 22.79 19.46 22.42 20.06C22.21 20.42 21.94 20.74 21.63 21C20.93 21.63 20.01 22 19 22C17.78 22 16.69 21.45 15.97 20.59C15.95 20.56 15.92 20.54 15.9 20.51C15.78 20.37 15.67 20.22 15.58 20.06C15.21 19.46 15 18.75 15 18C15 16.74 15.58 15.61 16.5 14.88C17.19 14.33 18.06 14 19 14C20 14 20.9 14.36 21.6 14.97C21.72 15.06 21.83 15.17 21.93 15.28C22.59 16 23 16.95 23 18Z\" stroke-width=\"1\" stroke-miterlimit=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"${_scopeId}></path><path d=\"M20.49 17.98H17.51\" stroke-width=\"1\" stroke-miterlimit=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"${_scopeId}></path><path d=\"M19 16.52V19.51\" stroke-width=\"1\" stroke-miterlimit=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"${_scopeId}></path><path d=\"M3.17004 7.43994L12 12.5499L20.7701 7.46991\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"${_scopeId}></path><path d=\"M12 21.6099V12.5399\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"${_scopeId}></path><path d=\"M21.61 9.17V14.83C21.61 14.88 21.61 14.92 21.6 14.97C20.9 14.36 20 14 19 14C18.06 14 17.19 14.33 16.5 14.88C15.58 15.61 15 16.74 15 18C15 18.75 15.21 19.46 15.58 20.06C15.67 20.22 15.78 20.37 15.9 20.51L14.07 21.52C12.93 22.16 11.07 22.16 9.93001 21.52L4.59001 18.56C3.38001 17.89 2.39001 16.21 2.39001 14.83V9.17C2.39001 7.79 3.38001 6.11002 4.59001 5.44002L9.93001 2.48C11.07 1.84 12.93 1.84 14.07 2.48L19.41 5.44002C20.62 6.11002 21.61 7.79 21.61 9.17Z\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"${_scopeId}></path></svg></button></div><div class=\"max-[800px]:max-h-[400px] overflow-auto\"${_scopeId}><!--[-->`);\n            _ssrRenderList(_unref(storageStore).storageCategoryList, (item) => {\n              _push2(_ssrRenderComponent(StorageNavElem, {\n                class: \"mt-2 border-b pb-4 mx-4 dark:border-[#666D76] max-[800px]:last:border-none\",\n                isActive: _unref(storageStore).isActive,\n                item\n              }, null, _parent2, _scopeId));\n            });\n            _push2(`<!--]--></div>`);\n          } else {\n            return [\n              _createVNode(\"div\", { class: \"flex px-10 py-4 gap-x-4 items-center justify-between\" }, [\n                _createVNode(TheSearch, {\n                  modelValue: _unref(storageStore).searchCategory,\n                  \"onUpdate:modelValue\": ($event) => _unref(storageStore).searchCategory = $event,\n                  class: \"w-11/12\",\n                  onSearch: ($event) => _unref(handleSearch)(_unref(storageStore).searchCategory, _unref(storageStore).searchCategory.trim() !== \"\" ? _unref(storageStore).loadStorageCategorySearch({ query: _unref(storageStore).searchCategory }) : _unref(storageStore).loadStorageCategoryList())\n                }, null, 8, [\"modelValue\", \"onUpdate:modelValue\", \"onSearch\"]),\n                _createVNode(\"button\", {\n                  onClick: ($event) => _unref(storageStore).createCategory = true\n                }, [\n                  (_openBlock(), _createBlock(\"svg\", {\n                    class: \"dark:stroke-white stroke-black dark:hover:stroke-green-300 hover:stroke-green-500 transition-all\",\n                    width: \"40px\",\n                    height: \"40px\",\n                    viewBox: \"0 0 24 24\",\n                    fill: \"none\",\n                    xmlns: \"http://www.w3.org/2000/svg\"\n                  }, [\n                    _createVNode(\"path\", {\n                      d: \"M23 18C23 18.75 22.79 19.46 22.42 20.06C22.21 20.42 21.94 20.74 21.63 21C20.93 21.63 20.01 22 19 22C17.78 22 16.69 21.45 15.97 20.59C15.95 20.56 15.92 20.54 15.9 20.51C15.78 20.37 15.67 20.22 15.58 20.06C15.21 19.46 15 18.75 15 18C15 16.74 15.58 15.61 16.5 14.88C17.19 14.33 18.06 14 19 14C20 14 20.9 14.36 21.6 14.97C21.72 15.06 21.83 15.17 21.93 15.28C22.59 16 23 16.95 23 18Z\",\n                      \"stroke-width\": \"1\",\n                      \"stroke-miterlimit\": \"10\",\n                      \"stroke-linecap\": \"round\",\n                      \"stroke-linejoin\": \"round\"\n                    }),\n                    _createVNode(\"path\", {\n                      d: \"M20.49 17.98H17.51\",\n                      \"stroke-width\": \"1\",\n                      \"stroke-miterlimit\": \"10\",\n                      \"stroke-linecap\": \"round\",\n                      \"stroke-linejoin\": \"round\"\n                    }),\n                    _createVNode(\"path\", {\n                      d: \"M19 16.52V19.51\",\n                      \"stroke-width\": \"1\",\n                      \"stroke-miterlimit\": \"10\",\n                      \"stroke-linecap\": \"round\",\n                      \"stroke-linejoin\": \"round\"\n                    }),\n                    _createVNode(\"path\", {\n                      d: \"M3.17004 7.43994L12 12.5499L20.7701 7.46991\",\n                      \"stroke-width\": \"1\",\n                      \"stroke-linecap\": \"round\",\n                      \"stroke-linejoin\": \"round\"\n                    }),\n                    _createVNode(\"path\", {\n                      d: \"M12 21.6099V12.5399\",\n                      \"stroke-width\": \"1\",\n                      \"stroke-linecap\": \"round\",\n                      \"stroke-linejoin\": \"round\"\n                    }),\n                    _createVNode(\"path\", {\n                      d: \"M21.61 9.17V14.83C21.61 14.88 21.61 14.92 21.6 14.97C20.9 14.36 20 14 19 14C18.06 14 17.19 14.33 16.5 14.88C15.58 15.61 15 16.74 15 18C15 18.75 15.21 19.46 15.58 20.06C15.67 20.22 15.78 20.37 15.9 20.51L14.07 21.52C12.93 22.16 11.07 22.16 9.93001 21.52L4.59001 18.56C3.38001 17.89 2.39001 16.21 2.39001 14.83V9.17C2.39001 7.79 3.38001 6.11002 4.59001 5.44002L9.93001 2.48C11.07 1.84 12.93 1.84 14.07 2.48L19.41 5.44002C20.62 6.11002 21.61 7.79 21.61 9.17Z\",\n                      \"stroke-width\": \"1\",\n                      \"stroke-linecap\": \"round\",\n                      \"stroke-linejoin\": \"round\"\n                    })\n                  ]))\n                ], 8, [\"onClick\"])\n              ]),\n              _createVNode(\"div\", { class: \"max-[800px]:max-h-[400px] overflow-auto\" }, [\n                (_openBlock(true), _createBlock(_Fragment, null, _renderList(_unref(storageStore).storageCategoryList, (item) => {\n                  return _openBlock(), _createBlock(StorageNavElem, {\n                    class: \"mt-2 border-b pb-4 mx-4 dark:border-[#666D76] max-[800px]:last:border-none\",\n                    isActive: _unref(storageStore).isActive,\n                    item\n                  }, null, 8, [\"isActive\", \"item\"]);\n                }), 256))\n              ])\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      if (_unref(storageStore).createCategory) {\n        _push(_ssrRenderComponent(TheModal, {\n          type: \"resize\",\n          onShowModal: ($event) => _unref(storageStore).createCategory = false\n        }, {\n          default: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(_ssrRenderComponent(StorageCreateCategory, null, null, _parent2, _scopeId));\n            } else {\n              return [\n                _createVNode(StorageCreateCategory)\n              ];\n            }\n          }),\n          _: 1\n        }, _parent));\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1750404002861,
-      "end": 1750404002869,
+      "start": 1750670600159,
+      "end": 1750670600168,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -267,8 +267,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { useRouter } from '#app/composables/router';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, withCtx as _withCtx, createVNode as _createVNode, openBlock as _openBlock, createBlock as _createBlock, renderList as _renderList, Fragment as _Fragment } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport TheContentBlock from \"~/components/UI/TheContentBlock.vue\";\nimport StorageNavElem from \"~/components/Storage/StorageNav/StorageNavElem.vue\";\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\nimport { useStorageStore } from \"~/stores/storage\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nimport StorageCreateCategory from \"~/components/Storage/UI/StorageCreateCategory.vue\";\nimport { handleSearch } from \"~/hooks/ElemUI\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"StorageNav\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const router = useRouter();\n    const storageStore = useStorageStore();\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(TheContentBlock, { class: \"!p-0 h-screen max-[800px]:h-full\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`<div class=\"flex px-10 py-4 gap-x-4 items-center justify-between\"${_scopeId}>`);\n            _push2(_ssrRenderComponent(TheSearch, {\n              modelValue: _unref(storageStore).searchCategory,\n              \"onUpdate:modelValue\": ($event) => _unref(storageStore).searchCategory = $event,\n              class: \"w-11/12\",\n              onSearch: ($event) => _unref(handleSearch)(_unref(storageStore).searchCategory, _unref(storageStore).searchCategory.trim() !== \"\" ? _unref(storageStore).loadStorageCategorySearch({ query: _unref(storageStore).searchCategory }) : _unref(storageStore).loadStorageCategoryList())\n            }, null, _parent2, _scopeId));\n            _push2(`<button${_scopeId}><svg class=\"dark:stroke-white stroke-black dark:hover:stroke-green-300 hover:stroke-green-500 transition-all\" width=\"40px\" height=\"40px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"${_scopeId}><path d=\"M23 18C23 18.75 22.79 19.46 22.42 20.06C22.21 20.42 21.94 20.74 21.63 21C20.93 21.63 20.01 22 19 22C17.78 22 16.69 21.45 15.97 20.59C15.95 20.56 15.92 20.54 15.9 20.51C15.78 20.37 15.67 20.22 15.58 20.06C15.21 19.46 15 18.75 15 18C15 16.74 15.58 15.61 16.5 14.88C17.19 14.33 18.06 14 19 14C20 14 20.9 14.36 21.6 14.97C21.72 15.06 21.83 15.17 21.93 15.28C22.59 16 23 16.95 23 18Z\" stroke-width=\"1\" stroke-miterlimit=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"${_scopeId}></path><path d=\"M20.49 17.98H17.51\" stroke-width=\"1\" stroke-miterlimit=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"${_scopeId}></path><path d=\"M19 16.52V19.51\" stroke-width=\"1\" stroke-miterlimit=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"${_scopeId}></path><path d=\"M3.17004 7.43994L12 12.5499L20.7701 7.46991\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"${_scopeId}></path><path d=\"M12 21.6099V12.5399\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"${_scopeId}></path><path d=\"M21.61 9.17V14.83C21.61 14.88 21.61 14.92 21.6 14.97C20.9 14.36 20 14 19 14C18.06 14 17.19 14.33 16.5 14.88C15.58 15.61 15 16.74 15 18C15 18.75 15.21 19.46 15.58 20.06C15.67 20.22 15.78 20.37 15.9 20.51L14.07 21.52C12.93 22.16 11.07 22.16 9.93001 21.52L4.59001 18.56C3.38001 17.89 2.39001 16.21 2.39001 14.83V9.17C2.39001 7.79 3.38001 6.11002 4.59001 5.44002L9.93001 2.48C11.07 1.84 12.93 1.84 14.07 2.48L19.41 5.44002C20.62 6.11002 21.61 7.79 21.61 9.17Z\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\"${_scopeId}></path></svg></button></div><div class=\"max-[800px]:max-h-[400px] overflow-auto\"${_scopeId}><!--[-->`);\n            _ssrRenderList(_unref(storageStore).storageCategoryList, (item) => {\n              _push2(_ssrRenderComponent(StorageNavElem, {\n                class: \"mt-2 border-b pb-4 mx-4 dark:border-[#666D76] max-[800px]:last:border-none\",\n                isActive: _unref(storageStore).isActive,\n                item\n              }, null, _parent2, _scopeId));\n            });\n            _push2(`<!--]--></div>`);\n          } else {\n            return [\n              _createVNode(\"div\", { class: \"flex px-10 py-4 gap-x-4 items-center justify-between\" }, [\n                _createVNode(TheSearch, {\n                  modelValue: _unref(storageStore).searchCategory,\n                  \"onUpdate:modelValue\": ($event) => _unref(storageStore).searchCategory = $event,\n                  class: \"w-11/12\",\n                  onSearch: ($event) => _unref(handleSearch)(_unref(storageStore).searchCategory, _unref(storageStore).searchCategory.trim() !== \"\" ? _unref(storageStore).loadStorageCategorySearch({ query: _unref(storageStore).searchCategory }) : _unref(storageStore).loadStorageCategoryList())\n                }, null, 8, [\"modelValue\", \"onUpdate:modelValue\", \"onSearch\"]),\n                _createVNode(\"button\", {\n                  onClick: ($event) => _unref(storageStore).createCategory = true\n                }, [\n                  (_openBlock(), _createBlock(\"svg\", {\n                    class: \"dark:stroke-white stroke-black dark:hover:stroke-green-300 hover:stroke-green-500 transition-all\",\n                    width: \"40px\",\n                    height: \"40px\",\n                    viewBox: \"0 0 24 24\",\n                    fill: \"none\",\n                    xmlns: \"http://www.w3.org/2000/svg\"\n                  }, [\n                    _createVNode(\"path\", {\n                      d: \"M23 18C23 18.75 22.79 19.46 22.42 20.06C22.21 20.42 21.94 20.74 21.63 21C20.93 21.63 20.01 22 19 22C17.78 22 16.69 21.45 15.97 20.59C15.95 20.56 15.92 20.54 15.9 20.51C15.78 20.37 15.67 20.22 15.58 20.06C15.21 19.46 15 18.75 15 18C15 16.74 15.58 15.61 16.5 14.88C17.19 14.33 18.06 14 19 14C20 14 20.9 14.36 21.6 14.97C21.72 15.06 21.83 15.17 21.93 15.28C22.59 16 23 16.95 23 18Z\",\n                      \"stroke-width\": \"1\",\n                      \"stroke-miterlimit\": \"10\",\n                      \"stroke-linecap\": \"round\",\n                      \"stroke-linejoin\": \"round\"\n                    }),\n                    _createVNode(\"path\", {\n                      d: \"M20.49 17.98H17.51\",\n                      \"stroke-width\": \"1\",\n                      \"stroke-miterlimit\": \"10\",\n                      \"stroke-linecap\": \"round\",\n                      \"stroke-linejoin\": \"round\"\n                    }),\n                    _createVNode(\"path\", {\n                      d: \"M19 16.52V19.51\",\n                      \"stroke-width\": \"1\",\n                      \"stroke-miterlimit\": \"10\",\n                      \"stroke-linecap\": \"round\",\n                      \"stroke-linejoin\": \"round\"\n                    }),\n                    _createVNode(\"path\", {\n                      d: \"M3.17004 7.43994L12 12.5499L20.7701 7.46991\",\n                      \"stroke-width\": \"1\",\n                      \"stroke-linecap\": \"round\",\n                      \"stroke-linejoin\": \"round\"\n                    }),\n                    _createVNode(\"path\", {\n                      d: \"M12 21.6099V12.5399\",\n                      \"stroke-width\": \"1\",\n                      \"stroke-linecap\": \"round\",\n                      \"stroke-linejoin\": \"round\"\n                    }),\n                    _createVNode(\"path\", {\n                      d: \"M21.61 9.17V14.83C21.61 14.88 21.61 14.92 21.6 14.97C20.9 14.36 20 14 19 14C18.06 14 17.19 14.33 16.5 14.88C15.58 15.61 15 16.74 15 18C15 18.75 15.21 19.46 15.58 20.06C15.67 20.22 15.78 20.37 15.9 20.51L14.07 21.52C12.93 22.16 11.07 22.16 9.93001 21.52L4.59001 18.56C3.38001 17.89 2.39001 16.21 2.39001 14.83V9.17C2.39001 7.79 3.38001 6.11002 4.59001 5.44002L9.93001 2.48C11.07 1.84 12.93 1.84 14.07 2.48L19.41 5.44002C20.62 6.11002 21.61 7.79 21.61 9.17Z\",\n                      \"stroke-width\": \"1\",\n                      \"stroke-linecap\": \"round\",\n                      \"stroke-linejoin\": \"round\"\n                    })\n                  ]))\n                ], 8, [\"onClick\"])\n              ]),\n              _createVNode(\"div\", { class: \"max-[800px]:max-h-[400px] overflow-auto\" }, [\n                (_openBlock(true), _createBlock(_Fragment, null, _renderList(_unref(storageStore).storageCategoryList, (item) => {\n                  return _openBlock(), _createBlock(StorageNavElem, {\n                    class: \"mt-2 border-b pb-4 mx-4 dark:border-[#666D76] max-[800px]:last:border-none\",\n                    isActive: _unref(storageStore).isActive,\n                    item\n                  }, null, 8, [\"isActive\", \"item\"]);\n                }), 256))\n              ])\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      if (_unref(storageStore).createCategory) {\n        _push(_ssrRenderComponent(TheModal, {\n          type: \"resize\",\n          onShowModal: ($event) => _unref(storageStore).createCategory = false\n        }, {\n          default: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(_ssrRenderComponent(StorageCreateCategory, null, null, _parent2, _scopeId));\n            } else {\n              return [\n                _createVNode(StorageCreateCategory)\n              ];\n            }\n          }),\n          _: 1\n        }, _parent));\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1750404002861,
-      "end": 1750404002869,
+      "start": 1750670600159,
+      "end": 1750670600168,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -281,56 +281,56 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1750404002869,
-      "end": 1750404002869,
+      "start": 1750670600168,
+      "end": 1750670600168,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1750404002869,
-      "end": 1750404002869,
+      "start": 1750670600168,
+      "end": 1750670600168,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1750404002869,
-      "end": 1750404002869,
+      "start": 1750670600169,
+      "end": 1750670600169,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1750404002869,
-      "end": 1750404002869,
+      "start": 1750670600169,
+      "end": 1750670600169,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1750404002869,
-      "end": 1750404002870,
+      "start": 1750670600169,
+      "end": 1750670600169,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1750404002870,
-      "end": 1750404002870,
+      "start": 1750670600170,
+      "end": 1750670600170,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1750404002871,
-      "end": 1750404002871,
+      "start": 1750670600171,
+      "end": 1750670600171,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1750404002871,
-      "end": 1750404002871,
+      "start": 1750670600171,
+      "end": 1750670600171,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1750404002871,
-      "end": 1750404002871,
+      "start": 1750670600171,
+      "end": 1750670600171,
       "order": "normal"
     }
   ]

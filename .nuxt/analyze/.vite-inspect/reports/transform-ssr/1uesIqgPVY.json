@@ -3,74 +3,74 @@
   "transforms": [
     {
       "name": "vite:vue",
-      "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { ssrRenderSlot as _ssrRenderSlot, ssrRenderClass as _ssrRenderClass, ssrRenderTeleport as _ssrRenderTeleport } from \"vue/server-renderer\"\n\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'TheModal',\n  __ssrInlineRender: true,\n  props: {\r\n  type: {\r\n    type: String,\r\n    default: ''\r\n  }\r\n},\n  setup(__props) {\n\r\n\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  _ssrRenderTeleport(_push, (_push) => {\n    _push(`<div class=\"fixed left-0 top-0 h-screen w-screen flex justify-center items-center z-[10000]\"><div class=\"opacity-60 bg-black absolute left-0 top-0 w-screen h-screen z-[9999]\"></div><div class=\"${_ssrRenderClass([{\r\n          '!w-max dark:!bg-gray-700': __props.type === 'resize',\r\n          '!w-4/12 dark:!bg-gray-700 !p-0': __props.type === 'resizeSendWindow',\r\n          '!w-[400px] dark:!bg-gray-700 !p-0': __props.type === 'resizeInfoWindow'\r\n        }, \"dark:bg-gray-600 bg-white z-[10000] rounded-3xl w-7/12 max-md:w-10/12 max-sm:w-11/12 max-h-[70%] relative p-5 max-sm:p-3 overflow-y-auto\"])}\">`)\n    _ssrRenderSlot(_ctx.$slots, \"default\", {}, null, _push, _parent)\n    _push(`</div></div>`)\n  }, \"body\", false, _parent)\n}\n}\n\n})",
-      "start": 1750404001304,
-      "end": 1750404001304,
+      "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { ssrRenderAttr as _ssrRenderAttr, ssrRenderSlot as _ssrRenderSlot, ssrRenderClass as _ssrRenderClass, ssrRenderTeleport as _ssrRenderTeleport } from \"vue/server-renderer\"\nimport _imports_0 from '/icons/modal-exit.svg'\n\n\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'TheModal',\n  __ssrInlineRender: true,\n  props: {\r\n  type: {\r\n    type: String,\r\n    default: ''\r\n  }\r\n},\n  setup(__props) {\n\r\n\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  _ssrRenderTeleport(_push, (_push) => {\n    _push(`<div class=\"fixed left-0 top-0 h-screen w-screen flex justify-center items-center z-[10000]\"><div class=\"opacity-60 bg-black absolute left-0 top-0 w-screen h-screen z-[9999]\"></div><div class=\"${\n      _ssrRenderClass([{\r\n          '!w-max dark:!bg-gray-700': __props.type === 'resize',\r\n          '!w-4/12 dark:!bg-gray-700 !p-0': __props.type === 'resizeSendWindow',\r\n          '!w-[400px] dark:!bg-gray-700 !p-0': __props.type === 'resizeInfoWindow'\r\n        }, \"dark:bg-gray-600 bg-white z-[10000] rounded-3xl w-7/12 max-md:w-10/12 max-sm:w-11/12 max-h-[70%] relative p-5 max-sm:p-3 overflow-y-auto\"])\n    }\"><button type=\"button\" class=\"bg-porcelain cursor-pointer w-[40px] h-[40px] flex items-center justify-center rounded-full absolute top-6 right-6 z-10\"><img${\n      _ssrRenderAttr(\"src\", _imports_0)\n    } alt=\"modal-exit\"></button>`)\n    _ssrRenderSlot(_ctx.$slots, \"default\", {}, null, _push, _parent)\n    _push(`</div></div>`)\n  }, \"body\", false, _parent)\n}\n}\n\n})",
+      "start": 1750670597938,
+      "end": 1750670597938,
       "sourcemaps": {
         "version": 3,
         "sources": [
           "D:/projects/nuxt/workix-nuxt-front/components/UI/TheModal.vue"
         ],
         "sourcesContent": [
-          "<script setup lang=\"ts\">\r\ndefineProps({\r\n  type: {\r\n    type: String,\r\n    default: ''\r\n  }\r\n})\r\n</script>\r\n\r\n<template>\r\n  <teleport to=\"body\">\r\n    <div class=\"fixed left-0 top-0 h-screen w-screen flex justify-center items-center z-[10000]\">\r\n      <div\r\n          class=\"opacity-60 bg-black absolute left-0 top-0 w-screen h-screen z-[9999]\"\r\n          @click=\"$emit('showModal')\"\r\n      ></div>\r\n      <div\r\n          class=\"dark:bg-gray-600 bg-white z-[10000] rounded-3xl w-7/12 max-md:w-10/12 max-sm:w-11/12 max-h-[70%] relative p-5 max-sm:p-3 overflow-y-auto\"\r\n          :class=\"{\r\n          '!w-max dark:!bg-gray-700': type === 'resize',\r\n          '!w-4/12 dark:!bg-gray-700 !p-0': type === 'resizeSendWindow',\r\n          '!w-[400px] dark:!bg-gray-700 !p-0': type === 'resizeInfoWindow'\r\n        }\"\r\n      >\r\n        <slot />\r\n      </div>\r\n    </div>\r\n  </teleport>\r\n</template>\r\n\r\n<style lang=\"scss\">\r\n.bounce-enter-active {\r\n  animation: bounce-in 0.5s;\r\n}\r\n\r\n.bounce-leave-active {\r\n  animation: bounce-in 0.5s reverse;\r\n}\r\n\r\n@keyframes bounce-in {\r\n  0% {\r\n    transform: scale(0);\r\n  }\r\n  50% {\r\n    transform: scale(1.25);\r\n  }\r\n  100% {\r\n    transform: scale(1);\r\n  }\r\n}\r\n</style>\r\n"
+          "<script setup lang=\"ts\">\r\ndefineProps({\r\n  type: {\r\n    type: String,\r\n    default: ''\r\n  }\r\n})\r\n</script>\r\n\r\n<template>\r\n  <teleport to=\"body\">\r\n    <div class=\"fixed left-0 top-0 h-screen w-screen flex justify-center items-center z-[10000]\">\r\n      <div\r\n          class=\"opacity-60 bg-black absolute left-0 top-0 w-screen h-screen z-[9999]\"\r\n          @click=\"$emit('showModal')\"\r\n      ></div>\r\n      <div\r\n          class=\"dark:bg-gray-600 bg-white z-[10000] rounded-3xl w-7/12 max-md:w-10/12 max-sm:w-11/12 max-h-[70%] relative p-5 max-sm:p-3 overflow-y-auto\"\r\n          :class=\"{\r\n          '!w-max dark:!bg-gray-700': type === 'resize',\r\n          '!w-4/12 dark:!bg-gray-700 !p-0': type === 'resizeSendWindow',\r\n          '!w-[400px] dark:!bg-gray-700 !p-0': type === 'resizeInfoWindow'\r\n        }\"\r\n      >\r\n        <button\r\n            type=\"button\"\r\n            class=\"bg-porcelain cursor-pointer w-[40px] h-[40px] flex items-center justify-center rounded-full absolute top-6 right-6 z-10\"\r\n            @click=\"$emit('showModal')\"\r\n        >\r\n          <img src=\"/icons/modal-exit.svg\" alt=\"modal-exit\">\r\n        </button>\r\n        <slot />\r\n      </div>\r\n    </div>\r\n  </teleport>\r\n</template>\r\n\r\n<style lang=\"scss\">\r\n.bounce-enter-active {\r\n  animation: bounce-in 0.5s;\r\n}\r\n\r\n.bounce-leave-active {\r\n  animation: bounce-in 0.5s reverse;\r\n}\r\n\r\n@keyframes bounce-in {\r\n  0% {\r\n    transform: scale(0);\r\n  }\r\n  50% {\r\n    transform: scale(1.25);\r\n  }\r\n  100% {\r\n    transform: scale(1);\r\n  }\r\n}\r\n</style>\r\n"
         ],
         "names": [],
-        "mappings": ";;;;;;;;;;;;;;AAAwB,CAAC;AAMvB,CAAC;;;;;;;;;;;;;;;"
+        "mappings": ";;;;;;;;;;;;;;;;AAAwB,CAAC;AAMvB,CAAC;;;;;;;;;;;;;;;;;;;"
       }
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750404001304,
-      "end": 1750404001304,
+      "start": 1750670597938,
+      "end": 1750670597938,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750404001304,
-      "end": 1750404001304,
+      "start": 1750670597938,
+      "end": 1750670597938,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750404001304,
-      "end": 1750404001304,
+      "start": 1750670597938,
+      "end": 1750670597938,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750404001304,
-      "end": 1750404001304,
+      "start": 1750670597938,
+      "end": 1750670597938,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750404001304,
-      "end": 1750404001304,
+      "start": 1750670597938,
+      "end": 1750670597938,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750404001304,
-      "end": 1750404001304,
+      "start": 1750670597938,
+      "end": 1750670597938,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1750404001304,
-      "end": 1750404001304,
+      "start": 1750670597938,
+      "end": 1750670597938,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1750404001304,
-      "end": 1750404001304,
+      "start": 1750670597938,
+      "end": 1750670597938,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { ssrRenderSlot as _ssrRenderSlot, ssrRenderClass as _ssrRenderClass, ssrRenderTeleport as _ssrRenderTeleport } from \"vue/server-renderer\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"TheModal\",\n  __ssrInlineRender: true,\n  props: {\n    type: {\n      type: String,\n      default: \"\"\n    }\n  },\n  setup(__props) {\n    return (_ctx, _push, _parent, _attrs) => {\n      _ssrRenderTeleport(_push, (_push2) => {\n        _push2(`<div class=\"fixed left-0 top-0 h-screen w-screen flex justify-center items-center z-[10000]\"><div class=\"opacity-60 bg-black absolute left-0 top-0 w-screen h-screen z-[9999]\"></div><div class=\"${_ssrRenderClass([{\n          \"!w-max dark:!bg-gray-700\": __props.type === \"resize\",\n          \"!w-4/12 dark:!bg-gray-700 !p-0\": __props.type === \"resizeSendWindow\",\n          \"!w-[400px] dark:!bg-gray-700 !p-0\": __props.type === \"resizeInfoWindow\"\n        }, \"dark:bg-gray-600 bg-white z-[10000] rounded-3xl w-7/12 max-md:w-10/12 max-sm:w-11/12 max-h-[70%] relative p-5 max-sm:p-3 overflow-y-auto\"])}\">`);\n        _ssrRenderSlot(_ctx.$slots, \"default\", {}, null, _push2, _parent);\n        _push2(`</div></div>`);\n      }, \"body\", false, _parent);\n    };\n  }\n});\n",
-      "start": 1750404001304,
-      "end": 1750404001881,
+      "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { ssrRenderAttr as _ssrRenderAttr, ssrRenderSlot as _ssrRenderSlot, ssrRenderClass as _ssrRenderClass, ssrRenderTeleport as _ssrRenderTeleport } from \"vue/server-renderer\";\nimport _imports_0 from \"/icons/modal-exit.svg\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"TheModal\",\n  __ssrInlineRender: true,\n  props: {\n    type: {\n      type: String,\n      default: \"\"\n    }\n  },\n  setup(__props) {\n    return (_ctx, _push, _parent, _attrs) => {\n      _ssrRenderTeleport(_push, (_push2) => {\n        _push2(`<div class=\"fixed left-0 top-0 h-screen w-screen flex justify-center items-center z-[10000]\"><div class=\"opacity-60 bg-black absolute left-0 top-0 w-screen h-screen z-[9999]\"></div><div class=\"${_ssrRenderClass([{\n          \"!w-max dark:!bg-gray-700\": __props.type === \"resize\",\n          \"!w-4/12 dark:!bg-gray-700 !p-0\": __props.type === \"resizeSendWindow\",\n          \"!w-[400px] dark:!bg-gray-700 !p-0\": __props.type === \"resizeInfoWindow\"\n        }, \"dark:bg-gray-600 bg-white z-[10000] rounded-3xl w-7/12 max-md:w-10/12 max-sm:w-11/12 max-h-[70%] relative p-5 max-sm:p-3 overflow-y-auto\"])}\"><button type=\"button\" class=\"bg-porcelain cursor-pointer w-[40px] h-[40px] flex items-center justify-center rounded-full absolute top-6 right-6 z-10\"><img${_ssrRenderAttr(\"src\", _imports_0)} alt=\"modal-exit\"></button>`);\n        _ssrRenderSlot(_ctx.$slots, \"default\", {}, null, _push2, _parent);\n        _push2(`</div></div>`);\n      }, \"body\", false, _parent);\n    };\n  }\n});\n",
+      "start": 1750670597940,
+      "end": 1750670598812,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -78,9 +78,9 @@
           "D:/projects/nuxt/workix-nuxt-front/components/UI/TheModal.vue?vue&type=script&setup=true&lang.ts"
         ],
         "sourcesContent": [
-          "import { defineComponent as _defineComponent } from 'vue'\nimport { ssrRenderSlot as _ssrRenderSlot, ssrRenderClass as _ssrRenderClass, ssrRenderTeleport as _ssrRenderTeleport } from \"vue/server-renderer\"\n\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'TheModal',\n  __ssrInlineRender: true,\n  props: {\r\n  type: {\r\n    type: String,\r\n    default: ''\r\n  }\r\n},\n  setup(__props) {\n\r\n\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  _ssrRenderTeleport(_push, (_push) => {\n    _push(`<div class=\"fixed left-0 top-0 h-screen w-screen flex justify-center items-center z-[10000]\"><div class=\"opacity-60 bg-black absolute left-0 top-0 w-screen h-screen z-[9999]\"></div><div class=\"${_ssrRenderClass([{\r\n          '!w-max dark:!bg-gray-700': __props.type === 'resize',\r\n          '!w-4/12 dark:!bg-gray-700 !p-0': __props.type === 'resizeSendWindow',\r\n          '!w-[400px] dark:!bg-gray-700 !p-0': __props.type === 'resizeInfoWindow'\r\n        }, \"dark:bg-gray-600 bg-white z-[10000] rounded-3xl w-7/12 max-md:w-10/12 max-sm:w-11/12 max-h-[70%] relative p-5 max-sm:p-3 overflow-y-auto\"])}\">`)\n    _ssrRenderSlot(_ctx.$slots, \"default\", {}, null, _push, _parent)\n    _push(`</div></div>`)\n  }, \"body\", false, _parent)\n}\n}\n\n})"
+          "import { defineComponent as _defineComponent } from 'vue'\nimport { ssrRenderAttr as _ssrRenderAttr, ssrRenderSlot as _ssrRenderSlot, ssrRenderClass as _ssrRenderClass, ssrRenderTeleport as _ssrRenderTeleport } from \"vue/server-renderer\"\nimport _imports_0 from '/icons/modal-exit.svg'\n\n\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'TheModal',\n  __ssrInlineRender: true,\n  props: {\r\n  type: {\r\n    type: String,\r\n    default: ''\r\n  }\r\n},\n  setup(__props) {\n\r\n\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  _ssrRenderTeleport(_push, (_push) => {\n    _push(`<div class=\"fixed left-0 top-0 h-screen w-screen flex justify-center items-center z-[10000]\"><div class=\"opacity-60 bg-black absolute left-0 top-0 w-screen h-screen z-[9999]\"></div><div class=\"${\n      _ssrRenderClass([{\r\n          '!w-max dark:!bg-gray-700': __props.type === 'resize',\r\n          '!w-4/12 dark:!bg-gray-700 !p-0': __props.type === 'resizeSendWindow',\r\n          '!w-[400px] dark:!bg-gray-700 !p-0': __props.type === 'resizeInfoWindow'\r\n        }, \"dark:bg-gray-600 bg-white z-[10000] rounded-3xl w-7/12 max-md:w-10/12 max-sm:w-11/12 max-h-[70%] relative p-5 max-sm:p-3 overflow-y-auto\"])\n    }\"><button type=\"button\" class=\"bg-porcelain cursor-pointer w-[40px] h-[40px] flex items-center justify-center rounded-full absolute top-6 right-6 z-10\"><img${\n      _ssrRenderAttr(\"src\", _imports_0)\n    } alt=\"modal-exit\"></button>`)\n    _ssrRenderSlot(_ctx.$slots, \"default\", {}, null, _push, _parent)\n    _push(`</div></div>`)\n  }, \"body\", false, _parent)\n}\n}\n\n})"
         ],
-        "mappings": "AAAA,SAAS,mBAAmB,wBAAwB;AACpD,SAAS,iBAAiB,gBAAgB,kBAAkB,iBAAiB,qBAAqB,0BAA0B;AAG5H,eAA4B,iCAAiB;AAAA,EAC3C,QAAQ;AAAA,EACR,mBAAmB;AAAA,EACnB,OAAO;AAAA,IACP,MAAM;AAAA,MACJ,MAAM;AAAA,MACN,SAAS;AAAA,IACX;AAAA,EACF;AAAA,EACE,MAAM,SAAS;AAIjB,WAAO,CAAC,MAAU,OAAW,SAAa,WAAgB;AACxD,yBAAmB,OAAO,CAACA,WAAU;AACnC,QAAAA,OAAM,oMAAoM,gBAAgB,CAAC;AAAA,UACrN,4BAA4B,QAAQ,SAAS;AAAA,UAC7C,kCAAkC,QAAQ,SAAS;AAAA,UACnD,qCAAqC,QAAQ,SAAS;AAAA,QACxD,GAAG,0IAA0I,CAAC,CAAC,IAAI;AACvJ,uBAAe,KAAK,QAAQ,WAAW,CAAC,GAAG,MAAMA,QAAO,OAAO;AAC/D,QAAAA,OAAM,cAAc;AAAA,MACtB,GAAG,QAAQ,OAAO,OAAO;AAAA,IAC3B;AAAA,EACA;AAEA,CAAC;",
+        "mappings": "AAAA,SAAS,mBAAmB,wBAAwB;AACpD,SAAS,iBAAiB,gBAAgB,iBAAiB,gBAAgB,kBAAkB,iBAAiB,qBAAqB,0BAA0B;AAC7J,OAAO,gBAAgB;AAIvB,eAA4B,iCAAiB;AAAA,EAC3C,QAAQ;AAAA,EACR,mBAAmB;AAAA,EACnB,OAAO;AAAA,IACP,MAAM;AAAA,MACJ,MAAM;AAAA,MACN,SAAS;AAAA,IACX;AAAA,EACF;AAAA,EACE,MAAM,SAAS;AAIjB,WAAO,CAAC,MAAU,OAAW,SAAa,WAAgB;AACxD,yBAAmB,OAAO,CAACA,WAAU;AACnC,QAAAA,OAAM,oMACJ,gBAAgB,CAAC;AAAA,UACb,4BAA4B,QAAQ,SAAS;AAAA,UAC7C,kCAAkC,QAAQ,SAAS;AAAA,UACnD,qCAAqC,QAAQ,SAAS;AAAA,QACxD,GAAG,0IAA0I,CAAC,CAClJ,+JACE,eAAe,OAAO,UAAU,CAClC,6BAA6B;AAC7B,uBAAe,KAAK,QAAQ,WAAW,CAAC,GAAG,MAAMA,QAAO,OAAO;AAC/D,QAAAA,OAAM,cAAc;AAAA,MACtB,GAAG,QAAQ,OAAO,OAAO;AAAA,IAC3B;AAAA,EACA;AAEA,CAAC;",
         "names": [
           "_push"
         ]
@@ -88,230 +88,230 @@
     },
     {
       "name": "vite:json",
-      "start": 1750404001881,
-      "end": 1750404001881,
+      "start": 1750670598812,
+      "end": 1750670598812,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1750404001881,
-      "end": 1750404001881,
+      "start": 1750670598812,
+      "end": 1750670598812,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1750404001882,
-      "end": 1750404001882,
+      "start": 1750670598812,
+      "end": 1750670598812,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1750404001882,
-      "end": 1750404001882,
+      "start": 1750670598812,
+      "end": 1750670598812,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750404001882,
-      "end": 1750404001882,
+      "start": 1750670598813,
+      "end": 1750670598813,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750404001882,
-      "end": 1750404001882,
+      "start": 1750670598813,
+      "end": 1750670598813,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750404001882,
-      "end": 1750404001882,
+      "start": 1750670598813,
+      "end": 1750670598813,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750404001882,
-      "end": 1750404001882,
+      "start": 1750670598813,
+      "end": 1750670598813,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1750404001883,
-      "end": 1750404001883,
+      "start": 1750670598813,
+      "end": 1750670598813,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750404001883,
-      "end": 1750404001883,
+      "start": 1750670598813,
+      "end": 1750670598813,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1750404001884,
-      "end": 1750404001885,
+      "start": 1750670598814,
+      "end": 1750670598814,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1750404001885,
-      "end": 1750404001885,
+      "start": 1750670598815,
+      "end": 1750670598815,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1750404001885,
-      "end": 1750404001885,
+      "start": 1750670598815,
+      "end": 1750670598815,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1750404001885,
-      "end": 1750404001885,
+      "start": 1750670598815,
+      "end": 1750670598815,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1750404001885,
-      "end": 1750404001885,
+      "start": 1750670598816,
+      "end": 1750670598816,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1750404001885,
-      "end": 1750404001885,
+      "start": 1750670598816,
+      "end": 1750670598817,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1750404001885,
-      "end": 1750404001885,
+      "start": 1750670598817,
+      "end": 1750670598817,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1750404001885,
-      "end": 1750404001885,
+      "start": 1750670598817,
+      "end": 1750670598817,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1750404001885,
-      "end": 1750404001885,
+      "start": 1750670598817,
+      "end": 1750670598817,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750404001886,
-      "end": 1750404001886,
+      "start": 1750670598817,
+      "end": 1750670598817,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750404001886,
-      "end": 1750404001886,
+      "start": 1750670598817,
+      "end": 1750670598817,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750404001886,
-      "end": 1750404001886,
+      "start": 1750670598818,
+      "end": 1750670598818,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750404001886,
-      "end": 1750404001886,
+      "start": 1750670598818,
+      "end": 1750670598818,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750404001886,
-      "end": 1750404001886,
+      "start": 1750670598818,
+      "end": 1750670598819,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750404001886,
-      "end": 1750404001886,
+      "start": 1750670598818,
+      "end": 1750670598819,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750404001887,
-      "end": 1750404001887,
+      "start": 1750670598820,
+      "end": 1750670598820,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750404001887,
-      "end": 1750404001887,
+      "start": 1750670598820,
+      "end": 1750670598820,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1750404001887,
-      "end": 1750404001892,
+      "start": 1750670598820,
+      "end": 1750670598824,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1750404001887,
-      "end": 1750404001893,
+      "start": 1750670598820,
+      "end": 1750670598824,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1750404001893,
-      "end": 1750404001893,
+      "start": 1750670598824,
+      "end": 1750670598824,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1750404001893,
-      "end": 1750404001893,
+      "start": 1750670598824,
+      "end": 1750670598824,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1750404001893,
-      "end": 1750404001893,
+      "start": 1750670598824,
+      "end": 1750670598825,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1750404001893,
-      "end": 1750404001893,
+      "start": 1750670598824,
+      "end": 1750670598825,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1750404001893,
-      "end": 1750404001893,
+      "start": 1750670598825,
+      "end": 1750670598825,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1750404001894,
-      "end": 1750404001894,
+      "start": 1750670598825,
+      "end": 1750670598825,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1750404001895,
-      "end": 1750404001895,
+      "start": 1750670598825,
+      "end": 1750670598825,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1750404001895,
-      "end": 1750404001895,
+      "start": 1750670598825,
+      "end": 1750670598826,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1750404001895,
-      "end": 1750404001895,
+      "start": 1750670598826,
+      "end": 1750670598826,
       "order": "normal"
     }
   ]

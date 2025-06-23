@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { unref as _unref, resolveComponent as _resolveComponent, mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderClass as _ssrRenderClass, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\"\n\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport {useRouter} from \"vue-router\";\r\nimport {useRoute} from \"vue-router\";\r\nimport {useNotification} from \"~/stores/notification\";\r\nimport {useChat} from \"~/stores/chat\";\r\nimport {toast} from \"vue3-toastify\";\r\nimport {useTreeStore} from \"~/stores/tree\";\r\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\r\nimport TheNavigation from \"~/components/TheNavigation.vue\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'base',\n  __ssrInlineRender: true,\n  setup(__props) {\n\r\nconst treeStore = useTreeStore()\r\n\r\nconst chat = useChat()\r\nconst notice = useNotification()\r\nconst route = useRouter()\r\nconst router = useRoute()\r\nconst user = useAuthStore();\r\n\r\nfunction notification() {\r\n  let ws = new WebSocket(`wss://api-buildwithus.ai-softdev.com/ws/notification?token=${nuxtStorage.localStorage.getData('token')}`)\r\n  ws.onmessage = (data) => {\r\n    let res = JSON.parse(data.data)\r\n    if (res.type === 'notification') {\r\n      notice.get_notification?.unshift(res.notification)\r\n      toast.info(res.notification.text, {\r\n        autoClose: 1500,\r\n        theme: 'auto'\r\n      })\r\n    } else if (router.path.search(/\\/base\\/chat[\\/\\d]*$/g) !== -1) {\r\n      if (res.type === 'send_message') {\r\n        for (let i = 0; i < chat.chatList.results.length; i++) {\r\n          if (chat.chatList.results[i].id === res.messages?.chat_id) {\r\n            chat.chatList.results[i].last_message = res.messages\r\n          }\r\n          if (res.message.message_type === 'change') {\r\n            if (chat.chatList.results[i].id === chat.userChat.id && res.message.file) {\r\n              chat.chatList.results[i].photo_url = res.message.file\r\n              console.log(res.message)\r\n            }\r\n            if (chat.chatList.results[i].name && chat.chatList.results[i].id === chat.userChat.id) {\r\n              chat.chatList.results[i].name = chat.updateChatName\r\n              console.log(res)\r\n            }\r\n          }\r\n        }\r\n      } else if (res.type === 'read_messages') {\r\n        if (chat.userChat.id === res.messages[0].chat_id) {\r\n          for (let i = 0; i < res.messages.length; i++) {\r\n            for (let j = chat.userChat.messages.length - 1; j >= 0; j--) {\r\n              if (chat.userChat.messages[j].id === res.messages[i].id) {\r\n                chat.userChat.messages[j].read = true;\r\n                break;\r\n              }\r\n            }\r\n          }\r\n        }\r\n        for (let i = 0; i < chat.chatList.results.length; i++) {\r\n          if (chat.chatList.results[i].last_message.id === res.messages[res.messages.length - 1].id) {\r\n            chat.chatList.results[i].last_message.read = true;\r\n            break\r\n          }\r\n        }\r\n      } else if (res.type === 'delete_message') {\r\n        for (let i = 0; i < chat.chatList.results.length; i++) {\r\n          if (chat.chatList.results[i].id === res.last_message?.chat_id) {\r\n            chat.chatList.results[i].last_message = res.last_message\r\n          }\r\n        }\r\n      } else if (res.type === 'update_message') {\r\n        for (let i = 0; i < chat.chatList.results.length; i++) {\r\n          if (chat.chatList.results[i].id === res.last_message?.chat_id) {\r\n            console.log(chat.chatList.results[i], '*****', res.last_message)\r\n            chat.chatList.results[i].last_message = res.last_message\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n\r\n\r\n  ws.onclose = function (e) {\r\n    notification();\r\n  };\r\n\r\n  ws.onerror = function (err) {\r\n    ws.close();\r\n  };\r\n}\r\n\r\nonMounted(() => {\r\n  route.afterEach(() => {\r\n    if (window.innerWidth <= 636) {\r\n      user.activeNav = false\r\n    }\r\n  })\r\n})\r\n\r\nonMounted(() => {\r\n  if (!nuxtStorage.localStorage.getData('token')) {\r\n    route.push('/').then(e => {\r\n      toast.info('Для начало авторизуйтесь', {autoClose: 1500, theme: 'auto'})\r\n    })\r\n  } else {\r\n    user.loadCurrentUser()\r\n    notification()\r\n  }\r\n})\r\n\r\nonUpdated(() => {\r\n  if (!nuxtStorage.localStorage.getData('token')) {\r\n    route.push('/').then(e => {\r\n      toast.info('Для начало авторизуйтесь', {autoClose: 1500, theme: 'auto'})\r\n    })\r\n  }\r\n})\r\n\r\n\r\nuseHead({\r\n  titleTemplate: (title) => {\r\n    return title\r\n        ? `${title} • ERP`\r\n        : 'ERP'\r\n  }\r\n})\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  const _component_HeaderContent = _resolveComponent(\"HeaderContent\")!\n  const _component_NuxtPage = _resolveComponent(\"NuxtPage\")!\n\n  _push(`<div${\n    _ssrRenderAttrs(_mergeProps({ class: \"\" }, _attrs))\n  }><div class=\"${\n    _ssrRenderClass([{'hidden' : !_unref(user).activeNav, 'max-[1150px]:block' : _unref(user).activeNav}, \"w-screen h-screen z-20 fixed bg-black opacity-30 hidden\"])\n  }\"></div><div class=\"flex w-full h-full bg-[#F7F6F9] dark:bg-bgPages\"><div class=\"${\n    _ssrRenderClass([{'max-[1150px]:-translate-x-32 transition-all duration-200' : !_unref(user).activeNav, 'max-[600px]:w-full transition-all' : _unref(user).activeNav}, \"bg-white transition-all duration-300 dark:bg-black max-[880px]:h-screen max-[1150px]:fixed z-50\"])\n  }\"><div class=\"absolute bg-gray-300 rounded-l-lg px-2 py-1 z-[100] hidden max-[1150px]:block max-md:block right-2 top-6\"><svg width=\"30px\" height=\"30px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M16.9995 15.9995L20.9995 11.9995M20.9995 11.9995L16.9995 7.99951M20.9995 11.9995H8.99951M12.9995 20.9995H6.20029C5.08019 20.9995 4.52014 20.9995 4.09231 20.7815C3.71599 20.5898 3.41003 20.2838 3.21828 19.9075C3.00029 19.4797 3.00029 18.9196 3.00029 17.7995V6.19951C3.00029 5.07941 3.00029 4.51935 3.21828 4.09153C3.41003 3.71521 3.71599 3.40925 4.09231 3.2175C4.52014 2.99951 5.08019 2.99951 6.20029 2.99951L12.9995 2.99951\" stroke=\"#000000\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg></div>`)\n  _push(_ssrRenderComponent(TheNavigation, {\n    class: [\"max-md:overflow-x-hidden\", {'mr-24' : _unref(user).activeNav && _unref(user).my_scroll>90}],\n    activeNav: _unref(user).activeNav\n  }, null, _parent))\n  _push(`</div><div class=\"w-full relative\"><div class=\"${_ssrRenderClass([{\r\n              'blur' : _unref(treeStore).treeFullScreen === true,\r\n              'max-[1150px]:!hidden': _unref(user).activeNav\r\n            }, \"cursor-pointer bg-porcelain h-10 w-10 flex items-center justify-center rounded-lg absolute top-5 max-[1150px]:top-3 left-5 z-50 dark:fill-white fill-black\"])}\"><svg width=\"22\" height=\"16\" viewBox=\"0 0 22 16\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M0.999776 1.99957H20.9998C21.5177 1.99957 21.9845 1.46089 21.9845 0.9431C21.9845 0.425798 21.5607 0.00261796 21.0428 0.00261796H0.956408C0.43868 0.00261796 0.014912 0.425798 0.014912 0.9431C0.014912 1.46089 0.482048 1.99957 0.999776 1.99957ZM0.999776 8.99956H20.9998C21.5177 8.99956 21.9845 8.51664 21.9845 7.99933C21.9845 7.48203 21.5177 6.99958 20.9998 6.99958H0.999776C0.482048 6.99958 0.014912 7.48203 0.014912 7.99933C0.014912 8.51664 0.482048 8.99956 0.999776 8.99956ZM21.0428 15.9962H0.956408C0.43868 15.9962 0.014912 15.5727 0.014912 15.0551C0.014912 14.5379 0.482048 13.9997 0.999776 13.9997H20.9998C21.5177 13.9997 21.9845 14.5379 21.9845 15.0551C21.9845 15.5727 21.5607 15.9962 21.0428 15.9962Z\"></path></svg></div>`)\n  _push(_ssrRenderComponent(_component_HeaderContent, { class: \"pl-14\" }, null, _parent))\n  _push(`<div class=\"${_ssrRenderClass([{'z-[1000]': _unref(treeStore).treeFullScreen}, \"relative z-10\"])}\">`)\n  _push(_ssrRenderComponent(_component_NuxtPage, { class: \"mx-6 max-sm:mx-1 py-10 h-full\" }, null, _parent))\n  _push(`</div></div></div></div>`)\n}\n}\n\n})",
-      "start": 1750403998254,
-      "end": 1750403998254,
+      "start": 1750670594431,
+      "end": 1750670594431,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750403998254,
-      "end": 1750403998254,
+      "start": 1750670594431,
+      "end": 1750670594431,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750403998254,
-      "end": 1750403998254,
+      "start": 1750670594431,
+      "end": 1750670594431,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750403998254,
-      "end": 1750403998254,
+      "start": 1750670594431,
+      "end": 1750670594431,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750403998254,
-      "end": 1750403998254,
+      "start": 1750670594431,
+      "end": 1750670594431,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750403998254,
-      "end": 1750403998254,
+      "start": 1750670594431,
+      "end": 1750670594431,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750403998254,
-      "end": 1750403998254,
+      "start": 1750670594431,
+      "end": 1750670594431,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1750403998254,
-      "end": 1750403998254,
+      "start": 1750670594431,
+      "end": 1750670594431,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1750403998254,
-      "end": 1750403998254,
+      "start": 1750670594431,
+      "end": 1750670594431,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, resolveComponent as _resolveComponent, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderClass as _ssrRenderClass, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useRouter } from \"vue-router\";\nimport { useRoute } from \"vue-router\";\nimport { useNotification } from \"~/stores/notification\";\nimport { useChat } from \"~/stores/chat\";\nimport { toast } from \"vue3-toastify\";\nimport { useTreeStore } from \"~/stores/tree\";\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\nimport TheNavigation from \"~/components/TheNavigation.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"base\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const treeStore = useTreeStore();\n    const chat = useChat();\n    const notice = useNotification();\n    const route = useRouter();\n    const router = useRoute();\n    const user = useAuthStore();\n    function notification() {\n      let ws = new WebSocket(`wss://api-buildwithus.ai-softdev.com/ws/notification?token=${nuxtStorage.localStorage.getData(\"token\")}`);\n      ws.onmessage = (data) => {\n        let res = JSON.parse(data.data);\n        if (res.type === \"notification\") {\n          notice.get_notification?.unshift(res.notification);\n          toast.info(res.notification.text, {\n            autoClose: 1500,\n            theme: \"auto\"\n          });\n        } else if (router.path.search(/\\/base\\/chat[\\/\\d]*$/g) !== -1) {\n          if (res.type === \"send_message\") {\n            for (let i = 0; i < chat.chatList.results.length; i++) {\n              if (chat.chatList.results[i].id === res.messages?.chat_id) {\n                chat.chatList.results[i].last_message = res.messages;\n              }\n              if (res.message.message_type === \"change\") {\n                if (chat.chatList.results[i].id === chat.userChat.id && res.message.file) {\n                  chat.chatList.results[i].photo_url = res.message.file;\n                  console.log(res.message);\n                }\n                if (chat.chatList.results[i].name && chat.chatList.results[i].id === chat.userChat.id) {\n                  chat.chatList.results[i].name = chat.updateChatName;\n                  console.log(res);\n                }\n              }\n            }\n          } else if (res.type === \"read_messages\") {\n            if (chat.userChat.id === res.messages[0].chat_id) {\n              for (let i = 0; i < res.messages.length; i++) {\n                for (let j = chat.userChat.messages.length - 1; j >= 0; j--) {\n                  if (chat.userChat.messages[j].id === res.messages[i].id) {\n                    chat.userChat.messages[j].read = true;\n                    break;\n                  }\n                }\n              }\n            }\n            for (let i = 0; i < chat.chatList.results.length; i++) {\n              if (chat.chatList.results[i].last_message.id === res.messages[res.messages.length - 1].id) {\n                chat.chatList.results[i].last_message.read = true;\n                break;\n              }\n            }\n          } else if (res.type === \"delete_message\") {\n            for (let i = 0; i < chat.chatList.results.length; i++) {\n              if (chat.chatList.results[i].id === res.last_message?.chat_id) {\n                chat.chatList.results[i].last_message = res.last_message;\n              }\n            }\n          } else if (res.type === \"update_message\") {\n            for (let i = 0; i < chat.chatList.results.length; i++) {\n              if (chat.chatList.results[i].id === res.last_message?.chat_id) {\n                console.log(chat.chatList.results[i], \"*****\", res.last_message);\n                chat.chatList.results[i].last_message = res.last_message;\n              }\n            }\n          }\n        }\n      };\n      ws.onclose = function(e) {\n        notification();\n      };\n      ws.onerror = function(err) {\n        ws.close();\n      };\n    }\n    onMounted(() => {\n      route.afterEach(() => {\n        if (window.innerWidth <= 636) {\n          user.activeNav = false;\n        }\n      });\n    });\n    onMounted(() => {\n      if (!nuxtStorage.localStorage.getData(\"token\")) {\n        route.push(\"/\").then((e) => {\n          toast.info(\"Для начало авторизуйтесь\", { autoClose: 1500, theme: \"auto\" });\n        });\n      } else {\n        user.loadCurrentUser();\n        notification();\n      }\n    });\n    onUpdated(() => {\n      if (!nuxtStorage.localStorage.getData(\"token\")) {\n        route.push(\"/\").then((e) => {\n          toast.info(\"Для начало авторизуйтесь\", { autoClose: 1500, theme: \"auto\" });\n        });\n      }\n    });\n    useHead({\n      titleTemplate: (title) => {\n        return title ? `${title} • ERP` : \"ERP\";\n      }\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_HeaderContent = _resolveComponent(\"HeaderContent\");\n      const _component_NuxtPage = _resolveComponent(\"NuxtPage\");\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"\" }, _attrs))}><div class=\"${_ssrRenderClass([{ \"hidden\": !_unref(user).activeNav, \"max-[1150px]:block\": _unref(user).activeNav }, \"w-screen h-screen z-20 fixed bg-black opacity-30 hidden\"])}\"></div><div class=\"flex w-full h-full bg-[#F7F6F9] dark:bg-bgPages\"><div class=\"${_ssrRenderClass([{ \"max-[1150px]:-translate-x-32 transition-all duration-200\": !_unref(user).activeNav, \"max-[600px]:w-full transition-all\": _unref(user).activeNav }, \"bg-white transition-all duration-300 dark:bg-black max-[880px]:h-screen max-[1150px]:fixed z-50\"])}\"><div class=\"absolute bg-gray-300 rounded-l-lg px-2 py-1 z-[100] hidden max-[1150px]:block max-md:block right-2 top-6\"><svg width=\"30px\" height=\"30px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M16.9995 15.9995L20.9995 11.9995M20.9995 11.9995L16.9995 7.99951M20.9995 11.9995H8.99951M12.9995 20.9995H6.20029C5.08019 20.9995 4.52014 20.9995 4.09231 20.7815C3.71599 20.5898 3.41003 20.2838 3.21828 19.9075C3.00029 19.4797 3.00029 18.9196 3.00029 17.7995V6.19951C3.00029 5.07941 3.00029 4.51935 3.21828 4.09153C3.41003 3.71521 3.71599 3.40925 4.09231 3.2175C4.52014 2.99951 5.08019 2.99951 6.20029 2.99951L12.9995 2.99951\" stroke=\"#000000\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg></div>`);\n      _push(_ssrRenderComponent(TheNavigation, {\n        class: [\"max-md:overflow-x-hidden\", { \"mr-24\": _unref(user).activeNav && _unref(user).my_scroll > 90 }],\n        activeNav: _unref(user).activeNav\n      }, null, _parent));\n      _push(`</div><div class=\"w-full relative\"><div class=\"${_ssrRenderClass([{\n        \"blur\": _unref(treeStore).treeFullScreen === true,\n        \"max-[1150px]:!hidden\": _unref(user).activeNav\n      }, \"cursor-pointer bg-porcelain h-10 w-10 flex items-center justify-center rounded-lg absolute top-5 max-[1150px]:top-3 left-5 z-50 dark:fill-white fill-black\"])}\"><svg width=\"22\" height=\"16\" viewBox=\"0 0 22 16\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M0.999776 1.99957H20.9998C21.5177 1.99957 21.9845 1.46089 21.9845 0.9431C21.9845 0.425798 21.5607 0.00261796 21.0428 0.00261796H0.956408C0.43868 0.00261796 0.014912 0.425798 0.014912 0.9431C0.014912 1.46089 0.482048 1.99957 0.999776 1.99957ZM0.999776 8.99956H20.9998C21.5177 8.99956 21.9845 8.51664 21.9845 7.99933C21.9845 7.48203 21.5177 6.99958 20.9998 6.99958H0.999776C0.482048 6.99958 0.014912 7.48203 0.014912 7.99933C0.014912 8.51664 0.482048 8.99956 0.999776 8.99956ZM21.0428 15.9962H0.956408C0.43868 15.9962 0.014912 15.5727 0.014912 15.0551C0.014912 14.5379 0.482048 13.9997 0.999776 13.9997H20.9998C21.5177 13.9997 21.9845 14.5379 21.9845 15.0551C21.9845 15.5727 21.5607 15.9962 21.0428 15.9962Z\"></path></svg></div>`);\n      _push(_ssrRenderComponent(_component_HeaderContent, { class: \"pl-14\" }, null, _parent));\n      _push(`<div class=\"${_ssrRenderClass([{ \"z-[1000]\": _unref(treeStore).treeFullScreen }, \"relative z-10\"])}\">`);\n      _push(_ssrRenderComponent(_component_NuxtPage, { class: \"mx-6 max-sm:mx-1 py-10 h-full\" }, null, _parent));\n      _push(`</div></div></div></div>`);\n    };\n  }\n});\n",
-      "start": 1750403998254,
-      "end": 1750403999201,
+      "start": 1750670594431,
+      "end": 1750670595765,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -86,173 +86,173 @@
     },
     {
       "name": "vite:json",
-      "start": 1750403999201,
-      "end": 1750403999201,
+      "start": 1750670595765,
+      "end": 1750670595765,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1750403999201,
-      "end": 1750403999201,
+      "start": 1750670595765,
+      "end": 1750670595765,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1750403999201,
-      "end": 1750403999201,
+      "start": 1750670595765,
+      "end": 1750670595765,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1750403999201,
-      "end": 1750403999201,
+      "start": 1750670595765,
+      "end": 1750670595765,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750403999202,
-      "end": 1750403999202,
+      "start": 1750670595766,
+      "end": 1750670595766,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750403999202,
-      "end": 1750403999202,
+      "start": 1750670595766,
+      "end": 1750670595766,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750403999202,
-      "end": 1750403999202,
+      "start": 1750670595766,
+      "end": 1750670595766,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750403999202,
-      "end": 1750403999202,
+      "start": 1750670595766,
+      "end": 1750670595766,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1750403999202,
-      "end": 1750403999202,
+      "start": 1750670595766,
+      "end": 1750670595766,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750403999202,
-      "end": 1750403999202,
+      "start": 1750670595767,
+      "end": 1750670595767,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1750403999203,
-      "end": 1750403999203,
+      "start": 1750670595767,
+      "end": 1750670595769,
       "order": "normal"
     },
     {
       "name": "vite:define",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, resolveComponent as _resolveComponent, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderClass as _ssrRenderClass, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useRouter } from \"vue-router\";\nimport { useRoute } from \"vue-router\";\nimport { useNotification } from \"~/stores/notification\";\nimport { useChat } from \"~/stores/chat\";\nimport { toast } from \"vue3-toastify\";\nimport { useTreeStore } from \"~/stores/tree\";\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\nimport TheNavigation from \"~/components/TheNavigation.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"base\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const treeStore = useTreeStore();\n    const chat = useChat();\n    const notice = useNotification();\n    const route = useRouter();\n    const router = useRoute();\n    const user = useAuthStore();\n    function notification() {\n      let ws = new WebSocket(`wss://api-buildwithus.ai-softdev.com/ws/notification?token=${nuxtStorage.localStorage.getData(\"token\")}`);\n      ws.onmessage = (data) => {\n        let res = JSON.parse(data.data);\n        if (res.type === \"notification\") {\n          notice.get_notification?.unshift(res.notification);\n          toast.info(res.notification.text, {\n            autoClose: 1500,\n            theme: \"auto\"\n          });\n        } else if (router.path.search(/\\/base\\/chat[\\/\\d]*$/g) !== -1) {\n          if (res.type === \"send_message\") {\n            for (let i = 0; i < chat.chatList.results.length; i++) {\n              if (chat.chatList.results[i].id === res.messages?.chat_id) {\n                chat.chatList.results[i].last_message = res.messages;\n              }\n              if (res.message.message_type === \"change\") {\n                if (chat.chatList.results[i].id === chat.userChat.id && res.message.file) {\n                  chat.chatList.results[i].photo_url = res.message.file;\n                  console.log(res.message);\n                }\n                if (chat.chatList.results[i].name && chat.chatList.results[i].id === chat.userChat.id) {\n                  chat.chatList.results[i].name = chat.updateChatName;\n                  console.log(res);\n                }\n              }\n            }\n          } else if (res.type === \"read_messages\") {\n            if (chat.userChat.id === res.messages[0].chat_id) {\n              for (let i = 0; i < res.messages.length; i++) {\n                for (let j = chat.userChat.messages.length - 1; j >= 0; j--) {\n                  if (chat.userChat.messages[j].id === res.messages[i].id) {\n                    chat.userChat.messages[j].read = true;\n                    break;\n                  }\n                }\n              }\n            }\n            for (let i = 0; i < chat.chatList.results.length; i++) {\n              if (chat.chatList.results[i].last_message.id === res.messages[res.messages.length - 1].id) {\n                chat.chatList.results[i].last_message.read = true;\n                break;\n              }\n            }\n          } else if (res.type === \"delete_message\") {\n            for (let i = 0; i < chat.chatList.results.length; i++) {\n              if (chat.chatList.results[i].id === res.last_message?.chat_id) {\n                chat.chatList.results[i].last_message = res.last_message;\n              }\n            }\n          } else if (res.type === \"update_message\") {\n            for (let i = 0; i < chat.chatList.results.length; i++) {\n              if (chat.chatList.results[i].id === res.last_message?.chat_id) {\n                console.log(chat.chatList.results[i], \"*****\", res.last_message);\n                chat.chatList.results[i].last_message = res.last_message;\n              }\n            }\n          }\n        }\n      };\n      ws.onclose = function(e) {\n        notification();\n      };\n      ws.onerror = function(err) {\n        ws.close();\n      };\n    }\n    onMounted(() => {\n      route.afterEach(() => {\n        if ((void 0).innerWidth <= 636) {\n          user.activeNav = false;\n        }\n      });\n    });\n    onMounted(() => {\n      if (!nuxtStorage.localStorage.getData(\"token\")) {\n        route.push(\"/\").then((e) => {\n          toast.info(\"Для начало авторизуйтесь\", { autoClose: 1500, theme: \"auto\" });\n        });\n      } else {\n        user.loadCurrentUser();\n        notification();\n      }\n    });\n    onUpdated(() => {\n      if (!nuxtStorage.localStorage.getData(\"token\")) {\n        route.push(\"/\").then((e) => {\n          toast.info(\"Для начало авторизуйтесь\", { autoClose: 1500, theme: \"auto\" });\n        });\n      }\n    });\n    useHead({\n      titleTemplate: (title) => {\n        return title ? `${title} • ERP` : \"ERP\";\n      }\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_HeaderContent = _resolveComponent(\"HeaderContent\");\n      const _component_NuxtPage = _resolveComponent(\"NuxtPage\");\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"\" }, _attrs))}><div class=\"${_ssrRenderClass([{ \"hidden\": !_unref(user).activeNav, \"max-[1150px]:block\": _unref(user).activeNav }, \"w-screen h-screen z-20 fixed bg-black opacity-30 hidden\"])}\"></div><div class=\"flex w-full h-full bg-[#F7F6F9] dark:bg-bgPages\"><div class=\"${_ssrRenderClass([{ \"max-[1150px]:-translate-x-32 transition-all duration-200\": !_unref(user).activeNav, \"max-[600px]:w-full transition-all\": _unref(user).activeNav }, \"bg-white transition-all duration-300 dark:bg-black max-[880px]:h-screen max-[1150px]:fixed z-50\"])}\"><div class=\"absolute bg-gray-300 rounded-l-lg px-2 py-1 z-[100] hidden max-[1150px]:block max-md:block right-2 top-6\"><svg width=\"30px\" height=\"30px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M16.9995 15.9995L20.9995 11.9995M20.9995 11.9995L16.9995 7.99951M20.9995 11.9995H8.99951M12.9995 20.9995H6.20029C5.08019 20.9995 4.52014 20.9995 4.09231 20.7815C3.71599 20.5898 3.41003 20.2838 3.21828 19.9075C3.00029 19.4797 3.00029 18.9196 3.00029 17.7995V6.19951C3.00029 5.07941 3.00029 4.51935 3.21828 4.09153C3.41003 3.71521 3.71599 3.40925 4.09231 3.2175C4.52014 2.99951 5.08019 2.99951 6.20029 2.99951L12.9995 2.99951\" stroke=\"#000000\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg></div>`);\n      _push(_ssrRenderComponent(TheNavigation, {\n        class: [\"max-md:overflow-x-hidden\", { \"mr-24\": _unref(user).activeNav && _unref(user).my_scroll > 90 }],\n        activeNav: _unref(user).activeNav\n      }, null, _parent));\n      _push(`</div><div class=\"w-full relative\"><div class=\"${_ssrRenderClass([{\n        \"blur\": _unref(treeStore).treeFullScreen === true,\n        \"max-[1150px]:!hidden\": _unref(user).activeNav\n      }, \"cursor-pointer bg-porcelain h-10 w-10 flex items-center justify-center rounded-lg absolute top-5 max-[1150px]:top-3 left-5 z-50 dark:fill-white fill-black\"])}\"><svg width=\"22\" height=\"16\" viewBox=\"0 0 22 16\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M0.999776 1.99957H20.9998C21.5177 1.99957 21.9845 1.46089 21.9845 0.9431C21.9845 0.425798 21.5607 0.00261796 21.0428 0.00261796H0.956408C0.43868 0.00261796 0.014912 0.425798 0.014912 0.9431C0.014912 1.46089 0.482048 1.99957 0.999776 1.99957ZM0.999776 8.99956H20.9998C21.5177 8.99956 21.9845 8.51664 21.9845 7.99933C21.9845 7.48203 21.5177 6.99958 20.9998 6.99958H0.999776C0.482048 6.99958 0.014912 7.48203 0.014912 7.99933C0.014912 8.51664 0.482048 8.99956 0.999776 8.99956ZM21.0428 15.9962H0.956408C0.43868 15.9962 0.014912 15.5727 0.014912 15.0551C0.014912 14.5379 0.482048 13.9997 0.999776 13.9997H20.9998C21.5177 13.9997 21.9845 14.5379 21.9845 15.0551C21.9845 15.5727 21.5607 15.9962 21.0428 15.9962Z\"></path></svg></div>`);\n      _push(_ssrRenderComponent(_component_HeaderContent, { class: \"pl-14\" }, null, _parent));\n      _push(`<div class=\"${_ssrRenderClass([{ \"z-[1000]\": _unref(treeStore).treeFullScreen }, \"relative z-10\"])}\">`);\n      _push(_ssrRenderComponent(_component_NuxtPage, { class: \"mx-6 max-sm:mx-1 py-10 h-full\" }, null, _parent));\n      _push(`</div></div></div></div>`);\n    };\n  }\n});\n",
-      "start": 1750403999204,
-      "end": 1750404000871,
+      "start": 1750670595770,
+      "end": 1750670597684,
       "order": "normal",
       "sourcemaps": "{\n  \"version\": 3,\n  \"sources\": [\"D:/projects/nuxt/workix-nuxt-front/pages/base.vue?macro=true&vue&type=script&setup=true&lang.ts\"],\n  \"sourcesContent\": [\"import { defineComponent as _defineComponent } from \\\"vue\\\";\\nimport { unref as _unref, resolveComponent as _resolveComponent, mergeProps as _mergeProps } from \\\"vue\\\";\\nimport { ssrRenderClass as _ssrRenderClass, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \\\"vue/server-renderer\\\";\\nimport { useAuthStore } from \\\"~/stores/auth\\\";\\nimport { useRouter } from \\\"vue-router\\\";\\nimport { useRoute } from \\\"vue-router\\\";\\nimport { useNotification } from \\\"~/stores/notification\\\";\\nimport { useChat } from \\\"~/stores/chat\\\";\\nimport { toast } from \\\"vue3-toastify\\\";\\nimport { useTreeStore } from \\\"~/stores/tree\\\";\\nimport nuxtStorage from \\\"nuxt-storage/nuxt-storage\\\";\\nimport TheNavigation from \\\"~/components/TheNavigation.vue\\\";\\nexport default /* @__PURE__ */ _defineComponent({\\n  __name: \\\"base\\\",\\n  __ssrInlineRender: true,\\n  setup(__props) {\\n    const treeStore = useTreeStore();\\n    const chat = useChat();\\n    const notice = useNotification();\\n    const route = useRouter();\\n    const router = useRoute();\\n    const user = useAuthStore();\\n    function notification() {\\n      let ws = new WebSocket(`wss://api-buildwithus.ai-softdev.com/ws/notification?token=${nuxtStorage.localStorage.getData(\\\"token\\\")}`);\\n      ws.onmessage = (data) => {\\n        let res = JSON.parse(data.data);\\n        if (res.type === \\\"notification\\\") {\\n          notice.get_notification?.unshift(res.notification);\\n          toast.info(res.notification.text, {\\n            autoClose: 1500,\\n            theme: \\\"auto\\\"\\n          });\\n        } else if (router.path.search(/\\\\/base\\\\/chat[\\\\/\\\\d]*$/g) !== -1) {\\n          if (res.type === \\\"send_message\\\") {\\n            for (let i = 0; i < chat.chatList.results.length; i++) {\\n              if (chat.chatList.results[i].id === res.messages?.chat_id) {\\n                chat.chatList.results[i].last_message = res.messages;\\n              }\\n              if (res.message.message_type === \\\"change\\\") {\\n                if (chat.chatList.results[i].id === chat.userChat.id && res.message.file) {\\n                  chat.chatList.results[i].photo_url = res.message.file;\\n                  console.log(res.message);\\n                }\\n                if (chat.chatList.results[i].name && chat.chatList.results[i].id === chat.userChat.id) {\\n                  chat.chatList.results[i].name = chat.updateChatName;\\n                  console.log(res);\\n                }\\n              }\\n            }\\n          } else if (res.type === \\\"read_messages\\\") {\\n            if (chat.userChat.id === res.messages[0].chat_id) {\\n              for (let i = 0; i < res.messages.length; i++) {\\n                for (let j = chat.userChat.messages.length - 1; j >= 0; j--) {\\n                  if (chat.userChat.messages[j].id === res.messages[i].id) {\\n                    chat.userChat.messages[j].read = true;\\n                    break;\\n                  }\\n                }\\n              }\\n            }\\n            for (let i = 0; i < chat.chatList.results.length; i++) {\\n              if (chat.chatList.results[i].last_message.id === res.messages[res.messages.length - 1].id) {\\n                chat.chatList.results[i].last_message.read = true;\\n                break;\\n              }\\n            }\\n          } else if (res.type === \\\"delete_message\\\") {\\n            for (let i = 0; i < chat.chatList.results.length; i++) {\\n              if (chat.chatList.results[i].id === res.last_message?.chat_id) {\\n                chat.chatList.results[i].last_message = res.last_message;\\n              }\\n            }\\n          } else if (res.type === \\\"update_message\\\") {\\n            for (let i = 0; i < chat.chatList.results.length; i++) {\\n              if (chat.chatList.results[i].id === res.last_message?.chat_id) {\\n                console.log(chat.chatList.results[i], \\\"*****\\\", res.last_message);\\n                chat.chatList.results[i].last_message = res.last_message;\\n              }\\n            }\\n          }\\n        }\\n      };\\n      ws.onclose = function(e) {\\n        notification();\\n      };\\n      ws.onerror = function(err) {\\n        ws.close();\\n      };\\n    }\\n    onMounted(() => {\\n      route.afterEach(() => {\\n        if (window.innerWidth <= 636) {\\n          user.activeNav = false;\\n        }\\n      });\\n    });\\n    onMounted(() => {\\n      if (!nuxtStorage.localStorage.getData(\\\"token\\\")) {\\n        route.push(\\\"/\\\").then((e) => {\\n          toast.info(\\\"Для начало авторизуйтесь\\\", { autoClose: 1500, theme: \\\"auto\\\" });\\n        });\\n      } else {\\n        user.loadCurrentUser();\\n        notification();\\n      }\\n    });\\n    onUpdated(() => {\\n      if (!nuxtStorage.localStorage.getData(\\\"token\\\")) {\\n        route.push(\\\"/\\\").then((e) => {\\n          toast.info(\\\"Для начало авторизуйтесь\\\", { autoClose: 1500, theme: \\\"auto\\\" });\\n        });\\n      }\\n    });\\n    useHead({\\n      titleTemplate: (title) => {\\n        return title ? `${title} • ERP` : \\\"ERP\\\";\\n      }\\n    });\\n    return (_ctx, _push, _parent, _attrs) => {\\n      const _component_HeaderContent = _resolveComponent(\\\"HeaderContent\\\");\\n      const _component_NuxtPage = _resolveComponent(\\\"NuxtPage\\\");\\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \\\"\\\" }, _attrs))}><div class=\\\"${_ssrRenderClass([{ \\\"hidden\\\": !_unref(user).activeNav, \\\"max-[1150px]:block\\\": _unref(user).activeNav }, \\\"w-screen h-screen z-20 fixed bg-black opacity-30 hidden\\\"])}\\\"></div><div class=\\\"flex w-full h-full bg-[#F7F6F9] dark:bg-bgPages\\\"><div class=\\\"${_ssrRenderClass([{ \\\"max-[1150px]:-translate-x-32 transition-all duration-200\\\": !_unref(user).activeNav, \\\"max-[600px]:w-full transition-all\\\": _unref(user).activeNav }, \\\"bg-white transition-all duration-300 dark:bg-black max-[880px]:h-screen max-[1150px]:fixed z-50\\\"])}\\\"><div class=\\\"absolute bg-gray-300 rounded-l-lg px-2 py-1 z-[100] hidden max-[1150px]:block max-md:block right-2 top-6\\\"><svg width=\\\"30px\\\" height=\\\"30px\\\" viewBox=\\\"0 0 24 24\\\" fill=\\\"none\\\" xmlns=\\\"http://www.w3.org/2000/svg\\\"><path d=\\\"M16.9995 15.9995L20.9995 11.9995M20.9995 11.9995L16.9995 7.99951M20.9995 11.9995H8.99951M12.9995 20.9995H6.20029C5.08019 20.9995 4.52014 20.9995 4.09231 20.7815C3.71599 20.5898 3.41003 20.2838 3.21828 19.9075C3.00029 19.4797 3.00029 18.9196 3.00029 17.7995V6.19951C3.00029 5.07941 3.00029 4.51935 3.21828 4.09153C3.41003 3.71521 3.71599 3.40925 4.09231 3.2175C4.52014 2.99951 5.08019 2.99951 6.20029 2.99951L12.9995 2.99951\\\" stroke=\\\"#000000\\\" stroke-width=\\\"2\\\" stroke-linecap=\\\"round\\\" stroke-linejoin=\\\"round\\\"></path></svg></div>`);\\n      _push(_ssrRenderComponent(TheNavigation, {\\n        class: [\\\"max-md:overflow-x-hidden\\\", { \\\"mr-24\\\": _unref(user).activeNav && _unref(user).my_scroll > 90 }],\\n        activeNav: _unref(user).activeNav\\n      }, null, _parent));\\n      _push(`</div><div class=\\\"w-full relative\\\"><div class=\\\"${_ssrRenderClass([{\\n        \\\"blur\\\": _unref(treeStore).treeFullScreen === true,\\n        \\\"max-[1150px]:!hidden\\\": _unref(user).activeNav\\n      }, \\\"cursor-pointer bg-porcelain h-10 w-10 flex items-center justify-center rounded-lg absolute top-5 max-[1150px]:top-3 left-5 z-50 dark:fill-white fill-black\\\"])}\\\"><svg width=\\\"22\\\" height=\\\"16\\\" viewBox=\\\"0 0 22 16\\\" xmlns=\\\"http://www.w3.org/2000/svg\\\"><path fill-rule=\\\"evenodd\\\" clip-rule=\\\"evenodd\\\" d=\\\"M0.999776 1.99957H20.9998C21.5177 1.99957 21.9845 1.46089 21.9845 0.9431C21.9845 0.425798 21.5607 0.00261796 21.0428 0.00261796H0.956408C0.43868 0.00261796 0.014912 0.425798 0.014912 0.9431C0.014912 1.46089 0.482048 1.99957 0.999776 1.99957ZM0.999776 8.99956H20.9998C21.5177 8.99956 21.9845 8.51664 21.9845 7.99933C21.9845 7.48203 21.5177 6.99958 20.9998 6.99958H0.999776C0.482048 6.99958 0.014912 7.48203 0.014912 7.99933C0.014912 8.51664 0.482048 8.99956 0.999776 8.99956ZM21.0428 15.9962H0.956408C0.43868 15.9962 0.014912 15.5727 0.014912 15.0551C0.014912 14.5379 0.482048 13.9997 0.999776 13.9997H20.9998C21.5177 13.9997 21.9845 14.5379 21.9845 15.0551C21.9845 15.5727 21.5607 15.9962 21.0428 15.9962Z\\\"></path></svg></div>`);\\n      _push(_ssrRenderComponent(_component_HeaderContent, { class: \\\"pl-14\\\" }, null, _parent));\\n      _push(`<div class=\\\"${_ssrRenderClass([{ \\\"z-[1000]\\\": _unref(treeStore).treeFullScreen }, \\\"relative z-10\\\"])}\\\">`);\\n      _push(_ssrRenderComponent(_component_NuxtPage, { class: \\\"mx-6 max-sm:mx-1 py-10 h-full\\\" }, null, _parent));\\n      _push(`</div></div></div></div>`);\\n    };\\n  }\\n});\\n\"],\n  \"mappings\": \"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\",\n  \"names\": []\n}\n"
     },
     {
       "name": "vite:css-post",
-      "start": 1750404000871,
-      "end": 1750404000871,
+      "start": 1750670597685,
+      "end": 1750670597685,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1750404000871,
-      "end": 1750404000871,
+      "start": 1750670597685,
+      "end": 1750670597685,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1750404000871,
-      "end": 1750404000871,
+      "start": 1750670597685,
+      "end": 1750670597685,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1750404000871,
-      "end": 1750404000871,
+      "start": 1750670597685,
+      "end": 1750670597685,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1750404000872,
-      "end": 1750404000872,
+      "start": 1750670597686,
+      "end": 1750670597686,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1750404000872,
-      "end": 1750404000872,
+      "start": 1750670597686,
+      "end": 1750670597686,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1750404000872,
-      "end": 1750404000872,
+      "start": 1750670597686,
+      "end": 1750670597686,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750404000873,
-      "end": 1750404000873,
+      "start": 1750670597687,
+      "end": 1750670597687,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750404000873,
-      "end": 1750404000873,
+      "start": 1750670597687,
+      "end": 1750670597687,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750404000873,
-      "end": 1750404000873,
+      "start": 1750670597687,
+      "end": 1750670597687,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750404000873,
-      "end": 1750404000873,
+      "start": 1750670597687,
+      "end": 1750670597687,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750404000873,
-      "end": 1750404000873,
+      "start": 1750670597688,
+      "end": 1750670597688,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750404000873,
-      "end": 1750404000873,
+      "start": 1750670597688,
+      "end": 1750670597688,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750404000873,
-      "end": 1750404000873,
+      "start": 1750670597689,
+      "end": 1750670597689,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750404000873,
-      "end": 1750404000874,
+      "start": 1750670597689,
+      "end": 1750670597689,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { onMounted, onUpdated } from 'vue';\nimport { useHead } from '@unhead/vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, resolveComponent as _resolveComponent, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderClass as _ssrRenderClass, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useRouter } from \"vue-router\";\nimport { useRoute } from \"vue-router\";\nimport { useNotification } from \"~/stores/notification\";\nimport { useChat } from \"~/stores/chat\";\nimport { toast } from \"vue3-toastify\";\nimport { useTreeStore } from \"~/stores/tree\";\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\nimport TheNavigation from \"~/components/TheNavigation.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"base\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const treeStore = useTreeStore();\n    const chat = useChat();\n    const notice = useNotification();\n    const route = useRouter();\n    const router = useRoute();\n    const user = useAuthStore();\n    function notification() {\n      let ws = new WebSocket(`wss://api-buildwithus.ai-softdev.com/ws/notification?token=${nuxtStorage.localStorage.getData(\"token\")}`);\n      ws.onmessage = (data) => {\n        let res = JSON.parse(data.data);\n        if (res.type === \"notification\") {\n          notice.get_notification?.unshift(res.notification);\n          toast.info(res.notification.text, {\n            autoClose: 1500,\n            theme: \"auto\"\n          });\n        } else if (router.path.search(/\\/base\\/chat[\\/\\d]*$/g) !== -1) {\n          if (res.type === \"send_message\") {\n            for (let i = 0; i < chat.chatList.results.length; i++) {\n              if (chat.chatList.results[i].id === res.messages?.chat_id) {\n                chat.chatList.results[i].last_message = res.messages;\n              }\n              if (res.message.message_type === \"change\") {\n                if (chat.chatList.results[i].id === chat.userChat.id && res.message.file) {\n                  chat.chatList.results[i].photo_url = res.message.file;\n                  console.log(res.message);\n                }\n                if (chat.chatList.results[i].name && chat.chatList.results[i].id === chat.userChat.id) {\n                  chat.chatList.results[i].name = chat.updateChatName;\n                  console.log(res);\n                }\n              }\n            }\n          } else if (res.type === \"read_messages\") {\n            if (chat.userChat.id === res.messages[0].chat_id) {\n              for (let i = 0; i < res.messages.length; i++) {\n                for (let j = chat.userChat.messages.length - 1; j >= 0; j--) {\n                  if (chat.userChat.messages[j].id === res.messages[i].id) {\n                    chat.userChat.messages[j].read = true;\n                    break;\n                  }\n                }\n              }\n            }\n            for (let i = 0; i < chat.chatList.results.length; i++) {\n              if (chat.chatList.results[i].last_message.id === res.messages[res.messages.length - 1].id) {\n                chat.chatList.results[i].last_message.read = true;\n                break;\n              }\n            }\n          } else if (res.type === \"delete_message\") {\n            for (let i = 0; i < chat.chatList.results.length; i++) {\n              if (chat.chatList.results[i].id === res.last_message?.chat_id) {\n                chat.chatList.results[i].last_message = res.last_message;\n              }\n            }\n          } else if (res.type === \"update_message\") {\n            for (let i = 0; i < chat.chatList.results.length; i++) {\n              if (chat.chatList.results[i].id === res.last_message?.chat_id) {\n                console.log(chat.chatList.results[i], \"*****\", res.last_message);\n                chat.chatList.results[i].last_message = res.last_message;\n              }\n            }\n          }\n        }\n      };\n      ws.onclose = function(e) {\n        notification();\n      };\n      ws.onerror = function(err) {\n        ws.close();\n      };\n    }\n    onMounted(() => {\n      route.afterEach(() => {\n        if ((void 0).innerWidth <= 636) {\n          user.activeNav = false;\n        }\n      });\n    });\n    onMounted(() => {\n      if (!nuxtStorage.localStorage.getData(\"token\")) {\n        route.push(\"/\").then((e) => {\n          toast.info(\"Для начало авторизуйтесь\", { autoClose: 1500, theme: \"auto\" });\n        });\n      } else {\n        user.loadCurrentUser();\n        notification();\n      }\n    });\n    onUpdated(() => {\n      if (!nuxtStorage.localStorage.getData(\"token\")) {\n        route.push(\"/\").then((e) => {\n          toast.info(\"Для начало авторизуйтесь\", { autoClose: 1500, theme: \"auto\" });\n        });\n      }\n    });\n    useHead({\n      titleTemplate: (title) => {\n        return title ? `${title} • ERP` : \"ERP\";\n      }\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_HeaderContent = _resolveComponent(\"HeaderContent\");\n      const _component_NuxtPage = _resolveComponent(\"NuxtPage\");\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"\" }, _attrs))}><div class=\"${_ssrRenderClass([{ \"hidden\": !_unref(user).activeNav, \"max-[1150px]:block\": _unref(user).activeNav }, \"w-screen h-screen z-20 fixed bg-black opacity-30 hidden\"])}\"></div><div class=\"flex w-full h-full bg-[#F7F6F9] dark:bg-bgPages\"><div class=\"${_ssrRenderClass([{ \"max-[1150px]:-translate-x-32 transition-all duration-200\": !_unref(user).activeNav, \"max-[600px]:w-full transition-all\": _unref(user).activeNav }, \"bg-white transition-all duration-300 dark:bg-black max-[880px]:h-screen max-[1150px]:fixed z-50\"])}\"><div class=\"absolute bg-gray-300 rounded-l-lg px-2 py-1 z-[100] hidden max-[1150px]:block max-md:block right-2 top-6\"><svg width=\"30px\" height=\"30px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M16.9995 15.9995L20.9995 11.9995M20.9995 11.9995L16.9995 7.99951M20.9995 11.9995H8.99951M12.9995 20.9995H6.20029C5.08019 20.9995 4.52014 20.9995 4.09231 20.7815C3.71599 20.5898 3.41003 20.2838 3.21828 19.9075C3.00029 19.4797 3.00029 18.9196 3.00029 17.7995V6.19951C3.00029 5.07941 3.00029 4.51935 3.21828 4.09153C3.41003 3.71521 3.71599 3.40925 4.09231 3.2175C4.52014 2.99951 5.08019 2.99951 6.20029 2.99951L12.9995 2.99951\" stroke=\"#000000\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg></div>`);\n      _push(_ssrRenderComponent(TheNavigation, {\n        class: [\"max-md:overflow-x-hidden\", { \"mr-24\": _unref(user).activeNav && _unref(user).my_scroll > 90 }],\n        activeNav: _unref(user).activeNav\n      }, null, _parent));\n      _push(`</div><div class=\"w-full relative\"><div class=\"${_ssrRenderClass([{\n        \"blur\": _unref(treeStore).treeFullScreen === true,\n        \"max-[1150px]:!hidden\": _unref(user).activeNav\n      }, \"cursor-pointer bg-porcelain h-10 w-10 flex items-center justify-center rounded-lg absolute top-5 max-[1150px]:top-3 left-5 z-50 dark:fill-white fill-black\"])}\"><svg width=\"22\" height=\"16\" viewBox=\"0 0 22 16\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M0.999776 1.99957H20.9998C21.5177 1.99957 21.9845 1.46089 21.9845 0.9431C21.9845 0.425798 21.5607 0.00261796 21.0428 0.00261796H0.956408C0.43868 0.00261796 0.014912 0.425798 0.014912 0.9431C0.014912 1.46089 0.482048 1.99957 0.999776 1.99957ZM0.999776 8.99956H20.9998C21.5177 8.99956 21.9845 8.51664 21.9845 7.99933C21.9845 7.48203 21.5177 6.99958 20.9998 6.99958H0.999776C0.482048 6.99958 0.014912 7.48203 0.014912 7.99933C0.014912 8.51664 0.482048 8.99956 0.999776 8.99956ZM21.0428 15.9962H0.956408C0.43868 15.9962 0.014912 15.5727 0.014912 15.0551C0.014912 14.5379 0.482048 13.9997 0.999776 13.9997H20.9998C21.5177 13.9997 21.9845 14.5379 21.9845 15.0551C21.9845 15.5727 21.5607 15.9962 21.0428 15.9962Z\"></path></svg></div>`);\n      _push(_ssrRenderComponent(_component_HeaderContent, { class: \"pl-14\" }, null, _parent));\n      _push(`<div class=\"${_ssrRenderClass([{ \"z-[1000]\": _unref(treeStore).treeFullScreen }, \"relative z-10\"])}\">`);\n      _push(_ssrRenderComponent(_component_NuxtPage, { class: \"mx-6 max-sm:mx-1 py-10 h-full\" }, null, _parent));\n      _push(`</div></div></div></div>`);\n    };\n  }\n});\n",
-      "start": 1750404000874,
-      "end": 1750404000882,
+      "start": 1750670597689,
+      "end": 1750670597696,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -266,8 +266,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { onMounted, onUpdated } from 'vue';\nimport { useHead } from '@unhead/vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, resolveComponent as _resolveComponent, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderClass as _ssrRenderClass, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useRouter } from \"vue-router\";\nimport { useRoute } from \"vue-router\";\nimport { useNotification } from \"~/stores/notification\";\nimport { useChat } from \"~/stores/chat\";\nimport { toast } from \"vue3-toastify\";\nimport { useTreeStore } from \"~/stores/tree\";\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\nimport TheNavigation from \"~/components/TheNavigation.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"base\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const treeStore = useTreeStore();\n    const chat = useChat();\n    const notice = useNotification();\n    const route = useRouter();\n    const router = useRoute();\n    const user = useAuthStore();\n    function notification() {\n      let ws = new WebSocket(`wss://api-buildwithus.ai-softdev.com/ws/notification?token=${nuxtStorage.localStorage.getData(\"token\")}`);\n      ws.onmessage = (data) => {\n        let res = JSON.parse(data.data);\n        if (res.type === \"notification\") {\n          notice.get_notification?.unshift(res.notification);\n          toast.info(res.notification.text, {\n            autoClose: 1500,\n            theme: \"auto\"\n          });\n        } else if (router.path.search(/\\/base\\/chat[\\/\\d]*$/g) !== -1) {\n          if (res.type === \"send_message\") {\n            for (let i = 0; i < chat.chatList.results.length; i++) {\n              if (chat.chatList.results[i].id === res.messages?.chat_id) {\n                chat.chatList.results[i].last_message = res.messages;\n              }\n              if (res.message.message_type === \"change\") {\n                if (chat.chatList.results[i].id === chat.userChat.id && res.message.file) {\n                  chat.chatList.results[i].photo_url = res.message.file;\n                  console.log(res.message);\n                }\n                if (chat.chatList.results[i].name && chat.chatList.results[i].id === chat.userChat.id) {\n                  chat.chatList.results[i].name = chat.updateChatName;\n                  console.log(res);\n                }\n              }\n            }\n          } else if (res.type === \"read_messages\") {\n            if (chat.userChat.id === res.messages[0].chat_id) {\n              for (let i = 0; i < res.messages.length; i++) {\n                for (let j = chat.userChat.messages.length - 1; j >= 0; j--) {\n                  if (chat.userChat.messages[j].id === res.messages[i].id) {\n                    chat.userChat.messages[j].read = true;\n                    break;\n                  }\n                }\n              }\n            }\n            for (let i = 0; i < chat.chatList.results.length; i++) {\n              if (chat.chatList.results[i].last_message.id === res.messages[res.messages.length - 1].id) {\n                chat.chatList.results[i].last_message.read = true;\n                break;\n              }\n            }\n          } else if (res.type === \"delete_message\") {\n            for (let i = 0; i < chat.chatList.results.length; i++) {\n              if (chat.chatList.results[i].id === res.last_message?.chat_id) {\n                chat.chatList.results[i].last_message = res.last_message;\n              }\n            }\n          } else if (res.type === \"update_message\") {\n            for (let i = 0; i < chat.chatList.results.length; i++) {\n              if (chat.chatList.results[i].id === res.last_message?.chat_id) {\n                console.log(chat.chatList.results[i], \"*****\", res.last_message);\n                chat.chatList.results[i].last_message = res.last_message;\n              }\n            }\n          }\n        }\n      };\n      ws.onclose = function(e) {\n        notification();\n      };\n      ws.onerror = function(err) {\n        ws.close();\n      };\n    }\n    onMounted(() => {\n      route.afterEach(() => {\n        if ((void 0).innerWidth <= 636) {\n          user.activeNav = false;\n        }\n      });\n    });\n    onMounted(() => {\n      if (!nuxtStorage.localStorage.getData(\"token\")) {\n        route.push(\"/\").then((e) => {\n          toast.info(\"Для начало авторизуйтесь\", { autoClose: 1500, theme: \"auto\" });\n        });\n      } else {\n        user.loadCurrentUser();\n        notification();\n      }\n    });\n    onUpdated(() => {\n      if (!nuxtStorage.localStorage.getData(\"token\")) {\n        route.push(\"/\").then((e) => {\n          toast.info(\"Для начало авторизуйтесь\", { autoClose: 1500, theme: \"auto\" });\n        });\n      }\n    });\n    useHead({\n      titleTemplate: (title) => {\n        return title ? `${title} • ERP` : \"ERP\";\n      }\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_HeaderContent = _resolveComponent(\"HeaderContent\");\n      const _component_NuxtPage = _resolveComponent(\"NuxtPage\");\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"\" }, _attrs))}><div class=\"${_ssrRenderClass([{ \"hidden\": !_unref(user).activeNav, \"max-[1150px]:block\": _unref(user).activeNav }, \"w-screen h-screen z-20 fixed bg-black opacity-30 hidden\"])}\"></div><div class=\"flex w-full h-full bg-[#F7F6F9] dark:bg-bgPages\"><div class=\"${_ssrRenderClass([{ \"max-[1150px]:-translate-x-32 transition-all duration-200\": !_unref(user).activeNav, \"max-[600px]:w-full transition-all\": _unref(user).activeNav }, \"bg-white transition-all duration-300 dark:bg-black max-[880px]:h-screen max-[1150px]:fixed z-50\"])}\"><div class=\"absolute bg-gray-300 rounded-l-lg px-2 py-1 z-[100] hidden max-[1150px]:block max-md:block right-2 top-6\"><svg width=\"30px\" height=\"30px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M16.9995 15.9995L20.9995 11.9995M20.9995 11.9995L16.9995 7.99951M20.9995 11.9995H8.99951M12.9995 20.9995H6.20029C5.08019 20.9995 4.52014 20.9995 4.09231 20.7815C3.71599 20.5898 3.41003 20.2838 3.21828 19.9075C3.00029 19.4797 3.00029 18.9196 3.00029 17.7995V6.19951C3.00029 5.07941 3.00029 4.51935 3.21828 4.09153C3.41003 3.71521 3.71599 3.40925 4.09231 3.2175C4.52014 2.99951 5.08019 2.99951 6.20029 2.99951L12.9995 2.99951\" stroke=\"#000000\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg></div>`);\n      _push(_ssrRenderComponent(TheNavigation, {\n        class: [\"max-md:overflow-x-hidden\", { \"mr-24\": _unref(user).activeNav && _unref(user).my_scroll > 90 }],\n        activeNav: _unref(user).activeNav\n      }, null, _parent));\n      _push(`</div><div class=\"w-full relative\"><div class=\"${_ssrRenderClass([{\n        \"blur\": _unref(treeStore).treeFullScreen === true,\n        \"max-[1150px]:!hidden\": _unref(user).activeNav\n      }, \"cursor-pointer bg-porcelain h-10 w-10 flex items-center justify-center rounded-lg absolute top-5 max-[1150px]:top-3 left-5 z-50 dark:fill-white fill-black\"])}\"><svg width=\"22\" height=\"16\" viewBox=\"0 0 22 16\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M0.999776 1.99957H20.9998C21.5177 1.99957 21.9845 1.46089 21.9845 0.9431C21.9845 0.425798 21.5607 0.00261796 21.0428 0.00261796H0.956408C0.43868 0.00261796 0.014912 0.425798 0.014912 0.9431C0.014912 1.46089 0.482048 1.99957 0.999776 1.99957ZM0.999776 8.99956H20.9998C21.5177 8.99956 21.9845 8.51664 21.9845 7.99933C21.9845 7.48203 21.5177 6.99958 20.9998 6.99958H0.999776C0.482048 6.99958 0.014912 7.48203 0.014912 7.99933C0.014912 8.51664 0.482048 8.99956 0.999776 8.99956ZM21.0428 15.9962H0.956408C0.43868 15.9962 0.014912 15.5727 0.014912 15.0551C0.014912 14.5379 0.482048 13.9997 0.999776 13.9997H20.9998C21.5177 13.9997 21.9845 14.5379 21.9845 15.0551C21.9845 15.5727 21.5607 15.9962 21.0428 15.9962Z\"></path></svg></div>`);\n      _push(_ssrRenderComponent(_component_HeaderContent, { class: \"pl-14\" }, null, _parent));\n      _push(`<div class=\"${_ssrRenderClass([{ \"z-[1000]\": _unref(treeStore).treeFullScreen }, \"relative z-10\"])}\">`);\n      _push(_ssrRenderComponent(_component_NuxtPage, { class: \"mx-6 max-sm:mx-1 py-10 h-full\" }, null, _parent));\n      _push(`</div></div></div></div>`);\n    };\n  }\n});\n",
-      "start": 1750404000874,
-      "end": 1750404000882,
+      "start": 1750670597689,
+      "end": 1750670597696,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -280,21 +280,21 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1750404000883,
-      "end": 1750404000883,
+      "start": 1750670597697,
+      "end": 1750670597697,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1750404000883,
-      "end": 1750404000883,
+      "start": 1750670597697,
+      "end": 1750670597697,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
       "result": "\nconst __nuxt_page_meta = null\nexport default __nuxt_page_meta\n",
-      "start": 1750404000883,
-      "end": 1750404000885,
+      "start": 1750670597697,
+      "end": 1750670597698,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -308,8 +308,8 @@
     {
       "name": "nuxt:pages-macros-transform",
       "result": "\nconst __nuxt_page_meta = null\nexport default __nuxt_page_meta\n",
-      "start": 1750404000883,
-      "end": 1750404000885,
+      "start": 1750670597697,
+      "end": 1750670597699,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -322,32 +322,32 @@
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1750404000885,
-      "end": 1750404000885,
+      "start": 1750670597699,
+      "end": 1750670597699,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1750404000885,
-      "end": 1750404000885,
+      "start": 1750670597699,
+      "end": 1750670597699,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1750404000885,
-      "end": 1750404000888,
+      "start": 1750670597699,
+      "end": 1750670597699,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1750404000888,
-      "end": 1750404000888,
+      "start": 1750670597702,
+      "end": 1750670597702,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1750404000888,
-      "end": 1750404000888,
+      "start": 1750670597703,
+      "end": 1750670597703,
       "order": "normal"
     }
   ]

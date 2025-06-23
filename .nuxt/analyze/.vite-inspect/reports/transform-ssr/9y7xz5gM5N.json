@@ -3,82 +3,82 @@
   "transforms": [
     {
       "name": "vite:load-fallback",
-      "result": "<script setup lang=\"ts\">\r\nimport {useCompanies} from \"~/stores/companies\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport {useMediaQuery, useParallax} from '@vueuse/core'\r\nimport TheModal from \"~/components/UI/TheModal.vue\";\r\nimport TheButton from \"~/components/UI/TheButton.vue\";\r\nimport TheInput from \"~/components/UI/TheInput.vue\";\r\nimport Sceleton from \"~/components/UI/TheSceleton.vue\";\r\nimport ThePreloader from \"~/components/UI/ThePreloader.vue\";\r\nimport {useUserStore} from \"~/stores/users\";\r\n\r\nconst company = useCompanies()\r\nconst loadUserInfo = useAuthStore()\r\nconst target = ref(null)\r\nconst isMobile = useMediaQuery('(max-width: 700px)')\r\n\r\nconst parallax = reactive(useParallax(target))\r\n\r\nconst targetStyle: CSSProperties = {\r\n  transition: '.3s ease-out all',\r\n}\r\nconst cardWindowStyle: CSSProperties = {\r\n  margin: 'auto',\r\n}\r\nconst layerBase: CSSProperties = {\r\n  position: 'absolute',\r\n  height: '100%',\r\n  width: '100%',\r\n  transition: '.3s ease-out all',\r\n}\r\nconst containerStyle: CSSProperties = {\r\n  margin: '3em auto',\r\n  perspective: '300px',\r\n}\r\n\r\nconst cardStyle = computed(() => ({\r\n  transition: '.3s ease-out all',\r\n  transform: `rotateX(${parallax.roll * 1}deg) rotateY(${\r\n    parallax.tilt * 1\r\n  }deg)`,\r\n}))\r\n\r\nconst container = ref(null)\r\nconst {tilt, roll, source} = useParallax(container)\r\n\r\nconst loadCurrentUser = useAuthStore()\r\n defineProps({\r\n  showInfo: {\r\n    type: Boolean,\r\n    default: false\r\n  },\r\n  getCode: {\r\n    type: Boolean,\r\n    default: false\r\n  },\r\n  userEdit: {\r\n    type: Object,\r\n    default: () => {\r\n    }\r\n  }\r\n})\r\nconst birth = new Date(loadCurrentUser.user.date_of_birth).toLocaleDateString()\r\nonMounted(()=>{\r\n  loadUserInfo.loadCurrentUserWorker()\r\n})\r\n</script>\r\n\r\n<template>\r\n  <div class=\"w-full p-6 relative bg-white shadow-cards max-sm:col-auto dark:shadow-md dark:border-t dark:border-t-gray-500 dark:shadow-gray-500 rounded-3xl hover:transform hover:-translate-y-2 transition-all duration-200\">\r\n    <div\r\n    >\r\n      <div class=\"flex items-center justify-between mb-8\">\r\n        <div class=\"border rounded-full px-3 py-2 w-fit flex items-center gap-3\">\r\n          <img src=\"/icons/profile.svg\" alt=\"profile\">\r\n          <h2 class=\"dark:text-white\">{{ $t('Личные данные') }}</h2>\r\n        </div>\r\n        <button\r\n            @click=\"showInfo = true; userEdit={...loadCurrentUser.user}\"\r\n            class=\"w-10 h-10 rounded-lg flex items-center justify-center bg-porcelain hover:bg-gray-300 transition-all ease-in-out duration-300\"\r\n        >\r\n          <img src=\"/icons/edit.svg\" alt=\"profile\">\r\n        </button>\r\n      </div>\r\n      <div\r\n          :class=\"{'blur' : !loadCurrentUser.user.id}\"\r\n      >\r\n        <div class=\"flex flex-col\">\r\n          <div v-if=\"loadCurrentUser.user.id\"\r\n               class=\"flex max-sm:flex-wrap max-sm:justify-center select-none text-gray-600 gap-x-2 mb-5 pb-5 border-b\">\r\n            <img class=\"block w-[60px] h-[60px] border-2 border-golden rounded-full shadow-lg dark:shadow-none\"\r\n                 :src=\"loadCurrentUser.user.photo\" alt=\"logo\">\r\n            <div class=\"my-2 mx-2\">\r\n              <h3 class=\"text-md font-bold dark:text-white select-none\">{{ loadCurrentUser.user.first_name }}\r\n                {{ loadCurrentUser.user.last_name }}\r\n              </h3>\r\n              <p class=\"dark:text-white text-sm text-mediumGray\">\r\n                {{\r\n                  Math.trunc((new Date() - new Date(loadCurrentUser.user.date_of_birth)) / 1000 / 3600 / 24 / 365) + ' лет'\r\n                }}\r\n              </p>\r\n              <p v-if=\"loadCurrentUser.user.role.name === 'Администратор сайта'\"\r\n                 class=\"dark:text-white tracking-widest font-bold\">{{ loadCurrentUser.user.role.name }}</p>\r\n              <p v-else-if=\"loadCurrentUser.user.role.name === 'Сотрудник'\"\r\n                 class=\"dark:text-white tracking-widest font-bold\">{{ loadCurrentUser.user.position.name }}</p>\r\n            </div>\r\n          </div>\r\n          <div v-else class=\"flex items-center gap-x-4\">\r\n            <sceleton border-radius=\"100px\" width=\"100px\" height=\"100px\"></sceleton>\r\n            <div class=\"flex flex-col gap-y-2\">\r\n              <sceleton width=\"150px\" height=\"20px\" border-radius=\"5px\"></sceleton>\r\n              <sceleton width=\"60px\" height=\"15px\" border-radius=\"5px\"></sceleton>\r\n            </div>\r\n          </div>\r\n          <div class=\"flex flex-col gap-y-2 ml-2 w-full\">\r\n            <div class=\"text-sm flex items-center justify-between\">\r\n              <p class=\"dark:text-white font-bold\">\r\n                {{ $t('Email') }}:\r\n              </p>\r\n              <p v-if=\"loadCurrentUser.user.id\">{{loadCurrentUser.user.email}}</p>\r\n            </div>\r\n            <div class=\"text-sm flex items-center justify-between\">\r\n              <p class=\"dark:text-white font-bold\">\r\n                {{ $t('Номер') }}:\r\n              </p>\r\n              <p>{{loadCurrentUser.user.phone?.slice(4, 13)}}</p>\r\n            </div>\r\n            <div class=\"text-sm flex items-center justify-between\">\r\n              <p class=\"dark:text-white font-bold\">\r\n                {{ $t('Заработная плата') }}:\r\n              </p>\r\n              <p v-if=\"loadCurrentUser.user.salary\">{{ loadCurrentUser.user.salary + ' сум' }}</p>\r\n              <p v-else>{{ $t('Не назначена') }}</p>\r\n            </div>\r\n            <div v-if=\"company.company.name\" class=\"text-sm flex items-center justify-between\">\r\n              <p class=\"dark:text-white font-bold\">\r\n                {{ $t('Компания') }}:\r\n              </p>\r\n              <p>{{ company.company.name }}</p>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div v-if=\"!loadCurrentUser.user.id\">\r\n        <div class=\"bg-black w-full h-full absolute top-0 left-0 opacity-40 rounded-lg\"></div>\r\n        <ThePreloader></ThePreloader>\r\n      </div>\r\n    </div>\r\n    <Transition name=\"fade\">\r\n      <TheModal\r\n          v-if=\"showInfo\"\r\n          @showModal=\"showInfo = false; getCode = false\"\r\n      >\r\n        <form @submit.prevent=\"loadCurrentUser.update_my({user: userEdit})\">\r\n          <div>\r\n            <h2 class=\"text-center text-xl tracking-widest font-bold dark:text-white\">Личная информация</h2>\r\n          </div>\r\n          <div class=\"w-full\">\r\n            <div class=\"mt-10 flex items-center justify-around\">\r\n              <div class=\"flex flex-col text-center w-3/12 dark:text-white tracking-widest\">\r\n                <p class=\"dark:text-gray-200 text-gray-400 font-bold text-[14px]\">{{ $t('Должность' + ':') }} </p>\r\n                <p class=\"\">{{ userEdit.position.name }}</p>\r\n              </div>\r\n              <div class=\"flex flex-col text-center w-3/12 dark:text-white tracking-widest\">\r\n                <p class=\"dark:text-gray-200 text-gray-400 font-bold text-[14px]\">{{ $t('Заработная плата' + ':') }} </p>\r\n                <p class=\"\">{{ userEdit.salary + ' ' + $t('сум') }}</p>\r\n              </div>\r\n            </div>\r\n            <div class=\"px-10 max-sm:px-0\">\r\n              <div class=\"my-10 flex max-lg:gap-x-2 max-md:gap-y-2 max-md:flex-wrap max-md:justify-center justify-between\">\r\n                <div class=\"gap-y-2 flex flex-col w-5/12 max-lg:w-full justify-center\">\r\n                  <p class=\"dark:text-white ml-1 tracking-widest  font-bold\">{{ $t('Имя') + ':' }}</p>\r\n                  <TheInput type=\"text\"\r\n                            v-model=\"userEdit.first_name\"/>\r\n                </div>\r\n                <div class=\"gap-y-2 flex flex-col w-5/12 max-lg:w-full justify-center\">\r\n                  <p class=\"dark:text-white ml-1 tracking-widest  font-bold\">{{ $t('Фамилия') + ':' }}</p>\r\n                  <TheInput type=\"text\"\r\n                            v-model=\"userEdit.last_name\"/>\r\n                </div>\r\n              </div>\r\n              <div class=\"my-10 flex max-lg:gap-x-2 max-lg:gap-y-4 max-lg:flex-wrap max-md:justify-center justify-between items-center\">\r\n                <div class=\"gap-y-2 flex flex-col w-5/12 max-lg:w-full justify-center\">\r\n                  <p class=\"dark:text-white ml-1 tracking-widest  font-bold\">{{ $t('Телефон') + ':' }}</p>\r\n                  <TheInput type=\"tel\"\r\n                            v-model=\"userEdit.phone\"/>\r\n                </div>\r\n                <div\r\n                  class=\"gap-y-2 flex flex-col w-5/12 max-lg:w-full justify-center border p-4 rounded-xl shadow-md dark:shadow-none text-center\">\r\n                  <div>\r\n                    <p class=\"dark:text-white ml-1 tracking-widest font-bold text-sm\" v-if=\"!getCode\">\r\n                      {{ $t('Изменить номер') + ':' }}</p>\r\n                    <p class=\"dark:text-white ml-1 tracking-widest font-bold text-sm\" v-else>{{ $t('Введите Код') + ':'}}</p>\r\n                  </div>\r\n                  <div class=\"flex gap-x-1 justify-center\" v-if=\"getCode\">\r\n                    <TheInput type=\"text\" maxlength=\"1\" class=\"w-[40px] h-[45px] rounded text-center font-bold text-xl\"/>\r\n                    <TheInput type=\"text\" maxlength=\"1\" class=\"w-[40px] h-[45px] rounded text-center font-bold text-xl\"/>\r\n                    <TheInput type=\"text\" maxlength=\"1\" class=\"w-[40px] h-[45px] rounded text-center font-bold text-xl\"/>\r\n                    <TheInput type=\"text\" maxlength=\"1\" class=\"w-[40px] h-[45px] rounded text-center font-bold text-xl\"/>\r\n                  </div>\r\n                  <div>\r\n                    <TheButton t=\"button\" type=\"change\"\r\n                               class=\"p-2 text-sm rounded-xl border shadow-md dark:shadow-none font-bold tracking-widest\"\r\n                               @click=\"getCode = true;\" v-if=\"!getCode\">{{ $t('Изменить') }}\r\n                    </TheButton>\r\n                    <TheButton t=\"button\" type=\"change\"\r\n                               class=\"p-2 text-sm rounded-xl border shadow-md dark:shadow-none font-bold tracking-widest\"\r\n                               @click=\"getCode = true;\" v-if=\"getCode\">{{ $t('Подтвердить') }}\r\n                    </TheButton>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"my-10 flex max-lg:gap-x-2 max-md:flex-wrap max-md:justify-center justify-between\">\r\n                <div class=\"gap-y-2 flex flex-col w-5/12 max-lg:w-full justify-center\">\r\n                  <p class=\"dark:text-white ml-1 tracking-widest  font-bold\">{{ $t('Дата рождения') + ':' }}</p>\r\n                  <input type=\"date\" v-model=\"birth\"/>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <div class=\"flex justify-around max-sm:flex-col max-sm:gap-y-2\">\r\n              <TheButton class=\"w-4/12 max-sm:w-full py-2 rounded-full\" t=\"button\" type=\"danger\"\r\n                         @click=\"showInfo = false; getCode = false\">{{ $t('Отмена') }}\r\n              </TheButton>\r\n              <TheButton class=\"w-4/12 max-sm:w-full py-2 rounded-full\" t=\"submit\" type=\"success\">{{ $t('Сохранить') }}</TheButton>\r\n            </div>\r\n          </div>\r\n        </form>\r\n      </TheModal>\r\n    </Transition>\r\n  </div>\r\n\r\n</template>\r\n\r\n<style scoped lang=\"scss\">\r\n</style>",
-      "start": 1750404002503,
-      "end": 1750404002928,
+      "result": "<script setup lang=\"ts\">\r\nimport {useCompanies} from \"~/stores/companies\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport {useMediaQuery, useParallax} from '@vueuse/core'\r\nimport TheModal from \"~/components/UI/TheModal.vue\";\r\nimport TheButton from \"~/components/UI/TheButton.vue\";\r\nimport TheInput from \"~/components/UI/TheInput.vue\";\r\nimport Sceleton from \"~/components/UI/TheSceleton.vue\";\r\nimport ThePreloader from \"~/components/UI/ThePreloader.vue\";\r\nimport {useUserStore} from \"~/stores/users\";\r\n\r\nconst company = useCompanies()\r\nconst loadUserInfo = useAuthStore()\r\nconst target = ref(null)\r\nconst isMobile = useMediaQuery('(max-width: 700px)')\r\n\r\nconst parallax = reactive(useParallax(target))\r\n\r\nconst targetStyle: CSSProperties = {\r\n  transition: '.3s ease-out all',\r\n}\r\nconst cardWindowStyle: CSSProperties = {\r\n  margin: 'auto',\r\n}\r\nconst layerBase: CSSProperties = {\r\n  position: 'absolute',\r\n  height: '100%',\r\n  width: '100%',\r\n  transition: '.3s ease-out all',\r\n}\r\nconst containerStyle: CSSProperties = {\r\n  margin: '3em auto',\r\n  perspective: '300px',\r\n}\r\n\r\nconst cardStyle = computed(() => ({\r\n  transition: '.3s ease-out all',\r\n  transform: `rotateX(${parallax.roll * 1}deg) rotateY(${\r\n      parallax.tilt * 1\r\n  }deg)`,\r\n}))\r\n\r\nconst container = ref(null)\r\nconst {tilt, roll, source} = useParallax(container)\r\n\r\nconst loadCurrentUser = useAuthStore()\r\ndefineProps({\r\n  showInfo: {\r\n    type: Boolean,\r\n    default: false\r\n  },\r\n  getCode: {\r\n    type: Boolean,\r\n    default: false\r\n  },\r\n  userEdit: {\r\n    type: Object,\r\n    default: () => {\r\n    }\r\n  }\r\n})\r\nconst birth = new Date(loadCurrentUser.user.date_of_birth).toLocaleDateString()\r\nonMounted(() => {\r\n  loadUserInfo.loadCurrentUserWorker()\r\n})\r\n</script>\r\n\r\n<template>\r\n  <div\r\n      class=\"w-full p-6 relative bg-white shadow-cards max-sm:col-auto dark:shadow-md dark:border-t dark:border-t-gray-500 dark:shadow-gray-500 rounded-3xl hover:transform hover:-translate-y-2 transition-all duration-200\">\r\n    <div\r\n    >\r\n      <div class=\"flex items-center justify-between mb-8\">\r\n        <div class=\"border rounded-full px-3 py-2 w-fit flex items-center gap-3\">\r\n          <img src=\"/icons/profile.svg\" alt=\"profile\">\r\n          <h2 class=\"dark:text-white\">{{ $t('Личные данные') }}</h2>\r\n        </div>\r\n        <button\r\n            @click=\"showInfo = true; userEdit={...loadCurrentUser.user}\"\r\n            class=\"w-10 h-10 rounded-lg flex items-center justify-center bg-porcelain hover:bg-gray-300 transition-all ease-in-out duration-300\"\r\n        >\r\n          <img src=\"/icons/edit.svg\" alt=\"profile\">\r\n        </button>\r\n      </div>\r\n      <div\r\n          :class=\"{'blur' : !loadCurrentUser.user.id}\"\r\n      >\r\n        <div class=\"flex flex-col\">\r\n          <div v-if=\"loadCurrentUser.user.id\"\r\n               class=\"flex max-sm:flex-wrap max-sm:justify-center select-none text-gray-600 gap-x-2 mb-5 pb-5 border-b\">\r\n            <img class=\"block w-[60px] h-[60px] border-2 border-golden rounded-full shadow-lg dark:shadow-none\"\r\n                 :src=\"loadCurrentUser.user.photo\" alt=\"logo\">\r\n            <div class=\"my-2 mx-2\">\r\n              <h3 class=\"text-md font-bold dark:text-white select-none\">{{ loadCurrentUser.user.first_name }}\r\n                {{ loadCurrentUser.user.last_name }}\r\n              </h3>\r\n              <p class=\"dark:text-white text-sm text-mediumGray\">\r\n                {{\r\n                  Math.trunc((new Date() - new Date(loadCurrentUser.user.date_of_birth)) / 1000 / 3600 / 24 / 365) + ' лет'\r\n                }}\r\n              </p>\r\n              <p v-if=\"loadCurrentUser.user.role.name === 'Администратор сайта'\"\r\n                 class=\"dark:text-white tracking-widest font-bold\">{{ loadCurrentUser.user.role.name }}</p>\r\n              <p v-else-if=\"loadCurrentUser.user.role.name === 'Сотрудник'\"\r\n                 class=\"dark:text-white tracking-widest font-bold\">{{ loadCurrentUser.user.position.name }}</p>\r\n            </div>\r\n          </div>\r\n          <div v-else class=\"flex items-center gap-x-4\">\r\n            <sceleton border-radius=\"100px\" width=\"100px\" height=\"100px\"></sceleton>\r\n            <div class=\"flex flex-col gap-y-2\">\r\n              <sceleton width=\"150px\" height=\"20px\" border-radius=\"5px\"></sceleton>\r\n              <sceleton width=\"60px\" height=\"15px\" border-radius=\"5px\"></sceleton>\r\n            </div>\r\n          </div>\r\n          <div class=\"flex flex-col gap-y-2 ml-2 w-full\">\r\n            <div class=\"text-sm flex items-center justify-between\">\r\n              <p class=\"dark:text-white font-bold\">\r\n                {{ $t('Email') }}:\r\n              </p>\r\n              <p v-if=\"loadCurrentUser.user.id\">{{ loadCurrentUser.user.email }}</p>\r\n            </div>\r\n            <div class=\"text-sm flex items-center justify-between\">\r\n              <p class=\"dark:text-white font-bold\">\r\n                {{ $t('Номер') }}:\r\n              </p>\r\n              <p>{{ loadCurrentUser.user.phone?.slice(4, 13) }}</p>\r\n            </div>\r\n            <div class=\"text-sm flex items-center justify-between\">\r\n              <p class=\"dark:text-white font-bold\">\r\n                {{ $t('Заработная плата') }}:\r\n              </p>\r\n              <p v-if=\"loadCurrentUser.user.salary\">{{ loadCurrentUser.user.salary + ' сум' }}</p>\r\n              <p v-else>{{ $t('Не назначена') }}</p>\r\n            </div>\r\n            <div v-if=\"company.company.name\" class=\"text-sm flex items-center justify-between\">\r\n              <p class=\"dark:text-white font-bold\">\r\n                {{ $t('Компания') }}:\r\n              </p>\r\n              <p>{{ company.company.name }}</p>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div v-if=\"!loadCurrentUser.user.id\">\r\n        <div class=\"bg-black w-full h-full absolute top-0 left-0 opacity-40 rounded-lg\"></div>\r\n        <ThePreloader></ThePreloader>\r\n      </div>\r\n    </div>\r\n    <Transition name=\"fade\">\r\n      <TheModal\r\n          v-if=\"showInfo\"\r\n          @showModal=\"showInfo = false; getCode = false\"\r\n      >\r\n        <form\r\n            @submit.prevent=\"loadCurrentUser.update_my({user: userEdit})\"\r\n            class=\"p-6 relative\"\r\n        >\r\n          <div>\r\n            <h2 class=\"text-2xl font-bold dark:text-white\">Личная информация</h2>\r\n          </div>\r\n          <div class=\"w-full mt-8\">\r\n            <div class=\"mt-10 flex items-center justify-around bg-whiteLilia p-8 rounded-3xl pb-6 border-b mb-6\">\r\n              <div class=\"flex items-center gap-3 dark:text-white border-r pr-10\">\r\n                <p class=\"dark:text-gray-200 font-bold text-md\">{{ $t('Должность' + ':') }} </p>\r\n                <p class=\"bg-white rounded-xl py-2 px-4 shadow\">{{ userEdit.position.name }}</p>\r\n              </div>\r\n              <div class=\"flex items-center gap-3 dark:text-white\">\r\n                <p class=\"dark:text-gray-200 font-bold text-md\">{{ $t('Заработная плата' + ':') }}</p>\r\n                <p\r\n                    v-if=\"userEdit.salary\"\r\n                    class=\"bg-white rounded-xl py-2 px-4 shadow\"\r\n                >\r\n                  {{ userEdit.salary + ' ' + $t('сум') }}\r\n                </p>\r\n                <p\r\n                    v-else\r\n                    class=\"bg-white rounded-xl py-2 px-4 shadow\"\r\n                >\r\n                  {{ $t('Нет зарплаты') }}\r\n                </p>\r\n              </div>\r\n            </div>\r\n            <div class=\"grid grid-cols-2 gap-5 mb-12\">\r\n              <TheInput\r\n                  class=\"w-full\"\r\n                  type=\"text\"\r\n                  label=\"Имя:\"\r\n                  v-model=\"userEdit.first_name\"\r\n              />\r\n              <TheInput\r\n                  type=\"date\"\r\n                  v-model=\"userEdit.date_of_birth\"\r\n                  label=\"Дата рождения:\"\r\n              />\r\n              <TheInput\r\n                  type=\"text\"\r\n                  v-model=\"userEdit.last_name\"\r\n                  label=\"Фамилия:\"\r\n              />\r\n              <TheInput\r\n                  type=\"tel\"\r\n                  v-model=\"userEdit.phone\"\r\n                  label=\"Телефон:\"\r\n              />\r\n            </div>\r\n\r\n            <!--            <div-->\r\n            <!--                class=\"gap-y-2 flex flex-col w-5/12 max-lg:w-full justify-center border p-4 rounded-xl shadow-md dark:shadow-none text-center\">-->\r\n            <!--              <div>-->\r\n            <!--                <p class=\"dark:text-white ml-1 tracking-widest font-bold text-sm\" v-if=\"!getCode\">-->\r\n            <!--                  {{ $t('Изменить номер') + ':' }}</p>-->\r\n            <!--                <p class=\"dark:text-white ml-1 tracking-widest font-bold text-sm\" v-else>{{ $t('Введите Код') + ':'}}</p>-->\r\n            <!--              </div>-->\r\n            <!--              <div class=\"flex gap-x-1 justify-center\" v-if=\"getCode\">-->\r\n            <!--                <TheInput type=\"text\" maxlength=\"1\" class=\"w-[40px] h-[45px] rounded text-center font-bold text-xl\"/>-->\r\n            <!--                <TheInput type=\"text\" maxlength=\"1\" class=\"w-[40px] h-[45px] rounded text-center font-bold text-xl\"/>-->\r\n            <!--                <TheInput type=\"text\" maxlength=\"1\" class=\"w-[40px] h-[45px] rounded text-center font-bold text-xl\"/>-->\r\n            <!--                <TheInput type=\"text\" maxlength=\"1\" class=\"w-[40px] h-[45px] rounded text-center font-bold text-xl\"/>-->\r\n            <!--              </div>-->\r\n            <!--              <div>-->\r\n            <!--                <TheButton t=\"button\" type=\"change\"-->\r\n            <!--                           class=\"p-2 text-sm rounded-xl border shadow-md dark:shadow-none font-bold tracking-widest\"-->\r\n            <!--                           @click=\"getCode = true;\" v-if=\"!getCode\">{{ $t('Изменить') }}-->\r\n            <!--                </TheButton>-->\r\n            <!--                <TheButton t=\"button\" type=\"change\"-->\r\n            <!--                           class=\"p-2 text-sm rounded-xl border shadow-md dark:shadow-none font-bold tracking-widest\"-->\r\n            <!--                           @click=\"getCode = true;\" v-if=\"getCode\">{{ $t('Подтвердить') }}-->\r\n            <!--                </TheButton>-->\r\n            <!--              </div>-->\r\n            <!--            </div>-->\r\n            <!--            <div class=\"my-10 flex max-lg:gap-x-2 max-md:flex-wrap max-md:justify-center justify-between\">-->\r\n            <!--              <div class=\"gap-y-2 flex flex-col w-5/12 max-lg:w-full justify-center\">-->\r\n            <!--                <p class=\"dark:text-white ml-1 tracking-widest  font-bold\">{{ $t('Дата рождения') + ':' }}</p>-->\r\n            <!--                <input type=\"date\" v-model=\"birth\"/>-->\r\n            <!--              </div>-->\r\n            <!--            </div>-->\r\n            <div\r\n                class=\"flex items-center justify-center gap-5\"\r\n            >\r\n              <TheButton\r\n                  class=\"!bg-porcelain !border !text-black rounded-full !w-3/12 !p-2\"\r\n                  t=\"button\"\r\n                  @click=\"showInfo = false; getCode = false\"\r\n              >\r\n                {{ $t('Отмена') }}\r\n              </TheButton>\r\n              <TheButton\r\n                  class=\"!bg-golden !border !text-black rounded-full !w-3/12 !p-2\"\r\n                  t=\"submit\"\r\n              >\r\n                {{ $t('Сохранить') }}\r\n              </TheButton>\r\n            </div>\r\n          </div>\r\n        </form>\r\n      </TheModal>\r\n    </Transition>\r\n  </div>\r\n\r\n</template>\r\n\r\n<style scoped lang=\"scss\">\r\n</style>",
+      "start": 1750670598830,
+      "end": 1750670599276,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750404002928,
-      "end": 1750404002928,
+      "start": 1750670599276,
+      "end": 1750670599276,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750404002928,
-      "end": 1750404002928,
+      "start": 1750670599276,
+      "end": 1750670599276,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750404002928,
-      "end": 1750404002928,
+      "start": 1750670599276,
+      "end": 1750670599276,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750404002928,
-      "end": 1750404002928,
+      "start": 1750670599276,
+      "end": 1750670599276,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750404002928,
-      "end": 1750404002928,
+      "start": 1750670599276,
+      "end": 1750670599276,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750404002928,
-      "end": 1750404002928,
+      "start": 1750670599276,
+      "end": 1750670599276,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1750404002928,
-      "end": 1750404002928,
+      "start": 1750670599276,
+      "end": 1750670599276,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1750404002928,
-      "end": 1750404002928,
+      "start": 1750670599276,
+      "end": 1750670599276,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1750404002928,
-      "end": 1750404002928,
+      "start": 1750670599276,
+      "end": 1750670599276,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1750404002928,
-      "end": 1750404002928,
+      "start": 1750670599276,
+      "end": 1750670599276,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1750404002928,
-      "end": 1750404002928,
+      "start": 1750670599276,
+      "end": 1750670599276,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "import _sfc_main from \"D:/projects/nuxt/workix-nuxt-front/components/Profile/ProfileUI/ProfileContentUserInfo.vue?vue&type=script&setup=true&lang.ts\";\nexport * from \"D:/projects/nuxt/workix-nuxt-front/components/Profile/ProfileUI/ProfileContentUserInfo.vue?vue&type=script&setup=true&lang.ts\";\nimport { useSSRContext as __vite_useSSRContext } from \"vue\";\nconst _sfc_setup = _sfc_main.setup;\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext();\n  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(\"components/Profile/ProfileUI/ProfileContentUserInfo.vue\");\n  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;\n};\nexport default _sfc_main;\n",
-      "start": 1750404002928,
-      "end": 1750404003080,
+      "start": 1750670599276,
+      "end": 1750670599573,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -86,212 +86,212 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1750404003081,
-      "end": 1750404003081,
+      "start": 1750670599574,
+      "end": 1750670599574,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750404003081,
-      "end": 1750404003081,
+      "start": 1750670599574,
+      "end": 1750670599574,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750404003081,
-      "end": 1750404003081,
+      "start": 1750670599574,
+      "end": 1750670599574,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750404003081,
-      "end": 1750404003081,
+      "start": 1750670599574,
+      "end": 1750670599574,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750404003081,
-      "end": 1750404003081,
+      "start": 1750670599574,
+      "end": 1750670599574,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1750404003081,
-      "end": 1750404003081,
+      "start": 1750670599574,
+      "end": 1750670599574,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750404003081,
-      "end": 1750404003081,
+      "start": 1750670599574,
+      "end": 1750670599574,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1750404003081,
-      "end": 1750404003081,
+      "start": 1750670599574,
+      "end": 1750670599574,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1750404003082,
-      "end": 1750404003082,
+      "start": 1750670599574,
+      "end": 1750670599574,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1750404003082,
-      "end": 1750404003082,
+      "start": 1750670599575,
+      "end": 1750670599575,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1750404003082,
-      "end": 1750404003082,
+      "start": 1750670599575,
+      "end": 1750670599575,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1750404003082,
-      "end": 1750404003082,
+      "start": 1750670599575,
+      "end": 1750670599575,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1750404003082,
-      "end": 1750404003082,
+      "start": 1750670599575,
+      "end": 1750670599575,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1750404003082,
-      "end": 1750404003082,
+      "start": 1750670599575,
+      "end": 1750670599575,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1750404003083,
-      "end": 1750404003083,
+      "start": 1750670599576,
+      "end": 1750670599576,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1750404003083,
-      "end": 1750404003083,
+      "start": 1750670599576,
+      "end": 1750670599576,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750404003083,
-      "end": 1750404003083,
+      "start": 1750670599576,
+      "end": 1750670599576,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750404003083,
-      "end": 1750404003083,
+      "start": 1750670599576,
+      "end": 1750670599576,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750404003084,
-      "end": 1750404003084,
+      "start": 1750670599576,
+      "end": 1750670599576,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750404003084,
-      "end": 1750404003084,
+      "start": 1750670599576,
+      "end": 1750670599576,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750404003084,
-      "end": 1750404003084,
+      "start": 1750670599576,
+      "end": 1750670599576,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750404003084,
-      "end": 1750404003084,
+      "start": 1750670599576,
+      "end": 1750670599576,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750404003085,
-      "end": 1750404003085,
+      "start": 1750670599577,
+      "end": 1750670599577,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750404003085,
-      "end": 1750404003085,
+      "start": 1750670599577,
+      "end": 1750670599577,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1750404003085,
-      "end": 1750404003087,
+      "start": 1750670599577,
+      "end": 1750670599579,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1750404003085,
-      "end": 1750404003087,
+      "start": 1750670599577,
+      "end": 1750670599579,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1750404003087,
-      "end": 1750404003087,
+      "start": 1750670599579,
+      "end": 1750670599579,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1750404003087,
-      "end": 1750404003087,
+      "start": 1750670599579,
+      "end": 1750670599579,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1750404003087,
-      "end": 1750404003087,
+      "start": 1750670599580,
+      "end": 1750670599580,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1750404003087,
-      "end": 1750404003087,
+      "start": 1750670599580,
+      "end": 1750670599580,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1750404003088,
-      "end": 1750404003088,
+      "start": 1750670599580,
+      "end": 1750670599580,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1750404003088,
-      "end": 1750404003088,
+      "start": 1750670599580,
+      "end": 1750670599580,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1750404003088,
-      "end": 1750404003088,
+      "start": 1750670599580,
+      "end": 1750670599580,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1750404003088,
-      "end": 1750404003088,
+      "start": 1750670599580,
+      "end": 1750670599580,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1750404003088,
-      "end": 1750404003088,
+      "start": 1750670599580,
+      "end": 1750670599580,
       "order": "normal"
     }
   ]

@@ -36,7 +36,7 @@ const containerStyle: CSSProperties = {
 const cardStyle = computed(() => ({
   transition: '.3s ease-out all',
   transform: `rotateX(${parallax.roll * 1}deg) rotateY(${
-    parallax.tilt * 1
+      parallax.tilt * 1
   }deg)`,
 }))
 
@@ -44,7 +44,7 @@ const container = ref(null)
 const {tilt, roll, source} = useParallax(container)
 
 const loadCurrentUser = useAuthStore()
- defineProps({
+defineProps({
   showInfo: {
     type: Boolean,
     default: false
@@ -60,13 +60,14 @@ const loadCurrentUser = useAuthStore()
   }
 })
 const birth = new Date(loadCurrentUser.user.date_of_birth).toLocaleDateString()
-onMounted(()=>{
+onMounted(() => {
   loadUserInfo.loadCurrentUserWorker()
 })
 </script>
 
 <template>
-  <div class="w-full p-6 relative bg-white shadow-cards max-sm:col-auto dark:shadow-md dark:border-t dark:border-t-gray-500 dark:shadow-gray-500 rounded-3xl hover:transform hover:-translate-y-2 transition-all duration-200">
+  <div
+      class="w-full p-6 relative bg-white shadow-cards max-sm:col-auto dark:shadow-md dark:border-t dark:border-t-gray-500 dark:shadow-gray-500 rounded-3xl hover:transform hover:-translate-y-2 transition-all duration-200">
     <div
     >
       <div class="flex items-center justify-between mb-8">
@@ -116,13 +117,13 @@ onMounted(()=>{
               <p class="dark:text-white font-bold">
                 {{ $t('Email') }}:
               </p>
-              <p v-if="loadCurrentUser.user.id">{{loadCurrentUser.user.email}}</p>
+              <p v-if="loadCurrentUser.user.id">{{ loadCurrentUser.user.email }}</p>
             </div>
             <div class="text-sm flex items-center justify-between">
               <p class="dark:text-white font-bold">
                 {{ $t('Номер') }}:
               </p>
-              <p>{{loadCurrentUser.user.phone?.slice(4, 13)}}</p>
+              <p>{{ loadCurrentUser.user.phone?.slice(4, 13) }}</p>
             </div>
             <div class="text-sm flex items-center justify-between">
               <p class="dark:text-white font-bold">
@@ -150,77 +151,105 @@ onMounted(()=>{
           v-if="showInfo"
           @showModal="showInfo = false; getCode = false"
       >
-        <form @submit.prevent="loadCurrentUser.update_my({user: userEdit})">
+        <form
+            @submit.prevent="loadCurrentUser.update_my({user: userEdit})"
+            class="p-6 relative"
+        >
           <div>
-            <h2 class="text-center text-xl tracking-widest font-bold dark:text-white">Личная информация</h2>
+            <h2 class="text-2xl font-bold dark:text-white">Личная информация</h2>
           </div>
-          <div class="w-full">
-            <div class="mt-10 flex items-center justify-around">
-              <div class="flex flex-col text-center w-3/12 dark:text-white tracking-widest">
-                <p class="dark:text-gray-200 text-gray-400 font-bold text-[14px]">{{ $t('Должность' + ':') }} </p>
-                <p class="">{{ userEdit.position.name }}</p>
+          <div class="w-full mt-8">
+            <div class="mt-10 flex items-center justify-around bg-whiteLilia p-8 rounded-3xl pb-6 border-b mb-6">
+              <div class="flex items-center gap-3 dark:text-white border-r pr-10">
+                <p class="dark:text-gray-200 font-bold text-md">{{ $t('Должность' + ':') }} </p>
+                <p class="bg-white rounded-xl py-2 px-4 shadow">{{ userEdit.position.name }}</p>
               </div>
-              <div class="flex flex-col text-center w-3/12 dark:text-white tracking-widest">
-                <p class="dark:text-gray-200 text-gray-400 font-bold text-[14px]">{{ $t('Заработная плата' + ':') }} </p>
-                <p class="">{{ userEdit.salary + ' ' + $t('сум') }}</p>
-              </div>
-            </div>
-            <div class="px-10 max-sm:px-0">
-              <div class="my-10 flex max-lg:gap-x-2 max-md:gap-y-2 max-md:flex-wrap max-md:justify-center justify-between">
-                <div class="gap-y-2 flex flex-col w-5/12 max-lg:w-full justify-center">
-                  <p class="dark:text-white ml-1 tracking-widest  font-bold">{{ $t('Имя') + ':' }}</p>
-                  <TheInput type="text"
-                            v-model="userEdit.first_name"/>
-                </div>
-                <div class="gap-y-2 flex flex-col w-5/12 max-lg:w-full justify-center">
-                  <p class="dark:text-white ml-1 tracking-widest  font-bold">{{ $t('Фамилия') + ':' }}</p>
-                  <TheInput type="text"
-                            v-model="userEdit.last_name"/>
-                </div>
-              </div>
-              <div class="my-10 flex max-lg:gap-x-2 max-lg:gap-y-4 max-lg:flex-wrap max-md:justify-center justify-between items-center">
-                <div class="gap-y-2 flex flex-col w-5/12 max-lg:w-full justify-center">
-                  <p class="dark:text-white ml-1 tracking-widest  font-bold">{{ $t('Телефон') + ':' }}</p>
-                  <TheInput type="tel"
-                            v-model="userEdit.phone"/>
-                </div>
-                <div
-                  class="gap-y-2 flex flex-col w-5/12 max-lg:w-full justify-center border p-4 rounded-xl shadow-md dark:shadow-none text-center">
-                  <div>
-                    <p class="dark:text-white ml-1 tracking-widest font-bold text-sm" v-if="!getCode">
-                      {{ $t('Изменить номер') + ':' }}</p>
-                    <p class="dark:text-white ml-1 tracking-widest font-bold text-sm" v-else>{{ $t('Введите Код') + ':'}}</p>
-                  </div>
-                  <div class="flex gap-x-1 justify-center" v-if="getCode">
-                    <TheInput type="text" maxlength="1" class="w-[40px] h-[45px] rounded text-center font-bold text-xl"/>
-                    <TheInput type="text" maxlength="1" class="w-[40px] h-[45px] rounded text-center font-bold text-xl"/>
-                    <TheInput type="text" maxlength="1" class="w-[40px] h-[45px] rounded text-center font-bold text-xl"/>
-                    <TheInput type="text" maxlength="1" class="w-[40px] h-[45px] rounded text-center font-bold text-xl"/>
-                  </div>
-                  <div>
-                    <TheButton t="button" type="change"
-                               class="p-2 text-sm rounded-xl border shadow-md dark:shadow-none font-bold tracking-widest"
-                               @click="getCode = true;" v-if="!getCode">{{ $t('Изменить') }}
-                    </TheButton>
-                    <TheButton t="button" type="change"
-                               class="p-2 text-sm rounded-xl border shadow-md dark:shadow-none font-bold tracking-widest"
-                               @click="getCode = true;" v-if="getCode">{{ $t('Подтвердить') }}
-                    </TheButton>
-                  </div>
-                </div>
-              </div>
-              <div class="my-10 flex max-lg:gap-x-2 max-md:flex-wrap max-md:justify-center justify-between">
-                <div class="gap-y-2 flex flex-col w-5/12 max-lg:w-full justify-center">
-                  <p class="dark:text-white ml-1 tracking-widest  font-bold">{{ $t('Дата рождения') + ':' }}</p>
-                  <input type="date" v-model="birth"/>
-                </div>
+              <div class="flex items-center gap-3 dark:text-white">
+                <p class="dark:text-gray-200 font-bold text-md">{{ $t('Заработная плата' + ':') }}</p>
+                <p
+                    v-if="userEdit.salary"
+                    class="bg-white rounded-xl py-2 px-4 shadow"
+                >
+                  {{ userEdit.salary + ' ' + $t('сум') }}
+                </p>
+                <p
+                    v-else
+                    class="bg-white rounded-xl py-2 px-4 shadow"
+                >
+                  {{ $t('Нет зарплаты') }}
+                </p>
               </div>
             </div>
-            <div class="flex justify-around max-sm:flex-col max-sm:gap-y-2">
-              <TheButton class="w-4/12 max-sm:w-full py-2 rounded-full" t="button" type="danger"
-                         @click="showInfo = false; getCode = false">{{ $t('Отмена') }}
+            <div class="grid grid-cols-2 gap-5 mb-12">
+              <TheInput
+                  class="w-full"
+                  type="text"
+                  label="Имя:"
+                  v-model="userEdit.first_name"
+              />
+              <TheInput
+                  type="date"
+                  v-model="userEdit.date_of_birth"
+                  label="Дата рождения:"
+              />
+              <TheInput
+                  type="text"
+                  v-model="userEdit.last_name"
+                  label="Фамилия:"
+              />
+              <TheInput
+                  type="tel"
+                  v-model="userEdit.phone"
+                  label="Телефон:"
+              />
+            </div>
+
+            <!--            <div-->
+            <!--                class="gap-y-2 flex flex-col w-5/12 max-lg:w-full justify-center border p-4 rounded-xl shadow-md dark:shadow-none text-center">-->
+            <!--              <div>-->
+            <!--                <p class="dark:text-white ml-1 tracking-widest font-bold text-sm" v-if="!getCode">-->
+            <!--                  {{ $t('Изменить номер') + ':' }}</p>-->
+            <!--                <p class="dark:text-white ml-1 tracking-widest font-bold text-sm" v-else>{{ $t('Введите Код') + ':'}}</p>-->
+            <!--              </div>-->
+            <!--              <div class="flex gap-x-1 justify-center" v-if="getCode">-->
+            <!--                <TheInput type="text" maxlength="1" class="w-[40px] h-[45px] rounded text-center font-bold text-xl"/>-->
+            <!--                <TheInput type="text" maxlength="1" class="w-[40px] h-[45px] rounded text-center font-bold text-xl"/>-->
+            <!--                <TheInput type="text" maxlength="1" class="w-[40px] h-[45px] rounded text-center font-bold text-xl"/>-->
+            <!--                <TheInput type="text" maxlength="1" class="w-[40px] h-[45px] rounded text-center font-bold text-xl"/>-->
+            <!--              </div>-->
+            <!--              <div>-->
+            <!--                <TheButton t="button" type="change"-->
+            <!--                           class="p-2 text-sm rounded-xl border shadow-md dark:shadow-none font-bold tracking-widest"-->
+            <!--                           @click="getCode = true;" v-if="!getCode">{{ $t('Изменить') }}-->
+            <!--                </TheButton>-->
+            <!--                <TheButton t="button" type="change"-->
+            <!--                           class="p-2 text-sm rounded-xl border shadow-md dark:shadow-none font-bold tracking-widest"-->
+            <!--                           @click="getCode = true;" v-if="getCode">{{ $t('Подтвердить') }}-->
+            <!--                </TheButton>-->
+            <!--              </div>-->
+            <!--            </div>-->
+            <!--            <div class="my-10 flex max-lg:gap-x-2 max-md:flex-wrap max-md:justify-center justify-between">-->
+            <!--              <div class="gap-y-2 flex flex-col w-5/12 max-lg:w-full justify-center">-->
+            <!--                <p class="dark:text-white ml-1 tracking-widest  font-bold">{{ $t('Дата рождения') + ':' }}</p>-->
+            <!--                <input type="date" v-model="birth"/>-->
+            <!--              </div>-->
+            <!--            </div>-->
+            <div
+                class="flex items-center justify-center gap-5"
+            >
+              <TheButton
+                  class="!bg-porcelain !border !text-black rounded-full !w-3/12 !p-2"
+                  t="button"
+                  @click="showInfo = false; getCode = false"
+              >
+                {{ $t('Отмена') }}
               </TheButton>
-              <TheButton class="w-4/12 max-sm:w-full py-2 rounded-full" t="submit" type="success">{{ $t('Сохранить') }}</TheButton>
+              <TheButton
+                  class="!bg-golden !border !text-black rounded-full !w-3/12 !p-2"
+                  t="submit"
+              >
+                {{ $t('Сохранить') }}
+              </TheButton>
             </div>
           </div>
         </form>

@@ -22,6 +22,13 @@ defineProps({
           '!w-[400px] dark:!bg-gray-700 !p-0': type === 'resizeInfoWindow'
         }"
       >
+        <button
+            type="button"
+            class="bg-porcelain cursor-pointer w-[40px] h-[40px] flex items-center justify-center rounded-full absolute top-6 right-6 z-10"
+            @click="$emit('showModal')"
+        >
+          <img src="/icons/modal-exit.svg" alt="modal-exit">
+        </button>
         <slot />
       </div>
     </div>
