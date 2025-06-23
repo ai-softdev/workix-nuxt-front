@@ -4,44 +4,44 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { unref as _unref, toDisplayString as _toDisplayString, normalizeClass as _normalizeClass, createElementVNode as _createElementVNode, createVNode as _createVNode, renderList as _renderList, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock, createTextVNode as _createTextVNode, withCtx as _withCtx, createBlock as _createBlock, createCommentVNode as _createCommentVNode, isRef as _isRef, vModelSelect as _vModelSelect, withDirectives as _withDirectives } from \"vue\"\n\nconst _hoisted_1 = { class: \"p-6 rounded-3xl shadow-cards bg-white mb-8 max-[680px]:p-3\" }\nconst _hoisted_2 = { class: \"flex items-center gap-10 justify-between max-[680px]:flex-col\" }\nconst _hoisted_3 = { class: \"flex items-center gap-x-3 p-2 rounded-full border w-fit max-[680px]:gap-1\" }\nconst _hoisted_4 = { class: \"flex gap-x-2 gap-y-2 flex-wrap mt-6\" }\nconst _hoisted_5 = {\n  key: 0,\n  class: \"flex items-center justify-center text-center\"\n}\nconst _hoisted_6 = /*#__PURE__*/_createElementVNode(\"p\", { class: \"text-gray-500 text-center w-full py-10\" }, \" Документов пока нет \", -1)\nconst _hoisted_7 = [\n  _hoisted_6\n]\nconst _hoisted_8 = { class: \"w-full flex items-center justify-end gap-4 pr-10 pb-5 max-md:pr-3 max-md:flex-col max-md:items-end\" }\nconst _hoisted_9 = { class: \"flex items-center gap-3\" }\nconst _hoisted_10 = /*#__PURE__*/_createElementVNode(\"p\", null, \"Строк на странице:\", -1)\nconst _hoisted_11 = [\"value\"]\n\nimport {useDocumentStore} from \"~/stores/documents\";\r\nimport DocumentContentListElem from \"~/components/documents/DocumentContent/DocumentContentList/DocumentContentListElem.vue\";\r\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\r\n\r\nimport Paginate from 'vuejs-paginate-next';\r\nimport {useRoute, useRouter} from \"vue-router\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'DocumentContentList',\n  setup(__props) {\n\r\nconst route = useRoute();\r\nconst router = useRouter();\r\nconst documentStore = useDocumentStore()\r\nconst pageCount = ref(0)\r\nconst limitItems = ref([5, 10, 20, 30, 50])\r\nconst page = ref(Number(route.query.page) || 1)\r\nconst limit = ref(Number(route.query.limit) || 5)\r\nconst query = ref(route.query.query || '')\r\nconst type = ref((route.query.type as string) || 'from-me')\r\n\r\nconst clickCallback = (pageNum: number) => {\r\n  page.value = pageNum;\r\n  updateQueryParams();\r\n};\r\n\r\nconst changePageLimit = () => {\r\n  page.value = 1;\r\n  updateQueryParams();\r\n};\r\n\r\nconst changeType = (newType: string) => {\r\n  type.value = newType;\r\n  page.value = 1;\r\n  updateQueryParams();\r\n};\r\n\r\nconst updateQueryParams = () => {\r\n  router.push({\r\n    query: {\r\n      page: page.value,\r\n      limit: limit.value,\r\n      query: query.value || undefined,\r\n      type: type.value || undefined,\r\n    }\r\n  });\r\n  documentStore.loadAllDocument({\r\n    page: page.value,\r\n    limit: limit.value,\r\n    query: query.value,\r\n    type: type.value,\r\n  });\r\n};\r\n\r\nwatch(() => documentStore.documentList, (newValue) => {\r\n  if (newValue && newValue.count && limit.value) {\r\n    pageCount.value = Math.ceil(newValue.count / limit.value);\r\n  }\r\n}, { immediate: true });\r\n\r\n\r\n  // documentStore.loadAllDocument({page: 1, limit: 5, type: \"from-me\"})\r\n\nreturn (_ctx: any,_cache: any) => {\n  return (_openBlock(), _createElementBlock(\"div\", null, [\n    _createElementVNode(\"div\", _hoisted_1, [\n      _createElementVNode(\"div\", _hoisted_2, [\n        _createElementVNode(\"div\", _hoisted_3, [\n          _createElementVNode(\"button\", {\n            class: _normalizeClass([\"text-sm max-[680px]:p-3\", ['py-3 px-10 rounded-full font-medium', _unref(type) === 'from-me' ? 'bg-golden' : '']]),\n            onClick: _cache[0] || (_cache[0] = ($event: any) => (changeType('from-me')))\n          }, _toDisplayString(_ctx.$t('Мои документы')), 3),\n          _createElementVNode(\"button\", {\n            class: _normalizeClass([\"text-sm max-[680px]:p-3\", ['py-3 px-10 rounded-full font-medium', _unref(type) === 'through-me' ? 'bg-golden' : '']]),\n            onClick: _cache[1] || (_cache[1] = ($event: any) => (changeType('through-me')))\n          }, _toDisplayString(_ctx.$t('Ожидающие подтверждения')), 3)\n        ]),\n        _createVNode(TheSearch, {\n          class: \"w-4/12 max-[680px]:w-full\",\n          \"model-value\": _unref(query),\n          \"onUpdate:modelValue\": _cache[2] || (_cache[2] = ($event: any) => (query.value = $event)),\n          onSearch: updateQueryParams\n        }, null, 8, [\"model-value\"])\n      ]),\n      _createElementVNode(\"div\", _hoisted_4, [\n        (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(documentStore).get_all_document.results, (item) => {\n          return (_openBlock(), _createBlock(DocumentContentListElem, { item: item }, {\n            documentTitle: _withCtx(() => [\n              _createTextVNode(_toDisplayString(item.title), 1)\n            ]),\n            documentFileName: _withCtx(() => [\n              _createTextVNode(_toDisplayString(item.file_name), 1)\n            ]),\n            documentUserName: _withCtx(() => [\n              _createTextVNode(_toDisplayString(item.author.first_name + ' ' + item.author.last_name), 1)\n            ]),\n            _: 2\n          }, 1032, [\"item\"]))\n        }), 256)),\n        (!_unref(documentStore).documentList.results?.length)\n          ? (_openBlock(), _createElementBlock(\"div\", _hoisted_5, _hoisted_7))\n          : _createCommentVNode(\"\", true)\n      ])\n    ]),\n    _createElementVNode(\"div\", _hoisted_8, [\n      _createVNode(_unref(Paginate), {\n        \"page-count\": _unref(pageCount),\n        \"page-range\": 3,\n        \"margin-pages\": 2,\n        \"click-handler\": clickCallback,\n        \"prev-text\": '<',\n        \"next-text\": '>',\n        \"container-class\": 'pagination',\n        \"page-class\": 'page-item',\n        \"force-page\": _unref(page)\n      }, null, 8, [\"page-count\", \"force-page\"]),\n      _createElementVNode(\"div\", _hoisted_9, [\n        _hoisted_10,\n        _withDirectives(_createElementVNode(\"select\", {\n          \"onUpdate:modelValue\": _cache[3] || (_cache[3] = ($event: any) => (_isRef(limit) ? (limit).value = $event : null)),\n          onChange: changePageLimit,\n          class: \"w-fit p-2.5 rounded-md border bg-white dark:bg-bgWhite text-black\"\n        }, [\n          (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(limitItems), (item) => {\n            return (_openBlock(), _createElementBlock(\"option\", {\n              key: item,\n              value: item\n            }, _toDisplayString(item), 9, _hoisted_11))\n          }), 128))\n        ], 544), [\n          [_vModelSelect, _unref(limit)]\n        ])\n      ])\n    ])\n  ]))\n}\n}\n\n})",
-      "start": 1750670544902,
-      "end": 1750670544902
+      "start": 1750671051699,
+      "end": 1750671051699
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750670544906,
-      "end": 1750670544906,
+      "start": 1750671051699,
+      "end": 1750671051699,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750670544906,
-      "end": 1750670544906,
+      "start": 1750671051699,
+      "end": 1750671051699,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750670544906,
-      "end": 1750670544906,
+      "start": 1750671051699,
+      "end": 1750671051699,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1750670544906,
-      "end": 1750670544906,
+      "start": 1750671051699,
+      "end": 1750671051699,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1750670544906,
-      "end": 1750670544906,
+      "start": 1750671051699,
+      "end": 1750671051699,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, toDisplayString as _toDisplayString, normalizeClass as _normalizeClass, createElementVNode as _createElementVNode, createVNode as _createVNode, renderList as _renderList, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock, createTextVNode as _createTextVNode, withCtx as _withCtx, createBlock as _createBlock, createCommentVNode as _createCommentVNode, isRef as _isRef, vModelSelect as _vModelSelect, withDirectives as _withDirectives } from \"vue\";\nconst _hoisted_1 = { class: \"p-6 rounded-3xl shadow-cards bg-white mb-8 max-[680px]:p-3\" };\nconst _hoisted_2 = { class: \"flex items-center gap-10 justify-between max-[680px]:flex-col\" };\nconst _hoisted_3 = { class: \"flex items-center gap-x-3 p-2 rounded-full border w-fit max-[680px]:gap-1\" };\nconst _hoisted_4 = { class: \"flex gap-x-2 gap-y-2 flex-wrap mt-6\" };\nconst _hoisted_5 = {\n  key: 0,\n  class: \"flex items-center justify-center text-center\"\n};\nconst _hoisted_6 = /* @__PURE__ */ _createElementVNode(\"p\", { class: \"text-gray-500 text-center w-full py-10\" }, \" Документов пока нет \", -1);\nconst _hoisted_7 = [\n  _hoisted_6\n];\nconst _hoisted_8 = { class: \"w-full flex items-center justify-end gap-4 pr-10 pb-5 max-md:pr-3 max-md:flex-col max-md:items-end\" };\nconst _hoisted_9 = { class: \"flex items-center gap-3\" };\nconst _hoisted_10 = /* @__PURE__ */ _createElementVNode(\"p\", null, \"Строк на странице:\", -1);\nconst _hoisted_11 = [\"value\"];\nimport { useDocumentStore } from \"~/stores/documents\";\nimport DocumentContentListElem from \"~/components/documents/DocumentContent/DocumentContentList/DocumentContentListElem.vue\";\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\nimport Paginate from \"vuejs-paginate-next\";\nimport { useRoute, useRouter } from \"vue-router\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"DocumentContentList\",\n  setup(__props) {\n    const route = useRoute();\n    const router = useRouter();\n    const documentStore = useDocumentStore();\n    const pageCount = ref(0);\n    const limitItems = ref([5, 10, 20, 30, 50]);\n    const page = ref(Number(route.query.page) || 1);\n    const limit = ref(Number(route.query.limit) || 5);\n    const query = ref(route.query.query || \"\");\n    const type = ref(route.query.type || \"from-me\");\n    const clickCallback = (pageNum) => {\n      page.value = pageNum;\n      updateQueryParams();\n    };\n    const changePageLimit = () => {\n      page.value = 1;\n      updateQueryParams();\n    };\n    const changeType = (newType) => {\n      type.value = newType;\n      page.value = 1;\n      updateQueryParams();\n    };\n    const updateQueryParams = () => {\n      router.push({\n        query: {\n          page: page.value,\n          limit: limit.value,\n          query: query.value || void 0,\n          type: type.value || void 0\n        }\n      });\n      documentStore.loadAllDocument({\n        page: page.value,\n        limit: limit.value,\n        query: query.value,\n        type: type.value\n      });\n    };\n    watch(() => documentStore.documentList, (newValue) => {\n      if (newValue && newValue.count && limit.value) {\n        pageCount.value = Math.ceil(newValue.count / limit.value);\n      }\n    }, { immediate: true });\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", null, [\n        _createElementVNode(\"div\", _hoisted_1, [\n          _createElementVNode(\"div\", _hoisted_2, [\n            _createElementVNode(\"div\", _hoisted_3, [\n              _createElementVNode(\"button\", {\n                class: _normalizeClass([\"text-sm max-[680px]:p-3\", [\"py-3 px-10 rounded-full font-medium\", _unref(type) === \"from-me\" ? \"bg-golden\" : \"\"]]),\n                onClick: _cache[0] || (_cache[0] = ($event) => changeType(\"from-me\"))\n              }, _toDisplayString(_ctx.$t(\"Мои документы\")), 3),\n              _createElementVNode(\"button\", {\n                class: _normalizeClass([\"text-sm max-[680px]:p-3\", [\"py-3 px-10 rounded-full font-medium\", _unref(type) === \"through-me\" ? \"bg-golden\" : \"\"]]),\n                onClick: _cache[1] || (_cache[1] = ($event) => changeType(\"through-me\"))\n              }, _toDisplayString(_ctx.$t(\"Ожидающие подтверждения\")), 3)\n            ]),\n            _createVNode(TheSearch, {\n              class: \"w-4/12 max-[680px]:w-full\",\n              \"model-value\": _unref(query),\n              \"onUpdate:modelValue\": _cache[2] || (_cache[2] = ($event) => query.value = $event),\n              onSearch: updateQueryParams\n            }, null, 8, [\"model-value\"])\n          ]),\n          _createElementVNode(\"div\", _hoisted_4, [\n            (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(documentStore).get_all_document.results, (item) => {\n              return _openBlock(), _createBlock(DocumentContentListElem, { item }, {\n                documentTitle: _withCtx(() => [\n                  _createTextVNode(_toDisplayString(item.title), 1)\n                ]),\n                documentFileName: _withCtx(() => [\n                  _createTextVNode(_toDisplayString(item.file_name), 1)\n                ]),\n                documentUserName: _withCtx(() => [\n                  _createTextVNode(_toDisplayString(item.author.first_name + \" \" + item.author.last_name), 1)\n                ]),\n                _: 2\n              }, 1032, [\"item\"]);\n            }), 256)),\n            !_unref(documentStore).documentList.results?.length ? (_openBlock(), _createElementBlock(\"div\", _hoisted_5, _hoisted_7)) : _createCommentVNode(\"\", true)\n          ])\n        ]),\n        _createElementVNode(\"div\", _hoisted_8, [\n          _createVNode(_unref(Paginate), {\n            \"page-count\": _unref(pageCount),\n            \"page-range\": 3,\n            \"margin-pages\": 2,\n            \"click-handler\": clickCallback,\n            \"prev-text\": \"<\",\n            \"next-text\": \">\",\n            \"container-class\": \"pagination\",\n            \"page-class\": \"page-item\",\n            \"force-page\": _unref(page)\n          }, null, 8, [\"page-count\", \"force-page\"]),\n          _createElementVNode(\"div\", _hoisted_9, [\n            _hoisted_10,\n            _withDirectives(_createElementVNode(\"select\", {\n              \"onUpdate:modelValue\": _cache[3] || (_cache[3] = ($event) => _isRef(limit) ? limit.value = $event : null),\n              onChange: changePageLimit,\n              class: \"w-fit p-2.5 rounded-md border bg-white dark:bg-bgWhite text-black\"\n            }, [\n              (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(limitItems), (item) => {\n                return _openBlock(), _createElementBlock(\"option\", {\n                  key: item,\n                  value: item\n                }, _toDisplayString(item), 9, _hoisted_11);\n              }), 128))\n            ], 544), [\n              [_vModelSelect, _unref(limit)]\n            ])\n          ])\n        ])\n      ]);\n    };\n  }\n});\n",
-      "start": 1750670544907,
-      "end": 1750670545365,
+      "start": 1750671051699,
+      "end": 1750671051796,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -57,141 +57,141 @@
     },
     {
       "name": "vite:json",
-      "start": 1750670545365,
-      "end": 1750670545365,
+      "start": 1750671051796,
+      "end": 1750671051796,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1750670545365,
-      "end": 1750670545365,
+      "start": 1750671051796,
+      "end": 1750671051796,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1750670545365,
-      "end": 1750670545365,
+      "start": 1750671051796,
+      "end": 1750671051796,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1750670545365,
-      "end": 1750670545365,
+      "start": 1750671051796,
+      "end": 1750671051796,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750670545366,
-      "end": 1750670545366,
+      "start": 1750671051796,
+      "end": 1750671051796,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750670545366,
-      "end": 1750670545366,
+      "start": 1750671051796,
+      "end": 1750671051796,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1750670545366,
-      "end": 1750670545366,
+      "start": 1750671051796,
+      "end": 1750671051796,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1750670545366,
-      "end": 1750670545367,
+      "start": 1750671051796,
+      "end": 1750671051796,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750670545367,
-      "end": 1750670545367,
+      "start": 1750671051796,
+      "end": 1750671051796,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1750670545367,
-      "end": 1750670545367,
+      "start": 1750671051796,
+      "end": 1750671051796,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1750670545367,
-      "end": 1750670545367,
+      "start": 1750671051796,
+      "end": 1750671051796,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1750670545367,
-      "end": 1750670545367,
+      "start": 1750671051796,
+      "end": 1750671051796,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1750670545367,
-      "end": 1750670545367,
+      "start": 1750671051796,
+      "end": 1750671051796,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1750670545368,
-      "end": 1750670545368,
+      "start": 1750671051796,
+      "end": 1750671051797,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1750670545368,
-      "end": 1750670545368,
+      "start": 1750671051797,
+      "end": 1750671051797,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1750670545368,
-      "end": 1750670545368,
+      "start": 1750671051797,
+      "end": 1750671051797,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1750670545368,
-      "end": 1750670545368,
+      "start": 1750671051797,
+      "end": 1750671051797,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1750670545368,
-      "end": 1750670545368,
+      "start": 1750671051797,
+      "end": 1750671051797,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750670545368,
-      "end": 1750670545369,
+      "start": 1750671051797,
+      "end": 1750671051797,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750670545369,
-      "end": 1750670545370,
+      "start": 1750671051797,
+      "end": 1750671051797,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750670545370,
-      "end": 1750670545370,
+      "start": 1750671051797,
+      "end": 1750671051797,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750670545371,
-      "end": 1750670545371,
+      "start": 1750671051797,
+      "end": 1750671051797,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref, watch } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, toDisplayString as _toDisplayString, normalizeClass as _normalizeClass, createElementVNode as _createElementVNode, createVNode as _createVNode, renderList as _renderList, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock, createTextVNode as _createTextVNode, withCtx as _withCtx, createBlock as _createBlock, createCommentVNode as _createCommentVNode, isRef as _isRef, vModelSelect as _vModelSelect, withDirectives as _withDirectives } from \"vue\";\nconst _hoisted_1 = { class: \"p-6 rounded-3xl shadow-cards bg-white mb-8 max-[680px]:p-3\" };\nconst _hoisted_2 = { class: \"flex items-center gap-10 justify-between max-[680px]:flex-col\" };\nconst _hoisted_3 = { class: \"flex items-center gap-x-3 p-2 rounded-full border w-fit max-[680px]:gap-1\" };\nconst _hoisted_4 = { class: \"flex gap-x-2 gap-y-2 flex-wrap mt-6\" };\nconst _hoisted_5 = {\n  key: 0,\n  class: \"flex items-center justify-center text-center\"\n};\nconst _hoisted_6 = /* @__PURE__ */ _createElementVNode(\"p\", { class: \"text-gray-500 text-center w-full py-10\" }, \" Документов пока нет \", -1);\nconst _hoisted_7 = [\n  _hoisted_6\n];\nconst _hoisted_8 = { class: \"w-full flex items-center justify-end gap-4 pr-10 pb-5 max-md:pr-3 max-md:flex-col max-md:items-end\" };\nconst _hoisted_9 = { class: \"flex items-center gap-3\" };\nconst _hoisted_10 = /* @__PURE__ */ _createElementVNode(\"p\", null, \"Строк на странице:\", -1);\nconst _hoisted_11 = [\"value\"];\nimport { useDocumentStore } from \"~/stores/documents\";\nimport DocumentContentListElem from \"~/components/documents/DocumentContent/DocumentContentList/DocumentContentListElem.vue\";\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\nimport Paginate from \"vuejs-paginate-next\";\nimport { useRoute, useRouter } from \"vue-router\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"DocumentContentList\",\n  setup(__props) {\n    const route = useRoute();\n    const router = useRouter();\n    const documentStore = useDocumentStore();\n    const pageCount = ref(0);\n    const limitItems = ref([5, 10, 20, 30, 50]);\n    const page = ref(Number(route.query.page) || 1);\n    const limit = ref(Number(route.query.limit) || 5);\n    const query = ref(route.query.query || \"\");\n    const type = ref(route.query.type || \"from-me\");\n    const clickCallback = (pageNum) => {\n      page.value = pageNum;\n      updateQueryParams();\n    };\n    const changePageLimit = () => {\n      page.value = 1;\n      updateQueryParams();\n    };\n    const changeType = (newType) => {\n      type.value = newType;\n      page.value = 1;\n      updateQueryParams();\n    };\n    const updateQueryParams = () => {\n      router.push({\n        query: {\n          page: page.value,\n          limit: limit.value,\n          query: query.value || void 0,\n          type: type.value || void 0\n        }\n      });\n      documentStore.loadAllDocument({\n        page: page.value,\n        limit: limit.value,\n        query: query.value,\n        type: type.value\n      });\n    };\n    watch(() => documentStore.documentList, (newValue) => {\n      if (newValue && newValue.count && limit.value) {\n        pageCount.value = Math.ceil(newValue.count / limit.value);\n      }\n    }, { immediate: true });\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", null, [\n        _createElementVNode(\"div\", _hoisted_1, [\n          _createElementVNode(\"div\", _hoisted_2, [\n            _createElementVNode(\"div\", _hoisted_3, [\n              _createElementVNode(\"button\", {\n                class: _normalizeClass([\"text-sm max-[680px]:p-3\", [\"py-3 px-10 rounded-full font-medium\", _unref(type) === \"from-me\" ? \"bg-golden\" : \"\"]]),\n                onClick: _cache[0] || (_cache[0] = ($event) => changeType(\"from-me\"))\n              }, _toDisplayString(_ctx.$t(\"Мои документы\")), 3),\n              _createElementVNode(\"button\", {\n                class: _normalizeClass([\"text-sm max-[680px]:p-3\", [\"py-3 px-10 rounded-full font-medium\", _unref(type) === \"through-me\" ? \"bg-golden\" : \"\"]]),\n                onClick: _cache[1] || (_cache[1] = ($event) => changeType(\"through-me\"))\n              }, _toDisplayString(_ctx.$t(\"Ожидающие подтверждения\")), 3)\n            ]),\n            _createVNode(TheSearch, {\n              class: \"w-4/12 max-[680px]:w-full\",\n              \"model-value\": _unref(query),\n              \"onUpdate:modelValue\": _cache[2] || (_cache[2] = ($event) => query.value = $event),\n              onSearch: updateQueryParams\n            }, null, 8, [\"model-value\"])\n          ]),\n          _createElementVNode(\"div\", _hoisted_4, [\n            (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(documentStore).get_all_document.results, (item) => {\n              return _openBlock(), _createBlock(DocumentContentListElem, { item }, {\n                documentTitle: _withCtx(() => [\n                  _createTextVNode(_toDisplayString(item.title), 1)\n                ]),\n                documentFileName: _withCtx(() => [\n                  _createTextVNode(_toDisplayString(item.file_name), 1)\n                ]),\n                documentUserName: _withCtx(() => [\n                  _createTextVNode(_toDisplayString(item.author.first_name + \" \" + item.author.last_name), 1)\n                ]),\n                _: 2\n              }, 1032, [\"item\"]);\n            }), 256)),\n            !_unref(documentStore).documentList.results?.length ? (_openBlock(), _createElementBlock(\"div\", _hoisted_5, _hoisted_7)) : _createCommentVNode(\"\", true)\n          ])\n        ]),\n        _createElementVNode(\"div\", _hoisted_8, [\n          _createVNode(_unref(Paginate), {\n            \"page-count\": _unref(pageCount),\n            \"page-range\": 3,\n            \"margin-pages\": 2,\n            \"click-handler\": clickCallback,\n            \"prev-text\": \"<\",\n            \"next-text\": \">\",\n            \"container-class\": \"pagination\",\n            \"page-class\": \"page-item\",\n            \"force-page\": _unref(page)\n          }, null, 8, [\"page-count\", \"force-page\"]),\n          _createElementVNode(\"div\", _hoisted_9, [\n            _hoisted_10,\n            _withDirectives(_createElementVNode(\"select\", {\n              \"onUpdate:modelValue\": _cache[3] || (_cache[3] = ($event) => _isRef(limit) ? limit.value = $event : null),\n              onChange: changePageLimit,\n              class: \"w-fit p-2.5 rounded-md border bg-white dark:bg-bgWhite text-black\"\n            }, [\n              (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(limitItems), (item) => {\n                return _openBlock(), _createElementBlock(\"option\", {\n                  key: item,\n                  value: item\n                }, _toDisplayString(item), 9, _hoisted_11);\n              }), 128))\n            ], 544), [\n              [_vModelSelect, _unref(limit)]\n            ])\n          ])\n        ])\n      ]);\n    };\n  }\n});\n",
-      "start": 1750670545371,
-      "end": 1750670545388,
+      "start": 1750671051797,
+      "end": 1750671051802,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -204,50 +204,50 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1750670545388,
-      "end": 1750670545388,
+      "start": 1750671051803,
+      "end": 1750671051803,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1750670545388,
-      "end": 1750670545388,
+      "start": 1750671051803,
+      "end": 1750671051803,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1750670545388,
-      "end": 1750670545388,
+      "start": 1750671051803,
+      "end": 1750671051803,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1750670545389,
-      "end": 1750670545389,
+      "start": 1750671051803,
+      "end": 1750671051803,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1750670545389,
-      "end": 1750670545389,
+      "start": 1750671051803,
+      "end": 1750671051803,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1750670545390,
-      "end": 1750670545390,
+      "start": 1750671051803,
+      "end": 1750671051803,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1750670545390,
-      "end": 1750670545390,
+      "start": 1750671051803,
+      "end": 1750671051804,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1750670545390,
-      "end": 1750670545390,
+      "start": 1750671051804,
+      "end": 1750671051804,
       "order": "normal"
     }
   ]

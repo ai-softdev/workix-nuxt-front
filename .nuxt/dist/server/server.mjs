@@ -986,7 +986,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$e == null ? void 0 : __nuxt_page_meta$e.redirect,
-        component: () => import("./_nuxt/profile-BSus-vJk.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/profile-C5fcHsKB.js").then((m) => m.default || m)
       },
       {
         name: "base-sales",

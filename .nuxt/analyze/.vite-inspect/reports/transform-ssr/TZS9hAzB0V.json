@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, unref as _unref, resolveComponent as _resolveComponent } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\"\n\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\r\nimport TheBreadcrumbs from \"~/components/UI/TheBreadcrumbs.vue\";\r\nimport TheInput from \"~/components/UI/TheInput.vue\";\r\nimport {useSales} from \"~/stores/sales\";\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'index',\n  __ssrInlineRender: true,\n  setup(__props) {\n\r\n\r\nconst sales = useSales();\r\n\r\nlet salesForm = ref({\r\n  name: '',\r\n  sales_count: '',\r\n  price_per_count: '',\r\n  vat: '',\r\n  company_sale_to: '',\r\n  agent: {\r\n    first_name: '',\r\n    last_name: '',\r\n    patronymic: '',\r\n  }\r\n})\r\n\r\nconst createItem = () => {\r\n  sales.createItem({ form: salesForm.value })\r\n      .then(() => clearForm())\r\n      .catch((error) => console.error(\"Ошибка при создании товара:\", error));\r\n};\r\n\r\nconst clearForm = () => {\r\n  salesForm.value = {\r\n    name: \"\",\r\n    sales_count: \"\",\r\n    price_per_count: \"\",\r\n    vat: \"\",\r\n    company_sale_to: \"\",\r\n    agent: {\r\n      first_name: \"\",\r\n      last_name: \"\",\r\n      patronymic: \"\",\r\n    },\r\n  };\r\n};\r\n\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  const _component_UITheButton = _resolveComponent(\"UITheButton\")!\n\n  _push(`<div${_ssrRenderAttrs(_attrs)}>`)\n  _push(_ssrRenderComponent(TheTextContent, null, {\n    default: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(`${_ssrInterpolate(_ctx.$t('Страница создания товара'))}`)\n      } else {\n        return [\n          _createTextVNode(_toDisplayString(_ctx.$t('Страница создания товара')), 1)\n        ]\n      }\n    }),\n    _: 1\n  }, _parent))\n  _push(`<div class=\"flex items-center gap-x-4 max-lg:mt-5\">`)\n  _push(_ssrRenderComponent(TheBreadcrumbs, { \"breadcrumb-link\": '/base/profile' }, {\n    default: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(`${_ssrInterpolate(_ctx.$t('Профиль'))}`)\n      } else {\n        return [\n          _createTextVNode(_toDisplayString(_ctx.$t('Профиль')), 1)\n        ]\n      }\n    }),\n    _: 1\n  }, _parent))\n  _push(`<div><svg width=\"15px\" height=\"15px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path class=\"dark:stroke-white stroke-black\" d=\"M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5\" stroke-width=\"2\" stroke-linecap=\"round\"></path></svg></div>`)\n  _push(_ssrRenderComponent(TheBreadcrumbs, { \"breadcrumb-link\": '/base/sales' }, {\n    default: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(`${_ssrInterpolate(_ctx.$t('Продажи'))}`)\n      } else {\n        return [\n          _createTextVNode(_toDisplayString(_ctx.$t('Продажи')), 1)\n        ]\n      }\n    }),\n    _: 1\n  }, _parent))\n  _push(`<div><svg width=\"15px\" height=\"15px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path class=\"dark:stroke-white stroke-black\" d=\"M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5\" stroke-width=\"2\" stroke-linecap=\"round\"></path></svg></div>`)\n  _push(_ssrRenderComponent(TheBreadcrumbs, null, {\n    default: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(`${_ssrInterpolate(_ctx.$t('Создание товара'))}`)\n      } else {\n        return [\n          _createTextVNode(_toDisplayString(_ctx.$t('Создание товара')), 1)\n        ]\n      }\n    }),\n    _: 1\n  }, _parent))\n  _push(`</div><div class=\"mt-10 w-6/12 flex flex-col gap-4 max-lg:w-full\"><p class=\"font-medium text-xl mb-3\"> Создание товара: </p><form class=\"grid grid-cols-2 gap-4 max-lg:grid-cols-1\">`)\n  _push(_ssrRenderComponent(TheInput, {\n    label: _ctx.$t('Название товара'),\n    placeholder: _unref(salesForm).name,\n    modelValue: _unref(salesForm).name,\n    \"onUpdate:modelValue\": ($event: any) => ((_unref(salesForm).name) = $event),\n    type: \"text\"\n  }, null, _parent))\n  _push(_ssrRenderComponent(TheInput, {\n    label: _ctx.$t('Количество продаж'),\n    placeholder: _unref(salesForm).sales_count,\n    modelValue: _unref(salesForm).sales_count,\n    \"onUpdate:modelValue\": ($event: any) => ((_unref(salesForm).sales_count) = $event),\n    type: \"number\"\n  }, null, _parent))\n  _push(_ssrRenderComponent(TheInput, {\n    label: _ctx.$t('Цена за единицу'),\n    placeholder: _unref(salesForm).price_per_count,\n    modelValue: _unref(salesForm).price_per_count,\n    \"onUpdate:modelValue\": ($event: any) => ((_unref(salesForm).price_per_count) = $event),\n    type: \"number\"\n  }, null, _parent))\n  _push(_ssrRenderComponent(TheInput, {\n    label: _ctx.$t('НДС'),\n    placeholder: _unref(salesForm).vat,\n    modelValue: _unref(salesForm).vat,\n    \"onUpdate:modelValue\": ($event: any) => ((_unref(salesForm).vat) = $event),\n    type: \"number\"\n  }, null, _parent))\n  _push(_ssrRenderComponent(TheInput, {\n    label: _ctx.$t('Контрагент'),\n    placeholder: _unref(salesForm).company_sale_to,\n    modelValue: _unref(salesForm).company_sale_to,\n    \"onUpdate:modelValue\": ($event: any) => ((_unref(salesForm).company_sale_to) = $event),\n    type: \"text\"\n  }, null, _parent))\n  _push(_ssrRenderComponent(_component_UITheButton, {\n    type: \"submit\",\n    class: \"mb-2 border p-3 rounded-lg !text-black dark:!text-white\"\n  }, {\n    default: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(` Добавить `)\n      } else {\n        return [\n          _createTextVNode(\" Добавить \")\n        ]\n      }\n    }),\n    _: 1\n  }, _parent))\n  _push(`</form></div></div>`)\n}\n}\n\n})",
-      "start": 1750670594424,
-      "end": 1750670594424,
+      "start": 1750671104216,
+      "end": 1750671104216,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750670594424,
-      "end": 1750670594424,
+      "start": 1750671104216,
+      "end": 1750671104216,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750670594424,
-      "end": 1750670594424,
+      "start": 1750671104216,
+      "end": 1750671104216,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750670594425,
-      "end": 1750670594425,
+      "start": 1750671104216,
+      "end": 1750671104216,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750670594425,
-      "end": 1750670594425,
+      "start": 1750671104216,
+      "end": 1750671104216,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750670594425,
-      "end": 1750670594425,
+      "start": 1750671104216,
+      "end": 1750671104216,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750670594425,
-      "end": 1750670594425,
+      "start": 1750671104216,
+      "end": 1750671104216,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1750670594425,
-      "end": 1750670594425,
+      "start": 1750671104216,
+      "end": 1750671104216,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1750670594425,
-      "end": 1750670594425,
+      "start": 1750671104216,
+      "end": 1750671104216,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, unref as _unref, resolveComponent as _resolveComponent } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport TheBreadcrumbs from \"~/components/UI/TheBreadcrumbs.vue\";\nimport TheInput from \"~/components/UI/TheInput.vue\";\nimport { useSales } from \"~/stores/sales\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const sales = useSales();\n    let salesForm = ref({\n      name: \"\",\n      sales_count: \"\",\n      price_per_count: \"\",\n      vat: \"\",\n      company_sale_to: \"\",\n      agent: {\n        first_name: \"\",\n        last_name: \"\",\n        patronymic: \"\"\n      }\n    });\n    const createItem = () => {\n      sales.createItem({ form: salesForm.value }).then(() => clearForm()).catch((error) => console.error(\"Ошибка при создании товара:\", error));\n    };\n    const clearForm = () => {\n      salesForm.value = {\n        name: \"\",\n        sales_count: \"\",\n        price_per_count: \"\",\n        vat: \"\",\n        company_sale_to: \"\",\n        agent: {\n          first_name: \"\",\n          last_name: \"\",\n          patronymic: \"\"\n        }\n      };\n    };\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_UITheButton = _resolveComponent(\"UITheButton\");\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(TheTextContent, null, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Страница создания товара\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Страница создания товара\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<div class=\"flex items-center gap-x-4 max-lg:mt-5\">`);\n      _push(_ssrRenderComponent(TheBreadcrumbs, { \"breadcrumb-link\": \"/base/profile\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Профиль\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Профиль\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<div><svg width=\"15px\" height=\"15px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path class=\"dark:stroke-white stroke-black\" d=\"M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5\" stroke-width=\"2\" stroke-linecap=\"round\"></path></svg></div>`);\n      _push(_ssrRenderComponent(TheBreadcrumbs, { \"breadcrumb-link\": \"/base/sales\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Продажи\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Продажи\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<div><svg width=\"15px\" height=\"15px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path class=\"dark:stroke-white stroke-black\" d=\"M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5\" stroke-width=\"2\" stroke-linecap=\"round\"></path></svg></div>`);\n      _push(_ssrRenderComponent(TheBreadcrumbs, null, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Создание товара\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Создание товара\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`</div><div class=\"mt-10 w-6/12 flex flex-col gap-4 max-lg:w-full\"><p class=\"font-medium text-xl mb-3\"> Создание товара: </p><form class=\"grid grid-cols-2 gap-4 max-lg:grid-cols-1\">`);\n      _push(_ssrRenderComponent(TheInput, {\n        label: _ctx.$t(\"Название товара\"),\n        placeholder: _unref(salesForm).name,\n        modelValue: _unref(salesForm).name,\n        \"onUpdate:modelValue\": ($event) => _unref(salesForm).name = $event,\n        type: \"text\"\n      }, null, _parent));\n      _push(_ssrRenderComponent(TheInput, {\n        label: _ctx.$t(\"Количество продаж\"),\n        placeholder: _unref(salesForm).sales_count,\n        modelValue: _unref(salesForm).sales_count,\n        \"onUpdate:modelValue\": ($event) => _unref(salesForm).sales_count = $event,\n        type: \"number\"\n      }, null, _parent));\n      _push(_ssrRenderComponent(TheInput, {\n        label: _ctx.$t(\"Цена за единицу\"),\n        placeholder: _unref(salesForm).price_per_count,\n        modelValue: _unref(salesForm).price_per_count,\n        \"onUpdate:modelValue\": ($event) => _unref(salesForm).price_per_count = $event,\n        type: \"number\"\n      }, null, _parent));\n      _push(_ssrRenderComponent(TheInput, {\n        label: _ctx.$t(\"НДС\"),\n        placeholder: _unref(salesForm).vat,\n        modelValue: _unref(salesForm).vat,\n        \"onUpdate:modelValue\": ($event) => _unref(salesForm).vat = $event,\n        type: \"number\"\n      }, null, _parent));\n      _push(_ssrRenderComponent(TheInput, {\n        label: _ctx.$t(\"Контрагент\"),\n        placeholder: _unref(salesForm).company_sale_to,\n        modelValue: _unref(salesForm).company_sale_to,\n        \"onUpdate:modelValue\": ($event) => _unref(salesForm).company_sale_to = $event,\n        type: \"text\"\n      }, null, _parent));\n      _push(_ssrRenderComponent(_component_UITheButton, {\n        type: \"submit\",\n        class: \"mb-2 border p-3 rounded-lg !text-black dark:!text-white\"\n      }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(` Добавить `);\n          } else {\n            return [\n              _createTextVNode(\" Добавить \")\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`</form></div></div>`);\n    };\n  }\n});\n",
-      "start": 1750670594425,
-      "end": 1750670596127,
+      "start": 1750671104216,
+      "end": 1750671105032,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -89,171 +89,171 @@
     },
     {
       "name": "vite:json",
-      "start": 1750670596127,
-      "end": 1750670596127,
+      "start": 1750671105032,
+      "end": 1750671105032,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1750670596127,
-      "end": 1750670596127,
+      "start": 1750671105032,
+      "end": 1750671105032,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1750670596128,
-      "end": 1750670596128,
+      "start": 1750671105032,
+      "end": 1750671105032,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1750670596128,
-      "end": 1750670596128,
+      "start": 1750671105032,
+      "end": 1750671105032,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750670596128,
-      "end": 1750670596128,
+      "start": 1750671105032,
+      "end": 1750671105032,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750670596128,
-      "end": 1750670596128,
+      "start": 1750671105032,
+      "end": 1750671105032,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750670596128,
-      "end": 1750670596128,
+      "start": 1750671105032,
+      "end": 1750671105032,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750670596128,
-      "end": 1750670596128,
+      "start": 1750671105032,
+      "end": 1750671105032,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1750670596128,
-      "end": 1750670596128,
+      "start": 1750671105032,
+      "end": 1750671105036,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750670596129,
-      "end": 1750670596129,
+      "start": 1750671105036,
+      "end": 1750671105036,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1750670596131,
-      "end": 1750670596131,
+      "start": 1750671105036,
+      "end": 1750671105037,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1750670596132,
-      "end": 1750670596132,
+      "start": 1750671105037,
+      "end": 1750671105038,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1750670596132,
-      "end": 1750670596132,
+      "start": 1750671105038,
+      "end": 1750671105038,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1750670596132,
-      "end": 1750670596132,
+      "start": 1750671105038,
+      "end": 1750671105038,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1750670596132,
-      "end": 1750670596132,
+      "start": 1750671105038,
+      "end": 1750671105038,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1750670596132,
-      "end": 1750670596132,
+      "start": 1750671105038,
+      "end": 1750671105038,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1750670596132,
-      "end": 1750670596132,
+      "start": 1750671105038,
+      "end": 1750671105038,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1750670596132,
-      "end": 1750670596132,
+      "start": 1750671105038,
+      "end": 1750671105038,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1750670596132,
-      "end": 1750670596132,
+      "start": 1750671105038,
+      "end": 1750671105038,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750670596133,
-      "end": 1750670596133,
+      "start": 1750671105038,
+      "end": 1750671105038,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750670596133,
-      "end": 1750670596133,
+      "start": 1750671105038,
+      "end": 1750671105038,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750670596133,
-      "end": 1750670596133,
+      "start": 1750671105038,
+      "end": 1750671105038,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750670596133,
-      "end": 1750670596133,
+      "start": 1750671105038,
+      "end": 1750671105038,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750670596133,
-      "end": 1750670596133,
+      "start": 1750671105038,
+      "end": 1750671105038,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750670596133,
-      "end": 1750670596133,
+      "start": 1750671105038,
+      "end": 1750671105038,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750670596133,
-      "end": 1750670596133,
+      "start": 1750671105038,
+      "end": 1750671105038,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750670596133,
-      "end": 1750670596133,
+      "start": 1750671105038,
+      "end": 1750671105038,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, unref as _unref, resolveComponent as _resolveComponent } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport TheBreadcrumbs from \"~/components/UI/TheBreadcrumbs.vue\";\nimport TheInput from \"~/components/UI/TheInput.vue\";\nimport { useSales } from \"~/stores/sales\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const sales = useSales();\n    let salesForm = ref({\n      name: \"\",\n      sales_count: \"\",\n      price_per_count: \"\",\n      vat: \"\",\n      company_sale_to: \"\",\n      agent: {\n        first_name: \"\",\n        last_name: \"\",\n        patronymic: \"\"\n      }\n    });\n    const createItem = () => {\n      sales.createItem({ form: salesForm.value }).then(() => clearForm()).catch((error) => console.error(\"Ошибка при создании товара:\", error));\n    };\n    const clearForm = () => {\n      salesForm.value = {\n        name: \"\",\n        sales_count: \"\",\n        price_per_count: \"\",\n        vat: \"\",\n        company_sale_to: \"\",\n        agent: {\n          first_name: \"\",\n          last_name: \"\",\n          patronymic: \"\"\n        }\n      };\n    };\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_UITheButton = _resolveComponent(\"UITheButton\");\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(TheTextContent, null, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Страница создания товара\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Страница создания товара\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<div class=\"flex items-center gap-x-4 max-lg:mt-5\">`);\n      _push(_ssrRenderComponent(TheBreadcrumbs, { \"breadcrumb-link\": \"/base/profile\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Профиль\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Профиль\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<div><svg width=\"15px\" height=\"15px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path class=\"dark:stroke-white stroke-black\" d=\"M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5\" stroke-width=\"2\" stroke-linecap=\"round\"></path></svg></div>`);\n      _push(_ssrRenderComponent(TheBreadcrumbs, { \"breadcrumb-link\": \"/base/sales\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Продажи\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Продажи\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<div><svg width=\"15px\" height=\"15px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path class=\"dark:stroke-white stroke-black\" d=\"M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5\" stroke-width=\"2\" stroke-linecap=\"round\"></path></svg></div>`);\n      _push(_ssrRenderComponent(TheBreadcrumbs, null, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Создание товара\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Создание товара\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`</div><div class=\"mt-10 w-6/12 flex flex-col gap-4 max-lg:w-full\"><p class=\"font-medium text-xl mb-3\"> Создание товара: </p><form class=\"grid grid-cols-2 gap-4 max-lg:grid-cols-1\">`);\n      _push(_ssrRenderComponent(TheInput, {\n        label: _ctx.$t(\"Название товара\"),\n        placeholder: _unref(salesForm).name,\n        modelValue: _unref(salesForm).name,\n        \"onUpdate:modelValue\": ($event) => _unref(salesForm).name = $event,\n        type: \"text\"\n      }, null, _parent));\n      _push(_ssrRenderComponent(TheInput, {\n        label: _ctx.$t(\"Количество продаж\"),\n        placeholder: _unref(salesForm).sales_count,\n        modelValue: _unref(salesForm).sales_count,\n        \"onUpdate:modelValue\": ($event) => _unref(salesForm).sales_count = $event,\n        type: \"number\"\n      }, null, _parent));\n      _push(_ssrRenderComponent(TheInput, {\n        label: _ctx.$t(\"Цена за единицу\"),\n        placeholder: _unref(salesForm).price_per_count,\n        modelValue: _unref(salesForm).price_per_count,\n        \"onUpdate:modelValue\": ($event) => _unref(salesForm).price_per_count = $event,\n        type: \"number\"\n      }, null, _parent));\n      _push(_ssrRenderComponent(TheInput, {\n        label: _ctx.$t(\"НДС\"),\n        placeholder: _unref(salesForm).vat,\n        modelValue: _unref(salesForm).vat,\n        \"onUpdate:modelValue\": ($event) => _unref(salesForm).vat = $event,\n        type: \"number\"\n      }, null, _parent));\n      _push(_ssrRenderComponent(TheInput, {\n        label: _ctx.$t(\"Контрагент\"),\n        placeholder: _unref(salesForm).company_sale_to,\n        modelValue: _unref(salesForm).company_sale_to,\n        \"onUpdate:modelValue\": ($event) => _unref(salesForm).company_sale_to = $event,\n        type: \"text\"\n      }, null, _parent));\n      _push(_ssrRenderComponent(_component_UITheButton, {\n        type: \"submit\",\n        class: \"mb-2 border p-3 rounded-lg !text-black dark:!text-white\"\n      }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(` Добавить `);\n          } else {\n            return [\n              _createTextVNode(\" Добавить \")\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`</form></div></div>`);\n    };\n  }\n});\n",
-      "start": 1750670596134,
-      "end": 1750670596142,
+      "start": 1750671105038,
+      "end": 1750671105041,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -267,8 +267,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, unref as _unref, resolveComponent as _resolveComponent } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport TheBreadcrumbs from \"~/components/UI/TheBreadcrumbs.vue\";\nimport TheInput from \"~/components/UI/TheInput.vue\";\nimport { useSales } from \"~/stores/sales\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const sales = useSales();\n    let salesForm = ref({\n      name: \"\",\n      sales_count: \"\",\n      price_per_count: \"\",\n      vat: \"\",\n      company_sale_to: \"\",\n      agent: {\n        first_name: \"\",\n        last_name: \"\",\n        patronymic: \"\"\n      }\n    });\n    const createItem = () => {\n      sales.createItem({ form: salesForm.value }).then(() => clearForm()).catch((error) => console.error(\"Ошибка при создании товара:\", error));\n    };\n    const clearForm = () => {\n      salesForm.value = {\n        name: \"\",\n        sales_count: \"\",\n        price_per_count: \"\",\n        vat: \"\",\n        company_sale_to: \"\",\n        agent: {\n          first_name: \"\",\n          last_name: \"\",\n          patronymic: \"\"\n        }\n      };\n    };\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_UITheButton = _resolveComponent(\"UITheButton\");\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(TheTextContent, null, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Страница создания товара\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Страница создания товара\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<div class=\"flex items-center gap-x-4 max-lg:mt-5\">`);\n      _push(_ssrRenderComponent(TheBreadcrumbs, { \"breadcrumb-link\": \"/base/profile\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Профиль\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Профиль\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<div><svg width=\"15px\" height=\"15px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path class=\"dark:stroke-white stroke-black\" d=\"M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5\" stroke-width=\"2\" stroke-linecap=\"round\"></path></svg></div>`);\n      _push(_ssrRenderComponent(TheBreadcrumbs, { \"breadcrumb-link\": \"/base/sales\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Продажи\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Продажи\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<div><svg width=\"15px\" height=\"15px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path class=\"dark:stroke-white stroke-black\" d=\"M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5\" stroke-width=\"2\" stroke-linecap=\"round\"></path></svg></div>`);\n      _push(_ssrRenderComponent(TheBreadcrumbs, null, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Создание товара\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Создание товара\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`</div><div class=\"mt-10 w-6/12 flex flex-col gap-4 max-lg:w-full\"><p class=\"font-medium text-xl mb-3\"> Создание товара: </p><form class=\"grid grid-cols-2 gap-4 max-lg:grid-cols-1\">`);\n      _push(_ssrRenderComponent(TheInput, {\n        label: _ctx.$t(\"Название товара\"),\n        placeholder: _unref(salesForm).name,\n        modelValue: _unref(salesForm).name,\n        \"onUpdate:modelValue\": ($event) => _unref(salesForm).name = $event,\n        type: \"text\"\n      }, null, _parent));\n      _push(_ssrRenderComponent(TheInput, {\n        label: _ctx.$t(\"Количество продаж\"),\n        placeholder: _unref(salesForm).sales_count,\n        modelValue: _unref(salesForm).sales_count,\n        \"onUpdate:modelValue\": ($event) => _unref(salesForm).sales_count = $event,\n        type: \"number\"\n      }, null, _parent));\n      _push(_ssrRenderComponent(TheInput, {\n        label: _ctx.$t(\"Цена за единицу\"),\n        placeholder: _unref(salesForm).price_per_count,\n        modelValue: _unref(salesForm).price_per_count,\n        \"onUpdate:modelValue\": ($event) => _unref(salesForm).price_per_count = $event,\n        type: \"number\"\n      }, null, _parent));\n      _push(_ssrRenderComponent(TheInput, {\n        label: _ctx.$t(\"НДС\"),\n        placeholder: _unref(salesForm).vat,\n        modelValue: _unref(salesForm).vat,\n        \"onUpdate:modelValue\": ($event) => _unref(salesForm).vat = $event,\n        type: \"number\"\n      }, null, _parent));\n      _push(_ssrRenderComponent(TheInput, {\n        label: _ctx.$t(\"Контрагент\"),\n        placeholder: _unref(salesForm).company_sale_to,\n        modelValue: _unref(salesForm).company_sale_to,\n        \"onUpdate:modelValue\": ($event) => _unref(salesForm).company_sale_to = $event,\n        type: \"text\"\n      }, null, _parent));\n      _push(_ssrRenderComponent(_component_UITheButton, {\n        type: \"submit\",\n        class: \"mb-2 border p-3 rounded-lg !text-black dark:!text-white\"\n      }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(` Добавить `);\n          } else {\n            return [\n              _createTextVNode(\" Добавить \")\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`</form></div></div>`);\n    };\n  }\n});\n",
-      "start": 1750670596134,
-      "end": 1750670596142,
+      "start": 1750671105038,
+      "end": 1750671105041,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -281,21 +281,21 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1750670596142,
-      "end": 1750670596142,
+      "start": 1750671105041,
+      "end": 1750671105041,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1750670596142,
-      "end": 1750670596142,
+      "start": 1750671105041,
+      "end": 1750671105041,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
       "result": "\nconst __nuxt_page_meta = null\nexport default __nuxt_page_meta\n",
-      "start": 1750670596144,
-      "end": 1750670596144,
+      "start": 1750671105041,
+      "end": 1750671105042,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -309,8 +309,8 @@
     {
       "name": "nuxt:pages-macros-transform",
       "result": "\nconst __nuxt_page_meta = null\nexport default __nuxt_page_meta\n",
-      "start": 1750670596144,
-      "end": 1750670596144,
+      "start": 1750671105041,
+      "end": 1750671105042,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -323,32 +323,32 @@
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1750670596145,
-      "end": 1750670596145,
+      "start": 1750671105042,
+      "end": 1750671105042,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1750670596145,
-      "end": 1750670596145,
+      "start": 1750671105042,
+      "end": 1750671105042,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1750670596145,
-      "end": 1750670596145,
+      "start": 1750671105042,
+      "end": 1750671105042,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1750670596145,
-      "end": 1750670596145,
+      "start": 1750671105042,
+      "end": 1750671105042,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1750670596145,
-      "end": 1750670596145,
+      "start": 1750671105042,
+      "end": 1750671105042,
       "order": "normal"
     }
   ]

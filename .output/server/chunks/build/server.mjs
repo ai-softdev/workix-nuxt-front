@@ -1050,7 +1050,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./profile-BSus-vJk.mjs').then((m) => m.default || m)
+        component: () => import('./profile-C5fcHsKB.mjs').then((m) => m.default || m)
       },
       {
         name: "base-sales",

@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { unref as _unref } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\"\n\nimport DepartmentContentLists from \"~/components/Company/department/DepartmentContentLists.vue\";\r\nimport DepartmentCreate from \"~/components/Company/department/DepartmentCreate.vue\";\r\nimport {useCompanies} from \"~/stores/companies\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\r\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\r\nimport TheFilter from \"~/components/UI/TheFilter.vue\";\r\nimport TheBreadcrumbs from \"~/components/UI/TheBreadcrumbs.vue\";\r\nimport TheContentBlock from \"~/components/UI/TheContentBlock.vue\";\r\nimport TheSceleton from \"~/components/UI/TheSceleton.vue\";\r\nimport TheTextarea from \"~/components/UI/TheTextareaAutosize.vue\";\r\nimport {useChat} from \"~/stores/chat\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'index',\n  __ssrInlineRender: true,\n  props: {\r\n  formTitle: String\r\n},\n  setup(__props) {\n\r\nconst chat = useChat()\r\nconst currentUser = useAuthStore()\r\nconst departmentList = useCompanies()\r\ndepartmentList.loadDepartmentList()\r\n\r\n\r\nconst router = useRouter()\r\nconst loadAuthStore = useAuthStore()\r\n\r\nwatch(() => loadAuthStore.user, (newValue) => {\r\n  if(loadAuthStore?.user?.role?.name_en === 'admin'){\r\n    if (window.history.length > 1) {\r\n      router.push('/base/profile');\r\n    } else {\r\n      router.push('/');\r\n    }\r\n  }\r\n})\r\n\r\nuseSeoMeta({\r\n  title: 'Департаменты',\r\n  description: 'Список департаментов компании'\r\n})\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  _push(`<div${\n    _ssrRenderAttrs(_attrs)\n  }><div class=\"flex items-center justify-between max-[786px]:flex-col max-[786px]:items-start\"><p class=\"dark:text-white text-3xl font-bold mb-6\">${\n    _ssrInterpolate(_ctx.$t('Страница департаментов компании'))\n  }</p>`)\n  _push(_ssrRenderComponent(DepartmentCreate, { class: \"w-3/12 max-md:w-9/12 max-md:mb-4 text-sm\" }, null, _parent))\n  _push(`</div><div class=\"flex relative items-center justify-between w-full gap-x-10 mt-4\"><p class=\"text-mediumGray w-6/12 max-[786px]:w-full\">${_ssrInterpolate(_ctx.$t('Кликните на отдел, чтобы посмотреть доступные должности.'))}</p></div><div class=\"mt-8\">`)\n  if (!_unref(departmentList).get_all_department.results) {\n    _push(`<div class=\"flex w-full gap-y-4 gap-x-4 flex-wrap\"><!--[-->`)\n    _ssrRenderList(6, (item) => {\n      _push(_ssrRenderComponent(TheSceleton, {\n        \"border-radius\": \"10px\",\n        width: \"30%\",\n        height: \"100px\"\n      }, null, _parent))\n    })\n    _push(`<!--]--></div>`)\n  } else {\n    _push(`<div class=\"grid grid-cols-4 max-[1250px]:grid-cols-3 max-[810px]:grid-cols-2 max-[636px]:grid-cols-1 gap-5\"><!--[-->`)\n    _ssrRenderList(_unref(departmentList)?.get_all_department.results, (department) => {\n      _push(_ssrRenderComponent(DepartmentContentLists, { \"department-item\": department }, null, _parent))\n    })\n    _push(`<!--]--></div>`)\n  }\n  _push(`<div class=\"mt-6 flex items-center justify-end gap-1\"><p>${\n    _ssrInterpolate(_ctx.$t('Количество департаментов'))\n  }: </p><p class=\"font-bold\">${\n    _ssrInterpolate(_unref(departmentList).get_all_department.count)\n  }</p></div></div></div>`)\n}\n}\n\n})",
-      "start": 1750670594345,
-      "end": 1750670594345,
+      "start": 1750671104043,
+      "end": 1750671104043,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750670594345,
-      "end": 1750670594345,
+      "start": 1750671104043,
+      "end": 1750671104043,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750670594345,
-      "end": 1750670594345,
+      "start": 1750671104043,
+      "end": 1750671104043,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750670594345,
-      "end": 1750670594345,
+      "start": 1750671104043,
+      "end": 1750671104043,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750670594345,
-      "end": 1750670594345,
+      "start": 1750671104043,
+      "end": 1750671104043,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750670594345,
-      "end": 1750670594345,
+      "start": 1750671104043,
+      "end": 1750671104043,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750670594345,
-      "end": 1750670594345,
+      "start": 1750671104043,
+      "end": 1750671104043,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1750670594345,
-      "end": 1750670594345,
+      "start": 1750671104043,
+      "end": 1750671104043,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1750670594345,
-      "end": 1750670594345,
+      "start": 1750671104043,
+      "end": 1750671104043,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport DepartmentContentLists from \"~/components/Company/department/DepartmentContentLists.vue\";\nimport DepartmentCreate from \"~/components/Company/department/DepartmentCreate.vue\";\nimport { useCompanies } from \"~/stores/companies\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport TheSceleton from \"~/components/UI/TheSceleton.vue\";\nimport { useChat } from \"~/stores/chat\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  props: {\n    formTitle: String\n  },\n  setup(__props) {\n    const chat = useChat();\n    const currentUser = useAuthStore();\n    const departmentList = useCompanies();\n    departmentList.loadDepartmentList();\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if (window.history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Департаменты\",\n      description: \"Список департаментов компании\"\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}><div class=\"flex items-center justify-between max-[786px]:flex-col max-[786px]:items-start\"><p class=\"dark:text-white text-3xl font-bold mb-6\">${_ssrInterpolate(_ctx.$t(\"Страница департаментов компании\"))}</p>`);\n      _push(_ssrRenderComponent(DepartmentCreate, { class: \"w-3/12 max-md:w-9/12 max-md:mb-4 text-sm\" }, null, _parent));\n      _push(`</div><div class=\"flex relative items-center justify-between w-full gap-x-10 mt-4\"><p class=\"text-mediumGray w-6/12 max-[786px]:w-full\">${_ssrInterpolate(_ctx.$t(\"Кликните на отдел, чтобы посмотреть доступные должности.\"))}</p></div><div class=\"mt-8\">`);\n      if (!_unref(departmentList).get_all_department.results) {\n        _push(`<div class=\"flex w-full gap-y-4 gap-x-4 flex-wrap\"><!--[-->`);\n        _ssrRenderList(6, (item) => {\n          _push(_ssrRenderComponent(TheSceleton, {\n            \"border-radius\": \"10px\",\n            width: \"30%\",\n            height: \"100px\"\n          }, null, _parent));\n        });\n        _push(`<!--]--></div>`);\n      } else {\n        _push(`<div class=\"grid grid-cols-4 max-[1250px]:grid-cols-3 max-[810px]:grid-cols-2 max-[636px]:grid-cols-1 gap-5\"><!--[-->`);\n        _ssrRenderList(_unref(departmentList)?.get_all_department.results, (department) => {\n          _push(_ssrRenderComponent(DepartmentContentLists, { \"department-item\": department }, null, _parent));\n        });\n        _push(`<!--]--></div>`);\n      }\n      _push(`<div class=\"mt-6 flex items-center justify-end gap-1\"><p>${_ssrInterpolate(_ctx.$t(\"Количество департаментов\"))}: </p><p class=\"font-bold\">${_ssrInterpolate(_unref(departmentList).get_all_department.count)}</p></div></div></div>`);\n    };\n  }\n});\n",
-      "start": 1750670594345,
-      "end": 1750670596127,
+      "start": 1750671104043,
+      "end": 1750671104417,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -86,173 +86,173 @@
     },
     {
       "name": "vite:json",
-      "start": 1750670596127,
-      "end": 1750670596127,
+      "start": 1750671104417,
+      "end": 1750671104417,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1750670596127,
-      "end": 1750670596127,
+      "start": 1750671104417,
+      "end": 1750671104417,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1750670596128,
-      "end": 1750670596128,
+      "start": 1750671104418,
+      "end": 1750671104418,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1750670596128,
-      "end": 1750670596128,
+      "start": 1750671104418,
+      "end": 1750671104418,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750670596128,
-      "end": 1750670596128,
+      "start": 1750671104418,
+      "end": 1750671104418,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750670596128,
-      "end": 1750670596128,
+      "start": 1750671104418,
+      "end": 1750671104418,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750670596128,
-      "end": 1750670596128,
+      "start": 1750671104419,
+      "end": 1750671104419,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750670596128,
-      "end": 1750670596128,
+      "start": 1750671104419,
+      "end": 1750671104419,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1750670596128,
-      "end": 1750670596128,
+      "start": 1750671104420,
+      "end": 1750671104420,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750670596129,
-      "end": 1750670596129,
+      "start": 1750671104420,
+      "end": 1750671104420,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1750670596131,
-      "end": 1750670596131,
+      "start": 1750671104421,
+      "end": 1750671104421,
       "order": "normal"
     },
     {
       "name": "vite:define",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport DepartmentContentLists from \"~/components/Company/department/DepartmentContentLists.vue\";\nimport DepartmentCreate from \"~/components/Company/department/DepartmentCreate.vue\";\nimport { useCompanies } from \"~/stores/companies\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport TheSceleton from \"~/components/UI/TheSceleton.vue\";\nimport { useChat } from \"~/stores/chat\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  props: {\n    formTitle: String\n  },\n  setup(__props) {\n    const chat = useChat();\n    const currentUser = useAuthStore();\n    const departmentList = useCompanies();\n    departmentList.loadDepartmentList();\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Департаменты\",\n      description: \"Список департаментов компании\"\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}><div class=\"flex items-center justify-between max-[786px]:flex-col max-[786px]:items-start\"><p class=\"dark:text-white text-3xl font-bold mb-6\">${_ssrInterpolate(_ctx.$t(\"Страница департаментов компании\"))}</p>`);\n      _push(_ssrRenderComponent(DepartmentCreate, { class: \"w-3/12 max-md:w-9/12 max-md:mb-4 text-sm\" }, null, _parent));\n      _push(`</div><div class=\"flex relative items-center justify-between w-full gap-x-10 mt-4\"><p class=\"text-mediumGray w-6/12 max-[786px]:w-full\">${_ssrInterpolate(_ctx.$t(\"Кликните на отдел, чтобы посмотреть доступные должности.\"))}</p></div><div class=\"mt-8\">`);\n      if (!_unref(departmentList).get_all_department.results) {\n        _push(`<div class=\"flex w-full gap-y-4 gap-x-4 flex-wrap\"><!--[-->`);\n        _ssrRenderList(6, (item) => {\n          _push(_ssrRenderComponent(TheSceleton, {\n            \"border-radius\": \"10px\",\n            width: \"30%\",\n            height: \"100px\"\n          }, null, _parent));\n        });\n        _push(`<!--]--></div>`);\n      } else {\n        _push(`<div class=\"grid grid-cols-4 max-[1250px]:grid-cols-3 max-[810px]:grid-cols-2 max-[636px]:grid-cols-1 gap-5\"><!--[-->`);\n        _ssrRenderList(_unref(departmentList)?.get_all_department.results, (department) => {\n          _push(_ssrRenderComponent(DepartmentContentLists, { \"department-item\": department }, null, _parent));\n        });\n        _push(`<!--]--></div>`);\n      }\n      _push(`<div class=\"mt-6 flex items-center justify-end gap-1\"><p>${_ssrInterpolate(_ctx.$t(\"Количество департаментов\"))}: </p><p class=\"font-bold\">${_ssrInterpolate(_unref(departmentList).get_all_department.count)}</p></div></div></div>`);\n    };\n  }\n});\n",
-      "start": 1750670596132,
-      "end": 1750670598108,
+      "start": 1750671104421,
+      "end": 1750671105576,
       "order": "normal",
       "sourcemaps": "{\n  \"version\": 3,\n  \"sources\": [\"D:/projects/nuxt/workix-nuxt-front/pages/base/companies/department/index.vue?macro=true&vue&type=script&setup=true&lang.ts\"],\n  \"sourcesContent\": [\"import { defineComponent as _defineComponent } from \\\"vue\\\";\\nimport { unref as _unref } from \\\"vue\\\";\\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \\\"vue/server-renderer\\\";\\nimport DepartmentContentLists from \\\"~/components/Company/department/DepartmentContentLists.vue\\\";\\nimport DepartmentCreate from \\\"~/components/Company/department/DepartmentCreate.vue\\\";\\nimport { useCompanies } from \\\"~/stores/companies\\\";\\nimport { useAuthStore } from \\\"~/stores/auth\\\";\\nimport TheSceleton from \\\"~/components/UI/TheSceleton.vue\\\";\\nimport { useChat } from \\\"~/stores/chat\\\";\\nexport default /* @__PURE__ */ _defineComponent({\\n  __name: \\\"index\\\",\\n  __ssrInlineRender: true,\\n  props: {\\n    formTitle: String\\n  },\\n  setup(__props) {\\n    const chat = useChat();\\n    const currentUser = useAuthStore();\\n    const departmentList = useCompanies();\\n    departmentList.loadDepartmentList();\\n    const router = useRouter();\\n    const loadAuthStore = useAuthStore();\\n    watch(() => loadAuthStore.user, (newValue) => {\\n      if (loadAuthStore?.user?.role?.name_en === \\\"admin\\\") {\\n        if (window.history.length > 1) {\\n          router.push(\\\"/base/profile\\\");\\n        } else {\\n          router.push(\\\"/\\\");\\n        }\\n      }\\n    });\\n    useSeoMeta({\\n      title: \\\"Департаменты\\\",\\n      description: \\\"Список департаментов компании\\\"\\n    });\\n    return (_ctx, _push, _parent, _attrs) => {\\n      _push(`<div${_ssrRenderAttrs(_attrs)}><div class=\\\"flex items-center justify-between max-[786px]:flex-col max-[786px]:items-start\\\"><p class=\\\"dark:text-white text-3xl font-bold mb-6\\\">${_ssrInterpolate(_ctx.$t(\\\"Страница департаментов компании\\\"))}</p>`);\\n      _push(_ssrRenderComponent(DepartmentCreate, { class: \\\"w-3/12 max-md:w-9/12 max-md:mb-4 text-sm\\\" }, null, _parent));\\n      _push(`</div><div class=\\\"flex relative items-center justify-between w-full gap-x-10 mt-4\\\"><p class=\\\"text-mediumGray w-6/12 max-[786px]:w-full\\\">${_ssrInterpolate(_ctx.$t(\\\"Кликните на отдел, чтобы посмотреть доступные должности.\\\"))}</p></div><div class=\\\"mt-8\\\">`);\\n      if (!_unref(departmentList).get_all_department.results) {\\n        _push(`<div class=\\\"flex w-full gap-y-4 gap-x-4 flex-wrap\\\"><!--[-->`);\\n        _ssrRenderList(6, (item) => {\\n          _push(_ssrRenderComponent(TheSceleton, {\\n            \\\"border-radius\\\": \\\"10px\\\",\\n            width: \\\"30%\\\",\\n            height: \\\"100px\\\"\\n          }, null, _parent));\\n        });\\n        _push(`<!--]--></div>`);\\n      } else {\\n        _push(`<div class=\\\"grid grid-cols-4 max-[1250px]:grid-cols-3 max-[810px]:grid-cols-2 max-[636px]:grid-cols-1 gap-5\\\"><!--[-->`);\\n        _ssrRenderList(_unref(departmentList)?.get_all_department.results, (department) => {\\n          _push(_ssrRenderComponent(DepartmentContentLists, { \\\"department-item\\\": department }, null, _parent));\\n        });\\n        _push(`<!--]--></div>`);\\n      }\\n      _push(`<div class=\\\"mt-6 flex items-center justify-end gap-1\\\"><p>${_ssrInterpolate(_ctx.$t(\\\"Количество департаментов\\\"))}: </p><p class=\\\"font-bold\\\">${_ssrInterpolate(_unref(departmentList).get_all_department.count)}</p></div></div></div>`);\\n    };\\n  }\\n});\\n\"],\n  \"mappings\": \"AAAA,SAAS,mBAAmB,wBAAwB;AACpD,SAAS,SAAS,cAAc;AAChC,SAAS,sBAAsB,qBAAqB,kBAAkB,iBAAiB,kBAAkB,iBAAiB,iBAAiB,sBAAsB;AACjK,OAAO,4BAA4B;AACnC,OAAO,sBAAsB;AAC7B,SAAS,oBAAoB;AAC7B,SAAS,oBAAoB;AAC7B,OAAO,iBAAiB;AACxB,SAAS,eAAe;AACxB,eAA+B,iCAAiB;AAAA,EAC9C,QAAQ;AAAA,EACR,mBAAmB;AAAA,EACnB,OAAO;AAAA,IACL,WAAW;AAAA,EACb;AAAA,EACA,MAAM,SAAS;AACb,UAAM,OAAO,QAAQ;AACrB,UAAM,cAAc,aAAa;AACjC,UAAM,iBAAiB,aAAa;AACpC,mBAAe,mBAAmB;AAClC,UAAM,SAAS,UAAU;AACzB,UAAM,gBAAgB,aAAa;AACnC,UAAM,MAAM,cAAc,MAAM,CAAC,aAAa;AAC5C,UAAI,eAAe,MAAM,MAAM,YAAY,SAAS;AAClD,YAAI,SAAO,QAAQ,SAAS,GAAG;AAC7B,iBAAO,KAAK,eAAe;AAAA,QAC7B,OAAO;AACL,iBAAO,KAAK,GAAG;AAAA,QACjB;AAAA,MACF;AAAA,IACF,CAAC;AACD,eAAW;AAAA,MACT,OAAO;AAAA,MACP,aAAa;AAAA,IACf,CAAC;AACD,WAAO,CAAC,MAAM,OAAO,SAAS,WAAW;AACvC,YAAM,OAAO,gBAAgB,MAAM,CAAC,mJAAmJ,gBAAgB,KAAK,GAAG,iCAAiC,CAAC,CAAC,MAAM;AACxP,YAAM,oBAAoB,kBAAkB,EAAE,OAAO,2CAA2C,GAAG,MAAM,OAAO,CAAC;AACjH,YAAM,2IAA2I,gBAAgB,KAAK,GAAG,0DAA0D,CAAC,CAAC,8BAA8B;AACnQ,UAAI,CAAC,OAAO,cAAc,EAAE,mBAAmB,SAAS;AACtD,cAAM,6DAA6D;AACnE,uBAAe,GAAG,CAAC,SAAS;AAC1B,gBAAM,oBAAoB,aAAa;AAAA,YACrC,iBAAiB;AAAA,YACjB,OAAO;AAAA,YACP,QAAQ;AAAA,UACV,GAAG,MAAM,OAAO,CAAC;AAAA,QACnB,CAAC;AACD,cAAM,gBAAgB;AAAA,MACxB,OAAO;AACL,cAAM,uHAAuH;AAC7H,uBAAe,OAAO,cAAc,GAAG,mBAAmB,SAAS,CAAC,eAAe;AACjF,gBAAM,oBAAoB,wBAAwB,EAAE,mBAAmB,WAAW,GAAG,MAAM,OAAO,CAAC;AAAA,QACrG,CAAC;AACD,cAAM,gBAAgB;AAAA,MACxB;AACA,YAAM,4DAA4D,gBAAgB,KAAK,GAAG,0BAA0B,CAAC,CAAC,8BAA8B,gBAAgB,OAAO,cAAc,EAAE,mBAAmB,KAAK,CAAC,wBAAwB;AAAA,IAC9O;AAAA,EACF;AACF,CAAC;\",\n  \"names\": []\n}\n"
     },
     {
       "name": "vite:css-post",
-      "start": 1750670598108,
-      "end": 1750670598108,
+      "start": 1750671105576,
+      "end": 1750671105576,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1750670598108,
-      "end": 1750670598108,
+      "start": 1750671105576,
+      "end": 1750671105576,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1750670598109,
-      "end": 1750670598109,
+      "start": 1750671105576,
+      "end": 1750671105576,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1750670598109,
-      "end": 1750670598109,
+      "start": 1750671105576,
+      "end": 1750671105576,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1750670598109,
-      "end": 1750670598109,
+      "start": 1750671105576,
+      "end": 1750671105576,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1750670598109,
-      "end": 1750670598109,
+      "start": 1750671105576,
+      "end": 1750671105576,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1750670598109,
-      "end": 1750670598109,
+      "start": 1750671105576,
+      "end": 1750671105576,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750670598109,
-      "end": 1750670598109,
+      "start": 1750671105576,
+      "end": 1750671105576,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750670598109,
-      "end": 1750670598109,
+      "start": 1750671105576,
+      "end": 1750671105576,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750670598109,
-      "end": 1750670598109,
+      "start": 1750671105577,
+      "end": 1750671105577,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750670598109,
-      "end": 1750670598109,
+      "start": 1750671105577,
+      "end": 1750671105577,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750670598109,
-      "end": 1750670598109,
+      "start": 1750671105578,
+      "end": 1750671105578,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750670598109,
-      "end": 1750670598109,
+      "start": 1750671105578,
+      "end": 1750671105578,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750670598109,
-      "end": 1750670598109,
+      "start": 1750671105578,
+      "end": 1750671105578,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750670598109,
-      "end": 1750670598109,
+      "start": 1750671105578,
+      "end": 1750671105578,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { useRouter } from '#app/composables/router';\nimport { watch } from 'vue';\nimport { useSeoMeta } from '@unhead/vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport DepartmentContentLists from \"~/components/Company/department/DepartmentContentLists.vue\";\nimport DepartmentCreate from \"~/components/Company/department/DepartmentCreate.vue\";\nimport { useCompanies } from \"~/stores/companies\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport TheSceleton from \"~/components/UI/TheSceleton.vue\";\nimport { useChat } from \"~/stores/chat\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  props: {\n    formTitle: String\n  },\n  setup(__props) {\n    const chat = useChat();\n    const currentUser = useAuthStore();\n    const departmentList = useCompanies();\n    departmentList.loadDepartmentList();\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Департаменты\",\n      description: \"Список департаментов компании\"\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}><div class=\"flex items-center justify-between max-[786px]:flex-col max-[786px]:items-start\"><p class=\"dark:text-white text-3xl font-bold mb-6\">${_ssrInterpolate(_ctx.$t(\"Страница департаментов компании\"))}</p>`);\n      _push(_ssrRenderComponent(DepartmentCreate, { class: \"w-3/12 max-md:w-9/12 max-md:mb-4 text-sm\" }, null, _parent));\n      _push(`</div><div class=\"flex relative items-center justify-between w-full gap-x-10 mt-4\"><p class=\"text-mediumGray w-6/12 max-[786px]:w-full\">${_ssrInterpolate(_ctx.$t(\"Кликните на отдел, чтобы посмотреть доступные должности.\"))}</p></div><div class=\"mt-8\">`);\n      if (!_unref(departmentList).get_all_department.results) {\n        _push(`<div class=\"flex w-full gap-y-4 gap-x-4 flex-wrap\"><!--[-->`);\n        _ssrRenderList(6, (item) => {\n          _push(_ssrRenderComponent(TheSceleton, {\n            \"border-radius\": \"10px\",\n            width: \"30%\",\n            height: \"100px\"\n          }, null, _parent));\n        });\n        _push(`<!--]--></div>`);\n      } else {\n        _push(`<div class=\"grid grid-cols-4 max-[1250px]:grid-cols-3 max-[810px]:grid-cols-2 max-[636px]:grid-cols-1 gap-5\"><!--[-->`);\n        _ssrRenderList(_unref(departmentList)?.get_all_department.results, (department) => {\n          _push(_ssrRenderComponent(DepartmentContentLists, { \"department-item\": department }, null, _parent));\n        });\n        _push(`<!--]--></div>`);\n      }\n      _push(`<div class=\"mt-6 flex items-center justify-end gap-1\"><p>${_ssrInterpolate(_ctx.$t(\"Количество департаментов\"))}: </p><p class=\"font-bold\">${_ssrInterpolate(_unref(departmentList).get_all_department.count)}</p></div></div></div>`);\n    };\n  }\n});\n",
-      "start": 1750670598109,
-      "end": 1750670598126,
+      "start": 1750671105578,
+      "end": 1750671105579,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -266,8 +266,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { useRouter } from '#app/composables/router';\nimport { watch } from 'vue';\nimport { useSeoMeta } from '@unhead/vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport DepartmentContentLists from \"~/components/Company/department/DepartmentContentLists.vue\";\nimport DepartmentCreate from \"~/components/Company/department/DepartmentCreate.vue\";\nimport { useCompanies } from \"~/stores/companies\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport TheSceleton from \"~/components/UI/TheSceleton.vue\";\nimport { useChat } from \"~/stores/chat\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  props: {\n    formTitle: String\n  },\n  setup(__props) {\n    const chat = useChat();\n    const currentUser = useAuthStore();\n    const departmentList = useCompanies();\n    departmentList.loadDepartmentList();\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Департаменты\",\n      description: \"Список департаментов компании\"\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}><div class=\"flex items-center justify-between max-[786px]:flex-col max-[786px]:items-start\"><p class=\"dark:text-white text-3xl font-bold mb-6\">${_ssrInterpolate(_ctx.$t(\"Страница департаментов компании\"))}</p>`);\n      _push(_ssrRenderComponent(DepartmentCreate, { class: \"w-3/12 max-md:w-9/12 max-md:mb-4 text-sm\" }, null, _parent));\n      _push(`</div><div class=\"flex relative items-center justify-between w-full gap-x-10 mt-4\"><p class=\"text-mediumGray w-6/12 max-[786px]:w-full\">${_ssrInterpolate(_ctx.$t(\"Кликните на отдел, чтобы посмотреть доступные должности.\"))}</p></div><div class=\"mt-8\">`);\n      if (!_unref(departmentList).get_all_department.results) {\n        _push(`<div class=\"flex w-full gap-y-4 gap-x-4 flex-wrap\"><!--[-->`);\n        _ssrRenderList(6, (item) => {\n          _push(_ssrRenderComponent(TheSceleton, {\n            \"border-radius\": \"10px\",\n            width: \"30%\",\n            height: \"100px\"\n          }, null, _parent));\n        });\n        _push(`<!--]--></div>`);\n      } else {\n        _push(`<div class=\"grid grid-cols-4 max-[1250px]:grid-cols-3 max-[810px]:grid-cols-2 max-[636px]:grid-cols-1 gap-5\"><!--[-->`);\n        _ssrRenderList(_unref(departmentList)?.get_all_department.results, (department) => {\n          _push(_ssrRenderComponent(DepartmentContentLists, { \"department-item\": department }, null, _parent));\n        });\n        _push(`<!--]--></div>`);\n      }\n      _push(`<div class=\"mt-6 flex items-center justify-end gap-1\"><p>${_ssrInterpolate(_ctx.$t(\"Количество департаментов\"))}: </p><p class=\"font-bold\">${_ssrInterpolate(_unref(departmentList).get_all_department.count)}</p></div></div></div>`);\n    };\n  }\n});\n",
-      "start": 1750670598109,
-      "end": 1750670598126,
+      "start": 1750671105578,
+      "end": 1750671105579,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -280,21 +280,21 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1750670598126,
-      "end": 1750670598126,
+      "start": 1750671105579,
+      "end": 1750671105579,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1750670598126,
-      "end": 1750670598126,
+      "start": 1750671105579,
+      "end": 1750671105579,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
       "result": "\nconst __nuxt_page_meta = null\nexport default __nuxt_page_meta\n",
-      "start": 1750670598126,
-      "end": 1750670598128,
+      "start": 1750671105579,
+      "end": 1750671105580,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -308,8 +308,8 @@
     {
       "name": "nuxt:pages-macros-transform",
       "result": "\nconst __nuxt_page_meta = null\nexport default __nuxt_page_meta\n",
-      "start": 1750670598126,
-      "end": 1750670598128,
+      "start": 1750671105579,
+      "end": 1750671105580,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -322,32 +322,32 @@
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1750670598128,
-      "end": 1750670598128,
+      "start": 1750671105580,
+      "end": 1750671105580,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1750670598129,
-      "end": 1750670598130,
+      "start": 1750671105580,
+      "end": 1750671105580,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1750670598132,
-      "end": 1750670598134,
+      "start": 1750671105580,
+      "end": 1750671105580,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1750670598134,
-      "end": 1750670598134,
+      "start": 1750671105580,
+      "end": 1750671105580,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1750670598134,
-      "end": 1750670598134,
+      "start": 1750671105580,
+      "end": 1750671105580,
       "order": "normal"
     }
   ]
