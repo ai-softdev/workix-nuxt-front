@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { unref as _unref, resolveComponent as _resolveComponent, withCtx as _withCtx, createVNode as _createVNode, mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderClass as _ssrRenderClass, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\"\n\nimport {useUserStore} from \"~/stores/users\";\r\nimport {useChat} from \"~/stores/chat\";\r\nimport {useRoute} from \"vue-router\";\r\nimport ChatNav from \"~/components/Chat/ChatNav.vue\"\r\nimport ChatCropper from \"~/components/Chat/UI/ChatCropper.vue\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport {useCompanies} from \"~/stores/companies\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'chat',\n  __ssrInlineRender: true,\n  setup(__props) {\n\r\nconst windowWidth = ref(0)\r\nconst activeNav = ref(true)\r\nconst route = useRoute()\r\nconst router = useRouter()\r\nconst chatStore = useChat()\r\nconst userStore = useUserStore()\r\nconst loadAuthStore = useAuthStore()\r\nconst company = useCompanies()\r\n\r\nchatStore.loadChatList({page: 1, limit: 100})\r\nuserStore.loadUserList({query: '', user_type: 'user-list', page: 1, limit: 10000})\r\nonMounted(() => {\r\n  windowWidth.value = window.innerWidth\r\n  if (route.path === '/base/chat') {\r\n    activeNav.value = true\r\n  } else if (route.path === `/base/chat/${chatStore.userChat?.id}`) {\r\n    activeNav.value = false\r\n  }\r\n})\r\nonUnmounted(() => {\r\n  chatStore.showGroupCreateChoice = false;\r\n  chatStore.showGroupCreate = false;\r\n  chatStore.file = '';\r\n  chatStore.src = '';\r\n  chatStore.fileUpload = null;\r\n  chatStore.results = {coordinates: null, image: null}\r\n})\r\n\r\n\r\nwatch(() => loadAuthStore.user, (newValue) => {\r\n  if(loadAuthStore?.user?.role?.name_en === 'admin'){\r\n    if (window.history.length > 1) {\r\n      router.push('/base/profile');\r\n    } else {\r\n      router.push('/');\r\n    }\r\n  }\r\n})\r\nwatch(() => company.company, (newValue) => {\r\n  let permission = company.company.modules?.find(item => item.name_en === 'chat')\r\n  if(!permission){\r\n    if (window.history.length > 1) {\r\n      router.push('/base/profile');\r\n    } else {\r\n      router.push('/');\r\n    }\r\n  }\r\n})\r\n\r\nuseSeoMeta({\r\n  title: 'Чат',\r\n  description: 'Интерактивный чат для пользователей'\r\n})\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  const _component_ClientOnly = _resolveComponent(\"ClientOnly\")!\n  const _component_NuxtPage = _resolveComponent(\"NuxtPage\")!\n\n  _push(`<div${\n    _ssrRenderAttrs(_mergeProps({ class: \"!mx-0 !p-10 max-[768px]:!p-0\" }, _attrs))\n  }><div class=\"bg-white border flex w-full border-t border-t-gray-100 dark:text-white rounded-3xl shadow-chat overflow-hidden\"><div class=\"${\n    _ssrRenderClass([{'max-md:w-0' : !_unref(chatStore).activeChatNav || _unref(route).path === `/base/chat/${_unref(route).params.id}`, 'max-md:w-full ' : _unref(route).path === `/base/chat`, 'w-[320px]' : !_unref(userStore).get_user_list.results || !_unref(chatStore).activeChatNav}, \"max-md:absolute h-screen overflow-hidden relative z-[12] rounded-l-3xl dark:bg-gray-700 border-r bg-white transition-all duration-300 w-[320px]\"])\n  }\">`)\n  _push(_ssrRenderComponent(ChatNav, null, null, _parent))\n  _push(`</div><div class=\"w-11/12 relative overflow-hidden max-lg:w-9/12 max-md:w-full h-screen\">`)\n  _push(_ssrRenderComponent(_component_ClientOnly, null, {\n    default: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(_ssrRenderComponent(_component_NuxtPage, null, null, _parent, _scopeId))\n        _push(_ssrRenderComponent(ChatCropper, null, null, _parent, _scopeId))\n      } else {\n        return [\n          _createVNode(_component_NuxtPage),\n          _createVNode(ChatCropper)\n        ]\n      }\n    }),\n    _: 1\n  }, _parent))\n  if (_unref(route).path === '/base/chat') {\n    _push(`<div class=\"flex items-center justify-center my-auto w-full h-full text-center rounded-full px-2\"><p class=\"bg-black bg-opacity-5 px-10 py-2 rounded-full\">${_ssrInterpolate(_ctx.$t('Выберите контакт для сообщения'))}</p></div>`)\n  } else {\n    _push(`<!---->`)\n  }\n  _push(`</div></div></div>`)\n}\n}\n\n})",
-      "start": 1750671104046,
-      "end": 1750671104046,
+      "start": 1750752020804,
+      "end": 1750752020805,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750671104046,
-      "end": 1750671104046,
+      "start": 1750752020805,
+      "end": 1750752020805,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750671104046,
-      "end": 1750671104046,
+      "start": 1750752020805,
+      "end": 1750752020805,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750671104046,
-      "end": 1750671104046,
+      "start": 1750752020806,
+      "end": 1750752020806,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750671104046,
-      "end": 1750671104046,
+      "start": 1750752020806,
+      "end": 1750752020806,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750671104046,
-      "end": 1750671104046,
+      "start": 1750752020806,
+      "end": 1750752020806,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750671104046,
-      "end": 1750671104046,
+      "start": 1750752020806,
+      "end": 1750752020806,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1750671104046,
-      "end": 1750671104046,
+      "start": 1750752020806,
+      "end": 1750752020806,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1750671104046,
-      "end": 1750671104046,
+      "start": 1750752020806,
+      "end": 1750752020806,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, resolveComponent as _resolveComponent, withCtx as _withCtx, createVNode as _createVNode, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderClass as _ssrRenderClass, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport { useUserStore } from \"~/stores/users\";\nimport { useChat } from \"~/stores/chat\";\nimport { useRoute } from \"vue-router\";\nimport ChatNav from \"~/components/Chat/ChatNav.vue\";\nimport ChatCropper from \"~/components/Chat/UI/ChatCropper.vue\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"chat\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const windowWidth = ref(0);\n    const activeNav = ref(true);\n    const route = useRoute();\n    const router = useRouter();\n    const chatStore = useChat();\n    const userStore = useUserStore();\n    const loadAuthStore = useAuthStore();\n    const company = useCompanies();\n    chatStore.loadChatList({ page: 1, limit: 100 });\n    userStore.loadUserList({ query: \"\", user_type: \"user-list\", page: 1, limit: 1e4 });\n    onMounted(() => {\n      windowWidth.value = window.innerWidth;\n      if (route.path === \"/base/chat\") {\n        activeNav.value = true;\n      } else if (route.path === `/base/chat/${chatStore.userChat?.id}`) {\n        activeNav.value = false;\n      }\n    });\n    onUnmounted(() => {\n      chatStore.showGroupCreateChoice = false;\n      chatStore.showGroupCreate = false;\n      chatStore.file = \"\";\n      chatStore.src = \"\";\n      chatStore.fileUpload = null;\n      chatStore.results = { coordinates: null, image: null };\n    });\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if (window.history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    watch(() => company.company, (newValue) => {\n      let permission = company.company.modules?.find((item) => item.name_en === \"chat\");\n      if (!permission) {\n        if (window.history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Чат\",\n      description: \"Интерактивный чат для пользователей\"\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_ClientOnly = _resolveComponent(\"ClientOnly\");\n      const _component_NuxtPage = _resolveComponent(\"NuxtPage\");\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"!mx-0 !p-10 max-[768px]:!p-0\" }, _attrs))}><div class=\"bg-white border flex w-full border-t border-t-gray-100 dark:text-white rounded-3xl shadow-chat overflow-hidden\"><div class=\"${_ssrRenderClass([{ \"max-md:w-0\": !_unref(chatStore).activeChatNav || _unref(route).path === `/base/chat/${_unref(route).params.id}`, \"max-md:w-full \": _unref(route).path === `/base/chat`, \"w-[320px]\": !_unref(userStore).get_user_list.results || !_unref(chatStore).activeChatNav }, \"max-md:absolute h-screen overflow-hidden relative z-[12] rounded-l-3xl dark:bg-gray-700 border-r bg-white transition-all duration-300 w-[320px]\"])}\">`);\n      _push(_ssrRenderComponent(ChatNav, null, null, _parent));\n      _push(`</div><div class=\"w-11/12 relative overflow-hidden max-lg:w-9/12 max-md:w-full h-screen\">`);\n      _push(_ssrRenderComponent(_component_ClientOnly, null, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(_ssrRenderComponent(_component_NuxtPage, null, null, _parent2, _scopeId));\n            _push2(_ssrRenderComponent(ChatCropper, null, null, _parent2, _scopeId));\n          } else {\n            return [\n              _createVNode(_component_NuxtPage),\n              _createVNode(ChatCropper)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      if (_unref(route).path === \"/base/chat\") {\n        _push(`<div class=\"flex items-center justify-center my-auto w-full h-full text-center rounded-full px-2\"><p class=\"bg-black bg-opacity-5 px-10 py-2 rounded-full\">${_ssrInterpolate(_ctx.$t(\"Выберите контакт для сообщения\"))}</p></div>`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div></div></div>`);\n    };\n  }\n});\n",
-      "start": 1750671104046,
-      "end": 1750671104585,
+      "start": 1750752020808,
+      "end": 1750752021662,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -89,173 +89,173 @@
     },
     {
       "name": "vite:json",
-      "start": 1750671104585,
-      "end": 1750671104585,
+      "start": 1750752021662,
+      "end": 1750752021662,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1750671104585,
-      "end": 1750671104585,
+      "start": 1750752021662,
+      "end": 1750752021662,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1750671104585,
-      "end": 1750671104586,
+      "start": 1750752021662,
+      "end": 1750752021663,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1750671104586,
-      "end": 1750671104586,
+      "start": 1750752021663,
+      "end": 1750752021663,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750671104586,
-      "end": 1750671104586,
+      "start": 1750752021663,
+      "end": 1750752021663,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750671104586,
-      "end": 1750671104586,
+      "start": 1750752021663,
+      "end": 1750752021663,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750671104586,
-      "end": 1750671104586,
+      "start": 1750752021663,
+      "end": 1750752021663,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750671104586,
-      "end": 1750671104586,
+      "start": 1750752021663,
+      "end": 1750752021663,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1750671104586,
-      "end": 1750671104586,
+      "start": 1750752021663,
+      "end": 1750752021663,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750671104586,
-      "end": 1750671104586,
+      "start": 1750752021664,
+      "end": 1750752021664,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1750671104587,
-      "end": 1750671104587,
+      "start": 1750752021664,
+      "end": 1750752021664,
       "order": "normal"
     },
     {
       "name": "vite:define",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, resolveComponent as _resolveComponent, withCtx as _withCtx, createVNode as _createVNode, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderClass as _ssrRenderClass, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport { useUserStore } from \"~/stores/users\";\nimport { useChat } from \"~/stores/chat\";\nimport { useRoute } from \"vue-router\";\nimport ChatNav from \"~/components/Chat/ChatNav.vue\";\nimport ChatCropper from \"~/components/Chat/UI/ChatCropper.vue\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"chat\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const windowWidth = ref(0);\n    const activeNav = ref(true);\n    const route = useRoute();\n    const router = useRouter();\n    const chatStore = useChat();\n    const userStore = useUserStore();\n    const loadAuthStore = useAuthStore();\n    const company = useCompanies();\n    chatStore.loadChatList({ page: 1, limit: 100 });\n    userStore.loadUserList({ query: \"\", user_type: \"user-list\", page: 1, limit: 1e4 });\n    onMounted(() => {\n      windowWidth.value = (void 0).innerWidth;\n      if (route.path === \"/base/chat\") {\n        activeNav.value = true;\n      } else if (route.path === `/base/chat/${chatStore.userChat?.id}`) {\n        activeNav.value = false;\n      }\n    });\n    onUnmounted(() => {\n      chatStore.showGroupCreateChoice = false;\n      chatStore.showGroupCreate = false;\n      chatStore.file = \"\";\n      chatStore.src = \"\";\n      chatStore.fileUpload = null;\n      chatStore.results = { coordinates: null, image: null };\n    });\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    watch(() => company.company, (newValue) => {\n      let permission = company.company.modules?.find((item) => item.name_en === \"chat\");\n      if (!permission) {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Чат\",\n      description: \"Интерактивный чат для пользователей\"\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_ClientOnly = _resolveComponent(\"ClientOnly\");\n      const _component_NuxtPage = _resolveComponent(\"NuxtPage\");\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"!mx-0 !p-10 max-[768px]:!p-0\" }, _attrs))}><div class=\"bg-white border flex w-full border-t border-t-gray-100 dark:text-white rounded-3xl shadow-chat overflow-hidden\"><div class=\"${_ssrRenderClass([{ \"max-md:w-0\": !_unref(chatStore).activeChatNav || _unref(route).path === `/base/chat/${_unref(route).params.id}`, \"max-md:w-full \": _unref(route).path === `/base/chat`, \"w-[320px]\": !_unref(userStore).get_user_list.results || !_unref(chatStore).activeChatNav }, \"max-md:absolute h-screen overflow-hidden relative z-[12] rounded-l-3xl dark:bg-gray-700 border-r bg-white transition-all duration-300 w-[320px]\"])}\">`);\n      _push(_ssrRenderComponent(ChatNav, null, null, _parent));\n      _push(`</div><div class=\"w-11/12 relative overflow-hidden max-lg:w-9/12 max-md:w-full h-screen\">`);\n      _push(_ssrRenderComponent(_component_ClientOnly, null, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(_ssrRenderComponent(_component_NuxtPage, null, null, _parent2, _scopeId));\n            _push2(_ssrRenderComponent(ChatCropper, null, null, _parent2, _scopeId));\n          } else {\n            return [\n              _createVNode(_component_NuxtPage),\n              _createVNode(ChatCropper)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      if (_unref(route).path === \"/base/chat\") {\n        _push(`<div class=\"flex items-center justify-center my-auto w-full h-full text-center rounded-full px-2\"><p class=\"bg-black bg-opacity-5 px-10 py-2 rounded-full\">${_ssrInterpolate(_ctx.$t(\"Выберите контакт для сообщения\"))}</p></div>`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div></div></div>`);\n    };\n  }\n});\n",
-      "start": 1750671104587,
-      "end": 1750671105986,
+      "start": 1750752021664,
+      "end": 1750752023832,
       "order": "normal",
       "sourcemaps": "{\n  \"version\": 3,\n  \"sources\": [\"D:/projects/nuxt/workix-nuxt-front/pages/base/chat.vue?macro=true&vue&type=script&setup=true&lang.ts\"],\n  \"sourcesContent\": [\"import { defineComponent as _defineComponent } from \\\"vue\\\";\\nimport { unref as _unref, resolveComponent as _resolveComponent, withCtx as _withCtx, createVNode as _createVNode, mergeProps as _mergeProps } from \\\"vue\\\";\\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderClass as _ssrRenderClass, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \\\"vue/server-renderer\\\";\\nimport { useUserStore } from \\\"~/stores/users\\\";\\nimport { useChat } from \\\"~/stores/chat\\\";\\nimport { useRoute } from \\\"vue-router\\\";\\nimport ChatNav from \\\"~/components/Chat/ChatNav.vue\\\";\\nimport ChatCropper from \\\"~/components/Chat/UI/ChatCropper.vue\\\";\\nimport { useAuthStore } from \\\"~/stores/auth\\\";\\nimport { useCompanies } from \\\"~/stores/companies\\\";\\nexport default /* @__PURE__ */ _defineComponent({\\n  __name: \\\"chat\\\",\\n  __ssrInlineRender: true,\\n  setup(__props) {\\n    const windowWidth = ref(0);\\n    const activeNav = ref(true);\\n    const route = useRoute();\\n    const router = useRouter();\\n    const chatStore = useChat();\\n    const userStore = useUserStore();\\n    const loadAuthStore = useAuthStore();\\n    const company = useCompanies();\\n    chatStore.loadChatList({ page: 1, limit: 100 });\\n    userStore.loadUserList({ query: \\\"\\\", user_type: \\\"user-list\\\", page: 1, limit: 1e4 });\\n    onMounted(() => {\\n      windowWidth.value = window.innerWidth;\\n      if (route.path === \\\"/base/chat\\\") {\\n        activeNav.value = true;\\n      } else if (route.path === `/base/chat/${chatStore.userChat?.id}`) {\\n        activeNav.value = false;\\n      }\\n    });\\n    onUnmounted(() => {\\n      chatStore.showGroupCreateChoice = false;\\n      chatStore.showGroupCreate = false;\\n      chatStore.file = \\\"\\\";\\n      chatStore.src = \\\"\\\";\\n      chatStore.fileUpload = null;\\n      chatStore.results = { coordinates: null, image: null };\\n    });\\n    watch(() => loadAuthStore.user, (newValue) => {\\n      if (loadAuthStore?.user?.role?.name_en === \\\"admin\\\") {\\n        if (window.history.length > 1) {\\n          router.push(\\\"/base/profile\\\");\\n        } else {\\n          router.push(\\\"/\\\");\\n        }\\n      }\\n    });\\n    watch(() => company.company, (newValue) => {\\n      let permission = company.company.modules?.find((item) => item.name_en === \\\"chat\\\");\\n      if (!permission) {\\n        if (window.history.length > 1) {\\n          router.push(\\\"/base/profile\\\");\\n        } else {\\n          router.push(\\\"/\\\");\\n        }\\n      }\\n    });\\n    useSeoMeta({\\n      title: \\\"Чат\\\",\\n      description: \\\"Интерактивный чат для пользователей\\\"\\n    });\\n    return (_ctx, _push, _parent, _attrs) => {\\n      const _component_ClientOnly = _resolveComponent(\\\"ClientOnly\\\");\\n      const _component_NuxtPage = _resolveComponent(\\\"NuxtPage\\\");\\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \\\"!mx-0 !p-10 max-[768px]:!p-0\\\" }, _attrs))}><div class=\\\"bg-white border flex w-full border-t border-t-gray-100 dark:text-white rounded-3xl shadow-chat overflow-hidden\\\"><div class=\\\"${_ssrRenderClass([{ \\\"max-md:w-0\\\": !_unref(chatStore).activeChatNav || _unref(route).path === `/base/chat/${_unref(route).params.id}`, \\\"max-md:w-full \\\": _unref(route).path === `/base/chat`, \\\"w-[320px]\\\": !_unref(userStore).get_user_list.results || !_unref(chatStore).activeChatNav }, \\\"max-md:absolute h-screen overflow-hidden relative z-[12] rounded-l-3xl dark:bg-gray-700 border-r bg-white transition-all duration-300 w-[320px]\\\"])}\\\">`);\\n      _push(_ssrRenderComponent(ChatNav, null, null, _parent));\\n      _push(`</div><div class=\\\"w-11/12 relative overflow-hidden max-lg:w-9/12 max-md:w-full h-screen\\\">`);\\n      _push(_ssrRenderComponent(_component_ClientOnly, null, {\\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\\n          if (_push2) {\\n            _push2(_ssrRenderComponent(_component_NuxtPage, null, null, _parent2, _scopeId));\\n            _push2(_ssrRenderComponent(ChatCropper, null, null, _parent2, _scopeId));\\n          } else {\\n            return [\\n              _createVNode(_component_NuxtPage),\\n              _createVNode(ChatCropper)\\n            ];\\n          }\\n        }),\\n        _: 1\\n      }, _parent));\\n      if (_unref(route).path === \\\"/base/chat\\\") {\\n        _push(`<div class=\\\"flex items-center justify-center my-auto w-full h-full text-center rounded-full px-2\\\"><p class=\\\"bg-black bg-opacity-5 px-10 py-2 rounded-full\\\">${_ssrInterpolate(_ctx.$t(\\\"Выберите контакт для сообщения\\\"))}</p></div>`);\\n      } else {\\n        _push(`<!---->`);\\n      }\\n      _push(`</div></div></div>`);\\n    };\\n  }\\n});\\n\"],\n  \"mappings\": \"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\",\n  \"names\": []\n}\n"
     },
     {
       "name": "vite:css-post",
-      "start": 1750671105986,
-      "end": 1750671105986,
+      "start": 1750752023833,
+      "end": 1750752023833,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1750671105986,
-      "end": 1750671105986,
+      "start": 1750752023833,
+      "end": 1750752023833,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1750671105986,
-      "end": 1750671105986,
+      "start": 1750752023833,
+      "end": 1750752023833,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1750671105986,
-      "end": 1750671105986,
+      "start": 1750752023833,
+      "end": 1750752023833,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1750671105986,
-      "end": 1750671105987,
+      "start": 1750752023833,
+      "end": 1750752023833,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1750671105987,
-      "end": 1750671105987,
+      "start": 1750752023833,
+      "end": 1750752023833,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1750671105987,
-      "end": 1750671105987,
+      "start": 1750752023833,
+      "end": 1750752023833,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750671105987,
-      "end": 1750671105987,
+      "start": 1750752023833,
+      "end": 1750752023833,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750671105987,
-      "end": 1750671105987,
+      "start": 1750752023833,
+      "end": 1750752023833,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750671105987,
-      "end": 1750671105988,
+      "start": 1750752023833,
+      "end": 1750752023834,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750671105987,
-      "end": 1750671105988,
+      "start": 1750752023833,
+      "end": 1750752023834,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750671105990,
-      "end": 1750671105991,
+      "start": 1750752023834,
+      "end": 1750752023834,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750671105990,
-      "end": 1750671105992,
+      "start": 1750752023834,
+      "end": 1750752023834,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750671105992,
-      "end": 1750671105992,
+      "start": 1750752023834,
+      "end": 1750752023834,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750671105992,
-      "end": 1750671105992,
+      "start": 1750752023834,
+      "end": 1750752023834,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref, onMounted, onUnmounted, watch } from 'vue';\nimport { useRouter } from '#app/composables/router';\nimport { useSeoMeta } from '@unhead/vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, resolveComponent as _resolveComponent, withCtx as _withCtx, createVNode as _createVNode, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderClass as _ssrRenderClass, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport { useUserStore } from \"~/stores/users\";\nimport { useChat } from \"~/stores/chat\";\nimport { useRoute } from \"vue-router\";\nimport ChatNav from \"~/components/Chat/ChatNav.vue\";\nimport ChatCropper from \"~/components/Chat/UI/ChatCropper.vue\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"chat\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const windowWidth = ref(0);\n    const activeNav = ref(true);\n    const route = useRoute();\n    const router = useRouter();\n    const chatStore = useChat();\n    const userStore = useUserStore();\n    const loadAuthStore = useAuthStore();\n    const company = useCompanies();\n    chatStore.loadChatList({ page: 1, limit: 100 });\n    userStore.loadUserList({ query: \"\", user_type: \"user-list\", page: 1, limit: 1e4 });\n    onMounted(() => {\n      windowWidth.value = (void 0).innerWidth;\n      if (route.path === \"/base/chat\") {\n        activeNav.value = true;\n      } else if (route.path === `/base/chat/${chatStore.userChat?.id}`) {\n        activeNav.value = false;\n      }\n    });\n    onUnmounted(() => {\n      chatStore.showGroupCreateChoice = false;\n      chatStore.showGroupCreate = false;\n      chatStore.file = \"\";\n      chatStore.src = \"\";\n      chatStore.fileUpload = null;\n      chatStore.results = { coordinates: null, image: null };\n    });\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    watch(() => company.company, (newValue) => {\n      let permission = company.company.modules?.find((item) => item.name_en === \"chat\");\n      if (!permission) {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Чат\",\n      description: \"Интерактивный чат для пользователей\"\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_ClientOnly = _resolveComponent(\"ClientOnly\");\n      const _component_NuxtPage = _resolveComponent(\"NuxtPage\");\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"!mx-0 !p-10 max-[768px]:!p-0\" }, _attrs))}><div class=\"bg-white border flex w-full border-t border-t-gray-100 dark:text-white rounded-3xl shadow-chat overflow-hidden\"><div class=\"${_ssrRenderClass([{ \"max-md:w-0\": !_unref(chatStore).activeChatNav || _unref(route).path === `/base/chat/${_unref(route).params.id}`, \"max-md:w-full \": _unref(route).path === `/base/chat`, \"w-[320px]\": !_unref(userStore).get_user_list.results || !_unref(chatStore).activeChatNav }, \"max-md:absolute h-screen overflow-hidden relative z-[12] rounded-l-3xl dark:bg-gray-700 border-r bg-white transition-all duration-300 w-[320px]\"])}\">`);\n      _push(_ssrRenderComponent(ChatNav, null, null, _parent));\n      _push(`</div><div class=\"w-11/12 relative overflow-hidden max-lg:w-9/12 max-md:w-full h-screen\">`);\n      _push(_ssrRenderComponent(_component_ClientOnly, null, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(_ssrRenderComponent(_component_NuxtPage, null, null, _parent2, _scopeId));\n            _push2(_ssrRenderComponent(ChatCropper, null, null, _parent2, _scopeId));\n          } else {\n            return [\n              _createVNode(_component_NuxtPage),\n              _createVNode(ChatCropper)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      if (_unref(route).path === \"/base/chat\") {\n        _push(`<div class=\"flex items-center justify-center my-auto w-full h-full text-center rounded-full px-2\"><p class=\"bg-black bg-opacity-5 px-10 py-2 rounded-full\">${_ssrInterpolate(_ctx.$t(\"Выберите контакт для сообщения\"))}</p></div>`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div></div></div>`);\n    };\n  }\n});\n",
-      "start": 1750671105992,
-      "end": 1750671106000,
+      "start": 1750752023834,
+      "end": 1750752023849,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -269,8 +269,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref, onMounted, onUnmounted, watch } from 'vue';\nimport { useRouter } from '#app/composables/router';\nimport { useSeoMeta } from '@unhead/vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, resolveComponent as _resolveComponent, withCtx as _withCtx, createVNode as _createVNode, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderClass as _ssrRenderClass, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport { useUserStore } from \"~/stores/users\";\nimport { useChat } from \"~/stores/chat\";\nimport { useRoute } from \"vue-router\";\nimport ChatNav from \"~/components/Chat/ChatNav.vue\";\nimport ChatCropper from \"~/components/Chat/UI/ChatCropper.vue\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"chat\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const windowWidth = ref(0);\n    const activeNav = ref(true);\n    const route = useRoute();\n    const router = useRouter();\n    const chatStore = useChat();\n    const userStore = useUserStore();\n    const loadAuthStore = useAuthStore();\n    const company = useCompanies();\n    chatStore.loadChatList({ page: 1, limit: 100 });\n    userStore.loadUserList({ query: \"\", user_type: \"user-list\", page: 1, limit: 1e4 });\n    onMounted(() => {\n      windowWidth.value = (void 0).innerWidth;\n      if (route.path === \"/base/chat\") {\n        activeNav.value = true;\n      } else if (route.path === `/base/chat/${chatStore.userChat?.id}`) {\n        activeNav.value = false;\n      }\n    });\n    onUnmounted(() => {\n      chatStore.showGroupCreateChoice = false;\n      chatStore.showGroupCreate = false;\n      chatStore.file = \"\";\n      chatStore.src = \"\";\n      chatStore.fileUpload = null;\n      chatStore.results = { coordinates: null, image: null };\n    });\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    watch(() => company.company, (newValue) => {\n      let permission = company.company.modules?.find((item) => item.name_en === \"chat\");\n      if (!permission) {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Чат\",\n      description: \"Интерактивный чат для пользователей\"\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_ClientOnly = _resolveComponent(\"ClientOnly\");\n      const _component_NuxtPage = _resolveComponent(\"NuxtPage\");\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"!mx-0 !p-10 max-[768px]:!p-0\" }, _attrs))}><div class=\"bg-white border flex w-full border-t border-t-gray-100 dark:text-white rounded-3xl shadow-chat overflow-hidden\"><div class=\"${_ssrRenderClass([{ \"max-md:w-0\": !_unref(chatStore).activeChatNav || _unref(route).path === `/base/chat/${_unref(route).params.id}`, \"max-md:w-full \": _unref(route).path === `/base/chat`, \"w-[320px]\": !_unref(userStore).get_user_list.results || !_unref(chatStore).activeChatNav }, \"max-md:absolute h-screen overflow-hidden relative z-[12] rounded-l-3xl dark:bg-gray-700 border-r bg-white transition-all duration-300 w-[320px]\"])}\">`);\n      _push(_ssrRenderComponent(ChatNav, null, null, _parent));\n      _push(`</div><div class=\"w-11/12 relative overflow-hidden max-lg:w-9/12 max-md:w-full h-screen\">`);\n      _push(_ssrRenderComponent(_component_ClientOnly, null, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(_ssrRenderComponent(_component_NuxtPage, null, null, _parent2, _scopeId));\n            _push2(_ssrRenderComponent(ChatCropper, null, null, _parent2, _scopeId));\n          } else {\n            return [\n              _createVNode(_component_NuxtPage),\n              _createVNode(ChatCropper)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      if (_unref(route).path === \"/base/chat\") {\n        _push(`<div class=\"flex items-center justify-center my-auto w-full h-full text-center rounded-full px-2\"><p class=\"bg-black bg-opacity-5 px-10 py-2 rounded-full\">${_ssrInterpolate(_ctx.$t(\"Выберите контакт для сообщения\"))}</p></div>`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div></div></div>`);\n    };\n  }\n});\n",
-      "start": 1750671105992,
-      "end": 1750671106000,
+      "start": 1750752023834,
+      "end": 1750752023849,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -283,21 +283,21 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1750671106000,
-      "end": 1750671106000,
+      "start": 1750752023850,
+      "end": 1750752023850,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1750671106000,
-      "end": 1750671106000,
+      "start": 1750752023850,
+      "end": 1750752023850,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
       "result": "\nconst __nuxt_page_meta = null\nexport default __nuxt_page_meta\n",
-      "start": 1750671106000,
-      "end": 1750671106002,
+      "start": 1750752023852,
+      "end": 1750752023853,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -311,8 +311,8 @@
     {
       "name": "nuxt:pages-macros-transform",
       "result": "\nconst __nuxt_page_meta = null\nexport default __nuxt_page_meta\n",
-      "start": 1750671106000,
-      "end": 1750671106002,
+      "start": 1750752023852,
+      "end": 1750752023853,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -325,32 +325,32 @@
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1750671106002,
-      "end": 1750671106002,
+      "start": 1750752023853,
+      "end": 1750752023853,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1750671106002,
-      "end": 1750671106002,
+      "start": 1750752023875,
+      "end": 1750752023875,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1750671106002,
-      "end": 1750671106002,
+      "start": 1750752023875,
+      "end": 1750752023875,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1750671106002,
-      "end": 1750671106002,
+      "start": 1750752023875,
+      "end": 1750752023884,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1750671106002,
-      "end": 1750671106002,
+      "start": 1750752023884,
+      "end": 1750752023884,
       "order": "normal"
     }
   ]

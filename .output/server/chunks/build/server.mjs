@@ -928,7 +928,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./chat-CKSbB2s1.mjs').then((m) => m.default || m),
+        component: () => import('./chat-Dm27OSyE.mjs').then((m) => m.default || m),
         children: [
           {
             name: "base-chat-id",

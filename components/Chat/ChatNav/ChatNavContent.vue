@@ -38,15 +38,20 @@ const route = useRoute()
       </div>
     </div>
     <div v-if="chatStore.searchElem !== ''" class="">
-      <NuxtLink :to="`/base/chat/${chatStore.get_user_chat?.id}`" v-for="userSearchList in userStore.get_user_search.results"
-                @click="userSearchList.id !== chatStore.get_user_chat.user?.id ? chatStore.createChatUser({user_id: userSearchList.id}) : ()=>{
+      <NuxtLink
+          v-for="userSearchList in userStore.get_user_search.results"
+          :to="`/base/chat/${userSearchList.id}`"
+          @click="userSearchList.id !== chatStore.get_user_chat.user?.id ? chatStore.createChatUser({user_id: userSearchList.id}) : ()=>{
                   chatStore.flag = false;
                   nextTick(()=>{
                     chatStore.flag = true
                   })
                 }; chatStore.showPinnedWindow = false; chatStore.searchElem = '' ; chatStore.activeChatNav = false"
-                class="flex items-center px-4 gap-x-2 dark:hover:bg-gray-500 hover:bg-azure !bg-opacity-10 cursor-pointer transition-all duration-200 p-1"
-                :class="{'dark:hover:!bg-semiCyan' : route.path === `/base/chat/${userSearchList.id}`, 'hover:!bg-cyan' : route.path === `/base/chat/${userSearchList.id}`}">
+          class="flex items-center px-4 gap-x-2 dark:hover:bg-gray-500 hover:bg-azure !bg-opacity-10 cursor-pointer transition-all duration-200 p-1"
+          :class="{'dark:hover:!bg-semiCyan' : route.path === `/base/chat/${userSearchList.id}`, 'hover:!bg-cyan' : route.path === `/base/chat/${userSearchList.id}`}"
+      >
+<!--        :to="`/base/chat/${chatStore.get_user_chat?.id}`"-->
+        {{ userSearchList.id !== chatStore.get_user_chat.user?.id }}
         <img class="w-[50px] h-[50px] rounded-full" :src="userSearchList.photo" alt="use-photo">
         <p class="text-sm break-words font-bold">{{ userSearchList.first_name + ' ' + userSearchList.last_name }}</p>
       </NuxtLink>

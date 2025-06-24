@@ -864,7 +864,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$s == null ? void 0 : __nuxt_page_meta$s.redirect,
-        component: () => import("./_nuxt/chat-CKSbB2s1.js").then((m) => m.default || m),
+        component: () => import("./_nuxt/chat-Dm27OSyE.js").then((m) => m.default || m),
         children: [
           {
             name: "base-chat-id",

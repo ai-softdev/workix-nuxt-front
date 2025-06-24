@@ -1,0 +1,1 @@
+import{j as a,N as n,O as s,a5 as r,a4 as o}from"./swiper-vue.CGVHF6NK.js";const c=a({__name:"TheTextContent",props:{textType:{type:String,default:""}},setup(e){return(t,l)=>(n(),s("p",{class:o(["text-center dark:text-white text-black text-lg",{"mb-10":e.textType==="pageTitle"}])},[r(t.$slots,"default")],2))}});export{c as _};
