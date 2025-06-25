@@ -1,6 +1,7 @@
 import {defineStore} from "pinia";
 import axios from "~/composables/axios";
 import nuxtStorage from "nuxt-storage/nuxt-storage";
+import type {Router} from "vue-router";
 
 type TClickTimeout = NodeJS.Timeout | null
 export const useChat = defineStore('chat', {
@@ -192,7 +193,7 @@ export const useChat = defineStore('chat', {
       }).then(res => {
       })
     },
-    async createChatUser(params: { users: any, user_id: any, name: string, photo: any }) {
+    async createChatUser(params: { users: any, user_id: any, name: string, photo: any }, router: Router) {
       let fd = new FormData()
       if (this.isGroup) {
         fd.set('name', params.name)
@@ -203,11 +204,13 @@ export const useChat = defineStore('chat', {
       } else {
         fd.set('user_id', params.user_id)
       }
-      await axios.post(`chat/create`, fd, {
+      await axios.post(`chat/create/private`, fd, {
         headers: {
           Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
         }
       }).then(res => {
+        router.push(`/base/chat/${res.data.id}`)
+        console.log(res.data.id)
         this.loadChatList()
       })
     },

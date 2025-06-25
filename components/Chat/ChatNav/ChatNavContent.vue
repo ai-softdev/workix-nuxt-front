@@ -38,10 +38,9 @@ const route = useRoute()
       </div>
     </div>
     <div v-if="chatStore.searchElem !== ''" class="">
-      <NuxtLink
+      <div
           v-for="userSearchList in userStore.get_user_search.results"
-          :to="`/base/chat/${userSearchList.id}`"
-          @click="userSearchList.id !== chatStore.get_user_chat.user?.id ? chatStore.createChatUser({user_id: userSearchList.id}) : ()=>{
+          @click="userSearchList.id !== chatStore.get_user_chat.user?.id ? chatStore.createChatUser({user_id: userSearchList.id}, $router) : ()=>{
                   chatStore.flag = false;
                   nextTick(()=>{
                     chatStore.flag = true
@@ -51,10 +50,9 @@ const route = useRoute()
           :class="{'dark:hover:!bg-semiCyan' : route.path === `/base/chat/${userSearchList.id}`, 'hover:!bg-cyan' : route.path === `/base/chat/${userSearchList.id}`}"
       >
 <!--        :to="`/base/chat/${chatStore.get_user_chat?.id}`"-->
-        {{ userSearchList.id !== chatStore.get_user_chat.user?.id }}
         <img class="w-[50px] h-[50px] rounded-full" :src="userSearchList.photo" alt="use-photo">
         <p class="text-sm break-words font-bold">{{ userSearchList.first_name + ' ' + userSearchList.last_name }}</p>
-      </NuxtLink>
+      </div>
     </div>
   </div>
 </template>

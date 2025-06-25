@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { unref as _unref, mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderStyle as _ssrRenderStyle, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\"\n\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\r\nimport ScanAnimation from \"~/components/Storage/UI/ScanAnimation.vue\";\r\nimport {useStorageStore} from \"~/stores/storage\";\r\nimport { handleSearch } from \"~/hooks/ElemUI\";\r\nimport { useRoute } from \"vue-router\";\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'StorageHeader',\n  __ssrInlineRender: true,\n  setup(__props) {\n\r\nconst storageStore = useStorageStore()\r\nconst modeInput = ref('')\r\nconst route = useRoute()\r\n  \nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"flex justify-center gap-x-4 w-full mx-auto items-center\" }, _attrs))}><form class=\"w-full flex items-center justify-center gap-x-4\">`)\n  _push(_ssrRenderComponent(TheSearch, {\n    mode: _unref(modeInput),\n    onFocusout: ($event: any) => (modeInput.value = ''),\n    onSearch: ($event: any) => (_unref(storageStore).searchGoods.trim() !== '' && _unref(route).path === '/base/storage' ? _unref(storageStore).loadAllListSearch({search: _unref(storageStore).searchGoods}) : _unref(storageStore).loadStorageSubCategory({slug: _unref(route).params.slug, search: _unref(storageStore).searchGoods})),\n    modelValue: _unref(storageStore).searchGoods,\n    \"onUpdate:modelValue\": ($event: any) => ((_unref(storageStore).searchGoods) = $event),\n    class: \"!w-6/12\",\n    type: \"text\",\n    ref: \"scan\"\n  }, null, _parent))\n  _push(`<div class=\"max-[800px]:hidden\">`)\n  _push(_ssrRenderComponent(ScanAnimation, {\n    onOnScan: ($event: any) => (modeInput.value = 'scan'),\n    mode: _unref(modeInput)\n  }, null, _parent))\n  _push(`</div></form><button class=\"max-[800px]:block hidden\"><svg class=\"dark:fill-white fill-black\" width=\"40px\" height=\"40px\" viewBox=\"0 0 24 24\" id=\"qr-code-scan-2\" data-name=\"Flat Color\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M10,15v2a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V15a1,1,0,0,1,1-1H9A1,1,0,0,1,10,15Zm7-9H15a1,1,0,0,0-1,1V9a1,1,0,0,0,1,1h2a1,1,0,0,0,1-1V7A1,1,0,0,0,17,6Zm0,6H13a1,1,0,0,0-1,1v4a1,1,0,0,0,1,1h4a1,1,0,0,0,1-1V13A1,1,0,0,0,17,12ZM12,7a1,1,0,0,0-1-1H7A1,1,0,0,0,6,7v4a1,1,0,0,0,1,1h4a1,1,0,0,0,1-1Z\" style=\"${_ssrRenderStyle({\"fill\":\"rgb(44, 169, 188)\",\"stroke-width\":\"1.2\"})}\"></path><path d=\"M3,9A1,1,0,0,1,2,8V4A2,2,0,0,1,4,2H8A1,1,0,0,1,8,4H4V8A1,1,0,0,1,3,9ZM22,8V4a2,2,0,0,0-2-2H16a1,1,0,0,0,0,2h4V8a1,1,0,0,0,2,0ZM9,21a1,1,0,0,0-1-1H4V16a1,1,0,0,0-2,0v4a2,2,0,0,0,2,2H8A1,1,0,0,0,9,21Zm13-1V16a1,1,0,0,0-2,0v4H16a1,1,0,0,0,0,2h4A2,2,0,0,0,22,20Z\"></path></svg></button></div>`)\n}\n}\n\n})",
-      "start": 1750752027116,
-      "end": 1750752027116,
+      "start": 1750850846550,
+      "end": 1750850846550,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750752027118,
-      "end": 1750752027118,
+      "start": 1750850846550,
+      "end": 1750850846550,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750752027118,
-      "end": 1750752027118,
+      "start": 1750850846550,
+      "end": 1750850846550,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750752027118,
-      "end": 1750752027118,
+      "start": 1750850846550,
+      "end": 1750850846550,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750752027118,
-      "end": 1750752027118,
+      "start": 1750850846550,
+      "end": 1750850846550,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750752027118,
-      "end": 1750752027118,
+      "start": 1750850846550,
+      "end": 1750850846550,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750752027118,
-      "end": 1750752027118,
+      "start": 1750850846550,
+      "end": 1750850846550,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1750752027118,
-      "end": 1750752027118,
+      "start": 1750850846550,
+      "end": 1750850846550,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1750752027118,
-      "end": 1750752027118,
+      "start": 1750850846550,
+      "end": 1750850846550,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderStyle as _ssrRenderStyle, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\nimport ScanAnimation from \"~/components/Storage/UI/ScanAnimation.vue\";\nimport { useStorageStore } from \"~/stores/storage\";\nimport { useRoute } from \"vue-router\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"StorageHeader\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const storageStore = useStorageStore();\n    const modeInput = ref(\"\");\n    const route = useRoute();\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"flex justify-center gap-x-4 w-full mx-auto items-center\" }, _attrs))}><form class=\"w-full flex items-center justify-center gap-x-4\">`);\n      _push(_ssrRenderComponent(TheSearch, {\n        mode: _unref(modeInput),\n        onFocusout: ($event) => modeInput.value = \"\",\n        onSearch: ($event) => _unref(storageStore).searchGoods.trim() !== \"\" && _unref(route).path === \"/base/storage\" ? _unref(storageStore).loadAllListSearch({ search: _unref(storageStore).searchGoods }) : _unref(storageStore).loadStorageSubCategory({ slug: _unref(route).params.slug, search: _unref(storageStore).searchGoods }),\n        modelValue: _unref(storageStore).searchGoods,\n        \"onUpdate:modelValue\": ($event) => _unref(storageStore).searchGoods = $event,\n        class: \"!w-6/12\",\n        type: \"text\",\n        ref: \"scan\"\n      }, null, _parent));\n      _push(`<div class=\"max-[800px]:hidden\">`);\n      _push(_ssrRenderComponent(ScanAnimation, {\n        onOnScan: ($event) => modeInput.value = \"scan\",\n        mode: _unref(modeInput)\n      }, null, _parent));\n      _push(`</div></form><button class=\"max-[800px]:block hidden\"><svg class=\"dark:fill-white fill-black\" width=\"40px\" height=\"40px\" viewBox=\"0 0 24 24\" id=\"qr-code-scan-2\" data-name=\"Flat Color\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M10,15v2a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V15a1,1,0,0,1,1-1H9A1,1,0,0,1,10,15Zm7-9H15a1,1,0,0,0-1,1V9a1,1,0,0,0,1,1h2a1,1,0,0,0,1-1V7A1,1,0,0,0,17,6Zm0,6H13a1,1,0,0,0-1,1v4a1,1,0,0,0,1,1h4a1,1,0,0,0,1-1V13A1,1,0,0,0,17,12ZM12,7a1,1,0,0,0-1-1H7A1,1,0,0,0,6,7v4a1,1,0,0,0,1,1h4a1,1,0,0,0,1-1Z\" style=\"${_ssrRenderStyle({ \"fill\": \"rgb(44, 169, 188)\", \"stroke-width\": \"1.2\" })}\"></path><path d=\"M3,9A1,1,0,0,1,2,8V4A2,2,0,0,1,4,2H8A1,1,0,0,1,8,4H4V8A1,1,0,0,1,3,9ZM22,8V4a2,2,0,0,0-2-2H16a1,1,0,0,0,0,2h4V8a1,1,0,0,0,2,0ZM9,21a1,1,0,0,0-1-1H4V16a1,1,0,0,0-2,0v4a2,2,0,0,0,2,2H8A1,1,0,0,0,9,21Zm13-1V16a1,1,0,0,0-2,0v4H16a1,1,0,0,0,0,2h4A2,2,0,0,0,22,20Z\"></path></svg></button></div>`);\n    };\n  }\n});\n",
-      "start": 1750752027118,
-      "end": 1750752027701,
+      "start": 1750850846550,
+      "end": 1750850846663,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -86,171 +86,171 @@
     },
     {
       "name": "vite:json",
-      "start": 1750752027701,
-      "end": 1750752027701,
+      "start": 1750850846663,
+      "end": 1750850846663,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1750752027701,
-      "end": 1750752027701,
+      "start": 1750850846663,
+      "end": 1750850846663,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1750752027701,
-      "end": 1750752027701,
+      "start": 1750850846663,
+      "end": 1750850846663,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1750752027701,
-      "end": 1750752027701,
+      "start": 1750850846663,
+      "end": 1750850846663,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750752027701,
-      "end": 1750752027701,
+      "start": 1750850846663,
+      "end": 1750850846663,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750752027701,
-      "end": 1750752027701,
+      "start": 1750850846663,
+      "end": 1750850846663,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750752027701,
-      "end": 1750752027702,
+      "start": 1750850846663,
+      "end": 1750850846663,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750752027701,
-      "end": 1750752027702,
+      "start": 1750850846663,
+      "end": 1750850846663,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1750752027702,
-      "end": 1750752027702,
+      "start": 1750850846663,
+      "end": 1750850846663,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750752027702,
-      "end": 1750752027702,
+      "start": 1750850846663,
+      "end": 1750850846663,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1750752027703,
-      "end": 1750752027705,
+      "start": 1750850846663,
+      "end": 1750850846665,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1750752027705,
-      "end": 1750752027705,
+      "start": 1750850846665,
+      "end": 1750850846665,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1750752027706,
-      "end": 1750752027706,
+      "start": 1750850846665,
+      "end": 1750850846665,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1750752027706,
-      "end": 1750752027706,
+      "start": 1750850846665,
+      "end": 1750850846665,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1750752027706,
-      "end": 1750752027706,
+      "start": 1750850846665,
+      "end": 1750850846665,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1750752027706,
-      "end": 1750752027706,
+      "start": 1750850846665,
+      "end": 1750850846665,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1750752027706,
-      "end": 1750752027706,
+      "start": 1750850846665,
+      "end": 1750850846665,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1750752027706,
-      "end": 1750752027706,
+      "start": 1750850846665,
+      "end": 1750850846665,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1750752027706,
-      "end": 1750752027706,
+      "start": 1750850846665,
+      "end": 1750850846665,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750752027706,
-      "end": 1750752027706,
+      "start": 1750850846665,
+      "end": 1750850846665,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750752027706,
-      "end": 1750752027706,
+      "start": 1750850846665,
+      "end": 1750850846665,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750752027706,
-      "end": 1750752027706,
+      "start": 1750850846665,
+      "end": 1750850846666,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750752027706,
-      "end": 1750752027706,
+      "start": 1750850846665,
+      "end": 1750850846666,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750752027706,
-      "end": 1750752027706,
+      "start": 1750850846666,
+      "end": 1750850846666,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750752027706,
-      "end": 1750752027706,
+      "start": 1750850846666,
+      "end": 1750850846666,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750752027706,
-      "end": 1750752027706,
+      "start": 1750850846666,
+      "end": 1750850846666,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750752027706,
-      "end": 1750752027706,
+      "start": 1750850846666,
+      "end": 1750850846666,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderStyle as _ssrRenderStyle, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\nimport ScanAnimation from \"~/components/Storage/UI/ScanAnimation.vue\";\nimport { useStorageStore } from \"~/stores/storage\";\nimport { useRoute } from \"vue-router\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"StorageHeader\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const storageStore = useStorageStore();\n    const modeInput = ref(\"\");\n    const route = useRoute();\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"flex justify-center gap-x-4 w-full mx-auto items-center\" }, _attrs))}><form class=\"w-full flex items-center justify-center gap-x-4\">`);\n      _push(_ssrRenderComponent(TheSearch, {\n        mode: _unref(modeInput),\n        onFocusout: ($event) => modeInput.value = \"\",\n        onSearch: ($event) => _unref(storageStore).searchGoods.trim() !== \"\" && _unref(route).path === \"/base/storage\" ? _unref(storageStore).loadAllListSearch({ search: _unref(storageStore).searchGoods }) : _unref(storageStore).loadStorageSubCategory({ slug: _unref(route).params.slug, search: _unref(storageStore).searchGoods }),\n        modelValue: _unref(storageStore).searchGoods,\n        \"onUpdate:modelValue\": ($event) => _unref(storageStore).searchGoods = $event,\n        class: \"!w-6/12\",\n        type: \"text\",\n        ref: \"scan\"\n      }, null, _parent));\n      _push(`<div class=\"max-[800px]:hidden\">`);\n      _push(_ssrRenderComponent(ScanAnimation, {\n        onOnScan: ($event) => modeInput.value = \"scan\",\n        mode: _unref(modeInput)\n      }, null, _parent));\n      _push(`</div></form><button class=\"max-[800px]:block hidden\"><svg class=\"dark:fill-white fill-black\" width=\"40px\" height=\"40px\" viewBox=\"0 0 24 24\" id=\"qr-code-scan-2\" data-name=\"Flat Color\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M10,15v2a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V15a1,1,0,0,1,1-1H9A1,1,0,0,1,10,15Zm7-9H15a1,1,0,0,0-1,1V9a1,1,0,0,0,1,1h2a1,1,0,0,0,1-1V7A1,1,0,0,0,17,6Zm0,6H13a1,1,0,0,0-1,1v4a1,1,0,0,0,1,1h4a1,1,0,0,0,1-1V13A1,1,0,0,0,17,12ZM12,7a1,1,0,0,0-1-1H7A1,1,0,0,0,6,7v4a1,1,0,0,0,1,1h4a1,1,0,0,0,1-1Z\" style=\"${_ssrRenderStyle({ \"fill\": \"rgb(44, 169, 188)\", \"stroke-width\": \"1.2\" })}\"></path><path d=\"M3,9A1,1,0,0,1,2,8V4A2,2,0,0,1,4,2H8A1,1,0,0,1,8,4H4V8A1,1,0,0,1,3,9ZM22,8V4a2,2,0,0,0-2-2H16a1,1,0,0,0,0,2h4V8a1,1,0,0,0,2,0ZM9,21a1,1,0,0,0-1-1H4V16a1,1,0,0,0-2,0v4a2,2,0,0,0,2,2H8A1,1,0,0,0,9,21Zm13-1V16a1,1,0,0,0-2,0v4H16a1,1,0,0,0,0,2h4A2,2,0,0,0,22,20Z\"></path></svg></button></div>`);\n    };\n  }\n});\n",
-      "start": 1750752027707,
-      "end": 1750752027718,
+      "start": 1750850846666,
+      "end": 1750850846671,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -264,8 +264,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderStyle as _ssrRenderStyle, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\nimport ScanAnimation from \"~/components/Storage/UI/ScanAnimation.vue\";\nimport { useStorageStore } from \"~/stores/storage\";\nimport { useRoute } from \"vue-router\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"StorageHeader\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const storageStore = useStorageStore();\n    const modeInput = ref(\"\");\n    const route = useRoute();\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"flex justify-center gap-x-4 w-full mx-auto items-center\" }, _attrs))}><form class=\"w-full flex items-center justify-center gap-x-4\">`);\n      _push(_ssrRenderComponent(TheSearch, {\n        mode: _unref(modeInput),\n        onFocusout: ($event) => modeInput.value = \"\",\n        onSearch: ($event) => _unref(storageStore).searchGoods.trim() !== \"\" && _unref(route).path === \"/base/storage\" ? _unref(storageStore).loadAllListSearch({ search: _unref(storageStore).searchGoods }) : _unref(storageStore).loadStorageSubCategory({ slug: _unref(route).params.slug, search: _unref(storageStore).searchGoods }),\n        modelValue: _unref(storageStore).searchGoods,\n        \"onUpdate:modelValue\": ($event) => _unref(storageStore).searchGoods = $event,\n        class: \"!w-6/12\",\n        type: \"text\",\n        ref: \"scan\"\n      }, null, _parent));\n      _push(`<div class=\"max-[800px]:hidden\">`);\n      _push(_ssrRenderComponent(ScanAnimation, {\n        onOnScan: ($event) => modeInput.value = \"scan\",\n        mode: _unref(modeInput)\n      }, null, _parent));\n      _push(`</div></form><button class=\"max-[800px]:block hidden\"><svg class=\"dark:fill-white fill-black\" width=\"40px\" height=\"40px\" viewBox=\"0 0 24 24\" id=\"qr-code-scan-2\" data-name=\"Flat Color\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M10,15v2a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V15a1,1,0,0,1,1-1H9A1,1,0,0,1,10,15Zm7-9H15a1,1,0,0,0-1,1V9a1,1,0,0,0,1,1h2a1,1,0,0,0,1-1V7A1,1,0,0,0,17,6Zm0,6H13a1,1,0,0,0-1,1v4a1,1,0,0,0,1,1h4a1,1,0,0,0,1-1V13A1,1,0,0,0,17,12ZM12,7a1,1,0,0,0-1-1H7A1,1,0,0,0,6,7v4a1,1,0,0,0,1,1h4a1,1,0,0,0,1-1Z\" style=\"${_ssrRenderStyle({ \"fill\": \"rgb(44, 169, 188)\", \"stroke-width\": \"1.2\" })}\"></path><path d=\"M3,9A1,1,0,0,1,2,8V4A2,2,0,0,1,4,2H8A1,1,0,0,1,8,4H4V8A1,1,0,0,1,3,9ZM22,8V4a2,2,0,0,0-2-2H16a1,1,0,0,0,0,2h4V8a1,1,0,0,0,2,0ZM9,21a1,1,0,0,0-1-1H4V16a1,1,0,0,0-2,0v4a2,2,0,0,0,2,2H8A1,1,0,0,0,9,21Zm13-1V16a1,1,0,0,0-2,0v4H16a1,1,0,0,0,0,2h4A2,2,0,0,0,22,20Z\"></path></svg></button></div>`);\n    };\n  }\n});\n",
-      "start": 1750752027707,
-      "end": 1750752027718,
+      "start": 1750850846666,
+      "end": 1750850846671,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -278,56 +278,56 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1750752027720,
-      "end": 1750752027720,
+      "start": 1750850846671,
+      "end": 1750850846672,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1750752027720,
-      "end": 1750752027720,
+      "start": 1750850846671,
+      "end": 1750850846672,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1750752027720,
-      "end": 1750752027720,
+      "start": 1750850846672,
+      "end": 1750850846672,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1750752027720,
-      "end": 1750752027720,
+      "start": 1750850846672,
+      "end": 1750850846672,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1750752027720,
-      "end": 1750752027720,
+      "start": 1750850846672,
+      "end": 1750850846672,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1750752027721,
-      "end": 1750752027722,
+      "start": 1750850846672,
+      "end": 1750850846672,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1750752027722,
-      "end": 1750752027724,
+      "start": 1750850846672,
+      "end": 1750850846672,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1750752027728,
-      "end": 1750752027728,
+      "start": 1750850846673,
+      "end": 1750850846673,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1750752027728,
-      "end": 1750752027728,
+      "start": 1750850846673,
+      "end": 1750850846673,
       "order": "normal"
     }
   ]

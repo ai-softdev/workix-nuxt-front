@@ -4,44 +4,44 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { createElementVNode as _createElementVNode, unref as _unref, normalizeClass as _normalizeClass, openBlock as _openBlock, createElementBlock as _createElementBlock, pushScopeId as _pushScopeId, popScopeId as _popScopeId } from \"vue\"\n\nconst _withScopeId = n => (_pushScopeId(\"data-v-559db129\"),n=n(),_popScopeId(),n)\nconst _hoisted_1 = /*#__PURE__*/ _withScopeId(() => /*#__PURE__*/_createElementVNode(\"div\", {\n  class: \"absolute\",\n  id: \"mic\"\n}, null, -1))\nconst _hoisted_2 = /*#__PURE__*/ _withScopeId(() => /*#__PURE__*/_createElementVNode(\"path\", {\n  \"fill-rule\": \"evenodd\",\n  \"clip-rule\": \"evenodd\",\n  d: \"M12 4.5C10.314 4.5 9 5.80455 9 7.35V12.15C9 13.6955 10.314 15 12 15C13.686 15 15 13.6955 15 12.15L15 7.35C15 5.80455 13.686 4.5 12 4.5ZM7.5 7.35C7.5 4.919 9.54387 3 12 3C14.4561 3 16.5 4.919 16.5 7.35L16.5 12.15C16.5 14.581 14.4561 16.5 12 16.5C9.54387 16.5 7.5 14.581 7.5 12.15V7.35ZM6.75 12.75C6.75 15.1443 9.0033 17.25 12 17.25C14.9967 17.25 17.25 15.1443 17.25 12.75H18.75C18.75 15.9176 16.0499 18.3847 12.75 18.7129V21H11.25V18.7129C7.95007 18.3847 5.25 15.9176 5.25 12.75H6.75Z\"\n}, null, -1))\nconst _hoisted_3 = [\n  _hoisted_2\n]\nconst _hoisted_4 = { ref: \"audioPlayer\" }\n\nimport {useChat} from \"~/stores/chat\";\r\nimport {clearTimer} from \"~/hooks/ElemUI\";\r\nimport useRecorder from \"~/hooks/Recordings\";\r\nconst threshold = 500\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'ChatVoiceContent',\n  setup(__props) {\n\r\nconst chat = useChat()\r\nconst isLongClick = ref(false)\r\nconst recorder = useRecorder()\r\nconst startClick = () => {\r\n  chat.voiceTimer = 0\r\n  chat.clickerTimeout = null\r\n  increaseTime()\r\n}\r\nconst increaseTime = () => {\r\n  chat.clickerTimeout = setTimeout(() => {\r\n    chat.recordingVoice = true\r\n    chat.voiceTimer++\r\n    increaseTime()\r\n  }, 200)\r\n}\r\nconst endClick = () => {\r\n  recorder.createWaveSurfer()\r\n  recorder.recButton()\r\n  clearTimer(chat.recordingVoice = false, chat.clickerTimeout)\r\n  isLongClick.value = chat.voiceTimer >= threshold / 1000\r\n  if (!isLongClick.value) {\r\n\r\n    setTimeout(() => {\r\n      chat.showVoiceInfo = true\r\n    }, 0)\r\n    setTimeout(() => {\r\n      chat.showVoiceInfo = false\r\n    }, 3000)\r\n  }\r\n}\r\n\r\n\nreturn (_ctx: any,_cache: any) => {\n  return (_openBlock(), _createElementBlock(\"div\", null, [\n    _hoisted_1,\n    _createElementVNode(\"div\", {\n      class: _normalizeClass([\"absolute right-6 bottom-3 transition-all\", {'rounded-full pt-1 px-1 bg-blueSemiLight' : _unref(chat).recordingVoice}])\n    }, [\n      _createElementVNode(\"button\", {\n        onMousedown: startClick,\n        onMouseup: endClick\n      }, [\n        (_openBlock(), _createElementBlock(\"svg\", {\n          class: _normalizeClass([\"fill-gray-500 dark:hover:fill-gray-300 hover:fill-gray-700 transition-all\", {'fill-white hover:!fill-white' : _unref(chat).recordingVoice}]),\n          width: \"35px\",\n          height: \"35px\",\n          viewBox: \"0 0 24 24\",\n          fill: \"none\",\n          xmlns: \"http://www.w3.org/2000/svg\"\n        }, _hoisted_3, 2))\n      ], 32),\n      _createElementVNode(\"audio\", _hoisted_4, null, 512)\n    ], 2)\n  ]))\n}\n}\n\n})",
-      "start": 1750751980464,
-      "end": 1750751980464
+      "start": 1750850817420,
+      "end": 1750850817420
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750751980464,
-      "end": 1750751980464,
+      "start": 1750850817420,
+      "end": 1750850817420,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750751980465,
-      "end": 1750751980465,
+      "start": 1750850817421,
+      "end": 1750850817421,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750751980465,
-      "end": 1750751980465,
+      "start": 1750850817421,
+      "end": 1750850817421,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1750751980465,
-      "end": 1750751980465,
+      "start": 1750850817421,
+      "end": 1750850817421,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1750751980465,
-      "end": 1750751980465,
+      "start": 1750850817421,
+      "end": 1750850817421,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { createElementVNode as _createElementVNode, unref as _unref, normalizeClass as _normalizeClass, openBlock as _openBlock, createElementBlock as _createElementBlock, pushScopeId as _pushScopeId, popScopeId as _popScopeId } from \"vue\";\nconst _withScopeId = (n) => (_pushScopeId(\"data-v-559db129\"), n = n(), _popScopeId(), n);\nconst _hoisted_1 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ _createElementVNode(\"div\", {\n  class: \"absolute\",\n  id: \"mic\"\n}, null, -1));\nconst _hoisted_2 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ _createElementVNode(\"path\", {\n  \"fill-rule\": \"evenodd\",\n  \"clip-rule\": \"evenodd\",\n  d: \"M12 4.5C10.314 4.5 9 5.80455 9 7.35V12.15C9 13.6955 10.314 15 12 15C13.686 15 15 13.6955 15 12.15L15 7.35C15 5.80455 13.686 4.5 12 4.5ZM7.5 7.35C7.5 4.919 9.54387 3 12 3C14.4561 3 16.5 4.919 16.5 7.35L16.5 12.15C16.5 14.581 14.4561 16.5 12 16.5C9.54387 16.5 7.5 14.581 7.5 12.15V7.35ZM6.75 12.75C6.75 15.1443 9.0033 17.25 12 17.25C14.9967 17.25 17.25 15.1443 17.25 12.75H18.75C18.75 15.9176 16.0499 18.3847 12.75 18.7129V21H11.25V18.7129C7.95007 18.3847 5.25 15.9176 5.25 12.75H6.75Z\"\n}, null, -1));\nconst _hoisted_3 = [\n  _hoisted_2\n];\nconst _hoisted_4 = { ref: \"audioPlayer\" };\nimport { useChat } from \"~/stores/chat\";\nimport { clearTimer } from \"~/hooks/ElemUI\";\nimport useRecorder from \"~/hooks/Recordings\";\nconst threshold = 500;\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ChatVoiceContent\",\n  setup(__props) {\n    const chat = useChat();\n    const isLongClick = ref(false);\n    const recorder = useRecorder();\n    const startClick = () => {\n      chat.voiceTimer = 0;\n      chat.clickerTimeout = null;\n      increaseTime();\n    };\n    const increaseTime = () => {\n      chat.clickerTimeout = setTimeout(() => {\n        chat.recordingVoice = true;\n        chat.voiceTimer++;\n        increaseTime();\n      }, 200);\n    };\n    const endClick = () => {\n      recorder.createWaveSurfer();\n      recorder.recButton();\n      clearTimer(chat.recordingVoice = false, chat.clickerTimeout);\n      isLongClick.value = chat.voiceTimer >= threshold / 1e3;\n      if (!isLongClick.value) {\n        setTimeout(() => {\n          chat.showVoiceInfo = true;\n        }, 0);\n        setTimeout(() => {\n          chat.showVoiceInfo = false;\n        }, 3e3);\n      }\n    };\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", null, [\n        _hoisted_1,\n        _createElementVNode(\"div\", {\n          class: _normalizeClass([\"absolute right-6 bottom-3 transition-all\", { \"rounded-full pt-1 px-1 bg-blueSemiLight\": _unref(chat).recordingVoice }])\n        }, [\n          _createElementVNode(\"button\", {\n            onMousedown: startClick,\n            onMouseup: endClick\n          }, [\n            (_openBlock(), _createElementBlock(\"svg\", {\n              class: _normalizeClass([\"fill-gray-500 dark:hover:fill-gray-300 hover:fill-gray-700 transition-all\", { \"fill-white hover:!fill-white\": _unref(chat).recordingVoice }]),\n              width: \"35px\",\n              height: \"35px\",\n              viewBox: \"0 0 24 24\",\n              fill: \"none\",\n              xmlns: \"http://www.w3.org/2000/svg\"\n            }, _hoisted_3, 2))\n          ], 32),\n          _createElementVNode(\"audio\", _hoisted_4, null, 512)\n        ], 2)\n      ]);\n    };\n  }\n});\n",
-      "start": 1750751980465,
-      "end": 1750751981459,
+      "start": 1750850817421,
+      "end": 1750850817542,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -57,141 +57,141 @@
     },
     {
       "name": "vite:json",
-      "start": 1750751981459,
-      "end": 1750751981459,
+      "start": 1750850817542,
+      "end": 1750850817542,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1750751981459,
-      "end": 1750751981459,
+      "start": 1750850817542,
+      "end": 1750850817542,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1750751981459,
-      "end": 1750751981459,
+      "start": 1750850817542,
+      "end": 1750850817542,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1750751981459,
-      "end": 1750751981459,
+      "start": 1750850817542,
+      "end": 1750850817542,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750751981459,
-      "end": 1750751981459,
+      "start": 1750850817542,
+      "end": 1750850817542,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750751981459,
-      "end": 1750751981459,
+      "start": 1750850817542,
+      "end": 1750850817542,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1750751981459,
-      "end": 1750751981459,
+      "start": 1750850817542,
+      "end": 1750850817542,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1750751981460,
-      "end": 1750751981460,
+      "start": 1750850817542,
+      "end": 1750850817543,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750751981460,
-      "end": 1750751981460,
+      "start": 1750850817543,
+      "end": 1750850817543,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1750751981460,
-      "end": 1750751981460,
+      "start": 1750850817543,
+      "end": 1750850817543,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1750751981460,
-      "end": 1750751981460,
+      "start": 1750850817543,
+      "end": 1750850817543,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1750751981460,
-      "end": 1750751981460,
+      "start": 1750850817543,
+      "end": 1750850817543,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1750751981460,
-      "end": 1750751981460,
+      "start": 1750850817543,
+      "end": 1750850817543,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1750751981460,
-      "end": 1750751981460,
+      "start": 1750850817543,
+      "end": 1750850817543,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1750751981460,
-      "end": 1750751981460,
+      "start": 1750850817543,
+      "end": 1750850817543,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1750751981460,
-      "end": 1750751981460,
+      "start": 1750850817543,
+      "end": 1750850817543,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1750751981460,
-      "end": 1750751981460,
+      "start": 1750850817543,
+      "end": 1750850817543,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1750751981460,
-      "end": 1750751981460,
+      "start": 1750850817543,
+      "end": 1750850817543,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750751981461,
-      "end": 1750751981461,
+      "start": 1750850817543,
+      "end": 1750850817543,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750751981461,
-      "end": 1750751981461,
+      "start": 1750850817543,
+      "end": 1750850817544,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750751981461,
-      "end": 1750751981461,
+      "start": 1750850817544,
+      "end": 1750850817544,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750751981461,
-      "end": 1750751981461,
+      "start": 1750850817544,
+      "end": 1750850817544,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { createElementVNode as _createElementVNode, unref as _unref, normalizeClass as _normalizeClass, openBlock as _openBlock, createElementBlock as _createElementBlock, pushScopeId as _pushScopeId, popScopeId as _popScopeId } from \"vue\";\nconst _withScopeId = (n) => (_pushScopeId(\"data-v-559db129\"), n = n(), _popScopeId(), n);\nconst _hoisted_1 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ _createElementVNode(\"div\", {\n  class: \"absolute\",\n  id: \"mic\"\n}, null, -1));\nconst _hoisted_2 = /* @__PURE__ */ _withScopeId(() => /* @__PURE__ */ _createElementVNode(\"path\", {\n  \"fill-rule\": \"evenodd\",\n  \"clip-rule\": \"evenodd\",\n  d: \"M12 4.5C10.314 4.5 9 5.80455 9 7.35V12.15C9 13.6955 10.314 15 12 15C13.686 15 15 13.6955 15 12.15L15 7.35C15 5.80455 13.686 4.5 12 4.5ZM7.5 7.35C7.5 4.919 9.54387 3 12 3C14.4561 3 16.5 4.919 16.5 7.35L16.5 12.15C16.5 14.581 14.4561 16.5 12 16.5C9.54387 16.5 7.5 14.581 7.5 12.15V7.35ZM6.75 12.75C6.75 15.1443 9.0033 17.25 12 17.25C14.9967 17.25 17.25 15.1443 17.25 12.75H18.75C18.75 15.9176 16.0499 18.3847 12.75 18.7129V21H11.25V18.7129C7.95007 18.3847 5.25 15.9176 5.25 12.75H6.75Z\"\n}, null, -1));\nconst _hoisted_3 = [\n  _hoisted_2\n];\nconst _hoisted_4 = { ref: \"audioPlayer\" };\nimport { useChat } from \"~/stores/chat\";\nimport { clearTimer } from \"~/hooks/ElemUI\";\nimport useRecorder from \"~/hooks/Recordings\";\nconst threshold = 500;\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ChatVoiceContent\",\n  setup(__props) {\n    const chat = useChat();\n    const isLongClick = ref(false);\n    const recorder = useRecorder();\n    const startClick = () => {\n      chat.voiceTimer = 0;\n      chat.clickerTimeout = null;\n      increaseTime();\n    };\n    const increaseTime = () => {\n      chat.clickerTimeout = setTimeout(() => {\n        chat.recordingVoice = true;\n        chat.voiceTimer++;\n        increaseTime();\n      }, 200);\n    };\n    const endClick = () => {\n      recorder.createWaveSurfer();\n      recorder.recButton();\n      clearTimer(chat.recordingVoice = false, chat.clickerTimeout);\n      isLongClick.value = chat.voiceTimer >= threshold / 1e3;\n      if (!isLongClick.value) {\n        setTimeout(() => {\n          chat.showVoiceInfo = true;\n        }, 0);\n        setTimeout(() => {\n          chat.showVoiceInfo = false;\n        }, 3e3);\n      }\n    };\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", null, [\n        _hoisted_1,\n        _createElementVNode(\"div\", {\n          class: _normalizeClass([\"absolute right-6 bottom-3 transition-all\", { \"rounded-full pt-1 px-1 bg-blueSemiLight\": _unref(chat).recordingVoice }])\n        }, [\n          _createElementVNode(\"button\", {\n            onMousedown: startClick,\n            onMouseup: endClick\n          }, [\n            (_openBlock(), _createElementBlock(\"svg\", {\n              class: _normalizeClass([\"fill-gray-500 dark:hover:fill-gray-300 hover:fill-gray-700 transition-all\", { \"fill-white hover:!fill-white\": _unref(chat).recordingVoice }]),\n              width: \"35px\",\n              height: \"35px\",\n              viewBox: \"0 0 24 24\",\n              fill: \"none\",\n              xmlns: \"http://www.w3.org/2000/svg\"\n            }, _hoisted_3, 2))\n          ], 32),\n          _createElementVNode(\"audio\", _hoisted_4, null, 512)\n        ], 2)\n      ]);\n    };\n  }\n});\n",
-      "start": 1750751981462,
-      "end": 1750751981470,
+      "start": 1750850817544,
+      "end": 1750850817550,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -204,50 +204,50 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1750751981471,
-      "end": 1750751981471,
+      "start": 1750850817556,
+      "end": 1750850817556,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1750751981471,
-      "end": 1750751981471,
+      "start": 1750850817556,
+      "end": 1750850817556,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1750751981471,
-      "end": 1750751981471,
+      "start": 1750850817556,
+      "end": 1750850817556,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1750751981471,
-      "end": 1750751981471,
+      "start": 1750850817556,
+      "end": 1750850817556,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1750751981471,
-      "end": 1750751981472,
+      "start": 1750850817556,
+      "end": 1750850817556,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1750751981472,
-      "end": 1750751981472,
+      "start": 1750850817557,
+      "end": 1750850817557,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1750751981472,
-      "end": 1750751981472,
+      "start": 1750850817557,
+      "end": 1750850817557,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1750751981473,
-      "end": 1750751981473,
+      "start": 1750850817557,
+      "end": 1750850817557,
       "order": "normal"
     }
   ]
