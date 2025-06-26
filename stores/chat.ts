@@ -214,6 +214,24 @@ export const useChat = defineStore('chat', {
         this.loadChatList()
       })
     },
+    async createChatGroup(params: { users_str: string, name: string, photo: any }, router: Router) {
+      console.log(params.users_str)
+      let fd = new FormData()
+      fd.set('name', params.name)
+      fd.set('users_str', params.users_str)
+      if (typeof params.photo !== 'string') {
+        fd.set('photo', params.photo)
+      }
+      await axios.post(`chat/private/group`, fd, {
+        headers: {
+          Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
+        }
+      }).then(res => {
+        router.push(`/base/chat/${res.data.id}`)
+        console.log(res.data.id)
+        this.loadChatList()
+      })
+    },
 
 
 

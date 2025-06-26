@@ -3,12 +3,18 @@ import {useAuthStore} from "~/stores/auth";
 
 const user = useAuthStore()
 
-defineProps({
+const props = defineProps({
   item: {
     type: Object,
-    default: ()=>{}
+    default: () => ({})
   }
 })
+const emit = defineEmits(['update'])
+
+function toggle() {
+  props.item.value = !props.item.value
+  emit('update', props.item) // сообщаем родителю
+}
 </script>
 
 <template>
@@ -27,12 +33,7 @@ defineProps({
         </Transition>
       </div>
       <span class="relative z-10 dark:text-white">{{ item?.user?.first_name + ' ' + item?.user?.last_name }}</span>
-      <input
-        type="checkbox"
-        class="hidden"
-        @change="item.value = !item.value"
-        :checked="item.value"
-      >
+      <input type="checkbox" class="hidden" @change="toggle" :checked="item.value">
       <span class=" w-full h-full absolute top-0 left-0 "></span>
     </label>
 </template>

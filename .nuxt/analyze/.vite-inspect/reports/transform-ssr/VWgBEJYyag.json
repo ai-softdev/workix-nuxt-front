@@ -4,81 +4,81 @@
     {
       "name": "vite:load-fallback",
       "result": "<script setup>\r\n\r\nimport {useNotification} from \"~/stores/notification\";\r\n\r\nconst notification = useNotification()\r\n</script>\r\n\r\n<template>\r\n  <div class=\"flex flex-col gap-4 max-h-[400px] overflow-y-auto\">\r\n    <div\r\n        v-if=\"!notification.get_notification.length\"\r\n        class=\"text-center\"\r\n    >\r\n      {{ $t('Уведомлений пока нет') }}\r\n    </div>\r\n\r\n    <div v-for=\"(notice, i) in notification.get_notification\" :key=\"i\"\r\n         @click=\"notification.readNotice({id: notice.id})\"\r\n         class=\"p-4 relative dark:hover:bg-gray-700 !bg-whiteSmoke border hover:bg-gray-100 cursor-pointer transition-all duration-200 rounded-lg dark:border-gray-500\"\r\n         :class=\"{'dark:bg-gray-700 bg-gray-100' : notice.read === true}\"\r\n    >\r\n      <div v-if=\"notice.read\" class=\"absolute bottom-1 right-2 text-[11px]\">\r\n        <svg class=\"fill-semiCyan\" width=\"20px\" height=\"20px\" viewBox=\"0 0 24 24\" fill=\"none\"\r\n             xmlns=\"http://www.w3.org/2000/svg\">\r\n          <path fill-rule=\"evenodd\" clip-rule=\"evenodd\"\r\n                d=\"M15.4933 6.93502C15.8053 7.20743 15.8374 7.68122 15.565 7.99325L7.70786 16.9933C7.56543 17.1564 7.35943 17.25 7.14287 17.25C6.9263 17.25 6.72031 17.1564 6.57788 16.9933L3.43502 13.3933C3.16261 13.0812 3.19473 12.6074 3.50677 12.335C3.8188 12.0626 4.29259 12.0947 4.565 12.4068L7.14287 15.3596L14.435 7.00677C14.7074 6.69473 15.1812 6.66261 15.4933 6.93502Z\"/>\r\n          <path v-if=\"notice.read === true\" fill-rule=\"evenodd\" clip-rule=\"evenodd\"\r\n                d=\"M20.5175 7.01946C20.8174 7.30513 20.829 7.77986 20.5433 8.07981L11.9716 17.0798C11.8201 17.2389 11.6065 17.3235 11.3872 17.3114C11.1679 17.2993 10.9649 17.1917 10.8318 17.0169L10.4035 16.4544C10.1526 16.1249 10.2163 15.6543 10.5458 15.4034C10.8289 15.1878 11.2161 15.2044 11.4787 15.4223L19.4571 7.04531C19.7428 6.74537 20.2175 6.73379 20.5175 7.01946Z\"/>\r\n        </svg>\r\n      </div>\r\n      <div class=\"flex flex-col gap-4 dark:text-white text-black\">\r\n        <div class=\"w-full\">\r\n          <p class=\"text-sm text-start\">{{ notice.text }}</p>\r\n        </div>\r\n        <div class=\"text-sm flex items-center gap-2\">\r\n          <p>{{ new Date(notice.created_at).toLocaleDateString() }}</p>\r\n          <p>{{ new Date(notice.created_at).toLocaleTimeString().slice(0, 5) }}</p>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</template>\r\n\r\n<style scoped lang=\"scss\">\r\n\r\n</style>",
-      "start": 1750850844883,
-      "end": 1750850845756,
+      "start": 1750909474128,
+      "end": 1750909474671,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750850845756,
-      "end": 1750850845756,
+      "start": 1750909474671,
+      "end": 1750909474671,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750850845756,
-      "end": 1750850845756,
+      "start": 1750909474671,
+      "end": 1750909474671,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750850845756,
-      "end": 1750850845756,
+      "start": 1750909474671,
+      "end": 1750909474671,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750850845756,
-      "end": 1750850845756,
+      "start": 1750909474671,
+      "end": 1750909474671,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750850845756,
-      "end": 1750850845756,
+      "start": 1750909474672,
+      "end": 1750909474672,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750850845756,
-      "end": 1750850845756,
+      "start": 1750909474672,
+      "end": 1750909474672,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1750850845756,
-      "end": 1750850845756,
+      "start": 1750909474672,
+      "end": 1750909474672,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1750850845756,
-      "end": 1750850845756,
+      "start": 1750909474672,
+      "end": 1750909474672,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1750850845756,
-      "end": 1750850845756,
+      "start": 1750909474672,
+      "end": 1750909474672,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1750850845756,
-      "end": 1750850845756,
+      "start": 1750909474672,
+      "end": 1750909474672,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1750850845756,
-      "end": 1750850845756,
+      "start": 1750909474672,
+      "end": 1750909474672,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "import { unref as _unref, mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderClass as _ssrRenderClass, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\"\n\nimport {useNotification} from \"~/stores/notification\";\r\n\r\n\nconst _sfc_main = {\n  __name: 'ProfileContentNotification',\n  __ssrInlineRender: true,\n  setup(__props) {\n\r\n\r\nconst notification = useNotification()\r\n\nreturn (_ctx, _push, _parent, _attrs) => {\n  _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"flex flex-col gap-4 max-h-[400px] overflow-y-auto\" }, _attrs))}>`)\n  if (!_unref(notification).get_notification.length) {\n    _push(`<div class=\"text-center\">${_ssrInterpolate(_ctx.$t('Уведомлений пока нет'))}</div>`)\n  } else {\n    _push(`<!---->`)\n  }\n  _push(`<!--[-->`)\n  _ssrRenderList(_unref(notification).get_notification, (notice, i) => {\n    _push(`<div class=\"${_ssrRenderClass([{'dark:bg-gray-700 bg-gray-100' : notice.read === true}, \"p-4 relative dark:hover:bg-gray-700 !bg-whiteSmoke border hover:bg-gray-100 cursor-pointer transition-all duration-200 rounded-lg dark:border-gray-500\"])}\">`)\n    if (notice.read) {\n      _push(`<div class=\"absolute bottom-1 right-2 text-[11px]\"><svg class=\"fill-semiCyan\" width=\"20px\" height=\"20px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M15.4933 6.93502C15.8053 7.20743 15.8374 7.68122 15.565 7.99325L7.70786 16.9933C7.56543 17.1564 7.35943 17.25 7.14287 17.25C6.9263 17.25 6.72031 17.1564 6.57788 16.9933L3.43502 13.3933C3.16261 13.0812 3.19473 12.6074 3.50677 12.335C3.8188 12.0626 4.29259 12.0947 4.565 12.4068L7.14287 15.3596L14.435 7.00677C14.7074 6.69473 15.1812 6.66261 15.4933 6.93502Z\"></path>`)\n      if (notice.read === true) {\n        _push(`<path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M20.5175 7.01946C20.8174 7.30513 20.829 7.77986 20.5433 8.07981L11.9716 17.0798C11.8201 17.2389 11.6065 17.3235 11.3872 17.3114C11.1679 17.2993 10.9649 17.1917 10.8318 17.0169L10.4035 16.4544C10.1526 16.1249 10.2163 15.6543 10.5458 15.4034C10.8289 15.1878 11.2161 15.2044 11.4787 15.4223L19.4571 7.04531C19.7428 6.74537 20.2175 6.73379 20.5175 7.01946Z\"></path>`)\n      } else {\n        _push(`<!---->`)\n      }\n      _push(`</svg></div>`)\n    } else {\n      _push(`<!---->`)\n    }\n    _push(`<div class=\"flex flex-col gap-4 dark:text-white text-black\"><div class=\"w-full\"><p class=\"text-sm text-start\">${\n      _ssrInterpolate(notice.text)\n    }</p></div><div class=\"text-sm flex items-center gap-2\"><p>${\n      _ssrInterpolate(new Date(notice.created_at).toLocaleDateString())\n    }</p><p>${\n      _ssrInterpolate(new Date(notice.created_at).toLocaleTimeString().slice(0, 5))\n    }</p></div></div></div>`)\n  })\n  _push(`<!--]--></div>`)\n}\n}\n\n}\n\n\n\nimport { useSSRContext as __vite_useSSRContext } from 'vue'\nconst _sfc_setup = _sfc_main.setup\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext()\n  ;(ssrContext.modules || (ssrContext.modules = new Set())).add(\"components/Profile/ProfileUI/ProfileContentNotification.vue\")\n  return _sfc_setup ? _sfc_setup(props, ctx) : undefined\n}\nexport default _sfc_main",
-      "start": 1750850845756,
-      "end": 1750850845757,
+      "start": 1750909474672,
+      "end": 1750909474675,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -94,212 +94,212 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1750850845757,
-      "end": 1750850845757,
+      "start": 1750909474675,
+      "end": 1750909474675,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750850845757,
-      "end": 1750850845757,
+      "start": 1750909474675,
+      "end": 1750909474675,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750850845757,
-      "end": 1750850845757,
+      "start": 1750909474675,
+      "end": 1750909474675,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750850845757,
-      "end": 1750850845757,
+      "start": 1750909474675,
+      "end": 1750909474675,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750850845757,
-      "end": 1750850845757,
+      "start": 1750909474675,
+      "end": 1750909474675,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1750850845757,
-      "end": 1750850845757,
+      "start": 1750909474675,
+      "end": 1750909474675,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750850845757,
-      "end": 1750850845758,
+      "start": 1750909474676,
+      "end": 1750909474676,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1750850845758,
-      "end": 1750850845758,
+      "start": 1750909474676,
+      "end": 1750909474676,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1750850845758,
-      "end": 1750850845758,
+      "start": 1750909474676,
+      "end": 1750909474676,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1750850845758,
-      "end": 1750850845758,
+      "start": 1750909474676,
+      "end": 1750909474676,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1750850845758,
-      "end": 1750850845758,
+      "start": 1750909474676,
+      "end": 1750909474676,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1750850845758,
-      "end": 1750850845758,
+      "start": 1750909474676,
+      "end": 1750909474676,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1750850845758,
-      "end": 1750850845758,
+      "start": 1750909474676,
+      "end": 1750909474676,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1750850845758,
-      "end": 1750850845758,
+      "start": 1750909474676,
+      "end": 1750909474676,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1750850845758,
-      "end": 1750850845758,
+      "start": 1750909474676,
+      "end": 1750909474676,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1750850845758,
-      "end": 1750850845758,
+      "start": 1750909474676,
+      "end": 1750909474676,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750850845758,
-      "end": 1750850845758,
+      "start": 1750909474676,
+      "end": 1750909474676,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750850845758,
-      "end": 1750850845758,
+      "start": 1750909474676,
+      "end": 1750909474676,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750850845758,
-      "end": 1750850845758,
+      "start": 1750909474676,
+      "end": 1750909474676,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750850845758,
-      "end": 1750850845758,
+      "start": 1750909474676,
+      "end": 1750909474676,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750850845758,
-      "end": 1750850845758,
+      "start": 1750909474676,
+      "end": 1750909474676,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750850845758,
-      "end": 1750850845758,
+      "start": 1750909474676,
+      "end": 1750909474676,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750850845758,
-      "end": 1750850845758,
+      "start": 1750909474676,
+      "end": 1750909474677,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750850845758,
-      "end": 1750850845758,
+      "start": 1750909474676,
+      "end": 1750909474677,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1750850845758,
-      "end": 1750850845759,
+      "start": 1750909474677,
+      "end": 1750909474678,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1750850845758,
-      "end": 1750850845759,
+      "start": 1750909474677,
+      "end": 1750909474678,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1750850845759,
-      "end": 1750850845759,
+      "start": 1750909474678,
+      "end": 1750909474678,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1750850845759,
-      "end": 1750850845759,
+      "start": 1750909474678,
+      "end": 1750909474678,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1750850845759,
-      "end": 1750850845759,
+      "start": 1750909474678,
+      "end": 1750909474678,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1750850845759,
-      "end": 1750850845759,
+      "start": 1750909474678,
+      "end": 1750909474678,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1750850845759,
-      "end": 1750850845759,
+      "start": 1750909474678,
+      "end": 1750909474678,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1750850845759,
-      "end": 1750850845759,
+      "start": 1750909474678,
+      "end": 1750909474678,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1750850845759,
-      "end": 1750850845759,
+      "start": 1750909474678,
+      "end": 1750909474678,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1750850845759,
-      "end": 1750850845759,
+      "start": 1750909474678,
+      "end": 1750909474678,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1750850845759,
-      "end": 1750850845759,
+      "start": 1750909474678,
+      "end": 1750909474678,
       "order": "normal"
     }
   ]

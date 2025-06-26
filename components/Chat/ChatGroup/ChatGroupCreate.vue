@@ -21,6 +21,18 @@ const setFocus = () => {
     groupName.value?.focus()
   })
 }
+if (chat.get_chat_list.results && Array.isArray(chat.get_chat_list.results)) {
+  chat.get_chat_list.results = chat.get_chat_list.results.map(e => ({
+    ...e,
+    value: false
+  }))
+}
+const selectedIds = computed(() =>
+    chat.get_chat_list.results
+        .filter(e => e.value)
+        .map(e => e.user.id)
+        .join(',')
+)
 onMounted(() => {
   groupTitle.value.trim()
 })
@@ -95,9 +107,15 @@ onMounted(() => {
         <input type="text" class="w-full dark:bg-gray-700 outline-none pl-10 h-[50px]" placeholder="Поиск..."/>
       </div>
       <ChatUserCheckbox
-          v-for="item in chat.get_chat_list.results.filter(e=> !e.is_group)"
+          v-for="item in chat.get_chat_list.results.filter(e => !e.is_group)"
+          :key="item.user.id"
           :item="item"
+          @update="handleUpdate"
       />
+      <div class="mt-4 text-sm">
+        <strong>Выбранные ID:</strong>
+        {{ selectedIds }}
+      </div>
       <div class="w-full px-4 h-[50px] flex items-center justify-end text-sm gap-x-4">
         <TheButton v-if="!chat.showSettingChat" type="chat"
                    @click="chat.showGroupCreateChoice = false; chat.showGroupCreate = true; setFocus()">
@@ -106,8 +124,24 @@ onMounted(() => {
         <TheButton v-else type="chat" @click="chat.showGroupCreateChoice = false;">
           {{ $t('Отмена') }}
         </TheButton>
-        <TheButton type="chat" v-if="!chat.showSettingChat"
-                   @click="chat.showGroupCreateChoice = false; chat.isGroup = true; chat.createChatUser({users: userCount.filter(e=>e.id).map(e=>e.id), name: groupTitle, photo: chat.fileUpload}).then(res=>{chat.isGroup = false})">
+        <TheButton
+            type="chat"
+            v-if="!chat.showSettingChat"
+            @click="
+    chat.showGroupCreateChoice = false;
+    chat.isGroup = true;
+    chat.createChatGroup(
+      {
+        name: groupTitle,
+        users_str: selectedIds,
+        photo: chat.fileUpload,
+      },
+      router
+    ).then(() => {
+      chat.isGroup = false;
+    })
+  "
+        >
           {{ $t('Создать') }}
         </TheButton>
         <TheButton v-else type="chat"

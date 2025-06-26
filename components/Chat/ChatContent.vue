@@ -38,14 +38,14 @@ defineProps({
 
 })
 const handleKeyDown = (event: KeyboardEvent) => {
-  if (event.key === 'Enter') {
-    if (event.shiftKey) {
-      chat.messageText += '\n'
-      event.preventDefault()
-    } else {
-      handleSubmit()
-    }
-  }
+  // if (event.key === 'Enter') {
+  //   if (event.shiftKey) {
+  //     chat.messageText += '\n'
+  //     event.preventDefault()
+  //   } else {
+  //     handleSubmit()
+  //   }
+  // }
 }
 const handleKeyDownUpdate = (event: KeyboardEvent) => {
   if (event.key === 'Enter') {
