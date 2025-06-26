@@ -4,44 +4,44 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { unref as _unref, createVNode as _createVNode, createElementVNode as _createElementVNode, renderList as _renderList, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock, createCommentVNode as _createCommentVNode } from \"vue\"\n\nconst _hoisted_1 = { class: \"mt-10 flex flex-col gap-4\" }\nconst _hoisted_2 = /*#__PURE__*/_createElementVNode(\"label\", { class: \"font-medium mb-2 block\" }, \"Мобильный телефон(ы)\", -1)\nconst _hoisted_3 = [\"onClick\"]\n\nimport TheInput from \"~/components/UI/TheInput.vue\";\r\nimport {useCompanies} from \"~/stores/companies\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'CurrentCompanyChangeInfoContent',\n  setup(__props) {\n\r\n\r\nconst companies = useCompanies()\r\nconst form = reactive({\r\n  title: '',\r\n  description: '',\r\n  email: '',\r\n  address: '',\r\n  file: null as File | null,\r\n  phones: [''] // массив номеров\r\n})\r\n\r\nconst handleFileChange = (e: Event) => {\r\n  const target = e.target as HTMLInputElement\r\n  if (target.files && target.files.length > 0) {\r\n    form.file = target.files[0]\r\n  }\r\n}\r\n\r\nconst addPhone = () => {\r\n  form.phones.push('')\r\n}\r\n\r\nconst removePhone = (index: number) => {\r\n  if (form.phones.length > 1) {\r\n    form.phones.splice(index, 1)\r\n  }\r\n}\r\n\r\nonMounted(() => {\r\n  const company = companies.company\r\n\r\n  if (company) {\r\n    form.title = company.name || ''\r\n    form.description = company.description || ''\r\n    form.email = company.email || ''\r\n    form.address = company.address || ''\r\n    form.phones = Array.isArray(company.phones) && company.phones.length > 0\r\n        ? [...company.phones]\r\n        : ['']\r\n  }\r\n})\r\n\r\nconst handleSubmit = async () => {\r\n  const fd = new FormData()\r\n  fd.append('title', form.title)\r\n  fd.append('description', form.description)\r\n  fd.append('email', form.email)\r\n  fd.append('address', form.address)\r\n\r\n  // Добавим телефоны как массив\r\n  form.phones.forEach((phone, index) => {\r\n    fd.append(`phones[${index}]`, phone)\r\n  })\r\n\r\n  // Файл, если выбран\r\n  if (form.file) {\r\n    fd.append('file', form.file)\r\n  }\r\n\r\n  try {\r\n    await companies.editCompany({ form: fd })\r\n    // alert('Компания успешно обновлена!')\r\n  } catch (e) {\r\n    console.error('Ошибка при сохранении компании:', e)\r\n  }\r\n}\r\n\nreturn (_ctx: any,_cache: any) => {\n  return (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n    _createVNode(TheInput, {\n      label: \"Название\",\n      modelValue: _unref(form).title,\n      \"onUpdate:modelValue\": _cache[0] || (_cache[0] = ($event: any) => ((_unref(form).title) = $event))\n    }, null, 8, [\"modelValue\"]),\n    _createVNode(TheInput, {\n      label: \"Описание\",\n      modelValue: _unref(form).description,\n      \"onUpdate:modelValue\": _cache[1] || (_cache[1] = ($event: any) => ((_unref(form).description) = $event))\n    }, null, 8, [\"modelValue\"]),\n    _createVNode(TheInput, {\n      label: \"Email\",\n      modelValue: _unref(form).email,\n      \"onUpdate:modelValue\": _cache[2] || (_cache[2] = ($event: any) => ((_unref(form).email) = $event))\n    }, null, 8, [\"modelValue\"]),\n    _createVNode(TheInput, {\n      label: \"Адрес\",\n      modelValue: _unref(form).address,\n      \"onUpdate:modelValue\": _cache[3] || (_cache[3] = ($event: any) => ((_unref(form).address) = $event))\n    }, null, 8, [\"modelValue\"]),\n    _createElementVNode(\"div\", null, [\n      _hoisted_2,\n      (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(form).phones, (phone, index) => {\n        return (_openBlock(), _createElementBlock(\"div\", {\n          key: index,\n          class: \"flex items-center gap-2 mb-2\"\n        }, [\n          _createVNode(TheInput, {\n            label: `Телефон #${index + 1}`,\n            modelValue: _unref(form).phones[index],\n            \"onUpdate:modelValue\": ($event: any) => ((_unref(form).phones[index]) = $event)\n          }, null, 8, [\"label\", \"modelValue\", \"onUpdate:modelValue\"]),\n          (_unref(form).phones.length > 1)\n            ? (_openBlock(), _createElementBlock(\"button\", {\n                key: 0,\n                onClick: ($event: any) => (removePhone(index)),\n                class: \"text-red-500 text-sm\"\n              }, \"Удалить\", 8, _hoisted_3))\n            : _createCommentVNode(\"\", true)\n        ]))\n      }), 128)),\n      _createElementVNode(\"button\", {\n        onClick: addPhone,\n        class: \"text-blue-500 text-sm\"\n      }, \"+ Добавить номер\")\n    ]),\n    _createVNode(TheInput, {\n      type: \"file\",\n      id: \"upload-file\",\n      onInput: handleFileChange\n    }),\n    _createElementVNode(\"button\", {\n      onClick: handleSubmit,\n      class: \"bg-blue-600 text-white px-4 py-2 rounded w-fit mt-4\"\n    }, \" Сохранить компанию \")\n  ]))\n}\n}\n\n})",
-      "start": 1750909420370,
-      "end": 1750909420370
+      "start": 1750922114041,
+      "end": 1750922114041
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750909420370,
-      "end": 1750909420370,
+      "start": 1750922114041,
+      "end": 1750922114041,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750909420370,
-      "end": 1750909420370,
+      "start": 1750922114041,
+      "end": 1750922114041,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750909420370,
-      "end": 1750909420370,
+      "start": 1750922114041,
+      "end": 1750922114041,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1750909420370,
-      "end": 1750909420370,
+      "start": 1750922114041,
+      "end": 1750922114042,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1750909420371,
-      "end": 1750909420371,
+      "start": 1750922114042,
+      "end": 1750922114042,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, createVNode as _createVNode, createElementVNode as _createElementVNode, renderList as _renderList, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock, createCommentVNode as _createCommentVNode } from \"vue\";\nconst _hoisted_1 = { class: \"mt-10 flex flex-col gap-4\" };\nconst _hoisted_2 = /* @__PURE__ */ _createElementVNode(\"label\", { class: \"font-medium mb-2 block\" }, \"Мобильный телефон(ы)\", -1);\nconst _hoisted_3 = [\"onClick\"];\nimport TheInput from \"~/components/UI/TheInput.vue\";\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"CurrentCompanyChangeInfoContent\",\n  setup(__props) {\n    const companies = useCompanies();\n    const form = reactive({\n      title: \"\",\n      description: \"\",\n      email: \"\",\n      address: \"\",\n      file: null,\n      phones: [\"\"]\n      // массив номеров\n    });\n    const handleFileChange = (e) => {\n      const target = e.target;\n      if (target.files && target.files.length > 0) {\n        form.file = target.files[0];\n      }\n    };\n    const addPhone = () => {\n      form.phones.push(\"\");\n    };\n    const removePhone = (index) => {\n      if (form.phones.length > 1) {\n        form.phones.splice(index, 1);\n      }\n    };\n    onMounted(() => {\n      const company = companies.company;\n      if (company) {\n        form.title = company.name || \"\";\n        form.description = company.description || \"\";\n        form.email = company.email || \"\";\n        form.address = company.address || \"\";\n        form.phones = Array.isArray(company.phones) && company.phones.length > 0 ? [...company.phones] : [\"\"];\n      }\n    });\n    const handleSubmit = async () => {\n      const fd = new FormData();\n      fd.append(\"title\", form.title);\n      fd.append(\"description\", form.description);\n      fd.append(\"email\", form.email);\n      fd.append(\"address\", form.address);\n      form.phones.forEach((phone, index) => {\n        fd.append(`phones[${index}]`, phone);\n      });\n      if (form.file) {\n        fd.append(\"file\", form.file);\n      }\n      try {\n        await companies.editCompany({ form: fd });\n      } catch (e) {\n        console.error(\"Ошибка при сохранении компании:\", e);\n      }\n    };\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n        _createVNode(TheInput, {\n          label: \"Название\",\n          modelValue: _unref(form).title,\n          \"onUpdate:modelValue\": _cache[0] || (_cache[0] = ($event) => _unref(form).title = $event)\n        }, null, 8, [\"modelValue\"]),\n        _createVNode(TheInput, {\n          label: \"Описание\",\n          modelValue: _unref(form).description,\n          \"onUpdate:modelValue\": _cache[1] || (_cache[1] = ($event) => _unref(form).description = $event)\n        }, null, 8, [\"modelValue\"]),\n        _createVNode(TheInput, {\n          label: \"Email\",\n          modelValue: _unref(form).email,\n          \"onUpdate:modelValue\": _cache[2] || (_cache[2] = ($event) => _unref(form).email = $event)\n        }, null, 8, [\"modelValue\"]),\n        _createVNode(TheInput, {\n          label: \"Адрес\",\n          modelValue: _unref(form).address,\n          \"onUpdate:modelValue\": _cache[3] || (_cache[3] = ($event) => _unref(form).address = $event)\n        }, null, 8, [\"modelValue\"]),\n        _createElementVNode(\"div\", null, [\n          _hoisted_2,\n          (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(form).phones, (phone, index) => {\n            return _openBlock(), _createElementBlock(\"div\", {\n              key: index,\n              class: \"flex items-center gap-2 mb-2\"\n            }, [\n              _createVNode(TheInput, {\n                label: `Телефон #${index + 1}`,\n                modelValue: _unref(form).phones[index],\n                \"onUpdate:modelValue\": ($event) => _unref(form).phones[index] = $event\n              }, null, 8, [\"label\", \"modelValue\", \"onUpdate:modelValue\"]),\n              _unref(form).phones.length > 1 ? (_openBlock(), _createElementBlock(\"button\", {\n                key: 0,\n                onClick: ($event) => removePhone(index),\n                class: \"text-red-500 text-sm\"\n              }, \"Удалить\", 8, _hoisted_3)) : _createCommentVNode(\"\", true)\n            ]);\n          }), 128)),\n          _createElementVNode(\"button\", {\n            onClick: addPhone,\n            class: \"text-blue-500 text-sm\"\n          }, \"+ Добавить номер\")\n        ]),\n        _createVNode(TheInput, {\n          type: \"file\",\n          id: \"upload-file\",\n          onInput: handleFileChange\n        }),\n        _createElementVNode(\"button\", {\n          onClick: handleSubmit,\n          class: \"bg-blue-600 text-white px-4 py-2 rounded w-fit mt-4\"\n        }, \" Сохранить компанию \")\n      ]);\n    };\n  }\n});\n",
-      "start": 1750909420371,
-      "end": 1750909420731,
+      "start": 1750922114042,
+      "end": 1750922114497,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -57,141 +57,141 @@
     },
     {
       "name": "vite:json",
-      "start": 1750909420731,
-      "end": 1750909420731,
+      "start": 1750922114497,
+      "end": 1750922114497,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1750909420732,
-      "end": 1750909420732,
+      "start": 1750922114497,
+      "end": 1750922114497,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1750909420732,
-      "end": 1750909420732,
+      "start": 1750922114497,
+      "end": 1750922114497,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1750909420732,
-      "end": 1750909420732,
+      "start": 1750922114497,
+      "end": 1750922114497,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750909420732,
-      "end": 1750909420732,
+      "start": 1750922114498,
+      "end": 1750922114498,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750909420733,
-      "end": 1750909420733,
+      "start": 1750922114498,
+      "end": 1750922114498,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1750909420733,
-      "end": 1750909420733,
+      "start": 1750922114498,
+      "end": 1750922114498,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1750909420733,
-      "end": 1750909420733,
+      "start": 1750922114498,
+      "end": 1750922114498,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750909420734,
-      "end": 1750909420734,
+      "start": 1750922114498,
+      "end": 1750922114498,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1750909420734,
-      "end": 1750909420734,
+      "start": 1750922114498,
+      "end": 1750922114498,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1750909420734,
-      "end": 1750909420734,
+      "start": 1750922114499,
+      "end": 1750922114499,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1750909420734,
-      "end": 1750909420734,
+      "start": 1750922114499,
+      "end": 1750922114499,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1750909420734,
-      "end": 1750909420734,
+      "start": 1750922114499,
+      "end": 1750922114499,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1750909420734,
-      "end": 1750909420734,
+      "start": 1750922114499,
+      "end": 1750922114499,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1750909420734,
-      "end": 1750909420735,
+      "start": 1750922114499,
+      "end": 1750922114499,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1750909420735,
-      "end": 1750909420735,
+      "start": 1750922114499,
+      "end": 1750922114499,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1750909420735,
-      "end": 1750909420735,
+      "start": 1750922114499,
+      "end": 1750922114499,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1750909420735,
-      "end": 1750909420735,
+      "start": 1750922114500,
+      "end": 1750922114500,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750909420736,
-      "end": 1750909420736,
+      "start": 1750922114500,
+      "end": 1750922114500,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750909420736,
-      "end": 1750909420737,
+      "start": 1750922114500,
+      "end": 1750922114500,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750909420737,
-      "end": 1750909420738,
+      "start": 1750922114500,
+      "end": 1750922114501,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750909420738,
-      "end": 1750909420738,
+      "start": 1750922114501,
+      "end": 1750922114501,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { reactive, onMounted } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, createVNode as _createVNode, createElementVNode as _createElementVNode, renderList as _renderList, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock, createCommentVNode as _createCommentVNode } from \"vue\";\nconst _hoisted_1 = { class: \"mt-10 flex flex-col gap-4\" };\nconst _hoisted_2 = /* @__PURE__ */ _createElementVNode(\"label\", { class: \"font-medium mb-2 block\" }, \"Мобильный телефон(ы)\", -1);\nconst _hoisted_3 = [\"onClick\"];\nimport TheInput from \"~/components/UI/TheInput.vue\";\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"CurrentCompanyChangeInfoContent\",\n  setup(__props) {\n    const companies = useCompanies();\n    const form = reactive({\n      title: \"\",\n      description: \"\",\n      email: \"\",\n      address: \"\",\n      file: null,\n      phones: [\"\"]\n      // массив номеров\n    });\n    const handleFileChange = (e) => {\n      const target = e.target;\n      if (target.files && target.files.length > 0) {\n        form.file = target.files[0];\n      }\n    };\n    const addPhone = () => {\n      form.phones.push(\"\");\n    };\n    const removePhone = (index) => {\n      if (form.phones.length > 1) {\n        form.phones.splice(index, 1);\n      }\n    };\n    onMounted(() => {\n      const company = companies.company;\n      if (company) {\n        form.title = company.name || \"\";\n        form.description = company.description || \"\";\n        form.email = company.email || \"\";\n        form.address = company.address || \"\";\n        form.phones = Array.isArray(company.phones) && company.phones.length > 0 ? [...company.phones] : [\"\"];\n      }\n    });\n    const handleSubmit = async () => {\n      const fd = new FormData();\n      fd.append(\"title\", form.title);\n      fd.append(\"description\", form.description);\n      fd.append(\"email\", form.email);\n      fd.append(\"address\", form.address);\n      form.phones.forEach((phone, index) => {\n        fd.append(`phones[${index}]`, phone);\n      });\n      if (form.file) {\n        fd.append(\"file\", form.file);\n      }\n      try {\n        await companies.editCompany({ form: fd });\n      } catch (e) {\n        console.error(\"Ошибка при сохранении компании:\", e);\n      }\n    };\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n        _createVNode(TheInput, {\n          label: \"Название\",\n          modelValue: _unref(form).title,\n          \"onUpdate:modelValue\": _cache[0] || (_cache[0] = ($event) => _unref(form).title = $event)\n        }, null, 8, [\"modelValue\"]),\n        _createVNode(TheInput, {\n          label: \"Описание\",\n          modelValue: _unref(form).description,\n          \"onUpdate:modelValue\": _cache[1] || (_cache[1] = ($event) => _unref(form).description = $event)\n        }, null, 8, [\"modelValue\"]),\n        _createVNode(TheInput, {\n          label: \"Email\",\n          modelValue: _unref(form).email,\n          \"onUpdate:modelValue\": _cache[2] || (_cache[2] = ($event) => _unref(form).email = $event)\n        }, null, 8, [\"modelValue\"]),\n        _createVNode(TheInput, {\n          label: \"Адрес\",\n          modelValue: _unref(form).address,\n          \"onUpdate:modelValue\": _cache[3] || (_cache[3] = ($event) => _unref(form).address = $event)\n        }, null, 8, [\"modelValue\"]),\n        _createElementVNode(\"div\", null, [\n          _hoisted_2,\n          (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(form).phones, (phone, index) => {\n            return _openBlock(), _createElementBlock(\"div\", {\n              key: index,\n              class: \"flex items-center gap-2 mb-2\"\n            }, [\n              _createVNode(TheInput, {\n                label: `Телефон #${index + 1}`,\n                modelValue: _unref(form).phones[index],\n                \"onUpdate:modelValue\": ($event) => _unref(form).phones[index] = $event\n              }, null, 8, [\"label\", \"modelValue\", \"onUpdate:modelValue\"]),\n              _unref(form).phones.length > 1 ? (_openBlock(), _createElementBlock(\"button\", {\n                key: 0,\n                onClick: ($event) => removePhone(index),\n                class: \"text-red-500 text-sm\"\n              }, \"Удалить\", 8, _hoisted_3)) : _createCommentVNode(\"\", true)\n            ]);\n          }), 128)),\n          _createElementVNode(\"button\", {\n            onClick: addPhone,\n            class: \"text-blue-500 text-sm\"\n          }, \"+ Добавить номер\")\n        ]),\n        _createVNode(TheInput, {\n          type: \"file\",\n          id: \"upload-file\",\n          onInput: handleFileChange\n        }),\n        _createElementVNode(\"button\", {\n          onClick: handleSubmit,\n          class: \"bg-blue-600 text-white px-4 py-2 rounded w-fit mt-4\"\n        }, \" Сохранить компанию \")\n      ]);\n    };\n  }\n});\n",
-      "start": 1750909420738,
-      "end": 1750909420750,
+      "start": 1750922114501,
+      "end": 1750922114509,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -204,50 +204,50 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1750909420751,
-      "end": 1750909420751,
+      "start": 1750922114511,
+      "end": 1750922114511,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1750909420751,
-      "end": 1750909420751,
+      "start": 1750922114511,
+      "end": 1750922114511,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1750909420751,
-      "end": 1750909420752,
+      "start": 1750922114511,
+      "end": 1750922114512,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1750909420752,
-      "end": 1750909420752,
+      "start": 1750922114512,
+      "end": 1750922114512,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1750909420752,
-      "end": 1750909420753,
+      "start": 1750922114512,
+      "end": 1750922114512,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1750909420753,
-      "end": 1750909420754,
+      "start": 1750922114512,
+      "end": 1750922114512,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1750909420754,
-      "end": 1750909420754,
+      "start": 1750922114513,
+      "end": 1750922114513,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1750909420754,
-      "end": 1750909420754,
+      "start": 1750922114522,
+      "end": 1750922114522,
       "order": "normal"
     }
   ]

@@ -4,63 +4,63 @@
     {
       "name": "vite:load-fallback",
       "result": "import axios from '~/composables/axios'\r\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\r\n\r\nexport type TEventInput = Event & {target: HTMLInputElement}\r\n\r\nexport const uploadImage = (event: TEventInput, item: any): void => {\r\n  item.file = event\r\n  if (event.type === 'image/svg+xml' || event.type === 'image/jpeg' || event.type === 'image/jpg' || event.type === 'image/png' || event.type === 'image/webp') {\r\n    item.src = URL.createObjectURL(item.file);\r\n  } else {\r\n    setTimeout(() => {\r\n      item.fileChecked = true\r\n    }, 0)\r\n    setTimeout(() => {\r\n      item.fileChecked = false\r\n    }, 3000)\r\n    item.src = ''\r\n    item.file = ''\r\n  }\r\n}\r\n\r\nexport const uploadFile = (event: TEventInput, item: any): void => {\r\n  item.file = event\r\n  if (event.type) {\r\n    item.src = URL.createObjectURL(item.file)\r\n    if (item.file.size == 0) {\r\n      setTimeout(() => {\r\n        item.fileSizeInfo = true\r\n      }, 0)\r\n      setTimeout(() => {\r\n        item.fileSizeInfo = false\r\n        item.file = ''\r\n        item.src = ''\r\n      }, 3000)\r\n    }\r\n  }\r\n}\r\n\r\nconst forceFileDownload = (res: any, item: any): void => {\r\n  const url = window.URL.createObjectURL(new Blob([res.data]))\r\n  const link = document.createElement('a')\r\n  link.href = url\r\n  link.setAttribute('download', `${item.file_name}`)\r\n  document.body.appendChild(link)\r\n  link.click()\r\n}\r\n\r\nexport const downloadWithAxios = (item: any): void => {\r\n  axios.get(`download${item.file}`, {\r\n    headers: {\r\n      Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`\r\n    }\r\n  }).then(res => {\r\n    forceFileDownload(res, item)\r\n  })\r\n}\r\nexport const setFocus = (value: any) => {\r\n  nextTick(() => {\r\n    value.focus()\r\n  })\r\n}\r\n\r\n\r\nexport const clearTimer = (recordingVoice: boolean, clicker: NodeJS.Timeout | null): void => {\r\n  if(clicker !== null) {\r\n    clearTimeout(clicker)\r\n    clicker = null\r\n    recordingVoice\r\n  }\r\n}\r\n\r\nexport const viewSelect = [\r\n  {\r\n    label: 'Список',\r\n    icon: 'i-heroicons-list-bullet',\r\n    type: 'list',\r\n    svg: '<svg width=\"18\" height=\"16\" viewBox=\"0 0 18 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\\n' +\r\n        '<path d=\"M16.5 2.16602H7.33333M16.5 13.8327H7.33333M16.5 7.99935H7.33333M4 2.16602C4 2.85637 3.44036 3.41602 2.75 3.41602C2.05964 3.41602 1.5 2.85637 1.5 2.16602C1.5 1.47566 2.05964 0.916016 2.75 0.916016C3.44036 0.916016 4 1.47566 4 2.16602ZM4 13.8327C4 14.523 3.44036 15.0827 2.75 15.0827C2.05964 15.0827 1.5 14.523 1.5 13.8327C1.5 13.1423 2.05964 12.5827 2.75 12.5827C3.44036 12.5827 4 13.1423 4 13.8327ZM4 7.99935C4 8.68968 3.44036 9.24935 2.75 9.24935C2.05964 9.24935 1.5 8.68968 1.5 7.99935C1.5 7.30902 2.05964 6.74935 2.75 6.74935C3.44036 6.74935 4 7.30902 4 7.99935Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n' +\r\n        '</svg>'\r\n  },\r\n  {\r\n    label: 'Плитка',\r\n    icon: 'i-heroicons-squares-2x2',\r\n    type: 'tile',\r\n    svg: '<svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\\n' +\r\n        '<path d=\"M9.99984 5.00065C10.4601 5.00065 10.8332 4.62755 10.8332 4.16732C10.8332 3.70708 10.4601 3.33398 9.99984 3.33398C9.53959 3.33398 9.1665 3.70708 9.1665 4.16732C9.1665 4.62755 9.53959 5.00065 9.99984 5.00065Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n' +\r\n        '<path d=\"M9.99984 10.8327C10.4601 10.8327 10.8332 10.4596 10.8332 9.99935C10.8332 9.5391 10.4601 9.16602 9.99984 9.16602C9.53959 9.16602 9.1665 9.5391 9.1665 9.99935C9.1665 10.4596 9.53959 10.8327 9.99984 10.8327Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n' +\r\n        '<path d=\"M9.99984 16.6667C10.4601 16.6667 10.8332 16.2936 10.8332 15.8333C10.8332 15.3731 10.4601 15 9.99984 15C9.53959 15 9.1665 15.3731 9.1665 15.8333C9.1665 16.2936 9.53959 16.6667 9.99984 16.6667Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n' +\r\n        '<path d=\"M15.8333 5.00065C16.2936 5.00065 16.6667 4.62755 16.6667 4.16732C16.6667 3.70708 16.2936 3.33398 15.8333 3.33398C15.3731 3.33398 15 3.70708 15 4.16732C15 4.62755 15.3731 5.00065 15.8333 5.00065Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n' +\r\n        '<path d=\"M15.8333 10.8327C16.2936 10.8327 16.6667 10.4596 16.6667 9.99935C16.6667 9.5391 16.2936 9.16602 15.8333 9.16602C15.3731 9.16602 15 9.5391 15 9.99935C15 10.4596 15.3731 10.8327 15.8333 10.8327Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n' +\r\n        '<path d=\"M15.8333 16.6667C16.2936 16.6667 16.6667 16.2936 16.6667 15.8333C16.6667 15.3731 16.2936 15 15.8333 15C15.3731 15 15 15.3731 15 15.8333C15 16.2936 15.3731 16.6667 15.8333 16.6667Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n' +\r\n        '<path d=\"M4.16683 5.00065C4.62706 5.00065 5.00016 4.62755 5.00016 4.16732C5.00016 3.70708 4.62706 3.33398 4.16683 3.33398C3.7066 3.33398 3.3335 3.70708 3.3335 4.16732C3.3335 4.62755 3.7066 5.00065 4.16683 5.00065Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n' +\r\n        '<path d=\"M4.16683 10.8327C4.62706 10.8327 5.00016 10.4596 5.00016 9.99935C5.00016 9.5391 4.62706 9.16602 4.16683 9.16602C3.7066 9.16602 3.3335 9.5391 3.3335 9.99935C3.3335 10.4596 3.7066 10.8327 4.16683 10.8327Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n' +\r\n        '<path d=\"M4.16683 16.6667C4.62706 16.6667 5.00016 16.2936 5.00016 15.8333C5.00016 15.3731 4.62706 15 4.16683 15C3.7066 15 3.3335 15.3731 3.3335 15.8333C3.3335 16.2936 3.7066 16.6667 4.16683 16.6667Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n' +\r\n        '</svg>'\r\n  },\r\n]\r\n\r\n\r\nexport const handleSearch = (item: any, request: Promise<void>, reqErr?: Promise<void>) => {\r\n  if(item.trim() !== '') {\r\n    request\r\n  } else if(item === '') {\r\n    reqErr\r\n  }\r\n}",
-      "start": 1750909472949,
-      "end": 1750909474258,
+      "start": 1750922157260,
+      "end": 1750922157836,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750909474258,
-      "end": 1750909474258,
+      "start": 1750922157836,
+      "end": 1750922157836,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750909474258,
-      "end": 1750909474258,
+      "start": 1750922157836,
+      "end": 1750922157836,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750909474258,
-      "end": 1750909474258,
+      "start": 1750922157836,
+      "end": 1750922157836,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750909474258,
-      "end": 1750909474258,
+      "start": 1750922157836,
+      "end": 1750922157836,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750909474258,
-      "end": 1750909474258,
+      "start": 1750922157836,
+      "end": 1750922157836,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750909474258,
-      "end": 1750909474258,
+      "start": 1750922157836,
+      "end": 1750922157836,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1750909474258,
-      "end": 1750909474258,
+      "start": 1750922157836,
+      "end": 1750922157836,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1750909474258,
-      "end": 1750909474258,
+      "start": 1750922157836,
+      "end": 1750922157836,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import axios from \"~/composables/axios\";\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\nexport const uploadImage = (event, item) => {\n  item.file = event;\n  if (event.type === \"image/svg+xml\" || event.type === \"image/jpeg\" || event.type === \"image/jpg\" || event.type === \"image/png\" || event.type === \"image/webp\") {\n    item.src = URL.createObjectURL(item.file);\n  } else {\n    setTimeout(() => {\n      item.fileChecked = true;\n    }, 0);\n    setTimeout(() => {\n      item.fileChecked = false;\n    }, 3e3);\n    item.src = \"\";\n    item.file = \"\";\n  }\n};\nexport const uploadFile = (event, item) => {\n  item.file = event;\n  if (event.type) {\n    item.src = URL.createObjectURL(item.file);\n    if (item.file.size == 0) {\n      setTimeout(() => {\n        item.fileSizeInfo = true;\n      }, 0);\n      setTimeout(() => {\n        item.fileSizeInfo = false;\n        item.file = \"\";\n        item.src = \"\";\n      }, 3e3);\n    }\n  }\n};\nconst forceFileDownload = (res, item) => {\n  const url = window.URL.createObjectURL(new Blob([res.data]));\n  const link = document.createElement(\"a\");\n  link.href = url;\n  link.setAttribute(\"download\", `${item.file_name}`);\n  document.body.appendChild(link);\n  link.click();\n};\nexport const downloadWithAxios = (item) => {\n  axios.get(`download${item.file}`, {\n    headers: {\n      Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n    }\n  }).then((res) => {\n    forceFileDownload(res, item);\n  });\n};\nexport const setFocus = (value) => {\n  nextTick(() => {\n    value.focus();\n  });\n};\nexport const clearTimer = (recordingVoice, clicker) => {\n  if (clicker !== null) {\n    clearTimeout(clicker);\n    clicker = null;\n    recordingVoice;\n  }\n};\nexport const viewSelect = [\n  {\n    label: \"Список\",\n    icon: \"i-heroicons-list-bullet\",\n    type: \"list\",\n    svg: '<svg width=\"18\" height=\"16\" viewBox=\"0 0 18 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\\n<path d=\"M16.5 2.16602H7.33333M16.5 13.8327H7.33333M16.5 7.99935H7.33333M4 2.16602C4 2.85637 3.44036 3.41602 2.75 3.41602C2.05964 3.41602 1.5 2.85637 1.5 2.16602C1.5 1.47566 2.05964 0.916016 2.75 0.916016C3.44036 0.916016 4 1.47566 4 2.16602ZM4 13.8327C4 14.523 3.44036 15.0827 2.75 15.0827C2.05964 15.0827 1.5 14.523 1.5 13.8327C1.5 13.1423 2.05964 12.5827 2.75 12.5827C3.44036 12.5827 4 13.1423 4 13.8327ZM4 7.99935C4 8.68968 3.44036 9.24935 2.75 9.24935C2.05964 9.24935 1.5 8.68968 1.5 7.99935C1.5 7.30902 2.05964 6.74935 2.75 6.74935C3.44036 6.74935 4 7.30902 4 7.99935Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n</svg>'\n  },\n  {\n    label: \"Плитка\",\n    icon: \"i-heroicons-squares-2x2\",\n    type: \"tile\",\n    svg: '<svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\\n<path d=\"M9.99984 5.00065C10.4601 5.00065 10.8332 4.62755 10.8332 4.16732C10.8332 3.70708 10.4601 3.33398 9.99984 3.33398C9.53959 3.33398 9.1665 3.70708 9.1665 4.16732C9.1665 4.62755 9.53959 5.00065 9.99984 5.00065Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M9.99984 10.8327C10.4601 10.8327 10.8332 10.4596 10.8332 9.99935C10.8332 9.5391 10.4601 9.16602 9.99984 9.16602C9.53959 9.16602 9.1665 9.5391 9.1665 9.99935C9.1665 10.4596 9.53959 10.8327 9.99984 10.8327Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M9.99984 16.6667C10.4601 16.6667 10.8332 16.2936 10.8332 15.8333C10.8332 15.3731 10.4601 15 9.99984 15C9.53959 15 9.1665 15.3731 9.1665 15.8333C9.1665 16.2936 9.53959 16.6667 9.99984 16.6667Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M15.8333 5.00065C16.2936 5.00065 16.6667 4.62755 16.6667 4.16732C16.6667 3.70708 16.2936 3.33398 15.8333 3.33398C15.3731 3.33398 15 3.70708 15 4.16732C15 4.62755 15.3731 5.00065 15.8333 5.00065Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M15.8333 10.8327C16.2936 10.8327 16.6667 10.4596 16.6667 9.99935C16.6667 9.5391 16.2936 9.16602 15.8333 9.16602C15.3731 9.16602 15 9.5391 15 9.99935C15 10.4596 15.3731 10.8327 15.8333 10.8327Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M15.8333 16.6667C16.2936 16.6667 16.6667 16.2936 16.6667 15.8333C16.6667 15.3731 16.2936 15 15.8333 15C15.3731 15 15 15.3731 15 15.8333C15 16.2936 15.3731 16.6667 15.8333 16.6667Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M4.16683 5.00065C4.62706 5.00065 5.00016 4.62755 5.00016 4.16732C5.00016 3.70708 4.62706 3.33398 4.16683 3.33398C3.7066 3.33398 3.3335 3.70708 3.3335 4.16732C3.3335 4.62755 3.7066 5.00065 4.16683 5.00065Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M4.16683 10.8327C4.62706 10.8327 5.00016 10.4596 5.00016 9.99935C5.00016 9.5391 4.62706 9.16602 4.16683 9.16602C3.7066 9.16602 3.3335 9.5391 3.3335 9.99935C3.3335 10.4596 3.7066 10.8327 4.16683 10.8327Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M4.16683 16.6667C4.62706 16.6667 5.00016 16.2936 5.00016 15.8333C5.00016 15.3731 4.62706 15 4.16683 15C3.7066 15 3.3335 15.3731 3.3335 15.8333C3.3335 16.2936 3.7066 16.6667 4.16683 16.6667Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n</svg>'\n  }\n];\nexport const handleSearch = (item, request, reqErr) => {\n  if (item.trim() !== \"\") {\n    request;\n  } else if (item === \"\") {\n    reqErr;\n  }\n};\n",
-      "start": 1750909474258,
-      "end": 1750909475056,
+      "start": 1750922157836,
+      "end": 1750922158410,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -76,173 +76,173 @@
     },
     {
       "name": "vite:json",
-      "start": 1750909475056,
-      "end": 1750909475056,
+      "start": 1750922158410,
+      "end": 1750922158410,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1750909475057,
-      "end": 1750909475057,
+      "start": 1750922158410,
+      "end": 1750922158410,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1750909475057,
-      "end": 1750909475057,
+      "start": 1750922158410,
+      "end": 1750922158410,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1750909475057,
-      "end": 1750909475057,
+      "start": 1750922158410,
+      "end": 1750922158410,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750909475057,
-      "end": 1750909475057,
+      "start": 1750922158410,
+      "end": 1750922158411,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750909475057,
-      "end": 1750909475057,
+      "start": 1750922158410,
+      "end": 1750922158411,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750909475057,
-      "end": 1750909475058,
+      "start": 1750922158411,
+      "end": 1750922158411,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750909475057,
-      "end": 1750909475058,
+      "start": 1750922158411,
+      "end": 1750922158411,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1750909475059,
-      "end": 1750909475059,
+      "start": 1750922158411,
+      "end": 1750922158411,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750909475059,
-      "end": 1750909475060,
+      "start": 1750922158411,
+      "end": 1750922158412,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1750909475060,
-      "end": 1750909475061,
+      "start": 1750922158412,
+      "end": 1750922158413,
       "order": "normal"
     },
     {
       "name": "vite:define",
       "result": "import axios from \"~/composables/axios\";\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\nexport const uploadImage = (event, item) => {\n  item.file = event;\n  if (event.type === \"image/svg+xml\" || event.type === \"image/jpeg\" || event.type === \"image/jpg\" || event.type === \"image/png\" || event.type === \"image/webp\") {\n    item.src = URL.createObjectURL(item.file);\n  } else {\n    setTimeout(() => {\n      item.fileChecked = true;\n    }, 0);\n    setTimeout(() => {\n      item.fileChecked = false;\n    }, 3e3);\n    item.src = \"\";\n    item.file = \"\";\n  }\n};\nexport const uploadFile = (event, item) => {\n  item.file = event;\n  if (event.type) {\n    item.src = URL.createObjectURL(item.file);\n    if (item.file.size == 0) {\n      setTimeout(() => {\n        item.fileSizeInfo = true;\n      }, 0);\n      setTimeout(() => {\n        item.fileSizeInfo = false;\n        item.file = \"\";\n        item.src = \"\";\n      }, 3e3);\n    }\n  }\n};\nconst forceFileDownload = (res, item) => {\n  const url = (void 0).URL.createObjectURL(new Blob([res.data]));\n  const link = (void 0).createElement(\"a\");\n  link.href = url;\n  link.setAttribute(\"download\", `${item.file_name}`);\n  (void 0).body.appendChild(link);\n  link.click();\n};\nexport const downloadWithAxios = (item) => {\n  axios.get(`download${item.file}`, {\n    headers: {\n      Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n    }\n  }).then((res) => {\n    forceFileDownload(res, item);\n  });\n};\nexport const setFocus = (value) => {\n  nextTick(() => {\n    value.focus();\n  });\n};\nexport const clearTimer = (recordingVoice, clicker) => {\n  if (clicker !== null) {\n    clearTimeout(clicker);\n    clicker = null;\n    recordingVoice;\n  }\n};\nexport const viewSelect = [\n  {\n    label: \"Список\",\n    icon: \"i-heroicons-list-bullet\",\n    type: \"list\",\n    svg: '<svg width=\"18\" height=\"16\" viewBox=\"0 0 18 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\\n<path d=\"M16.5 2.16602H7.33333M16.5 13.8327H7.33333M16.5 7.99935H7.33333M4 2.16602C4 2.85637 3.44036 3.41602 2.75 3.41602C2.05964 3.41602 1.5 2.85637 1.5 2.16602C1.5 1.47566 2.05964 0.916016 2.75 0.916016C3.44036 0.916016 4 1.47566 4 2.16602ZM4 13.8327C4 14.523 3.44036 15.0827 2.75 15.0827C2.05964 15.0827 1.5 14.523 1.5 13.8327C1.5 13.1423 2.05964 12.5827 2.75 12.5827C3.44036 12.5827 4 13.1423 4 13.8327ZM4 7.99935C4 8.68968 3.44036 9.24935 2.75 9.24935C2.05964 9.24935 1.5 8.68968 1.5 7.99935C1.5 7.30902 2.05964 6.74935 2.75 6.74935C3.44036 6.74935 4 7.30902 4 7.99935Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n</svg>'\n  },\n  {\n    label: \"Плитка\",\n    icon: \"i-heroicons-squares-2x2\",\n    type: \"tile\",\n    svg: '<svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\\n<path d=\"M9.99984 5.00065C10.4601 5.00065 10.8332 4.62755 10.8332 4.16732C10.8332 3.70708 10.4601 3.33398 9.99984 3.33398C9.53959 3.33398 9.1665 3.70708 9.1665 4.16732C9.1665 4.62755 9.53959 5.00065 9.99984 5.00065Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M9.99984 10.8327C10.4601 10.8327 10.8332 10.4596 10.8332 9.99935C10.8332 9.5391 10.4601 9.16602 9.99984 9.16602C9.53959 9.16602 9.1665 9.5391 9.1665 9.99935C9.1665 10.4596 9.53959 10.8327 9.99984 10.8327Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M9.99984 16.6667C10.4601 16.6667 10.8332 16.2936 10.8332 15.8333C10.8332 15.3731 10.4601 15 9.99984 15C9.53959 15 9.1665 15.3731 9.1665 15.8333C9.1665 16.2936 9.53959 16.6667 9.99984 16.6667Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M15.8333 5.00065C16.2936 5.00065 16.6667 4.62755 16.6667 4.16732C16.6667 3.70708 16.2936 3.33398 15.8333 3.33398C15.3731 3.33398 15 3.70708 15 4.16732C15 4.62755 15.3731 5.00065 15.8333 5.00065Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M15.8333 10.8327C16.2936 10.8327 16.6667 10.4596 16.6667 9.99935C16.6667 9.5391 16.2936 9.16602 15.8333 9.16602C15.3731 9.16602 15 9.5391 15 9.99935C15 10.4596 15.3731 10.8327 15.8333 10.8327Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M15.8333 16.6667C16.2936 16.6667 16.6667 16.2936 16.6667 15.8333C16.6667 15.3731 16.2936 15 15.8333 15C15.3731 15 15 15.3731 15 15.8333C15 16.2936 15.3731 16.6667 15.8333 16.6667Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M4.16683 5.00065C4.62706 5.00065 5.00016 4.62755 5.00016 4.16732C5.00016 3.70708 4.62706 3.33398 4.16683 3.33398C3.7066 3.33398 3.3335 3.70708 3.3335 4.16732C3.3335 4.62755 3.7066 5.00065 4.16683 5.00065Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M4.16683 10.8327C4.62706 10.8327 5.00016 10.4596 5.00016 9.99935C5.00016 9.5391 4.62706 9.16602 4.16683 9.16602C3.7066 9.16602 3.3335 9.5391 3.3335 9.99935C3.3335 10.4596 3.7066 10.8327 4.16683 10.8327Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M4.16683 16.6667C4.62706 16.6667 5.00016 16.2936 5.00016 15.8333C5.00016 15.3731 4.62706 15 4.16683 15C3.7066 15 3.3335 15.3731 3.3335 15.8333C3.3335 16.2936 3.7066 16.6667 4.16683 16.6667Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n</svg>'\n  }\n];\nexport const handleSearch = (item, request, reqErr) => {\n  if (item.trim() !== \"\") {\n    request;\n  } else if (item === \"\") {\n    reqErr;\n  }\n};\n",
-      "start": 1750909475061,
-      "end": 1750909475547,
+      "start": 1750922158413,
+      "end": 1750922158788,
       "order": "normal",
       "sourcemaps": "{\n  \"version\": 3,\n  \"sources\": [\"D:/projects/nuxt/workix-nuxt-front/hooks/ElemUI.ts\"],\n  \"sourcesContent\": [\"import axios from \\\"~/composables/axios\\\";\\nimport nuxtStorage from \\\"nuxt-storage/nuxt-storage\\\";\\nexport const uploadImage = (event, item) => {\\n  item.file = event;\\n  if (event.type === \\\"image/svg+xml\\\" || event.type === \\\"image/jpeg\\\" || event.type === \\\"image/jpg\\\" || event.type === \\\"image/png\\\" || event.type === \\\"image/webp\\\") {\\n    item.src = URL.createObjectURL(item.file);\\n  } else {\\n    setTimeout(() => {\\n      item.fileChecked = true;\\n    }, 0);\\n    setTimeout(() => {\\n      item.fileChecked = false;\\n    }, 3e3);\\n    item.src = \\\"\\\";\\n    item.file = \\\"\\\";\\n  }\\n};\\nexport const uploadFile = (event, item) => {\\n  item.file = event;\\n  if (event.type) {\\n    item.src = URL.createObjectURL(item.file);\\n    if (item.file.size == 0) {\\n      setTimeout(() => {\\n        item.fileSizeInfo = true;\\n      }, 0);\\n      setTimeout(() => {\\n        item.fileSizeInfo = false;\\n        item.file = \\\"\\\";\\n        item.src = \\\"\\\";\\n      }, 3e3);\\n    }\\n  }\\n};\\nconst forceFileDownload = (res, item) => {\\n  const url = window.URL.createObjectURL(new Blob([res.data]));\\n  const link = document.createElement(\\\"a\\\");\\n  link.href = url;\\n  link.setAttribute(\\\"download\\\", `${item.file_name}`);\\n  document.body.appendChild(link);\\n  link.click();\\n};\\nexport const downloadWithAxios = (item) => {\\n  axios.get(`download${item.file}`, {\\n    headers: {\\n      Authorization: `Bearer ${nuxtStorage.localStorage.getData(\\\"token\\\")}`\\n    }\\n  }).then((res) => {\\n    forceFileDownload(res, item);\\n  });\\n};\\nexport const setFocus = (value) => {\\n  nextTick(() => {\\n    value.focus();\\n  });\\n};\\nexport const clearTimer = (recordingVoice, clicker) => {\\n  if (clicker !== null) {\\n    clearTimeout(clicker);\\n    clicker = null;\\n    recordingVoice;\\n  }\\n};\\nexport const viewSelect = [\\n  {\\n    label: \\\"Список\\\",\\n    icon: \\\"i-heroicons-list-bullet\\\",\\n    type: \\\"list\\\",\\n    svg: '<svg width=\\\"18\\\" height=\\\"16\\\" viewBox=\\\"0 0 18 16\\\" fill=\\\"none\\\" xmlns=\\\"http://www.w3.org/2000/svg\\\">\\\\n<path d=\\\"M16.5 2.16602H7.33333M16.5 13.8327H7.33333M16.5 7.99935H7.33333M4 2.16602C4 2.85637 3.44036 3.41602 2.75 3.41602C2.05964 3.41602 1.5 2.85637 1.5 2.16602C1.5 1.47566 2.05964 0.916016 2.75 0.916016C3.44036 0.916016 4 1.47566 4 2.16602ZM4 13.8327C4 14.523 3.44036 15.0827 2.75 15.0827C2.05964 15.0827 1.5 14.523 1.5 13.8327C1.5 13.1423 2.05964 12.5827 2.75 12.5827C3.44036 12.5827 4 13.1423 4 13.8327ZM4 7.99935C4 8.68968 3.44036 9.24935 2.75 9.24935C2.05964 9.24935 1.5 8.68968 1.5 7.99935C1.5 7.30902 2.05964 6.74935 2.75 6.74935C3.44036 6.74935 4 7.30902 4 7.99935Z\\\" stroke=\\\"currentColor\\\" stroke-width=\\\"1.33333\\\" stroke-linecap=\\\"round\\\" stroke-linejoin=\\\"round\\\"/>\\\\n</svg>'\\n  },\\n  {\\n    label: \\\"Плитка\\\",\\n    icon: \\\"i-heroicons-squares-2x2\\\",\\n    type: \\\"tile\\\",\\n    svg: '<svg width=\\\"20\\\" height=\\\"20\\\" viewBox=\\\"0 0 20 20\\\" fill=\\\"none\\\" xmlns=\\\"http://www.w3.org/2000/svg\\\">\\\\n<path d=\\\"M9.99984 5.00065C10.4601 5.00065 10.8332 4.62755 10.8332 4.16732C10.8332 3.70708 10.4601 3.33398 9.99984 3.33398C9.53959 3.33398 9.1665 3.70708 9.1665 4.16732C9.1665 4.62755 9.53959 5.00065 9.99984 5.00065Z\\\" stroke=\\\"currentColor\\\" stroke-width=\\\"1.33333\\\" stroke-linecap=\\\"round\\\" stroke-linejoin=\\\"round\\\"/>\\\\n<path d=\\\"M9.99984 10.8327C10.4601 10.8327 10.8332 10.4596 10.8332 9.99935C10.8332 9.5391 10.4601 9.16602 9.99984 9.16602C9.53959 9.16602 9.1665 9.5391 9.1665 9.99935C9.1665 10.4596 9.53959 10.8327 9.99984 10.8327Z\\\" stroke=\\\"currentColor\\\" stroke-width=\\\"1.33333\\\" stroke-linecap=\\\"round\\\" stroke-linejoin=\\\"round\\\"/>\\\\n<path d=\\\"M9.99984 16.6667C10.4601 16.6667 10.8332 16.2936 10.8332 15.8333C10.8332 15.3731 10.4601 15 9.99984 15C9.53959 15 9.1665 15.3731 9.1665 15.8333C9.1665 16.2936 9.53959 16.6667 9.99984 16.6667Z\\\" stroke=\\\"currentColor\\\" stroke-width=\\\"1.33333\\\" stroke-linecap=\\\"round\\\" stroke-linejoin=\\\"round\\\"/>\\\\n<path d=\\\"M15.8333 5.00065C16.2936 5.00065 16.6667 4.62755 16.6667 4.16732C16.6667 3.70708 16.2936 3.33398 15.8333 3.33398C15.3731 3.33398 15 3.70708 15 4.16732C15 4.62755 15.3731 5.00065 15.8333 5.00065Z\\\" stroke=\\\"currentColor\\\" stroke-width=\\\"1.33333\\\" stroke-linecap=\\\"round\\\" stroke-linejoin=\\\"round\\\"/>\\\\n<path d=\\\"M15.8333 10.8327C16.2936 10.8327 16.6667 10.4596 16.6667 9.99935C16.6667 9.5391 16.2936 9.16602 15.8333 9.16602C15.3731 9.16602 15 9.5391 15 9.99935C15 10.4596 15.3731 10.8327 15.8333 10.8327Z\\\" stroke=\\\"currentColor\\\" stroke-width=\\\"1.33333\\\" stroke-linecap=\\\"round\\\" stroke-linejoin=\\\"round\\\"/>\\\\n<path d=\\\"M15.8333 16.6667C16.2936 16.6667 16.6667 16.2936 16.6667 15.8333C16.6667 15.3731 16.2936 15 15.8333 15C15.3731 15 15 15.3731 15 15.8333C15 16.2936 15.3731 16.6667 15.8333 16.6667Z\\\" stroke=\\\"currentColor\\\" stroke-width=\\\"1.33333\\\" stroke-linecap=\\\"round\\\" stroke-linejoin=\\\"round\\\"/>\\\\n<path d=\\\"M4.16683 5.00065C4.62706 5.00065 5.00016 4.62755 5.00016 4.16732C5.00016 3.70708 4.62706 3.33398 4.16683 3.33398C3.7066 3.33398 3.3335 3.70708 3.3335 4.16732C3.3335 4.62755 3.7066 5.00065 4.16683 5.00065Z\\\" stroke=\\\"currentColor\\\" stroke-width=\\\"1.33333\\\" stroke-linecap=\\\"round\\\" stroke-linejoin=\\\"round\\\"/>\\\\n<path d=\\\"M4.16683 10.8327C4.62706 10.8327 5.00016 10.4596 5.00016 9.99935C5.00016 9.5391 4.62706 9.16602 4.16683 9.16602C3.7066 9.16602 3.3335 9.5391 3.3335 9.99935C3.3335 10.4596 3.7066 10.8327 4.16683 10.8327Z\\\" stroke=\\\"currentColor\\\" stroke-width=\\\"1.33333\\\" stroke-linecap=\\\"round\\\" stroke-linejoin=\\\"round\\\"/>\\\\n<path d=\\\"M4.16683 16.6667C4.62706 16.6667 5.00016 16.2936 5.00016 15.8333C5.00016 15.3731 4.62706 15 4.16683 15C3.7066 15 3.3335 15.3731 3.3335 15.8333C3.3335 16.2936 3.7066 16.6667 4.16683 16.6667Z\\\" stroke=\\\"currentColor\\\" stroke-width=\\\"1.33333\\\" stroke-linecap=\\\"round\\\" stroke-linejoin=\\\"round\\\"/>\\\\n</svg>'\\n  }\\n];\\nexport const handleSearch = (item, request, reqErr) => {\\n  if (item.trim() !== \\\"\\\") {\\n    request;\\n  } else if (item === \\\"\\\") {\\n    reqErr;\\n  }\\n};\\n\"],\n  \"mappings\": \"AAAA,OAAO,WAAW;AAClB,OAAO,iBAAiB;AACjB,aAAM,cAAc,CAAC,OAAO,SAAS;AAC1C,OAAK,OAAO;AACZ,MAAI,MAAM,SAAS,mBAAmB,MAAM,SAAS,gBAAgB,MAAM,SAAS,eAAe,MAAM,SAAS,eAAe,MAAM,SAAS,cAAc;AAC5J,SAAK,MAAM,IAAI,gBAAgB,KAAK,IAAI;AAAA,EAC1C,OAAO;AACL,eAAW,MAAM;AACf,WAAK,cAAc;AAAA,IACrB,GAAG,CAAC;AACJ,eAAW,MAAM;AACf,WAAK,cAAc;AAAA,IACrB,GAAG,GAAG;AACN,SAAK,MAAM;AACX,SAAK,OAAO;AAAA,EACd;AACF;AACO,aAAM,aAAa,CAAC,OAAO,SAAS;AACzC,OAAK,OAAO;AACZ,MAAI,MAAM,MAAM;AACd,SAAK,MAAM,IAAI,gBAAgB,KAAK,IAAI;AACxC,QAAI,KAAK,KAAK,QAAQ,GAAG;AACvB,iBAAW,MAAM;AACf,aAAK,eAAe;AAAA,MACtB,GAAG,CAAC;AACJ,iBAAW,MAAM;AACf,aAAK,eAAe;AACpB,aAAK,OAAO;AACZ,aAAK,MAAM;AAAA,MACb,GAAG,GAAG;AAAA,IACR;AAAA,EACF;AACF;AACA,MAAM,oBAAoB,CAAC,KAAK,SAAS;AACvC,QAAM,MAAM,SAAO,IAAI,gBAAgB,IAAI,KAAK,CAAC,IAAI,IAAI,CAAC,CAAC;AAC3D,QAAM,OAAO,SAAS,cAAc,GAAG;AACvC,OAAK,OAAO;AACZ,OAAK,aAAa,YAAY,GAAG,KAAK,SAAS,EAAE;AACjD,WAAS,KAAK,YAAY,IAAI;AAC9B,OAAK,MAAM;AACb;AACO,aAAM,oBAAoB,CAAC,SAAS;AACzC,QAAM,IAAI,WAAW,KAAK,IAAI,IAAI;AAAA,IAChC,SAAS;AAAA,MACP,eAAe,UAAU,YAAY,aAAa,QAAQ,OAAO,CAAC;AAAA,IACpE;AAAA,EACF,CAAC,EAAE,KAAK,CAAC,QAAQ;AACf,sBAAkB,KAAK,IAAI;AAAA,EAC7B,CAAC;AACH;AACO,aAAM,WAAW,CAAC,UAAU;AACjC,WAAS,MAAM;AACb,UAAM,MAAM;AAAA,EACd,CAAC;AACH;AACO,aAAM,aAAa,CAAC,gBAAgB,YAAY;AACrD,MAAI,YAAY,MAAM;AACpB,iBAAa,OAAO;AACpB,cAAU;AACV;AAAA,EACF;AACF;AACO,aAAM,aAAa;AAAA,EACxB;AAAA,IACE,OAAO;AAAA,IACP,MAAM;AAAA,IACN,MAAM;AAAA,IACN,KAAK;AAAA,EACP;AAAA,EACA;AAAA,IACE,OAAO;AAAA,IACP,MAAM;AAAA,IACN,MAAM;AAAA,IACN,KAAK;AAAA,EACP;AACF;AACO,aAAM,eAAe,CAAC,MAAM,SAAS,WAAW;AACrD,MAAI,KAAK,KAAK,MAAM,IAAI;AACtB;AAAA,EACF,WAAW,SAAS,IAAI;AACtB;AAAA,EACF;AACF;\",\n  \"names\": []\n}\n"
     },
     {
       "name": "vite:css-post",
-      "start": 1750909475548,
-      "end": 1750909475548,
+      "start": 1750922158789,
+      "end": 1750922158789,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1750909475548,
-      "end": 1750909475548,
+      "start": 1750922158789,
+      "end": 1750922158789,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1750909475548,
-      "end": 1750909475548,
+      "start": 1750922158789,
+      "end": 1750922158789,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1750909475549,
-      "end": 1750909475549,
+      "start": 1750922158789,
+      "end": 1750922158789,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1750909475549,
-      "end": 1750909475549,
+      "start": 1750922158789,
+      "end": 1750922158789,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1750909475550,
-      "end": 1750909475550,
+      "start": 1750922158790,
+      "end": 1750922158790,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1750909475551,
-      "end": 1750909475551,
+      "start": 1750922158790,
+      "end": 1750922158790,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750909475551,
-      "end": 1750909475551,
+      "start": 1750922158790,
+      "end": 1750922158790,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750909475551,
-      "end": 1750909475551,
+      "start": 1750922158790,
+      "end": 1750922158790,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750909475551,
-      "end": 1750909475551,
+      "start": 1750922158790,
+      "end": 1750922158790,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750909475551,
-      "end": 1750909475551,
+      "start": 1750922158790,
+      "end": 1750922158790,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750909475551,
-      "end": 1750909475551,
+      "start": 1750922158791,
+      "end": 1750922158791,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750909475551,
-      "end": 1750909475551,
+      "start": 1750922158791,
+      "end": 1750922158791,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750909475552,
-      "end": 1750909475552,
+      "start": 1750922158791,
+      "end": 1750922158791,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750909475552,
-      "end": 1750909475552,
+      "start": 1750922158791,
+      "end": 1750922158791,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { nextTick } from 'vue';\nimport axios from \"~/composables/axios\";\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\nexport const uploadImage = (event, item) => {\n  item.file = event;\n  if (event.type === \"image/svg+xml\" || event.type === \"image/jpeg\" || event.type === \"image/jpg\" || event.type === \"image/png\" || event.type === \"image/webp\") {\n    item.src = URL.createObjectURL(item.file);\n  } else {\n    setTimeout(() => {\n      item.fileChecked = true;\n    }, 0);\n    setTimeout(() => {\n      item.fileChecked = false;\n    }, 3e3);\n    item.src = \"\";\n    item.file = \"\";\n  }\n};\nexport const uploadFile = (event, item) => {\n  item.file = event;\n  if (event.type) {\n    item.src = URL.createObjectURL(item.file);\n    if (item.file.size == 0) {\n      setTimeout(() => {\n        item.fileSizeInfo = true;\n      }, 0);\n      setTimeout(() => {\n        item.fileSizeInfo = false;\n        item.file = \"\";\n        item.src = \"\";\n      }, 3e3);\n    }\n  }\n};\nconst forceFileDownload = (res, item) => {\n  const url = (void 0).URL.createObjectURL(new Blob([res.data]));\n  const link = (void 0).createElement(\"a\");\n  link.href = url;\n  link.setAttribute(\"download\", `${item.file_name}`);\n  (void 0).body.appendChild(link);\n  link.click();\n};\nexport const downloadWithAxios = (item) => {\n  axios.get(`download${item.file}`, {\n    headers: {\n      Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n    }\n  }).then((res) => {\n    forceFileDownload(res, item);\n  });\n};\nexport const setFocus = (value) => {\n  nextTick(() => {\n    value.focus();\n  });\n};\nexport const clearTimer = (recordingVoice, clicker) => {\n  if (clicker !== null) {\n    clearTimeout(clicker);\n    clicker = null;\n    recordingVoice;\n  }\n};\nexport const viewSelect = [\n  {\n    label: \"Список\",\n    icon: \"i-heroicons-list-bullet\",\n    type: \"list\",\n    svg: '<svg width=\"18\" height=\"16\" viewBox=\"0 0 18 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\\n<path d=\"M16.5 2.16602H7.33333M16.5 13.8327H7.33333M16.5 7.99935H7.33333M4 2.16602C4 2.85637 3.44036 3.41602 2.75 3.41602C2.05964 3.41602 1.5 2.85637 1.5 2.16602C1.5 1.47566 2.05964 0.916016 2.75 0.916016C3.44036 0.916016 4 1.47566 4 2.16602ZM4 13.8327C4 14.523 3.44036 15.0827 2.75 15.0827C2.05964 15.0827 1.5 14.523 1.5 13.8327C1.5 13.1423 2.05964 12.5827 2.75 12.5827C3.44036 12.5827 4 13.1423 4 13.8327ZM4 7.99935C4 8.68968 3.44036 9.24935 2.75 9.24935C2.05964 9.24935 1.5 8.68968 1.5 7.99935C1.5 7.30902 2.05964 6.74935 2.75 6.74935C3.44036 6.74935 4 7.30902 4 7.99935Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n</svg>'\n  },\n  {\n    label: \"Плитка\",\n    icon: \"i-heroicons-squares-2x2\",\n    type: \"tile\",\n    svg: '<svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\\n<path d=\"M9.99984 5.00065C10.4601 5.00065 10.8332 4.62755 10.8332 4.16732C10.8332 3.70708 10.4601 3.33398 9.99984 3.33398C9.53959 3.33398 9.1665 3.70708 9.1665 4.16732C9.1665 4.62755 9.53959 5.00065 9.99984 5.00065Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M9.99984 10.8327C10.4601 10.8327 10.8332 10.4596 10.8332 9.99935C10.8332 9.5391 10.4601 9.16602 9.99984 9.16602C9.53959 9.16602 9.1665 9.5391 9.1665 9.99935C9.1665 10.4596 9.53959 10.8327 9.99984 10.8327Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M9.99984 16.6667C10.4601 16.6667 10.8332 16.2936 10.8332 15.8333C10.8332 15.3731 10.4601 15 9.99984 15C9.53959 15 9.1665 15.3731 9.1665 15.8333C9.1665 16.2936 9.53959 16.6667 9.99984 16.6667Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M15.8333 5.00065C16.2936 5.00065 16.6667 4.62755 16.6667 4.16732C16.6667 3.70708 16.2936 3.33398 15.8333 3.33398C15.3731 3.33398 15 3.70708 15 4.16732C15 4.62755 15.3731 5.00065 15.8333 5.00065Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M15.8333 10.8327C16.2936 10.8327 16.6667 10.4596 16.6667 9.99935C16.6667 9.5391 16.2936 9.16602 15.8333 9.16602C15.3731 9.16602 15 9.5391 15 9.99935C15 10.4596 15.3731 10.8327 15.8333 10.8327Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M15.8333 16.6667C16.2936 16.6667 16.6667 16.2936 16.6667 15.8333C16.6667 15.3731 16.2936 15 15.8333 15C15.3731 15 15 15.3731 15 15.8333C15 16.2936 15.3731 16.6667 15.8333 16.6667Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M4.16683 5.00065C4.62706 5.00065 5.00016 4.62755 5.00016 4.16732C5.00016 3.70708 4.62706 3.33398 4.16683 3.33398C3.7066 3.33398 3.3335 3.70708 3.3335 4.16732C3.3335 4.62755 3.7066 5.00065 4.16683 5.00065Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M4.16683 10.8327C4.62706 10.8327 5.00016 10.4596 5.00016 9.99935C5.00016 9.5391 4.62706 9.16602 4.16683 9.16602C3.7066 9.16602 3.3335 9.5391 3.3335 9.99935C3.3335 10.4596 3.7066 10.8327 4.16683 10.8327Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M4.16683 16.6667C4.62706 16.6667 5.00016 16.2936 5.00016 15.8333C5.00016 15.3731 4.62706 15 4.16683 15C3.7066 15 3.3335 15.3731 3.3335 15.8333C3.3335 16.2936 3.7066 16.6667 4.16683 16.6667Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n</svg>'\n  }\n];\nexport const handleSearch = (item, request, reqErr) => {\n  if (item.trim() !== \"\") {\n    request;\n  } else if (item === \"\") {\n    reqErr;\n  }\n};\n",
-      "start": 1750909475552,
-      "end": 1750909475558,
+      "start": 1750922158792,
+      "end": 1750922158793,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -256,8 +256,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { nextTick } from 'vue';\nimport axios from \"~/composables/axios\";\nimport nuxtStorage from \"nuxt-storage/nuxt-storage\";\nexport const uploadImage = (event, item) => {\n  item.file = event;\n  if (event.type === \"image/svg+xml\" || event.type === \"image/jpeg\" || event.type === \"image/jpg\" || event.type === \"image/png\" || event.type === \"image/webp\") {\n    item.src = URL.createObjectURL(item.file);\n  } else {\n    setTimeout(() => {\n      item.fileChecked = true;\n    }, 0);\n    setTimeout(() => {\n      item.fileChecked = false;\n    }, 3e3);\n    item.src = \"\";\n    item.file = \"\";\n  }\n};\nexport const uploadFile = (event, item) => {\n  item.file = event;\n  if (event.type) {\n    item.src = URL.createObjectURL(item.file);\n    if (item.file.size == 0) {\n      setTimeout(() => {\n        item.fileSizeInfo = true;\n      }, 0);\n      setTimeout(() => {\n        item.fileSizeInfo = false;\n        item.file = \"\";\n        item.src = \"\";\n      }, 3e3);\n    }\n  }\n};\nconst forceFileDownload = (res, item) => {\n  const url = (void 0).URL.createObjectURL(new Blob([res.data]));\n  const link = (void 0).createElement(\"a\");\n  link.href = url;\n  link.setAttribute(\"download\", `${item.file_name}`);\n  (void 0).body.appendChild(link);\n  link.click();\n};\nexport const downloadWithAxios = (item) => {\n  axios.get(`download${item.file}`, {\n    headers: {\n      Authorization: `Bearer ${nuxtStorage.localStorage.getData(\"token\")}`\n    }\n  }).then((res) => {\n    forceFileDownload(res, item);\n  });\n};\nexport const setFocus = (value) => {\n  nextTick(() => {\n    value.focus();\n  });\n};\nexport const clearTimer = (recordingVoice, clicker) => {\n  if (clicker !== null) {\n    clearTimeout(clicker);\n    clicker = null;\n    recordingVoice;\n  }\n};\nexport const viewSelect = [\n  {\n    label: \"Список\",\n    icon: \"i-heroicons-list-bullet\",\n    type: \"list\",\n    svg: '<svg width=\"18\" height=\"16\" viewBox=\"0 0 18 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\\n<path d=\"M16.5 2.16602H7.33333M16.5 13.8327H7.33333M16.5 7.99935H7.33333M4 2.16602C4 2.85637 3.44036 3.41602 2.75 3.41602C2.05964 3.41602 1.5 2.85637 1.5 2.16602C1.5 1.47566 2.05964 0.916016 2.75 0.916016C3.44036 0.916016 4 1.47566 4 2.16602ZM4 13.8327C4 14.523 3.44036 15.0827 2.75 15.0827C2.05964 15.0827 1.5 14.523 1.5 13.8327C1.5 13.1423 2.05964 12.5827 2.75 12.5827C3.44036 12.5827 4 13.1423 4 13.8327ZM4 7.99935C4 8.68968 3.44036 9.24935 2.75 9.24935C2.05964 9.24935 1.5 8.68968 1.5 7.99935C1.5 7.30902 2.05964 6.74935 2.75 6.74935C3.44036 6.74935 4 7.30902 4 7.99935Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n</svg>'\n  },\n  {\n    label: \"Плитка\",\n    icon: \"i-heroicons-squares-2x2\",\n    type: \"tile\",\n    svg: '<svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\\n<path d=\"M9.99984 5.00065C10.4601 5.00065 10.8332 4.62755 10.8332 4.16732C10.8332 3.70708 10.4601 3.33398 9.99984 3.33398C9.53959 3.33398 9.1665 3.70708 9.1665 4.16732C9.1665 4.62755 9.53959 5.00065 9.99984 5.00065Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M9.99984 10.8327C10.4601 10.8327 10.8332 10.4596 10.8332 9.99935C10.8332 9.5391 10.4601 9.16602 9.99984 9.16602C9.53959 9.16602 9.1665 9.5391 9.1665 9.99935C9.1665 10.4596 9.53959 10.8327 9.99984 10.8327Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M9.99984 16.6667C10.4601 16.6667 10.8332 16.2936 10.8332 15.8333C10.8332 15.3731 10.4601 15 9.99984 15C9.53959 15 9.1665 15.3731 9.1665 15.8333C9.1665 16.2936 9.53959 16.6667 9.99984 16.6667Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M15.8333 5.00065C16.2936 5.00065 16.6667 4.62755 16.6667 4.16732C16.6667 3.70708 16.2936 3.33398 15.8333 3.33398C15.3731 3.33398 15 3.70708 15 4.16732C15 4.62755 15.3731 5.00065 15.8333 5.00065Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M15.8333 10.8327C16.2936 10.8327 16.6667 10.4596 16.6667 9.99935C16.6667 9.5391 16.2936 9.16602 15.8333 9.16602C15.3731 9.16602 15 9.5391 15 9.99935C15 10.4596 15.3731 10.8327 15.8333 10.8327Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M15.8333 16.6667C16.2936 16.6667 16.6667 16.2936 16.6667 15.8333C16.6667 15.3731 16.2936 15 15.8333 15C15.3731 15 15 15.3731 15 15.8333C15 16.2936 15.3731 16.6667 15.8333 16.6667Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M4.16683 5.00065C4.62706 5.00065 5.00016 4.62755 5.00016 4.16732C5.00016 3.70708 4.62706 3.33398 4.16683 3.33398C3.7066 3.33398 3.3335 3.70708 3.3335 4.16732C3.3335 4.62755 3.7066 5.00065 4.16683 5.00065Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M4.16683 10.8327C4.62706 10.8327 5.00016 10.4596 5.00016 9.99935C5.00016 9.5391 4.62706 9.16602 4.16683 9.16602C3.7066 9.16602 3.3335 9.5391 3.3335 9.99935C3.3335 10.4596 3.7066 10.8327 4.16683 10.8327Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n<path d=\"M4.16683 16.6667C4.62706 16.6667 5.00016 16.2936 5.00016 15.8333C5.00016 15.3731 4.62706 15 4.16683 15C3.7066 15 3.3335 15.3731 3.3335 15.8333C3.3335 16.2936 3.7066 16.6667 4.16683 16.6667Z\" stroke=\"currentColor\" stroke-width=\"1.33333\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\\n</svg>'\n  }\n];\nexport const handleSearch = (item, request, reqErr) => {\n  if (item.trim() !== \"\") {\n    request;\n  } else if (item === \"\") {\n    reqErr;\n  }\n};\n",
-      "start": 1750909475552,
-      "end": 1750909475558,
+      "start": 1750922158792,
+      "end": 1750922158793,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -270,56 +270,56 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1750909475558,
-      "end": 1750909475559,
+      "start": 1750922158794,
+      "end": 1750922158794,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1750909475558,
-      "end": 1750909475559,
+      "start": 1750922158794,
+      "end": 1750922158794,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1750909475559,
-      "end": 1750909475559,
+      "start": 1750922158794,
+      "end": 1750922158794,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1750909475559,
-      "end": 1750909475559,
+      "start": 1750922158794,
+      "end": 1750922158794,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1750909475559,
-      "end": 1750909475560,
+      "start": 1750922158794,
+      "end": 1750922158794,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1750909475560,
-      "end": 1750909475560,
+      "start": 1750922158794,
+      "end": 1750922158794,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1750909475561,
-      "end": 1750909475561,
+      "start": 1750922158795,
+      "end": 1750922158795,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1750909475569,
-      "end": 1750909475569,
+      "start": 1750922158796,
+      "end": 1750922158796,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1750909475570,
-      "end": 1750909475570,
+      "start": 1750922158796,
+      "end": 1750922158796,
       "order": "normal"
     }
   ]

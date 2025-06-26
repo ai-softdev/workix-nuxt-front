@@ -219,10 +219,10 @@ export const useChat = defineStore('chat', {
       let fd = new FormData()
       fd.set('name', params.name)
       fd.set('users_str', params.users_str)
-      if (typeof params.photo !== 'string') {
+      if (params.photo) {
         fd.set('photo', params.photo)
       }
-      await axios.post(`chat/private/group`, fd, {
+      await axios.post(`chat/create/group`, fd, {
         headers: {
           Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
         }

@@ -112,10 +112,6 @@ onMounted(() => {
           :item="item"
           @update="handleUpdate"
       />
-      <div class="mt-4 text-sm">
-        <strong>Выбранные ID:</strong>
-        {{ selectedIds }}
-      </div>
       <div class="w-full px-4 h-[50px] flex items-center justify-end text-sm gap-x-4">
         <TheButton v-if="!chat.showSettingChat" type="chat"
                    @click="chat.showGroupCreateChoice = false; chat.showGroupCreate = true; setFocus()">

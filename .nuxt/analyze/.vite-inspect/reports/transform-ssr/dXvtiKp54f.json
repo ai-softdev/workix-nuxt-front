@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { unref as _unref, withCtx as _withCtx, createVNode as _createVNode } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\"\n\nimport DocumentContent from \"~/components/documents/DocumentContent.vue\";\r\nimport DocumentHeader from \"~/components/documents/DocumentHeader.vue\";\r\nimport TheContentBlock from \"~/components/UI/TheContentBlock.vue\";\r\nimport DocumentInfo from \"~/components/documents/DocumentInfo.vue\";\r\nimport {useDocumentStore} from \"~/stores/documents\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport {useCompanies} from \"~/stores/companies\";\r\nimport DocumentContentHeaderCreate from \"~/components/documents/DocumentContent/DocumentContentHeaderCreate.vue\";\r\nimport TheModal from \"~/components/UI/TheModal.vue\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'index',\n  __ssrInlineRender: true,\n  setup(__props) {\n\r\nconst document = useDocumentStore()\r\n\r\nonMounted(()=>{\r\n  document.loadAllDocument({page: 1, limit: 5, type: \"from-me\"})\r\n})\r\n\r\nconst router = useRouter()\r\nconst loadAuthStore = useAuthStore()\r\nconst company = useCompanies()\r\n\r\nwatch(() => loadAuthStore.user, (newValue) => {\r\n  if(loadAuthStore?.user?.role?.name_en === 'admin'){\r\n    if (window.history.length > 1) {\r\n      router.push('/base/profile');\r\n    } else {\r\n      router.push('/');\r\n    }\r\n  }\r\n})\r\nwatch(() => company.company, (newValue) => {\r\n  let permission = company.company.modules?.find(item => item.name_en === 'documents')\r\n  if(!permission){\r\n    if (window.history.length > 1) {\r\n      router.push('/base/profile');\r\n    } else {\r\n      router.push('/');\r\n    }\r\n  }\r\n})\r\n\r\nuseSeoMeta({\r\n  title: 'Документы'\r\n})\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  _push(`<div${\n    _ssrRenderAttrs(_attrs)\n  }><div class=\"flex items-center gap-4 justify-between max-[680px]:flex-col max-[680px]:items-start max-[680px]:gap-5\"><p class=\"dark:text-white text-3xl font-bold\">${\n    _ssrInterpolate(_ctx.$t('Документы'))\n  }</p><button class=\"rounded-full py-3 px-8 font-medium bg-golden flex items-center gap-x-2 transition-all\"> + ${\n    _ssrInterpolate(_ctx.$t('Добавить документ'))\n  }</button>`)\n  if (_unref(document).showCreateDoc) {\n    _push(_ssrRenderComponent(TheModal, {\n      type: 'resize',\n      onShowModal: ($event: any) => (_unref(document).showCreateDoc = false)\n    }, {\n      default: _withCtx((_, _push, _parent, _scopeId) => {\n        if (_push) {\n          _push(_ssrRenderComponent(DocumentContentHeaderCreate, null, null, _parent, _scopeId))\n        } else {\n          return [\n            _createVNode(DocumentContentHeaderCreate)\n          ]\n        }\n      }),\n      _: 1\n    }, _parent))\n  } else {\n    _push(`<!---->`)\n  }\n  _push(`</div><div class=\"flex justify-between gap-5 mt-8 max-[1250px]:flex-col\">`)\n  _push(_ssrRenderComponent(DocumentContent, { class: \"!w-9/12 max-[1250px]:!w-full max-[1250px]:order-2\" }, null, _parent))\n  _push(_ssrRenderComponent(DocumentInfo, { class: \"!w-3/12 max-[1250px]:!w-full\" }, null, _parent))\n  _push(`</div></div>`)\n}\n}\n\n})",
-      "start": 1750909468956,
-      "end": 1750909468956,
+      "start": 1750922154849,
+      "end": 1750922154849,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750909468957,
-      "end": 1750909468957,
+      "start": 1750922154849,
+      "end": 1750922154849,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750909468957,
-      "end": 1750909468957,
+      "start": 1750922154849,
+      "end": 1750922154849,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750909468957,
-      "end": 1750909468957,
+      "start": 1750922154849,
+      "end": 1750922154849,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750909468957,
-      "end": 1750909468957,
+      "start": 1750922154849,
+      "end": 1750922154849,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750909468957,
-      "end": 1750909468957,
+      "start": 1750922154849,
+      "end": 1750922154849,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750909468957,
-      "end": 1750909468957,
+      "start": 1750922154849,
+      "end": 1750922154849,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1750909468957,
-      "end": 1750909468957,
+      "start": 1750922154849,
+      "end": 1750922154849,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1750909468957,
-      "end": 1750909468957,
+      "start": 1750922154849,
+      "end": 1750922154849,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, withCtx as _withCtx, createVNode as _createVNode } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport DocumentContent from \"~/components/documents/DocumentContent.vue\";\nimport DocumentInfo from \"~/components/documents/DocumentInfo.vue\";\nimport { useDocumentStore } from \"~/stores/documents\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useCompanies } from \"~/stores/companies\";\nimport DocumentContentHeaderCreate from \"~/components/documents/DocumentContent/DocumentContentHeaderCreate.vue\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const document = useDocumentStore();\n    onMounted(() => {\n      document.loadAllDocument({ page: 1, limit: 5, type: \"from-me\" });\n    });\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    const company = useCompanies();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if (window.history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    watch(() => company.company, (newValue) => {\n      let permission = company.company.modules?.find((item) => item.name_en === \"documents\");\n      if (!permission) {\n        if (window.history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Документы\"\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}><div class=\"flex items-center gap-4 justify-between max-[680px]:flex-col max-[680px]:items-start max-[680px]:gap-5\"><p class=\"dark:text-white text-3xl font-bold\">${_ssrInterpolate(_ctx.$t(\"Документы\"))}</p><button class=\"rounded-full py-3 px-8 font-medium bg-golden flex items-center gap-x-2 transition-all\"> + ${_ssrInterpolate(_ctx.$t(\"Добавить документ\"))}</button>`);\n      if (_unref(document).showCreateDoc) {\n        _push(_ssrRenderComponent(TheModal, {\n          type: \"resize\",\n          onShowModal: ($event) => _unref(document).showCreateDoc = false\n        }, {\n          default: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(_ssrRenderComponent(DocumentContentHeaderCreate, null, null, _parent2, _scopeId));\n            } else {\n              return [\n                _createVNode(DocumentContentHeaderCreate)\n              ];\n            }\n          }),\n          _: 1\n        }, _parent));\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div><div class=\"flex justify-between gap-5 mt-8 max-[1250px]:flex-col\">`);\n      _push(_ssrRenderComponent(DocumentContent, { class: \"!w-9/12 max-[1250px]:!w-full max-[1250px]:order-2\" }, null, _parent));\n      _push(_ssrRenderComponent(DocumentInfo, { class: \"!w-3/12 max-[1250px]:!w-full\" }, null, _parent));\n      _push(`</div></div>`);\n    };\n  }\n});\n",
-      "start": 1750909468957,
-      "end": 1750909469496,
+      "start": 1750922154849,
+      "end": 1750922155931,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -89,173 +89,173 @@
     },
     {
       "name": "vite:json",
-      "start": 1750909469496,
-      "end": 1750909469496,
+      "start": 1750922155931,
+      "end": 1750922155931,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1750909469496,
-      "end": 1750909469496,
+      "start": 1750922155931,
+      "end": 1750922155931,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1750909469496,
-      "end": 1750909469496,
+      "start": 1750922155931,
+      "end": 1750922155931,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1750909469496,
-      "end": 1750909469496,
+      "start": 1750922155931,
+      "end": 1750922155931,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750909469497,
-      "end": 1750909469497,
+      "start": 1750922155931,
+      "end": 1750922155932,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750909469497,
-      "end": 1750909469497,
+      "start": 1750922155931,
+      "end": 1750922155932,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750909469497,
-      "end": 1750909469497,
+      "start": 1750922155932,
+      "end": 1750922155932,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750909469497,
-      "end": 1750909469497,
+      "start": 1750922155932,
+      "end": 1750922155932,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1750909469497,
-      "end": 1750909469497,
+      "start": 1750922155932,
+      "end": 1750922155932,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750909469498,
-      "end": 1750909469498,
+      "start": 1750922155932,
+      "end": 1750922155932,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1750909469499,
-      "end": 1750909469499,
+      "start": 1750922155932,
+      "end": 1750922155932,
       "order": "normal"
     },
     {
       "name": "vite:define",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, withCtx as _withCtx, createVNode as _createVNode } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport DocumentContent from \"~/components/documents/DocumentContent.vue\";\nimport DocumentInfo from \"~/components/documents/DocumentInfo.vue\";\nimport { useDocumentStore } from \"~/stores/documents\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useCompanies } from \"~/stores/companies\";\nimport DocumentContentHeaderCreate from \"~/components/documents/DocumentContent/DocumentContentHeaderCreate.vue\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const document = useDocumentStore();\n    onMounted(() => {\n      document.loadAllDocument({ page: 1, limit: 5, type: \"from-me\" });\n    });\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    const company = useCompanies();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    watch(() => company.company, (newValue) => {\n      let permission = company.company.modules?.find((item) => item.name_en === \"documents\");\n      if (!permission) {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Документы\"\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}><div class=\"flex items-center gap-4 justify-between max-[680px]:flex-col max-[680px]:items-start max-[680px]:gap-5\"><p class=\"dark:text-white text-3xl font-bold\">${_ssrInterpolate(_ctx.$t(\"Документы\"))}</p><button class=\"rounded-full py-3 px-8 font-medium bg-golden flex items-center gap-x-2 transition-all\"> + ${_ssrInterpolate(_ctx.$t(\"Добавить документ\"))}</button>`);\n      if (_unref(document).showCreateDoc) {\n        _push(_ssrRenderComponent(TheModal, {\n          type: \"resize\",\n          onShowModal: ($event) => _unref(document).showCreateDoc = false\n        }, {\n          default: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(_ssrRenderComponent(DocumentContentHeaderCreate, null, null, _parent2, _scopeId));\n            } else {\n              return [\n                _createVNode(DocumentContentHeaderCreate)\n              ];\n            }\n          }),\n          _: 1\n        }, _parent));\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div><div class=\"flex justify-between gap-5 mt-8 max-[1250px]:flex-col\">`);\n      _push(_ssrRenderComponent(DocumentContent, { class: \"!w-9/12 max-[1250px]:!w-full max-[1250px]:order-2\" }, null, _parent));\n      _push(_ssrRenderComponent(DocumentInfo, { class: \"!w-3/12 max-[1250px]:!w-full\" }, null, _parent));\n      _push(`</div></div>`);\n    };\n  }\n});\n",
-      "start": 1750909469500,
-      "end": 1750909471329,
+      "start": 1750922155932,
+      "end": 1750922157091,
       "order": "normal",
       "sourcemaps": "{\n  \"version\": 3,\n  \"sources\": [\"D:/projects/nuxt/workix-nuxt-front/pages/base/documents/index.vue?macro=true&vue&type=script&setup=true&lang.ts\"],\n  \"sourcesContent\": [\"import { defineComponent as _defineComponent } from \\\"vue\\\";\\nimport { unref as _unref, withCtx as _withCtx, createVNode as _createVNode } from \\\"vue\\\";\\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \\\"vue/server-renderer\\\";\\nimport DocumentContent from \\\"~/components/documents/DocumentContent.vue\\\";\\nimport DocumentInfo from \\\"~/components/documents/DocumentInfo.vue\\\";\\nimport { useDocumentStore } from \\\"~/stores/documents\\\";\\nimport { useAuthStore } from \\\"~/stores/auth\\\";\\nimport { useCompanies } from \\\"~/stores/companies\\\";\\nimport DocumentContentHeaderCreate from \\\"~/components/documents/DocumentContent/DocumentContentHeaderCreate.vue\\\";\\nimport TheModal from \\\"~/components/UI/TheModal.vue\\\";\\nexport default /* @__PURE__ */ _defineComponent({\\n  __name: \\\"index\\\",\\n  __ssrInlineRender: true,\\n  setup(__props) {\\n    const document = useDocumentStore();\\n    onMounted(() => {\\n      document.loadAllDocument({ page: 1, limit: 5, type: \\\"from-me\\\" });\\n    });\\n    const router = useRouter();\\n    const loadAuthStore = useAuthStore();\\n    const company = useCompanies();\\n    watch(() => loadAuthStore.user, (newValue) => {\\n      if (loadAuthStore?.user?.role?.name_en === \\\"admin\\\") {\\n        if (window.history.length > 1) {\\n          router.push(\\\"/base/profile\\\");\\n        } else {\\n          router.push(\\\"/\\\");\\n        }\\n      }\\n    });\\n    watch(() => company.company, (newValue) => {\\n      let permission = company.company.modules?.find((item) => item.name_en === \\\"documents\\\");\\n      if (!permission) {\\n        if (window.history.length > 1) {\\n          router.push(\\\"/base/profile\\\");\\n        } else {\\n          router.push(\\\"/\\\");\\n        }\\n      }\\n    });\\n    useSeoMeta({\\n      title: \\\"Документы\\\"\\n    });\\n    return (_ctx, _push, _parent, _attrs) => {\\n      _push(`<div${_ssrRenderAttrs(_attrs)}><div class=\\\"flex items-center gap-4 justify-between max-[680px]:flex-col max-[680px]:items-start max-[680px]:gap-5\\\"><p class=\\\"dark:text-white text-3xl font-bold\\\">${_ssrInterpolate(_ctx.$t(\\\"Документы\\\"))}</p><button class=\\\"rounded-full py-3 px-8 font-medium bg-golden flex items-center gap-x-2 transition-all\\\"> + ${_ssrInterpolate(_ctx.$t(\\\"Добавить документ\\\"))}</button>`);\\n      if (_unref(document).showCreateDoc) {\\n        _push(_ssrRenderComponent(TheModal, {\\n          type: \\\"resize\\\",\\n          onShowModal: ($event) => _unref(document).showCreateDoc = false\\n        }, {\\n          default: _withCtx((_, _push2, _parent2, _scopeId) => {\\n            if (_push2) {\\n              _push2(_ssrRenderComponent(DocumentContentHeaderCreate, null, null, _parent2, _scopeId));\\n            } else {\\n              return [\\n                _createVNode(DocumentContentHeaderCreate)\\n              ];\\n            }\\n          }),\\n          _: 1\\n        }, _parent));\\n      } else {\\n        _push(`<!---->`);\\n      }\\n      _push(`</div><div class=\\\"flex justify-between gap-5 mt-8 max-[1250px]:flex-col\\\">`);\\n      _push(_ssrRenderComponent(DocumentContent, { class: \\\"!w-9/12 max-[1250px]:!w-full max-[1250px]:order-2\\\" }, null, _parent));\\n      _push(_ssrRenderComponent(DocumentInfo, { class: \\\"!w-3/12 max-[1250px]:!w-full\\\" }, null, _parent));\\n      _push(`</div></div>`);\\n    };\\n  }\\n});\\n\"],\n  \"mappings\": \"AAAA,SAAS,mBAAmB,wBAAwB;AACpD,SAAS,SAAS,QAAQ,WAAW,UAAU,eAAe,oBAAoB;AAClF,SAAS,sBAAsB,qBAAqB,kBAAkB,iBAAiB,kBAAkB,uBAAuB;AAChI,OAAO,qBAAqB;AAC5B,OAAO,kBAAkB;AACzB,SAAS,wBAAwB;AACjC,SAAS,oBAAoB;AAC7B,SAAS,oBAAoB;AAC7B,OAAO,iCAAiC;AACxC,OAAO,cAAc;AACrB,eAA+B,iCAAiB;AAAA,EAC9C,QAAQ;AAAA,EACR,mBAAmB;AAAA,EACnB,MAAM,SAAS;AACb,UAAM,WAAW,iBAAiB;AAClC,cAAU,MAAM;AACd,eAAS,gBAAgB,EAAE,MAAM,GAAG,OAAO,GAAG,MAAM,UAAU,CAAC;AAAA,IACjE,CAAC;AACD,UAAM,SAAS,UAAU;AACzB,UAAM,gBAAgB,aAAa;AACnC,UAAM,UAAU,aAAa;AAC7B,UAAM,MAAM,cAAc,MAAM,CAAC,aAAa;AAC5C,UAAI,eAAe,MAAM,MAAM,YAAY,SAAS;AAClD,YAAI,SAAO,QAAQ,SAAS,GAAG;AAC7B,iBAAO,KAAK,eAAe;AAAA,QAC7B,OAAO;AACL,iBAAO,KAAK,GAAG;AAAA,QACjB;AAAA,MACF;AAAA,IACF,CAAC;AACD,UAAM,MAAM,QAAQ,SAAS,CAAC,aAAa;AACzC,UAAI,aAAa,QAAQ,QAAQ,SAAS,KAAK,CAAC,SAAS,KAAK,YAAY,WAAW;AACrF,UAAI,CAAC,YAAY;AACf,YAAI,SAAO,QAAQ,SAAS,GAAG;AAC7B,iBAAO,KAAK,eAAe;AAAA,QAC7B,OAAO;AACL,iBAAO,KAAK,GAAG;AAAA,QACjB;AAAA,MACF;AAAA,IACF,CAAC;AACD,eAAW;AAAA,MACT,OAAO;AAAA,IACT,CAAC;AACD,WAAO,CAAC,MAAM,OAAO,SAAS,WAAW;AACvC,YAAM,OAAO,gBAAgB,MAAM,CAAC,sKAAsK,gBAAgB,KAAK,GAAG,WAAW,CAAC,CAAC,gHAAgH,gBAAgB,KAAK,GAAG,mBAAmB,CAAC,CAAC,WAAW;AACvZ,UAAI,OAAO,QAAQ,EAAE,eAAe;AAClC,cAAM,oBAAoB,UAAU;AAAA,UAClC,MAAM;AAAA,UACN,aAAa,CAAC,WAAW,OAAO,QAAQ,EAAE,gBAAgB;AAAA,QAC5D,GAAG;AAAA,UACD,SAAS,SAAS,CAAC,GAAG,QAAQ,UAAU,aAAa;AACnD,gBAAI,QAAQ;AACV,qBAAO,oBAAoB,6BAA6B,MAAM,MAAM,UAAU,QAAQ,CAAC;AAAA,YACzF,OAAO;AACL,qBAAO;AAAA,gBACL,aAAa,2BAA2B;AAAA,cAC1C;AAAA,YACF;AAAA,UACF,CAAC;AAAA,UACD,GAAG;AAAA,QACL,GAAG,OAAO,CAAC;AAAA,MACb,OAAO;AACL,cAAM,SAAS;AAAA,MACjB;AACA,YAAM,2EAA2E;AACjF,YAAM,oBAAoB,iBAAiB,EAAE,OAAO,oDAAoD,GAAG,MAAM,OAAO,CAAC;AACzH,YAAM,oBAAoB,cAAc,EAAE,OAAO,+BAA+B,GAAG,MAAM,OAAO,CAAC;AACjG,YAAM,cAAc;AAAA,IACtB;AAAA,EACF;AACF,CAAC;\",\n  \"names\": []\n}\n"
     },
     {
       "name": "vite:css-post",
-      "start": 1750909471329,
-      "end": 1750909471329,
+      "start": 1750922157091,
+      "end": 1750922157091,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1750909471329,
-      "end": 1750909471329,
+      "start": 1750922157091,
+      "end": 1750922157091,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1750909471329,
-      "end": 1750909471329,
+      "start": 1750922157091,
+      "end": 1750922157091,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1750909471329,
-      "end": 1750909471329,
+      "start": 1750922157091,
+      "end": 1750922157091,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1750909471329,
-      "end": 1750909471329,
+      "start": 1750922157092,
+      "end": 1750922157092,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1750909471329,
-      "end": 1750909471329,
+      "start": 1750922157092,
+      "end": 1750922157092,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1750909471330,
-      "end": 1750909471330,
+      "start": 1750922157092,
+      "end": 1750922157092,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750909471330,
-      "end": 1750909471330,
+      "start": 1750922157092,
+      "end": 1750922157092,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750909471330,
-      "end": 1750909471330,
+      "start": 1750922157092,
+      "end": 1750922157092,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750909471330,
-      "end": 1750909471330,
+      "start": 1750922157092,
+      "end": 1750922157092,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750909471330,
-      "end": 1750909471330,
+      "start": 1750922157092,
+      "end": 1750922157092,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750909471332,
-      "end": 1750909471332,
+      "start": 1750922157093,
+      "end": 1750922157093,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750909471332,
-      "end": 1750909471332,
+      "start": 1750922157093,
+      "end": 1750922157093,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750909471333,
-      "end": 1750909471333,
+      "start": 1750922157093,
+      "end": 1750922157093,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750909471333,
-      "end": 1750909471333,
+      "start": 1750922157093,
+      "end": 1750922157093,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { onMounted, watch } from 'vue';\nimport { useRouter } from '#app/composables/router';\nimport { useSeoMeta } from '@unhead/vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, withCtx as _withCtx, createVNode as _createVNode } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport DocumentContent from \"~/components/documents/DocumentContent.vue\";\nimport DocumentInfo from \"~/components/documents/DocumentInfo.vue\";\nimport { useDocumentStore } from \"~/stores/documents\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useCompanies } from \"~/stores/companies\";\nimport DocumentContentHeaderCreate from \"~/components/documents/DocumentContent/DocumentContentHeaderCreate.vue\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const document = useDocumentStore();\n    onMounted(() => {\n      document.loadAllDocument({ page: 1, limit: 5, type: \"from-me\" });\n    });\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    const company = useCompanies();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    watch(() => company.company, (newValue) => {\n      let permission = company.company.modules?.find((item) => item.name_en === \"documents\");\n      if (!permission) {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Документы\"\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}><div class=\"flex items-center gap-4 justify-between max-[680px]:flex-col max-[680px]:items-start max-[680px]:gap-5\"><p class=\"dark:text-white text-3xl font-bold\">${_ssrInterpolate(_ctx.$t(\"Документы\"))}</p><button class=\"rounded-full py-3 px-8 font-medium bg-golden flex items-center gap-x-2 transition-all\"> + ${_ssrInterpolate(_ctx.$t(\"Добавить документ\"))}</button>`);\n      if (_unref(document).showCreateDoc) {\n        _push(_ssrRenderComponent(TheModal, {\n          type: \"resize\",\n          onShowModal: ($event) => _unref(document).showCreateDoc = false\n        }, {\n          default: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(_ssrRenderComponent(DocumentContentHeaderCreate, null, null, _parent2, _scopeId));\n            } else {\n              return [\n                _createVNode(DocumentContentHeaderCreate)\n              ];\n            }\n          }),\n          _: 1\n        }, _parent));\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div><div class=\"flex justify-between gap-5 mt-8 max-[1250px]:flex-col\">`);\n      _push(_ssrRenderComponent(DocumentContent, { class: \"!w-9/12 max-[1250px]:!w-full max-[1250px]:order-2\" }, null, _parent));\n      _push(_ssrRenderComponent(DocumentInfo, { class: \"!w-3/12 max-[1250px]:!w-full\" }, null, _parent));\n      _push(`</div></div>`);\n    };\n  }\n});\n",
-      "start": 1750909471333,
-      "end": 1750909471342,
+      "start": 1750922157093,
+      "end": 1750922157104,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -269,8 +269,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { onMounted, watch } from 'vue';\nimport { useRouter } from '#app/composables/router';\nimport { useSeoMeta } from '@unhead/vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, withCtx as _withCtx, createVNode as _createVNode } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport DocumentContent from \"~/components/documents/DocumentContent.vue\";\nimport DocumentInfo from \"~/components/documents/DocumentInfo.vue\";\nimport { useDocumentStore } from \"~/stores/documents\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useCompanies } from \"~/stores/companies\";\nimport DocumentContentHeaderCreate from \"~/components/documents/DocumentContent/DocumentContentHeaderCreate.vue\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const document = useDocumentStore();\n    onMounted(() => {\n      document.loadAllDocument({ page: 1, limit: 5, type: \"from-me\" });\n    });\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    const company = useCompanies();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    watch(() => company.company, (newValue) => {\n      let permission = company.company.modules?.find((item) => item.name_en === \"documents\");\n      if (!permission) {\n        if ((void 0).history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Документы\"\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}><div class=\"flex items-center gap-4 justify-between max-[680px]:flex-col max-[680px]:items-start max-[680px]:gap-5\"><p class=\"dark:text-white text-3xl font-bold\">${_ssrInterpolate(_ctx.$t(\"Документы\"))}</p><button class=\"rounded-full py-3 px-8 font-medium bg-golden flex items-center gap-x-2 transition-all\"> + ${_ssrInterpolate(_ctx.$t(\"Добавить документ\"))}</button>`);\n      if (_unref(document).showCreateDoc) {\n        _push(_ssrRenderComponent(TheModal, {\n          type: \"resize\",\n          onShowModal: ($event) => _unref(document).showCreateDoc = false\n        }, {\n          default: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(_ssrRenderComponent(DocumentContentHeaderCreate, null, null, _parent2, _scopeId));\n            } else {\n              return [\n                _createVNode(DocumentContentHeaderCreate)\n              ];\n            }\n          }),\n          _: 1\n        }, _parent));\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div><div class=\"flex justify-between gap-5 mt-8 max-[1250px]:flex-col\">`);\n      _push(_ssrRenderComponent(DocumentContent, { class: \"!w-9/12 max-[1250px]:!w-full max-[1250px]:order-2\" }, null, _parent));\n      _push(_ssrRenderComponent(DocumentInfo, { class: \"!w-3/12 max-[1250px]:!w-full\" }, null, _parent));\n      _push(`</div></div>`);\n    };\n  }\n});\n",
-      "start": 1750909471333,
-      "end": 1750909471342,
+      "start": 1750922157093,
+      "end": 1750922157104,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -283,21 +283,21 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1750909471342,
-      "end": 1750909471342,
+      "start": 1750922157104,
+      "end": 1750922157104,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1750909471342,
-      "end": 1750909471342,
+      "start": 1750922157104,
+      "end": 1750922157104,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
       "result": "\nconst __nuxt_page_meta = null\nexport default __nuxt_page_meta\n",
-      "start": 1750909471346,
-      "end": 1750909471347,
+      "start": 1750922157106,
+      "end": 1750922157107,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -311,8 +311,8 @@
     {
       "name": "nuxt:pages-macros-transform",
       "result": "\nconst __nuxt_page_meta = null\nexport default __nuxt_page_meta\n",
-      "start": 1750909471346,
-      "end": 1750909471347,
+      "start": 1750922157106,
+      "end": 1750922157107,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -325,32 +325,32 @@
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1750909471347,
-      "end": 1750909471347,
+      "start": 1750922157108,
+      "end": 1750922157108,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1750909471347,
-      "end": 1750909471347,
+      "start": 1750922157108,
+      "end": 1750922157108,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1750909471347,
-      "end": 1750909471347,
+      "start": 1750922157108,
+      "end": 1750922157108,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1750909471347,
-      "end": 1750909471347,
+      "start": 1750922157108,
+      "end": 1750922157108,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1750909471347,
-      "end": 1750909471347,
+      "start": 1750922157108,
+      "end": 1750922157108,
       "order": "normal"
     }
   ]

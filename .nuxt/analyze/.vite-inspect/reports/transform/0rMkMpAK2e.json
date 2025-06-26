@@ -4,44 +4,44 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, resolveComponent as _resolveComponent, withCtx as _withCtx, createVNode as _createVNode, unref as _unref, createElementVNode as _createElementVNode, withModifiers as _withModifiers, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\"\n\nconst _hoisted_1 = { class: \"flex justify-center gap-x-10 mt-4\" }\n\nimport TheInput from \"~/components/UI/TheInput.vue\";\r\nimport TheFileInput from \"~/components/UI/TheFileInput.vue\";\r\nimport TheButton from \"~/components/UI/TheButton.vue\";\r\nimport {useDocumentStore} from \"~/stores/documents\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'DocumentContentHeaderCreate',\n  setup(__props) {\n\r\nconst documentStore = useDocumentStore()\r\n\nreturn (_ctx: any,_cache: any) => {\n  const _component_UITheTitle = _resolveComponent(\"UITheTitle\")!\n\n  return (_openBlock(), _createElementBlock(\"div\", null, [\n    _createVNode(_component_UITheTitle, { class: \"text-center\" }, {\n      default: _withCtx(() => [\n        _createTextVNode(_toDisplayString(_ctx.$t('Добавьте новый документ')), 1)\n      ]),\n      _: 1\n    }),\n    _createElementVNode(\"form\", {\n      class: \"flex gap-y-2 flex-col\",\n      onSubmit: _cache[3] || (_cache[3] = _withModifiers(($event: any) => (_unref(documentStore).docCreate({..._unref(documentStore).createForm})), [\"prevent\"]))\n    }, [\n      _createVNode(TheInput, {\n        type: 'text',\n        label: 'Название',\n        required: \"\",\n        modelValue: _unref(documentStore).createForm.title,\n        \"onUpdate:modelValue\": _cache[0] || (_cache[0] = ($event: any) => ((_unref(documentStore).createForm.title) = $event))\n      }, null, 8, [\"modelValue\"]),\n      _createVNode(TheInput, {\n        type: 'textarea',\n        label: 'Описание',\n        modelValue: _unref(documentStore).createForm.description,\n        \"onUpdate:modelValue\": _cache[1] || (_cache[1] = ($event: any) => ((_unref(documentStore).createForm.description) = $event))\n      }, null, 8, [\"modelValue\"]),\n      _createElementVNode(\"div\", null, [\n        _createVNode(TheFileInput)\n      ]),\n      _createElementVNode(\"div\", _hoisted_1, [\n        _createVNode(TheButton, {\n          type: \"danger\",\n          class: \"px-2 py-1 rounded-lg\",\n          onClick: _cache[2] || (_cache[2] = ($event: any) => {_unref(documentStore).showCreateDoc = false; _unref(documentStore).createForm = {}})\n        }, {\n          default: _withCtx(() => [\n            _createTextVNode(_toDisplayString(_ctx.$t('Отмена')), 1)\n          ]),\n          _: 1\n        }),\n        _createVNode(TheButton, {\n          type: \"success\",\n          class: \"px-2 py-1 rounded-lg\"\n        }, {\n          default: _withCtx(() => [\n            _createTextVNode(_toDisplayString(_ctx.$t('Создать')), 1)\n          ]),\n          _: 1\n        })\n      ])\n    ], 32)\n  ]))\n}\n}\n\n})",
-      "start": 1750909414554,
-      "end": 1750909414554
+      "start": 1750922108733,
+      "end": 1750922108733
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750909414554,
-      "end": 1750909414554,
+      "start": 1750922108733,
+      "end": 1750922108733,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750909414554,
-      "end": 1750909414554,
+      "start": 1750922108734,
+      "end": 1750922108734,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750909414554,
-      "end": 1750909414554,
+      "start": 1750922108734,
+      "end": 1750922108734,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1750909414554,
-      "end": 1750909414554,
+      "start": 1750922108734,
+      "end": 1750922108734,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1750909414554,
-      "end": 1750909414554,
+      "start": 1750922108734,
+      "end": 1750922108734,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, resolveComponent as _resolveComponent, withCtx as _withCtx, createVNode as _createVNode, unref as _unref, createElementVNode as _createElementVNode, withModifiers as _withModifiers, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\";\nconst _hoisted_1 = { class: \"flex justify-center gap-x-10 mt-4\" };\nimport TheInput from \"~/components/UI/TheInput.vue\";\nimport TheFileInput from \"~/components/UI/TheFileInput.vue\";\nimport TheButton from \"~/components/UI/TheButton.vue\";\nimport { useDocumentStore } from \"~/stores/documents\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"DocumentContentHeaderCreate\",\n  setup(__props) {\n    const documentStore = useDocumentStore();\n    return (_ctx, _cache) => {\n      const _component_UITheTitle = _resolveComponent(\"UITheTitle\");\n      return _openBlock(), _createElementBlock(\"div\", null, [\n        _createVNode(_component_UITheTitle, { class: \"text-center\" }, {\n          default: _withCtx(() => [\n            _createTextVNode(_toDisplayString(_ctx.$t(\"Добавьте новый документ\")), 1)\n          ]),\n          _: 1\n        }),\n        _createElementVNode(\"form\", {\n          class: \"flex gap-y-2 flex-col\",\n          onSubmit: _cache[3] || (_cache[3] = _withModifiers(($event) => _unref(documentStore).docCreate({ ..._unref(documentStore).createForm }), [\"prevent\"]))\n        }, [\n          _createVNode(TheInput, {\n            type: \"text\",\n            label: \"Название\",\n            required: \"\",\n            modelValue: _unref(documentStore).createForm.title,\n            \"onUpdate:modelValue\": _cache[0] || (_cache[0] = ($event) => _unref(documentStore).createForm.title = $event)\n          }, null, 8, [\"modelValue\"]),\n          _createVNode(TheInput, {\n            type: \"textarea\",\n            label: \"Описание\",\n            modelValue: _unref(documentStore).createForm.description,\n            \"onUpdate:modelValue\": _cache[1] || (_cache[1] = ($event) => _unref(documentStore).createForm.description = $event)\n          }, null, 8, [\"modelValue\"]),\n          _createElementVNode(\"div\", null, [\n            _createVNode(TheFileInput)\n          ]),\n          _createElementVNode(\"div\", _hoisted_1, [\n            _createVNode(TheButton, {\n              type: \"danger\",\n              class: \"px-2 py-1 rounded-lg\",\n              onClick: _cache[2] || (_cache[2] = ($event) => {\n                _unref(documentStore).showCreateDoc = false;\n                _unref(documentStore).createForm = {};\n              })\n            }, {\n              default: _withCtx(() => [\n                _createTextVNode(_toDisplayString(_ctx.$t(\"Отмена\")), 1)\n              ]),\n              _: 1\n            }),\n            _createVNode(TheButton, {\n              type: \"success\",\n              class: \"px-2 py-1 rounded-lg\"\n            }, {\n              default: _withCtx(() => [\n                _createTextVNode(_toDisplayString(_ctx.$t(\"Создать\")), 1)\n              ]),\n              _: 1\n            })\n          ])\n        ], 32)\n      ]);\n    };\n  }\n});\n",
-      "start": 1750909414554,
-      "end": 1750909417634,
+      "start": 1750922108734,
+      "end": 1750922109805,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -57,189 +57,189 @@
     },
     {
       "name": "vite:json",
-      "start": 1750909417634,
-      "end": 1750909417634,
+      "start": 1750922109806,
+      "end": 1750922109806,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1750909417634,
-      "end": 1750909417635,
+      "start": 1750922109806,
+      "end": 1750922109806,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1750909417635,
-      "end": 1750909417635,
+      "start": 1750922109806,
+      "end": 1750922109806,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1750909417635,
-      "end": 1750909417635,
+      "start": 1750922109806,
+      "end": 1750922109806,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750909417635,
-      "end": 1750909417636,
+      "start": 1750922109806,
+      "end": 1750922109806,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750909417636,
-      "end": 1750909417636,
+      "start": 1750922109806,
+      "end": 1750922109807,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1750909417636,
-      "end": 1750909417636,
+      "start": 1750922109807,
+      "end": 1750922109807,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1750909417636,
-      "end": 1750909417637,
+      "start": 1750922109807,
+      "end": 1750922109807,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750909417637,
-      "end": 1750909417637,
+      "start": 1750922109808,
+      "end": 1750922109808,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1750909417637,
-      "end": 1750909417637,
+      "start": 1750922109808,
+      "end": 1750922109808,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1750909417637,
-      "end": 1750909417637,
+      "start": 1750922109808,
+      "end": 1750922109808,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1750909417637,
-      "end": 1750909417637,
+      "start": 1750922109808,
+      "end": 1750922109808,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1750909417638,
-      "end": 1750909417638,
+      "start": 1750922109808,
+      "end": 1750922109808,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1750909417638,
-      "end": 1750909417638,
+      "start": 1750922109808,
+      "end": 1750922109808,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1750909417638,
-      "end": 1750909417638,
+      "start": 1750922109809,
+      "end": 1750922109809,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1750909417638,
-      "end": 1750909417638,
+      "start": 1750922109809,
+      "end": 1750922109809,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1750909417638,
-      "end": 1750909417638,
+      "start": 1750922109809,
+      "end": 1750922109809,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1750909417639,
-      "end": 1750909417639,
+      "start": 1750922109809,
+      "end": 1750922109809,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750909417639,
-      "end": 1750909417639,
+      "start": 1750922109809,
+      "end": 1750922109810,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750909417640,
-      "end": 1750909417640,
+      "start": 1750922109810,
+      "end": 1750922109810,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750909417643,
-      "end": 1750909417643,
+      "start": 1750922109810,
+      "end": 1750922109811,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750909417647,
-      "end": 1750909417648,
+      "start": 1750922109811,
+      "end": 1750922109811,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1750909417648,
-      "end": 1750909417668,
+      "start": 1750922109811,
+      "end": 1750922109826,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1750909417670,
-      "end": 1750909417670,
+      "start": 1750922109828,
+      "end": 1750922109828,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1750909417670,
-      "end": 1750909417670,
+      "start": 1750922109828,
+      "end": 1750922109828,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1750909417670,
-      "end": 1750909417671,
+      "start": 1750922109829,
+      "end": 1750922109829,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1750909417671,
-      "end": 1750909417671,
+      "start": 1750922109829,
+      "end": 1750922109829,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
       "result": "import { default as __nuxt_component_0 } from \"D:/projects/nuxt/workix-nuxt-front/components/UI/TheTitle.vue\";\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, resolveComponent as _resolveComponent, withCtx as _withCtx, createVNode as _createVNode, unref as _unref, createElementVNode as _createElementVNode, withModifiers as _withModifiers, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\";\nconst _hoisted_1 = { class: \"flex justify-center gap-x-10 mt-4\" };\nimport TheInput from \"~/components/UI/TheInput.vue\";\nimport TheFileInput from \"~/components/UI/TheFileInput.vue\";\nimport TheButton from \"~/components/UI/TheButton.vue\";\nimport { useDocumentStore } from \"~/stores/documents\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"DocumentContentHeaderCreate\",\n  setup(__props) {\n    const documentStore = useDocumentStore();\n    return (_ctx, _cache) => {\n      const _component_UITheTitle = __nuxt_component_0;\n      return _openBlock(), _createElementBlock(\"div\", null, [\n        _createVNode(_component_UITheTitle, { class: \"text-center\" }, {\n          default: _withCtx(() => [\n            _createTextVNode(_toDisplayString(_ctx.$t(\"Добавьте новый документ\")), 1)\n          ]),\n          _: 1\n        }),\n        _createElementVNode(\"form\", {\n          class: \"flex gap-y-2 flex-col\",\n          onSubmit: _cache[3] || (_cache[3] = _withModifiers(($event) => _unref(documentStore).docCreate({ ..._unref(documentStore).createForm }), [\"prevent\"]))\n        }, [\n          _createVNode(TheInput, {\n            type: \"text\",\n            label: \"Название\",\n            required: \"\",\n            modelValue: _unref(documentStore).createForm.title,\n            \"onUpdate:modelValue\": _cache[0] || (_cache[0] = ($event) => _unref(documentStore).createForm.title = $event)\n          }, null, 8, [\"modelValue\"]),\n          _createVNode(TheInput, {\n            type: \"textarea\",\n            label: \"Описание\",\n            modelValue: _unref(documentStore).createForm.description,\n            \"onUpdate:modelValue\": _cache[1] || (_cache[1] = ($event) => _unref(documentStore).createForm.description = $event)\n          }, null, 8, [\"modelValue\"]),\n          _createElementVNode(\"div\", null, [\n            _createVNode(TheFileInput)\n          ]),\n          _createElementVNode(\"div\", _hoisted_1, [\n            _createVNode(TheButton, {\n              type: \"danger\",\n              class: \"px-2 py-1 rounded-lg\",\n              onClick: _cache[2] || (_cache[2] = ($event) => {\n                _unref(documentStore).showCreateDoc = false;\n                _unref(documentStore).createForm = {};\n              })\n            }, {\n              default: _withCtx(() => [\n                _createTextVNode(_toDisplayString(_ctx.$t(\"Отмена\")), 1)\n              ]),\n              _: 1\n            }),\n            _createVNode(TheButton, {\n              type: \"success\",\n              class: \"px-2 py-1 rounded-lg\"\n            }, {\n              default: _withCtx(() => [\n                _createTextVNode(_toDisplayString(_ctx.$t(\"Создать\")), 1)\n              ]),\n              _: 1\n            })\n          ])\n        ], 32)\n      ]);\n    };\n  }\n});\n",
-      "start": 1750909417672,
-      "end": 1750909417672,
+      "start": 1750922109829,
+      "end": 1750922109830,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1750909417673,
-      "end": 1750909417673,
+      "start": 1750922109831,
+      "end": 1750922109831,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1750909417673,
-      "end": 1750909417673,
+      "start": 1750922109831,
+      "end": 1750922109831,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1750909417673,
-      "end": 1750909417673,
+      "start": 1750922109832,
+      "end": 1750922109832,
       "order": "normal"
     }
   ]
