@@ -4,44 +4,44 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { unref as _unref, openBlock as _openBlock, createBlock as _createBlock, createCommentVNode as _createCommentVNode, renderList as _renderList, Fragment as _Fragment, createElementBlock as _createElementBlock, createVNode as _createVNode, createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, normalizeClass as _normalizeClass } from \"vue\"\n\nconst _hoisted_1 = { class: \"h-[80%] max-md:h-[80%] overflow-y-auto mt-4 max-md:w-full\" }\nconst _hoisted_2 = {\n  key: 0,\n  class: \"flex flex-col mb-20\"\n}\nconst _hoisted_3 = { class: \"flex justify-center relative flex-col items-center mb-2\" }\nconst _hoisted_4 = { class: \"absolute left-6 max-md:left-10 flex items-center\" }\nconst _hoisted_5 = { class: \"ml-4 flex flex-col dark:opacity-20 gap-y-2\" }\nconst _hoisted_6 = {\n  key: 1,\n  class: \"\"\n}\nconst _hoisted_7 = [\"onClick\"]\nconst _hoisted_8 = [\"src\"]\nconst _hoisted_9 = { class: \"text-sm break-words font-bold\" }\n\nimport TheSceleton from \"~/components/UI/TheSceleton.vue\";\r\nimport {useUserStore} from \"~/stores/users\";\r\nimport {useChat} from \"~/stores/chat\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport {useRoute} from \"vue-router\";\r\nimport ChatNavContentUser from \"~/components/Chat/ChatNav/ChatNavContentUser.vue\";\r\nimport {setFocus} from \"~/hooks/ElemUI\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'ChatNavContent',\n  setup(__props) {\n\r\nconst userStore = useUserStore()\r\nconst chatStore = useChat()\r\nconst user = useAuthStore()\r\nconst route = useRoute()\r\n\r\n\nreturn (_ctx: any,_cache: any) => {\n  return (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n    (_unref(chatStore).searchElem === '')\n      ? (_openBlock(), _createElementBlock(\"div\", _hoisted_2, [\n          (_unref(userStore).get_user_list.results)\n            ? (_openBlock(), _createBlock(ChatNavContentUser, { key: 0 }))\n            : (_openBlock(), _createElementBlock(_Fragment, { key: 1 }, _renderList(4, (i) => {\n                return _createElementVNode(\"div\", _hoisted_3, [\n                  _createVNode(TheSceleton, {\n                    class: \"dark:opacity-20 opacity-60\",\n                    width: \"90%\",\n                    height: \"70px\",\n                    \"border-radius\": \"10px\"\n                  }),\n                  _createElementVNode(\"div\", _hoisted_4, [\n                    _createVNode(TheSceleton, {\n                      class: \"dark:opacity-20\",\n                      width: \"50px\",\n                      height: \"50px\",\n                      \"border-radius\": \"100%\"\n                    }),\n                    _createElementVNode(\"div\", _hoisted_5, [\n                      _createVNode(TheSceleton, {\n                        class: \"\",\n                        width: \"150px\",\n                        height: \"10px\",\n                        \"border-radius\": \"4px\"\n                      }),\n                      _createVNode(TheSceleton, {\n                        class: \"\",\n                        width: \"150px\",\n                        height: \"10px\",\n                        \"border-radius\": \"4px\"\n                      })\n                    ])\n                  ])\n                ])\n              }), 64))\n        ]))\n      : _createCommentVNode(\"\", true),\n    (_unref(chatStore).searchElem !== '')\n      ? (_openBlock(), _createElementBlock(\"div\", _hoisted_6, [\n          (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(userStore).get_user_search.results, (userSearchList) => {\n            return (_openBlock(), _createElementBlock(\"div\", {\n              onClick: ($event: any) => {userSearchList.id !== _unref(chatStore).get_user_chat.user?.id ? _unref(chatStore).createChatUser({user_id: userSearchList.id}, _ctx.$router) : ()=>{\r\n                  _unref(chatStore).flag = false;\r\n                  _ctx.nextTick(()=>{\r\n                    _unref(chatStore).flag = true\r\n                  })\r\n                }; _unref(chatStore).showPinnedWindow = false; _unref(chatStore).searchElem = '' ; _unref(chatStore).activeChatNav = false},\n              class: _normalizeClass([\"flex items-center px-4 gap-x-2 dark:hover:bg-gray-500 hover:bg-azure !bg-opacity-10 cursor-pointer transition-all duration-200 p-1\", {'dark:hover:!bg-semiCyan' : _unref(route).path === `/base/chat/${userSearchList.id}`, 'hover:!bg-cyan' : _unref(route).path === `/base/chat/${userSearchList.id}`}])\n            }, [\n              _createElementVNode(\"img\", {\n                class: \"w-[50px] h-[50px] rounded-full\",\n                src: userSearchList.photo,\n                alt: \"use-photo\"\n              }, null, 8, _hoisted_8),\n              _createElementVNode(\"p\", _hoisted_9, _toDisplayString(userSearchList.first_name + ' ' + userSearchList.last_name), 1)\n            ], 10, _hoisted_7))\n          }), 256))\n        ]))\n      : _createCommentVNode(\"\", true)\n  ]))\n}\n}\n\n})",
-      "start": 1750922114161,
-      "end": 1750922114161
+      "start": 1751023212931,
+      "end": 1751023212931
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750922114161,
-      "end": 1750922114161,
+      "start": 1751023212931,
+      "end": 1751023212931,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750922114161,
-      "end": 1750922114161,
+      "start": 1751023212931,
+      "end": 1751023212931,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750922114162,
-      "end": 1750922114162,
+      "start": 1751023212931,
+      "end": 1751023212931,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1750922114162,
-      "end": 1750922114162,
+      "start": 1751023212931,
+      "end": 1751023212931,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1750922114162,
-      "end": 1750922114162,
+      "start": 1751023212931,
+      "end": 1751023212931,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, openBlock as _openBlock, createBlock as _createBlock, createCommentVNode as _createCommentVNode, renderList as _renderList, Fragment as _Fragment, createElementBlock as _createElementBlock, createVNode as _createVNode, createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, normalizeClass as _normalizeClass } from \"vue\";\nconst _hoisted_1 = { class: \"h-[80%] max-md:h-[80%] overflow-y-auto mt-4 max-md:w-full\" };\nconst _hoisted_2 = {\n  key: 0,\n  class: \"flex flex-col mb-20\"\n};\nconst _hoisted_3 = { class: \"flex justify-center relative flex-col items-center mb-2\" };\nconst _hoisted_4 = { class: \"absolute left-6 max-md:left-10 flex items-center\" };\nconst _hoisted_5 = { class: \"ml-4 flex flex-col dark:opacity-20 gap-y-2\" };\nconst _hoisted_6 = {\n  key: 1,\n  class: \"\"\n};\nconst _hoisted_7 = [\"onClick\"];\nconst _hoisted_8 = [\"src\"];\nconst _hoisted_9 = { class: \"text-sm break-words font-bold\" };\nimport TheSceleton from \"~/components/UI/TheSceleton.vue\";\nimport { useUserStore } from \"~/stores/users\";\nimport { useChat } from \"~/stores/chat\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useRoute } from \"vue-router\";\nimport ChatNavContentUser from \"~/components/Chat/ChatNav/ChatNavContentUser.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ChatNavContent\",\n  setup(__props) {\n    const userStore = useUserStore();\n    const chatStore = useChat();\n    const user = useAuthStore();\n    const route = useRoute();\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n        _unref(chatStore).searchElem === \"\" ? (_openBlock(), _createElementBlock(\"div\", _hoisted_2, [\n          _unref(userStore).get_user_list.results ? (_openBlock(), _createBlock(ChatNavContentUser, { key: 0 })) : (_openBlock(), _createElementBlock(_Fragment, { key: 1 }, _renderList(4, (i) => {\n            return _createElementVNode(\"div\", _hoisted_3, [\n              _createVNode(TheSceleton, {\n                class: \"dark:opacity-20 opacity-60\",\n                width: \"90%\",\n                height: \"70px\",\n                \"border-radius\": \"10px\"\n              }),\n              _createElementVNode(\"div\", _hoisted_4, [\n                _createVNode(TheSceleton, {\n                  class: \"dark:opacity-20\",\n                  width: \"50px\",\n                  height: \"50px\",\n                  \"border-radius\": \"100%\"\n                }),\n                _createElementVNode(\"div\", _hoisted_5, [\n                  _createVNode(TheSceleton, {\n                    class: \"\",\n                    width: \"150px\",\n                    height: \"10px\",\n                    \"border-radius\": \"4px\"\n                  }),\n                  _createVNode(TheSceleton, {\n                    class: \"\",\n                    width: \"150px\",\n                    height: \"10px\",\n                    \"border-radius\": \"4px\"\n                  })\n                ])\n              ])\n            ]);\n          }), 64))\n        ])) : _createCommentVNode(\"\", true),\n        _unref(chatStore).searchElem !== \"\" ? (_openBlock(), _createElementBlock(\"div\", _hoisted_6, [\n          (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(userStore).get_user_search.results, (userSearchList) => {\n            return _openBlock(), _createElementBlock(\"div\", {\n              onClick: ($event) => {\n                userSearchList.id !== _unref(chatStore).get_user_chat.user?.id ? _unref(chatStore).createChatUser({ user_id: userSearchList.id }, _ctx.$router) : () => {\n                  _unref(chatStore).flag = false;\n                  _ctx.nextTick(() => {\n                    _unref(chatStore).flag = true;\n                  });\n                };\n                _unref(chatStore).showPinnedWindow = false;\n                _unref(chatStore).searchElem = \"\";\n                _unref(chatStore).activeChatNav = false;\n              },\n              class: _normalizeClass([\"flex items-center px-4 gap-x-2 dark:hover:bg-gray-500 hover:bg-azure !bg-opacity-10 cursor-pointer transition-all duration-200 p-1\", { \"dark:hover:!bg-semiCyan\": _unref(route).path === `/base/chat/${userSearchList.id}`, \"hover:!bg-cyan\": _unref(route).path === `/base/chat/${userSearchList.id}` }])\n            }, [\n              _createElementVNode(\"img\", {\n                class: \"w-[50px] h-[50px] rounded-full\",\n                src: userSearchList.photo,\n                alt: \"use-photo\"\n              }, null, 8, _hoisted_8),\n              _createElementVNode(\"p\", _hoisted_9, _toDisplayString(userSearchList.first_name + \" \" + userSearchList.last_name), 1)\n            ], 10, _hoisted_7);\n          }), 256))\n        ])) : _createCommentVNode(\"\", true)\n      ]);\n    };\n  }\n});\n",
-      "start": 1750922114162,
-      "end": 1750922114371,
+      "start": 1751023212931,
+      "end": 1751023213102,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -57,141 +57,141 @@
     },
     {
       "name": "vite:json",
-      "start": 1750922114372,
-      "end": 1750922114372,
+      "start": 1751023213102,
+      "end": 1751023213102,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1750922114372,
-      "end": 1750922114372,
+      "start": 1751023213102,
+      "end": 1751023213102,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1750922114372,
-      "end": 1750922114372,
+      "start": 1751023213102,
+      "end": 1751023213102,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1750922114372,
-      "end": 1750922114372,
+      "start": 1751023213102,
+      "end": 1751023213102,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750922114372,
-      "end": 1750922114372,
+      "start": 1751023213102,
+      "end": 1751023213102,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750922114372,
-      "end": 1750922114372,
+      "start": 1751023213102,
+      "end": 1751023213103,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1750922114372,
-      "end": 1750922114372,
+      "start": 1751023213103,
+      "end": 1751023213103,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1750922114375,
-      "end": 1750922114376,
+      "start": 1751023213103,
+      "end": 1751023213103,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750922114376,
-      "end": 1750922114376,
+      "start": 1751023213103,
+      "end": 1751023213103,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1750922114376,
-      "end": 1750922114376,
+      "start": 1751023213103,
+      "end": 1751023213103,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1750922114376,
-      "end": 1750922114376,
+      "start": 1751023213103,
+      "end": 1751023213103,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1750922114376,
-      "end": 1750922114376,
+      "start": 1751023213103,
+      "end": 1751023213103,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1750922114376,
-      "end": 1750922114376,
+      "start": 1751023213103,
+      "end": 1751023213103,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1750922114377,
-      "end": 1750922114377,
+      "start": 1751023213103,
+      "end": 1751023213103,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1750922114377,
-      "end": 1750922114377,
+      "start": 1751023213103,
+      "end": 1751023213103,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1750922114377,
-      "end": 1750922114377,
+      "start": 1751023213103,
+      "end": 1751023213103,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1750922114377,
-      "end": 1750922114377,
+      "start": 1751023213103,
+      "end": 1751023213103,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1750922114377,
-      "end": 1750922114377,
+      "start": 1751023213103,
+      "end": 1751023213103,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750922114377,
-      "end": 1750922114377,
+      "start": 1751023213103,
+      "end": 1751023213103,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750922114378,
-      "end": 1750922114378,
+      "start": 1751023213103,
+      "end": 1751023213103,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750922114378,
-      "end": 1750922114378,
+      "start": 1751023213103,
+      "end": 1751023213103,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750922114378,
-      "end": 1750922114378,
+      "start": 1751023213104,
+      "end": 1751023213104,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { nextTick as __unimport_nextTick, unref as __unimport_unref_ } from 'vue';import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, openBlock as _openBlock, createBlock as _createBlock, createCommentVNode as _createCommentVNode, renderList as _renderList, Fragment as _Fragment, createElementBlock as _createElementBlock, createVNode as _createVNode, createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, normalizeClass as _normalizeClass } from \"vue\";\nconst _hoisted_1 = { class: \"h-[80%] max-md:h-[80%] overflow-y-auto mt-4 max-md:w-full\" };\nconst _hoisted_2 = {\n  key: 0,\n  class: \"flex flex-col mb-20\"\n};\nconst _hoisted_3 = { class: \"flex justify-center relative flex-col items-center mb-2\" };\nconst _hoisted_4 = { class: \"absolute left-6 max-md:left-10 flex items-center\" };\nconst _hoisted_5 = { class: \"ml-4 flex flex-col dark:opacity-20 gap-y-2\" };\nconst _hoisted_6 = {\n  key: 1,\n  class: \"\"\n};\nconst _hoisted_7 = [\"onClick\"];\nconst _hoisted_8 = [\"src\"];\nconst _hoisted_9 = { class: \"text-sm break-words font-bold\" };\nimport TheSceleton from \"~/components/UI/TheSceleton.vue\";\nimport { useUserStore } from \"~/stores/users\";\nimport { useChat } from \"~/stores/chat\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useRoute } from \"vue-router\";\nimport ChatNavContentUser from \"~/components/Chat/ChatNav/ChatNavContentUser.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ChatNavContent\",\n  setup(__props) {\n    const userStore = useUserStore();\n    const chatStore = useChat();\n    const user = useAuthStore();\n    const route = useRoute();\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n        _unref(chatStore).searchElem === \"\" ? (_openBlock(), _createElementBlock(\"div\", _hoisted_2, [\n          _unref(userStore).get_user_list.results ? (_openBlock(), _createBlock(ChatNavContentUser, { key: 0 })) : (_openBlock(), _createElementBlock(_Fragment, { key: 1 }, _renderList(4, (i) => {\n            return _createElementVNode(\"div\", _hoisted_3, [\n              _createVNode(TheSceleton, {\n                class: \"dark:opacity-20 opacity-60\",\n                width: \"90%\",\n                height: \"70px\",\n                \"border-radius\": \"10px\"\n              }),\n              _createElementVNode(\"div\", _hoisted_4, [\n                _createVNode(TheSceleton, {\n                  class: \"dark:opacity-20\",\n                  width: \"50px\",\n                  height: \"50px\",\n                  \"border-radius\": \"100%\"\n                }),\n                _createElementVNode(\"div\", _hoisted_5, [\n                  _createVNode(TheSceleton, {\n                    class: \"\",\n                    width: \"150px\",\n                    height: \"10px\",\n                    \"border-radius\": \"4px\"\n                  }),\n                  _createVNode(TheSceleton, {\n                    class: \"\",\n                    width: \"150px\",\n                    height: \"10px\",\n                    \"border-radius\": \"4px\"\n                  })\n                ])\n              ])\n            ]);\n          }), 64))\n        ])) : _createCommentVNode(\"\", true),\n        _unref(chatStore).searchElem !== \"\" ? (_openBlock(), _createElementBlock(\"div\", _hoisted_6, [\n          (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(userStore).get_user_search.results, (userSearchList) => {\n            return _openBlock(), _createElementBlock(\"div\", {\n              onClick: ($event) => {\n                userSearchList.id !== _unref(chatStore).get_user_chat.user?.id ? _unref(chatStore).createChatUser({ user_id: userSearchList.id }, _ctx.$router) : () => {\n                  _unref(chatStore).flag = false;\n                  (\"nextTick\" in _ctx ? _ctx.nextTick : __unimport_unref_(__unimport_nextTick))(() => {\n                    _unref(chatStore).flag = true;\n                  });\n                };\n                _unref(chatStore).showPinnedWindow = false;\n                _unref(chatStore).searchElem = \"\";\n                _unref(chatStore).activeChatNav = false;\n              },\n              class: _normalizeClass([\"flex items-center px-4 gap-x-2 dark:hover:bg-gray-500 hover:bg-azure !bg-opacity-10 cursor-pointer transition-all duration-200 p-1\", { \"dark:hover:!bg-semiCyan\": _unref(route).path === `/base/chat/${userSearchList.id}`, \"hover:!bg-cyan\": _unref(route).path === `/base/chat/${userSearchList.id}` }])\n            }, [\n              _createElementVNode(\"img\", {\n                class: \"w-[50px] h-[50px] rounded-full\",\n                src: userSearchList.photo,\n                alt: \"use-photo\"\n              }, null, 8, _hoisted_8),\n              _createElementVNode(\"p\", _hoisted_9, _toDisplayString(userSearchList.first_name + \" \" + userSearchList.last_name), 1)\n            ], 10, _hoisted_7);\n          }), 256))\n        ])) : _createCommentVNode(\"\", true)\n      ]);\n    };\n  }\n});\n",
-      "start": 1750922114379,
-      "end": 1750922114391,
+      "start": 1751023213104,
+      "end": 1751023213110,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -204,50 +204,50 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1750922114393,
-      "end": 1750922114393,
+      "start": 1751023213110,
+      "end": 1751023213110,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1750922114393,
-      "end": 1750922114393,
+      "start": 1751023213110,
+      "end": 1751023213110,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1750922114393,
-      "end": 1750922114393,
+      "start": 1751023213110,
+      "end": 1751023213110,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1750922114394,
-      "end": 1750922114394,
+      "start": 1751023213110,
+      "end": 1751023213110,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1750922114395,
-      "end": 1750922114395,
+      "start": 1751023213111,
+      "end": 1751023213111,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1750922114395,
-      "end": 1750922114395,
+      "start": 1751023213111,
+      "end": 1751023213111,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1750922114396,
-      "end": 1750922114396,
+      "start": 1751023213111,
+      "end": 1751023213111,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1750922114397,
-      "end": 1750922114397,
+      "start": 1751023213111,
+      "end": 1751023213111,
       "order": "normal"
     }
   ]

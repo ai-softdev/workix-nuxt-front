@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { unref as _unref, mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttr as _ssrRenderAttr, ssrRenderClass as _ssrRenderClass, ssrRenderAttrs as _ssrRenderAttrs, ssrRenderList as _ssrRenderList, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\"\n\nimport TheSceleton from \"~/components/UI/TheSceleton.vue\";\r\nimport {useUserStore} from \"~/stores/users\";\r\nimport {useChat} from \"~/stores/chat\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport {useRoute} from \"vue-router\";\r\nimport ChatNavContentUser from \"~/components/Chat/ChatNav/ChatNavContentUser.vue\";\r\nimport {setFocus} from \"~/hooks/ElemUI\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'ChatNavContent',\n  __ssrInlineRender: true,\n  setup(__props) {\n\r\nconst userStore = useUserStore()\r\nconst chatStore = useChat()\r\nconst user = useAuthStore()\r\nconst route = useRoute()\r\n\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"h-[80%] max-md:h-[80%] overflow-y-auto mt-4 max-md:w-full\" }, _attrs))}>`)\n  if (_unref(chatStore).searchElem === '') {\n    _push(`<div class=\"flex flex-col mb-20\">`)\n    if (_unref(userStore).get_user_list.results) {\n      _push(_ssrRenderComponent(ChatNavContentUser, null, null, _parent))\n    } else {\n      _push(`<!--[-->`)\n      _ssrRenderList(4, (i) => {\n        _push(`<div class=\"flex justify-center relative flex-col items-center mb-2\">`)\n        _push(_ssrRenderComponent(TheSceleton, {\n          class: \"dark:opacity-20 opacity-60\",\n          width: \"90%\",\n          height: \"70px\",\n          \"border-radius\": \"10px\"\n        }, null, _parent))\n        _push(`<div class=\"absolute left-6 max-md:left-10 flex items-center\">`)\n        _push(_ssrRenderComponent(TheSceleton, {\n          class: \"dark:opacity-20\",\n          width: \"50px\",\n          height: \"50px\",\n          \"border-radius\": \"100%\"\n        }, null, _parent))\n        _push(`<div class=\"ml-4 flex flex-col dark:opacity-20 gap-y-2\">`)\n        _push(_ssrRenderComponent(TheSceleton, {\n          class: \"\",\n          width: \"150px\",\n          height: \"10px\",\n          \"border-radius\": \"4px\"\n        }, null, _parent))\n        _push(_ssrRenderComponent(TheSceleton, {\n          class: \"\",\n          width: \"150px\",\n          height: \"10px\",\n          \"border-radius\": \"4px\"\n        }, null, _parent))\n        _push(`</div></div></div>`)\n      })\n      _push(`<!--]-->`)\n    }\n    _push(`</div>`)\n  } else {\n    _push(`<!---->`)\n  }\n  if (_unref(chatStore).searchElem !== '') {\n    _push(`<div class=\"\"><!--[-->`)\n    _ssrRenderList(_unref(userStore).get_user_search.results, (userSearchList) => {\n      _push(`<div class=\"${\n        _ssrRenderClass([{'dark:hover:!bg-semiCyan' : _unref(route).path === `/base/chat/${userSearchList.id}`, 'hover:!bg-cyan' : _unref(route).path === `/base/chat/${userSearchList.id}`}, \"flex items-center px-4 gap-x-2 dark:hover:bg-gray-500 hover:bg-azure !bg-opacity-10 cursor-pointer transition-all duration-200 p-1\"])\n      }\"><img class=\"w-[50px] h-[50px] rounded-full\"${\n        _ssrRenderAttr(\"src\", userSearchList.photo)\n      } alt=\"use-photo\"><p class=\"text-sm break-words font-bold\">${\n        _ssrInterpolate(userSearchList.first_name + ' ' + userSearchList.last_name)\n      }</p></div>`)\n    })\n    _push(`<!--]--></div>`)\n  } else {\n    _push(`<!---->`)\n  }\n  _push(`</div>`)\n}\n}\n\n})",
-      "start": 1750922159978,
-      "end": 1750922159978,
+      "start": 1751023240392,
+      "end": 1751023240392,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750922159978,
-      "end": 1750922159978,
+      "start": 1751023240393,
+      "end": 1751023240393,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750922159978,
-      "end": 1750922159978,
+      "start": 1751023240393,
+      "end": 1751023240393,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750922159978,
-      "end": 1750922159978,
+      "start": 1751023240393,
+      "end": 1751023240394,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750922159978,
-      "end": 1750922159978,
+      "start": 1751023240393,
+      "end": 1751023240394,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750922159978,
-      "end": 1750922159978,
+      "start": 1751023240394,
+      "end": 1751023240394,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750922159978,
-      "end": 1750922159978,
+      "start": 1751023240394,
+      "end": 1751023240394,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1750922159978,
-      "end": 1750922159978,
+      "start": 1751023240394,
+      "end": 1751023240394,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1750922159978,
-      "end": 1750922159978,
+      "start": 1751023240394,
+      "end": 1751023240394,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttr as _ssrRenderAttr, ssrRenderClass as _ssrRenderClass, ssrRenderAttrs as _ssrRenderAttrs, ssrRenderList as _ssrRenderList, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport TheSceleton from \"~/components/UI/TheSceleton.vue\";\nimport { useUserStore } from \"~/stores/users\";\nimport { useChat } from \"~/stores/chat\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useRoute } from \"vue-router\";\nimport ChatNavContentUser from \"~/components/Chat/ChatNav/ChatNavContentUser.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ChatNavContent\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const userStore = useUserStore();\n    const chatStore = useChat();\n    const user = useAuthStore();\n    const route = useRoute();\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"h-[80%] max-md:h-[80%] overflow-y-auto mt-4 max-md:w-full\" }, _attrs))}>`);\n      if (_unref(chatStore).searchElem === \"\") {\n        _push(`<div class=\"flex flex-col mb-20\">`);\n        if (_unref(userStore).get_user_list.results) {\n          _push(_ssrRenderComponent(ChatNavContentUser, null, null, _parent));\n        } else {\n          _push(`<!--[-->`);\n          _ssrRenderList(4, (i) => {\n            _push(`<div class=\"flex justify-center relative flex-col items-center mb-2\">`);\n            _push(_ssrRenderComponent(TheSceleton, {\n              class: \"dark:opacity-20 opacity-60\",\n              width: \"90%\",\n              height: \"70px\",\n              \"border-radius\": \"10px\"\n            }, null, _parent));\n            _push(`<div class=\"absolute left-6 max-md:left-10 flex items-center\">`);\n            _push(_ssrRenderComponent(TheSceleton, {\n              class: \"dark:opacity-20\",\n              width: \"50px\",\n              height: \"50px\",\n              \"border-radius\": \"100%\"\n            }, null, _parent));\n            _push(`<div class=\"ml-4 flex flex-col dark:opacity-20 gap-y-2\">`);\n            _push(_ssrRenderComponent(TheSceleton, {\n              class: \"\",\n              width: \"150px\",\n              height: \"10px\",\n              \"border-radius\": \"4px\"\n            }, null, _parent));\n            _push(_ssrRenderComponent(TheSceleton, {\n              class: \"\",\n              width: \"150px\",\n              height: \"10px\",\n              \"border-radius\": \"4px\"\n            }, null, _parent));\n            _push(`</div></div></div>`);\n          });\n          _push(`<!--]-->`);\n        }\n        _push(`</div>`);\n      } else {\n        _push(`<!---->`);\n      }\n      if (_unref(chatStore).searchElem !== \"\") {\n        _push(`<div class=\"\"><!--[-->`);\n        _ssrRenderList(_unref(userStore).get_user_search.results, (userSearchList) => {\n          _push(`<div class=\"${_ssrRenderClass([{ \"dark:hover:!bg-semiCyan\": _unref(route).path === `/base/chat/${userSearchList.id}`, \"hover:!bg-cyan\": _unref(route).path === `/base/chat/${userSearchList.id}` }, \"flex items-center px-4 gap-x-2 dark:hover:bg-gray-500 hover:bg-azure !bg-opacity-10 cursor-pointer transition-all duration-200 p-1\"])}\"><img class=\"w-[50px] h-[50px] rounded-full\"${_ssrRenderAttr(\"src\", userSearchList.photo)} alt=\"use-photo\"><p class=\"text-sm break-words font-bold\">${_ssrInterpolate(userSearchList.first_name + \" \" + userSearchList.last_name)}</p></div>`);\n        });\n        _push(`<!--]--></div>`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1750922159978,
-      "end": 1750922160166,
+      "start": 1751023240394,
+      "end": 1751023240459,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -86,230 +86,230 @@
     },
     {
       "name": "vite:json",
-      "start": 1750922160166,
-      "end": 1750922160166,
+      "start": 1751023240459,
+      "end": 1751023240459,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1750922160166,
-      "end": 1750922160166,
+      "start": 1751023240459,
+      "end": 1751023240459,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1750922160166,
-      "end": 1750922160166,
+      "start": 1751023240459,
+      "end": 1751023240459,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1750922160166,
-      "end": 1750922160166,
+      "start": 1751023240459,
+      "end": 1751023240459,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750922160166,
-      "end": 1750922160166,
+      "start": 1751023240460,
+      "end": 1751023240460,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750922160166,
-      "end": 1750922160166,
+      "start": 1751023240460,
+      "end": 1751023240460,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750922160167,
-      "end": 1750922160167,
+      "start": 1751023240460,
+      "end": 1751023240460,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750922160167,
-      "end": 1750922160167,
+      "start": 1751023240460,
+      "end": 1751023240460,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1750922160167,
-      "end": 1750922160167,
+      "start": 1751023240460,
+      "end": 1751023240460,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750922160167,
-      "end": 1750922160167,
+      "start": 1751023240460,
+      "end": 1751023240460,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1750922160167,
-      "end": 1750922160168,
+      "start": 1751023240461,
+      "end": 1751023240462,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1750922160168,
-      "end": 1750922160168,
+      "start": 1751023240462,
+      "end": 1751023240462,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1750922160168,
-      "end": 1750922160169,
+      "start": 1751023240462,
+      "end": 1751023240462,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1750922160169,
-      "end": 1750922160169,
+      "start": 1751023240462,
+      "end": 1751023240462,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1750922160169,
-      "end": 1750922160169,
+      "start": 1751023240462,
+      "end": 1751023240462,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1750922160169,
-      "end": 1750922160169,
+      "start": 1751023240463,
+      "end": 1751023240463,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1750922160169,
-      "end": 1750922160169,
+      "start": 1751023240463,
+      "end": 1751023240463,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1750922160169,
-      "end": 1750922160169,
+      "start": 1751023240463,
+      "end": 1751023240463,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1750922160169,
-      "end": 1750922160169,
+      "start": 1751023240463,
+      "end": 1751023240463,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750922160169,
-      "end": 1750922160169,
+      "start": 1751023240463,
+      "end": 1751023240463,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750922160169,
-      "end": 1750922160169,
+      "start": 1751023240463,
+      "end": 1751023240463,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750922160169,
-      "end": 1750922160169,
+      "start": 1751023240463,
+      "end": 1751023240463,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750922160169,
-      "end": 1750922160169,
+      "start": 1751023240463,
+      "end": 1751023240463,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750922160169,
-      "end": 1750922160169,
+      "start": 1751023240463,
+      "end": 1751023240463,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750922160169,
-      "end": 1750922160169,
+      "start": 1751023240463,
+      "end": 1751023240463,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750922160169,
-      "end": 1750922160170,
+      "start": 1751023240463,
+      "end": 1751023240463,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750922160169,
-      "end": 1750922160170,
+      "start": 1751023240463,
+      "end": 1751023240463,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1750922160170,
-      "end": 1750922160175,
+      "start": 1751023240463,
+      "end": 1751023240465,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1750922160170,
-      "end": 1750922160175,
+      "start": 1751023240463,
+      "end": 1751023240465,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1750922160175,
-      "end": 1750922160175,
+      "start": 1751023240465,
+      "end": 1751023240465,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1750922160175,
-      "end": 1750922160175,
+      "start": 1751023240465,
+      "end": 1751023240465,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1750922160175,
-      "end": 1750922160175,
+      "start": 1751023240465,
+      "end": 1751023240465,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1750922160175,
-      "end": 1750922160175,
+      "start": 1751023240465,
+      "end": 1751023240465,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1750922160175,
-      "end": 1750922160175,
+      "start": 1751023240465,
+      "end": 1751023240465,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1750922160175,
-      "end": 1750922160175,
+      "start": 1751023240465,
+      "end": 1751023240465,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1750922160176,
-      "end": 1750922160176,
+      "start": 1751023240466,
+      "end": 1751023240466,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1750922160177,
-      "end": 1750922160177,
+      "start": 1751023240466,
+      "end": 1751023240466,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1750922160177,
-      "end": 1750922160177,
+      "start": 1751023240466,
+      "end": 1751023240466,
       "order": "normal"
     }
   ]

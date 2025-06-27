@@ -220,6 +220,7 @@ export const useChat = defineStore('chat', {
       fd.set('name', params.name)
       fd.set('users_str', params.users_str)
       if (params.photo) {
+        console.log(params.photo.__proto__)
         fd.set('photo', params.photo)
       }
       await axios.post(`chat/create/group`, fd, {

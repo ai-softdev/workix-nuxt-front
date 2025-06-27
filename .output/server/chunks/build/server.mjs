@@ -920,7 +920,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0 ,
-    component: () => import('./base-CLwCS2eP.mjs').then((m) => m.default || m),
+    component: () => import('./base-DVIyTxb7.mjs').then((m) => m.default || m),
     children: [
       {
         name: "base-chat",
@@ -928,7 +928,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./chat-Cir4PqBp.mjs').then((m) => m.default || m),
+        component: () => import('./chat-AQbwKT1H.mjs').then((m) => m.default || m),
         children: [
           {
             name: "base-chat-id",
@@ -936,7 +936,7 @@ const _routes = [
             meta: {},
             alias: [],
             redirect: void 0 ,
-            component: () => import('./_id_-O5FCgHAK.mjs').then((m) => m.default || m)
+            component: () => import('./_id_-DKE_Uyny.mjs').then((m) => m.default || m)
           }
         ]
       },
@@ -954,7 +954,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./_id_-DqD_nMVR.mjs').then((m) => m.default || m)
+        component: () => import('./_id_-CqAVmqCd.mjs').then((m) => m.default || m)
       },
       {
         name: "base-companies-department-id",
@@ -970,7 +970,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-D-yhTh9_.mjs').then((m) => m.default || m)
+        component: () => import('./index-FeUU3VGI.mjs').then((m) => m.default || m)
       },
       {
         name: "base-companies",
@@ -1010,7 +1010,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-Q0T-FjvD.mjs').then((m) => m.default || m)
+        component: () => import('./index-CM_hpilb.mjs').then((m) => m.default || m)
       },
       {
         name: "base-documents-signification-slug",
@@ -1108,7 +1108,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-DWeXujem.mjs').then((m) => m.default || m)
+        component: () => import('./index-iy5ZclhZ.mjs').then((m) => m.default || m)
       },
       {
         name: "base-tests-exam",
@@ -1140,7 +1140,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./_slug_-BvY2ypes.mjs').then((m) => m.default || m)
+        component: () => import('./_slug_-DdGBPu6n.mjs').then((m) => m.default || m)
       },
       {
         name: "base-users",

@@ -4,81 +4,81 @@
     {
       "name": "vite:load-fallback",
       "result": "<script setup lang=\"ts\">\r\n\r\nimport {onMounted} from \"vue\";\r\nimport {useDocumentStore} from \"~/stores/documents\";\r\nimport {useRoute} from \"vue-router\";\r\nimport {useCompanies} from \"~/stores/companies\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nconst route = useRoute()\r\nconst router = useRouter()\r\nconst isSigning = ref(false);\r\nconst selectedKey = ref('');\r\nconst notSelected = ref(true);\r\nconst selectedTitle = ref('');\r\n\r\nfunction loadScript(src: string): Promise<void> {\r\n  return new Promise((resolve, reject) => {\r\n    if (document.querySelector(`script[src=\"${src}\"]`)) {\r\n      resolve();\r\n      return;\r\n    }\r\n\r\n    const script = document.createElement('script');\r\n    script.src = src;\r\n    script.async = true;\r\n    script.onload = () => resolve();\r\n    script.onerror = () => reject(new Error(`Ошибка загрузки скрипта ${src}`));\r\n\r\n    document.head.appendChild(script);\r\n  });\r\n}\r\n\r\nasync function loadEImzoScripts() {\r\n  try {\r\n    await loadScript('/e-imzo/e-imzo.js');\r\n    await loadScript('/e-imzo/e-imzo-client.js');\r\n    await loadScript('/e-imzo/micro-ajax.js');\r\n    await loadScript('/e-imzo/e-imzo-init.js');\r\n    console.log('✅ Все скрипты загружены');\r\n\r\n    startAppLoad()\r\n  } catch (error) {\r\n    console.error('❌ Ошибка загрузки скриптов E-IMZO', error);\r\n  }\r\n}\r\n\r\nonMounted(async () => {\r\n  await loadEImzoScripts();\r\n});\r\n\r\n\r\nasync function startAppLoad() {\r\n  try {\r\n      // await loadScript(\"/e-imzo/e-imzo.js\");\r\n      // await loadScript(\"/e-imzo/e-imzo-client.js\");\r\n      // await loadScript(\"/e-imzo/micro-ajax.js\");\r\n      // await loadScript(\"/e-imzo/e-imzo-init.js\");\r\n\r\n    if (window.EIMZOClient) {\r\n      console.log(\"✅ EIMZOClient загружен:\", window.EIMZOClient);\r\n      console.log(\"📜 Доступные методы EIMZOClient:\", Object.keys(window.EIMZOClient));\r\n\r\n      installKeys();\r\n    } else {\r\n      console.error(\"❌ EIMZOClient не найден после загрузки\");\r\n    }\r\n  } catch (error) {\r\n    console.error(\"❌ Ошибка при загрузке скриптов:\", error);\r\n  }\r\n}\r\n\r\nasync function installKeys() {\r\n  if (!window.EIMZOClient) {\r\n    console.error(\"EIMZOClient не загружен\");\r\n    return;\r\n  }\r\n\r\n  isSigning.value = true;\r\n  try {\r\n    EIMZOClient.checkVersion(function (major, minor) {\r\n      var newVersion = EIMZO_MAJOR * 100 + EIMZO_MINOR;\r\n      var installedVersion = parseInt(major) * 100 + parseInt(minor);\r\n      if (installedVersion < newVersion) {\r\n        console.log('installedVersion < newVersion');\r\n      } else {\r\n        EIMZOClient.installApiKeys(function () {\r\n          responseUsers()\r\n        }, function (e, r) {\r\n          if (r) {\r\n            console.log('da');\r\n          } else {\r\n            console.log('net');\r\n          }\r\n        });\r\n      }\r\n    }, function (e, r) {\r\n      if (r) {\r\n        console.log('da2');\r\n      } else {\r\n        console.log('net2');\r\n      }\r\n    });\r\n\r\n    // console.log(\"✅ Подписанные данные:\", signedData);\r\n\r\n    // await documentStore.updateDocument({ id: route.params.id, signedData });\r\n    console.log(\"📄 Документ успешно подписан и обновлён\");\r\n  } catch (error) {\r\n    console.error(\"❌ Ошибка при подписании документа:\", error);\r\n  } finally {\r\n    isSigning.value = false;\r\n  }\r\n}\r\n\r\nfunction responseUsers() {\r\n  EIMZOClient.listAllUserKeys(\r\n      function(o, i) {\r\n        var itemId = \"itm-\" + o.serialNumber + \"-\" + i;\r\n        return itemId;\r\n      },\r\n      function(itemId, v) {\r\n        return uiCreateItem(itemId, v);\r\n      },\r\n      function(items, firstId) {\r\n\r\n        // Находим селект\r\n        var select = document.querySelector('select[name=\"key\"]');\r\n        select.innerHTML = \"\"; // Очищаем селект перед добавлением новых элементов\r\n\r\n        // Заполняем селект опциями\r\n        items.forEach(function(item) {\r\n          select.appendChild(item);\r\n        });\r\n\r\n        // Устанавливаем первый элемент по умолчанию (если есть)\r\n        if (select.options.length > 0) {\r\n          console.log('options yes', select.options[0],select.options[0].value)\r\n\r\n          select.value = select.options[0].value;\r\n        }\r\n      },\r\n      function(e, r) {\r\n        if (e) {\r\n          uiShowMessage(errorCAPIWS + \" : \" + e);\r\n        } else {\r\n          console.log(r);\r\n        }\r\n      }\r\n  );\r\n}\r\n\r\nvar uiCreateItem = function (itmkey, vo) {\r\n  var now = new Date();\r\n  vo.expired = dates.compare(now, vo.validTo) > 0;\r\n  var itm = document.createElement(\"option\");\r\n  itm.value = itmkey;\r\n  itm.text = vo.CN;\r\n  if (!vo.expired) {\r\n\r\n  } else {\r\n    itm.style.color = 'gray';\r\n    itm.text = itm.text + ' (срок истек)';\r\n  }\r\n  itm.setAttribute('vo',JSON.stringify(vo));\r\n  itm.setAttribute('id',itmkey);\r\n  return itm;\r\n}\r\n\r\nlet currentKey = ref('') // vo\r\nlet keyId = ref(null);\r\nconst fileBase64 = ref(null)\r\n\r\n\r\nconst handleSubmit = (event) => {\r\n\r\n  signFile()\r\n\r\n}\r\n\r\n\r\nconst signFile = function () {\r\n\r\n  console.log(\"Начало подписи\")\r\n  let data64 = fileBase64.value;\r\n  let key = keyId.value\r\n\r\n  EIMZOClient.createPkcs7(key, data64, null, function(pkcs7){\r\n    attachTimestamp(pkcs7, function(pkcs7wtst){\r\n        console.log(\"Подписанный документ с временем\", pkcs7wtst);\r\n\r\n      verify(pkcs7wtst, false, data64, function(result){\r\n        console.log(result)//выкинуть назад router\r\n      }, true);\r\n    });\r\n  }, (e, r) => {console.log('Ошибка при подписании')}, false, true); // !! set isDataBase64Encoded = TRUE\r\n};\r\n\r\nconst attachTimestamp = function (pkcs7, callback){\r\n  const E_IMZO_URL = 'https://workix.uz/eimzo'\r\n  microAjax(E_IMZO_URL + '/frontend/timestamp/pkcs7', function (data, s) {\r\n\r\n    if(s.status != 200){\r\n      console.log(\"Ошибка при добавлении timestamp к подписи\")\r\n      return;\r\n    }\r\n    var pkcs7wtst;\r\n    try {\r\n      var data = JSON.parse(data);\r\n      if (data.status != 1) {\r\n\r\n        console.log(data.status, ' - ', s.message);\r\n        return;\r\n      }\r\n      pkcs7wtst = data.pkcs7b64;\r\n    } catch (e) {\r\n      console.log(\"Ошибка\", s.status, ' - ', s.statusText, e);\r\n    }\r\n    callback(pkcs7wtst);\r\n  },pkcs7);\r\n}\r\n\r\nconst verify = function (pkcs7wtst, detached, data, callback, isDataBase64Encoded){\r\n  var data64;\r\n\r\n  console.log(detached);\r\n  console.log(data64);\r\n  documentStore.documentSign({slug: route.params.slug, data: {signature: pkcs7wtst}}, router)\r\n}\r\n\r\nfunction selectKey() {\r\n  // currentKey.value = event.target.value;\r\n  let select = document.getElementById('select-key')\r\n  selectedKey.value = select\r\n  notSelected.value = false\r\n  let option = document.getElementById(select.value);\r\n  let vo = JSON.parse(option.getAttribute('vo'))\r\n  selectedTitle.value = vo\r\n  console.log(\"🔑 Выбранные днные:\", vo);\r\n  EIMZOClient.loadKey(vo, function(id){\r\n    keyId.value = id;\r\n\r\n  }, (e, r)=> {console.log('error'); notSelected.value = true});\r\n}\r\n\r\nconst documentStore = useDocumentStore()\r\nconst authStore = useAuthStore()\r\n\r\nonMounted(()=>{\r\n  documentStore.loadDocument({slug: route.params.slug})\r\n})\r\n\r\nasync function fetchFileAsBase64() {\r\n  try {\r\n    const url = authStore.get_server_domain + documentStore.documentItem.file;\r\n    const response = await fetch(url);\r\n\r\n    if (!response.ok) throw new Error('Ошибка при загрузке файла');\r\n\r\n    const blob = await response.blob(); // Получаем Blob\r\n    const reader = new FileReader(); // Создаём FileReader\r\n\r\n    reader.onloadend = () => {\r\n      const base64Content = reader.result.split(',')[1]; // Извлекаем Base64\r\n      fileBase64.value = base64Content; // Сохраняем\r\n    };\r\n\r\n    reader.readAsDataURL(blob); // Читаем как Base64\r\n  } catch (error) {\r\n    console.error('Ошибка загрузки файла:', error);\r\n  }\r\n}\r\n\r\nwatch(() => documentStore.documentItem, (newValue) => {\r\n  console.log(authStore.get_server_domain+documentStore.documentItem.file)\r\n  fetchFileAsBase64()\r\n})\r\n</script>\r\n\r\n<template>\r\n    <div class=\"flex items-center gap-4 flex-col border p-3 mt-4 rounded-lg\">\r\n      <p class=\"text-xl font-medium\">\r\n        Документ: \"{{ documentStore.documentItem.title }}\"\r\n      </p>\r\n      <div class=\"flex items-center gap-4 flex-col\">\r\n        <select\r\n            id=\"select-key\"\r\n            name=\"key\"\r\n            class=\"p-3 border-white rounded-lg bg-bgWhite text-black\"\r\n        >\r\n        </select>\r\n        <button\r\n            @click=\"selectKey\"\r\n            class=\"border p-2 rounded-lg\"\r\n        >\r\n          Выбрать ключ\r\n        </button>\r\n      </div>\r\n      <p v-if=\"notSelected\" class=\"text-red-500 mt-2\">Вы не выбрали ключ</p>\r\n      <p v-if=\"!notSelected\" class=\"text-green-500 mt-2\">Вы выбрали ключ: {{ selectedTitle.CN }}</p>\r\n      <form\r\n          id=\"myForm\"\r\n          @submit.prevent=\"handleSubmit\"\r\n          class=\"mt-4\"\r\n      >\r\n        <button\r\n            type=\"submit\"\r\n            class=\"border py-3 px-4 rounded-lg text-xl bg-[#8881]\"\r\n        >\r\n          Подписать\r\n        </button>\r\n      </form>\r\n    </div>\r\n</template>\r\n\r\n<style scoped lang=\"scss\">\r\n\r\n</style>",
-      "start": 1750922154646,
-      "end": 1750922154802,
+      "start": 1751023234519,
+      "end": 1751023234777,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750922154802,
-      "end": 1750922154802,
+      "start": 1751023234777,
+      "end": 1751023234777,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1750922154802,
-      "end": 1750922154802,
+      "start": 1751023234777,
+      "end": 1751023234777,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750922154802,
-      "end": 1750922154803,
+      "start": 1751023234777,
+      "end": 1751023234777,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1750922154802,
-      "end": 1750922154803,
+      "start": 1751023234777,
+      "end": 1751023234777,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750922154803,
-      "end": 1750922154803,
+      "start": 1751023234777,
+      "end": 1751023234777,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1750922154803,
-      "end": 1750922154803,
+      "start": 1751023234777,
+      "end": 1751023234777,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1750922154803,
-      "end": 1750922154803,
+      "start": 1751023234777,
+      "end": 1751023234777,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1750922154803,
-      "end": 1750922154803,
+      "start": 1751023234777,
+      "end": 1751023234777,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1750922154803,
-      "end": 1750922154803,
+      "start": 1751023234777,
+      "end": 1751023234777,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1750922154803,
-      "end": 1750922154803,
+      "start": 1751023234777,
+      "end": 1751023234777,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1750922154803,
-      "end": 1750922154803,
+      "start": 1751023234777,
+      "end": 1751023234777,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "import _sfc_main from \"D:/projects/nuxt/workix-nuxt-front/pages/base/documents/signification/[slug].vue?vue&type=script&setup=true&lang.ts\";\nexport * from \"D:/projects/nuxt/workix-nuxt-front/pages/base/documents/signification/[slug].vue?vue&type=script&setup=true&lang.ts\";\nimport { useSSRContext as __vite_useSSRContext } from \"vue\";\nconst _sfc_setup = _sfc_main.setup;\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext();\n  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(\"pages/base/documents/signification/[slug].vue\");\n  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;\n};\nexport default _sfc_main;\n",
-      "start": 1750922154803,
-      "end": 1750922154822,
+      "start": 1751023234777,
+      "end": 1751023234817,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -86,214 +86,214 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1750922154822,
-      "end": 1750922154822,
+      "start": 1751023234817,
+      "end": 1751023234817,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750922154822,
-      "end": 1750922154822,
+      "start": 1751023234817,
+      "end": 1751023234817,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750922154822,
-      "end": 1750922154822,
+      "start": 1751023234817,
+      "end": 1751023234817,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750922154822,
-      "end": 1750922154822,
+      "start": 1751023234817,
+      "end": 1751023234817,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1750922154822,
-      "end": 1750922154822,
+      "start": 1751023234817,
+      "end": 1751023234817,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1750922154822,
-      "end": 1750922154822,
+      "start": 1751023234818,
+      "end": 1751023234818,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1750922154823,
-      "end": 1750922154823,
+      "start": 1751023234818,
+      "end": 1751023234818,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1750922154823,
-      "end": 1750922154824,
+      "start": 1751023234828,
+      "end": 1751023234828,
       "order": "normal"
     },
     {
       "name": "vite:define",
       "result": "import _sfc_main from \"D:/projects/nuxt/workix-nuxt-front/pages/base/documents/signification/[slug].vue?vue&type=script&setup=true&lang.ts\";\nexport * from \"D:/projects/nuxt/workix-nuxt-front/pages/base/documents/signification/[slug].vue?vue&type=script&setup=true&lang.ts\";\nimport { useSSRContext as __vite_useSSRContext } from \"vue\";\nconst _sfc_setup = _sfc_main.setup;\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext();\n  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(\"pages/base/documents/signification/[slug].vue\");\n  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;\n};\nexport default _sfc_main;\n",
-      "start": 1750922154824,
-      "end": 1750922155013,
+      "start": 1751023234829,
+      "end": 1751023235247,
       "order": "normal",
       "sourcemaps": "{\n  \"version\": 3,\n  \"sources\": [\"D:/projects/nuxt/workix-nuxt-front/pages/base/documents/signification/[slug].vue\"],\n  \"sourcesContent\": [\"import _sfc_main from \\\"D:/projects/nuxt/workix-nuxt-front/pages/base/documents/signification/[slug].vue?vue&type=script&setup=true&lang.ts\\\";\\nexport * from \\\"D:/projects/nuxt/workix-nuxt-front/pages/base/documents/signification/[slug].vue?vue&type=script&setup=true&lang.ts\\\";\\nimport { useSSRContext as __vite_useSSRContext } from \\\"vue\\\";\\nconst _sfc_setup = _sfc_main.setup;\\n_sfc_main.setup = (props, ctx) => {\\n  const ssrContext = __vite_useSSRContext();\\n  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(\\\"pages/base/documents/signification/[slug].vue\\\");\\n  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;\\n};\\nexport default _sfc_main;\\n\"],\n  \"mappings\": \"AAAA,OAAO,eAAe;AACtB,cAAc;AACd,SAAS,iBAAiB,4BAA4B;AACtD,MAAM,aAAa,UAAU;AAC7B,UAAU,QAAQ,CAAC,OAAO,QAAQ;AAChC,QAAM,aAAa,qBAAqB;AACxC,GAAC,WAAW,YAAY,WAAW,UAA0B,oBAAI,IAAI,IAAI,IAAI,+CAA+C;AAC5H,SAAO,aAAa,WAAW,OAAO,GAAG,IAAI;AAC/C;AACA,eAAe;\",\n  \"names\": []\n}\n"
     },
     {
       "name": "vite:css-post",
-      "start": 1750922155013,
-      "end": 1750922155014,
+      "start": 1751023235247,
+      "end": 1751023235248,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1750922155014,
-      "end": 1750922155014,
+      "start": 1751023235248,
+      "end": 1751023235248,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1750922155014,
-      "end": 1750922155014,
+      "start": 1751023235248,
+      "end": 1751023235248,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1750922155014,
-      "end": 1750922155014,
+      "start": 1751023235248,
+      "end": 1751023235248,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1750922155014,
-      "end": 1750922155014,
+      "start": 1751023235248,
+      "end": 1751023235248,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1750922155017,
-      "end": 1750922155017,
+      "start": 1751023235248,
+      "end": 1751023235248,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1750922155017,
-      "end": 1750922155017,
+      "start": 1751023235249,
+      "end": 1751023235249,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750922155018,
-      "end": 1750922155018,
+      "start": 1751023235250,
+      "end": 1751023235250,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1750922155018,
-      "end": 1750922155018,
+      "start": 1751023235250,
+      "end": 1751023235250,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750922155018,
-      "end": 1750922155018,
+      "start": 1751023235250,
+      "end": 1751023235250,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1750922155018,
-      "end": 1750922155018,
+      "start": 1751023235250,
+      "end": 1751023235250,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750922155018,
-      "end": 1750922155018,
+      "start": 1751023235251,
+      "end": 1751023235251,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1750922155018,
-      "end": 1750922155018,
+      "start": 1751023235251,
+      "end": 1751023235251,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750922155018,
-      "end": 1750922155018,
+      "start": 1751023235251,
+      "end": 1751023235251,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1750922155018,
-      "end": 1750922155018,
+      "start": 1751023235251,
+      "end": 1751023235251,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1750922155018,
-      "end": 1750922155020,
+      "start": 1751023235252,
+      "end": 1751023235253,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1750922155018,
-      "end": 1750922155020,
+      "start": 1751023235252,
+      "end": 1751023235253,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1750922155020,
-      "end": 1750922155020,
+      "start": 1751023235253,
+      "end": 1751023235253,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1750922155020,
-      "end": 1750922155020,
+      "start": 1751023235253,
+      "end": 1751023235253,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1750922155020,
-      "end": 1750922155020,
+      "start": 1751023235255,
+      "end": 1751023235255,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1750922155020,
-      "end": 1750922155020,
+      "start": 1751023235255,
+      "end": 1751023235255,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1750922155020,
-      "end": 1750922155020,
+      "start": 1751023235255,
+      "end": 1751023235255,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1750922155020,
-      "end": 1750922155020,
+      "start": 1751023235256,
+      "end": 1751023235256,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1750922155021,
-      "end": 1750922155021,
+      "start": 1751023235257,
+      "end": 1751023235257,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1750922155021,
-      "end": 1750922155022,
+      "start": 1751023235258,
+      "end": 1751023235259,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1750922155022,
-      "end": 1750922155022,
+      "start": 1751023235260,
+      "end": 1751023235260,
       "order": "normal"
     }
   ]
