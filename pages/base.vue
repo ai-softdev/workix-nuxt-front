@@ -66,7 +66,7 @@ const router = useRoute()
 const user = useAuthStore();
 
 function notification() {
-  let ws = new WebSocket(`wss://api-buildwithus.ai-softdev.com/ws/notification?token=${nuxtStorage.localStorage.getData('token')}`)
+  let ws = new WebSocket(`wss://api-buildwithus.ai-softdev.com/ws?token=${nuxtStorage.localStorage.getData('token')}`)
   ws.onmessage = (data) => {
     let res = JSON.parse(data.data)
     if (res.type === 'notification') {

@@ -31,55 +31,55 @@ defineProps({
 onUnmounted(()=>{
   chat.messageText = ''
 })
-function messages() {
-  let mes = new WebSocket(`wss://api-buildwithus.ai-softdev.com/ws/chat/${route.params.id}?token=${nuxtStorage.localStorage.getData('token')}`)
-  mes.onmessage = (event) => {
-    let res = JSON.parse(event.data)
-    if (chat.userChat?.id === res.chat_id && mes.readyState === WebSocket.OPEN) {
-      let last_message = chat.userChat.messages[chat.userChat.messages.length - 1]
-      if (last_message?.date == new Date(res.created_at).toLocaleDateString()) {
-        chat.userChat.messages[chat.userChat.messages.length - 1]?.messages?.push(res)
-      } else {
-        chat.userChat.messages.push({date: new Date(res.created_at).toLocaleDateString(), messages: [res]})
-      }
-    }
-    for (let i = 0; i < chat.chatList.results.length; i++) {
-      if (chat.chatList.results[i].id === res.chat_id) {
-        chat.chatList.results[i].last_message = res
-        if(res.file !== chat.userChat.photo_url && res.message_type === 'change' && res.file) {
-          chat.userChat.photo_url = res.file
-        }
-      }
-
-    }
-    if (res.type === 'delete_message') {
-      for (let j = 0; j < chat.userChat.messages.length; j++) {
-        for (let i = chat.userChat.messages[j].messages.length - 1; i >= 0; i--) {
-          if (chat.userChat.messages[j].messages[i].id === res.message_id) {
-            chat.userChat.messages[j].messages?.splice(i, 1)
-          }
-        }
-      }
-    } else if (res.type === 'update_message') {
-      for (let j = 0; j < chat.userChat.messages.length; j++) {
-        for (let i = chat.userChat.messages[j].messages.length - 1; i >= 0; i--) {
-          if (chat.userChat.messages[j].messages[i].id === res.message.id) {
-            chat.userChat.messages[j].messages[i] = res.message;
-            break;
-          }
-        }
-      }
-    }
-  }
-  onUnmounted(() => {
-    mes.close()
-  })
-}
+// function messages() {
+//   let mes = new WebSocket(`wss://api-buildwithus.ai-softdev.com/ws?token=${nuxtStorage.localStorage.getData('token')}`)
+//   mes.onmessage = (event) => {
+//     let res = JSON.parse(event.data)
+//     if (chat.userChat?.id === res.chat_id && mes.readyState === WebSocket.OPEN) {
+//       let last_message = chat.userChat.messages[chat.userChat.messages.length - 1]
+//       if (last_message?.date == new Date(res.created_at).toLocaleDateString()) {
+//         chat.userChat.messages[chat.userChat.messages.length - 1]?.messages?.push(res)
+//       } else {
+//         chat.userChat.messages.push({date: new Date(res.created_at).toLocaleDateString(), messages: [res]})
+//       }
+//     }
+//     for (let i = 0; i < chat.chatList.results.length; i++) {
+//       if (chat.chatList.results[i].id === res.chat_id) {
+//         chat.chatList.results[i].last_message = res
+//         if(res.file !== chat.userChat.photo_url && res.message_type === 'change' && res.file) {
+//           chat.userChat.photo_url = res.file
+//         }
+//       }
+//
+//     }
+//     if (res.type === 'delete_message') {
+//       for (let j = 0; j < chat.userChat.messages.length; j++) {
+//         for (let i = chat.userChat.messages[j].messages.length - 1; i >= 0; i--) {
+//           if (chat.userChat.messages[j].messages[i].id === res.message_id) {
+//             chat.userChat.messages[j].messages?.splice(i, 1)
+//           }
+//         }
+//       }
+//     } else if (res.type === 'update_message') {
+//       for (let j = 0; j < chat.userChat.messages.length; j++) {
+//         for (let i = chat.userChat.messages[j].messages.length - 1; i >= 0; i--) {
+//           if (chat.userChat.messages[j].messages[i].id === res.message.id) {
+//             chat.userChat.messages[j].messages[i] = res.message;
+//             break;
+//           }
+//         }
+//       }
+//     }
+//   }
+//   onUnmounted(() => {
+//     mes.close()
+//   })
+// }
 
 onMounted(() => {
   chat.loadUserChat({id: route.params.id, limit: 100, page: 1})
   chat.loadPinnedList({id: route.params.id, limit: 100, page: 1})
-  messages()
+  // messages()
 })
 
 useSeoMeta({

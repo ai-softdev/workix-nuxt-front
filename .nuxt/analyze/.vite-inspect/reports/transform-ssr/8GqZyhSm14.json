@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { unref as _unref, mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderAttr as _ssrRenderAttr, ssrRenderClass as _ssrRenderClass, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\"\nimport _imports_0 from '/icons/chat-search.svg'\n\n\nimport {useRoute} from \"vue-router\";\r\nimport {useUserStore} from \"~/stores/users\";\r\nimport {useChat} from \"~/stores/chat\";\r\nimport ChatNavHeaderElem from \"~/components/Chat/ChatNav/UI/ChatNavHeaderElem.vue\";\r\nimport TheButton from \"~/components/UI/TheButton.vue\";\r\nimport ChatGroupCreate from \"~/components/Chat/ChatGroup/ChatGroupCreate.vue\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'ChatNavHeader',\n  __ssrInlineRender: true,\n  props: {\r\n  activeNav: {\r\n    type: Boolean,\r\n    default: false\r\n  },\r\n},\n  setup(__props) {\n\r\nconst userStore = useUserStore()\r\nconst chat = useChat()\r\nconst route = useRoute()\r\n\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  _push(`<div${\n    _ssrRenderAttrs(_mergeProps({ class: \"px-4 pt-4\" }, _attrs))\n  }><form class=\"relative\"><label for=\"search-chat\" class=\"absolute top-2.5 right-3\"><img${\n    _ssrRenderAttr(\"src\", _imports_0)\n  } alt=\"chat-search\"></label><input id=\"search-chat\"${\n    _ssrRenderAttr(\"value\", _unref(chat).searchElem)\n  } type=\"text\" placeholder=\"Поиск...\" class=\"${\n    _ssrRenderClass([{'max-md:hidden' : !_unref(chat).activeChatNav && _unref(route).path !== '/base/chat'}, \"w-full hover:bg-gray-50 focus:border-golden px-4 py-2.5 border rounded-full max-md:w-9/12 max-md:mx-auto block text-sm bg-white focus:bg-gray-50 text-black dark:focus:opacity-100 transition-all dark:bg-gray-600 dark:text-white outline-none\"])\n  }\"></form>`)\n  if (_unref(chat).windowWidth < 768 || _unref(chat).windowWidth > 768) {\n    _push(`<div class=\"mt-6\">`)\n    _push(_ssrRenderComponent(ChatGroupCreate, null, null, _parent))\n    _push(_ssrRenderComponent(ChatNavHeaderElem, null, null, _parent))\n    _push(`</div>`)\n  } else {\n    _push(`<!---->`)\n  }\n  _push(`</div>`)\n}\n}\n\n})",
-      "start": 1751023240394,
-      "end": 1751023240394,
+      "start": 1751024587388,
+      "end": 1751024587388,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1751023240394,
-      "end": 1751023240394,
+      "start": 1751024587388,
+      "end": 1751024587388,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1751023240394,
-      "end": 1751023240394,
+      "start": 1751024587388,
+      "end": 1751024587388,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1751023240394,
-      "end": 1751023240394,
+      "start": 1751024587388,
+      "end": 1751024587388,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1751023240394,
-      "end": 1751023240394,
+      "start": 1751024587388,
+      "end": 1751024587388,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1751023240394,
-      "end": 1751023240394,
+      "start": 1751024587388,
+      "end": 1751024587388,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1751023240394,
-      "end": 1751023240394,
+      "start": 1751024587388,
+      "end": 1751024587388,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1751023240395,
-      "end": 1751023240395,
+      "start": 1751024587388,
+      "end": 1751024587389,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1751023240395,
-      "end": 1751023240395,
+      "start": 1751024587389,
+      "end": 1751024587389,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderAttr as _ssrRenderAttr, ssrRenderClass as _ssrRenderClass, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport _imports_0 from \"/icons/chat-search.svg\";\nimport { useRoute } from \"vue-router\";\nimport { useUserStore } from \"~/stores/users\";\nimport { useChat } from \"~/stores/chat\";\nimport ChatNavHeaderElem from \"~/components/Chat/ChatNav/UI/ChatNavHeaderElem.vue\";\nimport ChatGroupCreate from \"~/components/Chat/ChatGroup/ChatGroupCreate.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ChatNavHeader\",\n  __ssrInlineRender: true,\n  props: {\n    activeNav: {\n      type: Boolean,\n      default: false\n    }\n  },\n  setup(__props) {\n    const userStore = useUserStore();\n    const chat = useChat();\n    const route = useRoute();\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"px-4 pt-4\" }, _attrs))}><form class=\"relative\"><label for=\"search-chat\" class=\"absolute top-2.5 right-3\"><img${_ssrRenderAttr(\"src\", _imports_0)} alt=\"chat-search\"></label><input id=\"search-chat\"${_ssrRenderAttr(\"value\", _unref(chat).searchElem)} type=\"text\" placeholder=\"Поиск...\" class=\"${_ssrRenderClass([{ \"max-md:hidden\": !_unref(chat).activeChatNav && _unref(route).path !== \"/base/chat\" }, \"w-full hover:bg-gray-50 focus:border-golden px-4 py-2.5 border rounded-full max-md:w-9/12 max-md:mx-auto block text-sm bg-white focus:bg-gray-50 text-black dark:focus:opacity-100 transition-all dark:bg-gray-600 dark:text-white outline-none\"])}\"></form>`);\n      if (_unref(chat).windowWidth < 768 || _unref(chat).windowWidth > 768) {\n        _push(`<div class=\"mt-6\">`);\n        _push(_ssrRenderComponent(ChatGroupCreate, null, null, _parent));\n        _push(_ssrRenderComponent(ChatNavHeaderElem, null, null, _parent));\n        _push(`</div>`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1751023240395,
-      "end": 1751023240459,
+      "start": 1751024587389,
+      "end": 1751024587442,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -86,232 +86,232 @@
     },
     {
       "name": "vite:json",
-      "start": 1751023240459,
-      "end": 1751023240459,
+      "start": 1751024587443,
+      "end": 1751024587443,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1751023240459,
-      "end": 1751023240459,
+      "start": 1751024587443,
+      "end": 1751024587443,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1751023240459,
-      "end": 1751023240459,
+      "start": 1751024587443,
+      "end": 1751024587443,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1751023240459,
-      "end": 1751023240459,
+      "start": 1751024587443,
+      "end": 1751024587443,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751023240460,
-      "end": 1751023240460,
+      "start": 1751024587443,
+      "end": 1751024587443,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751023240460,
-      "end": 1751023240460,
+      "start": 1751024587443,
+      "end": 1751024587443,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1751023240460,
-      "end": 1751023240460,
+      "start": 1751024587443,
+      "end": 1751024587443,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1751023240460,
-      "end": 1751023240460,
+      "start": 1751024587443,
+      "end": 1751024587443,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1751023240460,
-      "end": 1751023240460,
+      "start": 1751024587443,
+      "end": 1751024587444,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751023240460,
-      "end": 1751023240460,
+      "start": 1751024587444,
+      "end": 1751024587444,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1751023240460,
-      "end": 1751023240462,
+      "start": 1751024587444,
+      "end": 1751024587445,
       "order": "normal"
     },
     {
       "name": "vite:define",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderAttr as _ssrRenderAttr, ssrRenderClass as _ssrRenderClass, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport _imports_0 from \"/icons/chat-search.svg\";\nimport { useRoute } from \"vue-router\";\nimport { useUserStore } from \"~/stores/users\";\nimport { useChat } from \"~/stores/chat\";\nimport ChatNavHeaderElem from \"~/components/Chat/ChatNav/UI/ChatNavHeaderElem.vue\";\nimport ChatGroupCreate from \"~/components/Chat/ChatGroup/ChatGroupCreate.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ChatNavHeader\",\n  __ssrInlineRender: true,\n  props: {\n    activeNav: {\n      type: Boolean,\n      default: false\n    }\n  },\n  setup(__props) {\n    const userStore = useUserStore();\n    const chat = useChat();\n    const route = useRoute();\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"px-4 pt-4\" }, _attrs))}><form class=\"relative\"><label for=\"search-chat\" class=\"absolute top-2.5 right-3\"><img${_ssrRenderAttr(\"src\", _imports_0)} alt=\"chat-search\"></label><input id=\"search-chat\"${_ssrRenderAttr(\"value\", _unref(chat).searchElem)} type=\"text\" placeholder=\"Поиск...\" class=\"${_ssrRenderClass([{ \"max-md:hidden\": !_unref(chat).activeChatNav && _unref(route).path !== \"/base/chat\" }, \"w-full hover:bg-gray-50 focus:border-golden px-4 py-2.5 border rounded-full max-md:w-9/12 max-md:mx-auto block text-sm bg-white focus:bg-gray-50 text-black dark:focus:opacity-100 transition-all dark:bg-gray-600 dark:text-white outline-none\"])}\"></form>`);\n      if (_unref(chat).windowWidth < 768 || _unref(chat).windowWidth > 768) {\n        _push(`<div class=\"mt-6\">`);\n        _push(_ssrRenderComponent(ChatGroupCreate, null, null, _parent));\n        _push(_ssrRenderComponent(ChatNavHeaderElem, null, null, _parent));\n        _push(`</div>`);\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1751023240462,
-      "end": 1751023240834,
+      "start": 1751024587445,
+      "end": 1751024587783,
       "order": "normal",
       "sourcemaps": "{\n  \"version\": 3,\n  \"sources\": [\"D:/projects/nuxt/workix-nuxt-front/components/Chat/ChatNav/ChatNavHeader.vue?vue&type=script&setup=true&lang.ts\"],\n  \"sourcesContent\": [\"import { defineComponent as _defineComponent } from \\\"vue\\\";\\nimport { unref as _unref, mergeProps as _mergeProps } from \\\"vue\\\";\\nimport { ssrRenderAttr as _ssrRenderAttr, ssrRenderClass as _ssrRenderClass, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \\\"vue/server-renderer\\\";\\nimport _imports_0 from \\\"/icons/chat-search.svg\\\";\\nimport { useRoute } from \\\"vue-router\\\";\\nimport { useUserStore } from \\\"~/stores/users\\\";\\nimport { useChat } from \\\"~/stores/chat\\\";\\nimport ChatNavHeaderElem from \\\"~/components/Chat/ChatNav/UI/ChatNavHeaderElem.vue\\\";\\nimport ChatGroupCreate from \\\"~/components/Chat/ChatGroup/ChatGroupCreate.vue\\\";\\nexport default /* @__PURE__ */ _defineComponent({\\n  __name: \\\"ChatNavHeader\\\",\\n  __ssrInlineRender: true,\\n  props: {\\n    activeNav: {\\n      type: Boolean,\\n      default: false\\n    }\\n  },\\n  setup(__props) {\\n    const userStore = useUserStore();\\n    const chat = useChat();\\n    const route = useRoute();\\n    return (_ctx, _push, _parent, _attrs) => {\\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \\\"px-4 pt-4\\\" }, _attrs))}><form class=\\\"relative\\\"><label for=\\\"search-chat\\\" class=\\\"absolute top-2.5 right-3\\\"><img${_ssrRenderAttr(\\\"src\\\", _imports_0)} alt=\\\"chat-search\\\"></label><input id=\\\"search-chat\\\"${_ssrRenderAttr(\\\"value\\\", _unref(chat).searchElem)} type=\\\"text\\\" placeholder=\\\"Поиск...\\\" class=\\\"${_ssrRenderClass([{ \\\"max-md:hidden\\\": !_unref(chat).activeChatNav && _unref(route).path !== \\\"/base/chat\\\" }, \\\"w-full hover:bg-gray-50 focus:border-golden px-4 py-2.5 border rounded-full max-md:w-9/12 max-md:mx-auto block text-sm bg-white focus:bg-gray-50 text-black dark:focus:opacity-100 transition-all dark:bg-gray-600 dark:text-white outline-none\\\"])}\\\"></form>`);\\n      if (_unref(chat).windowWidth < 768 || _unref(chat).windowWidth > 768) {\\n        _push(`<div class=\\\"mt-6\\\">`);\\n        _push(_ssrRenderComponent(ChatGroupCreate, null, null, _parent));\\n        _push(_ssrRenderComponent(ChatNavHeaderElem, null, null, _parent));\\n        _push(`</div>`);\\n      } else {\\n        _push(`<!---->`);\\n      }\\n      _push(`</div>`);\\n    };\\n  }\\n});\\n\"],\n  \"mappings\": \"AAAA,SAAS,mBAAmB,wBAAwB;AACpD,SAAS,SAAS,QAAQ,cAAc,mBAAmB;AAC3D,SAAS,iBAAiB,gBAAgB,kBAAkB,iBAAiB,sBAAsB,qBAAqB,kBAAkB,uBAAuB;AACjK,OAAO,gBAAgB;AACvB,SAAS,gBAAgB;AACzB,SAAS,oBAAoB;AAC7B,SAAS,eAAe;AACxB,OAAO,uBAAuB;AAC9B,OAAO,qBAAqB;AAC5B,eAA+B,iCAAiB;AAAA,EAC9C,QAAQ;AAAA,EACR,mBAAmB;AAAA,EACnB,OAAO;AAAA,IACL,WAAW;AAAA,MACT,MAAM;AAAA,MACN,SAAS;AAAA,IACX;AAAA,EACF;AAAA,EACA,MAAM,SAAS;AACb,UAAM,YAAY,aAAa;AAC/B,UAAM,OAAO,QAAQ;AACrB,UAAM,QAAQ,SAAS;AACvB,WAAO,CAAC,MAAM,OAAO,SAAS,WAAW;AACvC,YAAM,OAAO,gBAAgB,YAAY,EAAE,OAAO,YAAY,GAAG,MAAM,CAAC,CAAC,yFAAyF,eAAe,OAAO,UAAU,CAAC,qDAAqD,eAAe,SAAS,OAAO,IAAI,EAAE,UAAU,CAAC,8CAA8C,gBAAgB,CAAC,EAAE,iBAAiB,CAAC,OAAO,IAAI,EAAE,iBAAiB,OAAO,KAAK,EAAE,SAAS,aAAa,GAAG,iPAAiP,CAAC,CAAC,WAAW;AAC9rB,UAAI,OAAO,IAAI,EAAE,cAAc,OAAO,OAAO,IAAI,EAAE,cAAc,KAAK;AACpE,cAAM,oBAAoB;AAC1B,cAAM,oBAAoB,iBAAiB,MAAM,MAAM,OAAO,CAAC;AAC/D,cAAM,oBAAoB,mBAAmB,MAAM,MAAM,OAAO,CAAC;AACjE,cAAM,QAAQ;AAAA,MAChB,OAAO;AACL,cAAM,SAAS;AAAA,MACjB;AACA,YAAM,QAAQ;AAAA,IAChB;AAAA,EACF;AACF,CAAC;\",\n  \"names\": []\n}\n"
     },
     {
       "name": "vite:css-post",
-      "start": 1751023240834,
-      "end": 1751023240834,
+      "start": 1751024587783,
+      "end": 1751024587783,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1751023240834,
-      "end": 1751023240834,
+      "start": 1751024587783,
+      "end": 1751024587783,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1751023240834,
-      "end": 1751023240834,
+      "start": 1751024587784,
+      "end": 1751024587784,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1751023240834,
-      "end": 1751023240834,
+      "start": 1751024587784,
+      "end": 1751024587784,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1751023240835,
-      "end": 1751023240835,
+      "start": 1751024587784,
+      "end": 1751024587784,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1751023240835,
-      "end": 1751023240835,
+      "start": 1751024587785,
+      "end": 1751024587785,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1751023240835,
-      "end": 1751023240836,
+      "start": 1751024587785,
+      "end": 1751024587785,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1751023240836,
-      "end": 1751023240836,
+      "start": 1751024587785,
+      "end": 1751024587785,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1751023240836,
-      "end": 1751023240836,
+      "start": 1751024587785,
+      "end": 1751024587785,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1751023240836,
-      "end": 1751023240836,
+      "start": 1751024587786,
+      "end": 1751024587786,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1751023240836,
-      "end": 1751023240837,
+      "start": 1751024587786,
+      "end": 1751024587786,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1751023240837,
-      "end": 1751023240837,
+      "start": 1751024587787,
+      "end": 1751024587788,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1751023240837,
-      "end": 1751023240837,
+      "start": 1751024587787,
+      "end": 1751024587788,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1751023240837,
-      "end": 1751023240837,
+      "start": 1751024587788,
+      "end": 1751024587788,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1751023240837,
-      "end": 1751023240837,
+      "start": 1751024587788,
+      "end": 1751024587788,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1751023240837,
-      "end": 1751023240841,
+      "start": 1751024587788,
+      "end": 1751024587789,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1751023240837,
-      "end": 1751023240841,
+      "start": 1751024587788,
+      "end": 1751024587789,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1751023240842,
-      "end": 1751023240842,
+      "start": 1751024587789,
+      "end": 1751024587789,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1751023240842,
-      "end": 1751023240843,
+      "start": 1751024587789,
+      "end": 1751024587789,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1751023240843,
-      "end": 1751023240843,
+      "start": 1751024587789,
+      "end": 1751024587789,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1751023240843,
-      "end": 1751023240843,
+      "start": 1751024587789,
+      "end": 1751024587789,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1751023240843,
-      "end": 1751023240843,
+      "start": 1751024587789,
+      "end": 1751024587789,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1751023240843,
-      "end": 1751023240843,
+      "start": 1751024587789,
+      "end": 1751024587789,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1751023240845,
-      "end": 1751023240845,
+      "start": 1751024587789,
+      "end": 1751024587789,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1751023240846,
-      "end": 1751023240846,
+      "start": 1751024587790,
+      "end": 1751024587790,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1751023240846,
-      "end": 1751023240846,
+      "start": 1751024587790,
+      "end": 1751024587790,
       "order": "normal"
     }
   ]
