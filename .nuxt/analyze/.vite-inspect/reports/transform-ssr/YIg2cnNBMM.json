@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { withCtx as _withCtx, createVNode as _createVNode, toDisplayString as _toDisplayString } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttr as _ssrRenderAttr, ssrRenderClass as _ssrRenderClass, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\"\nimport _imports_0 from '/icons/statistic.svg'\nimport _imports_1 from '/icons/tasks.svg'\nimport _imports_2 from '/icons/notifications.svg'\n\n\nimport ProfileContentChart from \"~/components/Profile/ProfileUI/ProfileContentChart.vue\";\r\nimport ProfileContentUserInfo from \"~/components/Profile/ProfileUI/ProfileContentUserInfo.vue\";\r\nimport ProfileContentNotification from \"~/components/Profile/ProfileUI/ProfileContentNotification.vue\";\r\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\r\nimport ProfileTasks from \"~/components/Profile/ProfileUI/ProfileTasks.vue\"\r\n\r\nimport {useMediaQuery, useParallax} from '@vueuse/core'\r\nimport TheContentBlock from \"~/components/UI/TheContentBlock.vue\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'ProfileContent',\n  __ssrInlineRender: true,\n  props: {\r\n  activeNav: {\r\n    type: Boolean,\r\n    default: false\r\n  }\r\n},\n  setup(__props) {\n\r\nconst target = ref(null)\r\nconst isMobile = useMediaQuery('(max-width: 700px)')\r\n\r\nconst parallax = reactive(useParallax(target))\r\n\r\nconst targetStyle: CSSProperties = {\r\n  transition: '.3s ease-out all',\r\n}\r\nconst cardWindowStyle: CSSProperties = {\r\n  margin: 'auto',\r\n}\r\nconst layerBase: CSSProperties = {\r\n  position: 'absolute',\r\n  height: '100%',\r\n  width: '100%',\r\n  transition: '.3s ease-out all',\r\n}\r\nconst containerStyle: CSSProperties = {\r\n  margin: '3em auto',\r\n  perspective: '300px',\r\n}\r\n\r\nconst cardStyle = computed(() => ({\r\n  transition: '.3s ease-out all',\r\n  transform: `rotateX(${parallax.roll * 1}deg) rotateY(${\r\n    parallax.tilt * 1\r\n  }deg)`,\r\n}))\r\n\r\nconst parallaxContainer = ref(null)\r\nconst {tilt, roll, source} = useParallax(parallaxContainer)\r\n\r\n\r\nconst props = __props\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  _push(`<!--[--><div class=\"${_ssrRenderClass([{'max-[1150px]:grid-cols-2' : __props.activeNav, 'max-[1150px]:grid-cols-3' : !__props.activeNav}, \"w-full grid grid-cols-3 gap-x-5 max-[1150px]:!grid-cols-1\"])}\">`)\n  _push(_ssrRenderComponent(ProfileContentUserInfo, null, null, _parent))\n  _push(`<div class=\"w-full col-span-2 p-6 bg-white dark:border-t dark:border-t-gray-500 dark:shadow-md shadow-cards dark:shadow-gray-500 rounded-3xl hover:transform hover:-translate-y-2 transition-all duration-200\"><div class=\"border rounded-full px-3 py-2 w-fit flex items-center gap-3 mb-8\"><img${\n    _ssrRenderAttr(\"src\", _imports_0)\n  } alt=\"statistic\"><h2 class=\"dark:text-white\">${\n    _ssrInterpolate(_ctx.$t('Личная статистика'))\n  }</h2></div>`)\n  _push(_ssrRenderComponent(ProfileContentChart, null, null, _parent))\n  _push(`</div></div><div class=\"grid grid-cols-3 max-[1150px]:!grid-cols-1 gap-x-5 mt-5\">`)\n  _push(_ssrRenderComponent(TheContentBlock, { class: \"bg-white shadow-cards hover:transform hover:-translate-y-2 transition-all duration-200\" }, {\n    default: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(`<div class=\"border rounded-full px-3 py-2 w-fit flex items-center gap-3 mb-8\"${\n          _scopeId\n        }><img${\n          _ssrRenderAttr(\"src\", _imports_1)\n        } alt=\"tasks\"${\n          _scopeId\n        }><h2 class=\"dark:text-white\"${\n          _scopeId\n        }>${\n          _ssrInterpolate(_ctx.$t('Последние задания'))\n        }</h2></div>`)\n        _push(_ssrRenderComponent(ProfileTasks, null, null, _parent, _scopeId))\n      } else {\n        return [\n          _createVNode(\"div\", { class: \"border rounded-full px-3 py-2 w-fit flex items-center gap-3 mb-8\" }, [\n            _createVNode(\"img\", {\n              src: _imports_1,\n              alt: \"tasks\"\n            }),\n            _createVNode(\"h2\", { class: \"dark:text-white\" }, _toDisplayString(_ctx.$t('Последние задания')), 1)\n          ]),\n          _createVNode(ProfileTasks)\n        ]\n      }\n    }),\n    _: 1\n  }, _parent))\n  _push(_ssrRenderComponent(TheContentBlock, { class: \"bg-white shadow-cards hover:transform hover:-translate-y-2 transition-all duration-200\" }, {\n    default: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(`<div class=\"border rounded-full px-3 py-2 w-fit flex items-center gap-3 mb-8\"${\n          _scopeId\n        }><img${\n          _ssrRenderAttr(\"src\", _imports_2)\n        } alt=\"tasks\"${\n          _scopeId\n        }><h2 class=\"dark:text-white\"${\n          _scopeId\n        }>${\n          _ssrInterpolate(_ctx.$t('Уведомления'))\n        }</h2></div>`)\n        _push(_ssrRenderComponent(ProfileContentNotification, null, null, _parent, _scopeId))\n      } else {\n        return [\n          _createVNode(\"div\", { class: \"border rounded-full px-3 py-2 w-fit flex items-center gap-3 mb-8\" }, [\n            _createVNode(\"img\", {\n              src: _imports_2,\n              alt: \"tasks\"\n            }),\n            _createVNode(\"h2\", { class: \"dark:text-white\" }, _toDisplayString(_ctx.$t('Уведомления')), 1)\n          ]),\n          _createVNode(ProfileContentNotification)\n        ]\n      }\n    }),\n    _: 1\n  }, _parent))\n  _push(`</div><!--]-->`)\n}\n}\n\n})",
-      "start": 1751024584562,
-      "end": 1751024584562,
+      "start": 1751281533174,
+      "end": 1751281533174,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1751024584562,
-      "end": 1751024584562,
+      "start": 1751281533174,
+      "end": 1751281533174,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1751024584562,
-      "end": 1751024584562,
+      "start": 1751281533174,
+      "end": 1751281533174,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1751024584562,
-      "end": 1751024584562,
+      "start": 1751281533174,
+      "end": 1751281533174,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1751024584562,
-      "end": 1751024584562,
+      "start": 1751281533174,
+      "end": 1751281533174,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1751024584562,
-      "end": 1751024584562,
+      "start": 1751281533174,
+      "end": 1751281533174,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1751024584562,
-      "end": 1751024584562,
+      "start": 1751281533174,
+      "end": 1751281533174,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1751024584562,
-      "end": 1751024584562,
+      "start": 1751281533174,
+      "end": 1751281533175,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1751024584562,
-      "end": 1751024584562,
+      "start": 1751281533175,
+      "end": 1751281533175,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { withCtx as _withCtx, createVNode as _createVNode, toDisplayString as _toDisplayString } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttr as _ssrRenderAttr, ssrRenderClass as _ssrRenderClass, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport _imports_0 from \"/icons/statistic.svg\";\nimport _imports_1 from \"/icons/tasks.svg\";\nimport _imports_2 from \"/icons/notifications.svg\";\nimport ProfileContentChart from \"~/components/Profile/ProfileUI/ProfileContentChart.vue\";\nimport ProfileContentUserInfo from \"~/components/Profile/ProfileUI/ProfileContentUserInfo.vue\";\nimport ProfileContentNotification from \"~/components/Profile/ProfileUI/ProfileContentNotification.vue\";\nimport ProfileTasks from \"~/components/Profile/ProfileUI/ProfileTasks.vue\";\nimport { useMediaQuery, useParallax } from \"@vueuse/core\";\nimport TheContentBlock from \"~/components/UI/TheContentBlock.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ProfileContent\",\n  __ssrInlineRender: true,\n  props: {\n    activeNav: {\n      type: Boolean,\n      default: false\n    }\n  },\n  setup(__props) {\n    const target = ref(null);\n    const isMobile = useMediaQuery(\"(max-width: 700px)\");\n    const parallax = reactive(useParallax(target));\n    const targetStyle = {\n      transition: \".3s ease-out all\"\n    };\n    const cardWindowStyle = {\n      margin: \"auto\"\n    };\n    const layerBase = {\n      position: \"absolute\",\n      height: \"100%\",\n      width: \"100%\",\n      transition: \".3s ease-out all\"\n    };\n    const containerStyle = {\n      margin: \"3em auto\",\n      perspective: \"300px\"\n    };\n    const cardStyle = computed(() => ({\n      transition: \".3s ease-out all\",\n      transform: `rotateX(${parallax.roll * 1}deg) rotateY(${parallax.tilt * 1}deg)`\n    }));\n    const parallaxContainer = ref(null);\n    const { tilt, roll, source } = useParallax(parallaxContainer);\n    const props = __props;\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<!--[--><div class=\"${_ssrRenderClass([{ \"max-[1150px]:grid-cols-2\": __props.activeNav, \"max-[1150px]:grid-cols-3\": !__props.activeNav }, \"w-full grid grid-cols-3 gap-x-5 max-[1150px]:!grid-cols-1\"])}\">`);\n      _push(_ssrRenderComponent(ProfileContentUserInfo, null, null, _parent));\n      _push(`<div class=\"w-full col-span-2 p-6 bg-white dark:border-t dark:border-t-gray-500 dark:shadow-md shadow-cards dark:shadow-gray-500 rounded-3xl hover:transform hover:-translate-y-2 transition-all duration-200\"><div class=\"border rounded-full px-3 py-2 w-fit flex items-center gap-3 mb-8\"><img${_ssrRenderAttr(\"src\", _imports_0)} alt=\"statistic\"><h2 class=\"dark:text-white\">${_ssrInterpolate(_ctx.$t(\"Личная статистика\"))}</h2></div>`);\n      _push(_ssrRenderComponent(ProfileContentChart, null, null, _parent));\n      _push(`</div></div><div class=\"grid grid-cols-3 max-[1150px]:!grid-cols-1 gap-x-5 mt-5\">`);\n      _push(_ssrRenderComponent(TheContentBlock, { class: \"bg-white shadow-cards hover:transform hover:-translate-y-2 transition-all duration-200\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`<div class=\"border rounded-full px-3 py-2 w-fit flex items-center gap-3 mb-8\"${_scopeId}><img${_ssrRenderAttr(\"src\", _imports_1)} alt=\"tasks\"${_scopeId}><h2 class=\"dark:text-white\"${_scopeId}>${_ssrInterpolate(_ctx.$t(\"Последние задания\"))}</h2></div>`);\n            _push2(_ssrRenderComponent(ProfileTasks, null, null, _parent2, _scopeId));\n          } else {\n            return [\n              _createVNode(\"div\", { class: \"border rounded-full px-3 py-2 w-fit flex items-center gap-3 mb-8\" }, [\n                _createVNode(\"img\", {\n                  src: _imports_1,\n                  alt: \"tasks\"\n                }),\n                _createVNode(\"h2\", { class: \"dark:text-white\" }, _toDisplayString(_ctx.$t(\"Последние задания\")), 1)\n              ]),\n              _createVNode(ProfileTasks)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(_ssrRenderComponent(TheContentBlock, { class: \"bg-white shadow-cards hover:transform hover:-translate-y-2 transition-all duration-200\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`<div class=\"border rounded-full px-3 py-2 w-fit flex items-center gap-3 mb-8\"${_scopeId}><img${_ssrRenderAttr(\"src\", _imports_2)} alt=\"tasks\"${_scopeId}><h2 class=\"dark:text-white\"${_scopeId}>${_ssrInterpolate(_ctx.$t(\"Уведомления\"))}</h2></div>`);\n            _push2(_ssrRenderComponent(ProfileContentNotification, null, null, _parent2, _scopeId));\n          } else {\n            return [\n              _createVNode(\"div\", { class: \"border rounded-full px-3 py-2 w-fit flex items-center gap-3 mb-8\" }, [\n                _createVNode(\"img\", {\n                  src: _imports_2,\n                  alt: \"tasks\"\n                }),\n                _createVNode(\"h2\", { class: \"dark:text-white\" }, _toDisplayString(_ctx.$t(\"Уведомления\")), 1)\n              ]),\n              _createVNode(ProfileContentNotification)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`</div><!--]-->`);\n    };\n  }\n});\n",
-      "start": 1751024584562,
-      "end": 1751024584632,
+      "start": 1751281533175,
+      "end": 1751281533957,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -89,171 +89,171 @@
     },
     {
       "name": "vite:json",
-      "start": 1751024584632,
-      "end": 1751024584632,
+      "start": 1751281533957,
+      "end": 1751281533957,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1751024584632,
-      "end": 1751024584632,
+      "start": 1751281533958,
+      "end": 1751281533958,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1751024584632,
-      "end": 1751024584632,
+      "start": 1751281533958,
+      "end": 1751281533958,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1751024584632,
-      "end": 1751024584632,
+      "start": 1751281533958,
+      "end": 1751281533958,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751024584632,
-      "end": 1751024584632,
+      "start": 1751281533958,
+      "end": 1751281533958,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751024584632,
-      "end": 1751024584632,
+      "start": 1751281533958,
+      "end": 1751281533958,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1751024584632,
-      "end": 1751024584632,
+      "start": 1751281533958,
+      "end": 1751281533958,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1751024584632,
-      "end": 1751024584632,
+      "start": 1751281533958,
+      "end": 1751281533958,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1751024584632,
-      "end": 1751024584632,
+      "start": 1751281533959,
+      "end": 1751281533959,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751024584632,
-      "end": 1751024584632,
+      "start": 1751281533959,
+      "end": 1751281533959,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1751024584632,
-      "end": 1751024584633,
+      "start": 1751281533960,
+      "end": 1751281533961,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1751024584633,
-      "end": 1751024584633,
+      "start": 1751281533962,
+      "end": 1751281533962,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1751024584633,
-      "end": 1751024584633,
+      "start": 1751281533962,
+      "end": 1751281533962,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1751024584633,
-      "end": 1751024584633,
+      "start": 1751281533962,
+      "end": 1751281533962,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1751024584633,
-      "end": 1751024584633,
+      "start": 1751281533962,
+      "end": 1751281533962,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1751024584633,
-      "end": 1751024584633,
+      "start": 1751281533962,
+      "end": 1751281533962,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1751024584633,
-      "end": 1751024584633,
+      "start": 1751281533962,
+      "end": 1751281533962,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1751024584633,
-      "end": 1751024584633,
+      "start": 1751281533963,
+      "end": 1751281533963,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1751024584633,
-      "end": 1751024584633,
+      "start": 1751281533963,
+      "end": 1751281533963,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1751024584633,
-      "end": 1751024584633,
+      "start": 1751281533963,
+      "end": 1751281533963,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1751024584633,
-      "end": 1751024584633,
+      "start": 1751281533963,
+      "end": 1751281533964,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1751024584633,
-      "end": 1751024584633,
+      "start": 1751281533964,
+      "end": 1751281533964,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1751024584633,
-      "end": 1751024584633,
+      "start": 1751281533964,
+      "end": 1751281533964,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1751024584633,
-      "end": 1751024584633,
+      "start": 1751281533965,
+      "end": 1751281533965,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1751024584633,
-      "end": 1751024584633,
+      "start": 1751281533965,
+      "end": 1751281533965,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1751024584633,
-      "end": 1751024584633,
+      "start": 1751281533967,
+      "end": 1751281533967,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1751024584633,
-      "end": 1751024584633,
+      "start": 1751281533967,
+      "end": 1751281533967,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref, reactive, computed } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { withCtx as _withCtx, createVNode as _createVNode, toDisplayString as _toDisplayString } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttr as _ssrRenderAttr, ssrRenderClass as _ssrRenderClass, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport _imports_0 from \"/icons/statistic.svg\";\nimport _imports_1 from \"/icons/tasks.svg\";\nimport _imports_2 from \"/icons/notifications.svg\";\nimport ProfileContentChart from \"~/components/Profile/ProfileUI/ProfileContentChart.vue\";\nimport ProfileContentUserInfo from \"~/components/Profile/ProfileUI/ProfileContentUserInfo.vue\";\nimport ProfileContentNotification from \"~/components/Profile/ProfileUI/ProfileContentNotification.vue\";\nimport ProfileTasks from \"~/components/Profile/ProfileUI/ProfileTasks.vue\";\nimport { useMediaQuery, useParallax } from \"@vueuse/core\";\nimport TheContentBlock from \"~/components/UI/TheContentBlock.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ProfileContent\",\n  __ssrInlineRender: true,\n  props: {\n    activeNav: {\n      type: Boolean,\n      default: false\n    }\n  },\n  setup(__props) {\n    const target = ref(null);\n    const isMobile = useMediaQuery(\"(max-width: 700px)\");\n    const parallax = reactive(useParallax(target));\n    const targetStyle = {\n      transition: \".3s ease-out all\"\n    };\n    const cardWindowStyle = {\n      margin: \"auto\"\n    };\n    const layerBase = {\n      position: \"absolute\",\n      height: \"100%\",\n      width: \"100%\",\n      transition: \".3s ease-out all\"\n    };\n    const containerStyle = {\n      margin: \"3em auto\",\n      perspective: \"300px\"\n    };\n    const cardStyle = computed(() => ({\n      transition: \".3s ease-out all\",\n      transform: `rotateX(${parallax.roll * 1}deg) rotateY(${parallax.tilt * 1}deg)`\n    }));\n    const parallaxContainer = ref(null);\n    const { tilt, roll, source } = useParallax(parallaxContainer);\n    const props = __props;\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<!--[--><div class=\"${_ssrRenderClass([{ \"max-[1150px]:grid-cols-2\": __props.activeNav, \"max-[1150px]:grid-cols-3\": !__props.activeNav }, \"w-full grid grid-cols-3 gap-x-5 max-[1150px]:!grid-cols-1\"])}\">`);\n      _push(_ssrRenderComponent(ProfileContentUserInfo, null, null, _parent));\n      _push(`<div class=\"w-full col-span-2 p-6 bg-white dark:border-t dark:border-t-gray-500 dark:shadow-md shadow-cards dark:shadow-gray-500 rounded-3xl hover:transform hover:-translate-y-2 transition-all duration-200\"><div class=\"border rounded-full px-3 py-2 w-fit flex items-center gap-3 mb-8\"><img${_ssrRenderAttr(\"src\", _imports_0)} alt=\"statistic\"><h2 class=\"dark:text-white\">${_ssrInterpolate(_ctx.$t(\"Личная статистика\"))}</h2></div>`);\n      _push(_ssrRenderComponent(ProfileContentChart, null, null, _parent));\n      _push(`</div></div><div class=\"grid grid-cols-3 max-[1150px]:!grid-cols-1 gap-x-5 mt-5\">`);\n      _push(_ssrRenderComponent(TheContentBlock, { class: \"bg-white shadow-cards hover:transform hover:-translate-y-2 transition-all duration-200\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`<div class=\"border rounded-full px-3 py-2 w-fit flex items-center gap-3 mb-8\"${_scopeId}><img${_ssrRenderAttr(\"src\", _imports_1)} alt=\"tasks\"${_scopeId}><h2 class=\"dark:text-white\"${_scopeId}>${_ssrInterpolate(_ctx.$t(\"Последние задания\"))}</h2></div>`);\n            _push2(_ssrRenderComponent(ProfileTasks, null, null, _parent2, _scopeId));\n          } else {\n            return [\n              _createVNode(\"div\", { class: \"border rounded-full px-3 py-2 w-fit flex items-center gap-3 mb-8\" }, [\n                _createVNode(\"img\", {\n                  src: _imports_1,\n                  alt: \"tasks\"\n                }),\n                _createVNode(\"h2\", { class: \"dark:text-white\" }, _toDisplayString(_ctx.$t(\"Последние задания\")), 1)\n              ]),\n              _createVNode(ProfileTasks)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(_ssrRenderComponent(TheContentBlock, { class: \"bg-white shadow-cards hover:transform hover:-translate-y-2 transition-all duration-200\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`<div class=\"border rounded-full px-3 py-2 w-fit flex items-center gap-3 mb-8\"${_scopeId}><img${_ssrRenderAttr(\"src\", _imports_2)} alt=\"tasks\"${_scopeId}><h2 class=\"dark:text-white\"${_scopeId}>${_ssrInterpolate(_ctx.$t(\"Уведомления\"))}</h2></div>`);\n            _push2(_ssrRenderComponent(ProfileContentNotification, null, null, _parent2, _scopeId));\n          } else {\n            return [\n              _createVNode(\"div\", { class: \"border rounded-full px-3 py-2 w-fit flex items-center gap-3 mb-8\" }, [\n                _createVNode(\"img\", {\n                  src: _imports_2,\n                  alt: \"tasks\"\n                }),\n                _createVNode(\"h2\", { class: \"dark:text-white\" }, _toDisplayString(_ctx.$t(\"Уведомления\")), 1)\n              ]),\n              _createVNode(ProfileContentNotification)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`</div><!--]-->`);\n    };\n  }\n});\n",
-      "start": 1751024584633,
-      "end": 1751024584636,
+      "start": 1751281533967,
+      "end": 1751281533973,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -267,8 +267,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref, reactive, computed } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { withCtx as _withCtx, createVNode as _createVNode, toDisplayString as _toDisplayString } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttr as _ssrRenderAttr, ssrRenderClass as _ssrRenderClass, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport _imports_0 from \"/icons/statistic.svg\";\nimport _imports_1 from \"/icons/tasks.svg\";\nimport _imports_2 from \"/icons/notifications.svg\";\nimport ProfileContentChart from \"~/components/Profile/ProfileUI/ProfileContentChart.vue\";\nimport ProfileContentUserInfo from \"~/components/Profile/ProfileUI/ProfileContentUserInfo.vue\";\nimport ProfileContentNotification from \"~/components/Profile/ProfileUI/ProfileContentNotification.vue\";\nimport ProfileTasks from \"~/components/Profile/ProfileUI/ProfileTasks.vue\";\nimport { useMediaQuery, useParallax } from \"@vueuse/core\";\nimport TheContentBlock from \"~/components/UI/TheContentBlock.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ProfileContent\",\n  __ssrInlineRender: true,\n  props: {\n    activeNav: {\n      type: Boolean,\n      default: false\n    }\n  },\n  setup(__props) {\n    const target = ref(null);\n    const isMobile = useMediaQuery(\"(max-width: 700px)\");\n    const parallax = reactive(useParallax(target));\n    const targetStyle = {\n      transition: \".3s ease-out all\"\n    };\n    const cardWindowStyle = {\n      margin: \"auto\"\n    };\n    const layerBase = {\n      position: \"absolute\",\n      height: \"100%\",\n      width: \"100%\",\n      transition: \".3s ease-out all\"\n    };\n    const containerStyle = {\n      margin: \"3em auto\",\n      perspective: \"300px\"\n    };\n    const cardStyle = computed(() => ({\n      transition: \".3s ease-out all\",\n      transform: `rotateX(${parallax.roll * 1}deg) rotateY(${parallax.tilt * 1}deg)`\n    }));\n    const parallaxContainer = ref(null);\n    const { tilt, roll, source } = useParallax(parallaxContainer);\n    const props = __props;\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<!--[--><div class=\"${_ssrRenderClass([{ \"max-[1150px]:grid-cols-2\": __props.activeNav, \"max-[1150px]:grid-cols-3\": !__props.activeNav }, \"w-full grid grid-cols-3 gap-x-5 max-[1150px]:!grid-cols-1\"])}\">`);\n      _push(_ssrRenderComponent(ProfileContentUserInfo, null, null, _parent));\n      _push(`<div class=\"w-full col-span-2 p-6 bg-white dark:border-t dark:border-t-gray-500 dark:shadow-md shadow-cards dark:shadow-gray-500 rounded-3xl hover:transform hover:-translate-y-2 transition-all duration-200\"><div class=\"border rounded-full px-3 py-2 w-fit flex items-center gap-3 mb-8\"><img${_ssrRenderAttr(\"src\", _imports_0)} alt=\"statistic\"><h2 class=\"dark:text-white\">${_ssrInterpolate(_ctx.$t(\"Личная статистика\"))}</h2></div>`);\n      _push(_ssrRenderComponent(ProfileContentChart, null, null, _parent));\n      _push(`</div></div><div class=\"grid grid-cols-3 max-[1150px]:!grid-cols-1 gap-x-5 mt-5\">`);\n      _push(_ssrRenderComponent(TheContentBlock, { class: \"bg-white shadow-cards hover:transform hover:-translate-y-2 transition-all duration-200\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`<div class=\"border rounded-full px-3 py-2 w-fit flex items-center gap-3 mb-8\"${_scopeId}><img${_ssrRenderAttr(\"src\", _imports_1)} alt=\"tasks\"${_scopeId}><h2 class=\"dark:text-white\"${_scopeId}>${_ssrInterpolate(_ctx.$t(\"Последние задания\"))}</h2></div>`);\n            _push2(_ssrRenderComponent(ProfileTasks, null, null, _parent2, _scopeId));\n          } else {\n            return [\n              _createVNode(\"div\", { class: \"border rounded-full px-3 py-2 w-fit flex items-center gap-3 mb-8\" }, [\n                _createVNode(\"img\", {\n                  src: _imports_1,\n                  alt: \"tasks\"\n                }),\n                _createVNode(\"h2\", { class: \"dark:text-white\" }, _toDisplayString(_ctx.$t(\"Последние задания\")), 1)\n              ]),\n              _createVNode(ProfileTasks)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(_ssrRenderComponent(TheContentBlock, { class: \"bg-white shadow-cards hover:transform hover:-translate-y-2 transition-all duration-200\" }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`<div class=\"border rounded-full px-3 py-2 w-fit flex items-center gap-3 mb-8\"${_scopeId}><img${_ssrRenderAttr(\"src\", _imports_2)} alt=\"tasks\"${_scopeId}><h2 class=\"dark:text-white\"${_scopeId}>${_ssrInterpolate(_ctx.$t(\"Уведомления\"))}</h2></div>`);\n            _push2(_ssrRenderComponent(ProfileContentNotification, null, null, _parent2, _scopeId));\n          } else {\n            return [\n              _createVNode(\"div\", { class: \"border rounded-full px-3 py-2 w-fit flex items-center gap-3 mb-8\" }, [\n                _createVNode(\"img\", {\n                  src: _imports_2,\n                  alt: \"tasks\"\n                }),\n                _createVNode(\"h2\", { class: \"dark:text-white\" }, _toDisplayString(_ctx.$t(\"Уведомления\")), 1)\n              ]),\n              _createVNode(ProfileContentNotification)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`</div><!--]-->`);\n    };\n  }\n});\n",
-      "start": 1751024584633,
-      "end": 1751024584636,
+      "start": 1751281533967,
+      "end": 1751281533973,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -281,56 +281,56 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1751024584636,
-      "end": 1751024584636,
+      "start": 1751281533973,
+      "end": 1751281533973,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1751024584636,
-      "end": 1751024584636,
+      "start": 1751281533973,
+      "end": 1751281533973,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1751024584636,
-      "end": 1751024584636,
+      "start": 1751281533974,
+      "end": 1751281533974,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1751024584636,
-      "end": 1751024584636,
+      "start": 1751281533974,
+      "end": 1751281533974,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1751024584636,
-      "end": 1751024584637,
+      "start": 1751281533974,
+      "end": 1751281533974,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1751024584637,
-      "end": 1751024584637,
+      "start": 1751281533974,
+      "end": 1751281533974,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1751024584637,
-      "end": 1751024584637,
+      "start": 1751281533975,
+      "end": 1751281533975,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1751024584637,
-      "end": 1751024584637,
+      "start": 1751281533975,
+      "end": 1751281533976,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1751024584637,
-      "end": 1751024584637,
+      "start": 1751281533976,
+      "end": 1751281533976,
       "order": "normal"
     }
   ]

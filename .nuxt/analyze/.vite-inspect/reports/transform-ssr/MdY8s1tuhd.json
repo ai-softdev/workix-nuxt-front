@@ -4,233 +4,233 @@
     {
       "name": "vite:load-fallback",
       "result": "import { joinURL, isEqual } from \"ufo\";\nimport { isString, isFunction, isObject } from \"@intlify/shared\";\nimport { navigateTo, useNuxtApp, useRouter, useRuntimeConfig, useState } from \"#imports\";\nimport {\n  nuxtI18nOptionsDefault,\n  NUXT_I18N_MODULE_ID,\n  isSSG,\n  localeLoaders,\n  normalizedLocales,\n  nuxtI18nOptions\n} from \"#build/i18n.options.mjs\";\nimport {\n  wrapComposable,\n  detectBrowserLanguage,\n  callVueI18nInterfaces,\n  getVueI18nPropertyValue,\n  defineGetter,\n  getLocaleDomain,\n  getDomainFromLocale,\n  DefaultDetectBrowserLanguageFromResult\n} from \"./internal.mjs\";\nimport { loadLocale, makeFallbackLocaleCodes } from \"./messages.mjs\";\nimport {\n  localeHead,\n  localePath,\n  localeRoute,\n  getRouteBaseName,\n  switchLocalePath,\n  DefaultPrefixable,\n  DefaultSwitchLocalePathIntercepter\n} from \"./routing/compatibles/index.mjs\";\nimport { getLocale, setLocale, getLocaleCodes, getI18nTarget } from \"./routing/utils.mjs\";\nexport function _setLocale(i18n, locale) {\n  return callVueI18nInterfaces(i18n, \"setLocale\", locale);\n}\nexport function setCookieLocale(i18n, locale) {\n  return callVueI18nInterfaces(i18n, \"setLocaleCookie\", locale);\n}\nexport function setLocaleMessage(i18n, locale, messages) {\n  return callVueI18nInterfaces(i18n, \"setLocaleMessage\", locale, messages);\n}\nexport function mergeLocaleMessage(i18n, locale, messages) {\n  return callVueI18nInterfaces(i18n, \"mergeLocaleMessage\", locale, messages);\n}\nfunction onBeforeLanguageSwitch(i18n, oldLocale, newLocale, initial, context) {\n  return callVueI18nInterfaces(i18n, \"onBeforeLanguageSwitch\", oldLocale, newLocale, initial, context);\n}\nexport function onLanguageSwitched(i18n, oldLocale, newLocale) {\n  return callVueI18nInterfaces(i18n, \"onLanguageSwitched\", oldLocale, newLocale);\n}\nexport async function finalizePendingLocaleChange(i18n) {\n  return callVueI18nInterfaces(i18n, \"finalizePendingLocaleChange\");\n}\nexport function initCommonComposableOptions(i18n) {\n  return {\n    i18n: i18n ?? useNuxtApp().$i18n,\n    router: useRouter(),\n    runtimeConfig: useRuntimeConfig()\n  };\n}\nexport async function loadAndSetLocale(newLocale, i18n, initial = false) {\n  const _differentDomains = nuxtI18nOptions.differentDomains ?? nuxtI18nOptionsDefault.differentDomains;\n  const skipSettingLocaleOnNavigate = nuxtI18nOptions.skipSettingLocaleOnNavigate ?? nuxtI18nOptionsDefault.skipSettingLocaleOnNavigate;\n  const lazy = nuxtI18nOptions.lazy ?? nuxtI18nOptionsDefault.lazy;\n  const useCookie = (nuxtI18nOptions.detectBrowserLanguage && nuxtI18nOptions.detectBrowserLanguage.useCookie) ?? nuxtI18nOptionsDefault.detectBrowserLanguage.useCookie;\n  const nuxtApp = useNuxtApp();\n  let ret = false;\n  const oldLocale = getLocale(i18n);\n  __DEBUG__ && console.log(\"setLocale: new -> \", newLocale, \" old -> \", oldLocale, \" initial -> \", initial);\n  if (!newLocale) {\n    return [ret, oldLocale];\n  }\n  if (!initial && _differentDomains) {\n    return [ret, oldLocale];\n  }\n  if (oldLocale === newLocale) {\n    return [ret, oldLocale];\n  }\n  const localeOverride = await onBeforeLanguageSwitch(i18n, oldLocale, newLocale, initial, nuxtApp);\n  const localeCodes = getLocaleCodes(i18n);\n  if (localeOverride && localeCodes && localeCodes.includes(localeOverride)) {\n    if (localeOverride === oldLocale) {\n      return [ret, oldLocale];\n    }\n    newLocale = localeOverride;\n  }\n  const i18nFallbackLocales = getVueI18nPropertyValue(i18n, \"fallbackLocale\");\n  if (lazy) {\n    const setter = (locale, message) => mergeLocaleMessage(i18n, locale, message);\n    if (i18nFallbackLocales) {\n      const fallbackLocales = makeFallbackLocaleCodes(i18nFallbackLocales, [newLocale]);\n      await Promise.all(fallbackLocales.map((locale) => loadLocale(locale, localeLoaders, setter)));\n    }\n    await loadLocale(newLocale, localeLoaders, setter);\n  }\n  if (skipSettingLocaleOnNavigate) {\n    return [ret, oldLocale];\n  }\n  if (useCookie) {\n    setCookieLocale(i18n, newLocale);\n  }\n  setLocale(i18n, newLocale);\n  await onLanguageSwitched(i18n, oldLocale, newLocale);\n  ret = true;\n  return [ret, oldLocale];\n}\nexport function detectLocale(route, routeLocaleGetter, vueI18nOptionsLocale, initialLocaleLoader, detectLocaleContext) {\n  const { strategy, defaultLocale, differentDomains, detectBrowserLanguage: _detectBrowserLanguage } = nuxtI18nOptions;\n  const initialLocale = isFunction(initialLocaleLoader) ? initialLocaleLoader() : initialLocaleLoader;\n  __DEBUG__ && console.log(\"detectLocale: initialLocale -\", initialLocale);\n  const { ssg, callType, firstAccess, localeCookie } = detectLocaleContext;\n  __DEBUG__ && console.log(\"detectLocale: (ssg, callType, firstAccess) - \", ssg, callType, firstAccess);\n  const {\n    locale: browserLocale,\n    stat,\n    reason,\n    from\n  } = _detectBrowserLanguage ? detectBrowserLanguage(route, vueI18nOptionsLocale, detectLocaleContext, initialLocale) : DefaultDetectBrowserLanguageFromResult;\n  __DEBUG__ && console.log(\n    \"detectLocale: detectBrowserLanguage (browserLocale, stat, reason, from) -\",\n    browserLocale,\n    stat,\n    reason,\n    from\n  );\n  if (reason === \"detect_ignore_on_ssg\") {\n    return initialLocale;\n  }\n  if ((from === \"navigator_or_header\" || from === \"cookie\" || from === \"fallback\") && browserLocale) {\n    return browserLocale;\n  }\n  let finalLocale = browserLocale;\n  __DEBUG__ && console.log(\"detectLocale: finaleLocale first (finaleLocale, strategy) -\", finalLocale, strategy);\n  if (!finalLocale) {\n    if (differentDomains) {\n      finalLocale = getLocaleDomain(normalizedLocales);\n    } else if (strategy !== \"no_prefix\") {\n      finalLocale = routeLocaleGetter(route);\n    } else {\n      if (!_detectBrowserLanguage) {\n        finalLocale = initialLocale;\n      }\n    }\n  }\n  __DEBUG__ && console.log(\n    \"detectLocale: finaleLocale second (finaleLocale, detectBrowserLanguage) -\",\n    finalLocale,\n    _detectBrowserLanguage\n  );\n  if (!finalLocale && _detectBrowserLanguage && _detectBrowserLanguage.useCookie) {\n    finalLocale = localeCookie.value || \"\";\n  }\n  __DEBUG__ && console.log(\"detectLocale: finalLocale last (finalLocale, defaultLocale) -\", finalLocale, defaultLocale);\n  if (!finalLocale) {\n    finalLocale = defaultLocale || \"\";\n  }\n  __DEBUG__ && console.log(\"detectLocale: finalLocale -\", finalLocale);\n  return finalLocale;\n}\nexport function detectRedirect({\n  route,\n  targetLocale,\n  routeLocaleGetter,\n  calledWithRouting = false\n}) {\n  const nuxtApp = useNuxtApp();\n  const common = initCommonComposableOptions();\n  const { strategy, differentDomains } = nuxtI18nOptions;\n  __DEBUG__ && console.log(\"detectRedirect: targetLocale -> \", targetLocale);\n  __DEBUG__ && console.log(\"detectRedirect: route -> \", route);\n  __DEBUG__ && console.log(\"detectRedirect: calledWithRouting -> \", calledWithRouting, routeLocaleGetter(route.to));\n  let redirectPath = \"\";\n  const { fullPath: toFullPath } = route.to;\n  const isStaticGenerate = isSSG && process.server;\n  if (!isStaticGenerate && !differentDomains && (calledWithRouting || strategy !== \"no_prefix\") && routeLocaleGetter(route.to) !== targetLocale) {\n    const routePath = nuxtApp.$switchLocalePath(targetLocale) || nuxtApp.$localePath(toFullPath, targetLocale);\n    __DEBUG__ && console.log(\"detectRedirect: calculate routePath -> \", routePath, toFullPath);\n    if (isString(routePath) && routePath && !isEqual(routePath, toFullPath) && !routePath.startsWith(\"//\")) {\n      redirectPath = !(route.from && route.from.fullPath === routePath) ? routePath : \"\";\n    }\n  }\n  if ((differentDomains || isSSG && process.client) && routeLocaleGetter(route.to) !== targetLocale) {\n    const routePath = switchLocalePath(common, targetLocale, route.to);\n    __DEBUG__ && console.log(\"detectRedirect: calculate domain or ssg routePath -> \", routePath);\n    if (isString(routePath) && routePath && !isEqual(routePath, toFullPath) && !routePath.startsWith(\"//\")) {\n      redirectPath = routePath;\n    }\n  }\n  return redirectPath;\n}\nfunction isRootRedirectOptions(rootRedirect) {\n  return isObject(rootRedirect) && \"path\" in rootRedirect && \"statusCode\" in rootRedirect;\n}\nconst useRedirectState = () => useState(NUXT_I18N_MODULE_ID + \":redirect\", () => \"\");\nfunction _navigate(redirectPath, status) {\n  return navigateTo(redirectPath, { redirectCode: status });\n}\nexport async function navigate(args, { status = 302, enableNavigate = false } = {}) {\n  const rootRedirect = nuxtI18nOptions.rootRedirect ?? nuxtI18nOptionsDefault.rootRedirect;\n  const differentDomains = nuxtI18nOptions.differentDomains ?? nuxtI18nOptionsDefault.differentDomains;\n  const skipSettingLocaleOnNavigate = nuxtI18nOptions.skipSettingLocaleOnNavigate ?? nuxtI18nOptionsDefault.skipSettingLocaleOnNavigate;\n  const { i18n, locale, route } = args;\n  let { redirectPath } = args;\n  __DEBUG__ && console.log(\n    \"navigate options \",\n    status,\n    rootRedirect,\n    differentDomains,\n    skipSettingLocaleOnNavigate,\n    enableNavigate\n  );\n  __DEBUG__ && console.log(\"navigate isSSG\", isSSG);\n  if (route.path === \"/\" && rootRedirect) {\n    if (isString(rootRedirect)) {\n      redirectPath = \"/\" + rootRedirect;\n    } else if (isRootRedirectOptions(rootRedirect)) {\n      redirectPath = \"/\" + rootRedirect.path;\n      status = rootRedirect.statusCode;\n    }\n    __DEBUG__ && console.log(\"navigate: rootRedirect mode redirectPath -> \", redirectPath, \" status -> \", status);\n    return _navigate(redirectPath, status);\n  }\n  if (process.client && skipSettingLocaleOnNavigate) {\n    i18n.__pendingLocale = locale;\n    i18n.__pendingLocalePromise = new Promise((resolve) => {\n      i18n.__resolvePendingLocalePromise = resolve;\n    });\n    if (!enableNavigate) {\n      return;\n    }\n  }\n  if (!differentDomains) {\n    if (redirectPath) {\n      return _navigate(redirectPath, status);\n    }\n  } else {\n    const state = useRedirectState();\n    __DEBUG__ && console.log(\"redirect state ->\", state.value, \"redirectPath -> \", redirectPath);\n    if (state.value && state.value !== redirectPath) {\n      if (process.client) {\n        state.value = \"\";\n        window.location.assign(redirectPath);\n      } else if (process.server) {\n        __DEBUG__ && console.log(\"differentDomains servermode \", redirectPath);\n        state.value = redirectPath;\n      }\n    }\n  }\n}\nexport function injectNuxtHelpers(nuxt, i18n) {\n  defineGetter(nuxt, \"$i18n\", getI18nTarget(i18n));\n  defineGetter(nuxt, \"$getRouteBaseName\", getRouteBaseName);\n  defineGetter(nuxt, \"$localePath\", wrapComposable(localePath));\n  defineGetter(nuxt, \"$localeRoute\", wrapComposable(localeRoute));\n  defineGetter(nuxt, \"$switchLocalePath\", wrapComposable(switchLocalePath));\n  defineGetter(nuxt, \"$localeHead\", wrapComposable(localeHead));\n}\nexport function extendPrefixable() {\n  return (opts) => {\n    return DefaultPrefixable(opts) && !nuxtI18nOptions.differentDomains;\n  };\n}\nexport function extendSwitchLocalePathIntercepter() {\n  return (path, locale) => {\n    if (nuxtI18nOptions.differentDomains) {\n      const domain = getDomainFromLocale(locale);\n      __DEBUG__ && console.log(\"extendSwitchLocalePathIntercepter: domain -> \", domain, \" path -> \", path);\n      if (domain) {\n        return joinURL(domain, path);\n      } else {\n        return path;\n      }\n    } else {\n      return DefaultSwitchLocalePathIntercepter(path, locale);\n    }\n  };\n}\nexport function extendBaseUrl() {\n  return () => {\n    const ctx = useNuxtApp();\n    const runtimeConfig = useRuntimeConfig();\n    const baseUrl = nuxtI18nOptions.baseUrl;\n    if (isFunction(baseUrl)) {\n      const baseUrlResult = baseUrl(ctx);\n      __DEBUG__ && console.log(\"baseUrl: using localeLoader function -\", baseUrlResult);\n      return baseUrlResult;\n    }\n    const localeCodeLoader = nuxtI18nOptions.defaultLocale;\n    const localeCode = isFunction(localeCodeLoader) ? localeCodeLoader() : localeCodeLoader;\n    if (nuxtI18nOptions.differentDomains && localeCode) {\n      const domain = getDomainFromLocale(localeCode);\n      if (domain) {\n        __DEBUG__ && console.log(\"baseUrl: using differentDomains -\", domain);\n        return domain;\n      }\n    }\n    const config = runtimeConfig?.public?.i18n;\n    if (config?.baseUrl) {\n      __DEBUG__ && console.log(\"baseUrl: using runtimeConfig -\", config.baseUrl);\n      return config.baseUrl;\n    }\n    return baseUrl;\n  };\n}\nexport function getNormalizedLocales(locales) {\n  const normalized = [];\n  for (const locale of locales) {\n    if (isString(locale)) {\n      normalized.push({ code: locale });\n      continue;\n    }\n    normalized.push(locale);\n  }\n  return normalized;\n}\n",
-      "start": 1751024577486,
-      "end": 1751024577591,
+      "start": 1751281524484,
+      "end": 1751281524618,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1751024577591,
-      "end": 1751024577591,
+      "start": 1751281524618,
+      "end": 1751281524618,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1751024577591,
-      "end": 1751024577591,
+      "start": 1751281524618,
+      "end": 1751281524618,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1751024577591,
-      "end": 1751024577591,
+      "start": 1751281524618,
+      "end": 1751281524618,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1751024577591,
-      "end": 1751024577591,
+      "start": 1751281524618,
+      "end": 1751281524618,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1751024577591,
-      "end": 1751024577591,
+      "start": 1751281524618,
+      "end": 1751281524618,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1751024577591,
-      "end": 1751024577591,
+      "start": 1751281524618,
+      "end": 1751281524618,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1751024577591,
-      "end": 1751024577591,
+      "start": 1751281524618,
+      "end": 1751281524618,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1751024577591,
-      "end": 1751024577591,
+      "start": 1751281524618,
+      "end": 1751281524618,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1751024577591,
-      "end": 1751024577591,
+      "start": 1751281524618,
+      "end": 1751281524618,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1751024577591,
-      "end": 1751024577591,
+      "start": 1751281524618,
+      "end": 1751281524618,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1751024577591,
-      "end": 1751024577591,
+      "start": 1751281524618,
+      "end": 1751281524618,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1751024577591,
-      "end": 1751024577591,
+      "start": 1751281524618,
+      "end": 1751281524618,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1751024577591,
-      "end": 1751024577591,
+      "start": 1751281524618,
+      "end": 1751281524618,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751024577591,
-      "end": 1751024577591,
+      "start": 1751281524618,
+      "end": 1751281524618,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751024577591,
-      "end": 1751024577591,
+      "start": 1751281524618,
+      "end": 1751281524618,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1751024577591,
-      "end": 1751024577591,
+      "start": 1751281524618,
+      "end": 1751281524618,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1751024577591,
-      "end": 1751024577591,
+      "start": 1751281524618,
+      "end": 1751281524618,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1751024577591,
-      "end": 1751024577591,
+      "start": 1751281524618,
+      "end": 1751281524618,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751024577591,
-      "end": 1751024577591,
+      "start": 1751281524618,
+      "end": 1751281524618,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1751024577591,
-      "end": 1751024577592,
+      "start": 1751281524618,
+      "end": 1751281524619,
       "order": "normal"
     },
     {
       "name": "vite:define",
       "result": "import { joinURL, isEqual } from \"ufo\";\nimport { isString, isFunction, isObject } from \"@intlify/shared\";\nimport { navigateTo, useNuxtApp, useRouter, useRuntimeConfig, useState } from \"#imports\";\nimport {\n  nuxtI18nOptionsDefault,\n  NUXT_I18N_MODULE_ID,\n  isSSG,\n  localeLoaders,\n  normalizedLocales,\n  nuxtI18nOptions\n} from \"#build/i18n.options.mjs\";\nimport {\n  wrapComposable,\n  detectBrowserLanguage,\n  callVueI18nInterfaces,\n  getVueI18nPropertyValue,\n  defineGetter,\n  getLocaleDomain,\n  getDomainFromLocale,\n  DefaultDetectBrowserLanguageFromResult\n} from \"./internal.mjs\";\nimport { loadLocale, makeFallbackLocaleCodes } from \"./messages.mjs\";\nimport {\n  localeHead,\n  localePath,\n  localeRoute,\n  getRouteBaseName,\n  switchLocalePath,\n  DefaultPrefixable,\n  DefaultSwitchLocalePathIntercepter\n} from \"./routing/compatibles/index.mjs\";\nimport { getLocale, setLocale, getLocaleCodes, getI18nTarget } from \"./routing/utils.mjs\";\nexport function _setLocale(i18n, locale) {\n  return callVueI18nInterfaces(i18n, \"setLocale\", locale);\n}\nexport function setCookieLocale(i18n, locale) {\n  return callVueI18nInterfaces(i18n, \"setLocaleCookie\", locale);\n}\nexport function setLocaleMessage(i18n, locale, messages) {\n  return callVueI18nInterfaces(i18n, \"setLocaleMessage\", locale, messages);\n}\nexport function mergeLocaleMessage(i18n, locale, messages) {\n  return callVueI18nInterfaces(i18n, \"mergeLocaleMessage\", locale, messages);\n}\nfunction onBeforeLanguageSwitch(i18n, oldLocale, newLocale, initial, context) {\n  return callVueI18nInterfaces(i18n, \"onBeforeLanguageSwitch\", oldLocale, newLocale, initial, context);\n}\nexport function onLanguageSwitched(i18n, oldLocale, newLocale) {\n  return callVueI18nInterfaces(i18n, \"onLanguageSwitched\", oldLocale, newLocale);\n}\nexport async function finalizePendingLocaleChange(i18n) {\n  return callVueI18nInterfaces(i18n, \"finalizePendingLocaleChange\");\n}\nexport function initCommonComposableOptions(i18n) {\n  return {\n    i18n: i18n ?? useNuxtApp().$i18n,\n    router: useRouter(),\n    runtimeConfig: useRuntimeConfig()\n  };\n}\nexport async function loadAndSetLocale(newLocale, i18n, initial = false) {\n  const _differentDomains = nuxtI18nOptions.differentDomains ?? nuxtI18nOptionsDefault.differentDomains;\n  const skipSettingLocaleOnNavigate = nuxtI18nOptions.skipSettingLocaleOnNavigate ?? nuxtI18nOptionsDefault.skipSettingLocaleOnNavigate;\n  const lazy = nuxtI18nOptions.lazy ?? nuxtI18nOptionsDefault.lazy;\n  const useCookie = (nuxtI18nOptions.detectBrowserLanguage && nuxtI18nOptions.detectBrowserLanguage.useCookie) ?? nuxtI18nOptionsDefault.detectBrowserLanguage.useCookie;\n  const nuxtApp = useNuxtApp();\n  let ret = false;\n  const oldLocale = getLocale(i18n);\n  if (!newLocale) {\n    return [ret, oldLocale];\n  }\n  if (!initial && _differentDomains) {\n    return [ret, oldLocale];\n  }\n  if (oldLocale === newLocale) {\n    return [ret, oldLocale];\n  }\n  const localeOverride = await onBeforeLanguageSwitch(i18n, oldLocale, newLocale, initial, nuxtApp);\n  const localeCodes = getLocaleCodes(i18n);\n  if (localeOverride && localeCodes && localeCodes.includes(localeOverride)) {\n    if (localeOverride === oldLocale) {\n      return [ret, oldLocale];\n    }\n    newLocale = localeOverride;\n  }\n  const i18nFallbackLocales = getVueI18nPropertyValue(i18n, \"fallbackLocale\");\n  if (lazy) {\n    const setter = (locale, message) => mergeLocaleMessage(i18n, locale, message);\n    if (i18nFallbackLocales) {\n      const fallbackLocales = makeFallbackLocaleCodes(i18nFallbackLocales, [newLocale]);\n      await Promise.all(fallbackLocales.map((locale) => loadLocale(locale, localeLoaders, setter)));\n    }\n    await loadLocale(newLocale, localeLoaders, setter);\n  }\n  if (skipSettingLocaleOnNavigate) {\n    return [ret, oldLocale];\n  }\n  if (useCookie) {\n    setCookieLocale(i18n, newLocale);\n  }\n  setLocale(i18n, newLocale);\n  await onLanguageSwitched(i18n, oldLocale, newLocale);\n  ret = true;\n  return [ret, oldLocale];\n}\nexport function detectLocale(route, routeLocaleGetter, vueI18nOptionsLocale, initialLocaleLoader, detectLocaleContext) {\n  const { strategy, defaultLocale, differentDomains, detectBrowserLanguage: _detectBrowserLanguage } = nuxtI18nOptions;\n  const initialLocale = isFunction(initialLocaleLoader) ? initialLocaleLoader() : initialLocaleLoader;\n  const { ssg, callType, firstAccess, localeCookie } = detectLocaleContext;\n  const {\n    locale: browserLocale,\n    stat,\n    reason,\n    from\n  } = _detectBrowserLanguage ? detectBrowserLanguage(route, vueI18nOptionsLocale, detectLocaleContext, initialLocale) : DefaultDetectBrowserLanguageFromResult;\n  if (reason === \"detect_ignore_on_ssg\") {\n    return initialLocale;\n  }\n  if ((from === \"navigator_or_header\" || from === \"cookie\" || from === \"fallback\") && browserLocale) {\n    return browserLocale;\n  }\n  let finalLocale = browserLocale;\n  if (!finalLocale) {\n    if (differentDomains) {\n      finalLocale = getLocaleDomain(normalizedLocales);\n    } else if (strategy !== \"no_prefix\") {\n      finalLocale = routeLocaleGetter(route);\n    } else {\n      if (!_detectBrowserLanguage) {\n        finalLocale = initialLocale;\n      }\n    }\n  }\n  if (!finalLocale && _detectBrowserLanguage && _detectBrowserLanguage.useCookie) {\n    finalLocale = localeCookie.value || \"\";\n  }\n  if (!finalLocale) {\n    finalLocale = defaultLocale || \"\";\n  }\n  return finalLocale;\n}\nexport function detectRedirect({\n  route,\n  targetLocale,\n  routeLocaleGetter,\n  calledWithRouting = false\n}) {\n  const nuxtApp = useNuxtApp();\n  const common = initCommonComposableOptions();\n  const { strategy, differentDomains } = nuxtI18nOptions;\n  let redirectPath = \"\";\n  const { fullPath: toFullPath } = route.to;\n  const isStaticGenerate = isSSG && true;\n  if (!isStaticGenerate && !differentDomains && (calledWithRouting || strategy !== \"no_prefix\") && routeLocaleGetter(route.to) !== targetLocale) {\n    const routePath = nuxtApp.$switchLocalePath(targetLocale) || nuxtApp.$localePath(toFullPath, targetLocale);\n    if (isString(routePath) && routePath && !isEqual(routePath, toFullPath) && !routePath.startsWith(\"//\")) {\n      redirectPath = !(route.from && route.from.fullPath === routePath) ? routePath : \"\";\n    }\n  }\n  if ((differentDomains || isSSG && false) && routeLocaleGetter(route.to) !== targetLocale) {\n    const routePath = switchLocalePath(common, targetLocale, route.to);\n    if (isString(routePath) && routePath && !isEqual(routePath, toFullPath) && !routePath.startsWith(\"//\")) {\n      redirectPath = routePath;\n    }\n  }\n  return redirectPath;\n}\nfunction isRootRedirectOptions(rootRedirect) {\n  return isObject(rootRedirect) && \"path\" in rootRedirect && \"statusCode\" in rootRedirect;\n}\nconst useRedirectState = () => useState(NUXT_I18N_MODULE_ID + \":redirect\", () => \"\");\nfunction _navigate(redirectPath, status) {\n  return navigateTo(redirectPath, { redirectCode: status });\n}\nexport async function navigate(args, { status = 302, enableNavigate = false } = {}) {\n  const rootRedirect = nuxtI18nOptions.rootRedirect ?? nuxtI18nOptionsDefault.rootRedirect;\n  const differentDomains = nuxtI18nOptions.differentDomains ?? nuxtI18nOptionsDefault.differentDomains;\n  const skipSettingLocaleOnNavigate = nuxtI18nOptions.skipSettingLocaleOnNavigate ?? nuxtI18nOptionsDefault.skipSettingLocaleOnNavigate;\n  const { i18n, locale, route } = args;\n  let { redirectPath } = args;\n  if (route.path === \"/\" && rootRedirect) {\n    if (isString(rootRedirect)) {\n      redirectPath = \"/\" + rootRedirect;\n    } else if (isRootRedirectOptions(rootRedirect)) {\n      redirectPath = \"/\" + rootRedirect.path;\n      status = rootRedirect.statusCode;\n    }\n    return _navigate(redirectPath, status);\n  }\n  if (false) {\n    i18n.__pendingLocale = locale;\n    i18n.__pendingLocalePromise = new Promise((resolve) => {\n      i18n.__resolvePendingLocalePromise = resolve;\n    });\n    if (!enableNavigate) {\n      return;\n    }\n  }\n  if (!differentDomains) {\n    if (redirectPath) {\n      return _navigate(redirectPath, status);\n    }\n  } else {\n    const state = useRedirectState();\n    if (state.value && state.value !== redirectPath) {\n      if (false) {\n        state.value = \"\";\n        (void 0).location.assign(redirectPath);\n      } else if (true) {\n        state.value = redirectPath;\n      }\n    }\n  }\n}\nexport function injectNuxtHelpers(nuxt, i18n) {\n  defineGetter(nuxt, \"$i18n\", getI18nTarget(i18n));\n  defineGetter(nuxt, \"$getRouteBaseName\", getRouteBaseName);\n  defineGetter(nuxt, \"$localePath\", wrapComposable(localePath));\n  defineGetter(nuxt, \"$localeRoute\", wrapComposable(localeRoute));\n  defineGetter(nuxt, \"$switchLocalePath\", wrapComposable(switchLocalePath));\n  defineGetter(nuxt, \"$localeHead\", wrapComposable(localeHead));\n}\nexport function extendPrefixable() {\n  return (opts) => {\n    return DefaultPrefixable(opts) && !nuxtI18nOptions.differentDomains;\n  };\n}\nexport function extendSwitchLocalePathIntercepter() {\n  return (path, locale) => {\n    if (nuxtI18nOptions.differentDomains) {\n      const domain = getDomainFromLocale(locale);\n      if (domain) {\n        return joinURL(domain, path);\n      } else {\n        return path;\n      }\n    } else {\n      return DefaultSwitchLocalePathIntercepter(path, locale);\n    }\n  };\n}\nexport function extendBaseUrl() {\n  return () => {\n    const ctx = useNuxtApp();\n    const runtimeConfig = useRuntimeConfig();\n    const baseUrl = nuxtI18nOptions.baseUrl;\n    if (isFunction(baseUrl)) {\n      const baseUrlResult = baseUrl(ctx);\n      return baseUrlResult;\n    }\n    const localeCodeLoader = nuxtI18nOptions.defaultLocale;\n    const localeCode = isFunction(localeCodeLoader) ? localeCodeLoader() : localeCodeLoader;\n    if (nuxtI18nOptions.differentDomains && localeCode) {\n      const domain = getDomainFromLocale(localeCode);\n      if (domain) {\n        return domain;\n      }\n    }\n    const config = runtimeConfig?.public?.i18n;\n    if (config?.baseUrl) {\n      return config.baseUrl;\n    }\n    return baseUrl;\n  };\n}\nexport function getNormalizedLocales(locales) {\n  const normalized = [];\n  for (const locale of locales) {\n    if (isString(locale)) {\n      normalized.push({ code: locale });\n      continue;\n    }\n    normalized.push(locale);\n  }\n  return normalized;\n}\n",
-      "start": 1751024577592,
-      "end": 1751024577670,
+      "start": 1751281524619,
+      "end": 1751281524731,
       "order": "normal",
       "sourcemaps": "{\n  \"version\": 3,\n  \"sources\": [\"D:/projects/nuxt/workix-nuxt-front/node_modules/@nuxtjs/i18n/dist/runtime/utils.mjs\"],\n  \"sourcesContent\": [\"import { joinURL, isEqual } from \\\"ufo\\\";\\nimport { isString, isFunction, isObject } from \\\"@intlify/shared\\\";\\nimport { navigateTo, useNuxtApp, useRouter, useRuntimeConfig, useState } from \\\"#imports\\\";\\nimport {\\n  nuxtI18nOptionsDefault,\\n  NUXT_I18N_MODULE_ID,\\n  isSSG,\\n  localeLoaders,\\n  normalizedLocales,\\n  nuxtI18nOptions\\n} from \\\"#build/i18n.options.mjs\\\";\\nimport {\\n  wrapComposable,\\n  detectBrowserLanguage,\\n  callVueI18nInterfaces,\\n  getVueI18nPropertyValue,\\n  defineGetter,\\n  getLocaleDomain,\\n  getDomainFromLocale,\\n  DefaultDetectBrowserLanguageFromResult\\n} from \\\"./internal.mjs\\\";\\nimport { loadLocale, makeFallbackLocaleCodes } from \\\"./messages.mjs\\\";\\nimport {\\n  localeHead,\\n  localePath,\\n  localeRoute,\\n  getRouteBaseName,\\n  switchLocalePath,\\n  DefaultPrefixable,\\n  DefaultSwitchLocalePathIntercepter\\n} from \\\"./routing/compatibles/index.mjs\\\";\\nimport { getLocale, setLocale, getLocaleCodes, getI18nTarget } from \\\"./routing/utils.mjs\\\";\\nexport function _setLocale(i18n, locale) {\\n  return callVueI18nInterfaces(i18n, \\\"setLocale\\\", locale);\\n}\\nexport function setCookieLocale(i18n, locale) {\\n  return callVueI18nInterfaces(i18n, \\\"setLocaleCookie\\\", locale);\\n}\\nexport function setLocaleMessage(i18n, locale, messages) {\\n  return callVueI18nInterfaces(i18n, \\\"setLocaleMessage\\\", locale, messages);\\n}\\nexport function mergeLocaleMessage(i18n, locale, messages) {\\n  return callVueI18nInterfaces(i18n, \\\"mergeLocaleMessage\\\", locale, messages);\\n}\\nfunction onBeforeLanguageSwitch(i18n, oldLocale, newLocale, initial, context) {\\n  return callVueI18nInterfaces(i18n, \\\"onBeforeLanguageSwitch\\\", oldLocale, newLocale, initial, context);\\n}\\nexport function onLanguageSwitched(i18n, oldLocale, newLocale) {\\n  return callVueI18nInterfaces(i18n, \\\"onLanguageSwitched\\\", oldLocale, newLocale);\\n}\\nexport async function finalizePendingLocaleChange(i18n) {\\n  return callVueI18nInterfaces(i18n, \\\"finalizePendingLocaleChange\\\");\\n}\\nexport function initCommonComposableOptions(i18n) {\\n  return {\\n    i18n: i18n ?? useNuxtApp().$i18n,\\n    router: useRouter(),\\n    runtimeConfig: useRuntimeConfig()\\n  };\\n}\\nexport async function loadAndSetLocale(newLocale, i18n, initial = false) {\\n  const _differentDomains = nuxtI18nOptions.differentDomains ?? nuxtI18nOptionsDefault.differentDomains;\\n  const skipSettingLocaleOnNavigate = nuxtI18nOptions.skipSettingLocaleOnNavigate ?? nuxtI18nOptionsDefault.skipSettingLocaleOnNavigate;\\n  const lazy = nuxtI18nOptions.lazy ?? nuxtI18nOptionsDefault.lazy;\\n  const useCookie = (nuxtI18nOptions.detectBrowserLanguage && nuxtI18nOptions.detectBrowserLanguage.useCookie) ?? nuxtI18nOptionsDefault.detectBrowserLanguage.useCookie;\\n  const nuxtApp = useNuxtApp();\\n  let ret = false;\\n  const oldLocale = getLocale(i18n);\\n  __DEBUG__ && console.log(\\\"setLocale: new -> \\\", newLocale, \\\" old -> \\\", oldLocale, \\\" initial -> \\\", initial);\\n  if (!newLocale) {\\n    return [ret, oldLocale];\\n  }\\n  if (!initial && _differentDomains) {\\n    return [ret, oldLocale];\\n  }\\n  if (oldLocale === newLocale) {\\n    return [ret, oldLocale];\\n  }\\n  const localeOverride = await onBeforeLanguageSwitch(i18n, oldLocale, newLocale, initial, nuxtApp);\\n  const localeCodes = getLocaleCodes(i18n);\\n  if (localeOverride && localeCodes && localeCodes.includes(localeOverride)) {\\n    if (localeOverride === oldLocale) {\\n      return [ret, oldLocale];\\n    }\\n    newLocale = localeOverride;\\n  }\\n  const i18nFallbackLocales = getVueI18nPropertyValue(i18n, \\\"fallbackLocale\\\");\\n  if (lazy) {\\n    const setter = (locale, message) => mergeLocaleMessage(i18n, locale, message);\\n    if (i18nFallbackLocales) {\\n      const fallbackLocales = makeFallbackLocaleCodes(i18nFallbackLocales, [newLocale]);\\n      await Promise.all(fallbackLocales.map((locale) => loadLocale(locale, localeLoaders, setter)));\\n    }\\n    await loadLocale(newLocale, localeLoaders, setter);\\n  }\\n  if (skipSettingLocaleOnNavigate) {\\n    return [ret, oldLocale];\\n  }\\n  if (useCookie) {\\n    setCookieLocale(i18n, newLocale);\\n  }\\n  setLocale(i18n, newLocale);\\n  await onLanguageSwitched(i18n, oldLocale, newLocale);\\n  ret = true;\\n  return [ret, oldLocale];\\n}\\nexport function detectLocale(route, routeLocaleGetter, vueI18nOptionsLocale, initialLocaleLoader, detectLocaleContext) {\\n  const { strategy, defaultLocale, differentDomains, detectBrowserLanguage: _detectBrowserLanguage } = nuxtI18nOptions;\\n  const initialLocale = isFunction(initialLocaleLoader) ? initialLocaleLoader() : initialLocaleLoader;\\n  __DEBUG__ && console.log(\\\"detectLocale: initialLocale -\\\", initialLocale);\\n  const { ssg, callType, firstAccess, localeCookie } = detectLocaleContext;\\n  __DEBUG__ && console.log(\\\"detectLocale: (ssg, callType, firstAccess) - \\\", ssg, callType, firstAccess);\\n  const {\\n    locale: browserLocale,\\n    stat,\\n    reason,\\n    from\\n  } = _detectBrowserLanguage ? detectBrowserLanguage(route, vueI18nOptionsLocale, detectLocaleContext, initialLocale) : DefaultDetectBrowserLanguageFromResult;\\n  __DEBUG__ && console.log(\\n    \\\"detectLocale: detectBrowserLanguage (browserLocale, stat, reason, from) -\\\",\\n    browserLocale,\\n    stat,\\n    reason,\\n    from\\n  );\\n  if (reason === \\\"detect_ignore_on_ssg\\\") {\\n    return initialLocale;\\n  }\\n  if ((from === \\\"navigator_or_header\\\" || from === \\\"cookie\\\" || from === \\\"fallback\\\") && browserLocale) {\\n    return browserLocale;\\n  }\\n  let finalLocale = browserLocale;\\n  __DEBUG__ && console.log(\\\"detectLocale: finaleLocale first (finaleLocale, strategy) -\\\", finalLocale, strategy);\\n  if (!finalLocale) {\\n    if (differentDomains) {\\n      finalLocale = getLocaleDomain(normalizedLocales);\\n    } else if (strategy !== \\\"no_prefix\\\") {\\n      finalLocale = routeLocaleGetter(route);\\n    } else {\\n      if (!_detectBrowserLanguage) {\\n        finalLocale = initialLocale;\\n      }\\n    }\\n  }\\n  __DEBUG__ && console.log(\\n    \\\"detectLocale: finaleLocale second (finaleLocale, detectBrowserLanguage) -\\\",\\n    finalLocale,\\n    _detectBrowserLanguage\\n  );\\n  if (!finalLocale && _detectBrowserLanguage && _detectBrowserLanguage.useCookie) {\\n    finalLocale = localeCookie.value || \\\"\\\";\\n  }\\n  __DEBUG__ && console.log(\\\"detectLocale: finalLocale last (finalLocale, defaultLocale) -\\\", finalLocale, defaultLocale);\\n  if (!finalLocale) {\\n    finalLocale = defaultLocale || \\\"\\\";\\n  }\\n  __DEBUG__ && console.log(\\\"detectLocale: finalLocale -\\\", finalLocale);\\n  return finalLocale;\\n}\\nexport function detectRedirect({\\n  route,\\n  targetLocale,\\n  routeLocaleGetter,\\n  calledWithRouting = false\\n}) {\\n  const nuxtApp = useNuxtApp();\\n  const common = initCommonComposableOptions();\\n  const { strategy, differentDomains } = nuxtI18nOptions;\\n  __DEBUG__ && console.log(\\\"detectRedirect: targetLocale -> \\\", targetLocale);\\n  __DEBUG__ && console.log(\\\"detectRedirect: route -> \\\", route);\\n  __DEBUG__ && console.log(\\\"detectRedirect: calledWithRouting -> \\\", calledWithRouting, routeLocaleGetter(route.to));\\n  let redirectPath = \\\"\\\";\\n  const { fullPath: toFullPath } = route.to;\\n  const isStaticGenerate = isSSG && process.server;\\n  if (!isStaticGenerate && !differentDomains && (calledWithRouting || strategy !== \\\"no_prefix\\\") && routeLocaleGetter(route.to) !== targetLocale) {\\n    const routePath = nuxtApp.$switchLocalePath(targetLocale) || nuxtApp.$localePath(toFullPath, targetLocale);\\n    __DEBUG__ && console.log(\\\"detectRedirect: calculate routePath -> \\\", routePath, toFullPath);\\n    if (isString(routePath) && routePath && !isEqual(routePath, toFullPath) && !routePath.startsWith(\\\"//\\\")) {\\n      redirectPath = !(route.from && route.from.fullPath === routePath) ? routePath : \\\"\\\";\\n    }\\n  }\\n  if ((differentDomains || isSSG && process.client) && routeLocaleGetter(route.to) !== targetLocale) {\\n    const routePath = switchLocalePath(common, targetLocale, route.to);\\n    __DEBUG__ && console.log(\\\"detectRedirect: calculate domain or ssg routePath -> \\\", routePath);\\n    if (isString(routePath) && routePath && !isEqual(routePath, toFullPath) && !routePath.startsWith(\\\"//\\\")) {\\n      redirectPath = routePath;\\n    }\\n  }\\n  return redirectPath;\\n}\\nfunction isRootRedirectOptions(rootRedirect) {\\n  return isObject(rootRedirect) && \\\"path\\\" in rootRedirect && \\\"statusCode\\\" in rootRedirect;\\n}\\nconst useRedirectState = () => useState(NUXT_I18N_MODULE_ID + \\\":redirect\\\", () => \\\"\\\");\\nfunction _navigate(redirectPath, status) {\\n  return navigateTo(redirectPath, { redirectCode: status });\\n}\\nexport async function navigate(args, { status = 302, enableNavigate = false } = {}) {\\n  const rootRedirect = nuxtI18nOptions.rootRedirect ?? nuxtI18nOptionsDefault.rootRedirect;\\n  const differentDomains = nuxtI18nOptions.differentDomains ?? nuxtI18nOptionsDefault.differentDomains;\\n  const skipSettingLocaleOnNavigate = nuxtI18nOptions.skipSettingLocaleOnNavigate ?? nuxtI18nOptionsDefault.skipSettingLocaleOnNavigate;\\n  const { i18n, locale, route } = args;\\n  let { redirectPath } = args;\\n  __DEBUG__ && console.log(\\n    \\\"navigate options \\\",\\n    status,\\n    rootRedirect,\\n    differentDomains,\\n    skipSettingLocaleOnNavigate,\\n    enableNavigate\\n  );\\n  __DEBUG__ && console.log(\\\"navigate isSSG\\\", isSSG);\\n  if (route.path === \\\"/\\\" && rootRedirect) {\\n    if (isString(rootRedirect)) {\\n      redirectPath = \\\"/\\\" + rootRedirect;\\n    } else if (isRootRedirectOptions(rootRedirect)) {\\n      redirectPath = \\\"/\\\" + rootRedirect.path;\\n      status = rootRedirect.statusCode;\\n    }\\n    __DEBUG__ && console.log(\\\"navigate: rootRedirect mode redirectPath -> \\\", redirectPath, \\\" status -> \\\", status);\\n    return _navigate(redirectPath, status);\\n  }\\n  if (process.client && skipSettingLocaleOnNavigate) {\\n    i18n.__pendingLocale = locale;\\n    i18n.__pendingLocalePromise = new Promise((resolve) => {\\n      i18n.__resolvePendingLocalePromise = resolve;\\n    });\\n    if (!enableNavigate) {\\n      return;\\n    }\\n  }\\n  if (!differentDomains) {\\n    if (redirectPath) {\\n      return _navigate(redirectPath, status);\\n    }\\n  } else {\\n    const state = useRedirectState();\\n    __DEBUG__ && console.log(\\\"redirect state ->\\\", state.value, \\\"redirectPath -> \\\", redirectPath);\\n    if (state.value && state.value !== redirectPath) {\\n      if (process.client) {\\n        state.value = \\\"\\\";\\n        window.location.assign(redirectPath);\\n      } else if (process.server) {\\n        __DEBUG__ && console.log(\\\"differentDomains servermode \\\", redirectPath);\\n        state.value = redirectPath;\\n      }\\n    }\\n  }\\n}\\nexport function injectNuxtHelpers(nuxt, i18n) {\\n  defineGetter(nuxt, \\\"$i18n\\\", getI18nTarget(i18n));\\n  defineGetter(nuxt, \\\"$getRouteBaseName\\\", getRouteBaseName);\\n  defineGetter(nuxt, \\\"$localePath\\\", wrapComposable(localePath));\\n  defineGetter(nuxt, \\\"$localeRoute\\\", wrapComposable(localeRoute));\\n  defineGetter(nuxt, \\\"$switchLocalePath\\\", wrapComposable(switchLocalePath));\\n  defineGetter(nuxt, \\\"$localeHead\\\", wrapComposable(localeHead));\\n}\\nexport function extendPrefixable() {\\n  return (opts) => {\\n    return DefaultPrefixable(opts) && !nuxtI18nOptions.differentDomains;\\n  };\\n}\\nexport function extendSwitchLocalePathIntercepter() {\\n  return (path, locale) => {\\n    if (nuxtI18nOptions.differentDomains) {\\n      const domain = getDomainFromLocale(locale);\\n      __DEBUG__ && console.log(\\\"extendSwitchLocalePathIntercepter: domain -> \\\", domain, \\\" path -> \\\", path);\\n      if (domain) {\\n        return joinURL(domain, path);\\n      } else {\\n        return path;\\n      }\\n    } else {\\n      return DefaultSwitchLocalePathIntercepter(path, locale);\\n    }\\n  };\\n}\\nexport function extendBaseUrl() {\\n  return () => {\\n    const ctx = useNuxtApp();\\n    const runtimeConfig = useRuntimeConfig();\\n    const baseUrl = nuxtI18nOptions.baseUrl;\\n    if (isFunction(baseUrl)) {\\n      const baseUrlResult = baseUrl(ctx);\\n      __DEBUG__ && console.log(\\\"baseUrl: using localeLoader function -\\\", baseUrlResult);\\n      return baseUrlResult;\\n    }\\n    const localeCodeLoader = nuxtI18nOptions.defaultLocale;\\n    const localeCode = isFunction(localeCodeLoader) ? localeCodeLoader() : localeCodeLoader;\\n    if (nuxtI18nOptions.differentDomains && localeCode) {\\n      const domain = getDomainFromLocale(localeCode);\\n      if (domain) {\\n        __DEBUG__ && console.log(\\\"baseUrl: using differentDomains -\\\", domain);\\n        return domain;\\n      }\\n    }\\n    const config = runtimeConfig?.public?.i18n;\\n    if (config?.baseUrl) {\\n      __DEBUG__ && console.log(\\\"baseUrl: using runtimeConfig -\\\", config.baseUrl);\\n      return config.baseUrl;\\n    }\\n    return baseUrl;\\n  };\\n}\\nexport function getNormalizedLocales(locales) {\\n  const normalized = [];\\n  for (const locale of locales) {\\n    if (isString(locale)) {\\n      normalized.push({ code: locale });\\n      continue;\\n    }\\n    normalized.push(locale);\\n  }\\n  return normalized;\\n}\\n\"],\n  \"mappings\": \"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\",\n  \"names\": []\n}\n"
     },
     {
       "name": "vite:css-post",
-      "start": 1751024577671,
-      "end": 1751024577671,
+      "start": 1751281524731,
+      "end": 1751281524731,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1751024577671,
-      "end": 1751024577671,
+      "start": 1751281524731,
+      "end": 1751281524731,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1751024577671,
-      "end": 1751024577671,
+      "start": 1751281524731,
+      "end": 1751281524731,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1751024577671,
-      "end": 1751024577671,
+      "start": 1751281524731,
+      "end": 1751281524731,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1751024577671,
-      "end": 1751024577671,
+      "start": 1751281524732,
+      "end": 1751281524732,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1751024577671,
-      "end": 1751024577671,
+      "start": 1751281524732,
+      "end": 1751281524732,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1751024577671,
-      "end": 1751024577671,
+      "start": 1751281524732,
+      "end": 1751281524732,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1751024577671,
-      "end": 1751024577673,
+      "start": 1751281524732,
+      "end": 1751281524735,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1751024577671,
-      "end": 1751024577673,
+      "start": 1751281524732,
+      "end": 1751281524735,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1751024577673,
-      "end": 1751024577673,
+      "start": 1751281524736,
+      "end": 1751281524736,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1751024577673,
-      "end": 1751024577673,
+      "start": 1751281524736,
+      "end": 1751281524736,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1751024577673,
-      "end": 1751024577673,
+      "start": 1751281524736,
+      "end": 1751281524736,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1751024577673,
-      "end": 1751024577673,
+      "start": 1751281524736,
+      "end": 1751281524736,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1751024577674,
-      "end": 1751024577674,
+      "start": 1751281524736,
+      "end": 1751281524736,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1751024577674,
-      "end": 1751024577674,
+      "start": 1751281524736,
+      "end": 1751281524736,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { navigateTo, useRouter } from '#app/composables/router';\nimport { useNuxtApp, useRuntimeConfig } from '#app/nuxt';\nimport { useState } from '#app/composables/state';\nimport { joinURL, isEqual } from \"ufo\";\nimport { isString, isFunction, isObject } from \"@intlify/shared\";\nimport {\n  nuxtI18nOptionsDefault,\n  NUXT_I18N_MODULE_ID,\n  isSSG,\n  localeLoaders,\n  normalizedLocales,\n  nuxtI18nOptions\n} from \"#build/i18n.options.mjs\";\nimport {\n  wrapComposable,\n  detectBrowserLanguage,\n  callVueI18nInterfaces,\n  getVueI18nPropertyValue,\n  defineGetter,\n  getLocaleDomain,\n  getDomainFromLocale,\n  DefaultDetectBrowserLanguageFromResult\n} from \"./internal.mjs\";\nimport { loadLocale, makeFallbackLocaleCodes } from \"./messages.mjs\";\nimport {\n  localeHead,\n  localePath,\n  localeRoute,\n  getRouteBaseName,\n  switchLocalePath,\n  DefaultPrefixable,\n  DefaultSwitchLocalePathIntercepter\n} from \"./routing/compatibles/index.mjs\";\nimport { getLocale, setLocale, getLocaleCodes, getI18nTarget } from \"./routing/utils.mjs\";\nexport function _setLocale(i18n, locale) {\n  return callVueI18nInterfaces(i18n, \"setLocale\", locale);\n}\nexport function setCookieLocale(i18n, locale) {\n  return callVueI18nInterfaces(i18n, \"setLocaleCookie\", locale);\n}\nexport function setLocaleMessage(i18n, locale, messages) {\n  return callVueI18nInterfaces(i18n, \"setLocaleMessage\", locale, messages);\n}\nexport function mergeLocaleMessage(i18n, locale, messages) {\n  return callVueI18nInterfaces(i18n, \"mergeLocaleMessage\", locale, messages);\n}\nfunction onBeforeLanguageSwitch(i18n, oldLocale, newLocale, initial, context) {\n  return callVueI18nInterfaces(i18n, \"onBeforeLanguageSwitch\", oldLocale, newLocale, initial, context);\n}\nexport function onLanguageSwitched(i18n, oldLocale, newLocale) {\n  return callVueI18nInterfaces(i18n, \"onLanguageSwitched\", oldLocale, newLocale);\n}\nexport async function finalizePendingLocaleChange(i18n) {\n  return callVueI18nInterfaces(i18n, \"finalizePendingLocaleChange\");\n}\nexport function initCommonComposableOptions(i18n) {\n  return {\n    i18n: i18n ?? useNuxtApp().$i18n,\n    router: useRouter(),\n    runtimeConfig: useRuntimeConfig()\n  };\n}\nexport async function loadAndSetLocale(newLocale, i18n, initial = false) {\n  const _differentDomains = nuxtI18nOptions.differentDomains ?? nuxtI18nOptionsDefault.differentDomains;\n  const skipSettingLocaleOnNavigate = nuxtI18nOptions.skipSettingLocaleOnNavigate ?? nuxtI18nOptionsDefault.skipSettingLocaleOnNavigate;\n  const lazy = nuxtI18nOptions.lazy ?? nuxtI18nOptionsDefault.lazy;\n  const useCookie = (nuxtI18nOptions.detectBrowserLanguage && nuxtI18nOptions.detectBrowserLanguage.useCookie) ?? nuxtI18nOptionsDefault.detectBrowserLanguage.useCookie;\n  const nuxtApp = useNuxtApp();\n  let ret = false;\n  const oldLocale = getLocale(i18n);\n  if (!newLocale) {\n    return [ret, oldLocale];\n  }\n  if (!initial && _differentDomains) {\n    return [ret, oldLocale];\n  }\n  if (oldLocale === newLocale) {\n    return [ret, oldLocale];\n  }\n  const localeOverride = await onBeforeLanguageSwitch(i18n, oldLocale, newLocale, initial, nuxtApp);\n  const localeCodes = getLocaleCodes(i18n);\n  if (localeOverride && localeCodes && localeCodes.includes(localeOverride)) {\n    if (localeOverride === oldLocale) {\n      return [ret, oldLocale];\n    }\n    newLocale = localeOverride;\n  }\n  const i18nFallbackLocales = getVueI18nPropertyValue(i18n, \"fallbackLocale\");\n  if (lazy) {\n    const setter = (locale, message) => mergeLocaleMessage(i18n, locale, message);\n    if (i18nFallbackLocales) {\n      const fallbackLocales = makeFallbackLocaleCodes(i18nFallbackLocales, [newLocale]);\n      await Promise.all(fallbackLocales.map((locale) => loadLocale(locale, localeLoaders, setter)));\n    }\n    await loadLocale(newLocale, localeLoaders, setter);\n  }\n  if (skipSettingLocaleOnNavigate) {\n    return [ret, oldLocale];\n  }\n  if (useCookie) {\n    setCookieLocale(i18n, newLocale);\n  }\n  setLocale(i18n, newLocale);\n  await onLanguageSwitched(i18n, oldLocale, newLocale);\n  ret = true;\n  return [ret, oldLocale];\n}\nexport function detectLocale(route, routeLocaleGetter, vueI18nOptionsLocale, initialLocaleLoader, detectLocaleContext) {\n  const { strategy, defaultLocale, differentDomains, detectBrowserLanguage: _detectBrowserLanguage } = nuxtI18nOptions;\n  const initialLocale = isFunction(initialLocaleLoader) ? initialLocaleLoader() : initialLocaleLoader;\n  const { ssg, callType, firstAccess, localeCookie } = detectLocaleContext;\n  const {\n    locale: browserLocale,\n    stat,\n    reason,\n    from\n  } = _detectBrowserLanguage ? detectBrowserLanguage(route, vueI18nOptionsLocale, detectLocaleContext, initialLocale) : DefaultDetectBrowserLanguageFromResult;\n  if (reason === \"detect_ignore_on_ssg\") {\n    return initialLocale;\n  }\n  if ((from === \"navigator_or_header\" || from === \"cookie\" || from === \"fallback\") && browserLocale) {\n    return browserLocale;\n  }\n  let finalLocale = browserLocale;\n  if (!finalLocale) {\n    if (differentDomains) {\n      finalLocale = getLocaleDomain(normalizedLocales);\n    } else if (strategy !== \"no_prefix\") {\n      finalLocale = routeLocaleGetter(route);\n    } else {\n      if (!_detectBrowserLanguage) {\n        finalLocale = initialLocale;\n      }\n    }\n  }\n  if (!finalLocale && _detectBrowserLanguage && _detectBrowserLanguage.useCookie) {\n    finalLocale = localeCookie.value || \"\";\n  }\n  if (!finalLocale) {\n    finalLocale = defaultLocale || \"\";\n  }\n  return finalLocale;\n}\nexport function detectRedirect({\n  route,\n  targetLocale,\n  routeLocaleGetter,\n  calledWithRouting = false\n}) {\n  const nuxtApp = useNuxtApp();\n  const common = initCommonComposableOptions();\n  const { strategy, differentDomains } = nuxtI18nOptions;\n  let redirectPath = \"\";\n  const { fullPath: toFullPath } = route.to;\n  const isStaticGenerate = isSSG && true;\n  if (!isStaticGenerate && !differentDomains && (calledWithRouting || strategy !== \"no_prefix\") && routeLocaleGetter(route.to) !== targetLocale) {\n    const routePath = nuxtApp.$switchLocalePath(targetLocale) || nuxtApp.$localePath(toFullPath, targetLocale);\n    if (isString(routePath) && routePath && !isEqual(routePath, toFullPath) && !routePath.startsWith(\"//\")) {\n      redirectPath = !(route.from && route.from.fullPath === routePath) ? routePath : \"\";\n    }\n  }\n  if ((differentDomains || isSSG && false) && routeLocaleGetter(route.to) !== targetLocale) {\n    const routePath = switchLocalePath(common, targetLocale, route.to);\n    if (isString(routePath) && routePath && !isEqual(routePath, toFullPath) && !routePath.startsWith(\"//\")) {\n      redirectPath = routePath;\n    }\n  }\n  return redirectPath;\n}\nfunction isRootRedirectOptions(rootRedirect) {\n  return isObject(rootRedirect) && \"path\" in rootRedirect && \"statusCode\" in rootRedirect;\n}\nconst useRedirectState = () => useState(NUXT_I18N_MODULE_ID + \":redirect\", () => \"\");\nfunction _navigate(redirectPath, status) {\n  return navigateTo(redirectPath, { redirectCode: status });\n}\nexport async function navigate(args, { status = 302, enableNavigate = false } = {}) {\n  const rootRedirect = nuxtI18nOptions.rootRedirect ?? nuxtI18nOptionsDefault.rootRedirect;\n  const differentDomains = nuxtI18nOptions.differentDomains ?? nuxtI18nOptionsDefault.differentDomains;\n  const skipSettingLocaleOnNavigate = nuxtI18nOptions.skipSettingLocaleOnNavigate ?? nuxtI18nOptionsDefault.skipSettingLocaleOnNavigate;\n  const { i18n, locale, route } = args;\n  let { redirectPath } = args;\n  if (route.path === \"/\" && rootRedirect) {\n    if (isString(rootRedirect)) {\n      redirectPath = \"/\" + rootRedirect;\n    } else if (isRootRedirectOptions(rootRedirect)) {\n      redirectPath = \"/\" + rootRedirect.path;\n      status = rootRedirect.statusCode;\n    }\n    return _navigate(redirectPath, status);\n  }\n  if (false) {\n    i18n.__pendingLocale = locale;\n    i18n.__pendingLocalePromise = new Promise((resolve) => {\n      i18n.__resolvePendingLocalePromise = resolve;\n    });\n    if (!enableNavigate) {\n      return;\n    }\n  }\n  if (!differentDomains) {\n    if (redirectPath) {\n      return _navigate(redirectPath, status);\n    }\n  } else {\n    const state = useRedirectState();\n    if (state.value && state.value !== redirectPath) {\n      if (false) {\n        state.value = \"\";\n        (void 0).location.assign(redirectPath);\n      } else if (true) {\n        state.value = redirectPath;\n      }\n    }\n  }\n}\nexport function injectNuxtHelpers(nuxt, i18n) {\n  defineGetter(nuxt, \"$i18n\", getI18nTarget(i18n));\n  defineGetter(nuxt, \"$getRouteBaseName\", getRouteBaseName);\n  defineGetter(nuxt, \"$localePath\", wrapComposable(localePath));\n  defineGetter(nuxt, \"$localeRoute\", wrapComposable(localeRoute));\n  defineGetter(nuxt, \"$switchLocalePath\", wrapComposable(switchLocalePath));\n  defineGetter(nuxt, \"$localeHead\", wrapComposable(localeHead));\n}\nexport function extendPrefixable() {\n  return (opts) => {\n    return DefaultPrefixable(opts) && !nuxtI18nOptions.differentDomains;\n  };\n}\nexport function extendSwitchLocalePathIntercepter() {\n  return (path, locale) => {\n    if (nuxtI18nOptions.differentDomains) {\n      const domain = getDomainFromLocale(locale);\n      if (domain) {\n        return joinURL(domain, path);\n      } else {\n        return path;\n      }\n    } else {\n      return DefaultSwitchLocalePathIntercepter(path, locale);\n    }\n  };\n}\nexport function extendBaseUrl() {\n  return () => {\n    const ctx = useNuxtApp();\n    const runtimeConfig = useRuntimeConfig();\n    const baseUrl = nuxtI18nOptions.baseUrl;\n    if (isFunction(baseUrl)) {\n      const baseUrlResult = baseUrl(ctx);\n      return baseUrlResult;\n    }\n    const localeCodeLoader = nuxtI18nOptions.defaultLocale;\n    const localeCode = isFunction(localeCodeLoader) ? localeCodeLoader() : localeCodeLoader;\n    if (nuxtI18nOptions.differentDomains && localeCode) {\n      const domain = getDomainFromLocale(localeCode);\n      if (domain) {\n        return domain;\n      }\n    }\n    const config = runtimeConfig?.public?.i18n;\n    if (config?.baseUrl) {\n      return config.baseUrl;\n    }\n    return baseUrl;\n  };\n}\nexport function getNormalizedLocales(locales) {\n  const normalized = [];\n  for (const locale of locales) {\n    if (isString(locale)) {\n      normalized.push({ code: locale });\n      continue;\n    }\n    normalized.push(locale);\n  }\n  return normalized;\n}\n",
-      "start": 1751024577674,
-      "end": 1751024577678,
+      "start": 1751281524736,
+      "end": 1751281524753,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -244,8 +244,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { navigateTo, useRouter } from '#app/composables/router';\nimport { useNuxtApp, useRuntimeConfig } from '#app/nuxt';\nimport { useState } from '#app/composables/state';\nimport { joinURL, isEqual } from \"ufo\";\nimport { isString, isFunction, isObject } from \"@intlify/shared\";\nimport {\n  nuxtI18nOptionsDefault,\n  NUXT_I18N_MODULE_ID,\n  isSSG,\n  localeLoaders,\n  normalizedLocales,\n  nuxtI18nOptions\n} from \"#build/i18n.options.mjs\";\nimport {\n  wrapComposable,\n  detectBrowserLanguage,\n  callVueI18nInterfaces,\n  getVueI18nPropertyValue,\n  defineGetter,\n  getLocaleDomain,\n  getDomainFromLocale,\n  DefaultDetectBrowserLanguageFromResult\n} from \"./internal.mjs\";\nimport { loadLocale, makeFallbackLocaleCodes } from \"./messages.mjs\";\nimport {\n  localeHead,\n  localePath,\n  localeRoute,\n  getRouteBaseName,\n  switchLocalePath,\n  DefaultPrefixable,\n  DefaultSwitchLocalePathIntercepter\n} from \"./routing/compatibles/index.mjs\";\nimport { getLocale, setLocale, getLocaleCodes, getI18nTarget } from \"./routing/utils.mjs\";\nexport function _setLocale(i18n, locale) {\n  return callVueI18nInterfaces(i18n, \"setLocale\", locale);\n}\nexport function setCookieLocale(i18n, locale) {\n  return callVueI18nInterfaces(i18n, \"setLocaleCookie\", locale);\n}\nexport function setLocaleMessage(i18n, locale, messages) {\n  return callVueI18nInterfaces(i18n, \"setLocaleMessage\", locale, messages);\n}\nexport function mergeLocaleMessage(i18n, locale, messages) {\n  return callVueI18nInterfaces(i18n, \"mergeLocaleMessage\", locale, messages);\n}\nfunction onBeforeLanguageSwitch(i18n, oldLocale, newLocale, initial, context) {\n  return callVueI18nInterfaces(i18n, \"onBeforeLanguageSwitch\", oldLocale, newLocale, initial, context);\n}\nexport function onLanguageSwitched(i18n, oldLocale, newLocale) {\n  return callVueI18nInterfaces(i18n, \"onLanguageSwitched\", oldLocale, newLocale);\n}\nexport async function finalizePendingLocaleChange(i18n) {\n  return callVueI18nInterfaces(i18n, \"finalizePendingLocaleChange\");\n}\nexport function initCommonComposableOptions(i18n) {\n  return {\n    i18n: i18n ?? useNuxtApp().$i18n,\n    router: useRouter(),\n    runtimeConfig: useRuntimeConfig()\n  };\n}\nexport async function loadAndSetLocale(newLocale, i18n, initial = false) {\n  const _differentDomains = nuxtI18nOptions.differentDomains ?? nuxtI18nOptionsDefault.differentDomains;\n  const skipSettingLocaleOnNavigate = nuxtI18nOptions.skipSettingLocaleOnNavigate ?? nuxtI18nOptionsDefault.skipSettingLocaleOnNavigate;\n  const lazy = nuxtI18nOptions.lazy ?? nuxtI18nOptionsDefault.lazy;\n  const useCookie = (nuxtI18nOptions.detectBrowserLanguage && nuxtI18nOptions.detectBrowserLanguage.useCookie) ?? nuxtI18nOptionsDefault.detectBrowserLanguage.useCookie;\n  const nuxtApp = useNuxtApp();\n  let ret = false;\n  const oldLocale = getLocale(i18n);\n  if (!newLocale) {\n    return [ret, oldLocale];\n  }\n  if (!initial && _differentDomains) {\n    return [ret, oldLocale];\n  }\n  if (oldLocale === newLocale) {\n    return [ret, oldLocale];\n  }\n  const localeOverride = await onBeforeLanguageSwitch(i18n, oldLocale, newLocale, initial, nuxtApp);\n  const localeCodes = getLocaleCodes(i18n);\n  if (localeOverride && localeCodes && localeCodes.includes(localeOverride)) {\n    if (localeOverride === oldLocale) {\n      return [ret, oldLocale];\n    }\n    newLocale = localeOverride;\n  }\n  const i18nFallbackLocales = getVueI18nPropertyValue(i18n, \"fallbackLocale\");\n  if (lazy) {\n    const setter = (locale, message) => mergeLocaleMessage(i18n, locale, message);\n    if (i18nFallbackLocales) {\n      const fallbackLocales = makeFallbackLocaleCodes(i18nFallbackLocales, [newLocale]);\n      await Promise.all(fallbackLocales.map((locale) => loadLocale(locale, localeLoaders, setter)));\n    }\n    await loadLocale(newLocale, localeLoaders, setter);\n  }\n  if (skipSettingLocaleOnNavigate) {\n    return [ret, oldLocale];\n  }\n  if (useCookie) {\n    setCookieLocale(i18n, newLocale);\n  }\n  setLocale(i18n, newLocale);\n  await onLanguageSwitched(i18n, oldLocale, newLocale);\n  ret = true;\n  return [ret, oldLocale];\n}\nexport function detectLocale(route, routeLocaleGetter, vueI18nOptionsLocale, initialLocaleLoader, detectLocaleContext) {\n  const { strategy, defaultLocale, differentDomains, detectBrowserLanguage: _detectBrowserLanguage } = nuxtI18nOptions;\n  const initialLocale = isFunction(initialLocaleLoader) ? initialLocaleLoader() : initialLocaleLoader;\n  const { ssg, callType, firstAccess, localeCookie } = detectLocaleContext;\n  const {\n    locale: browserLocale,\n    stat,\n    reason,\n    from\n  } = _detectBrowserLanguage ? detectBrowserLanguage(route, vueI18nOptionsLocale, detectLocaleContext, initialLocale) : DefaultDetectBrowserLanguageFromResult;\n  if (reason === \"detect_ignore_on_ssg\") {\n    return initialLocale;\n  }\n  if ((from === \"navigator_or_header\" || from === \"cookie\" || from === \"fallback\") && browserLocale) {\n    return browserLocale;\n  }\n  let finalLocale = browserLocale;\n  if (!finalLocale) {\n    if (differentDomains) {\n      finalLocale = getLocaleDomain(normalizedLocales);\n    } else if (strategy !== \"no_prefix\") {\n      finalLocale = routeLocaleGetter(route);\n    } else {\n      if (!_detectBrowserLanguage) {\n        finalLocale = initialLocale;\n      }\n    }\n  }\n  if (!finalLocale && _detectBrowserLanguage && _detectBrowserLanguage.useCookie) {\n    finalLocale = localeCookie.value || \"\";\n  }\n  if (!finalLocale) {\n    finalLocale = defaultLocale || \"\";\n  }\n  return finalLocale;\n}\nexport function detectRedirect({\n  route,\n  targetLocale,\n  routeLocaleGetter,\n  calledWithRouting = false\n}) {\n  const nuxtApp = useNuxtApp();\n  const common = initCommonComposableOptions();\n  const { strategy, differentDomains } = nuxtI18nOptions;\n  let redirectPath = \"\";\n  const { fullPath: toFullPath } = route.to;\n  const isStaticGenerate = isSSG && true;\n  if (!isStaticGenerate && !differentDomains && (calledWithRouting || strategy !== \"no_prefix\") && routeLocaleGetter(route.to) !== targetLocale) {\n    const routePath = nuxtApp.$switchLocalePath(targetLocale) || nuxtApp.$localePath(toFullPath, targetLocale);\n    if (isString(routePath) && routePath && !isEqual(routePath, toFullPath) && !routePath.startsWith(\"//\")) {\n      redirectPath = !(route.from && route.from.fullPath === routePath) ? routePath : \"\";\n    }\n  }\n  if ((differentDomains || isSSG && false) && routeLocaleGetter(route.to) !== targetLocale) {\n    const routePath = switchLocalePath(common, targetLocale, route.to);\n    if (isString(routePath) && routePath && !isEqual(routePath, toFullPath) && !routePath.startsWith(\"//\")) {\n      redirectPath = routePath;\n    }\n  }\n  return redirectPath;\n}\nfunction isRootRedirectOptions(rootRedirect) {\n  return isObject(rootRedirect) && \"path\" in rootRedirect && \"statusCode\" in rootRedirect;\n}\nconst useRedirectState = () => useState(NUXT_I18N_MODULE_ID + \":redirect\", () => \"\");\nfunction _navigate(redirectPath, status) {\n  return navigateTo(redirectPath, { redirectCode: status });\n}\nexport async function navigate(args, { status = 302, enableNavigate = false } = {}) {\n  const rootRedirect = nuxtI18nOptions.rootRedirect ?? nuxtI18nOptionsDefault.rootRedirect;\n  const differentDomains = nuxtI18nOptions.differentDomains ?? nuxtI18nOptionsDefault.differentDomains;\n  const skipSettingLocaleOnNavigate = nuxtI18nOptions.skipSettingLocaleOnNavigate ?? nuxtI18nOptionsDefault.skipSettingLocaleOnNavigate;\n  const { i18n, locale, route } = args;\n  let { redirectPath } = args;\n  if (route.path === \"/\" && rootRedirect) {\n    if (isString(rootRedirect)) {\n      redirectPath = \"/\" + rootRedirect;\n    } else if (isRootRedirectOptions(rootRedirect)) {\n      redirectPath = \"/\" + rootRedirect.path;\n      status = rootRedirect.statusCode;\n    }\n    return _navigate(redirectPath, status);\n  }\n  if (false) {\n    i18n.__pendingLocale = locale;\n    i18n.__pendingLocalePromise = new Promise((resolve) => {\n      i18n.__resolvePendingLocalePromise = resolve;\n    });\n    if (!enableNavigate) {\n      return;\n    }\n  }\n  if (!differentDomains) {\n    if (redirectPath) {\n      return _navigate(redirectPath, status);\n    }\n  } else {\n    const state = useRedirectState();\n    if (state.value && state.value !== redirectPath) {\n      if (false) {\n        state.value = \"\";\n        (void 0).location.assign(redirectPath);\n      } else if (true) {\n        state.value = redirectPath;\n      }\n    }\n  }\n}\nexport function injectNuxtHelpers(nuxt, i18n) {\n  defineGetter(nuxt, \"$i18n\", getI18nTarget(i18n));\n  defineGetter(nuxt, \"$getRouteBaseName\", getRouteBaseName);\n  defineGetter(nuxt, \"$localePath\", wrapComposable(localePath));\n  defineGetter(nuxt, \"$localeRoute\", wrapComposable(localeRoute));\n  defineGetter(nuxt, \"$switchLocalePath\", wrapComposable(switchLocalePath));\n  defineGetter(nuxt, \"$localeHead\", wrapComposable(localeHead));\n}\nexport function extendPrefixable() {\n  return (opts) => {\n    return DefaultPrefixable(opts) && !nuxtI18nOptions.differentDomains;\n  };\n}\nexport function extendSwitchLocalePathIntercepter() {\n  return (path, locale) => {\n    if (nuxtI18nOptions.differentDomains) {\n      const domain = getDomainFromLocale(locale);\n      if (domain) {\n        return joinURL(domain, path);\n      } else {\n        return path;\n      }\n    } else {\n      return DefaultSwitchLocalePathIntercepter(path, locale);\n    }\n  };\n}\nexport function extendBaseUrl() {\n  return () => {\n    const ctx = useNuxtApp();\n    const runtimeConfig = useRuntimeConfig();\n    const baseUrl = nuxtI18nOptions.baseUrl;\n    if (isFunction(baseUrl)) {\n      const baseUrlResult = baseUrl(ctx);\n      return baseUrlResult;\n    }\n    const localeCodeLoader = nuxtI18nOptions.defaultLocale;\n    const localeCode = isFunction(localeCodeLoader) ? localeCodeLoader() : localeCodeLoader;\n    if (nuxtI18nOptions.differentDomains && localeCode) {\n      const domain = getDomainFromLocale(localeCode);\n      if (domain) {\n        return domain;\n      }\n    }\n    const config = runtimeConfig?.public?.i18n;\n    if (config?.baseUrl) {\n      return config.baseUrl;\n    }\n    return baseUrl;\n  };\n}\nexport function getNormalizedLocales(locales) {\n  const normalized = [];\n  for (const locale of locales) {\n    if (isString(locale)) {\n      normalized.push({ code: locale });\n      continue;\n    }\n    normalized.push(locale);\n  }\n  return normalized;\n}\n",
-      "start": 1751024577674,
-      "end": 1751024577678,
+      "start": 1751281524736,
+      "end": 1751281524753,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -258,56 +258,56 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1751024577678,
-      "end": 1751024577678,
+      "start": 1751281524753,
+      "end": 1751281524753,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1751024577678,
-      "end": 1751024577678,
+      "start": 1751281524753,
+      "end": 1751281524753,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1751024577678,
-      "end": 1751024577678,
+      "start": 1751281524753,
+      "end": 1751281524753,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1751024577678,
-      "end": 1751024577678,
+      "start": 1751281524753,
+      "end": 1751281524753,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1751024577678,
-      "end": 1751024577678,
+      "start": 1751281524753,
+      "end": 1751281524753,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1751024577678,
-      "end": 1751024577678,
+      "start": 1751281524754,
+      "end": 1751281524754,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1751024577678,
-      "end": 1751024577679,
+      "start": 1751281524754,
+      "end": 1751281524754,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1751024577679,
-      "end": 1751024577679,
+      "start": 1751281524754,
+      "end": 1751281524754,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1751024577685,
-      "end": 1751024577685,
+      "start": 1751281524755,
+      "end": 1751281524755,
       "order": "normal"
     }
   ]
