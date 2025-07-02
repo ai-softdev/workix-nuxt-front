@@ -1044,7 +1044,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$7 == null ? void 0 : __nuxt_page_meta$7.redirect,
-        component: () => import("./_nuxt/index-iy5ZclhZ.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/index-BIdO9wJ7.js").then((m) => m.default || m)
       },
       {
         name: "base-tests-exam",

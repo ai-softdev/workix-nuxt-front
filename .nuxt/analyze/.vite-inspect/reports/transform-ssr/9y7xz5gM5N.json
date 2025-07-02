@@ -4,81 +4,81 @@
     {
       "name": "vite:load-fallback",
       "result": "<script setup lang=\"ts\">\r\nimport {useCompanies} from \"~/stores/companies\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport {useMediaQuery, useParallax} from '@vueuse/core'\r\nimport TheModal from \"~/components/UI/TheModal.vue\";\r\nimport TheButton from \"~/components/UI/TheButton.vue\";\r\nimport TheInput from \"~/components/UI/TheInput.vue\";\r\nimport Sceleton from \"~/components/UI/TheSceleton.vue\";\r\nimport ThePreloader from \"~/components/UI/ThePreloader.vue\";\r\nimport {useUserStore} from \"~/stores/users\";\r\n\r\nconst company = useCompanies()\r\nconst loadUserInfo = useAuthStore()\r\nconst target = ref(null)\r\nconst isMobile = useMediaQuery('(max-width: 700px)')\r\n\r\nconst parallax = reactive(useParallax(target))\r\n\r\nconst targetStyle: CSSProperties = {\r\n  transition: '.3s ease-out all',\r\n}\r\nconst cardWindowStyle: CSSProperties = {\r\n  margin: 'auto',\r\n}\r\nconst layerBase: CSSProperties = {\r\n  position: 'absolute',\r\n  height: '100%',\r\n  width: '100%',\r\n  transition: '.3s ease-out all',\r\n}\r\nconst containerStyle: CSSProperties = {\r\n  margin: '3em auto',\r\n  perspective: '300px',\r\n}\r\n\r\nconst cardStyle = computed(() => ({\r\n  transition: '.3s ease-out all',\r\n  transform: `rotateX(${parallax.roll * 1}deg) rotateY(${\r\n      parallax.tilt * 1\r\n  }deg)`,\r\n}))\r\n\r\nconst container = ref(null)\r\nconst {tilt, roll, source} = useParallax(container)\r\n\r\nconst loadCurrentUser = useAuthStore()\r\ndefineProps({\r\n  showInfo: {\r\n    type: Boolean,\r\n    default: false\r\n  },\r\n  getCode: {\r\n    type: Boolean,\r\n    default: false\r\n  },\r\n  userEdit: {\r\n    type: Object,\r\n    default: () => {\r\n    }\r\n  }\r\n})\r\nconst birth = new Date(loadCurrentUser.user.date_of_birth).toLocaleDateString()\r\nonMounted(() => {\r\n  loadUserInfo.loadCurrentUserWorker()\r\n})\r\n</script>\r\n\r\n<template>\r\n  <div\r\n      class=\"w-full p-6 relative bg-white shadow-cards max-sm:col-auto dark:shadow-md dark:border-t dark:border-t-gray-500 dark:shadow-gray-500 rounded-3xl hover:transform hover:-translate-y-2 transition-all duration-200\">\r\n    <div\r\n    >\r\n      <div class=\"flex items-center justify-between mb-8\">\r\n        <div class=\"border rounded-full px-3 py-2 w-fit flex items-center gap-3\">\r\n          <img src=\"/icons/profile.svg\" alt=\"profile\">\r\n          <h2 class=\"dark:text-white\">{{ $t('Личные данные') }}</h2>\r\n        </div>\r\n        <button\r\n            @click=\"showInfo = true; userEdit={...loadCurrentUser.user}\"\r\n            class=\"w-10 h-10 rounded-lg flex items-center justify-center bg-porcelain hover:bg-gray-300 transition-all ease-in-out duration-300\"\r\n        >\r\n          <img src=\"/icons/edit.svg\" alt=\"profile\">\r\n        </button>\r\n      </div>\r\n      <div\r\n          :class=\"{'blur' : !loadCurrentUser.user.id}\"\r\n      >\r\n        <div class=\"flex flex-col\">\r\n          <div v-if=\"loadCurrentUser.user.id\"\r\n               class=\"flex max-sm:flex-wrap max-sm:justify-center select-none text-gray-600 gap-x-2 mb-5 pb-5 border-b\">\r\n            <img class=\"block w-[60px] h-[60px] border-2 border-golden rounded-full shadow-lg dark:shadow-none\"\r\n                 :src=\"loadCurrentUser.user.photo\" alt=\"logo\">\r\n            <div class=\"my-2 mx-2\">\r\n              <h3 class=\"text-md font-bold dark:text-white select-none\">{{ loadCurrentUser.user.first_name }}\r\n                {{ loadCurrentUser.user.last_name }}\r\n              </h3>\r\n              <p class=\"dark:text-white text-sm text-mediumGray\">\r\n                {{\r\n                  Math.trunc((new Date() - new Date(loadCurrentUser.user.date_of_birth)) / 1000 / 3600 / 24 / 365) + ' лет'\r\n                }}\r\n              </p>\r\n              <p v-if=\"loadCurrentUser.user.role.name === 'Администратор сайта'\"\r\n                 class=\"dark:text-white tracking-widest font-bold\">{{ loadCurrentUser.user.role.name }}</p>\r\n              <p v-else-if=\"loadCurrentUser.user.role.name === 'Сотрудник'\"\r\n                 class=\"dark:text-white tracking-widest font-bold\">{{ loadCurrentUser.user.position.name }}</p>\r\n            </div>\r\n          </div>\r\n          <div v-else class=\"flex items-center gap-x-4\">\r\n            <sceleton border-radius=\"100px\" width=\"100px\" height=\"100px\"></sceleton>\r\n            <div class=\"flex flex-col gap-y-2\">\r\n              <sceleton width=\"150px\" height=\"20px\" border-radius=\"5px\"></sceleton>\r\n              <sceleton width=\"60px\" height=\"15px\" border-radius=\"5px\"></sceleton>\r\n            </div>\r\n          </div>\r\n          <div class=\"flex flex-col gap-y-2 ml-2 w-full\">\r\n            <div class=\"text-sm flex items-center justify-between\">\r\n              <p class=\"dark:text-white font-bold\">\r\n                {{ $t('Email') }}:\r\n              </p>\r\n              <p v-if=\"loadCurrentUser.user.id\">{{ loadCurrentUser.user.email }}</p>\r\n            </div>\r\n            <div class=\"text-sm flex items-center justify-between\">\r\n              <p class=\"dark:text-white font-bold\">\r\n                {{ $t('Номер') }}:\r\n              </p>\r\n              <p>{{ loadCurrentUser.user.phone?.slice(4, 13) }}</p>\r\n            </div>\r\n            <div class=\"text-sm flex items-center justify-between\">\r\n              <p class=\"dark:text-white font-bold\">\r\n                {{ $t('Заработная плата') }}:\r\n              </p>\r\n              <p v-if=\"loadCurrentUser.user.salary\">{{ loadCurrentUser.user.salary + ' сум' }}</p>\r\n              <p v-else>{{ $t('Не назначена') }}</p>\r\n            </div>\r\n            <div v-if=\"company.company.name\" class=\"text-sm flex items-center justify-between\">\r\n              <p class=\"dark:text-white font-bold\">\r\n                {{ $t('Компания') }}:\r\n              </p>\r\n              <p>{{ company.company.name }}</p>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div v-if=\"!loadCurrentUser.user.id\">\r\n        <div class=\"bg-black w-full h-full absolute top-0 left-0 opacity-40 rounded-lg\"></div>\r\n        <ThePreloader></ThePreloader>\r\n      </div>\r\n    </div>\r\n    <Transition name=\"fade\">\r\n      <TheModal\r\n          v-if=\"showInfo\"\r\n          @showModal=\"showInfo = false; getCode = false\"\r\n      >\r\n        <form\r\n            @submit.prevent=\"loadCurrentUser.update_my({user: userEdit})\"\r\n            class=\"p-6 relative\"\r\n        >\r\n          <div>\r\n            <h2 class=\"text-2xl font-bold dark:text-white\">Личная информация</h2>\r\n          </div>\r\n          <div class=\"w-full mt-8\">\r\n            <div class=\"mt-10 max-[1275px]:flex-col max-[1275px]:gap-10 flex items-center justify-around bg-whiteLilia p-8 rounded-3xl pb-6 border-b mb-6\">\r\n              <div class=\"flex items-center max-[1120px]:flex-col gap-3 dark:text-white border-r pr-10 max-[1275px]:border-none max-[1275px]:pr-0\">\r\n                <p class=\"dark:text-gray-200 font-bold text-md\">{{ $t('Должность' + ':') }} </p>\r\n                <p class=\"bg-white rounded-xl py-2 px-4 shadow max-[1120px]:text-center\">{{ userEdit.position.name }}</p>\r\n              </div>\r\n              <div class=\"flex items-center max-[1120px]:flex-col gap-3 dark:text-white\">\r\n                <p class=\"dark:text-gray-200 font-bold text-md\">{{ $t('Заработная плата' + ':') }}</p>\r\n                <p\r\n                    v-if=\"userEdit.salary\"\r\n                    class=\"bg-white rounded-xl py-2 px-4 shadow\"\r\n                >\r\n                  {{ userEdit.salary + ' ' + $t('сум') }}\r\n                </p>\r\n                <p\r\n                    v-else\r\n                    class=\"bg-white rounded-xl py-2 px-4 shadow\"\r\n                >\r\n                  {{ $t('Нет зарплаты') }}\r\n                </p>\r\n              </div>\r\n            </div>\r\n            <div class=\"grid grid-cols-2 gap-5 mb-12 max-[1120px]:grid-cols-1\">\r\n              <TheInput\r\n                  class=\"w-full\"\r\n                  type=\"text\"\r\n                  label=\"Имя:\"\r\n                  v-model=\"userEdit.first_name\"\r\n              />\r\n              <TheInput\r\n                  type=\"date\"\r\n                  v-model=\"userEdit.date_of_birth\"\r\n                  label=\"Дата рождения:\"\r\n              />\r\n              <TheInput\r\n                  type=\"text\"\r\n                  v-model=\"userEdit.last_name\"\r\n                  label=\"Фамилия:\"\r\n              />\r\n              <TheInput\r\n                  type=\"tel\"\r\n                  v-model=\"userEdit.phone\"\r\n                  label=\"Телефон:\"\r\n              />\r\n            </div>\r\n            <div\r\n                class=\"flex items-center justify-center gap-5 max-[1120px]:flex-col\"\r\n            >\r\n              <TheButton\r\n                  class=\"!bg-porcelain !border !text-black rounded-full !w-3/12 max-[1120px]:!w-full !p-2\"\r\n                  t=\"button\"\r\n                  @click=\"showInfo = false; getCode = false\"\r\n              >\r\n                {{ $t('Отмена') }}\r\n              </TheButton>\r\n              <TheButton\r\n                  class=\"!bg-golden !border !text-black rounded-full !w-3/12 max-[1120px]:!w-full !p-2\"\r\n                  t=\"submit\"\r\n              >\r\n                {{ $t('Сохранить') }}\r\n              </TheButton>\r\n            </div>\r\n          </div>\r\n        </form>\r\n      </TheModal>\r\n    </Transition>\r\n  </div>\r\n\r\n</template>\r\n\r\n<style scoped lang=\"scss\">\r\n</style>",
-      "start": 1751281534195,
-      "end": 1751281534674,
+      "start": 1751456123431,
+      "end": 1751456124549,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1751281534674,
-      "end": 1751281534674,
+      "start": 1751456124549,
+      "end": 1751456124549,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1751281534674,
-      "end": 1751281534674,
+      "start": 1751456124549,
+      "end": 1751456124549,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1751281534674,
-      "end": 1751281534674,
+      "start": 1751456124549,
+      "end": 1751456124549,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1751281534674,
-      "end": 1751281534674,
+      "start": 1751456124549,
+      "end": 1751456124549,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1751281534674,
-      "end": 1751281534674,
+      "start": 1751456124549,
+      "end": 1751456124549,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1751281534674,
-      "end": 1751281534674,
+      "start": 1751456124549,
+      "end": 1751456124549,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1751281534674,
-      "end": 1751281534674,
+      "start": 1751456124549,
+      "end": 1751456124549,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1751281534674,
-      "end": 1751281534674,
+      "start": 1751456124549,
+      "end": 1751456124549,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1751281534674,
-      "end": 1751281534674,
+      "start": 1751456124549,
+      "end": 1751456124549,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1751281534674,
-      "end": 1751281534674,
+      "start": 1751456124549,
+      "end": 1751456124549,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1751281534674,
-      "end": 1751281534674,
+      "start": 1751456124549,
+      "end": 1751456124549,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "import _sfc_main from \"D:/projects/nuxt/workix-nuxt-front/components/Profile/ProfileUI/ProfileContentUserInfo.vue?vue&type=script&setup=true&lang.ts\";\nexport * from \"D:/projects/nuxt/workix-nuxt-front/components/Profile/ProfileUI/ProfileContentUserInfo.vue?vue&type=script&setup=true&lang.ts\";\nimport { useSSRContext as __vite_useSSRContext } from \"vue\";\nconst _sfc_setup = _sfc_main.setup;\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext();\n  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(\"components/Profile/ProfileUI/ProfileContentUserInfo.vue\");\n  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;\n};\nexport default _sfc_main;\n",
-      "start": 1751281534675,
-      "end": 1751281535043,
+      "start": 1751456124549,
+      "end": 1751456125083,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -86,212 +86,212 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1751281535043,
-      "end": 1751281535043,
+      "start": 1751456125083,
+      "end": 1751456125083,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751281535043,
-      "end": 1751281535043,
+      "start": 1751456125083,
+      "end": 1751456125084,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751281535043,
-      "end": 1751281535043,
+      "start": 1751456125083,
+      "end": 1751456125084,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1751281535043,
-      "end": 1751281535043,
+      "start": 1751456125084,
+      "end": 1751456125084,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1751281535043,
-      "end": 1751281535043,
+      "start": 1751456125084,
+      "end": 1751456125084,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1751281535043,
-      "end": 1751281535043,
+      "start": 1751456125084,
+      "end": 1751456125084,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751281535044,
-      "end": 1751281535044,
+      "start": 1751456125084,
+      "end": 1751456125085,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1751281535044,
-      "end": 1751281535044,
+      "start": 1751456125085,
+      "end": 1751456125085,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1751281535044,
-      "end": 1751281535044,
+      "start": 1751456125086,
+      "end": 1751456125086,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1751281535044,
-      "end": 1751281535044,
+      "start": 1751456125086,
+      "end": 1751456125086,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1751281535044,
-      "end": 1751281535044,
+      "start": 1751456125086,
+      "end": 1751456125086,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1751281535047,
-      "end": 1751281535047,
+      "start": 1751456125086,
+      "end": 1751456125086,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1751281535047,
-      "end": 1751281535047,
+      "start": 1751456125086,
+      "end": 1751456125086,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1751281535047,
-      "end": 1751281535047,
+      "start": 1751456125087,
+      "end": 1751456125088,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1751281535048,
-      "end": 1751281535048,
+      "start": 1751456125092,
+      "end": 1751456125094,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1751281535048,
-      "end": 1751281535048,
+      "start": 1751456125099,
+      "end": 1751456125099,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1751281535048,
-      "end": 1751281535048,
+      "start": 1751456125109,
+      "end": 1751456125109,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1751281535048,
-      "end": 1751281535048,
+      "start": 1751456125109,
+      "end": 1751456125109,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1751281535048,
-      "end": 1751281535048,
+      "start": 1751456125109,
+      "end": 1751456125109,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1751281535048,
-      "end": 1751281535048,
+      "start": 1751456125109,
+      "end": 1751456125109,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1751281535048,
-      "end": 1751281535048,
+      "start": 1751456125110,
+      "end": 1751456125110,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1751281535048,
-      "end": 1751281535048,
+      "start": 1751456125110,
+      "end": 1751456125110,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1751281535048,
-      "end": 1751281535048,
+      "start": 1751456125111,
+      "end": 1751456125111,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1751281535048,
-      "end": 1751281535048,
+      "start": 1751456125111,
+      "end": 1751456125114,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1751281535048,
-      "end": 1751281535049,
+      "start": 1751456125114,
+      "end": 1751456125131,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1751281535048,
-      "end": 1751281535049,
+      "start": 1751456125114,
+      "end": 1751456125131,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1751281535049,
-      "end": 1751281535049,
+      "start": 1751456125132,
+      "end": 1751456125132,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1751281535049,
-      "end": 1751281535049,
+      "start": 1751456125132,
+      "end": 1751456125132,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1751281535049,
-      "end": 1751281535049,
+      "start": 1751456125143,
+      "end": 1751456125143,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1751281535049,
-      "end": 1751281535049,
+      "start": 1751456125143,
+      "end": 1751456125143,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1751281535049,
-      "end": 1751281535049,
+      "start": 1751456125144,
+      "end": 1751456125144,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1751281535049,
-      "end": 1751281535049,
+      "start": 1751456125144,
+      "end": 1751456125144,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1751281535049,
-      "end": 1751281535049,
+      "start": 1751456125144,
+      "end": 1751456125145,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1751281535049,
-      "end": 1751281535049,
+      "start": 1751456125145,
+      "end": 1751456125145,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1751281535049,
-      "end": 1751281535049,
+      "start": 1751456125145,
+      "end": 1751456125145,
       "order": "normal"
     }
   ]

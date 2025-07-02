@@ -1,9 +1,13 @@
 <template>
   <div>
-    <TheTextContent :text-type="'pageTitle'">
-      {{ $t('Страница c заданиями') }}
-    </TheTextContent>
-    <div class="flex max-[1170px]:flex-col max-lg:items-center justify-between">
+    <div class="flex items-center gap-4 justify-between max-[680px]:flex-col max-[680px]:items-start max-[680px]:gap-5">
+      <p
+          class="dark:text-white text-3xl font-bold"
+      >
+        {{ $t('Задания') }}
+      </p>
+    </div>
+    <div class="mt-8 flex max-[1170px]:flex-col max-lg:items-center justify-between">
       <div class="flex flex-col w-full max-xl:flex-wrap gap-y-10 max-xl:items-center">
         <div class="w-full mx-auto">
           <TasksReport></TasksReport>
@@ -28,27 +32,65 @@
 <script setup lang="ts">
 import TasksReport from "../../../components/Tasks/TasksReport.vue";
 import TaskContent from "~/components/Tasks/TasksContent"
-import TheTextContent from "~/components/UI/TheTextContent.vue";
 import TasksNotification from "~/components/Tasks/TasksNotification.vue";
 import {Chart as ChartJS, ArcElement, Tooltip, Legend, Chart} from 'chart.js'
-import {Doughnut, Pie} from 'vue-chartjs'
+import {Pie} from 'vue-chartjs'
 import {useTaskList} from "~/stores/tasks";
-import {definePageMeta} from "#imports";
 import {useAuthStore} from "~/stores/auth";
 import {useCompanies} from "~/stores/companies";
 const statsList = useTaskList()
 ChartJS.register(ArcElement, Tooltip, Legend)
 Chart.defaults.color = '#b6b6b6'
 
-const chartData = ref({
-  labels:['Выполненые', 'В процессе', 'На расмотрении', 'Отмененные'],
+const STATUS_CONFIG = {
+  completed: { label: 'Выполненые', color: '#41B883' },
+  performing: { label: 'В процессе', color: '#E46651' },
+  watching: { label: 'На рассмотрении', color: '#3b82f6' },
+  rejected: { label: 'Отмененные', color: '#DD1B16' },
+  returned: { label: 'Возвращенные', color: '#FFA500' }, // можно задать любой цвет
+  expired: { label: 'Истёкшие', color: '#808080' }, // можно задать любой цвет
+}
+
+const chartStats = computed(() => {
+  const labels: string[] = []
+  const data: number[] = []
+  const backgroundColor: string[] = []
+
+  const stats = statsList?.stats
+
+  if (Array.isArray(stats)) {
+    stats.forEach((item) => {
+      const config = STATUS_CONFIG[item.status as keyof typeof STATUS_CONFIG]
+      if (config) {
+        labels.push(config.label)
+        data.push(item.count)
+        backgroundColor.push(config.color)
+      }
+    })
+  }
+
+  return { labels, data, backgroundColor }
+})
+
+const chartData = computed(() => ({
+  labels: chartStats.value.labels,
   datasets: [
     {
-      backgroundColor: ['#41B883', '#E46651', '#3b82f6', '#DD1B16'],
-      data: [statsList?.get_stats[2]?.count, statsList?.get_stats[0]?.count, statsList?.get_stats[4]?.count, statsList?.get_stats[3]?.count]
+      backgroundColor: chartStats.value.backgroundColor,
+      data: chartStats.value.data
     }
   ]
-});
+}))
+
+// const chartData = ref({
+//   labels:['Выполненые', 'В процессе', 'На расмотрении', 'Отмененные'],
+//   datasets: [
+//     {
+//       backgroundColor: ['#41B883', '#E46651', '#3b82f6', '#DD1B16'],
+//       data: [statsList?.get_stats[2]?.count, statsList?.get_stats[0]?.count, statsList?.get_stats[4]?.count, statsList?.get_stats[3]?.count]
+//     }
+//   ]
+// });
 const chartOptions = ref({
   responsive: true,
   maintainAspectRatio: false

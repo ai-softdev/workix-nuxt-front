@@ -1108,7 +1108,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-iy5ZclhZ.mjs').then((m) => m.default || m)
+        component: () => import('./index-BIdO9wJ7.mjs').then((m) => m.default || m)
       },
       {
         name: "base-tests-exam",

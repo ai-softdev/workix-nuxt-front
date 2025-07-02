@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { unref as _unref, resolveComponent as _resolveComponent, withCtx as _withCtx, renderSlot as _renderSlot, createVNode as _createVNode, openBlock as _openBlock, createBlock as _createBlock, createCommentVNode as _createCommentVNode } from \"vue\"\nimport { ssrRenderSlot as _ssrRenderSlot, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\"\n\nimport {useAuthStore} from \"~/stores/auth\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'NavigationLink',\n  __ssrInlineRender: true,\n  props: {\r\n  to: String,\r\n  activeNav: {\r\n    type: Boolean,\r\n    default: false\r\n  }\r\n},\n  setup(__props) {\n\r\nconst authUser = useAuthStore()\r\nconst props = __props\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  const _component_NuxtLink = _resolveComponent(\"NuxtLink\")!\n\n  _push(`<div${_ssrRenderAttrs(_attrs)}>`)\n  _push(_ssrRenderComponent(_component_NuxtLink, {\n    to: __props.to,\n    onClick: ($event: any) => {_unref(authUser).openSettings = false; _unref(authUser).openNotification = false;},\n    class: [\"router-link flex pl-6 transition-all rounded-lg border-lg py-2 w-full items-center gap-x-3 text-black px-4\", {'rounded-lg' : !_unref(authUser).activeNav}]\n  }, {\n    default: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(`<div class=\"link-icon dark:fill-white fill-black transition-all w-10 h-10 rounded-lg flex items-center justify-center border bg-white\"${_scopeId}>`)\n        _ssrRenderSlot(_ctx.$slots, \"navIcon\", {}, null, _push, _parent, _scopeId)\n        _push(`</div>`)\n        if (_unref(authUser).activeNav) {\n          _push(`<div class=\"text-sm max-sm:text-base\"${_scopeId}>`)\n          _ssrRenderSlot(_ctx.$slots, \"navLink\", {}, null, _push, _parent, _scopeId)\n          _push(`</div>`)\n        } else {\n          _push(`<!---->`)\n        }\n      } else {\n        return [\n          _createVNode(\"div\", { class: \"link-icon dark:fill-white fill-black transition-all w-10 h-10 rounded-lg flex items-center justify-center border bg-white\" }, [\n            _renderSlot(_ctx.$slots, \"navIcon\")\n          ]),\n          (_unref(authUser).activeNav)\n            ? (_openBlock(), _createBlock(\"div\", {\n                key: 0,\n                class: \"text-sm max-sm:text-base\"\n              }, [\n                _renderSlot(_ctx.$slots, \"navLink\")\n              ]))\n            : _createCommentVNode(\"\", true)\n        ]\n      }\n    }),\n    _: 3\n  }, _parent))\n  _push(`</div>`)\n}\n}\n\n})",
-      "start": 1751281536552,
-      "end": 1751281536552,
+      "start": 1751456127514,
+      "end": 1751456127514,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1751281536552,
-      "end": 1751281536552,
+      "start": 1751456127514,
+      "end": 1751456127514,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1751281536552,
-      "end": 1751281536552,
+      "start": 1751456127514,
+      "end": 1751456127514,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1751281536552,
-      "end": 1751281536552,
+      "start": 1751456127514,
+      "end": 1751456127514,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1751281536552,
-      "end": 1751281536552,
+      "start": 1751456127514,
+      "end": 1751456127514,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1751281536552,
-      "end": 1751281536552,
+      "start": 1751456127514,
+      "end": 1751456127514,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1751281536552,
-      "end": 1751281536552,
+      "start": 1751456127514,
+      "end": 1751456127514,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1751281536552,
-      "end": 1751281536552,
+      "start": 1751456127514,
+      "end": 1751456127514,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1751281536552,
-      "end": 1751281536552,
+      "start": 1751456127514,
+      "end": 1751456127514,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, resolveComponent as _resolveComponent, withCtx as _withCtx, renderSlot as _renderSlot, createVNode as _createVNode, openBlock as _openBlock, createBlock as _createBlock, createCommentVNode as _createCommentVNode } from \"vue\";\nimport { ssrRenderSlot as _ssrRenderSlot, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport { useAuthStore } from \"~/stores/auth\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"NavigationLink\",\n  __ssrInlineRender: true,\n  props: {\n    to: String,\n    activeNav: {\n      type: Boolean,\n      default: false\n    }\n  },\n  setup(__props) {\n    const authUser = useAuthStore();\n    const props = __props;\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_NuxtLink = _resolveComponent(\"NuxtLink\");\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(_component_NuxtLink, {\n        to: __props.to,\n        onClick: ($event) => {\n          _unref(authUser).openSettings = false;\n          _unref(authUser).openNotification = false;\n        },\n        class: [\"router-link flex pl-6 transition-all rounded-lg border-lg py-2 w-full items-center gap-x-3 text-black px-4\", { \"rounded-lg\": !_unref(authUser).activeNav }]\n      }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`<div class=\"link-icon dark:fill-white fill-black transition-all w-10 h-10 rounded-lg flex items-center justify-center border bg-white\"${_scopeId}>`);\n            _ssrRenderSlot(_ctx.$slots, \"navIcon\", {}, null, _push2, _parent2, _scopeId);\n            _push2(`</div>`);\n            if (_unref(authUser).activeNav) {\n              _push2(`<div class=\"text-sm max-sm:text-base\"${_scopeId}>`);\n              _ssrRenderSlot(_ctx.$slots, \"navLink\", {}, null, _push2, _parent2, _scopeId);\n              _push2(`</div>`);\n            } else {\n              _push2(`<!---->`);\n            }\n          } else {\n            return [\n              _createVNode(\"div\", { class: \"link-icon dark:fill-white fill-black transition-all w-10 h-10 rounded-lg flex items-center justify-center border bg-white\" }, [\n                _renderSlot(_ctx.$slots, \"navIcon\")\n              ]),\n              _unref(authUser).activeNav ? (_openBlock(), _createBlock(\"div\", {\n                key: 0,\n                class: \"text-sm max-sm:text-base\"\n              }, [\n                _renderSlot(_ctx.$slots, \"navLink\")\n              ])) : _createCommentVNode(\"\", true)\n            ];\n          }\n        }),\n        _: 3\n      }, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1751281536552,
-      "end": 1751281536689,
+      "start": 1751456127514,
+      "end": 1751456127643,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -89,213 +89,213 @@
     },
     {
       "name": "vite:json",
-      "start": 1751281536689,
-      "end": 1751281536689,
+      "start": 1751456127643,
+      "end": 1751456127643,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1751281536689,
-      "end": 1751281536689,
+      "start": 1751456127643,
+      "end": 1751456127643,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1751281536689,
-      "end": 1751281536689,
+      "start": 1751456127643,
+      "end": 1751456127643,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1751281536689,
-      "end": 1751281536689,
+      "start": 1751456127643,
+      "end": 1751456127643,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751281536693,
-      "end": 1751281536693,
+      "start": 1751456127643,
+      "end": 1751456127644,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751281536693,
-      "end": 1751281536693,
+      "start": 1751456127643,
+      "end": 1751456127644,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1751281536693,
-      "end": 1751281536693,
+      "start": 1751456127644,
+      "end": 1751456127644,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1751281536693,
-      "end": 1751281536693,
+      "start": 1751456127644,
+      "end": 1751456127644,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1751281536693,
-      "end": 1751281536694,
+      "start": 1751456127644,
+      "end": 1751456127644,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751281536694,
-      "end": 1751281536694,
+      "start": 1751456127644,
+      "end": 1751456127644,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1751281536695,
-      "end": 1751281536697,
+      "start": 1751456127646,
+      "end": 1751456127647,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1751281536698,
-      "end": 1751281536698,
+      "start": 1751456127647,
+      "end": 1751456127647,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1751281536698,
-      "end": 1751281536698,
+      "start": 1751456127647,
+      "end": 1751456127648,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1751281536698,
-      "end": 1751281536698,
+      "start": 1751456127648,
+      "end": 1751456127648,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1751281536698,
-      "end": 1751281536698,
+      "start": 1751456127648,
+      "end": 1751456127648,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1751281536698,
-      "end": 1751281536698,
+      "start": 1751456127648,
+      "end": 1751456127648,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1751281536698,
-      "end": 1751281536698,
+      "start": 1751456127648,
+      "end": 1751456127648,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1751281536698,
-      "end": 1751281536698,
+      "start": 1751456127648,
+      "end": 1751456127648,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1751281536698,
-      "end": 1751281536698,
+      "start": 1751456127648,
+      "end": 1751456127648,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1751281536699,
-      "end": 1751281536699,
+      "start": 1751456127649,
+      "end": 1751456127649,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1751281536699,
-      "end": 1751281536699,
+      "start": 1751456127649,
+      "end": 1751456127649,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1751281536699,
-      "end": 1751281536699,
+      "start": 1751456127649,
+      "end": 1751456127649,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1751281536699,
-      "end": 1751281536699,
+      "start": 1751456127649,
+      "end": 1751456127649,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1751281536699,
-      "end": 1751281536699,
+      "start": 1751456127650,
+      "end": 1751456127650,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1751281536699,
-      "end": 1751281536699,
+      "start": 1751456127650,
+      "end": 1751456127650,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1751281536700,
-      "end": 1751281536700,
+      "start": 1751456127650,
+      "end": 1751456127650,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1751281536700,
-      "end": 1751281536700,
+      "start": 1751456127650,
+      "end": 1751456127650,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1751281536700,
-      "end": 1751281536704,
+      "start": 1751456127650,
+      "end": 1751456127658,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1751281536700,
-      "end": 1751281536704,
+      "start": 1751456127650,
+      "end": 1751456127658,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1751281536704,
-      "end": 1751281536704,
+      "start": 1751456127658,
+      "end": 1751456127658,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1751281536704,
-      "end": 1751281536704,
+      "start": 1751456127658,
+      "end": 1751456127659,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1751281536704,
-      "end": 1751281536704,
+      "start": 1751456127659,
+      "end": 1751456127659,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1751281536704,
-      "end": 1751281536704,
+      "start": 1751456127659,
+      "end": 1751456127659,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1751281536704,
-      "end": 1751281536704,
+      "start": 1751456127659,
+      "end": 1751456127660,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
       "result": "import { default as __nuxt_component_0 } from \"D:/projects/nuxt/workix-nuxt-front/node_modules/nuxt/dist/app/components/nuxt-link\";\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, resolveComponent as _resolveComponent, withCtx as _withCtx, renderSlot as _renderSlot, createVNode as _createVNode, openBlock as _openBlock, createBlock as _createBlock, createCommentVNode as _createCommentVNode } from \"vue\";\nimport { ssrRenderSlot as _ssrRenderSlot, ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport { useAuthStore } from \"~/stores/auth\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"NavigationLink\",\n  __ssrInlineRender: true,\n  props: {\n    to: String,\n    activeNav: {\n      type: Boolean,\n      default: false\n    }\n  },\n  setup(__props) {\n    const authUser = useAuthStore();\n    const props = __props;\n    return (_ctx, _push, _parent, _attrs) => {\n      const _component_NuxtLink = __nuxt_component_0;\n      _push(`<div${_ssrRenderAttrs(_attrs)}>`);\n      _push(_ssrRenderComponent(_component_NuxtLink, {\n        to: __props.to,\n        onClick: ($event) => {\n          _unref(authUser).openSettings = false;\n          _unref(authUser).openNotification = false;\n        },\n        class: [\"router-link flex pl-6 transition-all rounded-lg border-lg py-2 w-full items-center gap-x-3 text-black px-4\", { \"rounded-lg\": !_unref(authUser).activeNav }]\n      }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`<div class=\"link-icon dark:fill-white fill-black transition-all w-10 h-10 rounded-lg flex items-center justify-center border bg-white\"${_scopeId}>`);\n            _ssrRenderSlot(_ctx.$slots, \"navIcon\", {}, null, _push2, _parent2, _scopeId);\n            _push2(`</div>`);\n            if (_unref(authUser).activeNav) {\n              _push2(`<div class=\"text-sm max-sm:text-base\"${_scopeId}>`);\n              _ssrRenderSlot(_ctx.$slots, \"navLink\", {}, null, _push2, _parent2, _scopeId);\n              _push2(`</div>`);\n            } else {\n              _push2(`<!---->`);\n            }\n          } else {\n            return [\n              _createVNode(\"div\", { class: \"link-icon dark:fill-white fill-black transition-all w-10 h-10 rounded-lg flex items-center justify-center border bg-white\" }, [\n                _renderSlot(_ctx.$slots, \"navIcon\")\n              ]),\n              _unref(authUser).activeNav ? (_openBlock(), _createBlock(\"div\", {\n                key: 0,\n                class: \"text-sm max-sm:text-base\"\n              }, [\n                _renderSlot(_ctx.$slots, \"navLink\")\n              ])) : _createCommentVNode(\"\", true)\n            ];\n          }\n        }),\n        _: 3\n      }, _parent));\n      _push(`</div>`);\n    };\n  }\n});\n",
-      "start": 1751281536704,
-      "end": 1751281536705,
+      "start": 1751456127661,
+      "end": 1751456127661,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -308,20 +308,20 @@
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1751281536705,
-      "end": 1751281536705,
+      "start": 1751456127664,
+      "end": 1751456127664,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1751281536705,
-      "end": 1751281536706,
+      "start": 1751456127664,
+      "end": 1751456127664,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1751281536706,
-      "end": 1751281536706,
+      "start": 1751456127664,
+      "end": 1751456127664,
       "order": "normal"
     }
   ]
