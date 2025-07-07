@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { unref as _unref, withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttr as _ssrRenderAttr, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\"\nimport _imports_0 from '/icons/mail.svg'\nimport _imports_1 from '/icons/phone.svg'\nimport _imports_2 from '/icons/password.svg'\nimport _imports_3 from '/icons/pasport.svg'\nimport _imports_4 from '/icons/salary.svg'\n\n\nimport TheCheckbox from \"~/components/UI/TheCheckbox.vue\";\r\nimport TheInput from \"~/components/UI/TheInput.vue\";\r\nimport TheButton from \"~/components/UI/TheButton.vue\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport {useUserStore} from \"~/stores/users\";\r\nimport {useCompanies} from \"~/stores/companies\";\r\nimport {toast} from \"vue3-toastify\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'UserChange',\n  __ssrInlineRender: true,\n  props: {\r\n  userEdit: {\r\n    type: Object,\r\n    default: () => {}\r\n  },\r\n  showChange: Boolean\r\n},\n  emits: ['showChange'],\n  setup(__props, { emit: __emit }) {\n\r\n\r\nconst userStore = useUserStore()\r\nconst companyStore = useCompanies()\r\nconst currentUser = useUserStore()\r\nconst route = useRoute()\r\n\r\nconst emit = __emit\r\n\r\nconst props = __props\r\n\r\n\r\nconst userEdit = ref({...props.userEdit});\r\n\r\nconst handleSubmit = async() => {\r\n  try {\r\n    await userStore.update_user({user: userEdit.value, id: userEdit.value.id})\r\n    if(userEdit.value.permissions !== userStore.user.permissions) {\r\n       await userStore.change_permissions({\r\n        permissions: userEdit.value.permissions.filter((e : any) => e.value).map((e : any) => e.id),\r\n        id: userEdit.value.id,\r\n      })\r\n    }\r\n    emit(\"showChange\")\r\n    await currentUser.loadUser({id: route.params.slug})\r\n  } catch (error) {\r\n    toast.error('Ошибка при обновлении пользователя или прав', {autoClose: 1500, theme:'auto'});\r\n  }\r\n}\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  _push(`<form${_ssrRenderAttrs(_mergeProps({ class: \"mt-10\" }, _attrs))}><div class=\"flex flex-wrap items-center gap-x-10 max-sm:gap-y-4 max-sm:flex-col mb-6\"><div class=\"w-5/12 max-sm:w-full\">`)\n  _push(_ssrRenderComponent(TheInput, {\n    label: _ctx.$t('Имя'),\n    placeholder: _unref(userStore).user.first_name,\n    modelValue: _unref(userEdit).first_name,\n    \"onUpdate:modelValue\": ($event: any) => ((_unref(userEdit).first_name) = $event)\n  }, null, _parent))\n  _push(`</div><div class=\"w-5/12 max-sm:w-full\">`)\n  _push(_ssrRenderComponent(TheInput, {\n    label: _ctx.$t('Фамилия'),\n    placeholder: _unref(userStore).user.last_name,\n    modelValue: _unref(userEdit).last_name,\n    \"onUpdate:modelValue\": ($event: any) => ((_unref(userEdit).last_name) = $event)\n  }, null, _parent))\n  _push(`</div></div><div class=\"flex flex-wrap items-center gap-x-10 max-sm:gap-y-4 max-sm:flex-col mb-6\"><div class=\"w-5/12 max-sm:w-full flex flex-col gap-1\"><div class=\"flex items-center gap-2\"><img${\n    _ssrRenderAttr(\"src\", _imports_0)\n  } alt=\"mail\"><p class=\"dark:text-white font-medium\">${\n    _ssrInterpolate(_ctx.$t('Почта'))\n  }: </p></div>`)\n  _push(_ssrRenderComponent(TheInput, {\n    placeholder: _unref(userStore).user.email,\n    modelValue: _unref(userEdit).email,\n    \"onUpdate:modelValue\": ($event: any) => ((_unref(userEdit).email) = $event)\n  }, null, _parent))\n  _push(`</div><div class=\"w-5/12 max-sm:w-full flex flex-col gap-1\"><div class=\"flex items-center gap-2\"><img${\n    _ssrRenderAttr(\"src\", _imports_1)\n  } alt=\"phone\"><p class=\"dark:text-white font-medium\">${\n    _ssrInterpolate(_ctx.$t('Номер телефона'))\n  }: </p></div>`)\n  _push(_ssrRenderComponent(TheInput, {\n    type: \"tel\",\n    placeholder: _unref(userStore).user.phone,\n    modelValue: _unref(userEdit).phone,\n    \"onUpdate:modelValue\": ($event: any) => ((_unref(userEdit).phone) = $event)\n  }, null, _parent))\n  _push(`</div></div><div class=\"flex flex-wrap items-center gap-x-10 max-sm:gap-y-4 max-sm:flex-col mb-6\"><div class=\"w-5/12 max-sm:w-full flex flex-col gap-1\"><div class=\"flex items-center gap-2\"><img${\n    _ssrRenderAttr(\"src\", _imports_2)\n  } alt=\"password\"><p class=\"dark:text-white font-medium\">${\n    _ssrInterpolate(_ctx.$t('Пароль'))\n  }: </p></div>`)\n  _push(_ssrRenderComponent(TheInput, {\n    type: \"password\",\n    placeholder: _unref(userStore).user.password,\n    modelValue: _unref(userEdit).password,\n    \"onUpdate:modelValue\": ($event: any) => ((_unref(userEdit).password) = $event)\n  }, null, _parent))\n  _push(`</div><div class=\"w-5/12 max-sm:w-full flex flex-col gap-1\"><div class=\"flex items-center gap-2\"><img${\n    _ssrRenderAttr(\"src\", _imports_3)\n  } alt=\"pasport\"><p class=\"dark:text-white font-medium\">${\n    _ssrInterpolate(_ctx.$t('Паспорт'))\n  }: </p></div>`)\n  _push(_ssrRenderComponent(TheInput, {\n    placeholder: _unref(userStore).user.passport,\n    modelValue: _unref(userEdit).passport,\n    \"onUpdate:modelValue\": ($event: any) => ((_unref(userEdit).passport) = $event)\n  }, null, _parent))\n  _push(`</div></div><div class=\"flex flex-wrap items-center gap-x-10 max-sm:gap-y-4 max-sm:flex-col mb-6\"><div class=\"w-5/12 max-sm:w-full\"><div class=\"flex items-center gap-2\"><img${\n    _ssrRenderAttr(\"src\", _imports_4)\n  } alt=\"salary\"><p class=\"dark:text-white font-medium\">${\n    _ssrInterpolate(_ctx.$t('Заработная плата'))\n  }: </p></div>`)\n  _push(_ssrRenderComponent(TheInput, {\n    modelValue: _unref(userEdit).salary,\n    \"onUpdate:modelValue\": ($event: any) => ((_unref(userEdit).salary) = $event)\n  }, null, _parent))\n  _push(`</div><div class=\"w-5/12 max-sm:w-full\"><p class=\"mb-2 font-bold\">${_ssrInterpolate(_ctx.$t('Департаменты'))}</p><select class=\"w-full text-black rounded-3xl p-2.5 bg-whiteSmoke border dark:bg-gray-300 dark:border-none outline-semiCyan outline-1\"><!--[-->`)\n  _ssrRenderList(_unref(companyStore)?.get_all_department.results, (department) => {\n    _push(`<option${\n      _ssrRenderAttr(\"value\", department.id)\n    }>${\n      _ssrInterpolate(department.name)\n    }</option>`)\n  })\n  _push(`<!--]--></select></div></div><div class=\"flex items-center justify-around gap-x-10 mb-6 pt-8 mt-8 border-t\"><div class=\"w-full\"><p class=\"font-bold text-lg\">${_ssrInterpolate(_ctx.$t('Возможности'))}</p><div class=\"flex flex-wrap mt-4 gap-2\"><!--[-->`)\n  _ssrRenderList(_unref(userEdit).permissions, (permission) => {\n    _push(_ssrRenderComponent(TheCheckbox, { item: permission }, null, _parent))\n  })\n  _push(`<!--]--></div></div></div><div class=\"flex flex-wrap gap-y-3 items-center justify-center gap-x-10 max-sm:flex-col\">`)\n  _push(_ssrRenderComponent(TheButton, {\n    class: \"w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-black hover:!bg-gray-200 gap-3 py-2 !bg-porcelain !border transition-all ease-in-out duration-300\",\n    t: \"button\",\n    onClick: ($event: any) => (_ctx.$emit('showChange'))\n  }, {\n    default: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(`${_ssrInterpolate(_ctx.$t('Отменить'))}`)\n      } else {\n        return [\n          _createTextVNode(_toDisplayString(_ctx.$t('Отменить')), 1)\n        ]\n      }\n    }),\n    _: 1\n  }, _parent))\n  _push(_ssrRenderComponent(TheButton, {\n    class: \"w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-black hover:!shadow-golden gap-3 py-2 !bg-golden !border transition-all ease-in-out duration-300\",\n    t: \"submit\",\n    type: \"success\"\n  }, {\n    default: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(`${_ssrInterpolate(_ctx.$t('Изменить'))}`)\n      } else {\n        return [\n          _createTextVNode(_toDisplayString(_ctx.$t('Изменить')), 1)\n        ]\n      }\n    }),\n    _: 1\n  }, _parent))\n  _push(`</div></form>`)\n}\n}\n\n})",
-      "start": 1751875969127,
-      "end": 1751875969127,
+      "start": 1751877301339,
+      "end": 1751877301339,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1751875969127,
-      "end": 1751875969127,
+      "start": 1751877301339,
+      "end": 1751877301339,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1751875969127,
-      "end": 1751875969127,
+      "start": 1751877301339,
+      "end": 1751877301339,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1751875969127,
-      "end": 1751875969127,
+      "start": 1751877301339,
+      "end": 1751877301339,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1751875969127,
-      "end": 1751875969127,
+      "start": 1751877301339,
+      "end": 1751877301339,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1751875969127,
-      "end": 1751875969127,
+      "start": 1751877301339,
+      "end": 1751877301339,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1751875969127,
-      "end": 1751875969127,
+      "start": 1751877301339,
+      "end": 1751877301339,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1751875969127,
-      "end": 1751875969127,
+      "start": 1751877301339,
+      "end": 1751877301339,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1751875969127,
-      "end": 1751875969127,
+      "start": 1751877301339,
+      "end": 1751877301339,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttr as _ssrRenderAttr, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport _imports_0 from \"/icons/mail.svg\";\nimport _imports_1 from \"/icons/phone.svg\";\nimport _imports_2 from \"/icons/password.svg\";\nimport _imports_3 from \"/icons/pasport.svg\";\nimport _imports_4 from \"/icons/salary.svg\";\nimport TheCheckbox from \"~/components/UI/TheCheckbox.vue\";\nimport TheInput from \"~/components/UI/TheInput.vue\";\nimport TheButton from \"~/components/UI/TheButton.vue\";\nimport { useUserStore } from \"~/stores/users\";\nimport { useCompanies } from \"~/stores/companies\";\nimport { toast } from \"vue3-toastify\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"UserChange\",\n  __ssrInlineRender: true,\n  props: {\n    userEdit: {\n      type: Object,\n      default: () => {\n      }\n    },\n    showChange: Boolean\n  },\n  emits: [\"showChange\"],\n  setup(__props, { emit: __emit }) {\n    const userStore = useUserStore();\n    const companyStore = useCompanies();\n    const currentUser = useUserStore();\n    const route = useRoute();\n    const emit = __emit;\n    const props = __props;\n    const userEdit = ref({ ...props.userEdit });\n    const handleSubmit = async () => {\n      try {\n        await userStore.update_user({ user: userEdit.value, id: userEdit.value.id });\n        if (userEdit.value.permissions !== userStore.user.permissions) {\n          await userStore.change_permissions({\n            permissions: userEdit.value.permissions.filter((e) => e.value).map((e) => e.id),\n            id: userEdit.value.id\n          });\n        }\n        emit(\"showChange\");\n        await currentUser.loadUser({ id: route.params.slug });\n      } catch (error) {\n        toast.error(\"Ошибка при обновлении пользователя или прав\", { autoClose: 1500, theme: \"auto\" });\n      }\n    };\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<form${_ssrRenderAttrs(_mergeProps({ class: \"mt-10\" }, _attrs))}><div class=\"flex flex-wrap items-center gap-x-10 max-sm:gap-y-4 max-sm:flex-col mb-6\"><div class=\"w-5/12 max-sm:w-full\">`);\n      _push(_ssrRenderComponent(TheInput, {\n        label: _ctx.$t(\"Имя\"),\n        placeholder: _unref(userStore).user.first_name,\n        modelValue: _unref(userEdit).first_name,\n        \"onUpdate:modelValue\": ($event) => _unref(userEdit).first_name = $event\n      }, null, _parent));\n      _push(`</div><div class=\"w-5/12 max-sm:w-full\">`);\n      _push(_ssrRenderComponent(TheInput, {\n        label: _ctx.$t(\"Фамилия\"),\n        placeholder: _unref(userStore).user.last_name,\n        modelValue: _unref(userEdit).last_name,\n        \"onUpdate:modelValue\": ($event) => _unref(userEdit).last_name = $event\n      }, null, _parent));\n      _push(`</div></div><div class=\"flex flex-wrap items-center gap-x-10 max-sm:gap-y-4 max-sm:flex-col mb-6\"><div class=\"w-5/12 max-sm:w-full flex flex-col gap-1\"><div class=\"flex items-center gap-2\"><img${_ssrRenderAttr(\"src\", _imports_0)} alt=\"mail\"><p class=\"dark:text-white font-medium\">${_ssrInterpolate(_ctx.$t(\"Почта\"))}: </p></div>`);\n      _push(_ssrRenderComponent(TheInput, {\n        placeholder: _unref(userStore).user.email,\n        modelValue: _unref(userEdit).email,\n        \"onUpdate:modelValue\": ($event) => _unref(userEdit).email = $event\n      }, null, _parent));\n      _push(`</div><div class=\"w-5/12 max-sm:w-full flex flex-col gap-1\"><div class=\"flex items-center gap-2\"><img${_ssrRenderAttr(\"src\", _imports_1)} alt=\"phone\"><p class=\"dark:text-white font-medium\">${_ssrInterpolate(_ctx.$t(\"Номер телефона\"))}: </p></div>`);\n      _push(_ssrRenderComponent(TheInput, {\n        type: \"tel\",\n        placeholder: _unref(userStore).user.phone,\n        modelValue: _unref(userEdit).phone,\n        \"onUpdate:modelValue\": ($event) => _unref(userEdit).phone = $event\n      }, null, _parent));\n      _push(`</div></div><div class=\"flex flex-wrap items-center gap-x-10 max-sm:gap-y-4 max-sm:flex-col mb-6\"><div class=\"w-5/12 max-sm:w-full flex flex-col gap-1\"><div class=\"flex items-center gap-2\"><img${_ssrRenderAttr(\"src\", _imports_2)} alt=\"password\"><p class=\"dark:text-white font-medium\">${_ssrInterpolate(_ctx.$t(\"Пароль\"))}: </p></div>`);\n      _push(_ssrRenderComponent(TheInput, {\n        type: \"password\",\n        placeholder: _unref(userStore).user.password,\n        modelValue: _unref(userEdit).password,\n        \"onUpdate:modelValue\": ($event) => _unref(userEdit).password = $event\n      }, null, _parent));\n      _push(`</div><div class=\"w-5/12 max-sm:w-full flex flex-col gap-1\"><div class=\"flex items-center gap-2\"><img${_ssrRenderAttr(\"src\", _imports_3)} alt=\"pasport\"><p class=\"dark:text-white font-medium\">${_ssrInterpolate(_ctx.$t(\"Паспорт\"))}: </p></div>`);\n      _push(_ssrRenderComponent(TheInput, {\n        placeholder: _unref(userStore).user.passport,\n        modelValue: _unref(userEdit).passport,\n        \"onUpdate:modelValue\": ($event) => _unref(userEdit).passport = $event\n      }, null, _parent));\n      _push(`</div></div><div class=\"flex flex-wrap items-center gap-x-10 max-sm:gap-y-4 max-sm:flex-col mb-6\"><div class=\"w-5/12 max-sm:w-full\"><div class=\"flex items-center gap-2\"><img${_ssrRenderAttr(\"src\", _imports_4)} alt=\"salary\"><p class=\"dark:text-white font-medium\">${_ssrInterpolate(_ctx.$t(\"Заработная плата\"))}: </p></div>`);\n      _push(_ssrRenderComponent(TheInput, {\n        modelValue: _unref(userEdit).salary,\n        \"onUpdate:modelValue\": ($event) => _unref(userEdit).salary = $event\n      }, null, _parent));\n      _push(`</div><div class=\"w-5/12 max-sm:w-full\"><p class=\"mb-2 font-bold\">${_ssrInterpolate(_ctx.$t(\"Департаменты\"))}</p><select class=\"w-full text-black rounded-3xl p-2.5 bg-whiteSmoke border dark:bg-gray-300 dark:border-none outline-semiCyan outline-1\"><!--[-->`);\n      _ssrRenderList(_unref(companyStore)?.get_all_department.results, (department) => {\n        _push(`<option${_ssrRenderAttr(\"value\", department.id)}>${_ssrInterpolate(department.name)}</option>`);\n      });\n      _push(`<!--]--></select></div></div><div class=\"flex items-center justify-around gap-x-10 mb-6 pt-8 mt-8 border-t\"><div class=\"w-full\"><p class=\"font-bold text-lg\">${_ssrInterpolate(_ctx.$t(\"Возможности\"))}</p><div class=\"flex flex-wrap mt-4 gap-2\"><!--[-->`);\n      _ssrRenderList(_unref(userEdit).permissions, (permission) => {\n        _push(_ssrRenderComponent(TheCheckbox, { item: permission }, null, _parent));\n      });\n      _push(`<!--]--></div></div></div><div class=\"flex flex-wrap gap-y-3 items-center justify-center gap-x-10 max-sm:flex-col\">`);\n      _push(_ssrRenderComponent(TheButton, {\n        class: \"w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-black hover:!bg-gray-200 gap-3 py-2 !bg-porcelain !border transition-all ease-in-out duration-300\",\n        t: \"button\",\n        onClick: ($event) => _ctx.$emit(\"showChange\")\n      }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Отменить\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Отменить\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(_ssrRenderComponent(TheButton, {\n        class: \"w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-black hover:!shadow-golden gap-3 py-2 !bg-golden !border transition-all ease-in-out duration-300\",\n        t: \"submit\",\n        type: \"success\"\n      }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Изменить\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Изменить\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`</div></form>`);\n    };\n  }\n});\n",
-      "start": 1751875969127,
-      "end": 1751875969960,
+      "start": 1751877301339,
+      "end": 1751877301864,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -89,171 +89,171 @@
     },
     {
       "name": "vite:json",
-      "start": 1751875969960,
-      "end": 1751875969960,
+      "start": 1751877301864,
+      "end": 1751877301864,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1751875969960,
-      "end": 1751875969960,
+      "start": 1751877301865,
+      "end": 1751877301865,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1751875969960,
-      "end": 1751875969960,
+      "start": 1751877301865,
+      "end": 1751877301865,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1751875969960,
-      "end": 1751875969960,
+      "start": 1751877301865,
+      "end": 1751877301865,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751875969960,
-      "end": 1751875969961,
+      "start": 1751877301865,
+      "end": 1751877301865,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751875969960,
-      "end": 1751875969961,
+      "start": 1751877301865,
+      "end": 1751877301865,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1751875969961,
-      "end": 1751875969961,
+      "start": 1751877301866,
+      "end": 1751877301866,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1751875969961,
-      "end": 1751875969961,
+      "start": 1751877301866,
+      "end": 1751877301866,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1751875969961,
-      "end": 1751875969961,
+      "start": 1751877301866,
+      "end": 1751877301866,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751875969961,
-      "end": 1751875969961,
+      "start": 1751877301866,
+      "end": 1751877301866,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1751875969961,
-      "end": 1751875969962,
+      "start": 1751877301867,
+      "end": 1751877301868,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1751875969962,
-      "end": 1751875969963,
+      "start": 1751877301868,
+      "end": 1751877301868,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1751875969963,
-      "end": 1751875969963,
+      "start": 1751877301868,
+      "end": 1751877301868,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1751875969963,
-      "end": 1751875969963,
+      "start": 1751877301868,
+      "end": 1751877301868,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1751875969963,
-      "end": 1751875969963,
+      "start": 1751877301870,
+      "end": 1751877301870,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1751875969963,
-      "end": 1751875969963,
+      "start": 1751877301871,
+      "end": 1751877301871,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1751875969963,
-      "end": 1751875969963,
+      "start": 1751877301871,
+      "end": 1751877301871,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1751875969963,
-      "end": 1751875969963,
+      "start": 1751877301871,
+      "end": 1751877301871,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1751875969963,
-      "end": 1751875969963,
+      "start": 1751877301871,
+      "end": 1751877301871,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1751875969963,
-      "end": 1751875969963,
+      "start": 1751877301871,
+      "end": 1751877301872,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1751875969963,
-      "end": 1751875969963,
+      "start": 1751877301871,
+      "end": 1751877301872,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1751875969963,
-      "end": 1751875969963,
+      "start": 1751877301872,
+      "end": 1751877301872,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1751875969963,
-      "end": 1751875969963,
+      "start": 1751877301872,
+      "end": 1751877301872,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1751875969963,
-      "end": 1751875969963,
+      "start": 1751877301873,
+      "end": 1751877301873,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1751875969963,
-      "end": 1751875969963,
+      "start": 1751877301873,
+      "end": 1751877301873,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1751875969963,
-      "end": 1751875969963,
+      "start": 1751877301873,
+      "end": 1751877301873,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1751875969963,
-      "end": 1751875969963,
+      "start": 1751877301873,
+      "end": 1751877301873,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { useRoute } from '#app/composables/router';\nimport { ref } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttr as _ssrRenderAttr, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport _imports_0 from \"/icons/mail.svg\";\nimport _imports_1 from \"/icons/phone.svg\";\nimport _imports_2 from \"/icons/password.svg\";\nimport _imports_3 from \"/icons/pasport.svg\";\nimport _imports_4 from \"/icons/salary.svg\";\nimport TheCheckbox from \"~/components/UI/TheCheckbox.vue\";\nimport TheInput from \"~/components/UI/TheInput.vue\";\nimport TheButton from \"~/components/UI/TheButton.vue\";\nimport { useUserStore } from \"~/stores/users\";\nimport { useCompanies } from \"~/stores/companies\";\nimport { toast } from \"vue3-toastify\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"UserChange\",\n  __ssrInlineRender: true,\n  props: {\n    userEdit: {\n      type: Object,\n      default: () => {\n      }\n    },\n    showChange: Boolean\n  },\n  emits: [\"showChange\"],\n  setup(__props, { emit: __emit }) {\n    const userStore = useUserStore();\n    const companyStore = useCompanies();\n    const currentUser = useUserStore();\n    const route = useRoute();\n    const emit = __emit;\n    const props = __props;\n    const userEdit = ref({ ...props.userEdit });\n    const handleSubmit = async () => {\n      try {\n        await userStore.update_user({ user: userEdit.value, id: userEdit.value.id });\n        if (userEdit.value.permissions !== userStore.user.permissions) {\n          await userStore.change_permissions({\n            permissions: userEdit.value.permissions.filter((e) => e.value).map((e) => e.id),\n            id: userEdit.value.id\n          });\n        }\n        emit(\"showChange\");\n        await currentUser.loadUser({ id: route.params.slug });\n      } catch (error) {\n        toast.error(\"Ошибка при обновлении пользователя или прав\", { autoClose: 1500, theme: \"auto\" });\n      }\n    };\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<form${_ssrRenderAttrs(_mergeProps({ class: \"mt-10\" }, _attrs))}><div class=\"flex flex-wrap items-center gap-x-10 max-sm:gap-y-4 max-sm:flex-col mb-6\"><div class=\"w-5/12 max-sm:w-full\">`);\n      _push(_ssrRenderComponent(TheInput, {\n        label: _ctx.$t(\"Имя\"),\n        placeholder: _unref(userStore).user.first_name,\n        modelValue: _unref(userEdit).first_name,\n        \"onUpdate:modelValue\": ($event) => _unref(userEdit).first_name = $event\n      }, null, _parent));\n      _push(`</div><div class=\"w-5/12 max-sm:w-full\">`);\n      _push(_ssrRenderComponent(TheInput, {\n        label: _ctx.$t(\"Фамилия\"),\n        placeholder: _unref(userStore).user.last_name,\n        modelValue: _unref(userEdit).last_name,\n        \"onUpdate:modelValue\": ($event) => _unref(userEdit).last_name = $event\n      }, null, _parent));\n      _push(`</div></div><div class=\"flex flex-wrap items-center gap-x-10 max-sm:gap-y-4 max-sm:flex-col mb-6\"><div class=\"w-5/12 max-sm:w-full flex flex-col gap-1\"><div class=\"flex items-center gap-2\"><img${_ssrRenderAttr(\"src\", _imports_0)} alt=\"mail\"><p class=\"dark:text-white font-medium\">${_ssrInterpolate(_ctx.$t(\"Почта\"))}: </p></div>`);\n      _push(_ssrRenderComponent(TheInput, {\n        placeholder: _unref(userStore).user.email,\n        modelValue: _unref(userEdit).email,\n        \"onUpdate:modelValue\": ($event) => _unref(userEdit).email = $event\n      }, null, _parent));\n      _push(`</div><div class=\"w-5/12 max-sm:w-full flex flex-col gap-1\"><div class=\"flex items-center gap-2\"><img${_ssrRenderAttr(\"src\", _imports_1)} alt=\"phone\"><p class=\"dark:text-white font-medium\">${_ssrInterpolate(_ctx.$t(\"Номер телефона\"))}: </p></div>`);\n      _push(_ssrRenderComponent(TheInput, {\n        type: \"tel\",\n        placeholder: _unref(userStore).user.phone,\n        modelValue: _unref(userEdit).phone,\n        \"onUpdate:modelValue\": ($event) => _unref(userEdit).phone = $event\n      }, null, _parent));\n      _push(`</div></div><div class=\"flex flex-wrap items-center gap-x-10 max-sm:gap-y-4 max-sm:flex-col mb-6\"><div class=\"w-5/12 max-sm:w-full flex flex-col gap-1\"><div class=\"flex items-center gap-2\"><img${_ssrRenderAttr(\"src\", _imports_2)} alt=\"password\"><p class=\"dark:text-white font-medium\">${_ssrInterpolate(_ctx.$t(\"Пароль\"))}: </p></div>`);\n      _push(_ssrRenderComponent(TheInput, {\n        type: \"password\",\n        placeholder: _unref(userStore).user.password,\n        modelValue: _unref(userEdit).password,\n        \"onUpdate:modelValue\": ($event) => _unref(userEdit).password = $event\n      }, null, _parent));\n      _push(`</div><div class=\"w-5/12 max-sm:w-full flex flex-col gap-1\"><div class=\"flex items-center gap-2\"><img${_ssrRenderAttr(\"src\", _imports_3)} alt=\"pasport\"><p class=\"dark:text-white font-medium\">${_ssrInterpolate(_ctx.$t(\"Паспорт\"))}: </p></div>`);\n      _push(_ssrRenderComponent(TheInput, {\n        placeholder: _unref(userStore).user.passport,\n        modelValue: _unref(userEdit).passport,\n        \"onUpdate:modelValue\": ($event) => _unref(userEdit).passport = $event\n      }, null, _parent));\n      _push(`</div></div><div class=\"flex flex-wrap items-center gap-x-10 max-sm:gap-y-4 max-sm:flex-col mb-6\"><div class=\"w-5/12 max-sm:w-full\"><div class=\"flex items-center gap-2\"><img${_ssrRenderAttr(\"src\", _imports_4)} alt=\"salary\"><p class=\"dark:text-white font-medium\">${_ssrInterpolate(_ctx.$t(\"Заработная плата\"))}: </p></div>`);\n      _push(_ssrRenderComponent(TheInput, {\n        modelValue: _unref(userEdit).salary,\n        \"onUpdate:modelValue\": ($event) => _unref(userEdit).salary = $event\n      }, null, _parent));\n      _push(`</div><div class=\"w-5/12 max-sm:w-full\"><p class=\"mb-2 font-bold\">${_ssrInterpolate(_ctx.$t(\"Департаменты\"))}</p><select class=\"w-full text-black rounded-3xl p-2.5 bg-whiteSmoke border dark:bg-gray-300 dark:border-none outline-semiCyan outline-1\"><!--[-->`);\n      _ssrRenderList(_unref(companyStore)?.get_all_department.results, (department) => {\n        _push(`<option${_ssrRenderAttr(\"value\", department.id)}>${_ssrInterpolate(department.name)}</option>`);\n      });\n      _push(`<!--]--></select></div></div><div class=\"flex items-center justify-around gap-x-10 mb-6 pt-8 mt-8 border-t\"><div class=\"w-full\"><p class=\"font-bold text-lg\">${_ssrInterpolate(_ctx.$t(\"Возможности\"))}</p><div class=\"flex flex-wrap mt-4 gap-2\"><!--[-->`);\n      _ssrRenderList(_unref(userEdit).permissions, (permission) => {\n        _push(_ssrRenderComponent(TheCheckbox, { item: permission }, null, _parent));\n      });\n      _push(`<!--]--></div></div></div><div class=\"flex flex-wrap gap-y-3 items-center justify-center gap-x-10 max-sm:flex-col\">`);\n      _push(_ssrRenderComponent(TheButton, {\n        class: \"w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-black hover:!bg-gray-200 gap-3 py-2 !bg-porcelain !border transition-all ease-in-out duration-300\",\n        t: \"button\",\n        onClick: ($event) => _ctx.$emit(\"showChange\")\n      }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Отменить\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Отменить\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(_ssrRenderComponent(TheButton, {\n        class: \"w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-black hover:!shadow-golden gap-3 py-2 !bg-golden !border transition-all ease-in-out duration-300\",\n        t: \"submit\",\n        type: \"success\"\n      }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Изменить\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Изменить\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`</div></form>`);\n    };\n  }\n});\n",
-      "start": 1751875969963,
-      "end": 1751875969973,
+      "start": 1751877301874,
+      "end": 1751877301878,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -267,8 +267,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { useRoute } from '#app/composables/router';\nimport { ref } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttr as _ssrRenderAttr, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport _imports_0 from \"/icons/mail.svg\";\nimport _imports_1 from \"/icons/phone.svg\";\nimport _imports_2 from \"/icons/password.svg\";\nimport _imports_3 from \"/icons/pasport.svg\";\nimport _imports_4 from \"/icons/salary.svg\";\nimport TheCheckbox from \"~/components/UI/TheCheckbox.vue\";\nimport TheInput from \"~/components/UI/TheInput.vue\";\nimport TheButton from \"~/components/UI/TheButton.vue\";\nimport { useUserStore } from \"~/stores/users\";\nimport { useCompanies } from \"~/stores/companies\";\nimport { toast } from \"vue3-toastify\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"UserChange\",\n  __ssrInlineRender: true,\n  props: {\n    userEdit: {\n      type: Object,\n      default: () => {\n      }\n    },\n    showChange: Boolean\n  },\n  emits: [\"showChange\"],\n  setup(__props, { emit: __emit }) {\n    const userStore = useUserStore();\n    const companyStore = useCompanies();\n    const currentUser = useUserStore();\n    const route = useRoute();\n    const emit = __emit;\n    const props = __props;\n    const userEdit = ref({ ...props.userEdit });\n    const handleSubmit = async () => {\n      try {\n        await userStore.update_user({ user: userEdit.value, id: userEdit.value.id });\n        if (userEdit.value.permissions !== userStore.user.permissions) {\n          await userStore.change_permissions({\n            permissions: userEdit.value.permissions.filter((e) => e.value).map((e) => e.id),\n            id: userEdit.value.id\n          });\n        }\n        emit(\"showChange\");\n        await currentUser.loadUser({ id: route.params.slug });\n      } catch (error) {\n        toast.error(\"Ошибка при обновлении пользователя или прав\", { autoClose: 1500, theme: \"auto\" });\n      }\n    };\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<form${_ssrRenderAttrs(_mergeProps({ class: \"mt-10\" }, _attrs))}><div class=\"flex flex-wrap items-center gap-x-10 max-sm:gap-y-4 max-sm:flex-col mb-6\"><div class=\"w-5/12 max-sm:w-full\">`);\n      _push(_ssrRenderComponent(TheInput, {\n        label: _ctx.$t(\"Имя\"),\n        placeholder: _unref(userStore).user.first_name,\n        modelValue: _unref(userEdit).first_name,\n        \"onUpdate:modelValue\": ($event) => _unref(userEdit).first_name = $event\n      }, null, _parent));\n      _push(`</div><div class=\"w-5/12 max-sm:w-full\">`);\n      _push(_ssrRenderComponent(TheInput, {\n        label: _ctx.$t(\"Фамилия\"),\n        placeholder: _unref(userStore).user.last_name,\n        modelValue: _unref(userEdit).last_name,\n        \"onUpdate:modelValue\": ($event) => _unref(userEdit).last_name = $event\n      }, null, _parent));\n      _push(`</div></div><div class=\"flex flex-wrap items-center gap-x-10 max-sm:gap-y-4 max-sm:flex-col mb-6\"><div class=\"w-5/12 max-sm:w-full flex flex-col gap-1\"><div class=\"flex items-center gap-2\"><img${_ssrRenderAttr(\"src\", _imports_0)} alt=\"mail\"><p class=\"dark:text-white font-medium\">${_ssrInterpolate(_ctx.$t(\"Почта\"))}: </p></div>`);\n      _push(_ssrRenderComponent(TheInput, {\n        placeholder: _unref(userStore).user.email,\n        modelValue: _unref(userEdit).email,\n        \"onUpdate:modelValue\": ($event) => _unref(userEdit).email = $event\n      }, null, _parent));\n      _push(`</div><div class=\"w-5/12 max-sm:w-full flex flex-col gap-1\"><div class=\"flex items-center gap-2\"><img${_ssrRenderAttr(\"src\", _imports_1)} alt=\"phone\"><p class=\"dark:text-white font-medium\">${_ssrInterpolate(_ctx.$t(\"Номер телефона\"))}: </p></div>`);\n      _push(_ssrRenderComponent(TheInput, {\n        type: \"tel\",\n        placeholder: _unref(userStore).user.phone,\n        modelValue: _unref(userEdit).phone,\n        \"onUpdate:modelValue\": ($event) => _unref(userEdit).phone = $event\n      }, null, _parent));\n      _push(`</div></div><div class=\"flex flex-wrap items-center gap-x-10 max-sm:gap-y-4 max-sm:flex-col mb-6\"><div class=\"w-5/12 max-sm:w-full flex flex-col gap-1\"><div class=\"flex items-center gap-2\"><img${_ssrRenderAttr(\"src\", _imports_2)} alt=\"password\"><p class=\"dark:text-white font-medium\">${_ssrInterpolate(_ctx.$t(\"Пароль\"))}: </p></div>`);\n      _push(_ssrRenderComponent(TheInput, {\n        type: \"password\",\n        placeholder: _unref(userStore).user.password,\n        modelValue: _unref(userEdit).password,\n        \"onUpdate:modelValue\": ($event) => _unref(userEdit).password = $event\n      }, null, _parent));\n      _push(`</div><div class=\"w-5/12 max-sm:w-full flex flex-col gap-1\"><div class=\"flex items-center gap-2\"><img${_ssrRenderAttr(\"src\", _imports_3)} alt=\"pasport\"><p class=\"dark:text-white font-medium\">${_ssrInterpolate(_ctx.$t(\"Паспорт\"))}: </p></div>`);\n      _push(_ssrRenderComponent(TheInput, {\n        placeholder: _unref(userStore).user.passport,\n        modelValue: _unref(userEdit).passport,\n        \"onUpdate:modelValue\": ($event) => _unref(userEdit).passport = $event\n      }, null, _parent));\n      _push(`</div></div><div class=\"flex flex-wrap items-center gap-x-10 max-sm:gap-y-4 max-sm:flex-col mb-6\"><div class=\"w-5/12 max-sm:w-full\"><div class=\"flex items-center gap-2\"><img${_ssrRenderAttr(\"src\", _imports_4)} alt=\"salary\"><p class=\"dark:text-white font-medium\">${_ssrInterpolate(_ctx.$t(\"Заработная плата\"))}: </p></div>`);\n      _push(_ssrRenderComponent(TheInput, {\n        modelValue: _unref(userEdit).salary,\n        \"onUpdate:modelValue\": ($event) => _unref(userEdit).salary = $event\n      }, null, _parent));\n      _push(`</div><div class=\"w-5/12 max-sm:w-full\"><p class=\"mb-2 font-bold\">${_ssrInterpolate(_ctx.$t(\"Департаменты\"))}</p><select class=\"w-full text-black rounded-3xl p-2.5 bg-whiteSmoke border dark:bg-gray-300 dark:border-none outline-semiCyan outline-1\"><!--[-->`);\n      _ssrRenderList(_unref(companyStore)?.get_all_department.results, (department) => {\n        _push(`<option${_ssrRenderAttr(\"value\", department.id)}>${_ssrInterpolate(department.name)}</option>`);\n      });\n      _push(`<!--]--></select></div></div><div class=\"flex items-center justify-around gap-x-10 mb-6 pt-8 mt-8 border-t\"><div class=\"w-full\"><p class=\"font-bold text-lg\">${_ssrInterpolate(_ctx.$t(\"Возможности\"))}</p><div class=\"flex flex-wrap mt-4 gap-2\"><!--[-->`);\n      _ssrRenderList(_unref(userEdit).permissions, (permission) => {\n        _push(_ssrRenderComponent(TheCheckbox, { item: permission }, null, _parent));\n      });\n      _push(`<!--]--></div></div></div><div class=\"flex flex-wrap gap-y-3 items-center justify-center gap-x-10 max-sm:flex-col\">`);\n      _push(_ssrRenderComponent(TheButton, {\n        class: \"w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-black hover:!bg-gray-200 gap-3 py-2 !bg-porcelain !border transition-all ease-in-out duration-300\",\n        t: \"button\",\n        onClick: ($event) => _ctx.$emit(\"showChange\")\n      }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Отменить\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Отменить\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(_ssrRenderComponent(TheButton, {\n        class: \"w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-black hover:!shadow-golden gap-3 py-2 !bg-golden !border transition-all ease-in-out duration-300\",\n        t: \"submit\",\n        type: \"success\"\n      }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Изменить\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Изменить\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`</div></form>`);\n    };\n  }\n});\n",
-      "start": 1751875969963,
-      "end": 1751875969973,
+      "start": 1751877301874,
+      "end": 1751877301878,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -281,56 +281,56 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1751875969973,
-      "end": 1751875969973,
+      "start": 1751877301878,
+      "end": 1751877301878,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1751875969973,
-      "end": 1751875969973,
+      "start": 1751877301878,
+      "end": 1751877301878,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1751875969973,
-      "end": 1751875969973,
+      "start": 1751877301878,
+      "end": 1751877301878,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1751875969973,
-      "end": 1751875969973,
+      "start": 1751877301878,
+      "end": 1751877301878,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1751875969973,
-      "end": 1751875969974,
+      "start": 1751877301879,
+      "end": 1751877301879,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1751875969974,
-      "end": 1751875969975,
+      "start": 1751877301879,
+      "end": 1751877301879,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1751875969975,
-      "end": 1751875969975,
+      "start": 1751877301879,
+      "end": 1751877301879,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1751875969975,
-      "end": 1751875969975,
+      "start": 1751877301880,
+      "end": 1751877301880,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1751875969975,
-      "end": 1751875969975,
+      "start": 1751877301880,
+      "end": 1751877301880,
       "order": "normal"
     }
   ]

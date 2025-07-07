@@ -191,7 +191,7 @@ export const useCompanies = defineStore('current-company', {
       })
     },
     async deleteDepartment(params: {id: any}, router: Router) {
-      await axios.delete(`department/delete/${params.id}`, {
+      await axios.delete(`department/${params.id}`, {
         headers: {
           Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
         }

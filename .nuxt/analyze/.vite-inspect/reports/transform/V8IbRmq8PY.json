@@ -4,232 +4,232 @@
     {
       "name": "vite:load-fallback",
       "result": "import { parseURL } from \"ufo\";\nimport { defineComponent, h } from \"vue\";\nimport { parseQuery } from \"vue-router\";\nimport { resolve } from \"pathe\";\nimport destr from \"destr\";\nimport { devRootDir } from \"#build/nuxt.config.mjs\";\nexport default (url) => defineComponent({\n  name: \"NuxtTestComponentWrapper\",\n  async setup(props, { attrs }) {\n    const query = parseQuery(parseURL(url).search);\n    const urlProps = query.props ? destr(query.props) : {};\n    const path = resolve(query.path);\n    if (!path.startsWith(devRootDir)) {\n      throw new Error(`[nuxt] Cannot access path outside of project root directory: \\`${path}\\`.`);\n    }\n    const comp = await import(\n      /* @vite-ignore */\n      query.path\n    ).then((r) => r.default);\n    return () => [\n      h(\"div\", \"Component Test Wrapper for \" + query.path),\n      h(\"div\", { id: \"nuxt-component-root\" }, [\n        h(comp, { ...attrs, ...props, ...urlProps })\n      ])\n    ];\n  }\n});\n",
-      "start": 1751875915206,
-      "end": 1751875915527,
+      "start": 1751877255416,
+      "end": 1751877255690,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1751875915527,
-      "end": 1751875915527,
+      "start": 1751877255690,
+      "end": 1751877255690,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1751875915527,
-      "end": 1751875915527,
+      "start": 1751877255690,
+      "end": 1751877255690,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1751875915527,
-      "end": 1751875915527,
+      "start": 1751877255690,
+      "end": 1751877255690,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1751875915527,
-      "end": 1751875915527,
+      "start": 1751877255690,
+      "end": 1751877255690,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1751875915527,
-      "end": 1751875915527,
+      "start": 1751877255690,
+      "end": 1751877255690,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1751875915527,
-      "end": 1751875915527,
+      "start": 1751877255690,
+      "end": 1751877255691,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1751875915527,
-      "end": 1751875915527,
+      "start": 1751877255691,
+      "end": 1751877255691,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1751875915527,
-      "end": 1751875915527,
+      "start": 1751877255691,
+      "end": 1751877255691,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1751875915527,
-      "end": 1751875915527,
+      "start": 1751877255691,
+      "end": 1751877255691,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1751875915527,
-      "end": 1751875915527,
+      "start": 1751877255691,
+      "end": 1751877255691,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751875915527,
-      "end": 1751875915527,
+      "start": 1751877255691,
+      "end": 1751877255691,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1751875915527,
-      "end": 1751875915528,
+      "start": 1751877255691,
+      "end": 1751877255691,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1751875915528,
-      "end": 1751875915528,
+      "start": 1751877255691,
+      "end": 1751877255691,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1751875915528,
-      "end": 1751875915528,
+      "start": 1751877255691,
+      "end": 1751877255691,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751875915528,
-      "end": 1751875915528,
+      "start": 1751877255691,
+      "end": 1751877255691,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1751875915528,
-      "end": 1751875915528,
+      "start": 1751877255691,
+      "end": 1751877255691,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1751875915528,
-      "end": 1751875915528,
+      "start": 1751877255691,
+      "end": 1751877255691,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1751875915528,
-      "end": 1751875915528,
+      "start": 1751877255691,
+      "end": 1751877255691,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1751875915528,
-      "end": 1751875915528,
+      "start": 1751877255691,
+      "end": 1751877255691,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1751875915528,
-      "end": 1751875915528,
+      "start": 1751877255691,
+      "end": 1751877255691,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1751875915528,
-      "end": 1751875915528,
+      "start": 1751877255691,
+      "end": 1751877255691,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1751875915528,
-      "end": 1751875915529,
+      "start": 1751877255691,
+      "end": 1751877255691,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1751875915529,
-      "end": 1751875915529,
+      "start": 1751877255691,
+      "end": 1751877255691,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1751875915529,
-      "end": 1751875915529,
+      "start": 1751877255691,
+      "end": 1751877255691,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1751875915529,
-      "end": 1751875915529,
+      "start": 1751877255691,
+      "end": 1751877255691,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1751875915529,
-      "end": 1751875915529,
+      "start": 1751877255691,
+      "end": 1751877255691,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1751875915529,
-      "end": 1751875915529,
+      "start": 1751877255691,
+      "end": 1751877255691,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1751875915529,
-      "end": 1751875915529,
+      "start": 1751877255691,
+      "end": 1751877255691,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1751875915529,
-      "end": 1751875915530,
+      "start": 1751877255691,
+      "end": 1751877255691,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1751875915530,
-      "end": 1751875915530,
+      "start": 1751877255691,
+      "end": 1751877255691,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1751875915530,
-      "end": 1751875915530,
+      "start": 1751877255691,
+      "end": 1751877255691,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1751875915530,
-      "end": 1751875915530,
+      "start": 1751877255691,
+      "end": 1751877255691,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1751875915530,
-      "end": 1751875915530,
+      "start": 1751877255691,
+      "end": 1751877255691,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1751875915530,
-      "end": 1751875915530,
+      "start": 1751877255691,
+      "end": 1751877255691,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1751875915530,
-      "end": 1751875915530,
+      "start": 1751877255691,
+      "end": 1751877255691,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
       "result": "import { __vitePreload } from \"\u0000vite/preload-helper.js\";import { parseURL } from \"ufo\";\nimport { defineComponent, h } from \"vue\";\nimport { parseQuery } from \"vue-router\";\nimport { resolve } from \"pathe\";\nimport destr from \"destr\";\nimport { devRootDir } from \"#build/nuxt.config.mjs\";\nexport default (url) => defineComponent({\n  name: \"NuxtTestComponentWrapper\",\n  async setup(props, { attrs }) {\n    const query = parseQuery(parseURL(url).search);\n    const urlProps = query.props ? destr(query.props) : {};\n    const path = resolve(query.path);\n    if (!path.startsWith(devRootDir)) {\n      throw new Error(`[nuxt] Cannot access path outside of project root directory: \\`${path}\\`.`);\n    }\n    const comp = await __vitePreload(() => import(\n      /* @vite-ignore */\n      query.path\n    ),__VITE_IS_MODERN__?\"__VITE_PRELOAD__\":void 0,import.meta.url).then((r) => r.default);\n    return () => [\n      h(\"div\", \"Component Test Wrapper for \" + query.path),\n      h(\"div\", { id: \"nuxt-component-root\" }, [\n        h(comp, { ...attrs, ...props, ...urlProps })\n      ])\n    ];\n  }\n});\n",
-      "start": 1751875915530,
-      "end": 1751875915530,
+      "start": 1751877255691,
+      "end": 1751877255692,
       "order": "normal",
       "sourcemaps": null
     },
     {
       "name": "vite:reporter",
-      "start": 1751875915530,
-      "end": 1751875915530,
+      "start": 1751877255692,
+      "end": 1751877255692,
       "order": "normal"
     }
   ]

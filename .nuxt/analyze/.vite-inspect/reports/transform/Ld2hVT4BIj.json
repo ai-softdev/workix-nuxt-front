@@ -4,44 +4,44 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { createElementVNode as _createElementVNode, renderSlot as _renderSlot, unref as _unref, withModifiers as _withModifiers, toDisplayString as _toDisplayString, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\"\n\nconst _hoisted_1 = { class: \"py-5 px-6 border rounded-3xl bg-whiteLilia dark:hover:bg-gray-700 hover:bg-gray-100 transition-all\" }\nconst _hoisted_2 = { class: \"flex items-center gap-3\" }\nconst _hoisted_3 = /*#__PURE__*/_createElementVNode(\"div\", { class: \"rounded-lg bg-white shadow-sm p-2 w-8 h-8 flex items-center justify-center\" }, [\n  /*#__PURE__*/_createElementVNode(\"svg\", {\n    width: \"18\",\n    height: \"22\",\n    viewBox: \"0 0 18 22\",\n    fill: \"none\",\n    xmlns: \"http://www.w3.org/2000/svg\"\n  }, [\n    /*#__PURE__*/_createElementVNode(\"path\", {\n      d: \"M11 10H5M7 14H5M13 6H5M17 5.8V16.2C17 17.8802 17 18.7202 16.673 19.362C16.3854 19.9265 15.9265 20.3854 15.362 20.673C14.7202 21 13.8802 21 12.2 21H5.8C4.11984 21 3.27976 21 2.63803 20.673C2.07354 20.3854 1.6146 19.9265 1.32698 19.362C1 18.7202 1 17.8802 1 16.2V5.8C1 4.11984 1 3.27976 1.32698 2.63803C1.6146 2.07354 2.07354 1.6146 2.63803 1.32698C3.27976 1 4.11984 1 5.8 1H12.2C13.8802 1 14.7202 1 15.362 1.32698C15.9265 1.6146 16.3854 2.07354 16.673 2.63803C17 3.27976 17 4.11984 17 5.8Z\",\n      stroke: \"currentColor\",\n      \"stroke-width\": \"1.65\",\n      \"stroke-linecap\": \"round\",\n      \"stroke-linejoin\": \"round\"\n    })\n  ])\n], -1)\nconst _hoisted_4 = /*#__PURE__*/_createElementVNode(\"svg\", {\n  width: \"16\",\n  height: \"16\",\n  viewBox: \"0 0 16 16\",\n  fill: \"none\",\n  xmlns: \"http://www.w3.org/2000/svg\"\n}, [\n  /*#__PURE__*/_createElementVNode(\"path\", {\n    d: \"M0.999999 8L15 8M15 8L8 1M15 8L8 15\",\n    stroke: \"currentColor\",\n    \"stroke-width\": \"2\",\n    \"stroke-linecap\": \"round\",\n    \"stroke-linejoin\": \"round\"\n  })\n], -1)\nconst _hoisted_5 = { class: \"text-center mb-4\" }\nconst _hoisted_6 = { class: \"flex items-center justify-center gap-x-2\" }\nconst _hoisted_7 = { class: \"w-6 h-6\" }\nconst _hoisted_8 = [\"src\"]\nconst _hoisted_9 = { class: \"text-mediumGray text-sm\" }\n\nimport {downloadWithAxios} from \"~/hooks/ElemUI\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'DocumentContentListElem',\n  props: {\r\n  item: {\r\n    type: Object,\r\n    default: () => {\r\n    }\r\n  }\r\n},\n  setup(__props) {\n\r\n\r\nconst router = useRouter()\r\nconst domain = useAuthStore()\r\n\r\n\nreturn (_ctx: any,_cache: any) => {\n  return (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n    _createElementVNode(\"div\", {\n      onClick: _cache[0] || (_cache[0] = _withModifiers(($event: any) => (_unref(router).push(`/base/documents/${__props.item.id}`)), [\"stop\"])),\n      class: \"cursor-pointer mb-4 pb-4 border-b hover:!text-golden text-black transition-all ease-in-out duration-300 flex items-center gap-3 justify-between\"\n    }, [\n      _createElementVNode(\"div\", _hoisted_2, [\n        _hoisted_3,\n        _renderSlot(_ctx.$slots, \"documentTitle\")\n      ]),\n      _hoisted_4\n    ]),\n    _createElementVNode(\"p\", _hoisted_5, _toDisplayString(_ctx.$t('Пользователь')) + \": \", 1),\n    _createElementVNode(\"div\", _hoisted_6, [\n      _createElementVNode(\"div\", _hoisted_7, [\n        _createElementVNode(\"img\", {\n          class: \"rounded-full w-full\",\n          src: _unref(domain).get_server_domain + __props.item.author.photo,\n          alt: \"\"\n        }, null, 8, _hoisted_8)\n      ]),\n      _createElementVNode(\"p\", _hoisted_9, [\n        _renderSlot(_ctx.$slots, \"documentUserName\")\n      ])\n    ])\n  ]))\n}\n}\n\n})",
-      "start": 1751875928959,
-      "end": 1751875928959
+      "start": 1751877269670,
+      "end": 1751877269670
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1751875928959,
-      "end": 1751875928959,
+      "start": 1751877269670,
+      "end": 1751877269670,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1751875928959,
-      "end": 1751875928959,
+      "start": 1751877269670,
+      "end": 1751877269670,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1751875928959,
-      "end": 1751875928959,
+      "start": 1751877269671,
+      "end": 1751877269671,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1751875928960,
-      "end": 1751875928960,
+      "start": 1751877269671,
+      "end": 1751877269671,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1751875928960,
-      "end": 1751875928960,
+      "start": 1751877269671,
+      "end": 1751877269671,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { createElementVNode as _createElementVNode, renderSlot as _renderSlot, unref as _unref, withModifiers as _withModifiers, toDisplayString as _toDisplayString, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\";\nconst _hoisted_1 = { class: \"py-5 px-6 border rounded-3xl bg-whiteLilia dark:hover:bg-gray-700 hover:bg-gray-100 transition-all\" };\nconst _hoisted_2 = { class: \"flex items-center gap-3\" };\nconst _hoisted_3 = /* @__PURE__ */ _createElementVNode(\"div\", { class: \"rounded-lg bg-white shadow-sm p-2 w-8 h-8 flex items-center justify-center\" }, [\n  /* @__PURE__ */ _createElementVNode(\"svg\", {\n    width: \"18\",\n    height: \"22\",\n    viewBox: \"0 0 18 22\",\n    fill: \"none\",\n    xmlns: \"http://www.w3.org/2000/svg\"\n  }, [\n    /* @__PURE__ */ _createElementVNode(\"path\", {\n      d: \"M11 10H5M7 14H5M13 6H5M17 5.8V16.2C17 17.8802 17 18.7202 16.673 19.362C16.3854 19.9265 15.9265 20.3854 15.362 20.673C14.7202 21 13.8802 21 12.2 21H5.8C4.11984 21 3.27976 21 2.63803 20.673C2.07354 20.3854 1.6146 19.9265 1.32698 19.362C1 18.7202 1 17.8802 1 16.2V5.8C1 4.11984 1 3.27976 1.32698 2.63803C1.6146 2.07354 2.07354 1.6146 2.63803 1.32698C3.27976 1 4.11984 1 5.8 1H12.2C13.8802 1 14.7202 1 15.362 1.32698C15.9265 1.6146 16.3854 2.07354 16.673 2.63803C17 3.27976 17 4.11984 17 5.8Z\",\n      stroke: \"currentColor\",\n      \"stroke-width\": \"1.65\",\n      \"stroke-linecap\": \"round\",\n      \"stroke-linejoin\": \"round\"\n    })\n  ])\n], -1);\nconst _hoisted_4 = /* @__PURE__ */ _createElementVNode(\"svg\", {\n  width: \"16\",\n  height: \"16\",\n  viewBox: \"0 0 16 16\",\n  fill: \"none\",\n  xmlns: \"http://www.w3.org/2000/svg\"\n}, [\n  /* @__PURE__ */ _createElementVNode(\"path\", {\n    d: \"M0.999999 8L15 8M15 8L8 1M15 8L8 15\",\n    stroke: \"currentColor\",\n    \"stroke-width\": \"2\",\n    \"stroke-linecap\": \"round\",\n    \"stroke-linejoin\": \"round\"\n  })\n], -1);\nconst _hoisted_5 = { class: \"text-center mb-4\" };\nconst _hoisted_6 = { class: \"flex items-center justify-center gap-x-2\" };\nconst _hoisted_7 = { class: \"w-6 h-6\" };\nconst _hoisted_8 = [\"src\"];\nconst _hoisted_9 = { class: \"text-mediumGray text-sm\" };\nimport { useAuthStore } from \"~/stores/auth\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"DocumentContentListElem\",\n  props: {\n    item: {\n      type: Object,\n      default: () => {\n      }\n    }\n  },\n  setup(__props) {\n    const router = useRouter();\n    const domain = useAuthStore();\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n        _createElementVNode(\"div\", {\n          onClick: _cache[0] || (_cache[0] = _withModifiers(($event) => _unref(router).push(`/base/documents/${__props.item.id}`), [\"stop\"])),\n          class: \"cursor-pointer mb-4 pb-4 border-b hover:!text-golden text-black transition-all ease-in-out duration-300 flex items-center gap-3 justify-between\"\n        }, [\n          _createElementVNode(\"div\", _hoisted_2, [\n            _hoisted_3,\n            _renderSlot(_ctx.$slots, \"documentTitle\")\n          ]),\n          _hoisted_4\n        ]),\n        _createElementVNode(\"p\", _hoisted_5, _toDisplayString(_ctx.$t(\"Пользователь\")) + \": \", 1),\n        _createElementVNode(\"div\", _hoisted_6, [\n          _createElementVNode(\"div\", _hoisted_7, [\n            _createElementVNode(\"img\", {\n              class: \"rounded-full w-full\",\n              src: _unref(domain).get_server_domain + __props.item.author.photo,\n              alt: \"\"\n            }, null, 8, _hoisted_8)\n          ]),\n          _createElementVNode(\"p\", _hoisted_9, [\n            _renderSlot(_ctx.$slots, \"documentUserName\")\n          ])\n        ])\n      ]);\n    };\n  }\n});\n",
-      "start": 1751875928960,
-      "end": 1751875929105,
+      "start": 1751877269671,
+      "end": 1751877269721,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -57,141 +57,141 @@
     },
     {
       "name": "vite:json",
-      "start": 1751875929105,
-      "end": 1751875929105,
+      "start": 1751877269721,
+      "end": 1751877269721,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1751875929105,
-      "end": 1751875929105,
+      "start": 1751877269721,
+      "end": 1751877269721,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1751875929105,
-      "end": 1751875929105,
+      "start": 1751877269721,
+      "end": 1751877269721,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1751875929105,
-      "end": 1751875929105,
+      "start": 1751877269721,
+      "end": 1751877269721,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751875929105,
-      "end": 1751875929106,
+      "start": 1751877269721,
+      "end": 1751877269721,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1751875929106,
-      "end": 1751875929106,
+      "start": 1751877269721,
+      "end": 1751877269721,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1751875929106,
-      "end": 1751875929106,
+      "start": 1751877269721,
+      "end": 1751877269721,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1751875929106,
-      "end": 1751875929106,
+      "start": 1751877269721,
+      "end": 1751877269722,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751875929106,
-      "end": 1751875929106,
+      "start": 1751877269722,
+      "end": 1751877269722,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1751875929106,
-      "end": 1751875929106,
+      "start": 1751877269722,
+      "end": 1751877269722,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1751875929106,
-      "end": 1751875929107,
+      "start": 1751877269722,
+      "end": 1751877269722,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1751875929107,
-      "end": 1751875929107,
+      "start": 1751877269722,
+      "end": 1751877269722,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1751875929107,
-      "end": 1751875929107,
+      "start": 1751877269722,
+      "end": 1751877269722,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1751875929107,
-      "end": 1751875929107,
+      "start": 1751877269722,
+      "end": 1751877269722,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1751875929107,
-      "end": 1751875929107,
+      "start": 1751877269722,
+      "end": 1751877269722,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1751875929107,
-      "end": 1751875929107,
+      "start": 1751877269722,
+      "end": 1751877269722,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1751875929107,
-      "end": 1751875929107,
+      "start": 1751877269722,
+      "end": 1751877269722,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1751875929107,
-      "end": 1751875929107,
+      "start": 1751877269722,
+      "end": 1751877269722,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1751875929107,
-      "end": 1751875929107,
+      "start": 1751877269722,
+      "end": 1751877269722,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1751875929107,
-      "end": 1751875929108,
+      "start": 1751877269722,
+      "end": 1751877269722,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1751875929108,
-      "end": 1751875929108,
+      "start": 1751877269722,
+      "end": 1751877269722,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1751875929108,
-      "end": 1751875929108,
+      "start": 1751877269723,
+      "end": 1751877269723,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { useRouter } from '#app/composables/router';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { createElementVNode as _createElementVNode, renderSlot as _renderSlot, unref as _unref, withModifiers as _withModifiers, toDisplayString as _toDisplayString, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\";\nconst _hoisted_1 = { class: \"py-5 px-6 border rounded-3xl bg-whiteLilia dark:hover:bg-gray-700 hover:bg-gray-100 transition-all\" };\nconst _hoisted_2 = { class: \"flex items-center gap-3\" };\nconst _hoisted_3 = /* @__PURE__ */ _createElementVNode(\"div\", { class: \"rounded-lg bg-white shadow-sm p-2 w-8 h-8 flex items-center justify-center\" }, [\n  /* @__PURE__ */ _createElementVNode(\"svg\", {\n    width: \"18\",\n    height: \"22\",\n    viewBox: \"0 0 18 22\",\n    fill: \"none\",\n    xmlns: \"http://www.w3.org/2000/svg\"\n  }, [\n    /* @__PURE__ */ _createElementVNode(\"path\", {\n      d: \"M11 10H5M7 14H5M13 6H5M17 5.8V16.2C17 17.8802 17 18.7202 16.673 19.362C16.3854 19.9265 15.9265 20.3854 15.362 20.673C14.7202 21 13.8802 21 12.2 21H5.8C4.11984 21 3.27976 21 2.63803 20.673C2.07354 20.3854 1.6146 19.9265 1.32698 19.362C1 18.7202 1 17.8802 1 16.2V5.8C1 4.11984 1 3.27976 1.32698 2.63803C1.6146 2.07354 2.07354 1.6146 2.63803 1.32698C3.27976 1 4.11984 1 5.8 1H12.2C13.8802 1 14.7202 1 15.362 1.32698C15.9265 1.6146 16.3854 2.07354 16.673 2.63803C17 3.27976 17 4.11984 17 5.8Z\",\n      stroke: \"currentColor\",\n      \"stroke-width\": \"1.65\",\n      \"stroke-linecap\": \"round\",\n      \"stroke-linejoin\": \"round\"\n    })\n  ])\n], -1);\nconst _hoisted_4 = /* @__PURE__ */ _createElementVNode(\"svg\", {\n  width: \"16\",\n  height: \"16\",\n  viewBox: \"0 0 16 16\",\n  fill: \"none\",\n  xmlns: \"http://www.w3.org/2000/svg\"\n}, [\n  /* @__PURE__ */ _createElementVNode(\"path\", {\n    d: \"M0.999999 8L15 8M15 8L8 1M15 8L8 15\",\n    stroke: \"currentColor\",\n    \"stroke-width\": \"2\",\n    \"stroke-linecap\": \"round\",\n    \"stroke-linejoin\": \"round\"\n  })\n], -1);\nconst _hoisted_5 = { class: \"text-center mb-4\" };\nconst _hoisted_6 = { class: \"flex items-center justify-center gap-x-2\" };\nconst _hoisted_7 = { class: \"w-6 h-6\" };\nconst _hoisted_8 = [\"src\"];\nconst _hoisted_9 = { class: \"text-mediumGray text-sm\" };\nimport { useAuthStore } from \"~/stores/auth\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"DocumentContentListElem\",\n  props: {\n    item: {\n      type: Object,\n      default: () => {\n      }\n    }\n  },\n  setup(__props) {\n    const router = useRouter();\n    const domain = useAuthStore();\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n        _createElementVNode(\"div\", {\n          onClick: _cache[0] || (_cache[0] = _withModifiers(($event) => _unref(router).push(`/base/documents/${__props.item.id}`), [\"stop\"])),\n          class: \"cursor-pointer mb-4 pb-4 border-b hover:!text-golden text-black transition-all ease-in-out duration-300 flex items-center gap-3 justify-between\"\n        }, [\n          _createElementVNode(\"div\", _hoisted_2, [\n            _hoisted_3,\n            _renderSlot(_ctx.$slots, \"documentTitle\")\n          ]),\n          _hoisted_4\n        ]),\n        _createElementVNode(\"p\", _hoisted_5, _toDisplayString(_ctx.$t(\"Пользователь\")) + \": \", 1),\n        _createElementVNode(\"div\", _hoisted_6, [\n          _createElementVNode(\"div\", _hoisted_7, [\n            _createElementVNode(\"img\", {\n              class: \"rounded-full w-full\",\n              src: _unref(domain).get_server_domain + __props.item.author.photo,\n              alt: \"\"\n            }, null, 8, _hoisted_8)\n          ]),\n          _createElementVNode(\"p\", _hoisted_9, [\n            _renderSlot(_ctx.$slots, \"documentUserName\")\n          ])\n        ])\n      ]);\n    };\n  }\n});\n",
-      "start": 1751875929108,
-      "end": 1751875929115,
+      "start": 1751877269723,
+      "end": 1751877269729,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -204,50 +204,50 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1751875929115,
-      "end": 1751875929115,
+      "start": 1751877269729,
+      "end": 1751877269729,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1751875929115,
-      "end": 1751875929115,
+      "start": 1751877269729,
+      "end": 1751877269729,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1751875929115,
-      "end": 1751875929115,
+      "start": 1751877269729,
+      "end": 1751877269729,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1751875929115,
-      "end": 1751875929115,
+      "start": 1751877269729,
+      "end": 1751877269729,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1751875929116,
-      "end": 1751875929116,
+      "start": 1751877269729,
+      "end": 1751877269729,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1751875929116,
-      "end": 1751875929116,
+      "start": 1751877269730,
+      "end": 1751877269730,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1751875929117,
-      "end": 1751875929117,
+      "start": 1751877269730,
+      "end": 1751877269730,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1751875929117,
-      "end": 1751875929117,
+      "start": 1751877269730,
+      "end": 1751877269730,
       "order": "normal"
     }
   ]

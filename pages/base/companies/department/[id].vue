@@ -82,6 +82,7 @@ watchSyncEffect(() => {
         {{ currentDepartment.get_department.name }}
       </p>
       <TheButton
+          v-if="!currentDepartment.get_department?.participants?.length"
           type="danger"
           class="px-10 py-2 !bg-whiteSmoke !border !border-gainsboro rounded-full flex items-center gap-3 !text-sunset"
           @click="showWarning = true"
