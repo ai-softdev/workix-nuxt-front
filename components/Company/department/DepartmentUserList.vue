@@ -11,27 +11,43 @@ defineProps({
 </script>
 
 <template>
-  <div class="my-6">
-    <NuxtLink :to="`/base/users/${userItem.id}`" class="transition-all shadow-md hover:shadow-lg border dark:border-none dark:shadow-none dark:bg-gray-400 dark:hover:bg-gray-300 p-4 rounded-lg flex max-[1241px]:flex-col max-[1241px]:gap-y-4 justify-between items-center cursor-pointer ">
-      <div class="flex items-center gap-x-4 w-3/12 max-lg:w-full max-lg:x-mx-auto">
-        <img class="w-14 h-14 rounded-full" :src="userItem.photo_url" alt="">
-        <h2 class="tracking-widest font-bold max-xl:text-center">{{ userItem.first_name + ' ' + userItem.last_name }}</h2>
+  <NuxtLink
+      :to="`/base/users/${userItem.id}`"
+      class="department__item transition-all grid grid-cols-3 max-[900px]:grid-cols-2 max-sm:grid-cols-1 gap-4 hover:shadow-departmentCard border bg-whiteLilia hover:bg-white hover:border-golden dark:border-none dark:shadow-none dark:bg-gray-400 dark:hover:bg-gray-300 p-5 rounded-3xl cursor-pointer"
+  >
+    <div class="flex items-center gap-x-4 border-r max-sm:border-none max-sm:justify-center">
+      <img class="w-14 h-14 rounded-full shadow" :src="userItem.photo">
+      <h2 class="font-bold max-xl:text-center">{{ userItem.first_name + ' ' + userItem.last_name }}</h2>
+    </div>
+    <div class="flex flex-col items-center justify-center border-r max-[900px]:border-none">
+      <p class="text-lg font-medium mb-2" v-if="loadCurrentUser.user.role?.name_en === 'admin'">{{$t('Роль | Должность')}}</p>
+      <p class="text-lg font-medium mb-2" v-else>{{$t('Должность')}}</p>
+      <div class="text-center flex flex-col gap-y-2">
+        <h2 class="text-sm text-mediumGray" v-if="loadCurrentUser.user.role?.name_en === 'admin'">({{ userItem.role }})</h2>
+        <h2 class="text-mediumGray text-sm">{{ userItem.position }}</h2>
       </div>
-      <div class="flex flex-col items-center justify-center w-5/12 max-lg:w-full  mx-auto">
-        <p class="text-lg font-bold tracking-widest mb-2" v-if="loadCurrentUser.user.role?.name_en === 'admin'">{{$t('Роль | Должность')}}</p>
-        <p class="text-lg font-bold tracking-widest mb-2" v-else>{{$t('Должность')}}</p>
-        <div class="text-center flex flex-col gap-y-2">
-          <h2 class="tracking-widest text-sm text-gray-600" v-if="loadCurrentUser.user.role?.name_en === 'admin'">({{ userItem.role }})</h2>
-          <h2 class="tracking-widest text-md ">{{ userItem.position }}</h2>
-        </div>
+    </div>
+    <div class="flex items-center justify-between gap-5 max-[900px]:justify-start max-[900px]:border-r max-sm:border-none max-sm:justify-center">
+      <div class="text-center pr-6 pl-8 max-[900px]:pr-0">
+        <h2 class="font-medium">{{$t('Дата регистрации')}}</h2>
+        <h2 class="text-mediumGray text-sm">00.00.0000</h2>
       </div>
-      <div class="w-2/12 max-[1241px]:w-full max-lg:x-mx-auto text-center">
-        <h2 class="tracking-widest font-bold">{{$t('Дата регистрации')}}</h2>
+      <div class="max-[900px]:hidden h-full border-l flex items-center justify-center pl-8">
+        <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1.5 8.5L15.5 8.5M15.5 8.5L8.5 1.5M15.5 8.5L8.5 15.5" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
       </div>
-    </NuxtLink>
-  </div>
+    </div>
+    <div class="hidden h-full max-[900px]:flex items-center justify-center">
+      <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1.5 8.5L15.5 8.5M15.5 8.5L8.5 1.5M15.5 8.5L8.5 15.5" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </NuxtLink>
 </template>
 
-<style scoped lang="scss">
-
+<style>
+.department__item:hover svg path{
+  stroke: #EAB70A;
+}
 </style>

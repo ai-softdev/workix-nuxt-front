@@ -1,5 +1,5 @@
 <template>
-  <label class="container mt-4 w-[250px]">
+  <label class="container mt-4 w-[250px] pr-4 !pl-12 py-2 rounded-full border bg-whiteSmoke flex items-center gap-2">
     <span class="text-black dark:text-white" v-if="t !== 'checkboxChat'">{{ item?.name }}</span>
     <span class="text-black dark:text-white" v-else>{{$t('Показать имя отправителя')}}</span>
     <input  v-if="t !== 'checkboxChat'"
@@ -67,16 +67,16 @@ const chat = useChat()
 /* Create a custom checkbox */
 .checkmark {
   position: absolute;
-  top: 0;
-  left: 0;
-  height: 25px;
-  width: 25px;
+  top: 11px;
+  left: 15px;
+  height: 18px;
+  width: 18px;
   background-color: #eee;
 }
 
 /* On mouse-over, add a grey background color */
 .container input ~ .checkmark {
-  border: 1px solid #2988c8;
+  border: 2px solid #6B6B6B;
   border-radius: 5px;
   transition: 0.3s ease-in-out;
 }
@@ -87,6 +87,7 @@ const chat = useChat()
 
 /* When the checkbox is checked, add a blue background */
 .container input:checked ~ .checkmark {
+  border: 2px solid #2988c8;
   background-color: #2988c8;
 }
 
@@ -104,8 +105,8 @@ const chat = useChat()
 
 /* Style the checkmark/indicator */
 .container .checkmark:after {
-  left: 9px;
-  top: 5px;
+  left: 6px;
+  top: 2px;
   width: 5px;
   height: 10px;
   border: solid white;

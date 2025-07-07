@@ -47,8 +47,8 @@ const STATUS_CONFIG = {
   performing: { label: 'В процессе', color: '#E46651' },
   watching: { label: 'На рассмотрении', color: '#3b82f6' },
   rejected: { label: 'Отмененные', color: '#DD1B16' },
-  returned: { label: 'Возвращенные', color: '#FFA500' }, // можно задать любой цвет
-  expired: { label: 'Истёкшие', color: '#808080' }, // можно задать любой цвет
+  returned: { label: 'Возвращенные', color: '#FFA500' },
+  expired: { label: 'Истёкшие', color: '#808080' },
 }
 
 const chartStats = computed(() => {

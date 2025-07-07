@@ -1,0 +1,336 @@
+{
+  "resolvedId": "D:/projects/nuxt/workix-nuxt-front/components/Company/department/DepartmentUserList.vue?vue&type=style&index=0&lang.css?inline&used",
+  "transforms": [
+    {
+      "name": "vite:vue",
+      "result": "\r\n.department__item:hover svg path{\r\n  stroke: #EAB70A;\r\n}\r\n",
+      "start": 1751875084092,
+      "end": 1751875084093,
+      "sourcemaps": {
+        "version": 3,
+        "sources": [
+          "D:/projects/nuxt/workix-nuxt-front/components/Company/department/DepartmentUserList.vue"
+        ],
+        "names": [],
+        "mappings": ";AAiDA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;EAC9B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACjB",
+        "file": "D:/projects/nuxt/workix-nuxt-front/components/Company/department/DepartmentUserList.vue",
+        "sourceRoot": "",
+        "sourcesContent": [
+          "<script setup lang=\"ts\">\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nconst loadCurrentUser = useAuthStore()\r\ndefineProps({\r\n  userItem: {\r\n    type: Object,\r\n    required: true,\r\n  },\r\n})\r\n\r\n</script>\r\n\r\n<template>\r\n  <NuxtLink\r\n      :to=\"`/base/users/${userItem.id}`\"\r\n      class=\"department__item transition-all grid grid-cols-3 max-[900px]:grid-cols-2 max-sm:grid-cols-1 gap-4 hover:shadow-departmentCard border bg-whiteLilia hover:bg-white hover:border-golden dark:border-none dark:shadow-none dark:bg-gray-400 dark:hover:bg-gray-300 p-5 rounded-3xl cursor-pointer\"\r\n  >\r\n    <div class=\"flex items-center gap-x-4 border-r max-sm:border-none max-sm:justify-center\">\r\n      <img class=\"w-14 h-14 rounded-full shadow\" :src=\"userItem.photo\">\r\n      <h2 class=\"font-bold max-xl:text-center\">{{ userItem.first_name + ' ' + userItem.last_name }}</h2>\r\n    </div>\r\n    <div class=\"flex flex-col items-center justify-center border-r max-[900px]:border-none\">\r\n      <p class=\"text-lg font-medium mb-2\" v-if=\"loadCurrentUser.user.role?.name_en === 'admin'\">{{$t('Роль | Должность')}}</p>\r\n      <p class=\"text-lg font-medium mb-2\" v-else>{{$t('Должность')}}</p>\r\n      <div class=\"text-center flex flex-col gap-y-2\">\r\n        <h2 class=\"text-sm text-mediumGray\" v-if=\"loadCurrentUser.user.role?.name_en === 'admin'\">({{ userItem.role }})</h2>\r\n        <h2 class=\"text-mediumGray text-sm\">{{ userItem.position }}</h2>\r\n      </div>\r\n    </div>\r\n    <div class=\"flex items-center justify-between gap-5 max-[900px]:justify-start max-[900px]:border-r max-sm:border-none max-sm:justify-center\">\r\n      <div class=\"text-center pr-6 pl-8 max-[900px]:pr-0\">\r\n        <h2 class=\"font-medium\">{{$t('Дата регистрации')}}</h2>\r\n        <h2 class=\"text-mediumGray text-sm\">00.00.0000</h2>\r\n      </div>\r\n      <div class=\"max-[900px]:hidden h-full border-l flex items-center justify-center pl-8\">\r\n        <svg width=\"17\" height=\"17\" viewBox=\"0 0 17 17\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\r\n          <path d=\"M1.5 8.5L15.5 8.5M15.5 8.5L8.5 1.5M15.5 8.5L8.5 15.5\" stroke=\"#000000\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\r\n        </svg>\r\n      </div>\r\n    </div>\r\n    <div class=\"hidden h-full max-[900px]:flex items-center justify-center\">\r\n      <svg width=\"17\" height=\"17\" viewBox=\"0 0 17 17\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\r\n        <path d=\"M1.5 8.5L15.5 8.5M15.5 8.5L8.5 1.5M15.5 8.5L8.5 15.5\" stroke=\"#000000\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\r\n      </svg>\r\n    </div>\r\n  </NuxtLink>\r\n</template>\r\n\r\n<style>\r\n.department__item:hover svg path{\r\n  stroke: #EAB70A;\r\n}\r\n</style>"
+        ]
+      }
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1751875084093,
+      "end": 1751875084093,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1751875084093,
+      "end": 1751875084093,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1751875084093,
+      "end": 1751875084093,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1751875084093,
+      "end": 1751875084093,
+      "order": "pre"
+    },
+    {
+      "name": "unplugin-vue-i18n",
+      "start": 1751875084093,
+      "end": 1751875084093,
+      "order": "pre"
+    },
+    {
+      "name": "unplugin-vue-i18n",
+      "start": 1751875084093,
+      "end": 1751875084093,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1751875084093,
+      "end": 1751875084093,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "result": ".department__item:hover svg path{stroke:#eab70a}",
+      "start": 1751875084093,
+      "end": 1751875084127,
+      "order": "normal",
+      "sourcemaps": {
+        "file": "D:/projects/nuxt/workix-nuxt-front/components/Company/department/DepartmentUserList.vue",
+        "mappings": "AACA,iCACE,cACF",
+        "names": [],
+        "sources": [
+          "D:/projects/nuxt/workix-nuxt-front/components/Company/department/DepartmentUserList.vue"
+        ],
+        "sourcesContent": [
+          "\r\n.department__item:hover svg path{\r\n  stroke: #EAB70A;\r\n}\r\n"
+        ],
+        "version": 3
+      }
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "result": ".department__item:hover svg path{stroke:#eab70a}",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "normal",
+      "sourcemaps": {
+        "file": "D:/projects/nuxt/workix-nuxt-front/components/Company/department/DepartmentUserList.vue",
+        "mappings": "AAAA,iCAAiC,cAAc",
+        "names": [],
+        "sources": [
+          "D:/projects/nuxt/workix-nuxt-front/components/Company/department/DepartmentUserList.vue"
+        ],
+        "sourcesContent": [
+          null
+        ],
+        "version": 3
+      }
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "result": "export default \".department__item:hover svg path{stroke:#eab70a}\"",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "normal",
+      "sourcemaps": {
+        "mappings": ""
+      }
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-macros-transform",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-macros-transform",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-resource",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-resource",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-meta-deprecation",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-meta-deprecation",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-template",
+      "start": 1751875084127,
+      "end": 1751875084127,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1751875084127,
+      "end": 1751875084128,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1751875084128,
+      "end": 1751875084128,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1751875084128,
+      "end": 1751875084128,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1751875084128,
+      "end": 1751875084128,
+      "order": "normal"
+    }
+  ]
+}
