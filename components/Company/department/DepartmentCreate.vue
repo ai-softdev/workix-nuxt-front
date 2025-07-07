@@ -32,16 +32,31 @@ const createForm = ref({
       + {{ $t('Создать департамент') }}
     </TheButton>
     <TheModal v-if="showCreate" @showModal="showCreate = !showCreate">
-      <TheTextContent>{{ $t('Создать департамент') }}</TheTextContent>
+      <p class="text-center font-bold max-sm:w-9/12 max-sm:mx-auto">
+        {{ $t('Создать департамент') }}
+      </p>
       <form @submit.prevent="department.createDepartment({department: createForm}); showCreate = false; createForm.name = ' ' ">
         <TaskContentCreateElems>
             <div class="w-full ">
               <TheInput type="text" :label="$t('Наименование')" v-model="createForm.name"/>
             </div>
         </TaskContentCreateElems>
-        <div class="flex justify-center gap-x-10">
-          <TheButton class="px-10 rounded-full py-2" t="button" type="danger" @click="showCreate = false">{{$t('Отменна')}}</TheButton>
-          <TheButton class="px-10 rounded-full py-2 bg-blueSemiLight" t="submit" @click="department.loadDepartmentList()">{{$t('Создать')}}</TheButton>
+        <div class="flex flex-wrap gap-y-3 items-center justify-center gap-x-10 max-sm:flex-col">
+          <TheButton
+              class="w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-black hover:!bg-gray-200 gap-3 py-2 !bg-porcelain !border transition-all ease-in-out duration-300"
+              t="button"
+              @click="showCreate = false"
+          >
+            {{ $t('Отменить') }}
+          </TheButton>
+          <TheButton
+              class="w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-black hover:!shadow-golden gap-3 py-2 !bg-golden !border transition-all ease-in-out duration-300"
+              t="submit"
+              type="success"
+              @click="department.loadDepartmentList()"
+          >
+            {{ $t('Создать') }}
+          </TheButton>
         </div>
       </form>
     </TheModal>

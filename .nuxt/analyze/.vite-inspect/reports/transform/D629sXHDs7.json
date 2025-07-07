@@ -4,63 +4,63 @@
     {
       "name": "vite:load-fallback",
       "result": "<script setup>\r\nimport TheFilter from \"~/components/UI/TheFilter.vue\"\r\nimport TheUserStats from \"~/components/User/UserUI/TheUserStats.vue\"\r\nimport {useUserStore} from \"~/stores/users\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport TheModal from \"~/components/UI/TheModal.vue\";\r\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\r\n\r\nimport Paginate from 'vuejs-paginate-next';\r\nimport {useRoute, useRouter} from \"vue-router\";\r\nimport {useCompanies} from \"~/stores/companies\";\r\n\r\nconst loadCurrentUser = useAuthStore()\r\nconst userList = useUserStore()\r\nconst phone = ref('')\r\n\r\nconst route = useRoute();\r\nconst router = useRouter();\r\n\r\nconst page = ref(Number(route.query.page) || 1);\r\nconst limit = ref(Number(route.query.limit) || 10);\r\nconst pageCount = ref(0)\r\nconst limitItems = ref([5, 10, 20, 30, 50])\r\n\r\nconst params = {\r\n  page: 1,\r\n  limit: 10,\r\n  query: ref(''),\r\n  user_type: 'user-list'\r\n}\r\n\r\ndefineProps({\r\n  userChecked: {\r\n    type: String,\r\n    default: 'user-list'\r\n  },\r\n  showUserInfo: {\r\n    type: Boolean,\r\n    default: false,\r\n  }\r\n})\r\n\r\nconst clickCallback = (pageNum) => {\r\n  page.value = pageNum;\r\n  updateQueryParams();\r\n};\r\n\r\nconst changePageLimit = () => {\r\n  updateQueryParams();\r\n};\r\n\r\nconst searchByName = () => {\r\n  page.value = 1;\r\n  updateQueryParams();\r\n};\r\n\r\nconst updateQueryParams = () => {\r\n  router.push({\r\n    query: {\r\n      page: page.value,\r\n      limit: limit.value,\r\n      itemName: params.query.value || undefined,\r\n    }\r\n  });\r\n};\r\n\r\nwatch(() => route.query, (newQuery) => {\r\n  page.value = Number(newQuery.page) || 1;\r\n  limit.value = Number(newQuery.limit) || 10;\r\n  params.query.value = newQuery.itemName || '';\r\n  userList.loadUserList({page: page.value, limit: limit.value, query: params.query.value})\r\n});\r\n\r\nwatch(() => userList.user, (newValue) => {\r\n  pageCount.value = Math.ceil(userList.user.count / limit.value);\r\n})\r\n\r\nfunction loadPage(page) {\r\n  if (page === '<') {\r\n    if (Number(params.page) > 1) {\r\n      params.page -= 1;\r\n    }\r\n  } else if (page === '>') {\r\n    if (Number(params.page) < userList.user.number_of_pages) {\r\n      params.page = Number(params.page) + 1\r\n    }\r\n  } else {\r\n    if (Number(page) <= userList.user.number_of_pages) {\r\n      params.page = Number(page)\r\n    }\r\n  }\r\n  if (window.innerWidth > 1000) {\r\n    window.scrollTo({top: 600})\r\n  } else if (window.innerWidth < 1000) {\r\n    window.scrollTo({top: 895})\r\n  } else {\r\n    window.scrollTo()\r\n  }\r\n}\r\n\r\nonMounted(() => {\r\n  navigateTo({\r\n    params: {\r\n      page: params.page\r\n    }\r\n  })\r\n})\r\nconst company = useCompanies()\r\nwatchSyncEffect(() => {\r\n  console.log(company.company, loadCurrentUser.user)\r\n  if (loadCurrentUser.user.role?.name_en === 'admin') {\r\n    userList.loadAdminList({page: params.page, limit: params.limit, query: params.query.value})\r\n  } else if(loadCurrentUser.user.role?.name_en === 'company_admin') {\r\n    userList.loadUserList({\r\n      page: params.page,\r\n      limit: params.limit,\r\n      query: params.query.value\r\n    })\r\n  }\r\n})\r\n\r\nconst isValidLink = (nameEn) => {\r\n  const foundItem = loadCurrentUser.user.permissions?.find(item => item.name_en === nameEn);\r\n  return foundItem !== undefined;\r\n}\r\n</script>\r\n\r\n<template>\r\n  <div class=\"flex flex-col gap-4\">\r\n    <div\r\n        class=\"flex items-center justify-between gap-10 max-[768px]:flex-col max-[768px]:items-start\"\r\n        :class=\"{'flex items-center justify-between' :['company_admin', 'admin'].includes( loadCurrentUser.user.role?.name_en )}\"\r\n    >\r\n      <div class=\"text-lg flex gap-x-10\">\r\n        <p\r\n            class=\"dark:text-white text-3xl font-bold\"\r\n            v-if=\"loadCurrentUser.user.role?.name_en === 'admin'\"\r\n        >\r\n          {{ $t('Список администраторов компании') }}\r\n        </p>\r\n        <p\r\n            class=\"dark:text-white text-3xl font-bold\"\r\n            v-else\r\n        >\r\n          {{ $t('Список всех пользователей компании') }}\r\n        </p>\r\n      </div>\r\n      <div\r\n          v-if=\"isValidLink('user.create')\"\r\n          :class=\"{'flex items-center justify-evenly' : loadCurrentUser.user.role?.name_en === 'admin', 'w-2/12 max-lg:w-4/12 max-sm:w-full max-sm:mb-6 max-sm:mx-auto' : loadCurrentUser.user.role_en !== 'admin'}\"\r\n      >\r\n        <div class=\"flex gap-x-10\" v-if=\"loadCurrentUser?.user.role === 'Администратор сайта'\">\r\n          <button class=\"p-2 rounded-xl dark:text-white tracking-widest font-bold\"\r\n                  :class=\"{'bg-blueDarkSemiLight text-white' : userChecked === 'user-list'}\"\r\n                  @click=\"userChecked = 'user-list'; userList.loadUserList({page: userList.page, limit: params.limit, user_type: userChecked})\">\r\n            {{ $t('Все пользователи') }}\r\n          </button>\r\n          <button class=\"p-2 rounded-xl dark:text-white tracking-widest font-bold\"\r\n                  :class=\"{'bg-blueDarkSemiLight text-white' : userChecked === 'admin-list'}\"\r\n                  @click=\"userChecked = 'admin-list'; userList.loadAdminList({page: userList.page, limit: params.limit})\">\r\n            {{ $t('Администраторы компаний') }}\r\n          </button>\r\n        </div>\r\n        <UserCreate></UserCreate>\r\n      </div>\r\n    </div>\r\n    <div class=\"w-full mt-4 max-[636px]:mt-0\">\r\n      <div class=\"flex items-center justify-between max-[636px]:flex-col gap-x-10 max-lg:flex-wrap max-md:justify-center\">\r\n        <p class=\"text-mediumGray w-5/12 max-[636px]:w-full\">\r\n          {{ $t('Данная страница хранит информацию о пользователях данной платформы') }}\r\n        </p>\r\n        <div class=\"w-5/12 max-[636px]:w-full max-[636px]:mt-5 flex items-center gap-3 h-10\">\r\n          <TheSearch\r\n              class=\"w-full\"\r\n              v-model:model-value=\"params.query\"\r\n              @search=\"searchByName\"\r\n          />\r\n<!--          @search=\"userList.loadUserList(params)\"-->\r\n<!--          <TheFilter></TheFilter>-->\r\n        </div>\r\n      </div>\r\n      <div class=\"mt-8 grid grid-cols-4 max-[1350px]:grid-cols-2 max-[636px]:grid-cols-1 gap-5 max-md:mt-10\">\r\n          <UserContentList\r\n              v-for=\"userItem in userList?.get_user_list.results\"\r\n              v-if=\"userList?.get_user_list.count > 0\"\r\n              :user-item=\"userItem\"\r\n              class=\"max-md:w-full\"/>\r\n      </div>\r\n      <div v-if=\"!userList?.get_user_list?.results?.length\">\r\n        <p class=\"text-center\">\r\n          {{ $t('По вашему запросу никого не найдено.') }}\r\n        </p>\r\n      </div>\r\n    </div>\r\n<!--    <div class=\"flex flex-wrap justify-center gap-x-4 mt-10\">-->\r\n<!--      <div v-if=\"userList.get_user_list.count > 5\" v-for=\"(page, id) in userList?.get_user_list?.links\" :key=\"id\"-->\r\n<!--           class=\"px-4 py-2 rounded-full cursor-pointer\"-->\r\n<!--           :class=\"{'bg-blue-400 text-white' : page.active, 'bg-gray-200 text-black' : !page.active}\"-->\r\n<!--           @click=\"loadPage(page.label); userList?.loadUserList({page: params.page, limit: params.limit, user_type: loadCurrentUser.user.role_en !== 'admin' ? 'user-list/my-company' : userChecked, query: params.query})\">-->\r\n<!--        {{ page.label }}-->\r\n<!--      </div>-->\r\n<!--    </div>-->\r\n    <div class=\"w-full flex items-center justify-end border-t gap-4 pr-10 pb-5 pt-5 max-md:pr-3 max-md:flex-col max-md:items-end\">\r\n      <paginate\r\n          :page-count=\"pageCount\"\r\n          :page-range=\"3\"\r\n          :margin-pages=\"2\"\r\n          :click-handler=\"clickCallback\"\r\n          :prev-text=\"'<'\"\r\n          :next-text=\"'>'\"\r\n          :container-class=\"'pagination'\"\r\n          :page-class=\"'page-item'\"\r\n          :force-page=\"page\"\r\n      >\r\n      </paginate>\r\n      <div class=\"flex items-center gap-3\">\r\n        <p>Строк на странице:</p>\r\n        <select\r\n            v-model=\"limit\"\r\n            @change=\"changePageLimit\"\r\n            class=\"w-fit p-2.5 rounded-md border bg-white dark:bg-bgWhite text-black\"\r\n        >\r\n          <option\r\n              v-for=\"item in limitItems\"\r\n              :value=\"item\"\r\n          >\r\n            {{item}}\r\n          </option>\r\n        </select>\r\n      </div>\r\n    </div>\r\n\r\n  </div>\r\n</template>\r\n\r\n<style scoped>\r\n\r\n</style>",
-      "start": 1751875047261,
-      "end": 1751875048505,
+      "start": 1751875920775,
+      "end": 1751875921450,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1751875048505,
-      "end": 1751875048505,
+      "start": 1751875921450,
+      "end": 1751875921450,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1751875048505,
-      "end": 1751875048505,
+      "start": 1751875921450,
+      "end": 1751875921450,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1751875048505,
-      "end": 1751875048505,
+      "start": 1751875921450,
+      "end": 1751875921450,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1751875048505,
-      "end": 1751875048505,
+      "start": 1751875921450,
+      "end": 1751875921450,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1751875048505,
-      "end": 1751875048505,
+      "start": 1751875921451,
+      "end": 1751875921451,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1751875048505,
-      "end": 1751875048505,
+      "start": 1751875921451,
+      "end": 1751875921451,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1751875048505,
-      "end": 1751875048505,
+      "start": 1751875921451,
+      "end": 1751875921451,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1751875048505,
-      "end": 1751875048505,
+      "start": 1751875921451,
+      "end": 1751875921451,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "import { unref as _unref, toDisplayString as _toDisplayString, openBlock as _openBlock, createElementBlock as _createElementBlock, createCommentVNode as _createCommentVNode, createElementVNode as _createElementVNode, normalizeClass as _normalizeClass, resolveComponent as _resolveComponent, createVNode as _createVNode, renderList as _renderList, Fragment as _Fragment, createBlock as _createBlock, isRef as _isRef, vModelSelect as _vModelSelect, withDirectives as _withDirectives } from \"vue\"\n\nconst _hoisted_1 = { class: \"flex flex-col gap-4\" }\nconst _hoisted_2 = { class: \"text-lg flex gap-x-10\" }\nconst _hoisted_3 = {\n  key: 0,\n  class: \"dark:text-white text-3xl font-bold\"\n}\nconst _hoisted_4 = {\n  key: 1,\n  class: \"dark:text-white text-3xl font-bold\"\n}\nconst _hoisted_5 = {\n  key: 0,\n  class: \"flex gap-x-10\"\n}\nconst _hoisted_6 = { class: \"w-full mt-4 max-[636px]:mt-0\" }\nconst _hoisted_7 = { class: \"flex items-center justify-between max-[636px]:flex-col gap-x-10 max-lg:flex-wrap max-md:justify-center\" }\nconst _hoisted_8 = { class: \"text-mediumGray w-5/12 max-[636px]:w-full\" }\nconst _hoisted_9 = { class: \"w-5/12 max-[636px]:w-full max-[636px]:mt-5 flex items-center gap-3 h-10\" }\nconst _hoisted_10 = { class: \"mt-8 grid grid-cols-4 max-[1350px]:grid-cols-2 max-[636px]:grid-cols-1 gap-5 max-md:mt-10\" }\nconst _hoisted_11 = { key: 0 }\nconst _hoisted_12 = { class: \"text-center\" }\nconst _hoisted_13 = { class: \"w-full flex items-center justify-end border-t gap-4 pr-10 pb-5 pt-5 max-md:pr-3 max-md:flex-col max-md:items-end\" }\nconst _hoisted_14 = { class: \"flex items-center gap-3\" }\nconst _hoisted_15 = /*#__PURE__*/_createElementVNode(\"p\", null, \"Строк на странице:\", -1)\nconst _hoisted_16 = [\"value\"]\n\nimport TheFilter from \"~/components/UI/TheFilter.vue\"\r\nimport TheUserStats from \"~/components/User/UserUI/TheUserStats.vue\"\r\nimport {useUserStore} from \"~/stores/users\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport TheModal from \"~/components/UI/TheModal.vue\";\r\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\r\n\r\nimport Paginate from 'vuejs-paginate-next';\r\nimport {useRoute, useRouter} from \"vue-router\";\r\nimport {useCompanies} from \"~/stores/companies\";\r\n\r\n\nconst _sfc_main = {\n  __name: 'UserContent',\n  props: {\r\n  userChecked: {\r\n    type: String,\r\n    default: 'user-list'\r\n  },\r\n  showUserInfo: {\r\n    type: Boolean,\r\n    default: false,\r\n  }\r\n},\n  setup(__props) {\n\r\nconst loadCurrentUser = useAuthStore()\r\nconst userList = useUserStore()\r\nconst phone = ref('')\r\n\r\nconst route = useRoute();\r\nconst router = useRouter();\r\n\r\nconst page = ref(Number(route.query.page) || 1);\r\nconst limit = ref(Number(route.query.limit) || 10);\r\nconst pageCount = ref(0)\r\nconst limitItems = ref([5, 10, 20, 30, 50])\r\n\r\nconst params = {\r\n  page: 1,\r\n  limit: 10,\r\n  query: ref(''),\r\n  user_type: 'user-list'\r\n}\r\n\r\n\r\n\r\nconst clickCallback = (pageNum) => {\r\n  page.value = pageNum;\r\n  updateQueryParams();\r\n};\r\n\r\nconst changePageLimit = () => {\r\n  updateQueryParams();\r\n};\r\n\r\nconst searchByName = () => {\r\n  page.value = 1;\r\n  updateQueryParams();\r\n};\r\n\r\nconst updateQueryParams = () => {\r\n  router.push({\r\n    query: {\r\n      page: page.value,\r\n      limit: limit.value,\r\n      itemName: params.query.value || undefined,\r\n    }\r\n  });\r\n};\r\n\r\nwatch(() => route.query, (newQuery) => {\r\n  page.value = Number(newQuery.page) || 1;\r\n  limit.value = Number(newQuery.limit) || 10;\r\n  params.query.value = newQuery.itemName || '';\r\n  userList.loadUserList({page: page.value, limit: limit.value, query: params.query.value})\r\n});\r\n\r\nwatch(() => userList.user, (newValue) => {\r\n  pageCount.value = Math.ceil(userList.user.count / limit.value);\r\n})\r\n\r\nfunction loadPage(page) {\r\n  if (page === '<') {\r\n    if (Number(params.page) > 1) {\r\n      params.page -= 1;\r\n    }\r\n  } else if (page === '>') {\r\n    if (Number(params.page) < userList.user.number_of_pages) {\r\n      params.page = Number(params.page) + 1\r\n    }\r\n  } else {\r\n    if (Number(page) <= userList.user.number_of_pages) {\r\n      params.page = Number(page)\r\n    }\r\n  }\r\n  if (window.innerWidth > 1000) {\r\n    window.scrollTo({top: 600})\r\n  } else if (window.innerWidth < 1000) {\r\n    window.scrollTo({top: 895})\r\n  } else {\r\n    window.scrollTo()\r\n  }\r\n}\r\n\r\nonMounted(() => {\r\n  navigateTo({\r\n    params: {\r\n      page: params.page\r\n    }\r\n  })\r\n})\r\nconst company = useCompanies()\r\nwatchSyncEffect(() => {\r\n  console.log(company.company, loadCurrentUser.user)\r\n  if (loadCurrentUser.user.role?.name_en === 'admin') {\r\n    userList.loadAdminList({page: params.page, limit: params.limit, query: params.query.value})\r\n  } else if(loadCurrentUser.user.role?.name_en === 'company_admin') {\r\n    userList.loadUserList({\r\n      page: params.page,\r\n      limit: params.limit,\r\n      query: params.query.value\r\n    })\r\n  }\r\n})\r\n\r\nconst isValidLink = (nameEn) => {\r\n  const foundItem = loadCurrentUser.user.permissions?.find(item => item.name_en === nameEn);\r\n  return foundItem !== undefined;\r\n}\r\n\nreturn (_ctx, _cache) => {\n  const _component_UserCreate = _resolveComponent(\"UserCreate\")\n  const _component_UserContentList = _resolveComponent(\"UserContentList\")\n\n  return (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n    _createElementVNode(\"div\", {\n      class: _normalizeClass([\"flex items-center justify-between gap-10 max-[768px]:flex-col max-[768px]:items-start\", {'flex items-center justify-between' :['company_admin', 'admin'].includes( _unref(loadCurrentUser).user.role?.name_en )}])\n    }, [\n      _createElementVNode(\"div\", _hoisted_2, [\n        (_unref(loadCurrentUser).user.role?.name_en === 'admin')\n          ? (_openBlock(), _createElementBlock(\"p\", _hoisted_3, _toDisplayString(_ctx.$t('Список администраторов компании')), 1))\n          : (_openBlock(), _createElementBlock(\"p\", _hoisted_4, _toDisplayString(_ctx.$t('Список всех пользователей компании')), 1))\n      ]),\n      (isValidLink('user.create'))\n        ? (_openBlock(), _createElementBlock(\"div\", {\n            key: 0,\n            class: _normalizeClass({'flex items-center justify-evenly' : _unref(loadCurrentUser).user.role?.name_en === 'admin', 'w-2/12 max-lg:w-4/12 max-sm:w-full max-sm:mb-6 max-sm:mx-auto' : _unref(loadCurrentUser).user.role_en !== 'admin'})\n          }, [\n            (_unref(loadCurrentUser)?.user.role === 'Администратор сайта')\n              ? (_openBlock(), _createElementBlock(\"div\", _hoisted_5, [\n                  _createElementVNode(\"button\", {\n                    class: _normalizeClass([\"p-2 rounded-xl dark:text-white tracking-widest font-bold\", {'bg-blueDarkSemiLight text-white' : __props.userChecked === 'user-list'}]),\n                    onClick: _cache[0] || (_cache[0] = $event => {__props.userChecked = 'user-list'; _unref(userList).loadUserList({page: _unref(userList).page, limit: params.limit, user_type: __props.userChecked})})\n                  }, _toDisplayString(_ctx.$t('Все пользователи')), 3),\n                  _createElementVNode(\"button\", {\n                    class: _normalizeClass([\"p-2 rounded-xl dark:text-white tracking-widest font-bold\", {'bg-blueDarkSemiLight text-white' : __props.userChecked === 'admin-list'}]),\n                    onClick: _cache[1] || (_cache[1] = $event => {__props.userChecked = 'admin-list'; _unref(userList).loadAdminList({page: _unref(userList).page, limit: params.limit})})\n                  }, _toDisplayString(_ctx.$t('Администраторы компаний')), 3)\n                ]))\n              : _createCommentVNode(\"\", true),\n            _createVNode(_component_UserCreate)\n          ], 2))\n        : _createCommentVNode(\"\", true)\n    ], 2),\n    _createElementVNode(\"div\", _hoisted_6, [\n      _createElementVNode(\"div\", _hoisted_7, [\n        _createElementVNode(\"p\", _hoisted_8, _toDisplayString(_ctx.$t('Данная страница хранит информацию о пользователях данной платформы')), 1),\n        _createElementVNode(\"div\", _hoisted_9, [\n          _createVNode(TheSearch, {\n            class: \"w-full\",\n            \"model-value\": params.query,\n            \"onUpdate:modelValue\": _cache[2] || (_cache[2] = $event => ((params.query) = $event)),\n            onSearch: searchByName\n          }, null, 8, [\"model-value\"])\n        ])\n      ]),\n      _createElementVNode(\"div\", _hoisted_10, [\n        (_unref(userList)?.get_user_list.count > 0)\n          ? (_openBlock(true), _createElementBlock(_Fragment, { key: 0 }, _renderList(_unref(userList)?.get_user_list.results, (userItem) => {\n              return (_openBlock(), _createBlock(_component_UserContentList, {\n                \"user-item\": userItem,\n                class: \"max-md:w-full\"\n              }, null, 8, [\"user-item\"]))\n            }), 256))\n          : _createCommentVNode(\"\", true)\n      ]),\n      (!_unref(userList)?.get_user_list?.results?.length)\n        ? (_openBlock(), _createElementBlock(\"div\", _hoisted_11, [\n            _createElementVNode(\"p\", _hoisted_12, _toDisplayString(_ctx.$t('По вашему запросу никого не найдено.')), 1)\n          ]))\n        : _createCommentVNode(\"\", true)\n    ]),\n    _createElementVNode(\"div\", _hoisted_13, [\n      _createVNode(_unref(Paginate), {\n        \"page-count\": _unref(pageCount),\n        \"page-range\": 3,\n        \"margin-pages\": 2,\n        \"click-handler\": clickCallback,\n        \"prev-text\": '<',\n        \"next-text\": '>',\n        \"container-class\": 'pagination',\n        \"page-class\": 'page-item',\n        \"force-page\": _unref(page)\n      }, null, 8, [\"page-count\", \"force-page\"]),\n      _createElementVNode(\"div\", _hoisted_14, [\n        _hoisted_15,\n        _withDirectives(_createElementVNode(\"select\", {\n          \"onUpdate:modelValue\": _cache[3] || (_cache[3] = $event => (_isRef(limit) ? (limit).value = $event : null)),\n          onChange: changePageLimit,\n          class: \"w-fit p-2.5 rounded-md border bg-white dark:bg-bgWhite text-black\"\n        }, [\n          (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(limitItems), (item) => {\n            return (_openBlock(), _createElementBlock(\"option\", { value: item }, _toDisplayString(item), 9, _hoisted_16))\n          }), 256))\n        ], 544), [\n          [_vModelSelect, _unref(limit)]\n        ])\n      ])\n    ])\n  ]))\n}\n}\n\n}\n\n\n\nexport default _sfc_main",
-      "start": 1751875048505,
-      "end": 1751875048520,
+      "start": 1751875921451,
+      "end": 1751875921460,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -68,123 +68,123 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1751875048520,
-      "end": 1751875048520,
+      "start": 1751875921461,
+      "end": 1751875921461,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751875048520,
-      "end": 1751875048520,
+      "start": 1751875921461,
+      "end": 1751875921461,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1751875048520,
-      "end": 1751875048520,
+      "start": 1751875921461,
+      "end": 1751875921461,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1751875048520,
-      "end": 1751875048520,
+      "start": 1751875921461,
+      "end": 1751875921461,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1751875048520,
-      "end": 1751875048520,
+      "start": 1751875921527,
+      "end": 1751875921531,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751875048520,
-      "end": 1751875048520,
+      "start": 1751875921534,
+      "end": 1751875921535,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1751875048520,
-      "end": 1751875048520,
+      "start": 1751875921537,
+      "end": 1751875921538,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1751875048520,
-      "end": 1751875048520,
+      "start": 1751875921540,
+      "end": 1751875921541,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1751875048520,
-      "end": 1751875048520,
+      "start": 1751875921544,
+      "end": 1751875921544,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1751875048520,
-      "end": 1751875048520,
+      "start": 1751875921544,
+      "end": 1751875921544,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1751875048520,
-      "end": 1751875048520,
+      "start": 1751875921544,
+      "end": 1751875921544,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1751875048520,
-      "end": 1751875048520,
+      "start": 1751875921544,
+      "end": 1751875921544,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1751875048520,
-      "end": 1751875048520,
+      "start": 1751875921544,
+      "end": 1751875921544,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1751875048520,
-      "end": 1751875048520,
+      "start": 1751875921619,
+      "end": 1751875921619,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1751875048520,
-      "end": 1751875048520,
+      "start": 1751875921620,
+      "end": 1751875921620,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1751875048520,
-      "end": 1751875048521,
+      "start": 1751875921622,
+      "end": 1751875921622,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1751875048521,
-      "end": 1751875048521,
+      "start": 1751875921627,
+      "end": 1751875921628,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1751875048521,
-      "end": 1751875048521,
+      "start": 1751875921628,
+      "end": 1751875921628,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1751875048521,
-      "end": 1751875048521,
+      "start": 1751875921628,
+      "end": 1751875921629,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref, watch, onMounted, watchSyncEffect } from 'vue';\nimport { navigateTo } from '#app/composables/router';\nimport { unref as _unref, toDisplayString as _toDisplayString, openBlock as _openBlock, createElementBlock as _createElementBlock, createCommentVNode as _createCommentVNode, createElementVNode as _createElementVNode, normalizeClass as _normalizeClass, resolveComponent as _resolveComponent, createVNode as _createVNode, renderList as _renderList, Fragment as _Fragment, createBlock as _createBlock, isRef as _isRef, vModelSelect as _vModelSelect, withDirectives as _withDirectives } from \"vue\"\n\nconst _hoisted_1 = { class: \"flex flex-col gap-4\" }\nconst _hoisted_2 = { class: \"text-lg flex gap-x-10\" }\nconst _hoisted_3 = {\n  key: 0,\n  class: \"dark:text-white text-3xl font-bold\"\n}\nconst _hoisted_4 = {\n  key: 1,\n  class: \"dark:text-white text-3xl font-bold\"\n}\nconst _hoisted_5 = {\n  key: 0,\n  class: \"flex gap-x-10\"\n}\nconst _hoisted_6 = { class: \"w-full mt-4 max-[636px]:mt-0\" }\nconst _hoisted_7 = { class: \"flex items-center justify-between max-[636px]:flex-col gap-x-10 max-lg:flex-wrap max-md:justify-center\" }\nconst _hoisted_8 = { class: \"text-mediumGray w-5/12 max-[636px]:w-full\" }\nconst _hoisted_9 = { class: \"w-5/12 max-[636px]:w-full max-[636px]:mt-5 flex items-center gap-3 h-10\" }\nconst _hoisted_10 = { class: \"mt-8 grid grid-cols-4 max-[1350px]:grid-cols-2 max-[636px]:grid-cols-1 gap-5 max-md:mt-10\" }\nconst _hoisted_11 = { key: 0 }\nconst _hoisted_12 = { class: \"text-center\" }\nconst _hoisted_13 = { class: \"w-full flex items-center justify-end border-t gap-4 pr-10 pb-5 pt-5 max-md:pr-3 max-md:flex-col max-md:items-end\" }\nconst _hoisted_14 = { class: \"flex items-center gap-3\" }\nconst _hoisted_15 = /*#__PURE__*/_createElementVNode(\"p\", null, \"Строк на странице:\", -1)\nconst _hoisted_16 = [\"value\"]\n\nimport TheFilter from \"~/components/UI/TheFilter.vue\"\r\nimport TheUserStats from \"~/components/User/UserUI/TheUserStats.vue\"\r\nimport {useUserStore} from \"~/stores/users\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport TheModal from \"~/components/UI/TheModal.vue\";\r\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\r\n\r\nimport Paginate from 'vuejs-paginate-next';\r\nimport {useRoute, useRouter} from \"vue-router\";\r\nimport {useCompanies} from \"~/stores/companies\";\r\n\r\n\nconst _sfc_main = {\n  __name: 'UserContent',\n  props: {\r\n  userChecked: {\r\n    type: String,\r\n    default: 'user-list'\r\n  },\r\n  showUserInfo: {\r\n    type: Boolean,\r\n    default: false,\r\n  }\r\n},\n  setup(__props) {\n\r\nconst loadCurrentUser = useAuthStore()\r\nconst userList = useUserStore()\r\nconst phone = ref('')\r\n\r\nconst route = useRoute();\r\nconst router = useRouter();\r\n\r\nconst page = ref(Number(route.query.page) || 1);\r\nconst limit = ref(Number(route.query.limit) || 10);\r\nconst pageCount = ref(0)\r\nconst limitItems = ref([5, 10, 20, 30, 50])\r\n\r\nconst params = {\r\n  page: 1,\r\n  limit: 10,\r\n  query: ref(''),\r\n  user_type: 'user-list'\r\n}\r\n\r\n\r\n\r\nconst clickCallback = (pageNum) => {\r\n  page.value = pageNum;\r\n  updateQueryParams();\r\n};\r\n\r\nconst changePageLimit = () => {\r\n  updateQueryParams();\r\n};\r\n\r\nconst searchByName = () => {\r\n  page.value = 1;\r\n  updateQueryParams();\r\n};\r\n\r\nconst updateQueryParams = () => {\r\n  router.push({\r\n    query: {\r\n      page: page.value,\r\n      limit: limit.value,\r\n      itemName: params.query.value || undefined,\r\n    }\r\n  });\r\n};\r\n\r\nwatch(() => route.query, (newQuery) => {\r\n  page.value = Number(newQuery.page) || 1;\r\n  limit.value = Number(newQuery.limit) || 10;\r\n  params.query.value = newQuery.itemName || '';\r\n  userList.loadUserList({page: page.value, limit: limit.value, query: params.query.value})\r\n});\r\n\r\nwatch(() => userList.user, (newValue) => {\r\n  pageCount.value = Math.ceil(userList.user.count / limit.value);\r\n})\r\n\r\nfunction loadPage(page) {\r\n  if (page === '<') {\r\n    if (Number(params.page) > 1) {\r\n      params.page -= 1;\r\n    }\r\n  } else if (page === '>') {\r\n    if (Number(params.page) < userList.user.number_of_pages) {\r\n      params.page = Number(params.page) + 1\r\n    }\r\n  } else {\r\n    if (Number(page) <= userList.user.number_of_pages) {\r\n      params.page = Number(page)\r\n    }\r\n  }\r\n  if (window.innerWidth > 1000) {\r\n    window.scrollTo({top: 600})\r\n  } else if (window.innerWidth < 1000) {\r\n    window.scrollTo({top: 895})\r\n  } else {\r\n    window.scrollTo()\r\n  }\r\n}\r\n\r\nonMounted(() => {\r\n  navigateTo({\r\n    params: {\r\n      page: params.page\r\n    }\r\n  })\r\n})\r\nconst company = useCompanies()\r\nwatchSyncEffect(() => {\r\n  console.log(company.company, loadCurrentUser.user)\r\n  if (loadCurrentUser.user.role?.name_en === 'admin') {\r\n    userList.loadAdminList({page: params.page, limit: params.limit, query: params.query.value})\r\n  } else if(loadCurrentUser.user.role?.name_en === 'company_admin') {\r\n    userList.loadUserList({\r\n      page: params.page,\r\n      limit: params.limit,\r\n      query: params.query.value\r\n    })\r\n  }\r\n})\r\n\r\nconst isValidLink = (nameEn) => {\r\n  const foundItem = loadCurrentUser.user.permissions?.find(item => item.name_en === nameEn);\r\n  return foundItem !== undefined;\r\n}\r\n\nreturn (_ctx, _cache) => {\n  const _component_UserCreate = _resolveComponent(\"UserCreate\")\n  const _component_UserContentList = _resolveComponent(\"UserContentList\")\n\n  return (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n    _createElementVNode(\"div\", {\n      class: _normalizeClass([\"flex items-center justify-between gap-10 max-[768px]:flex-col max-[768px]:items-start\", {'flex items-center justify-between' :['company_admin', 'admin'].includes( _unref(loadCurrentUser).user.role?.name_en )}])\n    }, [\n      _createElementVNode(\"div\", _hoisted_2, [\n        (_unref(loadCurrentUser).user.role?.name_en === 'admin')\n          ? (_openBlock(), _createElementBlock(\"p\", _hoisted_3, _toDisplayString(_ctx.$t('Список администраторов компании')), 1))\n          : (_openBlock(), _createElementBlock(\"p\", _hoisted_4, _toDisplayString(_ctx.$t('Список всех пользователей компании')), 1))\n      ]),\n      (isValidLink('user.create'))\n        ? (_openBlock(), _createElementBlock(\"div\", {\n            key: 0,\n            class: _normalizeClass({'flex items-center justify-evenly' : _unref(loadCurrentUser).user.role?.name_en === 'admin', 'w-2/12 max-lg:w-4/12 max-sm:w-full max-sm:mb-6 max-sm:mx-auto' : _unref(loadCurrentUser).user.role_en !== 'admin'})\n          }, [\n            (_unref(loadCurrentUser)?.user.role === 'Администратор сайта')\n              ? (_openBlock(), _createElementBlock(\"div\", _hoisted_5, [\n                  _createElementVNode(\"button\", {\n                    class: _normalizeClass([\"p-2 rounded-xl dark:text-white tracking-widest font-bold\", {'bg-blueDarkSemiLight text-white' : __props.userChecked === 'user-list'}]),\n                    onClick: _cache[0] || (_cache[0] = $event => {__props.userChecked = 'user-list'; _unref(userList).loadUserList({page: _unref(userList).page, limit: params.limit, user_type: __props.userChecked})})\n                  }, _toDisplayString(_ctx.$t('Все пользователи')), 3),\n                  _createElementVNode(\"button\", {\n                    class: _normalizeClass([\"p-2 rounded-xl dark:text-white tracking-widest font-bold\", {'bg-blueDarkSemiLight text-white' : __props.userChecked === 'admin-list'}]),\n                    onClick: _cache[1] || (_cache[1] = $event => {__props.userChecked = 'admin-list'; _unref(userList).loadAdminList({page: _unref(userList).page, limit: params.limit})})\n                  }, _toDisplayString(_ctx.$t('Администраторы компаний')), 3)\n                ]))\n              : _createCommentVNode(\"\", true),\n            _createVNode(_component_UserCreate)\n          ], 2))\n        : _createCommentVNode(\"\", true)\n    ], 2),\n    _createElementVNode(\"div\", _hoisted_6, [\n      _createElementVNode(\"div\", _hoisted_7, [\n        _createElementVNode(\"p\", _hoisted_8, _toDisplayString(_ctx.$t('Данная страница хранит информацию о пользователях данной платформы')), 1),\n        _createElementVNode(\"div\", _hoisted_9, [\n          _createVNode(TheSearch, {\n            class: \"w-full\",\n            \"model-value\": params.query,\n            \"onUpdate:modelValue\": _cache[2] || (_cache[2] = $event => ((params.query) = $event)),\n            onSearch: searchByName\n          }, null, 8, [\"model-value\"])\n        ])\n      ]),\n      _createElementVNode(\"div\", _hoisted_10, [\n        (_unref(userList)?.get_user_list.count > 0)\n          ? (_openBlock(true), _createElementBlock(_Fragment, { key: 0 }, _renderList(_unref(userList)?.get_user_list.results, (userItem) => {\n              return (_openBlock(), _createBlock(_component_UserContentList, {\n                \"user-item\": userItem,\n                class: \"max-md:w-full\"\n              }, null, 8, [\"user-item\"]))\n            }), 256))\n          : _createCommentVNode(\"\", true)\n      ]),\n      (!_unref(userList)?.get_user_list?.results?.length)\n        ? (_openBlock(), _createElementBlock(\"div\", _hoisted_11, [\n            _createElementVNode(\"p\", _hoisted_12, _toDisplayString(_ctx.$t('По вашему запросу никого не найдено.')), 1)\n          ]))\n        : _createCommentVNode(\"\", true)\n    ]),\n    _createElementVNode(\"div\", _hoisted_13, [\n      _createVNode(_unref(Paginate), {\n        \"page-count\": _unref(pageCount),\n        \"page-range\": 3,\n        \"margin-pages\": 2,\n        \"click-handler\": clickCallback,\n        \"prev-text\": '<',\n        \"next-text\": '>',\n        \"container-class\": 'pagination',\n        \"page-class\": 'page-item',\n        \"force-page\": _unref(page)\n      }, null, 8, [\"page-count\", \"force-page\"]),\n      _createElementVNode(\"div\", _hoisted_14, [\n        _hoisted_15,\n        _withDirectives(_createElementVNode(\"select\", {\n          \"onUpdate:modelValue\": _cache[3] || (_cache[3] = $event => (_isRef(limit) ? (limit).value = $event : null)),\n          onChange: changePageLimit,\n          class: \"w-fit p-2.5 rounded-md border bg-white dark:bg-bgWhite text-black\"\n        }, [\n          (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(limitItems), (item) => {\n            return (_openBlock(), _createElementBlock(\"option\", { value: item }, _toDisplayString(item), 9, _hoisted_16))\n          }), 256))\n        ], 544), [\n          [_vModelSelect, _unref(limit)]\n        ])\n      ])\n    ])\n  ]))\n}\n}\n\n}\n\n\n\nexport default _sfc_main",
-      "start": 1751875048521,
-      "end": 1751875048526,
+      "start": 1751875921629,
+      "end": 1751875921691,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -197,51 +197,51 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1751875048526,
-      "end": 1751875048526,
+      "start": 1751875921698,
+      "end": 1751875921698,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1751875048526,
-      "end": 1751875048526,
+      "start": 1751875921702,
+      "end": 1751875921702,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1751875048526,
-      "end": 1751875048526,
+      "start": 1751875921703,
+      "end": 1751875921703,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1751875048526,
-      "end": 1751875048526,
+      "start": 1751875921707,
+      "end": 1751875921707,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
       "result": "import { default as __nuxt_component_0 } from \"D:/projects/nuxt/workix-nuxt-front/components/User/UserCreate.vue\";\nimport { default as __nuxt_component_1 } from \"D:/projects/nuxt/workix-nuxt-front/components/User/UserContentList.vue\";\nimport { ref, watch, onMounted, watchSyncEffect } from 'vue';\nimport { navigateTo } from '#app/composables/router';\nimport { unref as _unref, toDisplayString as _toDisplayString, openBlock as _openBlock, createElementBlock as _createElementBlock, createCommentVNode as _createCommentVNode, createElementVNode as _createElementVNode, normalizeClass as _normalizeClass, resolveComponent as _resolveComponent, createVNode as _createVNode, renderList as _renderList, Fragment as _Fragment, createBlock as _createBlock, isRef as _isRef, vModelSelect as _vModelSelect, withDirectives as _withDirectives } from \"vue\"\n\nconst _hoisted_1 = { class: \"flex flex-col gap-4\" }\nconst _hoisted_2 = { class: \"text-lg flex gap-x-10\" }\nconst _hoisted_3 = {\n  key: 0,\n  class: \"dark:text-white text-3xl font-bold\"\n}\nconst _hoisted_4 = {\n  key: 1,\n  class: \"dark:text-white text-3xl font-bold\"\n}\nconst _hoisted_5 = {\n  key: 0,\n  class: \"flex gap-x-10\"\n}\nconst _hoisted_6 = { class: \"w-full mt-4 max-[636px]:mt-0\" }\nconst _hoisted_7 = { class: \"flex items-center justify-between max-[636px]:flex-col gap-x-10 max-lg:flex-wrap max-md:justify-center\" }\nconst _hoisted_8 = { class: \"text-mediumGray w-5/12 max-[636px]:w-full\" }\nconst _hoisted_9 = { class: \"w-5/12 max-[636px]:w-full max-[636px]:mt-5 flex items-center gap-3 h-10\" }\nconst _hoisted_10 = { class: \"mt-8 grid grid-cols-4 max-[1350px]:grid-cols-2 max-[636px]:grid-cols-1 gap-5 max-md:mt-10\" }\nconst _hoisted_11 = { key: 0 }\nconst _hoisted_12 = { class: \"text-center\" }\nconst _hoisted_13 = { class: \"w-full flex items-center justify-end border-t gap-4 pr-10 pb-5 pt-5 max-md:pr-3 max-md:flex-col max-md:items-end\" }\nconst _hoisted_14 = { class: \"flex items-center gap-3\" }\nconst _hoisted_15 = /*#__PURE__*/_createElementVNode(\"p\", null, \"Строк на странице:\", -1)\nconst _hoisted_16 = [\"value\"]\n\nimport TheFilter from \"~/components/UI/TheFilter.vue\"\r\nimport TheUserStats from \"~/components/User/UserUI/TheUserStats.vue\"\r\nimport {useUserStore} from \"~/stores/users\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport TheModal from \"~/components/UI/TheModal.vue\";\r\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\r\n\r\nimport Paginate from 'vuejs-paginate-next';\r\nimport {useRoute, useRouter} from \"vue-router\";\r\nimport {useCompanies} from \"~/stores/companies\";\r\n\r\n\nconst _sfc_main = {\n  __name: 'UserContent',\n  props: {\r\n  userChecked: {\r\n    type: String,\r\n    default: 'user-list'\r\n  },\r\n  showUserInfo: {\r\n    type: Boolean,\r\n    default: false,\r\n  }\r\n},\n  setup(__props) {\n\r\nconst loadCurrentUser = useAuthStore()\r\nconst userList = useUserStore()\r\nconst phone = ref('')\r\n\r\nconst route = useRoute();\r\nconst router = useRouter();\r\n\r\nconst page = ref(Number(route.query.page) || 1);\r\nconst limit = ref(Number(route.query.limit) || 10);\r\nconst pageCount = ref(0)\r\nconst limitItems = ref([5, 10, 20, 30, 50])\r\n\r\nconst params = {\r\n  page: 1,\r\n  limit: 10,\r\n  query: ref(''),\r\n  user_type: 'user-list'\r\n}\r\n\r\n\r\n\r\nconst clickCallback = (pageNum) => {\r\n  page.value = pageNum;\r\n  updateQueryParams();\r\n};\r\n\r\nconst changePageLimit = () => {\r\n  updateQueryParams();\r\n};\r\n\r\nconst searchByName = () => {\r\n  page.value = 1;\r\n  updateQueryParams();\r\n};\r\n\r\nconst updateQueryParams = () => {\r\n  router.push({\r\n    query: {\r\n      page: page.value,\r\n      limit: limit.value,\r\n      itemName: params.query.value || undefined,\r\n    }\r\n  });\r\n};\r\n\r\nwatch(() => route.query, (newQuery) => {\r\n  page.value = Number(newQuery.page) || 1;\r\n  limit.value = Number(newQuery.limit) || 10;\r\n  params.query.value = newQuery.itemName || '';\r\n  userList.loadUserList({page: page.value, limit: limit.value, query: params.query.value})\r\n});\r\n\r\nwatch(() => userList.user, (newValue) => {\r\n  pageCount.value = Math.ceil(userList.user.count / limit.value);\r\n})\r\n\r\nfunction loadPage(page) {\r\n  if (page === '<') {\r\n    if (Number(params.page) > 1) {\r\n      params.page -= 1;\r\n    }\r\n  } else if (page === '>') {\r\n    if (Number(params.page) < userList.user.number_of_pages) {\r\n      params.page = Number(params.page) + 1\r\n    }\r\n  } else {\r\n    if (Number(page) <= userList.user.number_of_pages) {\r\n      params.page = Number(page)\r\n    }\r\n  }\r\n  if (window.innerWidth > 1000) {\r\n    window.scrollTo({top: 600})\r\n  } else if (window.innerWidth < 1000) {\r\n    window.scrollTo({top: 895})\r\n  } else {\r\n    window.scrollTo()\r\n  }\r\n}\r\n\r\nonMounted(() => {\r\n  navigateTo({\r\n    params: {\r\n      page: params.page\r\n    }\r\n  })\r\n})\r\nconst company = useCompanies()\r\nwatchSyncEffect(() => {\r\n  console.log(company.company, loadCurrentUser.user)\r\n  if (loadCurrentUser.user.role?.name_en === 'admin') {\r\n    userList.loadAdminList({page: params.page, limit: params.limit, query: params.query.value})\r\n  } else if(loadCurrentUser.user.role?.name_en === 'company_admin') {\r\n    userList.loadUserList({\r\n      page: params.page,\r\n      limit: params.limit,\r\n      query: params.query.value\r\n    })\r\n  }\r\n})\r\n\r\nconst isValidLink = (nameEn) => {\r\n  const foundItem = loadCurrentUser.user.permissions?.find(item => item.name_en === nameEn);\r\n  return foundItem !== undefined;\r\n}\r\n\nreturn (_ctx, _cache) => {\n  const _component_UserCreate = __nuxt_component_0\n  const _component_UserContentList = __nuxt_component_1\n\n  return (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n    _createElementVNode(\"div\", {\n      class: _normalizeClass([\"flex items-center justify-between gap-10 max-[768px]:flex-col max-[768px]:items-start\", {'flex items-center justify-between' :['company_admin', 'admin'].includes( _unref(loadCurrentUser).user.role?.name_en )}])\n    }, [\n      _createElementVNode(\"div\", _hoisted_2, [\n        (_unref(loadCurrentUser).user.role?.name_en === 'admin')\n          ? (_openBlock(), _createElementBlock(\"p\", _hoisted_3, _toDisplayString(_ctx.$t('Список администраторов компании')), 1))\n          : (_openBlock(), _createElementBlock(\"p\", _hoisted_4, _toDisplayString(_ctx.$t('Список всех пользователей компании')), 1))\n      ]),\n      (isValidLink('user.create'))\n        ? (_openBlock(), _createElementBlock(\"div\", {\n            key: 0,\n            class: _normalizeClass({'flex items-center justify-evenly' : _unref(loadCurrentUser).user.role?.name_en === 'admin', 'w-2/12 max-lg:w-4/12 max-sm:w-full max-sm:mb-6 max-sm:mx-auto' : _unref(loadCurrentUser).user.role_en !== 'admin'})\n          }, [\n            (_unref(loadCurrentUser)?.user.role === 'Администратор сайта')\n              ? (_openBlock(), _createElementBlock(\"div\", _hoisted_5, [\n                  _createElementVNode(\"button\", {\n                    class: _normalizeClass([\"p-2 rounded-xl dark:text-white tracking-widest font-bold\", {'bg-blueDarkSemiLight text-white' : __props.userChecked === 'user-list'}]),\n                    onClick: _cache[0] || (_cache[0] = $event => {__props.userChecked = 'user-list'; _unref(userList).loadUserList({page: _unref(userList).page, limit: params.limit, user_type: __props.userChecked})})\n                  }, _toDisplayString(_ctx.$t('Все пользователи')), 3),\n                  _createElementVNode(\"button\", {\n                    class: _normalizeClass([\"p-2 rounded-xl dark:text-white tracking-widest font-bold\", {'bg-blueDarkSemiLight text-white' : __props.userChecked === 'admin-list'}]),\n                    onClick: _cache[1] || (_cache[1] = $event => {__props.userChecked = 'admin-list'; _unref(userList).loadAdminList({page: _unref(userList).page, limit: params.limit})})\n                  }, _toDisplayString(_ctx.$t('Администраторы компаний')), 3)\n                ]))\n              : _createCommentVNode(\"\", true),\n            _createVNode(_component_UserCreate)\n          ], 2))\n        : _createCommentVNode(\"\", true)\n    ], 2),\n    _createElementVNode(\"div\", _hoisted_6, [\n      _createElementVNode(\"div\", _hoisted_7, [\n        _createElementVNode(\"p\", _hoisted_8, _toDisplayString(_ctx.$t('Данная страница хранит информацию о пользователях данной платформы')), 1),\n        _createElementVNode(\"div\", _hoisted_9, [\n          _createVNode(TheSearch, {\n            class: \"w-full\",\n            \"model-value\": params.query,\n            \"onUpdate:modelValue\": _cache[2] || (_cache[2] = $event => ((params.query) = $event)),\n            onSearch: searchByName\n          }, null, 8, [\"model-value\"])\n        ])\n      ]),\n      _createElementVNode(\"div\", _hoisted_10, [\n        (_unref(userList)?.get_user_list.count > 0)\n          ? (_openBlock(true), _createElementBlock(_Fragment, { key: 0 }, _renderList(_unref(userList)?.get_user_list.results, (userItem) => {\n              return (_openBlock(), _createBlock(_component_UserContentList, {\n                \"user-item\": userItem,\n                class: \"max-md:w-full\"\n              }, null, 8, [\"user-item\"]))\n            }), 256))\n          : _createCommentVNode(\"\", true)\n      ]),\n      (!_unref(userList)?.get_user_list?.results?.length)\n        ? (_openBlock(), _createElementBlock(\"div\", _hoisted_11, [\n            _createElementVNode(\"p\", _hoisted_12, _toDisplayString(_ctx.$t('По вашему запросу никого не найдено.')), 1)\n          ]))\n        : _createCommentVNode(\"\", true)\n    ]),\n    _createElementVNode(\"div\", _hoisted_13, [\n      _createVNode(_unref(Paginate), {\n        \"page-count\": _unref(pageCount),\n        \"page-range\": 3,\n        \"margin-pages\": 2,\n        \"click-handler\": clickCallback,\n        \"prev-text\": '<',\n        \"next-text\": '>',\n        \"container-class\": 'pagination',\n        \"page-class\": 'page-item',\n        \"force-page\": _unref(page)\n      }, null, 8, [\"page-count\", \"force-page\"]),\n      _createElementVNode(\"div\", _hoisted_14, [\n        _hoisted_15,\n        _withDirectives(_createElementVNode(\"select\", {\n          \"onUpdate:modelValue\": _cache[3] || (_cache[3] = $event => (_isRef(limit) ? (limit).value = $event : null)),\n          onChange: changePageLimit,\n          class: \"w-fit p-2.5 rounded-md border bg-white dark:bg-bgWhite text-black\"\n        }, [\n          (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(limitItems), (item) => {\n            return (_openBlock(), _createElementBlock(\"option\", { value: item }, _toDisplayString(item), 9, _hoisted_16))\n          }), 256))\n        ], 544), [\n          [_vModelSelect, _unref(limit)]\n        ])\n      ])\n    ])\n  ]))\n}\n}\n\n}\n\n\n\nexport default _sfc_main",
-      "start": 1751875048526,
-      "end": 1751875048526,
+      "start": 1751875921707,
+      "end": 1751875921708,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1751875048526,
-      "end": 1751875048527,
+      "start": 1751875921708,
+      "end": 1751875921708,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1751875048527,
-      "end": 1751875048527,
+      "start": 1751875921708,
+      "end": 1751875921708,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1751875048527,
-      "end": 1751875048527,
+      "start": 1751875921709,
+      "end": 1751875921709,
       "order": "normal"
     }
   ]

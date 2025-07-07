@@ -898,7 +898,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$p == null ? void 0 : __nuxt_page_meta$p.redirect,
-        component: () => import("./_nuxt/_id_-BeqEXkCo.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/_id_-LnrFaUZB.js").then((m) => m.default || m)
       },
       {
         name: "base-companies-department",
@@ -906,7 +906,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: __nuxt_page_meta$o == null ? void 0 : __nuxt_page_meta$o.redirect,
-        component: () => import("./_nuxt/index-YnEJMS5_.js").then((m) => m.default || m)
+        component: () => import("./_nuxt/index-BwyD5DuM.js").then((m) => m.default || m)
       },
       {
         name: "base-companies",
@@ -1199,7 +1199,7 @@ const validate = /* @__PURE__ */ defineNuxtRouteMiddleware(async (to) => {
 });
 const inlineConfig = {
   "nuxt": {
-    "buildId": "5db0c7e9-f1c2-42c9-a3fe-5c46d85674a8"
+    "buildId": "dev"
   },
   "ui": {
     "primary": "green",

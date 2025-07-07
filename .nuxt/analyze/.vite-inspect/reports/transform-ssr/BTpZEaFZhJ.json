@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\"\n\nimport autosize from \"autosize\";\r\nimport {setFocus} from \"~/hooks/ElemUI\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'TheTextareaAutosize',\n  __ssrInlineRender: true,\n  props: {\r\n  modelValue: {\r\n    type: String,\r\n    default: ''\r\n  }\r\n},\n  setup(__props) {\n\r\nconst el = ref()\r\n\r\nonMounted(() => {\r\n  autosize.destroy(el.value)\r\n  setFocus(el.value)\r\n\r\n})\r\nonUpdated(()=>{\r\n  autosize(el.value)\r\n  console.log(12312312)\r\n})\r\nonBeforeUnmount(() => {\r\n  autosize.destroy(el.value)\r\n})\r\n\r\nconst props = __props\r\n\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  let _temp0\n\n  _push(`<textarea${\n    _ssrRenderAttrs(_temp0 = _mergeProps({\n      \"v-model\": __props.modelValue,\n      value: __props.modelValue,\n      ref_key: \"el\",\n      ref: el,\n      class: \"bg-whiteLilia placeholder-style p-4 resize-none example break-words dark:bg-gray-700 w-full max-h-[300px] items-center outline-none text-sm\",\n      placeholder: \"Написать сообщение...\"\n    }, _attrs), \"textarea\")\n  } data-v-b3e63d48>${\n    _ssrInterpolate((\"value\" in _temp0) ? _temp0.value : \"\")\n  }</textarea>`)\n}\n}\n\n})",
-      "start": 1751875086296,
-      "end": 1751875086296,
+      "start": 1751875970997,
+      "end": 1751875970997,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1751875086297,
-      "end": 1751875086297,
+      "start": 1751875970997,
+      "end": 1751875970997,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1751875086297,
-      "end": 1751875086297,
+      "start": 1751875970997,
+      "end": 1751875970997,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1751875086297,
-      "end": 1751875086297,
+      "start": 1751875970997,
+      "end": 1751875970997,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1751875086297,
-      "end": 1751875086297,
+      "start": 1751875970997,
+      "end": 1751875970997,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1751875086297,
-      "end": 1751875086297,
+      "start": 1751875970997,
+      "end": 1751875970997,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1751875086297,
-      "end": 1751875086297,
+      "start": 1751875970997,
+      "end": 1751875970997,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1751875086297,
-      "end": 1751875086297,
+      "start": 1751875970997,
+      "end": 1751875970998,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1751875086297,
-      "end": 1751875086297,
+      "start": 1751875970998,
+      "end": 1751875970998,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport autosize from \"autosize\";\nimport { setFocus } from \"~/hooks/ElemUI\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"TheTextareaAutosize\",\n  __ssrInlineRender: true,\n  props: {\n    modelValue: {\n      type: String,\n      default: \"\"\n    }\n  },\n  setup(__props) {\n    const el = ref();\n    onMounted(() => {\n      autosize.destroy(el.value);\n      setFocus(el.value);\n    });\n    onUpdated(() => {\n      autosize(el.value);\n      console.log(12312312);\n    });\n    onBeforeUnmount(() => {\n      autosize.destroy(el.value);\n    });\n    const props = __props;\n    return (_ctx, _push, _parent, _attrs) => {\n      let _temp0;\n      _push(`<textarea${_ssrRenderAttrs(_temp0 = _mergeProps({\n        \"v-model\": __props.modelValue,\n        value: __props.modelValue,\n        ref_key: \"el\",\n        ref: el,\n        class: \"bg-whiteLilia placeholder-style p-4 resize-none example break-words dark:bg-gray-700 w-full max-h-[300px] items-center outline-none text-sm\",\n        placeholder: \"Написать сообщение...\"\n      }, _attrs), \"textarea\")} data-v-b3e63d48>${_ssrInterpolate(\"value\" in _temp0 ? _temp0.value : \"\")}</textarea>`);\n    };\n  }\n});\n",
-      "start": 1751875086297,
-      "end": 1751875086404,
+      "start": 1751875970998,
+      "end": 1751875971326,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -86,171 +86,171 @@
     },
     {
       "name": "vite:json",
-      "start": 1751875086404,
-      "end": 1751875086404,
+      "start": 1751875971326,
+      "end": 1751875971326,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1751875086404,
-      "end": 1751875086404,
+      "start": 1751875971326,
+      "end": 1751875971326,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1751875086404,
-      "end": 1751875086404,
+      "start": 1751875971326,
+      "end": 1751875971326,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1751875086404,
-      "end": 1751875086404,
+      "start": 1751875971326,
+      "end": 1751875971326,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751875086405,
-      "end": 1751875086405,
+      "start": 1751875971326,
+      "end": 1751875971326,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751875086405,
-      "end": 1751875086405,
+      "start": 1751875971326,
+      "end": 1751875971326,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1751875086405,
-      "end": 1751875086405,
+      "start": 1751875971326,
+      "end": 1751875971326,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1751875086405,
-      "end": 1751875086405,
+      "start": 1751875971326,
+      "end": 1751875971326,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1751875086405,
-      "end": 1751875086405,
+      "start": 1751875971327,
+      "end": 1751875971327,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751875086405,
-      "end": 1751875086405,
+      "start": 1751875971327,
+      "end": 1751875971327,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1751875086406,
-      "end": 1751875086407,
+      "start": 1751875971327,
+      "end": 1751875971328,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1751875086407,
-      "end": 1751875086408,
+      "start": 1751875971329,
+      "end": 1751875971329,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1751875086408,
-      "end": 1751875086408,
+      "start": 1751875971329,
+      "end": 1751875971329,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1751875086408,
-      "end": 1751875086408,
+      "start": 1751875971329,
+      "end": 1751875971329,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1751875086408,
-      "end": 1751875086408,
+      "start": 1751875971331,
+      "end": 1751875971331,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1751875086408,
-      "end": 1751875086408,
+      "start": 1751875971333,
+      "end": 1751875971333,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1751875086408,
-      "end": 1751875086408,
+      "start": 1751875971333,
+      "end": 1751875971333,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1751875086408,
-      "end": 1751875086408,
+      "start": 1751875971333,
+      "end": 1751875971333,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1751875086408,
-      "end": 1751875086408,
+      "start": 1751875971333,
+      "end": 1751875971333,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1751875086408,
-      "end": 1751875086408,
+      "start": 1751875971333,
+      "end": 1751875971333,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1751875086408,
-      "end": 1751875086408,
+      "start": 1751875971333,
+      "end": 1751875971333,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1751875086409,
-      "end": 1751875086409,
+      "start": 1751875971334,
+      "end": 1751875971334,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1751875086409,
-      "end": 1751875086409,
+      "start": 1751875971334,
+      "end": 1751875971335,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1751875086409,
-      "end": 1751875086409,
+      "start": 1751875971335,
+      "end": 1751875971335,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1751875086409,
-      "end": 1751875086409,
+      "start": 1751875971335,
+      "end": 1751875971335,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1751875086409,
-      "end": 1751875086409,
+      "start": 1751875971335,
+      "end": 1751875971335,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1751875086409,
-      "end": 1751875086409,
+      "start": 1751875971335,
+      "end": 1751875971335,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref, onMounted, onUpdated, onBeforeUnmount } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport autosize from \"autosize\";\nimport { setFocus } from \"~/hooks/ElemUI\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"TheTextareaAutosize\",\n  __ssrInlineRender: true,\n  props: {\n    modelValue: {\n      type: String,\n      default: \"\"\n    }\n  },\n  setup(__props) {\n    const el = ref();\n    onMounted(() => {\n      autosize.destroy(el.value);\n      setFocus(el.value);\n    });\n    onUpdated(() => {\n      autosize(el.value);\n      console.log(12312312);\n    });\n    onBeforeUnmount(() => {\n      autosize.destroy(el.value);\n    });\n    const props = __props;\n    return (_ctx, _push, _parent, _attrs) => {\n      let _temp0;\n      _push(`<textarea${_ssrRenderAttrs(_temp0 = _mergeProps({\n        \"v-model\": __props.modelValue,\n        value: __props.modelValue,\n        ref_key: \"el\",\n        ref: el,\n        class: \"bg-whiteLilia placeholder-style p-4 resize-none example break-words dark:bg-gray-700 w-full max-h-[300px] items-center outline-none text-sm\",\n        placeholder: \"Написать сообщение...\"\n      }, _attrs), \"textarea\")} data-v-b3e63d48>${_ssrInterpolate(\"value\" in _temp0 ? _temp0.value : \"\")}</textarea>`);\n    };\n  }\n});\n",
-      "start": 1751875086409,
-      "end": 1751875086413,
+      "start": 1751875971337,
+      "end": 1751875971340,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -264,8 +264,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref, onMounted, onUpdated, onBeforeUnmount } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport autosize from \"autosize\";\nimport { setFocus } from \"~/hooks/ElemUI\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"TheTextareaAutosize\",\n  __ssrInlineRender: true,\n  props: {\n    modelValue: {\n      type: String,\n      default: \"\"\n    }\n  },\n  setup(__props) {\n    const el = ref();\n    onMounted(() => {\n      autosize.destroy(el.value);\n      setFocus(el.value);\n    });\n    onUpdated(() => {\n      autosize(el.value);\n      console.log(12312312);\n    });\n    onBeforeUnmount(() => {\n      autosize.destroy(el.value);\n    });\n    const props = __props;\n    return (_ctx, _push, _parent, _attrs) => {\n      let _temp0;\n      _push(`<textarea${_ssrRenderAttrs(_temp0 = _mergeProps({\n        \"v-model\": __props.modelValue,\n        value: __props.modelValue,\n        ref_key: \"el\",\n        ref: el,\n        class: \"bg-whiteLilia placeholder-style p-4 resize-none example break-words dark:bg-gray-700 w-full max-h-[300px] items-center outline-none text-sm\",\n        placeholder: \"Написать сообщение...\"\n      }, _attrs), \"textarea\")} data-v-b3e63d48>${_ssrInterpolate(\"value\" in _temp0 ? _temp0.value : \"\")}</textarea>`);\n    };\n  }\n});\n",
-      "start": 1751875086409,
-      "end": 1751875086413,
+      "start": 1751875971337,
+      "end": 1751875971340,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -278,45 +278,45 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1751875086413,
-      "end": 1751875086413,
+      "start": 1751875971340,
+      "end": 1751875971340,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1751875086413,
-      "end": 1751875086413,
+      "start": 1751875971340,
+      "end": 1751875971340,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1751875086413,
-      "end": 1751875086413,
+      "start": 1751875971340,
+      "end": 1751875971340,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1751875086413,
-      "end": 1751875086413,
+      "start": 1751875971340,
+      "end": 1751875971340,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1751875086414,
-      "end": 1751875086414,
+      "start": 1751875971340,
+      "end": 1751875971340,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1751875086414,
-      "end": 1751875086414,
+      "start": 1751875971340,
+      "end": 1751875971340,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
       "result": "import { ref, onMounted, onUpdated, onBeforeUnmount } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate } from \"vue/server-renderer\";\nimport autosize from \"autosize\";\nimport { setFocus } from \"~/hooks/ElemUI\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"TheTextareaAutosize\",\n  __ssrInlineRender: true,\n  props: {\n    modelValue: {\n      type: String,\n      default: \"\"\n    }\n  },\n  setup(__props) {\n    const el = ref();\n     false && /*@__PURE__*/ onMounted(() => {\n      autosize.destroy(el.value);\n      setFocus(el.value);\n    });\n    onUpdated(() => {\n      autosize(el.value);\n      console.log(12312312);\n    });\n     false && /*@__PURE__*/ onBeforeUnmount(() => {\n      autosize.destroy(el.value);\n    });\n    const props = __props;\n    return (_ctx, _push, _parent, _attrs) => {\n      let _temp0;\n      _push(`<textarea${_ssrRenderAttrs(_temp0 = _mergeProps({\n        \"v-model\": __props.modelValue,\n        value: __props.modelValue,\n        ref_key: \"el\",\n        ref: el,\n        class: \"bg-whiteLilia placeholder-style p-4 resize-none example break-words dark:bg-gray-700 w-full max-h-[300px] items-center outline-none text-sm\",\n        placeholder: \"Написать сообщение...\"\n      }, _attrs), \"textarea\")} data-v-b3e63d48>${_ssrInterpolate(\"value\" in _temp0 ? _temp0.value : \"\")}</textarea>`);\n    };\n  }\n});\n",
-      "start": 1751875086414,
-      "end": 1751875086415,
+      "start": 1751875971340,
+      "end": 1751875971341,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -329,14 +329,14 @@
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1751875086415,
-      "end": 1751875086415,
+      "start": 1751875971341,
+      "end": 1751875971341,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1751875086415,
-      "end": 1751875086415,
+      "start": 1751875971341,
+      "end": 1751875971341,
       "order": "normal"
     }
   ]

@@ -4,44 +4,44 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, createVNode as _createVNode, unref as _unref, openBlock as _openBlock, createBlock as _createBlock, createCommentVNode as _createCommentVNode, createElementBlock as _createElementBlock, normalizeClass as _normalizeClass } from \"vue\"\n\nconst _hoisted_1 = { class: \"flex items-center gap-4 justify-between max-[680px]:flex-col max-[680px]:items-start max-[680px]:gap-5\" }\nconst _hoisted_2 = { class: \"dark:text-white text-3xl font-bold\" }\nconst _hoisted_3 = { class: \"mt-8 flex max-[1170px]:flex-col max-lg:items-center justify-between\" }\nconst _hoisted_4 = { class: \"flex flex-col w-full max-xl:flex-wrap gap-y-10 max-xl:items-center\" }\nconst _hoisted_5 = { class: \"w-full mx-auto\" }\nconst _hoisted_6 = { class: \"w-full\" }\nconst _hoisted_7 = { class: \"flex flex-col w-4/12 max-[1170px]:w-full gap-y-10\" }\nconst _hoisted_8 = {\n  key: 1,\n  class: \"text-2xl break-words dark:text-white tracking-widest text-center\"\n}\nconst _hoisted_9 = { class: \"dark:border dark:border-gray-500 dark:shadow-md dark:shadow-gray-500 shadow-2xl rounded-lg p-4 w-full\" }\n\nimport TasksReport from \"../../../components/Tasks/TasksReport.vue\";\r\nimport TaskContent from \"~/components/Tasks/TasksContent\"\r\nimport TasksNotification from \"~/components/Tasks/TasksNotification.vue\";\r\nimport {Chart as ChartJS, ArcElement, Tooltip, Legend, Chart} from 'chart.js'\r\nimport {Pie} from 'vue-chartjs'\r\nimport {useTaskList} from \"~/stores/tasks\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport {useCompanies} from \"~/stores/companies\";\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'index',\n  setup(__props) {\n\r\nconst statsList = useTaskList()\r\nChartJS.register(ArcElement, Tooltip, Legend)\r\nChart.defaults.color = '#b6b6b6'\r\n\r\nconst STATUS_CONFIG = {\r\n  completed: { label: 'Выполненые', color: '#41B883' },\r\n  performing: { label: 'В процессе', color: '#E46651' },\r\n  watching: { label: 'На рассмотрении', color: '#3b82f6' },\r\n  rejected: { label: 'Отмененные', color: '#DD1B16' },\r\n  returned: { label: 'Возвращенные', color: '#FFA500' },\r\n  expired: { label: 'Истёкшие', color: '#808080' },\r\n}\r\n\r\nconst chartStats = computed(() => {\r\n  const labels: string[] = []\r\n  const data: number[] = []\r\n  const backgroundColor: string[] = []\r\n\r\n  const stats = statsList?.stats\r\n\r\n  if (Array.isArray(stats)) {\r\n    stats.forEach((item) => {\r\n      const config = STATUS_CONFIG[item.status as keyof typeof STATUS_CONFIG]\r\n      if (config) {\r\n        labels.push(config.label)\r\n        data.push(item.count)\r\n        backgroundColor.push(config.color)\r\n      }\r\n    })\r\n  }\r\n\r\n  return { labels, data, backgroundColor }\r\n})\r\n\r\nconst chartData = computed(() => ({\r\n  labels: chartStats.value.labels,\r\n  datasets: [\r\n    {\r\n      backgroundColor: chartStats.value.backgroundColor,\r\n      data: chartStats.value.data\r\n    }\r\n  ]\r\n}))\r\n\r\n// const chartData = ref({\r\n//   labels:['Выполненые', 'В процессе', 'На расмотрении', 'Отмененные'],\r\n//   datasets: [\r\n//     {\r\n//       backgroundColor: ['#41B883', '#E46651', '#3b82f6', '#DD1B16'],\r\n//       data: [statsList?.get_stats[2]?.count, statsList?.get_stats[0]?.count, statsList?.get_stats[4]?.count, statsList?.get_stats[3]?.count]\r\n//     }\r\n//   ]\r\n// });\r\nconst chartOptions = ref({\r\n  responsive: true,\r\n  maintainAspectRatio: false\r\n});\r\n\r\nconst router = useRouter()\r\nconst loadAuthStore = useAuthStore()\r\nconst company = useCompanies()\r\n\r\nwatch(() => loadAuthStore.user, (newValue) => {\r\n  if(loadAuthStore?.user?.role?.name_en === 'admin'){\r\n    if (window.history.length > 1) {\r\n      router.push('/base/profile');\r\n    } else {\r\n      router.push('/');\r\n    }\r\n  }\r\n})\r\nwatch(() => company.company, (newValue) => {\r\n  let permission = company.company.modules?.find(item => item.name_en === 'tasks')\r\n  if(!permission){\r\n    if (window.history.length > 1) {\r\n      router.push('/base/profile');\r\n    } else {\r\n      router.push('/');\r\n    }\r\n  }\r\n})\r\n\r\nuseSeoMeta({\r\n  title: 'Задания',\r\n  description: 'Страница с заданиями пользователей платформы'\r\n})\r\n\r\n\nreturn (_ctx: any,_cache: any) => {\n  return (_openBlock(), _createElementBlock(\"div\", null, [\n    _createElementVNode(\"div\", _hoisted_1, [\n      _createElementVNode(\"p\", _hoisted_2, _toDisplayString(_ctx.$t('Задания')), 1)\n    ]),\n    _createElementVNode(\"div\", _hoisted_3, [\n      _createElementVNode(\"div\", _hoisted_4, [\n        _createElementVNode(\"div\", _hoisted_5, [\n          _createVNode(TasksReport)\n        ]),\n        _createElementVNode(\"div\", _hoisted_6, [\n          _createVNode(_unref(TaskContent))\n        ])\n      ]),\n      _createElementVNode(\"div\", _hoisted_7, [\n        (_unref(chartData).datasets[0].data[0]!=undefined)\n          ? (_openBlock(), _createElementBlock(\"div\", {\n              key: 0,\n              class: _normalizeClass([\"dark:border dark:border-gray-500 dark:shadow-md dark:shadow-gray-500 shadow-2xl rounded-lg p-4 w-full bg-blue-5\", {'h-[400px]' : _unref(statsList).get_tasks.count > 0}])\n            }, [\n              (_unref(statsList).get_tasks.count > 0)\n                ? (_openBlock(), _createBlock(_unref(Pie), {\n                    key: 0,\n                    class: \"tracking-wider cursor-pointer\",\n                    data: _unref(chartData),\n                    options: _unref(chartOptions)\n                  }, null, 8, [\"data\", \"options\"]))\n                : (_openBlock(), _createElementBlock(\"p\", _hoisted_8, _toDisplayString(_ctx.$t('Статистика отсутствует')), 1))\n            ], 2))\n          : _createCommentVNode(\"\", true),\n        _createElementVNode(\"div\", _hoisted_9, [\n          _createVNode(TasksNotification, { class: \"\" })\n        ])\n      ])\n    ])\n  ]))\n}\n}\n\n})",
-      "start": 1751875043818,
-      "end": 1751875043818
+      "start": 1751875916643,
+      "end": 1751875916643
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1751875043818,
-      "end": 1751875043818,
+      "start": 1751875916644,
+      "end": 1751875916644,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1751875043818,
-      "end": 1751875043818,
+      "start": 1751875916644,
+      "end": 1751875916644,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1751875043818,
-      "end": 1751875043818,
+      "start": 1751875916644,
+      "end": 1751875916644,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1751875043818,
-      "end": 1751875043818,
+      "start": 1751875916644,
+      "end": 1751875916644,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1751875043818,
-      "end": 1751875043818,
+      "start": 1751875916644,
+      "end": 1751875916644,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, createVNode as _createVNode, unref as _unref, openBlock as _openBlock, createBlock as _createBlock, createCommentVNode as _createCommentVNode, createElementBlock as _createElementBlock, normalizeClass as _normalizeClass } from \"vue\";\nconst _hoisted_1 = { class: \"flex items-center gap-4 justify-between max-[680px]:flex-col max-[680px]:items-start max-[680px]:gap-5\" };\nconst _hoisted_2 = { class: \"dark:text-white text-3xl font-bold\" };\nconst _hoisted_3 = { class: \"mt-8 flex max-[1170px]:flex-col max-lg:items-center justify-between\" };\nconst _hoisted_4 = { class: \"flex flex-col w-full max-xl:flex-wrap gap-y-10 max-xl:items-center\" };\nconst _hoisted_5 = { class: \"w-full mx-auto\" };\nconst _hoisted_6 = { class: \"w-full\" };\nconst _hoisted_7 = { class: \"flex flex-col w-4/12 max-[1170px]:w-full gap-y-10\" };\nconst _hoisted_8 = {\n  key: 1,\n  class: \"text-2xl break-words dark:text-white tracking-widest text-center\"\n};\nconst _hoisted_9 = { class: \"dark:border dark:border-gray-500 dark:shadow-md dark:shadow-gray-500 shadow-2xl rounded-lg p-4 w-full\" };\nimport TasksReport from \"../../../components/Tasks/TasksReport.vue\";\nimport TaskContent from \"~/components/Tasks/TasksContent\";\nimport TasksNotification from \"~/components/Tasks/TasksNotification.vue\";\nimport { Chart as ChartJS, ArcElement, Tooltip, Legend, Chart } from \"chart.js\";\nimport { Pie } from \"vue-chartjs\";\nimport { useTaskList } from \"~/stores/tasks\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  setup(__props) {\n    const statsList = useTaskList();\n    ChartJS.register(ArcElement, Tooltip, Legend);\n    Chart.defaults.color = \"#b6b6b6\";\n    const STATUS_CONFIG = {\n      completed: { label: \"Выполненые\", color: \"#41B883\" },\n      performing: { label: \"В процессе\", color: \"#E46651\" },\n      watching: { label: \"На рассмотрении\", color: \"#3b82f6\" },\n      rejected: { label: \"Отмененные\", color: \"#DD1B16\" },\n      returned: { label: \"Возвращенные\", color: \"#FFA500\" },\n      expired: { label: \"Истёкшие\", color: \"#808080\" }\n    };\n    const chartStats = computed(() => {\n      const labels = [];\n      const data = [];\n      const backgroundColor = [];\n      const stats = statsList?.stats;\n      if (Array.isArray(stats)) {\n        stats.forEach((item) => {\n          const config = STATUS_CONFIG[item.status];\n          if (config) {\n            labels.push(config.label);\n            data.push(item.count);\n            backgroundColor.push(config.color);\n          }\n        });\n      }\n      return { labels, data, backgroundColor };\n    });\n    const chartData = computed(() => ({\n      labels: chartStats.value.labels,\n      datasets: [\n        {\n          backgroundColor: chartStats.value.backgroundColor,\n          data: chartStats.value.data\n        }\n      ]\n    }));\n    const chartOptions = ref({\n      responsive: true,\n      maintainAspectRatio: false\n    });\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    const company = useCompanies();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if (window.history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    watch(() => company.company, (newValue) => {\n      let permission = company.company.modules?.find((item) => item.name_en === \"tasks\");\n      if (!permission) {\n        if (window.history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Задания\",\n      description: \"Страница с заданиями пользователей платформы\"\n    });\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", null, [\n        _createElementVNode(\"div\", _hoisted_1, [\n          _createElementVNode(\"p\", _hoisted_2, _toDisplayString(_ctx.$t(\"Задания\")), 1)\n        ]),\n        _createElementVNode(\"div\", _hoisted_3, [\n          _createElementVNode(\"div\", _hoisted_4, [\n            _createElementVNode(\"div\", _hoisted_5, [\n              _createVNode(TasksReport)\n            ]),\n            _createElementVNode(\"div\", _hoisted_6, [\n              _createVNode(_unref(TaskContent))\n            ])\n          ]),\n          _createElementVNode(\"div\", _hoisted_7, [\n            _unref(chartData).datasets[0].data[0] != void 0 ? (_openBlock(), _createElementBlock(\"div\", {\n              key: 0,\n              class: _normalizeClass([\"dark:border dark:border-gray-500 dark:shadow-md dark:shadow-gray-500 shadow-2xl rounded-lg p-4 w-full bg-blue-5\", { \"h-[400px]\": _unref(statsList).get_tasks.count > 0 }])\n            }, [\n              _unref(statsList).get_tasks.count > 0 ? (_openBlock(), _createBlock(_unref(Pie), {\n                key: 0,\n                class: \"tracking-wider cursor-pointer\",\n                data: _unref(chartData),\n                options: _unref(chartOptions)\n              }, null, 8, [\"data\", \"options\"])) : (_openBlock(), _createElementBlock(\"p\", _hoisted_8, _toDisplayString(_ctx.$t(\"Статистика отсутствует\")), 1))\n            ], 2)) : _createCommentVNode(\"\", true),\n            _createElementVNode(\"div\", _hoisted_9, [\n              _createVNode(TasksNotification, { class: \"\" })\n            ])\n          ])\n        ])\n      ]);\n    };\n  }\n});\n",
-      "start": 1751875043818,
-      "end": 1751875044507,
+      "start": 1751875916646,
+      "end": 1751875917440,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -57,141 +57,141 @@
     },
     {
       "name": "vite:json",
-      "start": 1751875044508,
-      "end": 1751875044508,
+      "start": 1751875917440,
+      "end": 1751875917440,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1751875044508,
-      "end": 1751875044508,
+      "start": 1751875917440,
+      "end": 1751875917440,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1751875044508,
-      "end": 1751875044508,
+      "start": 1751875917440,
+      "end": 1751875917441,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1751875044508,
-      "end": 1751875044508,
+      "start": 1751875917444,
+      "end": 1751875917444,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751875044508,
-      "end": 1751875044508,
+      "start": 1751875917444,
+      "end": 1751875917444,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1751875044508,
-      "end": 1751875044508,
+      "start": 1751875917445,
+      "end": 1751875917445,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1751875044508,
-      "end": 1751875044508,
+      "start": 1751875917445,
+      "end": 1751875917445,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1751875044508,
-      "end": 1751875044509,
+      "start": 1751875917445,
+      "end": 1751875917445,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751875044509,
-      "end": 1751875044509,
+      "start": 1751875917445,
+      "end": 1751875917445,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1751875044509,
-      "end": 1751875044509,
+      "start": 1751875917445,
+      "end": 1751875917445,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1751875044509,
-      "end": 1751875044509,
+      "start": 1751875917445,
+      "end": 1751875917445,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1751875044509,
-      "end": 1751875044509,
+      "start": 1751875917445,
+      "end": 1751875917446,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1751875044509,
-      "end": 1751875044509,
+      "start": 1751875917446,
+      "end": 1751875917446,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1751875044509,
-      "end": 1751875044509,
+      "start": 1751875917446,
+      "end": 1751875917446,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1751875044509,
-      "end": 1751875044509,
+      "start": 1751875917446,
+      "end": 1751875917446,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1751875044509,
-      "end": 1751875044509,
+      "start": 1751875917446,
+      "end": 1751875917446,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1751875044509,
-      "end": 1751875044509,
+      "start": 1751875917446,
+      "end": 1751875917446,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1751875044509,
-      "end": 1751875044509,
+      "start": 1751875917446,
+      "end": 1751875917446,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1751875044510,
-      "end": 1751875044510,
+      "start": 1751875917447,
+      "end": 1751875917447,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1751875044510,
-      "end": 1751875044510,
+      "start": 1751875917447,
+      "end": 1751875917447,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1751875044510,
-      "end": 1751875044510,
+      "start": 1751875917447,
+      "end": 1751875917447,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1751875044510,
-      "end": 1751875044510,
+      "start": 1751875917447,
+      "end": 1751875917447,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { computed, ref, watch } from 'vue';\nimport { useRouter } from '#app/composables/router';\nimport { useSeoMeta } from '@unhead/vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, createVNode as _createVNode, unref as _unref, openBlock as _openBlock, createBlock as _createBlock, createCommentVNode as _createCommentVNode, createElementBlock as _createElementBlock, normalizeClass as _normalizeClass } from \"vue\";\nconst _hoisted_1 = { class: \"flex items-center gap-4 justify-between max-[680px]:flex-col max-[680px]:items-start max-[680px]:gap-5\" };\nconst _hoisted_2 = { class: \"dark:text-white text-3xl font-bold\" };\nconst _hoisted_3 = { class: \"mt-8 flex max-[1170px]:flex-col max-lg:items-center justify-between\" };\nconst _hoisted_4 = { class: \"flex flex-col w-full max-xl:flex-wrap gap-y-10 max-xl:items-center\" };\nconst _hoisted_5 = { class: \"w-full mx-auto\" };\nconst _hoisted_6 = { class: \"w-full\" };\nconst _hoisted_7 = { class: \"flex flex-col w-4/12 max-[1170px]:w-full gap-y-10\" };\nconst _hoisted_8 = {\n  key: 1,\n  class: \"text-2xl break-words dark:text-white tracking-widest text-center\"\n};\nconst _hoisted_9 = { class: \"dark:border dark:border-gray-500 dark:shadow-md dark:shadow-gray-500 shadow-2xl rounded-lg p-4 w-full\" };\nimport TasksReport from \"../../../components/Tasks/TasksReport.vue\";\nimport TaskContent from \"~/components/Tasks/TasksContent\";\nimport TasksNotification from \"~/components/Tasks/TasksNotification.vue\";\nimport { Chart as ChartJS, ArcElement, Tooltip, Legend, Chart } from \"chart.js\";\nimport { Pie } from \"vue-chartjs\";\nimport { useTaskList } from \"~/stores/tasks\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"index\",\n  setup(__props) {\n    const statsList = useTaskList();\n    ChartJS.register(ArcElement, Tooltip, Legend);\n    Chart.defaults.color = \"#b6b6b6\";\n    const STATUS_CONFIG = {\n      completed: { label: \"Выполненые\", color: \"#41B883\" },\n      performing: { label: \"В процессе\", color: \"#E46651\" },\n      watching: { label: \"На рассмотрении\", color: \"#3b82f6\" },\n      rejected: { label: \"Отмененные\", color: \"#DD1B16\" },\n      returned: { label: \"Возвращенные\", color: \"#FFA500\" },\n      expired: { label: \"Истёкшие\", color: \"#808080\" }\n    };\n    const chartStats = computed(() => {\n      const labels = [];\n      const data = [];\n      const backgroundColor = [];\n      const stats = statsList?.stats;\n      if (Array.isArray(stats)) {\n        stats.forEach((item) => {\n          const config = STATUS_CONFIG[item.status];\n          if (config) {\n            labels.push(config.label);\n            data.push(item.count);\n            backgroundColor.push(config.color);\n          }\n        });\n      }\n      return { labels, data, backgroundColor };\n    });\n    const chartData = computed(() => ({\n      labels: chartStats.value.labels,\n      datasets: [\n        {\n          backgroundColor: chartStats.value.backgroundColor,\n          data: chartStats.value.data\n        }\n      ]\n    }));\n    const chartOptions = ref({\n      responsive: true,\n      maintainAspectRatio: false\n    });\n    const router = useRouter();\n    const loadAuthStore = useAuthStore();\n    const company = useCompanies();\n    watch(() => loadAuthStore.user, (newValue) => {\n      if (loadAuthStore?.user?.role?.name_en === \"admin\") {\n        if (window.history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    watch(() => company.company, (newValue) => {\n      let permission = company.company.modules?.find((item) => item.name_en === \"tasks\");\n      if (!permission) {\n        if (window.history.length > 1) {\n          router.push(\"/base/profile\");\n        } else {\n          router.push(\"/\");\n        }\n      }\n    });\n    useSeoMeta({\n      title: \"Задания\",\n      description: \"Страница с заданиями пользователей платформы\"\n    });\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", null, [\n        _createElementVNode(\"div\", _hoisted_1, [\n          _createElementVNode(\"p\", _hoisted_2, _toDisplayString(_ctx.$t(\"Задания\")), 1)\n        ]),\n        _createElementVNode(\"div\", _hoisted_3, [\n          _createElementVNode(\"div\", _hoisted_4, [\n            _createElementVNode(\"div\", _hoisted_5, [\n              _createVNode(TasksReport)\n            ]),\n            _createElementVNode(\"div\", _hoisted_6, [\n              _createVNode(_unref(TaskContent))\n            ])\n          ]),\n          _createElementVNode(\"div\", _hoisted_7, [\n            _unref(chartData).datasets[0].data[0] != void 0 ? (_openBlock(), _createElementBlock(\"div\", {\n              key: 0,\n              class: _normalizeClass([\"dark:border dark:border-gray-500 dark:shadow-md dark:shadow-gray-500 shadow-2xl rounded-lg p-4 w-full bg-blue-5\", { \"h-[400px]\": _unref(statsList).get_tasks.count > 0 }])\n            }, [\n              _unref(statsList).get_tasks.count > 0 ? (_openBlock(), _createBlock(_unref(Pie), {\n                key: 0,\n                class: \"tracking-wider cursor-pointer\",\n                data: _unref(chartData),\n                options: _unref(chartOptions)\n              }, null, 8, [\"data\", \"options\"])) : (_openBlock(), _createElementBlock(\"p\", _hoisted_8, _toDisplayString(_ctx.$t(\"Статистика отсутствует\")), 1))\n            ], 2)) : _createCommentVNode(\"\", true),\n            _createElementVNode(\"div\", _hoisted_9, [\n              _createVNode(TasksNotification, { class: \"\" })\n            ])\n          ])\n        ])\n      ]);\n    };\n  }\n});\n",
-      "start": 1751875044510,
-      "end": 1751875044522,
+      "start": 1751875917454,
+      "end": 1751875917513,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -204,50 +204,50 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1751875044522,
-      "end": 1751875044522,
+      "start": 1751875917514,
+      "end": 1751875917514,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1751875044522,
-      "end": 1751875044524,
+      "start": 1751875917524,
+      "end": 1751875917527,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1751875044524,
-      "end": 1751875044524,
+      "start": 1751875917528,
+      "end": 1751875917528,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1751875044524,
-      "end": 1751875044524,
+      "start": 1751875917528,
+      "end": 1751875917528,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1751875044524,
-      "end": 1751875044524,
+      "start": 1751875917530,
+      "end": 1751875917530,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1751875044524,
-      "end": 1751875044524,
+      "start": 1751875917535,
+      "end": 1751875917535,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1751875044524,
-      "end": 1751875044525,
+      "start": 1751875917536,
+      "end": 1751875917536,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1751875044525,
-      "end": 1751875044525,
+      "start": 1751875917536,
+      "end": 1751875917536,
       "order": "normal"
     }
   ]

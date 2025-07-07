@@ -101,19 +101,27 @@ watchSyncEffect(() => {
           @showModal="showWarning = !showWarning"
       >
         <div>
-          <p class="text-xl text-center font-medium">
-            {{ $t('Предупреждение') }}
+          <p class="text-center font-bold max-sm:w-9/12 max-sm:mx-auto">
+            {{ $t('Вы действительно хотите удалить департамент?') }}
           </p>
-          <div class="text-center text-lg mt-2 tracking-widest">
-            <p>{{ $t('Вы действительно хотите удалить департамент?') }}</p>
-            <p class="!text-base">{{ $t('Удалённые департаменты восстановке не подлежат') }}</p>
+          <div class="text-center text-lg max-sm:text-sm w-7/12 mx-auto my-10 dark:text-white break-words max-sm:w-full">
+            <p class="text-redOrange">{{ $t('Предупреждение!') }}</p>
+            <p class="!text-base nt-2">{{ $t('Удалённые департаменты восстановке не подлежат') }}</p>
           </div>
         </div>
-        <div class="flex justify-center gap-x-10 mt-10">
-          <TheButton type="danger" class="w-3/12 py-2 rounded-full" @click="showWarning = false">{{ $t('Отмена') }}
+        <div class="flex justify-center gap-3 max-sm:flex-col">
+          <TheButton
+              class="w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-black hover:!bg-gray-200 gap-3 py-2 !bg-porcelain !border transition-all ease-in-out duration-300"
+              t="button"
+              @click="showWarning = false"
+          >
+            {{ $t('Отменить') }}
           </TheButton>
-          <TheButton type="success" class="w-3/12 py-2 rounded-full"
-                     @click="currentDepartment.deleteDepartment({id: currentDepartment.get_department.id}, $router)">
+          <TheButton
+              class="w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-white gap-3 py-2 !bg-redOrange !border transition-all ease-in-out duration-300"
+              t="submit"
+              @click="currentDepartment.deleteDepartment({id: currentDepartment.get_department.id}, $router)"
+          >
             {{ $t('Удалить') }}
           </TheButton>
         </div>
@@ -133,12 +141,18 @@ watchSyncEffect(() => {
       </div>
       <div
           v-else
-          class="w-full max-[1200px]:order-1 flex flex-col gap-4 p-6 rounded-3xl shadow-departmentInfo bg-white"
+          class="w-full max-[1200px]:order-1 flex flex-col items-center justify-center gap-4 p-6 rounded-3xl shadow-departmentInfo bg-white"
       >
-        <DepartmentUserList
-            v-for="userItem in currentDepartment?.get_department?.participants"
-            :user-item="userItem"
-        ></DepartmentUserList>
+        <template v-if="currentDepartment.get_department?.participants?.length">
+          <DepartmentUserList
+              v-for="userItem in currentDepartment.get_department.participants"
+              :key="userItem.id"
+              :user-item="userItem"
+          />
+        </template>
+        <p v-else class="text-gray-500 text-center py-4">
+          {{ $t('Пользователей пока нет') }}
+        </p>
       </div>
       <div class="w-3/12 max-[1200px]:w-full bg-white p-6 rounded-3xl h-fit shadow-departmentInfo">
         <TheTextContent>

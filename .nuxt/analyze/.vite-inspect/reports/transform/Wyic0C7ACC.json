@@ -4,44 +4,44 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, withCtx as _withCtx, createVNode as _createVNode, unref as _unref, createElementVNode as _createElementVNode, openBlock as _openBlock, createBlock as _createBlock, createCommentVNode as _createCommentVNode, createElementBlock as _createElementBlock } from \"vue\"\n\nconst _hoisted_1 = { class: \"overflow-x-hidden\" }\nconst _hoisted_2 = { class: \"\" }\nconst _hoisted_3 = { class: \"justify-center gap-x-10 border-b border-l border-r p-4 rounded-b-xl rounded-t-sm\" }\nconst _hoisted_4 = { class: \"flex gap-x-6 justify-center items-center\" }\nconst _hoisted_5 = { class: \"flex justify-center gap-x-10 mt-4\" }\nconst _hoisted_6 = { class: \"my-6\" }\nconst _hoisted_7 = { class: \"text-center tracking-widest text-lg\" }\nconst _hoisted_8 = { class: \"text-sm tracking-widest text-gray-300 my-6\" }\nconst _hoisted_9 = { class: \"flex justify-center gap-x-10\" }\n\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\r\nimport TheButton from \"~/components/UI/TheButton.vue\";\r\nimport TheModal from \"~/components/UI/TheModal.vue\";\r\nimport DocumentItemInfoChainSchedule\r\n  from \"~/components/documents/DocumentItemInfo/DocumentIemInfoChain/DocumentItemInfoChainSchedule.vue\";\r\nimport {useDocumentStore} from \"~/stores/documents\";\r\nimport {useRoute, useRouter} from 'vue-router'\r\nimport DocumentItemInfoChainFile\r\n  from \"~/components/documents/DocumentItemInfo/DocumentIemInfoChain/DocumentItemInfoChainFile.vue\";\r\nimport {LinkedList} from \"~/hooks/Node\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport { onMounted } from 'vue';\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'DocumentItemInfoChain',\n  setup(__props) {\n\r\n\r\nconst route = useRoute()\r\nconst router = useRouter()\r\nconst documentStore = useDocumentStore()\r\nconst authStore = useAuthStore()\r\n\r\nconst isSigning = ref(false);\r\n\r\nfunction loadScript(src: string): Promise<void> {\r\n  return new Promise((resolve, reject) => {\r\n    if (document.querySelector(`script[src=\"${src}\"]`)) {\r\n      resolve();\r\n      return;\r\n    }\r\n\r\n    const script = document.createElement('script');\r\n    script.src = src;\r\n    script.async = true;\r\n    script.onload = () => resolve();\r\n    script.onerror = () => reject(new Error(`Ошибка загрузки скрипта ${src}`));\r\n\r\n    document.head.appendChild(script);\r\n  });\r\n}\r\n\r\nasync function loadEImzoScripts() {\r\n  try {\r\n    await loadScript('/e-imzo/e-imzo.js');\r\n    await loadScript('/e-imzo/e-imzo-client.js');\r\n    await loadScript('/e-imzo/micro-ajax.js');\r\n    await loadScript('/e-imzo/e-imzo-init.js');\r\n    console.log('✅ Все скрипты загружены');\r\n  } catch (error) {\r\n    console.error('❌ Ошибка загрузки скриптов E-IMZO', error);\r\n  }\r\n}\r\n\r\nonMounted(async () => {\r\n  await loadEImzoScripts();\r\n});\r\n\r\n\r\nasync function startAppLoad() {\r\n  try {\r\n    await loadScript(\"/e-imzo/e-imzo.js\");\r\n    await loadScript(\"/e-imzo/e-imzo-client.js\");\r\n    await loadScript(\"/e-imzo/micro-ajax.js\");\r\n    await loadScript(\"/e-imzo/e-imzo-init.js\");\r\n\r\n    if (window.EIMZOClient) {\r\n      console.log(\"✅ EIMZOClient загружен:\", window.EIMZOClient);\r\n      console.log(\"📜 Доступные методы EIMZOClient:\", Object.keys(window.EIMZOClient));\r\n\r\n      installKeys();\r\n    } else {\r\n      console.error(\"❌ EIMZOClient не найден после загрузки\");\r\n    }\r\n  } catch (error) {\r\n    console.error(\"❌ Ошибка при загрузке скриптов:\", error);\r\n  }\r\n}\r\n\r\nasync function installKeys() {\r\n  if (!window.EIMZOClient) {\r\n    console.error(\"EIMZOClient не загружен\");\r\n    return;\r\n  }\r\n\r\n  isSigning.value = true;\r\n  try {\r\n    EIMZOClient.checkVersion(function (major, minor) {\r\n      var newVersion = EIMZO_MAJOR * 100 + EIMZO_MINOR;\r\n      var installedVersion = parseInt(major) * 100 + parseInt(minor);\r\n      if (installedVersion < newVersion) {\r\n        console.log('installedVersion < newVersion');\r\n      } else {\r\n        EIMZOClient.installApiKeys(function () {\r\n          responseUsers()\r\n        }, function (e, r) {\r\n          if (r) {\r\n            console.log('da');\r\n          } else {\r\n            console.log('net');\r\n          }\r\n        });\r\n      }\r\n    }, function (e, r) {\r\n      if (r) {\r\n        console.log('da2');\r\n      } else {\r\n        console.log('net2');\r\n      }\r\n    });\r\n\r\n    // console.log(\"✅ Подписанные данные:\", signedData);\r\n\r\n    // await documentStore.updateDocument({ id: route.params.id, signedData });\r\n    console.log(\"📄 Документ успешно подписан и обновлён\");\r\n  } catch (error) {\r\n    console.error(\"❌ Ошибка при подписании документа:\", error);\r\n  } finally {\r\n    isSigning.value = false;\r\n  }\r\n}\r\n\r\nfunction responseUsers(){\r\n  EIMZOClient.listAllUserKeys(function(o, i){\r\n    var itemId = \"itm-\" + o.serialNumber + \"-\" + i;\r\n    return itemId;\r\n  },function(itemId, v){\r\n    return uiCreateItem(itemId, v);\r\n  },function(items, firstId){\r\n    console.log(items, 'ne putat');\r\n    //создать селект отобразить items\r\n    console.log(firstId);\r\n  },function(e, r){\r\n    if(e){\r\n      uiShowMessage(errorCAPIWS + \" : \" + e);\r\n    } else {\r\n      console.log(r);\r\n    }\r\n  });\r\n}\r\n\r\nvar uiCreateItem = function (itmkey, vo) {\r\n  var now = new Date();\r\n  vo.expired = dates.compare(now, vo.validTo) > 0;\r\n  var itm = document.createElement(\"option\");\r\n  itm.value = itmkey;\r\n  itm.text = vo.CN;\r\n  if (!vo.expired) {\r\n\r\n  } else {\r\n    itm.style.color = 'gray';\r\n    itm.text = itm.text + ' (срок истек)';\r\n  }\r\n  itm.setAttribute('vo',JSON.stringify(vo));\r\n  itm.setAttribute('id',itmkey);\r\n  return itm;\r\n}\r\n\r\nconst extractIds = (data: any[]): string[] => {\r\n  return data.flat().map(item => item.id).filter(id => id);\r\n};\r\n\r\nfunction startChain(){\r\n  let array = extractIds(documentStore.userList)\r\n  documentStore.setUsers({slug: route.params.slug, form: array}, router)\r\n}\r\n\r\n\nreturn (_ctx: any,_cache: any) => {\n  return (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n    _createVNode(TheTextContent, { class: \"my-4\" }, {\n      default: _withCtx(() => [\n        _createTextVNode(_toDisplayString(_ctx.$t('Выстраивание цепочки для подписания документа')), 1)\n      ]),\n      _: 1\n    }),\n    _createElementVNode(\"div\", _hoisted_2, [\n      _createVNode(DocumentItemInfoChainSchedule, {\n        item: _unref(documentStore).documentItem\n      }, null, 8, [\"item\"])\n    ]),\n    _createElementVNode(\"div\", _hoisted_3, [\n      _createElementVNode(\"div\", _hoisted_4, [\n        _createVNode(DocumentItemInfoChainFile, {\n          item: _unref(documentStore).documentItem\n        }, null, 8, [\"item\"])\n      ]),\n      _createElementVNode(\"div\", _hoisted_5, [\n        (_unref(documentStore).documentItem.status === 'created' && _unref(documentStore).documentItem.author_id === _unref(authStore).user.id)\n          ? (_openBlock(), _createBlock(TheButton, {\n              key: 0,\n              type: 'documentBtn',\n              onClick: _cache[0] || (_cache[0] = ($event: any) => (_unref(documentStore).showWarn = true))\n            }, {\n              default: _withCtx(() => [\n                _createTextVNode(_toDisplayString(_ctx.$t('Удалить документ')), 1)\n              ]),\n              _: 1\n            }))\n          : _createCommentVNode(\"\", true),\n        (_unref(documentStore).documentItem.status === 'created')\n          ? (_openBlock(), _createBlock(TheButton, {\n              key: 1,\n              type: 'documentBtn',\n              onClick: startChain\n            }, {\n              default: _withCtx(() => [\n                _createTextVNode(_toDisplayString(_ctx.$t('Запустить цепь')), 1)\n              ]),\n              _: 1\n            }))\n          : _createCommentVNode(\"\", true),\n        (_unref(documentStore).documentItem.status === 'processing' && _unref(documentStore).documentItem.current_documentuser?.user_id === _unref(authStore).user.id)\n          ? (_openBlock(), _createBlock(TheButton, {\n              key: 2,\n              type: 'documentBtn',\n              onClick: _cache[1] || (_cache[1] = ($event: any) => (_unref(router).push(`/base/documents/signification/${_unref(route).params.slug}`)))\n            }, {\n              default: _withCtx(() => [\n                _createTextVNode(_toDisplayString(_ctx.$t('Перейти к подписанию')), 1)\n              ]),\n              _: 1\n            }))\n          : _createCommentVNode(\"\", true)\n      ])\n    ]),\n    _createElementVNode(\"div\", _hoisted_6, [\n      _createElementVNode(\"p\", _hoisted_7, _toDisplayString(_ctx.$t('Описание:')), 1),\n      _createElementVNode(\"p\", null, _toDisplayString(_unref(documentStore).documentItem.description), 1)\n    ]),\n    (_unref(documentStore).showWarn)\n      ? (_openBlock(), _createBlock(TheModal, {\n          key: 0,\n          type: 'resize',\n          onShowModal: _cache[4] || (_cache[4] = ($event: any) => (_unref(documentStore).showWarn = false))\n        }, {\n          default: _withCtx(() => [\n            _createVNode(TheTextContent, null, {\n              default: _withCtx(() => [\n                _createTextVNode(_toDisplayString(_ctx.$t('Удалить данный документ?')), 1)\n              ]),\n              _: 1\n            }),\n            _createElementVNode(\"p\", _hoisted_8, _toDisplayString(_ctx.$t('Содержимое данного документа пропадёт и черновик не будет сохранён')), 1),\n            _createElementVNode(\"div\", _hoisted_9, [\n              _createVNode(TheButton, {\n                type: 'chat',\n                onClick: _cache[2] || (_cache[2] = ($event: any) => (_unref(documentStore).showWarn = false))\n              }, {\n                default: _withCtx(() => [\n                  _createTextVNode(_toDisplayString(_ctx.$t('Отмена')), 1)\n                ]),\n                _: 1\n              }),\n              _createVNode(TheButton, {\n                type: 'chat',\n                onClick: _cache[3] || (_cache[3] = ($event: any) => {_unref(documentStore).docDelete({slug: _unref(route).params.slug}).then(res=> {_unref(router).push('/base/documents'); _unref(documentStore).showWarn = false})})\n              }, {\n                default: _withCtx(() => [\n                  _createTextVNode(_toDisplayString(_ctx.$t('Удалить')), 1)\n                ]),\n                _: 1\n              })\n            ])\n          ]),\n          _: 1\n        }))\n      : _createCommentVNode(\"\", true)\n  ]))\n}\n}\n\n})",
-      "start": 1751875052515,
-      "end": 1751875052515
+      "start": 1751875927090,
+      "end": 1751875927090
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1751875052515,
-      "end": 1751875052515,
+      "start": 1751875927090,
+      "end": 1751875927090,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1751875052515,
-      "end": 1751875052515,
+      "start": 1751875927090,
+      "end": 1751875927090,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1751875052515,
-      "end": 1751875052515,
+      "start": 1751875927090,
+      "end": 1751875927090,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1751875052515,
-      "end": 1751875052515,
+      "start": 1751875927090,
+      "end": 1751875927090,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1751875052515,
-      "end": 1751875052515,
+      "start": 1751875927090,
+      "end": 1751875927090,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, withCtx as _withCtx, createVNode as _createVNode, unref as _unref, createElementVNode as _createElementVNode, openBlock as _openBlock, createBlock as _createBlock, createCommentVNode as _createCommentVNode, createElementBlock as _createElementBlock } from \"vue\";\nconst _hoisted_1 = { class: \"overflow-x-hidden\" };\nconst _hoisted_2 = { class: \"\" };\nconst _hoisted_3 = { class: \"justify-center gap-x-10 border-b border-l border-r p-4 rounded-b-xl rounded-t-sm\" };\nconst _hoisted_4 = { class: \"flex gap-x-6 justify-center items-center\" };\nconst _hoisted_5 = { class: \"flex justify-center gap-x-10 mt-4\" };\nconst _hoisted_6 = { class: \"my-6\" };\nconst _hoisted_7 = { class: \"text-center tracking-widest text-lg\" };\nconst _hoisted_8 = { class: \"text-sm tracking-widest text-gray-300 my-6\" };\nconst _hoisted_9 = { class: \"flex justify-center gap-x-10\" };\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport TheButton from \"~/components/UI/TheButton.vue\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nimport DocumentItemInfoChainSchedule from \"~/components/documents/DocumentItemInfo/DocumentIemInfoChain/DocumentItemInfoChainSchedule.vue\";\nimport { useDocumentStore } from \"~/stores/documents\";\nimport { useRoute, useRouter } from \"vue-router\";\nimport DocumentItemInfoChainFile from \"~/components/documents/DocumentItemInfo/DocumentIemInfoChain/DocumentItemInfoChainFile.vue\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { onMounted } from \"vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"DocumentItemInfoChain\",\n  setup(__props) {\n    const route = useRoute();\n    const router = useRouter();\n    const documentStore = useDocumentStore();\n    const authStore = useAuthStore();\n    const isSigning = ref(false);\n    function loadScript(src) {\n      return new Promise((resolve, reject) => {\n        if (document.querySelector(`script[src=\"${src}\"]`)) {\n          resolve();\n          return;\n        }\n        const script = document.createElement(\"script\");\n        script.src = src;\n        script.async = true;\n        script.onload = () => resolve();\n        script.onerror = () => reject(new Error(`Ошибка загрузки скрипта ${src}`));\n        document.head.appendChild(script);\n      });\n    }\n    async function loadEImzoScripts() {\n      try {\n        await loadScript(\"/e-imzo/e-imzo.js\");\n        await loadScript(\"/e-imzo/e-imzo-client.js\");\n        await loadScript(\"/e-imzo/micro-ajax.js\");\n        await loadScript(\"/e-imzo/e-imzo-init.js\");\n        console.log(\"✅ Все скрипты загружены\");\n      } catch (error) {\n        console.error(\"❌ Ошибка загрузки скриптов E-IMZO\", error);\n      }\n    }\n    onMounted(async () => {\n      await loadEImzoScripts();\n    });\n    async function startAppLoad() {\n      try {\n        await loadScript(\"/e-imzo/e-imzo.js\");\n        await loadScript(\"/e-imzo/e-imzo-client.js\");\n        await loadScript(\"/e-imzo/micro-ajax.js\");\n        await loadScript(\"/e-imzo/e-imzo-init.js\");\n        if (window.EIMZOClient) {\n          console.log(\"✅ EIMZOClient загружен:\", window.EIMZOClient);\n          console.log(\"📜 Доступные методы EIMZOClient:\", Object.keys(window.EIMZOClient));\n          installKeys();\n        } else {\n          console.error(\"❌ EIMZOClient не найден после загрузки\");\n        }\n      } catch (error) {\n        console.error(\"❌ Ошибка при загрузке скриптов:\", error);\n      }\n    }\n    async function installKeys() {\n      if (!window.EIMZOClient) {\n        console.error(\"EIMZOClient не загружен\");\n        return;\n      }\n      isSigning.value = true;\n      try {\n        EIMZOClient.checkVersion(function(major, minor) {\n          var newVersion = EIMZO_MAJOR * 100 + EIMZO_MINOR;\n          var installedVersion = parseInt(major) * 100 + parseInt(minor);\n          if (installedVersion < newVersion) {\n            console.log(\"installedVersion < newVersion\");\n          } else {\n            EIMZOClient.installApiKeys(function() {\n              responseUsers();\n            }, function(e, r) {\n              if (r) {\n                console.log(\"da\");\n              } else {\n                console.log(\"net\");\n              }\n            });\n          }\n        }, function(e, r) {\n          if (r) {\n            console.log(\"da2\");\n          } else {\n            console.log(\"net2\");\n          }\n        });\n        console.log(\"📄 Документ успешно подписан и обновлён\");\n      } catch (error) {\n        console.error(\"❌ Ошибка при подписании документа:\", error);\n      } finally {\n        isSigning.value = false;\n      }\n    }\n    function responseUsers() {\n      EIMZOClient.listAllUserKeys(function(o, i) {\n        var itemId = \"itm-\" + o.serialNumber + \"-\" + i;\n        return itemId;\n      }, function(itemId, v) {\n        return uiCreateItem(itemId, v);\n      }, function(items, firstId) {\n        console.log(items, \"ne putat\");\n        console.log(firstId);\n      }, function(e, r) {\n        if (e) {\n          uiShowMessage(errorCAPIWS + \" : \" + e);\n        } else {\n          console.log(r);\n        }\n      });\n    }\n    var uiCreateItem = function(itmkey, vo) {\n      var now = /* @__PURE__ */ new Date();\n      vo.expired = dates.compare(now, vo.validTo) > 0;\n      var itm = document.createElement(\"option\");\n      itm.value = itmkey;\n      itm.text = vo.CN;\n      if (!vo.expired) {\n      } else {\n        itm.style.color = \"gray\";\n        itm.text = itm.text + \" (срок истек)\";\n      }\n      itm.setAttribute(\"vo\", JSON.stringify(vo));\n      itm.setAttribute(\"id\", itmkey);\n      return itm;\n    };\n    const extractIds = (data) => {\n      return data.flat().map((item) => item.id).filter((id) => id);\n    };\n    function startChain() {\n      let array = extractIds(documentStore.userList);\n      documentStore.setUsers({ slug: route.params.slug, form: array }, router);\n    }\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n        _createVNode(TheTextContent, { class: \"my-4\" }, {\n          default: _withCtx(() => [\n            _createTextVNode(_toDisplayString(_ctx.$t(\"Выстраивание цепочки для подписания документа\")), 1)\n          ]),\n          _: 1\n        }),\n        _createElementVNode(\"div\", _hoisted_2, [\n          _createVNode(DocumentItemInfoChainSchedule, {\n            item: _unref(documentStore).documentItem\n          }, null, 8, [\"item\"])\n        ]),\n        _createElementVNode(\"div\", _hoisted_3, [\n          _createElementVNode(\"div\", _hoisted_4, [\n            _createVNode(DocumentItemInfoChainFile, {\n              item: _unref(documentStore).documentItem\n            }, null, 8, [\"item\"])\n          ]),\n          _createElementVNode(\"div\", _hoisted_5, [\n            _unref(documentStore).documentItem.status === \"created\" && _unref(documentStore).documentItem.author_id === _unref(authStore).user.id ? (_openBlock(), _createBlock(TheButton, {\n              key: 0,\n              type: \"documentBtn\",\n              onClick: _cache[0] || (_cache[0] = ($event) => _unref(documentStore).showWarn = true)\n            }, {\n              default: _withCtx(() => [\n                _createTextVNode(_toDisplayString(_ctx.$t(\"Удалить документ\")), 1)\n              ]),\n              _: 1\n            })) : _createCommentVNode(\"\", true),\n            _unref(documentStore).documentItem.status === \"created\" ? (_openBlock(), _createBlock(TheButton, {\n              key: 1,\n              type: \"documentBtn\",\n              onClick: startChain\n            }, {\n              default: _withCtx(() => [\n                _createTextVNode(_toDisplayString(_ctx.$t(\"Запустить цепь\")), 1)\n              ]),\n              _: 1\n            })) : _createCommentVNode(\"\", true),\n            _unref(documentStore).documentItem.status === \"processing\" && _unref(documentStore).documentItem.current_documentuser?.user_id === _unref(authStore).user.id ? (_openBlock(), _createBlock(TheButton, {\n              key: 2,\n              type: \"documentBtn\",\n              onClick: _cache[1] || (_cache[1] = ($event) => _unref(router).push(`/base/documents/signification/${_unref(route).params.slug}`))\n            }, {\n              default: _withCtx(() => [\n                _createTextVNode(_toDisplayString(_ctx.$t(\"Перейти к подписанию\")), 1)\n              ]),\n              _: 1\n            })) : _createCommentVNode(\"\", true)\n          ])\n        ]),\n        _createElementVNode(\"div\", _hoisted_6, [\n          _createElementVNode(\"p\", _hoisted_7, _toDisplayString(_ctx.$t(\"Описание:\")), 1),\n          _createElementVNode(\"p\", null, _toDisplayString(_unref(documentStore).documentItem.description), 1)\n        ]),\n        _unref(documentStore).showWarn ? (_openBlock(), _createBlock(TheModal, {\n          key: 0,\n          type: \"resize\",\n          onShowModal: _cache[4] || (_cache[4] = ($event) => _unref(documentStore).showWarn = false)\n        }, {\n          default: _withCtx(() => [\n            _createVNode(TheTextContent, null, {\n              default: _withCtx(() => [\n                _createTextVNode(_toDisplayString(_ctx.$t(\"Удалить данный документ?\")), 1)\n              ]),\n              _: 1\n            }),\n            _createElementVNode(\"p\", _hoisted_8, _toDisplayString(_ctx.$t(\"Содержимое данного документа пропадёт и черновик не будет сохранён\")), 1),\n            _createElementVNode(\"div\", _hoisted_9, [\n              _createVNode(TheButton, {\n                type: \"chat\",\n                onClick: _cache[2] || (_cache[2] = ($event) => _unref(documentStore).showWarn = false)\n              }, {\n                default: _withCtx(() => [\n                  _createTextVNode(_toDisplayString(_ctx.$t(\"Отмена\")), 1)\n                ]),\n                _: 1\n              }),\n              _createVNode(TheButton, {\n                type: \"chat\",\n                onClick: _cache[3] || (_cache[3] = ($event) => {\n                  _unref(documentStore).docDelete({ slug: _unref(route).params.slug }).then((res) => {\n                    _unref(router).push(\"/base/documents\");\n                    _unref(documentStore).showWarn = false;\n                  });\n                })\n              }, {\n                default: _withCtx(() => [\n                  _createTextVNode(_toDisplayString(_ctx.$t(\"Удалить\")), 1)\n                ]),\n                _: 1\n              })\n            ])\n          ]),\n          _: 1\n        })) : _createCommentVNode(\"\", true)\n      ]);\n    };\n  }\n});\n",
-      "start": 1751875052515,
-      "end": 1751875052587,
+      "start": 1751875927090,
+      "end": 1751875927288,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -57,141 +57,141 @@
     },
     {
       "name": "vite:json",
-      "start": 1751875052587,
-      "end": 1751875052587,
+      "start": 1751875927288,
+      "end": 1751875927288,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1751875052587,
-      "end": 1751875052587,
+      "start": 1751875927288,
+      "end": 1751875927288,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1751875052587,
-      "end": 1751875052587,
+      "start": 1751875927288,
+      "end": 1751875927288,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1751875052587,
-      "end": 1751875052587,
+      "start": 1751875927288,
+      "end": 1751875927288,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751875052587,
-      "end": 1751875052587,
+      "start": 1751875927288,
+      "end": 1751875927288,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1751875052587,
-      "end": 1751875052587,
+      "start": 1751875927288,
+      "end": 1751875927288,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1751875052587,
-      "end": 1751875052587,
+      "start": 1751875927288,
+      "end": 1751875927288,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1751875052587,
-      "end": 1751875052587,
+      "start": 1751875927288,
+      "end": 1751875927288,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751875052587,
-      "end": 1751875052588,
+      "start": 1751875927289,
+      "end": 1751875927289,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1751875052588,
-      "end": 1751875052588,
+      "start": 1751875927289,
+      "end": 1751875927289,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1751875052588,
-      "end": 1751875052588,
+      "start": 1751875927289,
+      "end": 1751875927289,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1751875052588,
-      "end": 1751875052588,
+      "start": 1751875927289,
+      "end": 1751875927289,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1751875052588,
-      "end": 1751875052588,
+      "start": 1751875927289,
+      "end": 1751875927289,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1751875052588,
-      "end": 1751875052588,
+      "start": 1751875927289,
+      "end": 1751875927289,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1751875052588,
-      "end": 1751875052588,
+      "start": 1751875927289,
+      "end": 1751875927289,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1751875052588,
-      "end": 1751875052588,
+      "start": 1751875927289,
+      "end": 1751875927289,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1751875052588,
-      "end": 1751875052588,
+      "start": 1751875927289,
+      "end": 1751875927289,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1751875052588,
-      "end": 1751875052588,
+      "start": 1751875927289,
+      "end": 1751875927289,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1751875052588,
-      "end": 1751875052588,
+      "start": 1751875927289,
+      "end": 1751875927289,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1751875052588,
-      "end": 1751875052588,
+      "start": 1751875927289,
+      "end": 1751875927289,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1751875052588,
-      "end": 1751875052588,
+      "start": 1751875927289,
+      "end": 1751875927289,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1751875052588,
-      "end": 1751875052588,
+      "start": 1751875927289,
+      "end": 1751875927290,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, withCtx as _withCtx, createVNode as _createVNode, unref as _unref, createElementVNode as _createElementVNode, openBlock as _openBlock, createBlock as _createBlock, createCommentVNode as _createCommentVNode, createElementBlock as _createElementBlock } from \"vue\";\nconst _hoisted_1 = { class: \"overflow-x-hidden\" };\nconst _hoisted_2 = { class: \"\" };\nconst _hoisted_3 = { class: \"justify-center gap-x-10 border-b border-l border-r p-4 rounded-b-xl rounded-t-sm\" };\nconst _hoisted_4 = { class: \"flex gap-x-6 justify-center items-center\" };\nconst _hoisted_5 = { class: \"flex justify-center gap-x-10 mt-4\" };\nconst _hoisted_6 = { class: \"my-6\" };\nconst _hoisted_7 = { class: \"text-center tracking-widest text-lg\" };\nconst _hoisted_8 = { class: \"text-sm tracking-widest text-gray-300 my-6\" };\nconst _hoisted_9 = { class: \"flex justify-center gap-x-10\" };\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport TheButton from \"~/components/UI/TheButton.vue\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nimport DocumentItemInfoChainSchedule from \"~/components/documents/DocumentItemInfo/DocumentIemInfoChain/DocumentItemInfoChainSchedule.vue\";\nimport { useDocumentStore } from \"~/stores/documents\";\nimport { useRoute, useRouter } from \"vue-router\";\nimport DocumentItemInfoChainFile from \"~/components/documents/DocumentItemInfo/DocumentIemInfoChain/DocumentItemInfoChainFile.vue\";\nimport { useAuthStore } from \"~/stores/auth\";\nimport { onMounted } from \"vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"DocumentItemInfoChain\",\n  setup(__props) {\n    const route = useRoute();\n    const router = useRouter();\n    const documentStore = useDocumentStore();\n    const authStore = useAuthStore();\n    const isSigning = ref(false);\n    function loadScript(src) {\n      return new Promise((resolve, reject) => {\n        if (document.querySelector(`script[src=\"${src}\"]`)) {\n          resolve();\n          return;\n        }\n        const script = document.createElement(\"script\");\n        script.src = src;\n        script.async = true;\n        script.onload = () => resolve();\n        script.onerror = () => reject(new Error(`Ошибка загрузки скрипта ${src}`));\n        document.head.appendChild(script);\n      });\n    }\n    async function loadEImzoScripts() {\n      try {\n        await loadScript(\"/e-imzo/e-imzo.js\");\n        await loadScript(\"/e-imzo/e-imzo-client.js\");\n        await loadScript(\"/e-imzo/micro-ajax.js\");\n        await loadScript(\"/e-imzo/e-imzo-init.js\");\n        console.log(\"✅ Все скрипты загружены\");\n      } catch (error) {\n        console.error(\"❌ Ошибка загрузки скриптов E-IMZO\", error);\n      }\n    }\n    onMounted(async () => {\n      await loadEImzoScripts();\n    });\n    async function startAppLoad() {\n      try {\n        await loadScript(\"/e-imzo/e-imzo.js\");\n        await loadScript(\"/e-imzo/e-imzo-client.js\");\n        await loadScript(\"/e-imzo/micro-ajax.js\");\n        await loadScript(\"/e-imzo/e-imzo-init.js\");\n        if (window.EIMZOClient) {\n          console.log(\"✅ EIMZOClient загружен:\", window.EIMZOClient);\n          console.log(\"📜 Доступные методы EIMZOClient:\", Object.keys(window.EIMZOClient));\n          installKeys();\n        } else {\n          console.error(\"❌ EIMZOClient не найден после загрузки\");\n        }\n      } catch (error) {\n        console.error(\"❌ Ошибка при загрузке скриптов:\", error);\n      }\n    }\n    async function installKeys() {\n      if (!window.EIMZOClient) {\n        console.error(\"EIMZOClient не загружен\");\n        return;\n      }\n      isSigning.value = true;\n      try {\n        EIMZOClient.checkVersion(function(major, minor) {\n          var newVersion = EIMZO_MAJOR * 100 + EIMZO_MINOR;\n          var installedVersion = parseInt(major) * 100 + parseInt(minor);\n          if (installedVersion < newVersion) {\n            console.log(\"installedVersion < newVersion\");\n          } else {\n            EIMZOClient.installApiKeys(function() {\n              responseUsers();\n            }, function(e, r) {\n              if (r) {\n                console.log(\"da\");\n              } else {\n                console.log(\"net\");\n              }\n            });\n          }\n        }, function(e, r) {\n          if (r) {\n            console.log(\"da2\");\n          } else {\n            console.log(\"net2\");\n          }\n        });\n        console.log(\"📄 Документ успешно подписан и обновлён\");\n      } catch (error) {\n        console.error(\"❌ Ошибка при подписании документа:\", error);\n      } finally {\n        isSigning.value = false;\n      }\n    }\n    function responseUsers() {\n      EIMZOClient.listAllUserKeys(function(o, i) {\n        var itemId = \"itm-\" + o.serialNumber + \"-\" + i;\n        return itemId;\n      }, function(itemId, v) {\n        return uiCreateItem(itemId, v);\n      }, function(items, firstId) {\n        console.log(items, \"ne putat\");\n        console.log(firstId);\n      }, function(e, r) {\n        if (e) {\n          uiShowMessage(errorCAPIWS + \" : \" + e);\n        } else {\n          console.log(r);\n        }\n      });\n    }\n    var uiCreateItem = function(itmkey, vo) {\n      var now = /* @__PURE__ */ new Date();\n      vo.expired = dates.compare(now, vo.validTo) > 0;\n      var itm = document.createElement(\"option\");\n      itm.value = itmkey;\n      itm.text = vo.CN;\n      if (!vo.expired) {\n      } else {\n        itm.style.color = \"gray\";\n        itm.text = itm.text + \" (срок истек)\";\n      }\n      itm.setAttribute(\"vo\", JSON.stringify(vo));\n      itm.setAttribute(\"id\", itmkey);\n      return itm;\n    };\n    const extractIds = (data) => {\n      return data.flat().map((item) => item.id).filter((id) => id);\n    };\n    function startChain() {\n      let array = extractIds(documentStore.userList);\n      documentStore.setUsers({ slug: route.params.slug, form: array }, router);\n    }\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n        _createVNode(TheTextContent, { class: \"my-4\" }, {\n          default: _withCtx(() => [\n            _createTextVNode(_toDisplayString(_ctx.$t(\"Выстраивание цепочки для подписания документа\")), 1)\n          ]),\n          _: 1\n        }),\n        _createElementVNode(\"div\", _hoisted_2, [\n          _createVNode(DocumentItemInfoChainSchedule, {\n            item: _unref(documentStore).documentItem\n          }, null, 8, [\"item\"])\n        ]),\n        _createElementVNode(\"div\", _hoisted_3, [\n          _createElementVNode(\"div\", _hoisted_4, [\n            _createVNode(DocumentItemInfoChainFile, {\n              item: _unref(documentStore).documentItem\n            }, null, 8, [\"item\"])\n          ]),\n          _createElementVNode(\"div\", _hoisted_5, [\n            _unref(documentStore).documentItem.status === \"created\" && _unref(documentStore).documentItem.author_id === _unref(authStore).user.id ? (_openBlock(), _createBlock(TheButton, {\n              key: 0,\n              type: \"documentBtn\",\n              onClick: _cache[0] || (_cache[0] = ($event) => _unref(documentStore).showWarn = true)\n            }, {\n              default: _withCtx(() => [\n                _createTextVNode(_toDisplayString(_ctx.$t(\"Удалить документ\")), 1)\n              ]),\n              _: 1\n            })) : _createCommentVNode(\"\", true),\n            _unref(documentStore).documentItem.status === \"created\" ? (_openBlock(), _createBlock(TheButton, {\n              key: 1,\n              type: \"documentBtn\",\n              onClick: startChain\n            }, {\n              default: _withCtx(() => [\n                _createTextVNode(_toDisplayString(_ctx.$t(\"Запустить цепь\")), 1)\n              ]),\n              _: 1\n            })) : _createCommentVNode(\"\", true),\n            _unref(documentStore).documentItem.status === \"processing\" && _unref(documentStore).documentItem.current_documentuser?.user_id === _unref(authStore).user.id ? (_openBlock(), _createBlock(TheButton, {\n              key: 2,\n              type: \"documentBtn\",\n              onClick: _cache[1] || (_cache[1] = ($event) => _unref(router).push(`/base/documents/signification/${_unref(route).params.slug}`))\n            }, {\n              default: _withCtx(() => [\n                _createTextVNode(_toDisplayString(_ctx.$t(\"Перейти к подписанию\")), 1)\n              ]),\n              _: 1\n            })) : _createCommentVNode(\"\", true)\n          ])\n        ]),\n        _createElementVNode(\"div\", _hoisted_6, [\n          _createElementVNode(\"p\", _hoisted_7, _toDisplayString(_ctx.$t(\"Описание:\")), 1),\n          _createElementVNode(\"p\", null, _toDisplayString(_unref(documentStore).documentItem.description), 1)\n        ]),\n        _unref(documentStore).showWarn ? (_openBlock(), _createBlock(TheModal, {\n          key: 0,\n          type: \"resize\",\n          onShowModal: _cache[4] || (_cache[4] = ($event) => _unref(documentStore).showWarn = false)\n        }, {\n          default: _withCtx(() => [\n            _createVNode(TheTextContent, null, {\n              default: _withCtx(() => [\n                _createTextVNode(_toDisplayString(_ctx.$t(\"Удалить данный документ?\")), 1)\n              ]),\n              _: 1\n            }),\n            _createElementVNode(\"p\", _hoisted_8, _toDisplayString(_ctx.$t(\"Содержимое данного документа пропадёт и черновик не будет сохранён\")), 1),\n            _createElementVNode(\"div\", _hoisted_9, [\n              _createVNode(TheButton, {\n                type: \"chat\",\n                onClick: _cache[2] || (_cache[2] = ($event) => _unref(documentStore).showWarn = false)\n              }, {\n                default: _withCtx(() => [\n                  _createTextVNode(_toDisplayString(_ctx.$t(\"Отмена\")), 1)\n                ]),\n                _: 1\n              }),\n              _createVNode(TheButton, {\n                type: \"chat\",\n                onClick: _cache[3] || (_cache[3] = ($event) => {\n                  _unref(documentStore).docDelete({ slug: _unref(route).params.slug }).then((res) => {\n                    _unref(router).push(\"/base/documents\");\n                    _unref(documentStore).showWarn = false;\n                  });\n                })\n              }, {\n                default: _withCtx(() => [\n                  _createTextVNode(_toDisplayString(_ctx.$t(\"Удалить\")), 1)\n                ]),\n                _: 1\n              })\n            ])\n          ]),\n          _: 1\n        })) : _createCommentVNode(\"\", true)\n      ]);\n    };\n  }\n});\n",
-      "start": 1751875052588,
-      "end": 1751875052590,
+      "start": 1751875927290,
+      "end": 1751875927297,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -204,50 +204,50 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1751875052590,
-      "end": 1751875052590,
+      "start": 1751875927297,
+      "end": 1751875927297,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1751875052590,
-      "end": 1751875052590,
+      "start": 1751875927297,
+      "end": 1751875927297,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1751875052590,
-      "end": 1751875052590,
+      "start": 1751875927297,
+      "end": 1751875927297,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1751875052590,
-      "end": 1751875052590,
+      "start": 1751875927297,
+      "end": 1751875927297,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1751875052590,
-      "end": 1751875052591,
+      "start": 1751875927298,
+      "end": 1751875927299,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1751875052591,
-      "end": 1751875052591,
+      "start": 1751875927299,
+      "end": 1751875927299,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1751875052591,
-      "end": 1751875052591,
+      "start": 1751875927300,
+      "end": 1751875927300,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1751875052591,
-      "end": 1751875052591,
+      "start": 1751875927300,
+      "end": 1751875927300,
       "order": "normal"
     }
   ]

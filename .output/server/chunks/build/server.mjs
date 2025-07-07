@@ -962,7 +962,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./_id_-BeqEXkCo.mjs').then((m) => m.default || m)
+        component: () => import('./_id_-LnrFaUZB.mjs').then((m) => m.default || m)
       },
       {
         name: "base-companies-department",
@@ -970,7 +970,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-YnEJMS5_.mjs').then((m) => m.default || m)
+        component: () => import('./index-BwyD5DuM.mjs').then((m) => m.default || m)
       },
       {
         name: "base-companies",
@@ -1263,7 +1263,7 @@ const validate = /* @__PURE__ */ defineNuxtRouteMiddleware(async (to) => {
 });
 const inlineConfig = {
   "nuxt": {
-    "buildId": "5db0c7e9-f1c2-42c9-a3fe-5c46d85674a8"
+    "buildId": "dev"
   },
   "ui": {
     "primary": "green",
