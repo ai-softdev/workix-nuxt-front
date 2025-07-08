@@ -110,31 +110,43 @@ const props = defineProps({
          </svg>
        </div>
      </div>
-     <button
-         :class="{'max-[840px]:hidden' : !activeStructure}" @click="showCreateFolder = true"
-         class="w-full flex cursor-pointer p-2 bg-golden rounded-full font-bold dark:hover:bg-gray-500 transition-all duration-200 items-center gap-x-4 my-4 justify-center mx-auto"
-     >
-       + {{ $t('Создать папку') }}
-     </button>
+<!--     <button-->
+<!--         :class="{'max-[840px]:hidden' : !activeStructure}" @click="showCreateFolder = true"-->
+<!--         class="w-full flex cursor-pointer p-2 bg-golden rounded-full font-bold dark:hover:bg-gray-500 transition-all duration-200 items-center gap-x-4 my-4 justify-center mx-auto"-->
+<!--     >-->
+<!--       + {{ $t('Создать папку') }}-->
+<!--     </button>-->
      <TheModal v-if="showCreateFolder" @showModal="showCreateFolder = !showCreateFolder">
-       <TheTextContent>{{ $t('Создание папки') }}</TheTextContent>
+       <p class="text-3xl font-bold text-center mb-10">
+         {{ $t('Создание папки') }}
+       </p>
        <form @submit.prevent="loadCloud.create_folder(createFolderForm)">
-         <div class="flex items-center justify-center gap-x-10 my-10">
-           <TheInput class="w-6/12" :label="$t('Название')" v-model="createFolderForm.name"></TheInput>
-           <div class="w-6/12 flex flex-col gap-y-2">
-             <p class="tracking-widest dark:text-white">{{ $t('Расположение папки') }}</p>
-             <select class="w-full p-2.5 rounded-md dark:bg-gray-300">
+         <div class="flex flex-col gap-6">
+           <TheInput class="w-full" :label="$t('Название')" v-model="createFolderForm.name"></TheInput>
+           <div class="w-full flex flex-col gap-y-2">
+             <p class="dark:text-white">{{ $t('Расположение папки') }}</p>
+             <select class="w-full p-2.5 bg-whiteSmoke border rounded-full dark:bg-gray-300">
                <option value="">
                  {{ $t('Наименование') }}
                </option>
              </select>
            </div>
          </div>
-         <div class="flex justify-center gap-x-10">
-           <TheButton class="py-2 px-6 rounded-full" type="danger" @click="showCreateFolder = false">
+         <div class="flex flex-wrap gap-y-3 items-center justify-center gap-x-10 max-sm:flex-col mt-10">
+           <TheButton
+               class="w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-black hover:!bg-gray-200 gap-3 py-2 !bg-porcelain !border transition-all ease-in-out duration-300"
+               t="button"
+               @click="showCreateFolder = false"
+           >
              {{ $t('Отменить') }}
            </TheButton>
-           <TheButton class="py-2 px-6 rounded-full" type="success">{{ $t('Создать') }}</TheButton>
+           <TheButton
+               class="w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-black hover:!shadow-golden gap-3 py-2 !bg-golden !border transition-all ease-in-out duration-300"
+               t="submit"
+               type="success"
+           >
+             {{ $t('Создать') }}
+           </TheButton>
          </div>
        </form>
      </TheModal>
@@ -142,7 +154,7 @@ const props = defineProps({
        <div>
          <TheCloudUIStructureFolder>
            <template v-slot:structureName>
-             Недавние
+             {{ $t('Недавние') }}
            </template>
            <template v-slot:structureSvg>
              <img src="/icons/recent.svg" alt="recent">
@@ -150,7 +162,7 @@ const props = defineProps({
          </TheCloudUIStructureFolder>
          <TheCloudUIStructureFolder>
            <template v-slot:structureName>
-             Избранные
+             {{ $t('Избранные') }}
            </template>
            <template v-slot:structureSvg>
              <img src="/icons/favourite.svg" alt="favourite">

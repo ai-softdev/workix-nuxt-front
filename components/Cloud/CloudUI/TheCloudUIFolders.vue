@@ -137,31 +137,50 @@ function formatDate(data){
   return formatted;
 }
 
+let lastTouchTime = 0
+
+const handleTouch = () => {
+  const now = new Date().getTime()
+  if (now - lastTouchTime < 300) {
+    cloudContextMenu()
+  }
+  lastTouchTime = now
+}
+
+const cloudContextMenu = () => {
+  const top = unref(y) - unref(windowY);
+  const left = unref(x);
+
+  cloudVirtualElem.value.getBoundingClientRect = () => ({
+    width: 0,
+    height: 0,
+    top,
+    left
+  });
+
+  folderSettingShow.value = false;
+  fileSettingShow.value = false;
+  cloudSettingShow.value = false;
+
+  activeElem.value.id = cloudStore.get_all_folders.id;
+
+  if (currentUser.user.permissions?.find(e => e.name_en === 'folder.create')) {
+    cloudSettingShow.value = true;
+  } else {
+    toast.info(`${accessControl.text}`, { ...accessControl });
+  }
+};
+
 </script>
 
 <template>
   <div class="w-full">
     <div class="absolute w-full h-full z-0 left-0 top-0"
-         @contextmenu.prevent="function cloudContextMenu() {
-                                const top = unref(y) - unref(windowY)
-                                const left = unref(x)
-                                cloudVirtualElem.getBoundingClientRect = () => ({
-                                  width: 0,
-                                  height: 0,
-                                  top,
-                                  left
-                                })
-                                cloudSettingShow ? folderSettingShow = false : folderSettingShow = false;
-                                cloudSettingShow ? fileSettingShow = false : fileSettingShow = false;
-                                activeElem.id = cloudStore.get_all_folders.id
-                                if(currentUser.user.permissions?.find(e=>e.name_en === 'folder.create')) {
-                                  cloudSettingShow = true
-                                } else {
-                                  toast.info(`${accessControl.text}`, {...accessControl})
-                                  cloudSettingShow = false
-                                }
-                              }"
-         @click="activeElem.id = 0; folderObject = {}; showRead = false; createFolder.name = ''">
+         @contextmenu.prevent="cloudContextMenu"
+         @dblclick="cloudContextMenu"
+         @touchend="handleTouch"
+         @click="activeElem.id = 0; folderObject = {}; showRead = false; createFolder.name = ''"
+    >
     </div>
     <UContextMenu class="" v-model="cloudSettingShow" :virtual-element="cloudVirtualElem">
       <TheCloudUIContextMenuItem @click="createShow = true"
@@ -746,20 +765,31 @@ function formatDate(data){
     </div>
     <TheModal v-if="cloudStore.showAccessSetting" @showModal="cloudStore.showAccessSetting"></TheModal>
     <TheModal v-if="createShow" @showModal="createShow = false">
-      <TheTextContent>{{ $t('Создание папки') }}</TheTextContent>
-      <div>
-        <form
-          @submit.prevent="cloudStore.create_folder({parent_id: activeElem.id, name: createFolder.name}); createShow = false">
-          <h3>Наименование</h3>
-          <TheInput type="text" v-model="createFolder.name"></TheInput>
-          <div class="flex justify-center gap-x-10 mt-10">
-            <TheButton class="px-10 py-2 rounded-full" t="submit" type="danger" @click="createShow = false">
-              {{ $t('Отмена') }}
-            </TheButton>
-            <TheButton class="px-10 py-2 rounded-full" t="submit" type="success">{{ $t('Создать') }}</TheButton>
-          </div>
-        </form>
-      </div>
+      <p class="text-3xl font-bold text-center pb-10">
+        {{ $t('Создание папки') }}
+      </p>
+      <form
+          @submit.prevent="cloudStore.create_folder({parent_id: activeElem.id, name: createFolder.name}); createShow = false"
+      >
+        <h3>{{ $t('Наименование') }}</h3>
+        <TheInput type="text" v-model="createFolder.name"></TheInput>
+        <div class="flex flex-wrap gap-y-3 items-center mt-14 justify-center gap-x-10 max-sm:flex-col">
+          <TheButton
+              class="w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-black hover:!bg-gray-200 gap-3 py-2 !bg-porcelain !border transition-all ease-in-out duration-300"
+              t="button"
+              @click="createShow = false"
+          >
+            {{ $t('Отменить') }}
+          </TheButton>
+          <TheButton
+              class="w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-black hover:!shadow-golden gap-3 py-2 !bg-golden !border transition-all ease-in-out duration-300"
+              t="submit"
+              type="success"
+          >
+            {{ $t('Создать') }}
+          </TheButton>
+        </div>
+      </form>
     </TheModal>
   </div>
 </template>

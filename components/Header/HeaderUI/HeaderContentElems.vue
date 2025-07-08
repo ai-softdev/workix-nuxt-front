@@ -265,13 +265,13 @@
       <TheModal
           v-if="showExitModal"
           @showModal="showExitModal = false"
-          type="resizeSendWindow"
+          resizeClass="!w-4/12 max-sm:!w-11/12"
       >
         <div class="p-8">
-          <p class="font-bold text-2xl text-center">
+          <p class="font-bold text-3xl text-center w-10/12 mx-auto max-sm:w-full max-sm:text-xl max-sm:mt-5">
             {{$t('Вы уверены что хотите выйти из аккаунта?')}}
           </p>
-          <div class="flex items-center justify-between mt-[56px]">
+          <div class="flex items-center justify-between mt-[56px] gap-3">
             <TheButton
                 class="w-full rounded-full flex items-center justify-center !text-black hover:bg-gray-200 gap-3 py-2 bg-porcelain border transition-all ease-in-out duration-300"
                 @click="toggleModal"

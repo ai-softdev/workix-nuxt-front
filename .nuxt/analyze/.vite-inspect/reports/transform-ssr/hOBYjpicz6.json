@@ -4,8 +4,8 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, unref as _unref, createVNode as _createVNode, openBlock as _openBlock, createBlock as _createBlock } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttr as _ssrRenderAttr, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\"\nimport _imports_0 from '/icons/delete.svg'\n\n\nimport TheTitle from \"~/components/UI/TheTitle.vue\"\r\nimport TheBreadcrumbs from \"~/components/UI/TheBreadcrumbs.vue\";\r\nimport {useCompanies} from \"~/stores/companies\";\r\nimport {useRoute} from \"vue-router\";\r\nimport TheContentBlock from \"~/components/UI/TheContentBlock.vue\";\r\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\r\nimport TheFilter from \"~/components/UI/TheFilter.vue\";\r\nimport DepartmentUserList from \"~/components/Company/department/DepartmentUserList.vue\";\r\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\r\nimport TheButton from \"~/components/UI/TheButton.vue\";\r\nimport TheModal from \"~/components/UI/TheModal.vue\";\r\nimport TheSceleton from \"~/components/UI/TheSceleton.vue\";\r\nimport DocumentContentHeaderCreate from \"~/components/documents/DocumentContent/DocumentContentHeaderCreate.vue\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: '[id]',\n  __ssrInlineRender: true,\n  props: {\r\n  showWarning: {\r\n    type: Boolean,\r\n    default: false\r\n  }\r\n},\n  setup(__props) {\n\r\nconst currentDepartment = useCompanies()\r\nconst route = useRoute()\r\nconst router = useRouter()\r\n\r\n\r\n\r\n\r\nfunction goBack() {\r\n  router.back()\r\n}\r\n\r\nwatchEffect(() => {\r\n  currentDepartment.loadDepartment({id: route.params.id})\r\n})\r\nwatchSyncEffect(() => {\r\n  useSeoMeta({\r\n    title: `${currentDepartment.current_department.name}`\r\n  })\r\n})\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  _push(`<div${\n    _ssrRenderAttrs(_attrs)\n  }><div class=\"flex items-center gap-4 max-sm:flex-col max-sm:items-start\"><button class=\"px-6 py-2 rounded-[30px] border-2 font-bold text-mediumGray bg-white flex items-center gap-2\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M15 8H1M1 8L8 15M1 8L8 1\" stroke=\"#7D7D7D\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg> ${\n    _ssrInterpolate(_ctx.$t('Назад'))\n  }</button><div class=\"flex items-center flex-wrap gap-x-3\">`)\n  _push(_ssrRenderComponent(TheBreadcrumbs, { \"breadcrumb-link\": `/base/companies` }, {\n    default: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(`${_ssrInterpolate(_ctx.$t('Компания'))}`)\n      } else {\n        return [\n          _createTextVNode(_toDisplayString(_ctx.$t('Компания')), 1)\n        ]\n      }\n    }),\n    _: 1\n  }, _parent))\n  _push(`<div><svg width=\"6\" height=\"12\" viewBox=\"0 0 6 12\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.032 0.48H5.24L2.168 12H0.96L4.032 0.48Z\" fill=\"#1E1E1E\"></path></svg></div>`)\n  _push(_ssrRenderComponent(TheBreadcrumbs, { \"breadcrumb-link\": `/base/companies/department` }, {\n    default: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(`${_ssrInterpolate(_ctx.$t('Департаменты'))}`)\n      } else {\n        return [\n          _createTextVNode(_toDisplayString(_ctx.$t('Департаменты')), 1)\n        ]\n      }\n    }),\n    _: 1\n  }, _parent))\n  _push(`<div><svg width=\"6\" height=\"12\" viewBox=\"0 0 6 12\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.032 0.48H5.24L2.168 12H0.96L4.032 0.48Z\" fill=\"#1E1E1E\"></path></svg></div>`)\n  _push(_ssrRenderComponent(TheBreadcrumbs, null, {\n    default: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(`${_ssrInterpolate(_unref(currentDepartment).get_department.name)}`)\n      } else {\n        return [\n          _createTextVNode(_toDisplayString(_unref(currentDepartment).get_department.name), 1)\n        ]\n      }\n    }),\n    _: 1\n  }, _parent))\n  _push(`</div></div><div class=\"mt-8 flex items-center gap-4 justify-between max-[680px]:flex-col max-[680px]:items-start max-[680px]:gap-5\"><p class=\"dark:text-white text-3xl font-bold\">${_ssrInterpolate(_unref(currentDepartment).get_department.name)}</p>`)\n  if (!_unref(currentDepartment).get_department?.participants?.length) {\n    _push(_ssrRenderComponent(TheButton, {\n      type: \"danger\",\n      class: \"px-10 py-2 !bg-whiteSmoke !border !border-gainsboro rounded-full flex items-center gap-3 !text-sunset\",\n      onClick: ($event: any) => (__props.showWarning = true)\n    }, {\n      default: _withCtx((_, _push, _parent, _scopeId) => {\n        if (_push) {\n          _push(`<img${\n            _ssrRenderAttr(\"src\", _imports_0)\n          } alt=\"delete-button\"${\n            _scopeId\n          }> ${\n            _ssrInterpolate(_ctx.$t('Удалить отдел'))\n          }`)\n        } else {\n          return [\n            _createVNode(\"img\", {\n              src: _imports_0,\n              alt: \"delete-button\"\n            }),\n            _createTextVNode(\" \" + _toDisplayString(_ctx.$t('Удалить отдел')), 1)\n          ]\n        }\n      }),\n      _: 1\n    }, _parent))\n  } else {\n    _push(`<!---->`)\n  }\n  _push(`</div><div class=\"flex items-center gap-x-10 mt-8\"><div class=\"flex items-center w-11/12 max-sm:w-full gap-x-10\">`)\n  _push(_ssrRenderComponent(TheSearch, { class: \"w-3/12 max-[900px]:w-full\" }, null, _parent))\n  _push(`</div>`)\n  if (__props.showWarning) {\n    _push(_ssrRenderComponent(TheModal, {\n      onShowModal: ($event: any) => (__props.showWarning = !__props.showWarning)\n    }, {\n      default: _withCtx((_, _push, _parent, _scopeId) => {\n        if (_push) {\n          _push(`<div${\n            _scopeId\n          }><p class=\"text-center font-bold max-sm:w-9/12 max-sm:mx-auto\"${\n            _scopeId\n          }>${\n            _ssrInterpolate(_ctx.$t('Вы действительно хотите удалить департамент?'))\n          }</p><div class=\"text-center text-lg max-sm:text-sm w-7/12 mx-auto my-10 dark:text-white break-words max-sm:w-full\"${\n            _scopeId\n          }><p class=\"text-redOrange\"${\n            _scopeId\n          }>${\n            _ssrInterpolate(_ctx.$t('Предупреждение!'))\n          }</p><p class=\"!text-base nt-2\"${\n            _scopeId\n          }>${\n            _ssrInterpolate(_ctx.$t('Удалённые департаменты восстановке не подлежат'))\n          }</p></div></div><div class=\"flex justify-center gap-3 max-sm:flex-col\"${\n            _scopeId\n          }>`)\n          _push(_ssrRenderComponent(TheButton, {\n            class: \"w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-black hover:!bg-gray-200 gap-3 py-2 !bg-porcelain !border transition-all ease-in-out duration-300\",\n            t: \"button\",\n            onClick: ($event: any) => (__props.showWarning = false)\n          }, {\n            default: _withCtx((_, _push, _parent, _scopeId) => {\n              if (_push) {\n                _push(`${_ssrInterpolate(_ctx.$t('Отменить'))}`)\n              } else {\n                return [\n                  _createTextVNode(_toDisplayString(_ctx.$t('Отменить')), 1)\n                ]\n              }\n            }),\n            _: 1\n          }, _parent, _scopeId))\n          _push(_ssrRenderComponent(TheButton, {\n            class: \"w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-white gap-3 py-2 !bg-redOrange !border transition-all ease-in-out duration-300\",\n            t: \"submit\",\n            onClick: ($event: any) => (_unref(currentDepartment).deleteDepartment({id: _unref(currentDepartment).get_department.id}, _ctx.$router))\n          }, {\n            default: _withCtx((_, _push, _parent, _scopeId) => {\n              if (_push) {\n                _push(`${_ssrInterpolate(_ctx.$t('Удалить'))}`)\n              } else {\n                return [\n                  _createTextVNode(_toDisplayString(_ctx.$t('Удалить')), 1)\n                ]\n              }\n            }),\n            _: 1\n          }, _parent, _scopeId))\n          _push(`</div>`)\n        } else {\n          return [\n            _createVNode(\"div\", null, [\n              _createVNode(\"p\", { class: \"text-center font-bold max-sm:w-9/12 max-sm:mx-auto\" }, _toDisplayString(_ctx.$t('Вы действительно хотите удалить департамент?')), 1),\n              _createVNode(\"div\", { class: \"text-center text-lg max-sm:text-sm w-7/12 mx-auto my-10 dark:text-white break-words max-sm:w-full\" }, [\n                _createVNode(\"p\", { class: \"text-redOrange\" }, _toDisplayString(_ctx.$t('Предупреждение!')), 1),\n                _createVNode(\"p\", { class: \"!text-base nt-2\" }, _toDisplayString(_ctx.$t('Удалённые департаменты восстановке не подлежат')), 1)\n              ])\n            ]),\n            _createVNode(\"div\", { class: \"flex justify-center gap-3 max-sm:flex-col\" }, [\n              _createVNode(TheButton, {\n                class: \"w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-black hover:!bg-gray-200 gap-3 py-2 !bg-porcelain !border transition-all ease-in-out duration-300\",\n                t: \"button\",\n                onClick: ($event: any) => (__props.showWarning = false)\n              }, {\n                default: _withCtx(() => [\n                  _createTextVNode(_toDisplayString(_ctx.$t('Отменить')), 1)\n                ]),\n                _: 1\n              }, 8, [\"onClick\"]),\n              _createVNode(TheButton, {\n                class: \"w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-white gap-3 py-2 !bg-redOrange !border transition-all ease-in-out duration-300\",\n                t: \"submit\",\n                onClick: ($event: any) => (_unref(currentDepartment).deleteDepartment({id: _unref(currentDepartment).get_department.id}, _ctx.$router))\n              }, {\n                default: _withCtx(() => [\n                  _createTextVNode(_toDisplayString(_ctx.$t('Удалить')), 1)\n                ]),\n                _: 1\n              }, 8, [\"onClick\"])\n            ])\n          ]\n        }\n      }),\n      _: 1\n    }, _parent))\n  } else {\n    _push(`<!---->`)\n  }\n  _push(`</div><div class=\"flex gap-x-10 w-full mt-8 max-[1200px]:flex-col max-[1200px]:gap-3\">`)\n  if (!_unref(currentDepartment).get_department?.id) {\n    _push(`<div class=\"flex max-[1200px]:order-1 w-full gap-y-4 flex-col\"><!--[-->`)\n    _ssrRenderList(5, (i) => {\n      _push(_ssrRenderComponent(TheSceleton, {\n        \"border-radius\": \"10px\",\n        width: \"90%\",\n        height: \"80px\"\n      }, null, _parent))\n    })\n    _push(`<!--]--></div>`)\n  } else {\n    _push(`<div class=\"w-full max-[1200px]:order-1 flex flex-col items-center justify-center gap-4 p-6 rounded-3xl shadow-departmentInfo bg-white\">`)\n    if (_unref(currentDepartment).get_department?.participants?.length) {\n      _push(`<!--[-->`)\n      _ssrRenderList(_unref(currentDepartment).get_department.participants, (userItem) => {\n        _push(_ssrRenderComponent(DepartmentUserList, {\n          key: userItem.id,\n          \"user-item\": userItem\n        }, null, _parent))\n      })\n      _push(`<!--]-->`)\n    } else {\n      _push(`<p class=\"text-gray-500 text-center py-4\">${_ssrInterpolate(_ctx.$t('Пользователей пока нет'))}</p>`)\n    }\n    _push(`</div>`)\n  }\n  _push(`<div class=\"w-3/12 max-[1200px]:w-full bg-white p-6 rounded-3xl h-fit shadow-departmentInfo\">`)\n  _push(_ssrRenderComponent(TheTextContent, null, {\n    default: _withCtx((_, _push, _parent, _scopeId) => {\n      if (_push) {\n        _push(`<svg width=\"22\" height=\"23\" viewBox=\"0 0 22 23\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"${\n          _scopeId\n        }><path d=\"M11 15.5V11.5M11 7.5H11.01M21 11.5C21 17.0228 16.5228 21.5 11 21.5C5.47715 21.5 1 17.0228 1 11.5C1 5.97715 5.47715 1.5 11 1.5C16.5228 1.5 21 5.97715 21 11.5Z\" stroke=\"#2A2A2A\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"${\n          _scopeId\n        }></path></svg> ${\n          _ssrInterpolate(_ctx.$t('Информация'))\n        }`)\n      } else {\n        return [\n          (_openBlock(), _createBlock(\"svg\", {\n            width: \"22\",\n            height: \"23\",\n            viewBox: \"0 0 22 23\",\n            fill: \"none\",\n            xmlns: \"http://www.w3.org/2000/svg\"\n          }, [\n            _createVNode(\"path\", {\n              d: \"M11 15.5V11.5M11 7.5H11.01M21 11.5C21 17.0228 16.5228 21.5 11 21.5C5.47715 21.5 1 17.0228 1 11.5C1 5.97715 5.47715 1.5 11 1.5C16.5228 1.5 21 5.97715 21 11.5Z\",\n              stroke: \"#2A2A2A\",\n              \"stroke-width\": \"1.6\",\n              \"stroke-linecap\": \"round\",\n              \"stroke-linejoin\": \"round\"\n            })\n          ])),\n          _createTextVNode(\" \" + _toDisplayString(_ctx.$t('Информация')), 1)\n        ]\n      }\n    }),\n    _: 1\n  }, _parent))\n  _push(`<div class=\"flex items-center justify-between mt-8\"><p>${\n    _ssrInterpolate(_ctx.$t('Сотрудников'))\n  }: </p><p>${\n    _ssrInterpolate(_unref(currentDepartment).get_department.participants?.length)\n  }</p></div></div></div></div>`)\n}\n}\n\n})",
-      "start": 1751877298149,
-      "end": 1751877298149,
+      "start": 1751976110363,
+      "end": 1751976110363,
       "sourcemaps": {
         "version": 3,
         "sources": [
@@ -20,57 +20,57 @@
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1751877298149,
-      "end": 1751877298149,
+      "start": 1751976110364,
+      "end": 1751976110364,
       "order": "pre"
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1751877298149,
-      "end": 1751877298149,
+      "start": 1751976110364,
+      "end": 1751976110364,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1751877298149,
-      "end": 1751877298149,
+      "start": 1751976110364,
+      "end": 1751976110364,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1751877298149,
-      "end": 1751877298149,
+      "start": 1751976110364,
+      "end": 1751976110364,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1751877298149,
-      "end": 1751877298149,
+      "start": 1751976110364,
+      "end": 1751976110364,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1751877298149,
-      "end": 1751877298149,
+      "start": 1751976110364,
+      "end": 1751976110364,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1751877298149,
-      "end": 1751877298149,
+      "start": 1751976110364,
+      "end": 1751976110364,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1751877298149,
-      "end": 1751877298149,
+      "start": 1751976110364,
+      "end": 1751976110364,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, unref as _unref, createVNode as _createVNode, openBlock as _openBlock, createBlock as _createBlock } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttr as _ssrRenderAttr, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport _imports_0 from \"/icons/delete.svg\";\nimport TheBreadcrumbs from \"~/components/UI/TheBreadcrumbs.vue\";\nimport { useCompanies } from \"~/stores/companies\";\nimport { useRoute } from \"vue-router\";\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\nimport DepartmentUserList from \"~/components/Company/department/DepartmentUserList.vue\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport TheButton from \"~/components/UI/TheButton.vue\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nimport TheSceleton from \"~/components/UI/TheSceleton.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"[id]\",\n  __ssrInlineRender: true,\n  props: {\n    showWarning: {\n      type: Boolean,\n      default: false\n    }\n  },\n  setup(__props) {\n    const currentDepartment = useCompanies();\n    const route = useRoute();\n    const router = useRouter();\n    function goBack() {\n      router.back();\n    }\n    watchEffect(() => {\n      currentDepartment.loadDepartment({ id: route.params.id });\n    });\n    watchSyncEffect(() => {\n      useSeoMeta({\n        title: `${currentDepartment.current_department.name}`\n      });\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}><div class=\"flex items-center gap-4 max-sm:flex-col max-sm:items-start\"><button class=\"px-6 py-2 rounded-[30px] border-2 font-bold text-mediumGray bg-white flex items-center gap-2\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M15 8H1M1 8L8 15M1 8L8 1\" stroke=\"#7D7D7D\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg> ${_ssrInterpolate(_ctx.$t(\"Назад\"))}</button><div class=\"flex items-center flex-wrap gap-x-3\">`);\n      _push(_ssrRenderComponent(TheBreadcrumbs, { \"breadcrumb-link\": `/base/companies` }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Компания\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Компания\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<div><svg width=\"6\" height=\"12\" viewBox=\"0 0 6 12\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.032 0.48H5.24L2.168 12H0.96L4.032 0.48Z\" fill=\"#1E1E1E\"></path></svg></div>`);\n      _push(_ssrRenderComponent(TheBreadcrumbs, { \"breadcrumb-link\": `/base/companies/department` }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Департаменты\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Департаменты\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<div><svg width=\"6\" height=\"12\" viewBox=\"0 0 6 12\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.032 0.48H5.24L2.168 12H0.96L4.032 0.48Z\" fill=\"#1E1E1E\"></path></svg></div>`);\n      _push(_ssrRenderComponent(TheBreadcrumbs, null, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_unref(currentDepartment).get_department.name)}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_unref(currentDepartment).get_department.name), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`</div></div><div class=\"mt-8 flex items-center gap-4 justify-between max-[680px]:flex-col max-[680px]:items-start max-[680px]:gap-5\"><p class=\"dark:text-white text-3xl font-bold\">${_ssrInterpolate(_unref(currentDepartment).get_department.name)}</p>`);\n      if (!_unref(currentDepartment).get_department?.participants?.length) {\n        _push(_ssrRenderComponent(TheButton, {\n          type: \"danger\",\n          class: \"px-10 py-2 !bg-whiteSmoke !border !border-gainsboro rounded-full flex items-center gap-3 !text-sunset\",\n          onClick: ($event) => __props.showWarning = true\n        }, {\n          default: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(`<img${_ssrRenderAttr(\"src\", _imports_0)} alt=\"delete-button\"${_scopeId}> ${_ssrInterpolate(_ctx.$t(\"Удалить отдел\"))}`);\n            } else {\n              return [\n                _createVNode(\"img\", {\n                  src: _imports_0,\n                  alt: \"delete-button\"\n                }),\n                _createTextVNode(\" \" + _toDisplayString(_ctx.$t(\"Удалить отдел\")), 1)\n              ];\n            }\n          }),\n          _: 1\n        }, _parent));\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div><div class=\"flex items-center gap-x-10 mt-8\"><div class=\"flex items-center w-11/12 max-sm:w-full gap-x-10\">`);\n      _push(_ssrRenderComponent(TheSearch, { class: \"w-3/12 max-[900px]:w-full\" }, null, _parent));\n      _push(`</div>`);\n      if (__props.showWarning) {\n        _push(_ssrRenderComponent(TheModal, {\n          onShowModal: ($event) => __props.showWarning = !__props.showWarning\n        }, {\n          default: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(`<div${_scopeId}><p class=\"text-center font-bold max-sm:w-9/12 max-sm:mx-auto\"${_scopeId}>${_ssrInterpolate(_ctx.$t(\"Вы действительно хотите удалить департамент?\"))}</p><div class=\"text-center text-lg max-sm:text-sm w-7/12 mx-auto my-10 dark:text-white break-words max-sm:w-full\"${_scopeId}><p class=\"text-redOrange\"${_scopeId}>${_ssrInterpolate(_ctx.$t(\"Предупреждение!\"))}</p><p class=\"!text-base nt-2\"${_scopeId}>${_ssrInterpolate(_ctx.$t(\"Удалённые департаменты восстановке не подлежат\"))}</p></div></div><div class=\"flex justify-center gap-3 max-sm:flex-col\"${_scopeId}>`);\n              _push2(_ssrRenderComponent(TheButton, {\n                class: \"w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-black hover:!bg-gray-200 gap-3 py-2 !bg-porcelain !border transition-all ease-in-out duration-300\",\n                t: \"button\",\n                onClick: ($event) => __props.showWarning = false\n              }, {\n                default: _withCtx((_2, _push3, _parent3, _scopeId2) => {\n                  if (_push3) {\n                    _push3(`${_ssrInterpolate(_ctx.$t(\"Отменить\"))}`);\n                  } else {\n                    return [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Отменить\")), 1)\n                    ];\n                  }\n                }),\n                _: 1\n              }, _parent2, _scopeId));\n              _push2(_ssrRenderComponent(TheButton, {\n                class: \"w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-white gap-3 py-2 !bg-redOrange !border transition-all ease-in-out duration-300\",\n                t: \"submit\",\n                onClick: ($event) => _unref(currentDepartment).deleteDepartment({ id: _unref(currentDepartment).get_department.id }, _ctx.$router)\n              }, {\n                default: _withCtx((_2, _push3, _parent3, _scopeId2) => {\n                  if (_push3) {\n                    _push3(`${_ssrInterpolate(_ctx.$t(\"Удалить\"))}`);\n                  } else {\n                    return [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Удалить\")), 1)\n                    ];\n                  }\n                }),\n                _: 1\n              }, _parent2, _scopeId));\n              _push2(`</div>`);\n            } else {\n              return [\n                _createVNode(\"div\", null, [\n                  _createVNode(\"p\", { class: \"text-center font-bold max-sm:w-9/12 max-sm:mx-auto\" }, _toDisplayString(_ctx.$t(\"Вы действительно хотите удалить департамент?\")), 1),\n                  _createVNode(\"div\", { class: \"text-center text-lg max-sm:text-sm w-7/12 mx-auto my-10 dark:text-white break-words max-sm:w-full\" }, [\n                    _createVNode(\"p\", { class: \"text-redOrange\" }, _toDisplayString(_ctx.$t(\"Предупреждение!\")), 1),\n                    _createVNode(\"p\", { class: \"!text-base nt-2\" }, _toDisplayString(_ctx.$t(\"Удалённые департаменты восстановке не подлежат\")), 1)\n                  ])\n                ]),\n                _createVNode(\"div\", { class: \"flex justify-center gap-3 max-sm:flex-col\" }, [\n                  _createVNode(TheButton, {\n                    class: \"w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-black hover:!bg-gray-200 gap-3 py-2 !bg-porcelain !border transition-all ease-in-out duration-300\",\n                    t: \"button\",\n                    onClick: ($event) => __props.showWarning = false\n                  }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Отменить\")), 1)\n                    ]),\n                    _: 1\n                  }, 8, [\"onClick\"]),\n                  _createVNode(TheButton, {\n                    class: \"w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-white gap-3 py-2 !bg-redOrange !border transition-all ease-in-out duration-300\",\n                    t: \"submit\",\n                    onClick: ($event) => _unref(currentDepartment).deleteDepartment({ id: _unref(currentDepartment).get_department.id }, _ctx.$router)\n                  }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Удалить\")), 1)\n                    ]),\n                    _: 1\n                  }, 8, [\"onClick\"])\n                ])\n              ];\n            }\n          }),\n          _: 1\n        }, _parent));\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div><div class=\"flex gap-x-10 w-full mt-8 max-[1200px]:flex-col max-[1200px]:gap-3\">`);\n      if (!_unref(currentDepartment).get_department?.id) {\n        _push(`<div class=\"flex max-[1200px]:order-1 w-full gap-y-4 flex-col\"><!--[-->`);\n        _ssrRenderList(5, (i) => {\n          _push(_ssrRenderComponent(TheSceleton, {\n            \"border-radius\": \"10px\",\n            width: \"90%\",\n            height: \"80px\"\n          }, null, _parent));\n        });\n        _push(`<!--]--></div>`);\n      } else {\n        _push(`<div class=\"w-full max-[1200px]:order-1 flex flex-col items-center justify-center gap-4 p-6 rounded-3xl shadow-departmentInfo bg-white\">`);\n        if (_unref(currentDepartment).get_department?.participants?.length) {\n          _push(`<!--[-->`);\n          _ssrRenderList(_unref(currentDepartment).get_department.participants, (userItem) => {\n            _push(_ssrRenderComponent(DepartmentUserList, {\n              key: userItem.id,\n              \"user-item\": userItem\n            }, null, _parent));\n          });\n          _push(`<!--]-->`);\n        } else {\n          _push(`<p class=\"text-gray-500 text-center py-4\">${_ssrInterpolate(_ctx.$t(\"Пользователей пока нет\"))}</p>`);\n        }\n        _push(`</div>`);\n      }\n      _push(`<div class=\"w-3/12 max-[1200px]:w-full bg-white p-6 rounded-3xl h-fit shadow-departmentInfo\">`);\n      _push(_ssrRenderComponent(TheTextContent, null, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`<svg width=\"22\" height=\"23\" viewBox=\"0 0 22 23\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"${_scopeId}><path d=\"M11 15.5V11.5M11 7.5H11.01M21 11.5C21 17.0228 16.5228 21.5 11 21.5C5.47715 21.5 1 17.0228 1 11.5C1 5.97715 5.47715 1.5 11 1.5C16.5228 1.5 21 5.97715 21 11.5Z\" stroke=\"#2A2A2A\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"${_scopeId}></path></svg> ${_ssrInterpolate(_ctx.$t(\"Информация\"))}`);\n          } else {\n            return [\n              (_openBlock(), _createBlock(\"svg\", {\n                width: \"22\",\n                height: \"23\",\n                viewBox: \"0 0 22 23\",\n                fill: \"none\",\n                xmlns: \"http://www.w3.org/2000/svg\"\n              }, [\n                _createVNode(\"path\", {\n                  d: \"M11 15.5V11.5M11 7.5H11.01M21 11.5C21 17.0228 16.5228 21.5 11 21.5C5.47715 21.5 1 17.0228 1 11.5C1 5.97715 5.47715 1.5 11 1.5C16.5228 1.5 21 5.97715 21 11.5Z\",\n                  stroke: \"#2A2A2A\",\n                  \"stroke-width\": \"1.6\",\n                  \"stroke-linecap\": \"round\",\n                  \"stroke-linejoin\": \"round\"\n                })\n              ])),\n              _createTextVNode(\" \" + _toDisplayString(_ctx.$t(\"Информация\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<div class=\"flex items-center justify-between mt-8\"><p>${_ssrInterpolate(_ctx.$t(\"Сотрудников\"))}: </p><p>${_ssrInterpolate(_unref(currentDepartment).get_department.participants?.length)}</p></div></div></div></div>`);\n    };\n  }\n});\n",
-      "start": 1751877298149,
-      "end": 1751877299203,
+      "start": 1751976110364,
+      "end": 1751976111946,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -91,171 +91,171 @@
     },
     {
       "name": "vite:json",
-      "start": 1751877299203,
-      "end": 1751877299203,
+      "start": 1751976111946,
+      "end": 1751976111946,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1751877299203,
-      "end": 1751877299203,
+      "start": 1751976111946,
+      "end": 1751976111946,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1751877299203,
-      "end": 1751877299203,
+      "start": 1751976111946,
+      "end": 1751976111946,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1751877299203,
-      "end": 1751877299203,
+      "start": 1751976111946,
+      "end": 1751976111946,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751877299203,
-      "end": 1751877299203,
+      "start": 1751976111946,
+      "end": 1751976111946,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751877299203,
-      "end": 1751877299203,
+      "start": 1751976111946,
+      "end": 1751976111946,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1751877299203,
-      "end": 1751877299203,
+      "start": 1751976111946,
+      "end": 1751976111946,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1751877299203,
-      "end": 1751877299203,
+      "start": 1751976111946,
+      "end": 1751976111946,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1751877299203,
-      "end": 1751877299203,
+      "start": 1751976111946,
+      "end": 1751976111947,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751877299203,
-      "end": 1751877299204,
+      "start": 1751976111947,
+      "end": 1751976111947,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1751877299205,
-      "end": 1751877299205,
+      "start": 1751976111947,
+      "end": 1751976111948,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1751877299205,
-      "end": 1751877299206,
+      "start": 1751976111948,
+      "end": 1751976111949,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1751877299206,
-      "end": 1751877299206,
+      "start": 1751976111949,
+      "end": 1751976111949,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1751877299206,
-      "end": 1751877299206,
+      "start": 1751976111949,
+      "end": 1751976111949,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1751877299206,
-      "end": 1751877299206,
+      "start": 1751976111949,
+      "end": 1751976111949,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1751877299206,
-      "end": 1751877299206,
+      "start": 1751976111949,
+      "end": 1751976111949,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1751877299206,
-      "end": 1751877299206,
+      "start": 1751976111949,
+      "end": 1751976111949,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1751877299206,
-      "end": 1751877299206,
+      "start": 1751976111949,
+      "end": 1751976111949,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1751877299206,
-      "end": 1751877299206,
+      "start": 1751976111949,
+      "end": 1751976111949,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1751877299206,
-      "end": 1751877299206,
+      "start": 1751976111949,
+      "end": 1751976111949,
       "order": "post"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1751877299206,
-      "end": 1751877299206,
+      "start": 1751976111949,
+      "end": 1751976111949,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1751877299206,
-      "end": 1751877299206,
+      "start": 1751976111949,
+      "end": 1751976111949,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1751877299206,
-      "end": 1751877299206,
+      "start": 1751976111949,
+      "end": 1751976111949,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1751877299206,
-      "end": 1751877299206,
+      "start": 1751976111949,
+      "end": 1751976111949,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1751877299206,
-      "end": 1751877299206,
+      "start": 1751976111949,
+      "end": 1751976111949,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1751877299206,
-      "end": 1751877299206,
+      "start": 1751976111949,
+      "end": 1751976111949,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1751877299206,
-      "end": 1751877299206,
+      "start": 1751976111949,
+      "end": 1751976111949,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { useRouter } from '#app/composables/router';\nimport { watchEffect, watchSyncEffect } from 'vue';\nimport { useSeoMeta } from '@unhead/vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, unref as _unref, createVNode as _createVNode, openBlock as _openBlock, createBlock as _createBlock } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttr as _ssrRenderAttr, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport _imports_0 from \"/icons/delete.svg\";\nimport TheBreadcrumbs from \"~/components/UI/TheBreadcrumbs.vue\";\nimport { useCompanies } from \"~/stores/companies\";\nimport { useRoute } from \"vue-router\";\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\nimport DepartmentUserList from \"~/components/Company/department/DepartmentUserList.vue\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport TheButton from \"~/components/UI/TheButton.vue\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nimport TheSceleton from \"~/components/UI/TheSceleton.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"[id]\",\n  __ssrInlineRender: true,\n  props: {\n    showWarning: {\n      type: Boolean,\n      default: false\n    }\n  },\n  setup(__props) {\n    const currentDepartment = useCompanies();\n    const route = useRoute();\n    const router = useRouter();\n    function goBack() {\n      router.back();\n    }\n    watchEffect(() => {\n      currentDepartment.loadDepartment({ id: route.params.id });\n    });\n    watchSyncEffect(() => {\n      useSeoMeta({\n        title: `${currentDepartment.current_department.name}`\n      });\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}><div class=\"flex items-center gap-4 max-sm:flex-col max-sm:items-start\"><button class=\"px-6 py-2 rounded-[30px] border-2 font-bold text-mediumGray bg-white flex items-center gap-2\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M15 8H1M1 8L8 15M1 8L8 1\" stroke=\"#7D7D7D\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg> ${_ssrInterpolate(_ctx.$t(\"Назад\"))}</button><div class=\"flex items-center flex-wrap gap-x-3\">`);\n      _push(_ssrRenderComponent(TheBreadcrumbs, { \"breadcrumb-link\": `/base/companies` }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Компания\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Компания\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<div><svg width=\"6\" height=\"12\" viewBox=\"0 0 6 12\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.032 0.48H5.24L2.168 12H0.96L4.032 0.48Z\" fill=\"#1E1E1E\"></path></svg></div>`);\n      _push(_ssrRenderComponent(TheBreadcrumbs, { \"breadcrumb-link\": `/base/companies/department` }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Департаменты\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Департаменты\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<div><svg width=\"6\" height=\"12\" viewBox=\"0 0 6 12\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.032 0.48H5.24L2.168 12H0.96L4.032 0.48Z\" fill=\"#1E1E1E\"></path></svg></div>`);\n      _push(_ssrRenderComponent(TheBreadcrumbs, null, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_unref(currentDepartment).get_department.name)}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_unref(currentDepartment).get_department.name), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`</div></div><div class=\"mt-8 flex items-center gap-4 justify-between max-[680px]:flex-col max-[680px]:items-start max-[680px]:gap-5\"><p class=\"dark:text-white text-3xl font-bold\">${_ssrInterpolate(_unref(currentDepartment).get_department.name)}</p>`);\n      if (!_unref(currentDepartment).get_department?.participants?.length) {\n        _push(_ssrRenderComponent(TheButton, {\n          type: \"danger\",\n          class: \"px-10 py-2 !bg-whiteSmoke !border !border-gainsboro rounded-full flex items-center gap-3 !text-sunset\",\n          onClick: ($event) => __props.showWarning = true\n        }, {\n          default: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(`<img${_ssrRenderAttr(\"src\", _imports_0)} alt=\"delete-button\"${_scopeId}> ${_ssrInterpolate(_ctx.$t(\"Удалить отдел\"))}`);\n            } else {\n              return [\n                _createVNode(\"img\", {\n                  src: _imports_0,\n                  alt: \"delete-button\"\n                }),\n                _createTextVNode(\" \" + _toDisplayString(_ctx.$t(\"Удалить отдел\")), 1)\n              ];\n            }\n          }),\n          _: 1\n        }, _parent));\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div><div class=\"flex items-center gap-x-10 mt-8\"><div class=\"flex items-center w-11/12 max-sm:w-full gap-x-10\">`);\n      _push(_ssrRenderComponent(TheSearch, { class: \"w-3/12 max-[900px]:w-full\" }, null, _parent));\n      _push(`</div>`);\n      if (__props.showWarning) {\n        _push(_ssrRenderComponent(TheModal, {\n          onShowModal: ($event) => __props.showWarning = !__props.showWarning\n        }, {\n          default: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(`<div${_scopeId}><p class=\"text-center font-bold max-sm:w-9/12 max-sm:mx-auto\"${_scopeId}>${_ssrInterpolate(_ctx.$t(\"Вы действительно хотите удалить департамент?\"))}</p><div class=\"text-center text-lg max-sm:text-sm w-7/12 mx-auto my-10 dark:text-white break-words max-sm:w-full\"${_scopeId}><p class=\"text-redOrange\"${_scopeId}>${_ssrInterpolate(_ctx.$t(\"Предупреждение!\"))}</p><p class=\"!text-base nt-2\"${_scopeId}>${_ssrInterpolate(_ctx.$t(\"Удалённые департаменты восстановке не подлежат\"))}</p></div></div><div class=\"flex justify-center gap-3 max-sm:flex-col\"${_scopeId}>`);\n              _push2(_ssrRenderComponent(TheButton, {\n                class: \"w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-black hover:!bg-gray-200 gap-3 py-2 !bg-porcelain !border transition-all ease-in-out duration-300\",\n                t: \"button\",\n                onClick: ($event) => __props.showWarning = false\n              }, {\n                default: _withCtx((_2, _push3, _parent3, _scopeId2) => {\n                  if (_push3) {\n                    _push3(`${_ssrInterpolate(_ctx.$t(\"Отменить\"))}`);\n                  } else {\n                    return [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Отменить\")), 1)\n                    ];\n                  }\n                }),\n                _: 1\n              }, _parent2, _scopeId));\n              _push2(_ssrRenderComponent(TheButton, {\n                class: \"w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-white gap-3 py-2 !bg-redOrange !border transition-all ease-in-out duration-300\",\n                t: \"submit\",\n                onClick: ($event) => _unref(currentDepartment).deleteDepartment({ id: _unref(currentDepartment).get_department.id }, _ctx.$router)\n              }, {\n                default: _withCtx((_2, _push3, _parent3, _scopeId2) => {\n                  if (_push3) {\n                    _push3(`${_ssrInterpolate(_ctx.$t(\"Удалить\"))}`);\n                  } else {\n                    return [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Удалить\")), 1)\n                    ];\n                  }\n                }),\n                _: 1\n              }, _parent2, _scopeId));\n              _push2(`</div>`);\n            } else {\n              return [\n                _createVNode(\"div\", null, [\n                  _createVNode(\"p\", { class: \"text-center font-bold max-sm:w-9/12 max-sm:mx-auto\" }, _toDisplayString(_ctx.$t(\"Вы действительно хотите удалить департамент?\")), 1),\n                  _createVNode(\"div\", { class: \"text-center text-lg max-sm:text-sm w-7/12 mx-auto my-10 dark:text-white break-words max-sm:w-full\" }, [\n                    _createVNode(\"p\", { class: \"text-redOrange\" }, _toDisplayString(_ctx.$t(\"Предупреждение!\")), 1),\n                    _createVNode(\"p\", { class: \"!text-base nt-2\" }, _toDisplayString(_ctx.$t(\"Удалённые департаменты восстановке не подлежат\")), 1)\n                  ])\n                ]),\n                _createVNode(\"div\", { class: \"flex justify-center gap-3 max-sm:flex-col\" }, [\n                  _createVNode(TheButton, {\n                    class: \"w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-black hover:!bg-gray-200 gap-3 py-2 !bg-porcelain !border transition-all ease-in-out duration-300\",\n                    t: \"button\",\n                    onClick: ($event) => __props.showWarning = false\n                  }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Отменить\")), 1)\n                    ]),\n                    _: 1\n                  }, 8, [\"onClick\"]),\n                  _createVNode(TheButton, {\n                    class: \"w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-white gap-3 py-2 !bg-redOrange !border transition-all ease-in-out duration-300\",\n                    t: \"submit\",\n                    onClick: ($event) => _unref(currentDepartment).deleteDepartment({ id: _unref(currentDepartment).get_department.id }, _ctx.$router)\n                  }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Удалить\")), 1)\n                    ]),\n                    _: 1\n                  }, 8, [\"onClick\"])\n                ])\n              ];\n            }\n          }),\n          _: 1\n        }, _parent));\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div><div class=\"flex gap-x-10 w-full mt-8 max-[1200px]:flex-col max-[1200px]:gap-3\">`);\n      if (!_unref(currentDepartment).get_department?.id) {\n        _push(`<div class=\"flex max-[1200px]:order-1 w-full gap-y-4 flex-col\"><!--[-->`);\n        _ssrRenderList(5, (i) => {\n          _push(_ssrRenderComponent(TheSceleton, {\n            \"border-radius\": \"10px\",\n            width: \"90%\",\n            height: \"80px\"\n          }, null, _parent));\n        });\n        _push(`<!--]--></div>`);\n      } else {\n        _push(`<div class=\"w-full max-[1200px]:order-1 flex flex-col items-center justify-center gap-4 p-6 rounded-3xl shadow-departmentInfo bg-white\">`);\n        if (_unref(currentDepartment).get_department?.participants?.length) {\n          _push(`<!--[-->`);\n          _ssrRenderList(_unref(currentDepartment).get_department.participants, (userItem) => {\n            _push(_ssrRenderComponent(DepartmentUserList, {\n              key: userItem.id,\n              \"user-item\": userItem\n            }, null, _parent));\n          });\n          _push(`<!--]-->`);\n        } else {\n          _push(`<p class=\"text-gray-500 text-center py-4\">${_ssrInterpolate(_ctx.$t(\"Пользователей пока нет\"))}</p>`);\n        }\n        _push(`</div>`);\n      }\n      _push(`<div class=\"w-3/12 max-[1200px]:w-full bg-white p-6 rounded-3xl h-fit shadow-departmentInfo\">`);\n      _push(_ssrRenderComponent(TheTextContent, null, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`<svg width=\"22\" height=\"23\" viewBox=\"0 0 22 23\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"${_scopeId}><path d=\"M11 15.5V11.5M11 7.5H11.01M21 11.5C21 17.0228 16.5228 21.5 11 21.5C5.47715 21.5 1 17.0228 1 11.5C1 5.97715 5.47715 1.5 11 1.5C16.5228 1.5 21 5.97715 21 11.5Z\" stroke=\"#2A2A2A\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"${_scopeId}></path></svg> ${_ssrInterpolate(_ctx.$t(\"Информация\"))}`);\n          } else {\n            return [\n              (_openBlock(), _createBlock(\"svg\", {\n                width: \"22\",\n                height: \"23\",\n                viewBox: \"0 0 22 23\",\n                fill: \"none\",\n                xmlns: \"http://www.w3.org/2000/svg\"\n              }, [\n                _createVNode(\"path\", {\n                  d: \"M11 15.5V11.5M11 7.5H11.01M21 11.5C21 17.0228 16.5228 21.5 11 21.5C5.47715 21.5 1 17.0228 1 11.5C1 5.97715 5.47715 1.5 11 1.5C16.5228 1.5 21 5.97715 21 11.5Z\",\n                  stroke: \"#2A2A2A\",\n                  \"stroke-width\": \"1.6\",\n                  \"stroke-linecap\": \"round\",\n                  \"stroke-linejoin\": \"round\"\n                })\n              ])),\n              _createTextVNode(\" \" + _toDisplayString(_ctx.$t(\"Информация\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<div class=\"flex items-center justify-between mt-8\"><p>${_ssrInterpolate(_ctx.$t(\"Сотрудников\"))}: </p><p>${_ssrInterpolate(_unref(currentDepartment).get_department.participants?.length)}</p></div></div></div></div>`);\n    };\n  }\n});\n",
-      "start": 1751877299206,
-      "end": 1751877299243,
+      "start": 1751976111949,
+      "end": 1751976111956,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -269,8 +269,8 @@
     {
       "name": "nuxt:imports-transform",
       "result": "import { useRouter } from '#app/composables/router';\nimport { watchEffect, watchSyncEffect } from 'vue';\nimport { useSeoMeta } from '@unhead/vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { withCtx as _withCtx, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, unref as _unref, createVNode as _createVNode, openBlock as _openBlock, createBlock as _createBlock } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttr as _ssrRenderAttr, ssrRenderAttrs as _ssrRenderAttrs, ssrInterpolate as _ssrInterpolate, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport _imports_0 from \"/icons/delete.svg\";\nimport TheBreadcrumbs from \"~/components/UI/TheBreadcrumbs.vue\";\nimport { useCompanies } from \"~/stores/companies\";\nimport { useRoute } from \"vue-router\";\nimport TheSearch from \"~/components/UI/TheSearch.vue\";\nimport DepartmentUserList from \"~/components/Company/department/DepartmentUserList.vue\";\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\nimport TheButton from \"~/components/UI/TheButton.vue\";\nimport TheModal from \"~/components/UI/TheModal.vue\";\nimport TheSceleton from \"~/components/UI/TheSceleton.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"[id]\",\n  __ssrInlineRender: true,\n  props: {\n    showWarning: {\n      type: Boolean,\n      default: false\n    }\n  },\n  setup(__props) {\n    const currentDepartment = useCompanies();\n    const route = useRoute();\n    const router = useRouter();\n    function goBack() {\n      router.back();\n    }\n    watchEffect(() => {\n      currentDepartment.loadDepartment({ id: route.params.id });\n    });\n    watchSyncEffect(() => {\n      useSeoMeta({\n        title: `${currentDepartment.current_department.name}`\n      });\n    });\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_attrs)}><div class=\"flex items-center gap-4 max-sm:flex-col max-sm:items-start\"><button class=\"px-6 py-2 rounded-[30px] border-2 font-bold text-mediumGray bg-white flex items-center gap-2\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M15 8H1M1 8L8 15M1 8L8 1\" stroke=\"#7D7D7D\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg> ${_ssrInterpolate(_ctx.$t(\"Назад\"))}</button><div class=\"flex items-center flex-wrap gap-x-3\">`);\n      _push(_ssrRenderComponent(TheBreadcrumbs, { \"breadcrumb-link\": `/base/companies` }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Компания\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Компания\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<div><svg width=\"6\" height=\"12\" viewBox=\"0 0 6 12\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.032 0.48H5.24L2.168 12H0.96L4.032 0.48Z\" fill=\"#1E1E1E\"></path></svg></div>`);\n      _push(_ssrRenderComponent(TheBreadcrumbs, { \"breadcrumb-link\": `/base/companies/department` }, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_ctx.$t(\"Департаменты\"))}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Департаменты\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<div><svg width=\"6\" height=\"12\" viewBox=\"0 0 6 12\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.032 0.48H5.24L2.168 12H0.96L4.032 0.48Z\" fill=\"#1E1E1E\"></path></svg></div>`);\n      _push(_ssrRenderComponent(TheBreadcrumbs, null, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`${_ssrInterpolate(_unref(currentDepartment).get_department.name)}`);\n          } else {\n            return [\n              _createTextVNode(_toDisplayString(_unref(currentDepartment).get_department.name), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`</div></div><div class=\"mt-8 flex items-center gap-4 justify-between max-[680px]:flex-col max-[680px]:items-start max-[680px]:gap-5\"><p class=\"dark:text-white text-3xl font-bold\">${_ssrInterpolate(_unref(currentDepartment).get_department.name)}</p>`);\n      if (!_unref(currentDepartment).get_department?.participants?.length) {\n        _push(_ssrRenderComponent(TheButton, {\n          type: \"danger\",\n          class: \"px-10 py-2 !bg-whiteSmoke !border !border-gainsboro rounded-full flex items-center gap-3 !text-sunset\",\n          onClick: ($event) => __props.showWarning = true\n        }, {\n          default: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(`<img${_ssrRenderAttr(\"src\", _imports_0)} alt=\"delete-button\"${_scopeId}> ${_ssrInterpolate(_ctx.$t(\"Удалить отдел\"))}`);\n            } else {\n              return [\n                _createVNode(\"img\", {\n                  src: _imports_0,\n                  alt: \"delete-button\"\n                }),\n                _createTextVNode(\" \" + _toDisplayString(_ctx.$t(\"Удалить отдел\")), 1)\n              ];\n            }\n          }),\n          _: 1\n        }, _parent));\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div><div class=\"flex items-center gap-x-10 mt-8\"><div class=\"flex items-center w-11/12 max-sm:w-full gap-x-10\">`);\n      _push(_ssrRenderComponent(TheSearch, { class: \"w-3/12 max-[900px]:w-full\" }, null, _parent));\n      _push(`</div>`);\n      if (__props.showWarning) {\n        _push(_ssrRenderComponent(TheModal, {\n          onShowModal: ($event) => __props.showWarning = !__props.showWarning\n        }, {\n          default: _withCtx((_, _push2, _parent2, _scopeId) => {\n            if (_push2) {\n              _push2(`<div${_scopeId}><p class=\"text-center font-bold max-sm:w-9/12 max-sm:mx-auto\"${_scopeId}>${_ssrInterpolate(_ctx.$t(\"Вы действительно хотите удалить департамент?\"))}</p><div class=\"text-center text-lg max-sm:text-sm w-7/12 mx-auto my-10 dark:text-white break-words max-sm:w-full\"${_scopeId}><p class=\"text-redOrange\"${_scopeId}>${_ssrInterpolate(_ctx.$t(\"Предупреждение!\"))}</p><p class=\"!text-base nt-2\"${_scopeId}>${_ssrInterpolate(_ctx.$t(\"Удалённые департаменты восстановке не подлежат\"))}</p></div></div><div class=\"flex justify-center gap-3 max-sm:flex-col\"${_scopeId}>`);\n              _push2(_ssrRenderComponent(TheButton, {\n                class: \"w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-black hover:!bg-gray-200 gap-3 py-2 !bg-porcelain !border transition-all ease-in-out duration-300\",\n                t: \"button\",\n                onClick: ($event) => __props.showWarning = false\n              }, {\n                default: _withCtx((_2, _push3, _parent3, _scopeId2) => {\n                  if (_push3) {\n                    _push3(`${_ssrInterpolate(_ctx.$t(\"Отменить\"))}`);\n                  } else {\n                    return [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Отменить\")), 1)\n                    ];\n                  }\n                }),\n                _: 1\n              }, _parent2, _scopeId));\n              _push2(_ssrRenderComponent(TheButton, {\n                class: \"w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-white gap-3 py-2 !bg-redOrange !border transition-all ease-in-out duration-300\",\n                t: \"submit\",\n                onClick: ($event) => _unref(currentDepartment).deleteDepartment({ id: _unref(currentDepartment).get_department.id }, _ctx.$router)\n              }, {\n                default: _withCtx((_2, _push3, _parent3, _scopeId2) => {\n                  if (_push3) {\n                    _push3(`${_ssrInterpolate(_ctx.$t(\"Удалить\"))}`);\n                  } else {\n                    return [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Удалить\")), 1)\n                    ];\n                  }\n                }),\n                _: 1\n              }, _parent2, _scopeId));\n              _push2(`</div>`);\n            } else {\n              return [\n                _createVNode(\"div\", null, [\n                  _createVNode(\"p\", { class: \"text-center font-bold max-sm:w-9/12 max-sm:mx-auto\" }, _toDisplayString(_ctx.$t(\"Вы действительно хотите удалить департамент?\")), 1),\n                  _createVNode(\"div\", { class: \"text-center text-lg max-sm:text-sm w-7/12 mx-auto my-10 dark:text-white break-words max-sm:w-full\" }, [\n                    _createVNode(\"p\", { class: \"text-redOrange\" }, _toDisplayString(_ctx.$t(\"Предупреждение!\")), 1),\n                    _createVNode(\"p\", { class: \"!text-base nt-2\" }, _toDisplayString(_ctx.$t(\"Удалённые департаменты восстановке не подлежат\")), 1)\n                  ])\n                ]),\n                _createVNode(\"div\", { class: \"flex justify-center gap-3 max-sm:flex-col\" }, [\n                  _createVNode(TheButton, {\n                    class: \"w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-black hover:!bg-gray-200 gap-3 py-2 !bg-porcelain !border transition-all ease-in-out duration-300\",\n                    t: \"button\",\n                    onClick: ($event) => __props.showWarning = false\n                  }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Отменить\")), 1)\n                    ]),\n                    _: 1\n                  }, 8, [\"onClick\"]),\n                  _createVNode(TheButton, {\n                    class: \"w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-white gap-3 py-2 !bg-redOrange !border transition-all ease-in-out duration-300\",\n                    t: \"submit\",\n                    onClick: ($event) => _unref(currentDepartment).deleteDepartment({ id: _unref(currentDepartment).get_department.id }, _ctx.$router)\n                  }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Удалить\")), 1)\n                    ]),\n                    _: 1\n                  }, 8, [\"onClick\"])\n                ])\n              ];\n            }\n          }),\n          _: 1\n        }, _parent));\n      } else {\n        _push(`<!---->`);\n      }\n      _push(`</div><div class=\"flex gap-x-10 w-full mt-8 max-[1200px]:flex-col max-[1200px]:gap-3\">`);\n      if (!_unref(currentDepartment).get_department?.id) {\n        _push(`<div class=\"flex max-[1200px]:order-1 w-full gap-y-4 flex-col\"><!--[-->`);\n        _ssrRenderList(5, (i) => {\n          _push(_ssrRenderComponent(TheSceleton, {\n            \"border-radius\": \"10px\",\n            width: \"90%\",\n            height: \"80px\"\n          }, null, _parent));\n        });\n        _push(`<!--]--></div>`);\n      } else {\n        _push(`<div class=\"w-full max-[1200px]:order-1 flex flex-col items-center justify-center gap-4 p-6 rounded-3xl shadow-departmentInfo bg-white\">`);\n        if (_unref(currentDepartment).get_department?.participants?.length) {\n          _push(`<!--[-->`);\n          _ssrRenderList(_unref(currentDepartment).get_department.participants, (userItem) => {\n            _push(_ssrRenderComponent(DepartmentUserList, {\n              key: userItem.id,\n              \"user-item\": userItem\n            }, null, _parent));\n          });\n          _push(`<!--]-->`);\n        } else {\n          _push(`<p class=\"text-gray-500 text-center py-4\">${_ssrInterpolate(_ctx.$t(\"Пользователей пока нет\"))}</p>`);\n        }\n        _push(`</div>`);\n      }\n      _push(`<div class=\"w-3/12 max-[1200px]:w-full bg-white p-6 rounded-3xl h-fit shadow-departmentInfo\">`);\n      _push(_ssrRenderComponent(TheTextContent, null, {\n        default: _withCtx((_, _push2, _parent2, _scopeId) => {\n          if (_push2) {\n            _push2(`<svg width=\"22\" height=\"23\" viewBox=\"0 0 22 23\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"${_scopeId}><path d=\"M11 15.5V11.5M11 7.5H11.01M21 11.5C21 17.0228 16.5228 21.5 11 21.5C5.47715 21.5 1 17.0228 1 11.5C1 5.97715 5.47715 1.5 11 1.5C16.5228 1.5 21 5.97715 21 11.5Z\" stroke=\"#2A2A2A\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"${_scopeId}></path></svg> ${_ssrInterpolate(_ctx.$t(\"Информация\"))}`);\n          } else {\n            return [\n              (_openBlock(), _createBlock(\"svg\", {\n                width: \"22\",\n                height: \"23\",\n                viewBox: \"0 0 22 23\",\n                fill: \"none\",\n                xmlns: \"http://www.w3.org/2000/svg\"\n              }, [\n                _createVNode(\"path\", {\n                  d: \"M11 15.5V11.5M11 7.5H11.01M21 11.5C21 17.0228 16.5228 21.5 11 21.5C5.47715 21.5 1 17.0228 1 11.5C1 5.97715 5.47715 1.5 11 1.5C16.5228 1.5 21 5.97715 21 11.5Z\",\n                  stroke: \"#2A2A2A\",\n                  \"stroke-width\": \"1.6\",\n                  \"stroke-linecap\": \"round\",\n                  \"stroke-linejoin\": \"round\"\n                })\n              ])),\n              _createTextVNode(\" \" + _toDisplayString(_ctx.$t(\"Информация\")), 1)\n            ];\n          }\n        }),\n        _: 1\n      }, _parent));\n      _push(`<div class=\"flex items-center justify-between mt-8\"><p>${_ssrInterpolate(_ctx.$t(\"Сотрудников\"))}: </p><p>${_ssrInterpolate(_unref(currentDepartment).get_department.participants?.length)}</p></div></div></div></div>`);\n    };\n  }\n});\n",
-      "start": 1751877299206,
-      "end": 1751877299243,
+      "start": 1751976111949,
+      "end": 1751976111956,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -283,56 +283,56 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1751877299243,
-      "end": 1751877299243,
+      "start": 1751976111956,
+      "end": 1751976111956,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1751877299243,
-      "end": 1751877299243,
+      "start": 1751976111956,
+      "end": 1751976111956,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1751877299244,
-      "end": 1751877299253,
+      "start": 1751976111956,
+      "end": 1751976111956,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1751877299244,
-      "end": 1751877299253,
+      "start": 1751976111956,
+      "end": 1751976111956,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-template",
-      "start": 1751877299253,
-      "end": 1751877299253,
+      "start": 1751976111956,
+      "end": 1751976111957,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1751877299253,
-      "end": 1751877299253,
+      "start": 1751976111957,
+      "end": 1751976111957,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1751877299253,
-      "end": 1751877299253,
+      "start": 1751976111957,
+      "end": 1751976111957,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1751877299253,
-      "end": 1751877299253,
+      "start": 1751976111957,
+      "end": 1751976111957,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1751877299253,
-      "end": 1751877299253,
+      "start": 1751976111957,
+      "end": 1751976111957,
       "order": "normal"
     }
   ]

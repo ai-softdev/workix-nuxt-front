@@ -32,26 +32,37 @@ defineProps({
     >
       + {{ $t('Создать объект') }}
     </button>
-    <TheModal v-if="showCreate" @showModal="showCreate = !showCreate">
-      <TheTextContent>{{ $t('Создание объекта') }}</TheTextContent>
-      <form @submit.prevent="objects.createObject(createForm)">
-        <ObjectContentCreateElems>
-          <div class="w-6/12">
-            <TheInput type="text" :label="$t('Наименование')" v-model="createForm.name"></TheInput>
-          </div>
-        </ObjectContentCreateElems>
-        <ObjectContentCreateElems class="flex-wrap">
-          <div class="w-6/12">
-            <TheInput type="text" :label="$t('Адрес')" v-model="createForm.address"></TheInput>
-          </div>
-        </ObjectContentCreateElems>
-        <ObjectContentCreateElems>
-          <TheButton class="py-2 px-6 rounded-full" t="button" type="danger" @click="showCreate = false">
-            {{ $t('Отменить')
-            }}
+    <TheModal
+        v-if="showCreate"
+        @showModal="showCreate = !showCreate"
+    >
+      <p class="font-bold text-center text-xl max-sm:text-sm">
+        {{ $t('Создание объекта') }}
+      </p>
+      <form
+          @submit.prevent="objects.createObject(createForm)"
+          class="mt-10"
+      >
+        <div class="flex flex-col gap-6">
+          <TheInput type="text" :label="$t('Наименование')" v-model="createForm.name"></TheInput>
+          <TheInput type="text" :label="$t('Адрес')" v-model="createForm.address"></TheInput>
+        </div>
+        <div class="flex flex-wrap gap-y-3 items-center mt-14 justify-center gap-x-10 max-sm:flex-col">
+          <TheButton
+              class="w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-black hover:!bg-gray-200 gap-3 py-2 !bg-porcelain !border transition-all ease-in-out duration-300"
+              t="button"
+              @click="showCreate = false"
+          >
+            {{ $t('Отменить') }}
           </TheButton>
-          <TheButton class="py-2 px-6 rounded-full" t="submit" type="success">{{ $t('Создать') }}</TheButton>
-        </ObjectContentCreateElems>
+          <TheButton
+              class="w-4/12 max-sm:w-full rounded-full flex items-center justify-center !text-black hover:!shadow-golden gap-3 py-2 !bg-golden !border transition-all ease-in-out duration-300"
+              t="submit"
+              type="success"
+          >
+            {{ $t('Создать') }}
+          </TheButton>
+        </div>
       </form>
 
     </TheModal>

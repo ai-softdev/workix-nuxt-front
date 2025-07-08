@@ -4,44 +4,44 @@
     {
       "name": "vite:vue",
       "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, unref as _unref, renderList as _renderList, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock, createTextVNode as _createTextVNode, resolveComponent as _resolveComponent, withCtx as _withCtx, createVNode as _createVNode, normalizeClass as _normalizeClass } from \"vue\"\n\nconst _hoisted_1 = { class: \"dark:text-white text-3xl font-bold mb-6\" }\nconst _hoisted_2 = { class: \"grid grid-cols-4 max-[1750px]:grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 mt-10 items-center gap-x-4 gap-y-4\" }\nconst _hoisted_3 = { class: \"relative border p-5 rounded-3xl bg-white dark:border-gray-400\" }\nconst _hoisted_4 = { class: \"font-bold pb-6 mb-6 border-b\" }\nconst _hoisted_5 = { class: \"text-md\" }\nconst _hoisted_6 = { class: \"flex flex-col gap-6\" }\nconst _hoisted_7 = { class: \"flex items-center justify-between gap-3\" }\nconst _hoisted_8 = { class: \"break-words text-mediumGray\" }\nconst _hoisted_9 = { class: \"flex items-center justify-between gap-3\" }\nconst _hoisted_10 = { class: \"break-words text-mediumGray\" }\n\nimport CurrentCompanyElems from \"~/components/Company/CompanyUI/CurrentCompanyElems.vue\";\r\nimport {useCompanies} from \"~/stores/companies\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'CurrentCompanyDepartment',\n  props: {\r\n  more: {\r\n    type: Number,\r\n    default: null\r\n  }\r\n},\n  setup(__props) {\n\r\nconst departments = useCompanies()\r\ndepartments.loadDepartmentList()\r\n\r\n\nreturn (_ctx: any,_cache: any) => {\n  const _component_NuxtLink = _resolveComponent(\"NuxtLink\")!\n\n  return (_openBlock(), _createElementBlock(\"div\", null, [\n    _createElementVNode(\"p\", _hoisted_1, _toDisplayString(_ctx.$t('Отделы компании')), 1),\n    _createElementVNode(\"div\", _hoisted_2, [\n      (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(departments).get_all_department.results, (department) => {\n        return (_openBlock(), _createElementBlock(\"div\", _hoisted_3, [\n          _createElementVNode(\"div\", {\n            class: _normalizeClass({'blur-[1px]' : __props.more === department.id})\n          }, [\n            _createElementVNode(\"div\", _hoisted_4, [\n              _createElementVNode(\"h2\", _hoisted_5, _toDisplayString(department.name), 1)\n            ]),\n            _createElementVNode(\"div\", _hoisted_6, [\n              _createElementVNode(\"div\", _hoisted_7, [\n                _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t('Руководитель')), 1),\n                _createElementVNode(\"p\", _hoisted_8, _toDisplayString(department.department_director_name ? department.department_director_name : 'Отсутсвует'), 1)\n              ]),\n              _createElementVNode(\"div\", _hoisted_9, [\n                _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t('Заместитель')), 1),\n                _createElementVNode(\"p\", _hoisted_10, _toDisplayString(department.vice_department_director_name ? department.vice_department_director_name : 'Отсутсвует'), 1)\n              ]),\n              _createVNode(_component_NuxtLink, {\n                to: `/base/companies/department/${department.id}`,\n                class: \"block p-2.5 rounded-full bg-golden text-center\"\n              }, {\n                default: _withCtx(() => [\n                  _createTextVNode(_toDisplayString(_ctx.$t('Подробнее')), 1)\n                ]),\n                _: 2\n              }, 1032, [\"to\"])\n            ])\n          ], 2)\n        ]))\n      }), 256))\n    ])\n  ]))\n}\n}\n\n})",
-      "start": 1751877267789,
-      "end": 1751877267789
+      "start": 1751976074063,
+      "end": 1751976074063
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1751877267818,
-      "end": 1751877267818,
+      "start": 1751976074064,
+      "end": 1751976074064,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1751877267833,
-      "end": 1751877267833,
+      "start": 1751976074064,
+      "end": 1751976074064,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1751877267833,
-      "end": 1751877267833,
+      "start": 1751976074064,
+      "end": 1751976074064,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1751877267833,
-      "end": 1751877267833,
+      "start": 1751976074064,
+      "end": 1751976074064,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1751877267833,
-      "end": 1751877267833,
+      "start": 1751976074064,
+      "end": 1751976074064,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, unref as _unref, renderList as _renderList, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock, createTextVNode as _createTextVNode, resolveComponent as _resolveComponent, withCtx as _withCtx, createVNode as _createVNode, normalizeClass as _normalizeClass } from \"vue\";\nconst _hoisted_1 = { class: \"dark:text-white text-3xl font-bold mb-6\" };\nconst _hoisted_2 = { class: \"grid grid-cols-4 max-[1750px]:grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 mt-10 items-center gap-x-4 gap-y-4\" };\nconst _hoisted_3 = { class: \"relative border p-5 rounded-3xl bg-white dark:border-gray-400\" };\nconst _hoisted_4 = { class: \"font-bold pb-6 mb-6 border-b\" };\nconst _hoisted_5 = { class: \"text-md\" };\nconst _hoisted_6 = { class: \"flex flex-col gap-6\" };\nconst _hoisted_7 = { class: \"flex items-center justify-between gap-3\" };\nconst _hoisted_8 = { class: \"break-words text-mediumGray\" };\nconst _hoisted_9 = { class: \"flex items-center justify-between gap-3\" };\nconst _hoisted_10 = { class: \"break-words text-mediumGray\" };\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"CurrentCompanyDepartment\",\n  props: {\n    more: {\n      type: Number,\n      default: null\n    }\n  },\n  setup(__props) {\n    const departments = useCompanies();\n    departments.loadDepartmentList();\n    return (_ctx, _cache) => {\n      const _component_NuxtLink = _resolveComponent(\"NuxtLink\");\n      return _openBlock(), _createElementBlock(\"div\", null, [\n        _createElementVNode(\"p\", _hoisted_1, _toDisplayString(_ctx.$t(\"Отделы компании\")), 1),\n        _createElementVNode(\"div\", _hoisted_2, [\n          (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(departments).get_all_department.results, (department) => {\n            return _openBlock(), _createElementBlock(\"div\", _hoisted_3, [\n              _createElementVNode(\"div\", {\n                class: _normalizeClass({ \"blur-[1px]\": __props.more === department.id })\n              }, [\n                _createElementVNode(\"div\", _hoisted_4, [\n                  _createElementVNode(\"h2\", _hoisted_5, _toDisplayString(department.name), 1)\n                ]),\n                _createElementVNode(\"div\", _hoisted_6, [\n                  _createElementVNode(\"div\", _hoisted_7, [\n                    _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t(\"Руководитель\")), 1),\n                    _createElementVNode(\"p\", _hoisted_8, _toDisplayString(department.department_director_name ? department.department_director_name : \"Отсутсвует\"), 1)\n                  ]),\n                  _createElementVNode(\"div\", _hoisted_9, [\n                    _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t(\"Заместитель\")), 1),\n                    _createElementVNode(\"p\", _hoisted_10, _toDisplayString(department.vice_department_director_name ? department.vice_department_director_name : \"Отсутсвует\"), 1)\n                  ]),\n                  _createVNode(_component_NuxtLink, {\n                    to: `/base/companies/department/${department.id}`,\n                    class: \"block p-2.5 rounded-full bg-golden text-center\"\n                  }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Подробнее\")), 1)\n                    ]),\n                    _: 2\n                  }, 1032, [\"to\"])\n                ])\n              ], 2)\n            ]);\n          }), 256))\n        ])\n      ]);\n    };\n  }\n});\n",
-      "start": 1751877267833,
-      "end": 1751877267907,
+      "start": 1751976074064,
+      "end": 1751976074366,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -57,189 +57,189 @@
     },
     {
       "name": "vite:json",
-      "start": 1751877267907,
-      "end": 1751877267907,
+      "start": 1751976074366,
+      "end": 1751976074366,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1751877267907,
-      "end": 1751877267907,
+      "start": 1751976074366,
+      "end": 1751976074366,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1751877267907,
-      "end": 1751877267907,
+      "start": 1751976074366,
+      "end": 1751976074366,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1751877267907,
-      "end": 1751877267907,
+      "start": 1751976074367,
+      "end": 1751976074367,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751877267908,
-      "end": 1751877267908,
+      "start": 1751976074367,
+      "end": 1751976074367,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1751877267908,
-      "end": 1751877267908,
+      "start": 1751976074367,
+      "end": 1751976074367,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1751877267908,
-      "end": 1751877267908,
+      "start": 1751976074367,
+      "end": 1751976074367,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1751877267908,
-      "end": 1751877267909,
+      "start": 1751976074367,
+      "end": 1751976074367,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751877267909,
-      "end": 1751877267909,
+      "start": 1751976074367,
+      "end": 1751976074368,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1751877267909,
-      "end": 1751877267909,
+      "start": 1751976074368,
+      "end": 1751976074368,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1751877267909,
-      "end": 1751877267909,
+      "start": 1751976074368,
+      "end": 1751976074368,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1751877267909,
-      "end": 1751877267909,
+      "start": 1751976074368,
+      "end": 1751976074368,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1751877267909,
-      "end": 1751877267909,
+      "start": 1751976074368,
+      "end": 1751976074368,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1751877267909,
-      "end": 1751877267909,
+      "start": 1751976074368,
+      "end": 1751976074368,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1751877267909,
-      "end": 1751877267909,
+      "start": 1751976074368,
+      "end": 1751976074368,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1751877267909,
-      "end": 1751877267909,
+      "start": 1751976074368,
+      "end": 1751976074368,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1751877267910,
-      "end": 1751877267910,
+      "start": 1751976074368,
+      "end": 1751976074368,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1751877267910,
-      "end": 1751877267910,
+      "start": 1751976074368,
+      "end": 1751976074368,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1751877267910,
-      "end": 1751877267910,
+      "start": 1751976074368,
+      "end": 1751976074369,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1751877267914,
-      "end": 1751877267915,
+      "start": 1751976074369,
+      "end": 1751976074369,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1751877267915,
-      "end": 1751877267915,
+      "start": 1751976074369,
+      "end": 1751976074369,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1751877267915,
-      "end": 1751877267915,
+      "start": 1751976074369,
+      "end": 1751976074369,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1751877267915,
-      "end": 1751877267917,
+      "start": 1751976074370,
+      "end": 1751976074374,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1751877267917,
-      "end": 1751877267917,
+      "start": 1751976074375,
+      "end": 1751976074375,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1751877267917,
-      "end": 1751877267917,
+      "start": 1751976074375,
+      "end": 1751976074375,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1751877267917,
-      "end": 1751877267917,
+      "start": 1751976074375,
+      "end": 1751976074375,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1751877267917,
-      "end": 1751877267917,
+      "start": 1751976074375,
+      "end": 1751976074375,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
       "result": "import { default as __nuxt_component_0 } from \"D:/projects/nuxt/workix-nuxt-front/node_modules/nuxt/dist/app/components/nuxt-link\";\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, unref as _unref, renderList as _renderList, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock, createTextVNode as _createTextVNode, resolveComponent as _resolveComponent, withCtx as _withCtx, createVNode as _createVNode, normalizeClass as _normalizeClass } from \"vue\";\nconst _hoisted_1 = { class: \"dark:text-white text-3xl font-bold mb-6\" };\nconst _hoisted_2 = { class: \"grid grid-cols-4 max-[1750px]:grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 mt-10 items-center gap-x-4 gap-y-4\" };\nconst _hoisted_3 = { class: \"relative border p-5 rounded-3xl bg-white dark:border-gray-400\" };\nconst _hoisted_4 = { class: \"font-bold pb-6 mb-6 border-b\" };\nconst _hoisted_5 = { class: \"text-md\" };\nconst _hoisted_6 = { class: \"flex flex-col gap-6\" };\nconst _hoisted_7 = { class: \"flex items-center justify-between gap-3\" };\nconst _hoisted_8 = { class: \"break-words text-mediumGray\" };\nconst _hoisted_9 = { class: \"flex items-center justify-between gap-3\" };\nconst _hoisted_10 = { class: \"break-words text-mediumGray\" };\nimport { useCompanies } from \"~/stores/companies\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"CurrentCompanyDepartment\",\n  props: {\n    more: {\n      type: Number,\n      default: null\n    }\n  },\n  setup(__props) {\n    const departments = useCompanies();\n    departments.loadDepartmentList();\n    return (_ctx, _cache) => {\n      const _component_NuxtLink = __nuxt_component_0;\n      return _openBlock(), _createElementBlock(\"div\", null, [\n        _createElementVNode(\"p\", _hoisted_1, _toDisplayString(_ctx.$t(\"Отделы компании\")), 1),\n        _createElementVNode(\"div\", _hoisted_2, [\n          (_openBlock(true), _createElementBlock(_Fragment, null, _renderList(_unref(departments).get_all_department.results, (department) => {\n            return _openBlock(), _createElementBlock(\"div\", _hoisted_3, [\n              _createElementVNode(\"div\", {\n                class: _normalizeClass({ \"blur-[1px]\": __props.more === department.id })\n              }, [\n                _createElementVNode(\"div\", _hoisted_4, [\n                  _createElementVNode(\"h2\", _hoisted_5, _toDisplayString(department.name), 1)\n                ]),\n                _createElementVNode(\"div\", _hoisted_6, [\n                  _createElementVNode(\"div\", _hoisted_7, [\n                    _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t(\"Руководитель\")), 1),\n                    _createElementVNode(\"p\", _hoisted_8, _toDisplayString(department.department_director_name ? department.department_director_name : \"Отсутсвует\"), 1)\n                  ]),\n                  _createElementVNode(\"div\", _hoisted_9, [\n                    _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t(\"Заместитель\")), 1),\n                    _createElementVNode(\"p\", _hoisted_10, _toDisplayString(department.vice_department_director_name ? department.vice_department_director_name : \"Отсутсвует\"), 1)\n                  ]),\n                  _createVNode(_component_NuxtLink, {\n                    to: `/base/companies/department/${department.id}`,\n                    class: \"block p-2.5 rounded-full bg-golden text-center\"\n                  }, {\n                    default: _withCtx(() => [\n                      _createTextVNode(_toDisplayString(_ctx.$t(\"Подробнее\")), 1)\n                    ]),\n                    _: 2\n                  }, 1032, [\"to\"])\n                ])\n              ], 2)\n            ]);\n          }), 256))\n        ])\n      ]);\n    };\n  }\n});\n",
-      "start": 1751877267917,
-      "end": 1751877267918,
+      "start": 1751976074375,
+      "end": 1751976074376,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1751877267918,
-      "end": 1751877267918,
+      "start": 1751976074376,
+      "end": 1751976074376,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1751877267918,
-      "end": 1751877267918,
+      "start": 1751976074376,
+      "end": 1751976074376,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1751877267918,
-      "end": 1751877267918,
+      "start": 1751976074376,
+      "end": 1751976074376,
       "order": "normal"
     }
   ]

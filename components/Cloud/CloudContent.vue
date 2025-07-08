@@ -20,7 +20,7 @@ defineProps({
          :class="{'!hidden' : !activeStructure}" @click="activeStructure = false"/>
     <div class="w-2/12 max-[1300px]:w-3/12 max-[840px]:absolute max-[840px]:bg-white">
       <p class="font-bold text-xl mb-5 max-[840px]:hidden">
-        Файлы и папки
+        {{ $t('Файлы и папки') }}
       </p>
       <div
           class="flex bg-porcelain shrink-0 border p-4 rounded-3xl flex-col h-full max-[840px]:border-none max-[840px]:absolute max-[840px]:z-40 max-[840px]:dark:bg-gray-600 max-[840px]:bg-white gap-y-10 !z-[23]"

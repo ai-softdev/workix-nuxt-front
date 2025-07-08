@@ -4,63 +4,63 @@
     {
       "name": "vite:load-fallback",
       "result": "<template>\r\n  <div>\r\n    <div class=\"flex items-center gap-4 justify-between max-[680px]:flex-col max-[680px]:items-start max-[680px]:gap-5\">\r\n      <p\r\n          class=\"dark:text-white text-3xl font-bold\"\r\n      >\r\n        {{ $t('Задания') }}\r\n      </p>\r\n    </div>\r\n    <div class=\"mt-8 flex max-[1170px]:flex-col max-lg:items-center justify-between\">\r\n      <div class=\"flex flex-col w-full max-xl:flex-wrap gap-y-10 max-xl:items-center\">\r\n        <div class=\"w-full mx-auto\">\r\n          <TasksReport></TasksReport>\r\n        </div>\r\n        <div class=\"w-full\">\r\n          <TaskContent></TaskContent>\r\n        </div>\r\n      </div>\r\n      <div class=\"flex flex-col w-4/12 max-[1170px]:w-full gap-y-10\" >\r\n        <div v-if=\"chartData.datasets[0].data[0]!=undefined\" class=\"dark:border dark:border-gray-500 dark:shadow-md dark:shadow-gray-500 shadow-2xl rounded-lg p-4 w-full bg-blue-5\" :class=\"{'h-[400px]' : statsList.get_tasks.count > 0}\">\r\n          <Pie class=\"tracking-wider cursor-pointer\" v-if=\"statsList.get_tasks.count > 0\" :data=\"chartData\" :options=\"chartOptions\"/>\r\n          <p v-else class=\"text-2xl break-words dark:text-white tracking-widest text-center\">{{$t('Статистика отсутствует')}}</p>\r\n        </div>\r\n        <div class=\"dark:border dark:border-gray-500 dark:shadow-md dark:shadow-gray-500 shadow-2xl rounded-lg p-4 w-full\">\r\n          <TasksNotification class=\"\"></TasksNotification>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</template>\r\n\r\n<script setup lang=\"ts\">\r\nimport TasksReport from \"../../../components/Tasks/TasksReport.vue\";\r\nimport TaskContent from \"~/components/Tasks/TasksContent\"\r\nimport TasksNotification from \"~/components/Tasks/TasksNotification.vue\";\r\nimport {Chart as ChartJS, ArcElement, Tooltip, Legend, Chart} from 'chart.js'\r\nimport {Pie} from 'vue-chartjs'\r\nimport {useTaskList} from \"~/stores/tasks\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport {useCompanies} from \"~/stores/companies\";\r\nconst statsList = useTaskList()\r\nChartJS.register(ArcElement, Tooltip, Legend)\r\nChart.defaults.color = '#b6b6b6'\r\n\r\nconst STATUS_CONFIG = {\r\n  completed: { label: 'Выполненые', color: '#41B883' },\r\n  performing: { label: 'В процессе', color: '#E46651' },\r\n  watching: { label: 'На рассмотрении', color: '#3b82f6' },\r\n  rejected: { label: 'Отмененные', color: '#DD1B16' },\r\n  returned: { label: 'Возвращенные', color: '#FFA500' },\r\n  expired: { label: 'Истёкшие', color: '#808080' },\r\n}\r\n\r\nconst chartStats = computed(() => {\r\n  const labels: string[] = []\r\n  const data: number[] = []\r\n  const backgroundColor: string[] = []\r\n\r\n  const stats = statsList?.stats\r\n\r\n  if (Array.isArray(stats)) {\r\n    stats.forEach((item) => {\r\n      const config = STATUS_CONFIG[item.status as keyof typeof STATUS_CONFIG]\r\n      if (config) {\r\n        labels.push(config.label)\r\n        data.push(item.count)\r\n        backgroundColor.push(config.color)\r\n      }\r\n    })\r\n  }\r\n\r\n  return { labels, data, backgroundColor }\r\n})\r\n\r\nconst chartData = computed(() => ({\r\n  labels: chartStats.value.labels,\r\n  datasets: [\r\n    {\r\n      backgroundColor: chartStats.value.backgroundColor,\r\n      data: chartStats.value.data\r\n    }\r\n  ]\r\n}))\r\n\r\n// const chartData = ref({\r\n//   labels:['Выполненые', 'В процессе', 'На расмотрении', 'Отмененные'],\r\n//   datasets: [\r\n//     {\r\n//       backgroundColor: ['#41B883', '#E46651', '#3b82f6', '#DD1B16'],\r\n//       data: [statsList?.get_stats[2]?.count, statsList?.get_stats[0]?.count, statsList?.get_stats[4]?.count, statsList?.get_stats[3]?.count]\r\n//     }\r\n//   ]\r\n// });\r\nconst chartOptions = ref({\r\n  responsive: true,\r\n  maintainAspectRatio: false\r\n});\r\n\r\nconst router = useRouter()\r\nconst loadAuthStore = useAuthStore()\r\nconst company = useCompanies()\r\n\r\nwatch(() => loadAuthStore.user, (newValue) => {\r\n  if(loadAuthStore?.user?.role?.name_en === 'admin'){\r\n    if (window.history.length > 1) {\r\n      router.push('/base/profile');\r\n    } else {\r\n      router.push('/');\r\n    }\r\n  }\r\n})\r\nwatch(() => company.company, (newValue) => {\r\n  let permission = company.company.modules?.find(item => item.name_en === 'tasks')\r\n  if(!permission){\r\n    if (window.history.length > 1) {\r\n      router.push('/base/profile');\r\n    } else {\r\n      router.push('/');\r\n    }\r\n  }\r\n})\r\n\r\nuseSeoMeta({\r\n  title: 'Задания',\r\n  description: 'Страница с заданиями пользователей платформы'\r\n})\r\n\r\n</script>\r\n\r\n<style lang=\"scss\" scoped>\r\n\r\n</style>",
-      "start": 1751877262271,
-      "end": 1751877262311,
+      "start": 1751976064004,
+      "end": 1751976064030,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1751877262311,
-      "end": 1751877262311,
+      "start": 1751976064030,
+      "end": 1751976064030,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1751877262311,
-      "end": 1751877262311,
+      "start": 1751976064030,
+      "end": 1751976064030,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1751877262311,
-      "end": 1751877262311,
+      "start": 1751976064030,
+      "end": 1751976064030,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1751877262311,
-      "end": 1751877262311,
+      "start": 1751976064030,
+      "end": 1751976064030,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1751877262311,
-      "end": 1751877262311,
+      "start": 1751976064030,
+      "end": 1751976064030,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1751877262311,
-      "end": 1751877262311,
+      "start": 1751976064030,
+      "end": 1751976064030,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1751877262311,
-      "end": 1751877262311,
+      "start": 1751976064030,
+      "end": 1751976064030,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1751877262311,
-      "end": 1751877262311,
+      "start": 1751976064030,
+      "end": 1751976064030,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "import _sfc_main from \"D:/projects/nuxt/workix-nuxt-front/pages/base/tasks/index.vue?vue&type=script&setup=true&lang.ts\";\nexport * from \"D:/projects/nuxt/workix-nuxt-front/pages/base/tasks/index.vue?vue&type=script&setup=true&lang.ts\";\nexport default _sfc_main;\n",
-      "start": 1751877262311,
-      "end": 1751877262372,
+      "start": 1751976064030,
+      "end": 1751976064063,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -68,170 +68,170 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1751877262372,
-      "end": 1751877262372,
+      "start": 1751976064064,
+      "end": 1751976064064,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751877262373,
-      "end": 1751877262373,
+      "start": 1751976064064,
+      "end": 1751976064069,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1751877262373,
-      "end": 1751877262373,
+      "start": 1751976064069,
+      "end": 1751976064070,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1751877262373,
-      "end": 1751877262373,
+      "start": 1751976064070,
+      "end": 1751976064070,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1751877262373,
-      "end": 1751877262373,
+      "start": 1751976064072,
+      "end": 1751976064073,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751877262374,
-      "end": 1751877262374,
+      "start": 1751976064074,
+      "end": 1751976064074,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1751877262374,
-      "end": 1751877262374,
+      "start": 1751976064075,
+      "end": 1751976064075,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1751877262374,
-      "end": 1751877262374,
+      "start": 1751976064076,
+      "end": 1751976064076,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1751877262374,
-      "end": 1751877262374,
+      "start": 1751976064076,
+      "end": 1751976064076,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1751877262374,
-      "end": 1751877262374,
+      "start": 1751976064077,
+      "end": 1751976064077,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1751877262374,
-      "end": 1751877262374,
+      "start": 1751976064077,
+      "end": 1751976064077,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1751877262374,
-      "end": 1751877262374,
+      "start": 1751976064078,
+      "end": 1751976064078,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1751877262374,
-      "end": 1751877262374,
+      "start": 1751976064078,
+      "end": 1751976064078,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1751877262375,
-      "end": 1751877262375,
+      "start": 1751976064079,
+      "end": 1751976064079,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1751877262375,
-      "end": 1751877262375,
+      "start": 1751976064080,
+      "end": 1751976064080,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1751877262375,
-      "end": 1751877262375,
+      "start": 1751976064081,
+      "end": 1751976064081,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1751877262375,
-      "end": 1751877262376,
+      "start": 1751976064083,
+      "end": 1751976064084,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1751877262376,
-      "end": 1751877262376,
+      "start": 1751976064085,
+      "end": 1751976064085,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1751877262376,
-      "end": 1751877262376,
+      "start": 1751976064086,
+      "end": 1751976064088,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1751877262377,
-      "end": 1751877262379,
+      "start": 1751976064090,
+      "end": 1751976064098,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1751877262379,
-      "end": 1751877262379,
+      "start": 1751976064099,
+      "end": 1751976064099,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1751877262379,
-      "end": 1751877262379,
+      "start": 1751976064103,
+      "end": 1751976064105,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1751877262379,
-      "end": 1751877262379,
+      "start": 1751976064106,
+      "end": 1751976064107,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1751877262380,
-      "end": 1751877262380,
+      "start": 1751976064108,
+      "end": 1751976064109,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1751877262380,
-      "end": 1751877262380,
+      "start": 1751976064111,
+      "end": 1751976064112,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1751877262381,
-      "end": 1751877262381,
+      "start": 1751976064113,
+      "end": 1751976064113,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1751877262381,
-      "end": 1751877262381,
+      "start": 1751976064114,
+      "end": 1751976064116,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1751877262382,
-      "end": 1751877262382,
+      "start": 1751976064116,
+      "end": 1751976064116,
       "order": "normal"
     }
   ]

@@ -4,7 +4,7 @@
   >
     <ProfileContentUserInfo/>
     <div
-      class="w-full col-span-2 p-6 bg-white dark:border-t dark:border-t-gray-500 dark:shadow-md shadow-cards dark:shadow-gray-500 rounded-3xl hover:transform hover:-translate-y-2 transition-all duration-200">
+      class="w-full col-span-2 p-6 bg-white dark:border-t dark:border-t-gray-500 dark:shadow-md shadow-profileCard dark:shadow-gray-500 rounded-3xl hover:transform hover:-translate-y-2 transition-all duration-200">
       <div class="border rounded-full px-3 py-2 w-fit flex items-center gap-3 mb-8">
         <img src="/icons/statistic.svg" alt="statistic">
         <h2 class="dark:text-white">{{ $t('Личная статистика') }}</h2>
@@ -14,7 +14,7 @@
   </div>
   <div class="grid grid-cols-3 max-[1150px]:!grid-cols-1 gap-x-5 mt-5">
     <TheContentBlock
-        class="bg-white shadow-cards hover:transform hover:-translate-y-2 transition-all duration-200"
+        class="bg-white shadow-profileCard hover:transform hover:-translate-y-2 transition-all duration-200"
     >
       <div class="border rounded-full px-3 py-2 w-fit flex items-center gap-3 mb-8">
         <img src="/icons/tasks.svg" alt="tasks">
@@ -23,7 +23,7 @@
       <ProfileTasks></ProfileTasks>
     </TheContentBlock>
     <TheContentBlock
-        class="bg-white shadow-cards hover:transform hover:-translate-y-2 transition-all duration-200"
+        class="bg-white shadow-profileCard hover:transform hover:-translate-y-2 transition-all duration-200"
     >
       <div class="border rounded-full px-3 py-2 w-fit flex items-center gap-3 mb-8">
         <img src="/icons/notifications.svg" alt="tasks">

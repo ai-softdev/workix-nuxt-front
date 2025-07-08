@@ -13,7 +13,7 @@ defineProps({
 <template>
   <NuxtLink
       :to="`/base/users/${userItem.id}`"
-      class="department__item transition-all grid grid-cols-3 max-[900px]:grid-cols-2 max-sm:grid-cols-1 gap-4 hover:shadow-departmentCard border bg-whiteLilia hover:bg-white hover:border-golden dark:border-none dark:shadow-none dark:bg-gray-400 dark:hover:bg-gray-300 p-5 rounded-3xl cursor-pointer"
+      class="department__item w-full transition-all grid grid-cols-3 max-[900px]:grid-cols-2 max-sm:grid-cols-1 gap-4 hover:shadow-departmentCard border bg-whiteLilia hover:bg-white hover:border-golden dark:border-none dark:shadow-none dark:bg-gray-400 dark:hover:bg-gray-300 p-5 rounded-3xl cursor-pointer"
   >
     <div class="flex items-center gap-x-4 border-r max-sm:border-none max-sm:justify-center">
       <img class="w-14 h-14 rounded-full shadow" :src="userItem.photo">

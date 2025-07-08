@@ -12,16 +12,20 @@ defineProps({
 </script>
 
 <template>
-  <div>
-    <NuxtLink class="flex dark:hover:bg-gray-700 p-2 rounded-lg transition-all items-center gap-x-2" :to="`/base/users/${user.id}`">
-      <div class="w-[50px] h-[50px]">
-        <img class="w-full rounded-full" :src="url.get_server_domain + user.photo_url" alt="">
-      </div>
-      <p>
-        {{user.first_name + ' ' + user.last_name}}
-      </p>
-    </NuxtLink>
-  </div>
+  <NuxtLink
+      class="flex dark:hover:bg-gray-700 p-2 rounded-3xl bg-whiteSmoke items-center gap-x-2 hover:shadow-sm transition-all ease-in-out duration-300"
+      :to="`/base/users/${user.id}`"
+  >
+    <div class="w-[50px] h-[50px] rounded-full bg-white shadow">
+      <img
+          :src="user.photo"
+          alt="user-img"
+      >
+    </div>
+    <p>
+      {{user.first_name + ' ' + user.last_name}}
+    </p>
+  </NuxtLink>
 </template>
 
 <style scoped lang="scss">

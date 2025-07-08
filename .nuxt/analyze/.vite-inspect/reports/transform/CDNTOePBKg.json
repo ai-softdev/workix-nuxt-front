@@ -3,64 +3,64 @@
   "transforms": [
     {
       "name": "vite:load-fallback",
-      "result": "<script setup lang=\"ts\">\r\nimport {useObjects} from \"~/stores/objects\";\r\nimport {useRoute} from \"vue-router\";\r\nimport TheTitle from '~/components/UI/TheTitle.vue'\r\nimport TheContentBlock from \"~/components/UI/TheContentBlock.vue\";\r\nimport ObjectParticipants from \"~/components/Objects/ObjectParticipants.vue\";\r\nimport ObjectSwiper from \"~/components/Objects/ObjectSwiper.vue\";\r\nimport TheBreadcrumbs from \"~/components/UI/TheBreadcrumbs.vue\";\r\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\r\nconst route = useRoute()\r\nconst currentObject = useObjects()\r\nwatchEffect(()=> {\r\n  currentObject.loadObject({id: route.params.id})\r\n})\r\n\r\nwatchSyncEffect(()=>{\r\n  useSeoMeta({\r\n    title: `${currentObject.objects.name}`\r\n  })\r\n})\r\n</script>\r\n\r\n<template>\r\n  <div class=\"text-center\">\r\n      <TheTextContent :text-type=\"'pageTitle'\">{{$t('Страница объекта ')}} <span class=\"bg-semiCyan px-2 py-1 rounded-full text-white\">{{currentObject.get_objects.name}}</span></TheTextContent>\r\n    <div class=\"flex max-sm:flex-col max-sm:my-6 items-center gap-x-4\">\r\n      <TheBreadcrumbs :breadcrumb-link=\"'/base/objects'\">\r\n        {{ $t('Список объектов') }}\r\n      </TheBreadcrumbs>\r\n      <div>\r\n        <svg width=\"15px\" height=\"15px\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\r\n          <path class=\"dark:stroke-white stroke-black\"\r\n                d=\"M14 12C14 14.7614 11.7614 17 9 17H7C4.23858 17 2 14.7614 2 12C2 9.23858 4.23858 7 7 7H7.5M10 12C10 9.23858 12.2386 7 15 7H17C19.7614 7 22 9.23858 22 12C22 14.7614 19.7614 17 17 17H16.5\"\r\n                stroke-width=\"2\" stroke-linecap=\"round\"/>\r\n        </svg>\r\n      </div>\r\n      <TheBreadcrumbs>\r\n        {{currentObject.get_objects.name}}\r\n      </TheBreadcrumbs>\r\n    </div>\r\n    <div class=\"flex mt-6 gap-x-4\">\r\n      <TheContentBlock class=\"w-9/12\">\r\n        <div class=\"flex justify-between gap-x-2\">\r\n         <div>\r\n           <p>{{$t('Дата создания:')}}</p>\r\n           <p>{{new Date(currentObject.get_objects.created_at).toLocaleDateString()}}</p>\r\n         </div>\r\n          <TheTextContent :text-type=\"'pageTitle'\">{{$t('Описание')}}</TheTextContent>\r\n          <div>\r\n            <p>{{$t('Email:')}}</p>\r\n            <p>{{currentObject.get_objects.email}}</p>\r\n          </div>\r\n        </div>\r\n        <div>\r\n          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At consequatur exercitationem fugiat in minus non suscipit velit voluptatum? Expedita facere itaque iusto magni possimus quis reiciendis rem tenetur totam voluptatibus. Beatae commodi corporis culpa hic iusto, natus numquam perferendis quas repellat saepe sed totam, vel voluptatum. Amet architecto at commodi consequuntur culpa delectus deleniti dicta dolore ea eius eos est eum explicabo, id impedit ipsam itaque necessitatibus nemo neque officia pariatur perspiciatis placeat praesentium quaerat quam quas quos repellat repudiandae saepe sint soluta tenetur vel voluptatum. Aliquam asperiores incidunt omnis repellendus. Beatae eaque exercitationem quia sed tempore? Maiores quia, quo!</p>\r\n        </div>\r\n      </TheContentBlock>\r\n      <TheContentBlock class=\"w-3/12\">\r\n        <TheTextContent>{{$t('Участники')}}</TheTextContent>\r\n        <div>\r\n          <ObjectParticipants v-if=\"currentObject.get_objects.participants?.length > 0\" v-for=\"user in currentObject.get_objects.participants\" :user=\"user\"/>\r\n          <div v-else>\r\n            <p>{{$t('Участники отсутствуют')}}</p>\r\n          </div>\r\n        </div>\r\n      </TheContentBlock>\r\n    </div>\r\n    <TheContentBlock class=\"my-10\">\r\n      <TheTextContent :text-type=\"'pageTitle'\">{{$t('Изображения объекта')}}</TheTextContent>\r\n      <ObjectSwiper></ObjectSwiper>\r\n    </TheContentBlock>\r\n  </div>\r\n</template>\r\n\r\n<style scoped lang=\"scss\">\r\n\r\n</style>",
-      "start": 1751877262224,
-      "end": 1751877262304,
+      "result": "<script setup lang=\"ts\">\r\nimport {useObjects} from \"~/stores/objects\";\r\nimport {useRoute} from \"vue-router\";\r\nimport TheTitle from '~/components/UI/TheTitle.vue'\r\nimport TheContentBlock from \"~/components/UI/TheContentBlock.vue\";\r\nimport ObjectParticipants from \"~/components/Objects/ObjectParticipants.vue\";\r\nimport ObjectSwiper from \"~/components/Objects/ObjectSwiper.vue\";\r\nimport TheBreadcrumbs from \"~/components/UI/TheBreadcrumbs.vue\";\r\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\r\n\r\nconst route = useRoute()\r\nconst currentObject = useObjects()\r\n\r\nconst router = useRouter()\r\n\r\nfunction goBack() {\r\n  router.back()\r\n}\r\n\r\nwatchEffect(() => {\r\n  currentObject.loadObject({id: route.params.id})\r\n})\r\n\r\nwatchSyncEffect(() => {\r\n  useSeoMeta({\r\n    title: `${currentObject.objects.name}`\r\n  })\r\n})\r\n</script>\r\n\r\n<template>\r\n  <div class=\"text-center\">\r\n    <div class=\"flex items-center gap-4 max-sm:flex-col max-sm:items-start\">\r\n      <button\r\n          @click=\"goBack\"\r\n          class=\"px-6 py-2 rounded-[30px] border-2 font-bold text-mediumGray bg-white flex items-center gap-2\"\r\n      >\r\n        <svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\r\n          <path d=\"M15 8H1M1 8L8 15M1 8L8 1\" stroke=\"#7D7D7D\" stroke-width=\"2\" stroke-linecap=\"round\"\r\n                stroke-linejoin=\"round\"/>\r\n        </svg>\r\n        {{ $t('Назад') }}\r\n      </button>\r\n      <div class=\"flex items-center flex-wrap gap-x-3\">\r\n        <TheBreadcrumbs :breadcrumb-link=\"`/base/objects`\">\r\n          {{ $t('Объекты') }}\r\n        </TheBreadcrumbs>\r\n        <div>\r\n          <svg width=\"6\" height=\"12\" viewBox=\"0 0 6 12\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\r\n            <path d=\"M4.032 0.48H5.24L2.168 12H0.96L4.032 0.48Z\" fill=\"#1E1E1E\"/>\r\n          </svg>\r\n        </div>\r\n        <TheBreadcrumbs>\r\n          {{ $t('Страница объекта ') }}\r\n        </TheBreadcrumbs>\r\n      </div>\r\n    </div>\r\n    <div class=\"flex items-center gap-4 my-8 max-sm:flex-col max-sm:items-start\">\r\n      <p class=\"dark:text-white text-3xl font-bold max-sm:text-start\">\r\n        {{ $t('Страница объекта ') }}\r\n      </p>\r\n      <div class=\"font-bold px-8 py-2 shadow-object rounded-full bg-white\">\r\n        {{ currentObject.get_objects.name }}\r\n      </div>\r\n    </div>\r\n    <div class=\"flex mt-6 gap-x-4 max-[1100px]:flex-col max-[1100px]:gap-5\">\r\n      <div class=\"w-9/12 flex flex-col gap-5 max-[1100px]:w-full max-[1100px]:order-2\">\r\n        <div class=\"bg-white p-6 rounded-3xl shadow-objectDescription\">\r\n          <p class=\"px-4 py-2 rounded-full border w-fit mb-6 font-bold\">\r\n            {{ $t('Описание') }}\r\n          </p>\r\n          <p class=\"text-start\">\r\n            {{ currentObject.objects.description || $t('Нет описания') }}\r\n          </p>\r\n        </div>\r\n        <div class=\"bg-white p-6 rounded-3xl shadow-objectDescription\">\r\n          <p class=\"px-4 py-2 rounded-full border w-fit mb-6 font-bold\">\r\n            {{ $t('Изображение объекта') }}\r\n          </p>\r\n          <div class=\"flex flex-col items-center gap-4\">\r\n            <div\r\n                v-for=\"(item, index) in currentObject.objects.pictures\"\r\n                class=\"relative w-8/12 max-[656px]:w-full\"\r\n            >\r\n              <div class=\"absolute bg-white rounded-lg shadow font-bold w-8 h-8 top-6 left-6 flex items-center justify-center\">\r\n                {{index+1}}\r\n              </div>\r\n              <img\r\n                  class=\"block w-full h-full object-cover rounded-3xl shadow\"\r\n                  :src=\"item.picture\"\r\n                  alt=\"picture\"\r\n              >\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"w-3/12 flex flex-col gap-5 max-[1100px]:w-full\">\r\n        <div class=\"bg-white p-6 rounded-3xl shadow-objectDescription\">\r\n          <div class=\"mx-auto border rounded-full px-3 py-2 w-fit flex items-center gap-3 mb-6\">\r\n            <img src=\"/icons/people.svg\" alt=\"people\">\r\n            <h2 class=\"dark:text-white\">{{ $t('Участники') }}</h2>\r\n          </div>\r\n          <div class=\"flex flex-col gap-3\">\r\n            <ObjectParticipants\r\n                v-if=\"currentObject.get_objects.participants?.length > 0\"\r\n                v-for=\"user in currentObject.get_objects.participants\"\r\n                :user=\"user\"\r\n            />\r\n            <div v-else>\r\n              <p>{{ $t('Участники отсутствуют') }}</p>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"bg-white p-6 rounded-3xl shadow-objectDescription\">\r\n          <div class=\"mx-auto border rounded-full px-3 py-2 w-fit flex items-center gap-3 mb-6\">\r\n            <img src=\"/icons/time.svg\" alt=\"time\">\r\n            <h2 class=\"dark:text-white\">{{ $t('Дата создания:') }}</h2>\r\n          </div>\r\n          <p class=\"bg-whiteSmoke px-4 py-2 w-fit rounded-full mx-auto\">{{ new Date(currentObject.get_objects.created_at).toLocaleDateString() }}</p>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</template>\r\n\r\n<style scoped lang=\"scss\">\r\n\r\n</style>",
+      "start": 1751976063960,
+      "end": 1751976064014,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1751877262304,
-      "end": 1751877262304,
+      "start": 1751976064014,
+      "end": 1751976064014,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1751877262304,
-      "end": 1751877262304,
+      "start": 1751976064014,
+      "end": 1751976064014,
       "order": "pre"
     },
     {
       "name": "unplugin-vue-i18n",
-      "start": 1751877262304,
-      "end": 1751877262304,
+      "start": 1751976064014,
+      "end": 1751976064014,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1751877262304,
-      "end": 1751877262304,
+      "start": 1751976064014,
+      "end": 1751976064014,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1751877262304,
-      "end": 1751877262304,
+      "start": 1751976064014,
+      "end": 1751976064014,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1751877262304,
-      "end": 1751877262304,
+      "start": 1751976064014,
+      "end": 1751976064014,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1751877262304,
-      "end": 1751877262304,
+      "start": 1751976064014,
+      "end": 1751976064014,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1751877262304,
-      "end": 1751877262304,
+      "start": 1751976064014,
+      "end": 1751976064014,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "import _sfc_main from \"D:/projects/nuxt/workix-nuxt-front/pages/base/objects/[id].vue?vue&type=script&setup=true&lang.ts\";\nexport * from \"D:/projects/nuxt/workix-nuxt-front/pages/base/objects/[id].vue?vue&type=script&setup=true&lang.ts\";\nexport default _sfc_main;\n",
-      "start": 1751877262304,
-      "end": 1751877262372,
+      "start": 1751976064014,
+      "end": 1751976064063,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -68,170 +68,170 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1751877262372,
-      "end": 1751877262372,
+      "start": 1751976064064,
+      "end": 1751976064064,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751877262373,
-      "end": 1751877262373,
+      "start": 1751976064064,
+      "end": 1751976064069,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1751877262373,
-      "end": 1751877262373,
+      "start": 1751976064070,
+      "end": 1751976064070,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1751877262373,
-      "end": 1751877262373,
+      "start": 1751976064070,
+      "end": 1751976064070,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1751877262373,
-      "end": 1751877262373,
+      "start": 1751976064072,
+      "end": 1751976064073,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1751877262374,
-      "end": 1751877262374,
+      "start": 1751976064074,
+      "end": 1751976064074,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1751877262374,
-      "end": 1751877262374,
+      "start": 1751976064075,
+      "end": 1751976064075,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1751877262374,
-      "end": 1751877262374,
+      "start": 1751976064076,
+      "end": 1751976064076,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1751877262374,
-      "end": 1751877262374,
+      "start": 1751976064076,
+      "end": 1751976064076,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1751877262374,
-      "end": 1751877262374,
+      "start": 1751976064077,
+      "end": 1751976064077,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1751877262374,
-      "end": 1751877262374,
+      "start": 1751976064077,
+      "end": 1751976064077,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1751877262374,
-      "end": 1751877262374,
+      "start": 1751976064078,
+      "end": 1751976064078,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1751877262374,
-      "end": 1751877262374,
+      "start": 1751976064078,
+      "end": 1751976064078,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1751877262375,
-      "end": 1751877262375,
+      "start": 1751976064079,
+      "end": 1751976064079,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1751877262375,
-      "end": 1751877262375,
+      "start": 1751976064080,
+      "end": 1751976064080,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1751877262375,
-      "end": 1751877262375,
+      "start": 1751976064081,
+      "end": 1751976064081,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-macros-transform",
-      "start": 1751877262375,
-      "end": 1751877262376,
+      "start": 1751976064083,
+      "end": 1751976064084,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-resource",
-      "start": 1751877262376,
-      "end": 1751877262376,
+      "start": 1751976064085,
+      "end": 1751976064085,
       "order": "post"
     },
     {
       "name": "nuxtjs:i18n-meta-deprecation",
-      "start": 1751877262376,
-      "end": 1751877262376,
+      "start": 1751976064087,
+      "end": 1751976064088,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1751877262377,
-      "end": 1751877262379,
+      "start": 1751976064090,
+      "end": 1751976064098,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1751877262379,
-      "end": 1751877262379,
+      "start": 1751976064099,
+      "end": 1751976064099,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1751877262379,
-      "end": 1751877262379,
+      "start": 1751976064103,
+      "end": 1751976064105,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1751877262379,
-      "end": 1751877262379,
+      "start": 1751976064107,
+      "end": 1751976064107,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1751877262380,
-      "end": 1751877262380,
+      "start": 1751976064108,
+      "end": 1751976064109,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1751877262380,
-      "end": 1751877262380,
+      "start": 1751976064111,
+      "end": 1751976064112,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1751877262381,
-      "end": 1751877262381,
+      "start": 1751976064113,
+      "end": 1751976064113,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1751877262381,
-      "end": 1751877262381,
+      "start": 1751976064114,
+      "end": 1751976064116,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1751877262382,
-      "end": 1751877262382,
+      "start": 1751976064116,
+      "end": 1751976064116,
       "order": "normal"
     }
   ]

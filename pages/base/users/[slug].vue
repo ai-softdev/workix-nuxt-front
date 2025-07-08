@@ -105,7 +105,7 @@ onUpdated(() => {
       </div>
     </div>
     <div class="my-10 grid grid-cols-3 max-[1150px]:!grid-cols-1 gap-5">
-      <div class="bg-white p-6 rounded-3xl">
+      <div class="bg-white p-6 rounded-3xl shadow-profileCard">
         <div class="border rounded-full px-3 py-2 w-fit flex items-center gap-3">
           <img src="/icons/profile.svg" alt="profile">
           <h2 class="dark:text-white">{{ $t('Информация') }}</h2>
@@ -211,7 +211,7 @@ onUpdated(() => {
           </div>
         </div>
       </div>
-      <div class="col-span-2 bg-white p-6 rounded-3xl">
+      <div class="col-span-2 bg-white p-6 rounded-3xl shadow-profileCard">
         <div class="border rounded-full px-3 py-2 w-fit flex items-center gap-3 mb-8">
           <img src="/icons/statistic.svg" alt="statistic">
           <h2 class="dark:text-white">{{ $t('Личная статистика') }}</h2>
@@ -220,10 +220,10 @@ onUpdated(() => {
           <TheUserChart></TheUserChart>
         </div>
       </div>
-      <div class="bg-white p-6 rounded-3xl">
+      <div class="bg-white p-6 rounded-3xl shadow-profileCard">
         <div class="border rounded-full px-3 py-2 w-fit flex items-center gap-3 mb-8">
           <img src="/icons/info.svg" alt="info">
-          <h2 class="dark:text-white">{{ $t('Информация  о отделе') }}</h2>
+          <h2 class="dark:text-white">{{ $t('Информация об отделе') }}</h2>
         </div>
         <div class="flex flex-col gap-4 w-full">
           <div class="text-sm flex items-center justify-between">
