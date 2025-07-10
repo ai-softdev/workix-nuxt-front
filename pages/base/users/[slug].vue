@@ -39,6 +39,21 @@ function goBack() {
   router.back()
 }
 
+const age = computed(() => {
+  const birthDate = new Date(currentUser.user.date_of_birth)
+  const today = new Date()
+
+  let years = today.getFullYear() - birthDate.getFullYear()
+  const monthDiff = today.getMonth() - birthDate.getMonth()
+  const dayDiff = today.getDate() - birthDate.getDate()
+
+  if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+    years--
+  }
+
+  return years
+})
+
 watchEffect(() => {
   currentUser.loadUser({id: route.params.slug})
   if (loadCurrentUser.user.role?.name_en === 'company_admin' || loadCurrentUser.user.role?.name_en === 'admin') {
@@ -128,9 +143,7 @@ onUpdated(() => {
                   {{ currentUser.user.last_name }}
                 </h3>
                 <p class="dark:text-white text-sm text-mediumGray">
-                  {{
-                    Math.trunc((new Date() - new Date(loadCurrentUser.user.date_of_birth)) / 1000 / 3600 / 24 / 365) + ' лет'
-                  }}
+                  {{ age  + ' лет' }}
                 </p>
               </div>
             </div>
@@ -205,7 +218,7 @@ onUpdated(() => {
               <p
                   class="flex items-center gap-x-2 hover:underline"
               >
-                {{ currentUser.user.phone }}
+                {{ currentUser.user.head_user.start_work_year || $t('Нет стажа') }}
               </p>
             </div>
           </div>

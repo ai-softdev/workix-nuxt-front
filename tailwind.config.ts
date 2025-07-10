@@ -22,7 +22,8 @@ export default <Partial<Config>>{
         gainsboro: "#DFDFDF",
         mercury: "#E5E5E5",
         darkJungle: "#1E1E1E",
-        redOrange: "#F44336"
+        redOrange: "#F44336",
+        romance: "#535862"
       },
       boxShadow: {
         notifications: '0 6px 12px 0 rgba(0, 0, 0, 0.05)',

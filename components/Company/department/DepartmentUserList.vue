@@ -8,6 +8,15 @@ defineProps({
   },
 })
 
+function formatDate(input: string): string {
+  const date = new Date(input)
+  return date.toLocaleDateString('ru-RU', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  })
+}
+
 </script>
 
 <template>
@@ -30,7 +39,7 @@ defineProps({
     <div class="flex items-center justify-between gap-5 max-[900px]:justify-start max-[900px]:border-r max-sm:border-none max-sm:justify-center">
       <div class="text-center pr-6 pl-8 max-[900px]:pr-0">
         <h2 class="font-medium">{{$t('Дата регистрации')}}</h2>
-        <h2 class="text-mediumGray text-sm">00.00.0000</h2>
+        <h2 class="text-mediumGray text-sm">{{ formatDate(userItem.created_at) }}</h2>
       </div>
       <div class="max-[900px]:hidden h-full border-l flex items-center justify-center pl-8">
         <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">

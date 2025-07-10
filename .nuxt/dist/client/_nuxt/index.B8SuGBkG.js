@@ -1,1 +1,0 @@
-import{u as t}from"./storage.CgertWpn.js";import{g as s,m as r,s as a,o as n,c as m}from"./entry.BElsFtQk.js";import"./nuxt-storage.CDH-9eXG.js";const d=s({__name:"index",setup(u){const e=t(),o=r();return a(()=>{e.loadItem({itemSlug:o.params.slug})}),(c,p)=>(n(),m("div",null," Lorem, ipsum. "))}});export{d as default};

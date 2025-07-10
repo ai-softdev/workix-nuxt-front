@@ -1,23 +1,16 @@
 <template>
-  <div class="flex justify-center flex-wrap gap-x-6 gap-y-6">
+  <div
+      class="grid grid-cols-2 gap-x-5 gap-y-6 max-[1170px]:w-full max-[756px]:grid-cols-1"
+  >
     <TasksReportBlock>
-      <template v-slot:TaskReportSvg>
-        <svg width="50px" height="50px" viewBox="0 0 91 91" id="Layer_1" xml:space="preserve"
-             xmlns="http://www.w3.org/2000/svg">
-            <g>
-            <g>
-            <path
-              d="M64.292,13.277c-0.002-0.025-0.01-0.047-0.01-0.072c0-0.024,0.008-0.047,0.01-0.072V6.758h-8.936    c-1.07,0-2.053-0.606-2.525-1.567c-1.402-2.841-4.217-4.605-7.338-4.605c-3.129,0-5.941,1.764-7.346,4.604    c-0.473,0.961-1.455,1.568-2.521,1.568h-8.938v6.41c0,0.013,0.004,0.024,0.004,0.037c0,0.013-0.004,0.024-0.004,0.036v6.412    h37.604V13.277z"
-              fill="#3b82f6"/>
-              <path
-                d="M69.923,16.021v6.448c0,1.554-1.26,2.815-2.814,2.815H23.876c-1.559,0-2.816-1.261-2.816-2.815v-6.448    H9.597v74.682h66.164c3.279,0,5.943-2.666,5.943-5.939V16.021H69.923z"
-                fill="#647F94"/>
-              <path
-                d="M29.911,75.561h-9.264c-1.555,0-2.814-1.26-2.814-2.813c0-1.557,1.26-2.816,2.814-2.816h9.264    c1.557,0,2.814,1.26,2.814,2.816C32.726,74.301,31.468,75.561,29.911,75.561z M45.894,75.561h-6.879    c-1.553,0-2.814-1.26-2.814-2.813c0-1.557,1.262-2.816,2.814-2.816h6.879c1.553,0,2.814,1.26,2.814,2.816    C48.708,74.301,47.446,75.561,45.894,75.561z M64.046,75.561h-8.781c-1.557,0-2.818-1.26-2.818-2.813    c0-1.557,1.262-2.816,2.818-2.816h8.781c1.551,0,2.814,1.26,2.814,2.816C66.86,74.301,65.597,75.561,64.046,75.561z     M70.649,58.609H20.647c-1.555,0-2.814-1.26-2.814-2.814c0-1.557,1.26-2.816,2.814-2.816h50.002c1.557,0,2.814,1.26,2.814,2.816    C73.464,57.35,72.206,58.609,70.649,58.609z M70.649,41.666H20.647c-1.555,0-2.814-1.26-2.814-2.815    c0-1.556,1.26-2.816,2.814-2.816h50.002c1.557,0,2.814,1.261,2.814,2.816C73.464,40.406,72.206,41.666,70.649,41.666z"
-                fill="#95AEC2"/>
-            </g>
-            </g>
+      <template
+          v-slot:TaskReportSvg
+      >
+        <div class="w-[86px] h-[86px] flex items-center justify-center bg-azure bg-opacity-10 rounded-3xl">
+          <svg width="30" height="35" viewBox="0 0 30 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M27.0503 18.4853V9.26471C27.0503 6.5468 27.0503 5.18785 26.5214 4.14975C26.0561 3.23661 25.3138 2.49421 24.4006 2.02894C23.3624 1.5 22.0036 1.5 19.2856 1.5H8.93267C6.21477 1.5 4.85582 1.5 3.81772 2.02894C2.90458 2.49421 2.16217 3.23661 1.69691 4.14975C1.16797 5.18785 1.16797 6.5468 1.16797 9.26471V26.0882C1.16797 28.8062 1.16797 30.165 1.69691 31.2032C2.16217 32.1164 2.90458 32.8587 3.81772 33.324C4.85582 33.8529 6.21477 33.8529 8.93267 33.8529H14.1091M17.3444 16.0588H7.63856M10.8739 22.5294H7.63856M20.5797 9.58824H7.63856M18.1533 29L21.3886 32.2353L28.668 24.9559" stroke="#2196F3" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
+        </div>
       </template>
       <template v-slot:TaskReportTitle>
         {{ $t('Общие задания') }}
@@ -31,101 +24,137 @@
     </TasksReportBlock>
     <TasksReportBlock>
       <template v-slot:TaskReportSvg>
-        <svg width="50px" height="50px" viewBox="0 0 91 91" enable-background="new 0 0 91 91" id="Layer_1" version="1.1"
-             xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-            <g>
-            <g>
-            <path
-              d="M23.932,87.037V64.561c0-10.395,10.014-20.498,22.377-20.498h0.639c12.359,0,22.371,10.104,22.371,20.498    v22.477"
-              fill="#95AEC2"/>
-              <path
-                d="M23.932,3.638v22.48c0,10.395,10.014,20.501,22.377,20.501h0.639c12.359,0,22.371-10.106,22.371-20.501    V3.638"
-                fill="#647F94"/>
-              <path
-                d="M75.018,6.978H16.561c-1.846,0-3.34-1.496-3.34-3.34c0-1.846,1.494-3.34,3.34-3.34h58.457    c1.842,0,3.34,1.494,3.34,3.34C78.357,5.481,76.859,6.978,75.018,6.978z"
-                fill="#45596B"/>
-              <path
-                d="M75.018,90.377H16.561c-1.846,0-3.34-1.496-3.34-3.34s1.494-3.34,3.34-3.34h58.457    c1.842,0,3.34,1.496,3.34,3.34S76.859,90.377,75.018,90.377z"
-                fill="#45596B"/>
-            </g>
-            </g>
+        <div class="w-[86px] h-[86px] flex items-center justify-center bg-[#F4C1071F] bg-opacity-10 rounded-3xl">
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.0013 3.66699L28.6013 10.267C33.0013 -1.28301 45.2846 11.0003 33.7346 15.4003L40.3346 22.0003L33.7346 28.6003C29.3346 17.0503 17.0513 29.3337 28.6013 33.7337L22.0013 40.3337L15.4013 33.7337C11.0013 45.2837 -1.28203 33.0003 10.268 28.6003L3.66797 22.0003L10.268 15.4003C14.668 26.9503 26.9513 14.667 15.4013 10.267L22.0013 3.66699Z" stroke="#EAB70A" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
+        </div>
       </template>
       <template v-slot:TaskReportTitle>
         {{ $t('В процессе') }}
       </template>
-      <template v-if="!taskList.get_stats[0]" v-slot:TaskSceleton>
+      <template
+          v-if="!performingStat('performing')"
+          v-slot:TaskSceleton
+      >
         <TheSceleton border-radius="20px" width="100px" height="20px"></TheSceleton>
       </template>
-      <template v-else v-slot:TaskReportSubtitle>
-        {{ taskList?.get_stats[0]?.count + $t(' заданий') }}
+      <template
+          v-else
+          v-slot:TaskReportSubtitle
+      >
+        {{ performingStat('performing')?.count + ' ' + $t('заданий') }}
       </template>
     </TasksReportBlock>
     <TasksReportBlock>
       <template v-slot:TaskReportSvg>
-        <svg width="50px" height="50px" viewBox="0 0 91 91" enable-background="new 0 0 91 91" id="Layer_1" version="1.1"
-             xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-            <g>
-            <g>
-            <path
-              d="M16.084,38.938h-0.332c-8.271,0-15.002-6.68-15.002-14.888V11.007c0-1.846,1.494-3.34,3.342-3.34h14.494    c1.844,0,3.34,1.494,3.34,3.34v23.664c0.018,0.266,0.027,0.424,0.029,0.586c0.025,1.588-1.072,2.975-2.625,3.314    C18.201,38.819,17.139,38.938,16.084,38.938z M7.432,14.347v9.703c0,4.359,3.461,7.935,7.814,8.193V14.347H7.432z"
-              fill="#45596B"/>
-              <path
-                d="M18.615,37.769c-1.34,0-2.438-1.076-2.459-2.424c-0.02-0.334-0.029-0.502-0.029-0.674V11.007    c0-1.359,1.1-2.459,2.459-2.459c1.357,0,2.459,1.1,2.459,2.459l0.01,23.832c0.01,0.145,0.018,0.287,0.02,0.432    c0.021,1.359-1.063,2.477-2.42,2.498C18.641,37.769,18.629,37.769,18.615,37.769z"
-                fill="#647F94"/>
-              <path
-                d="M75.32,38.938h-0.332c-1.057,0-2.121-0.119-3.25-0.367c-1.572-0.342-2.678-1.756-2.629-3.363    c0.004-0.152,0.016-0.303,0.027-0.453l0.01-23.748c0-1.846,1.494-3.34,3.34-3.34H86.98c1.844,0,3.34,1.494,3.34,3.34V24.05    C90.32,32.259,83.592,38.938,75.32,38.938z M75.826,14.347v17.896c4.352-0.258,7.814-3.833,7.814-8.193v-9.703H75.826z"
-                fill="#45596B"/>
-              <path
-                d="M45.535,88.495c-1.844,0-3.342-1.496-3.342-3.34V58.304c0-1.842,1.498-3.34,3.342-3.34    c1.846,0,3.34,1.498,3.34,3.34v26.852C48.875,86.999,47.381,88.495,45.535,88.495z"
-                fill="#45596B"/>
-              <path
-                d="M60.531,88.495H30.537c-1.844,0-3.34-1.496-3.34-3.34c0-1.846,1.496-3.34,3.34-3.34h29.994    c1.844,0,3.34,1.494,3.34,3.34C63.871,86.999,62.375,88.495,60.531,88.495z"
-                fill="#45596B"/>
-              <g>
-            <path
-              d="M72.486,2.498H46.66v29.195c0,1.357-1.104,2.459-2.459,2.459H30.537c-1.357,0-2.459-1.102-2.459-2.459     V2.498h-9.492c-1.359,0-2.463,1.098-2.463,2.459l0.033,30.412c0.365,14.955,12.287,25.398,29,25.398h0.756     c16.711,0,28.635-10.443,28.994-25.453l0.039-30.357C74.945,3.595,73.844,2.498,72.486,2.498z"
-              fill="#647F94"/>
-                <rect fill="#3b82f6" height="26.734" width="8.744" x="32.996" y="2.498"/>
-            </g>
-            </g>
-            </g>
+        <div class="w-[86px] h-[86px] flex items-center justify-center bg-[#E5E0FFCC] bg-opacity-10 rounded-3xl">
+          <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M31.5 31.5L24.25 24.25M14.8333 6.5C19.4357 6.5 23.1667 10.231 23.1667 14.8333M28.1667 14.8333C28.1667 22.1972 22.1972 28.1667 14.8333 28.1667C7.46953 28.1667 1.5 22.1972 1.5 14.8333C1.5 7.46953 7.46953 1.5 14.8333 1.5C22.1972 1.5 28.1667 7.46953 28.1667 14.8333Z" stroke="#8977EA" stroke-width="2.17241" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
+        </div>
       </template>
       <template v-slot:TaskReportTitle>
-        {{ $t('Выполненые') }}
+        {{ $t('На проверке') }}
       </template>
-      <template v-if="!taskList.get_stats[2]" v-slot:TaskSceleton>
+      <template
+          v-if="!performingStat('watching')"
+          v-slot:TaskSceleton
+      >
         <TheSceleton border-radius="20px" width="100px" height="20px"></TheSceleton>
       </template>
-      <template v-else v-slot:TaskReportSubtitle>
-        {{ taskList?.get_stats[2]?.count + $t(' заданий') }}
+      <template
+          v-else
+          v-slot:TaskReportSubtitle
+      >
+        {{ performingStat('watching')?.count + ' ' + $t('заданий') }}
       </template>
     </TasksReportBlock>
     <TasksReportBlock>
       <template v-slot:TaskReportSvg>
-        <svg width="50px" height="50px" viewBox="0 0 91 91" enable-background="new 0 0 91 91" id="Layer_1" version="1.1"
-             xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <g>
-          <g>
-          <path d="M16.142,90.613H68.39c3.418,0,6.197-2.779,6.197-6.195V29.52l-58.445-0.002V90.613z" fill="#647F94"/>
-            <path
-              d="M58.431,42.701c0-1.547,1.254-2.801,2.801-2.801s2.803,1.254,2.803,2.801v37.295    c0,1.549-1.256,2.801-2.803,2.801s-2.801-1.252-2.801-2.801V42.701z M42.56,42.701c0-1.547,1.254-2.801,2.803-2.801    c1.545,0,2.799,1.254,2.799,2.801v37.295c0,1.549-1.254,2.801-2.799,2.801c-1.549,0-2.803-1.252-2.803-2.801V42.701z     M26.688,42.701c0-1.547,1.256-2.801,2.801-2.801c1.547,0,2.803,1.254,2.803,2.801v37.295c0,1.549-1.256,2.801-2.803,2.801    c-1.545,0-2.801-1.252-2.801-2.801V42.701z"
-              fill="#95AEC2"/>
-            <rect fill="#3b82f6" height="9.438" width="66.611" x="12.056" y="14.479"/>
-            <rect fill="#647F94" height="7.887" width="18.205" x="36.259" y="0.99"/>
-          </g>
-          </g>
-        </svg>
+        <div class="w-[86px] h-[86px] flex items-center justify-center bg-[#C6EBE873] bg-opacity-10 rounded-3xl">
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.66797 18.3333C3.66797 18.3333 3.89039 16.7764 10.334 10.3327C16.7777 3.88909 27.2248 3.88909 33.6686 10.3327C35.9515 12.6157 37.4257 15.4013 38.091 18.3333M3.66797 18.3333V7.33333M3.66797 18.3333H14.668M40.3346 25.6667C40.3346 25.6667 40.1123 27.2235 33.6686 33.6673C27.2248 40.111 16.7777 40.111 10.334 33.6673C8.05103 31.3843 6.5769 28.5987 5.91166 25.6667M40.3346 25.6667V36.6667M40.3346 25.6667H29.3346" stroke="#43B7AD" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </template>
+      <template v-slot:TaskReportTitle>
+        {{ $t('Возращенные на доработку') }}
+      </template>
+      <template
+          v-if="!performingStat('returned')"
+          v-slot:TaskSceleton
+      >
+        <TheSceleton border-radius="20px" width="100px" height="20px"></TheSceleton>
+      </template>
+      <template
+          v-else
+          v-slot:TaskReportSubtitle
+      >
+        {{ performingStat('returned')?.count + ' ' + $t('заданий') }}
+      </template>
+    </TasksReportBlock>
+    <TasksReportBlock>
+      <template v-slot:TaskReportSvg>
+        <div class="w-[86px] h-[86px] flex items-center justify-center bg-[#D3CFCF66] bg-opacity-10 rounded-3xl">
+          <svg width="25" height="34" viewBox="0 0 25 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.69143 26.8258H16.9786M3.97657 1.28613H20.6934C21.5604 1.28613 21.9938 1.28613 22.3249 1.45483C22.6162 1.60324 22.8528 1.84003 23.0013 2.13128C23.17 2.46238 23.17 2.89583 23.17 3.7627V6.97377C23.17 7.73095 23.17 8.10954 23.0844 8.46581C23.0086 8.78169 22.8835 9.08366 22.7138 9.36064C22.5224 9.67304 22.2546 9.94074 21.7192 10.4762L17.182 15.0135C16.569 15.6264 16.2624 15.933 16.1477 16.2864C16.0466 16.5972 16.0466 16.9322 16.1477 17.243C16.2624 17.5964 16.569 17.903 17.182 18.516L21.7192 23.0532C22.2546 23.5886 22.5224 23.8564 22.7138 24.1687C22.8835 24.4458 23.0086 24.7478 23.0844 25.0635C23.17 25.4199 23.17 25.7985 23.17 26.5557V29.7667C23.17 30.6337 23.17 31.0671 23.0013 31.3981C22.8528 31.6895 22.6162 31.9261 22.3249 32.0746C21.9938 32.2433 21.5604 32.2433 20.6934 32.2433H3.97657C3.10969 32.2433 2.67625 32.2433 2.34515 32.0746C2.0539 31.9261 1.81711 31.6895 1.6687 31.3981C1.5 31.0671 1.5 30.6337 1.5 29.7667V26.5557C1.5 25.7985 1.5 25.4199 1.58553 25.0635C1.66136 24.7478 1.78645 24.4458 1.95618 24.1687C2.14762 23.8564 2.41533 23.5886 2.95074 23.0532L7.48809 18.516C8.10107 17.903 8.40755 17.5964 8.52238 17.243C8.62339 16.9322 8.62339 16.5972 8.52238 16.2864C8.40756 15.933 8.10105 15.6264 7.48809 15.0135L2.95074 10.4762C2.41534 9.94076 2.14762 9.67304 1.95618 9.36064C1.78645 9.08366 1.66136 8.78169 1.58553 8.46581C1.5 8.10954 1.5 7.73095 1.5 6.97377V3.7627C1.5 2.89583 1.5 2.46238 1.6687 2.13128C1.81711 1.84003 2.0539 1.60324 2.34515 1.45483C2.67625 1.28613 3.10969 1.28613 3.97657 1.28613Z" stroke="#2A2A2A" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </template>
+      <template v-slot:TaskReportTitle>
+        {{ $t('Истеченные по сроку') }}
+      </template>
+      <template
+          v-if="!performingStat('expired')"
+          v-slot:TaskSceleton
+      >
+        <TheSceleton border-radius="20px" width="100px" height="20px"></TheSceleton>
+      </template>
+      <template v-else v-slot:TaskReportSubtitle>
+        {{ performingStat('expired')?.count + ' ' + $t('заданий') }}
+      </template>
+    </TasksReportBlock>
+    <TasksReportBlock>
+      <template v-slot:TaskReportSvg>
+        <div class="w-[86px] h-[86px] flex items-center justify-center bg-[#F443361F] bg-opacity-10 rounded-3xl">
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9.03964 9.03866L34.963 34.962M34.9628 9.03864L9.03951 34.962M40.3346 22.0003C40.3346 32.1255 32.1264 40.3337 22.0013 40.3337C11.8761 40.3337 3.66797 32.1255 3.66797 22.0003C3.66797 11.8751 11.8761 3.66699 22.0013 3.66699C32.1264 3.66699 40.3346 11.8751 40.3346 22.0003Z" stroke="#F44336" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
       </template>
       <template v-slot:TaskReportTitle>
         {{ $t('Отклоненные') }}
       </template>
-      <template v-if="!taskList.get_stats[3]" v-slot:TaskSceleton>
+      <template
+          v-if="!performingStat('rejected')"
+          v-slot:TaskSceleton
+      >
         <TheSceleton border-radius="20px" width="100px" height="20px"></TheSceleton>
       </template>
       <template v-else v-slot:TaskReportSubtitle>
-        {{ taskList?.get_stats[3]?.count + $t(' заданий') }}
+        {{ performingStat('rejected')?.count + ' ' + $t('заданий') }}
+      </template>
+    </TasksReportBlock>
+    <TasksReportBlock>
+      <template v-slot:TaskReportSvg>
+        <div class="w-[86px] h-[86px] flex items-center justify-center bg-[#4CAF501F] bg-opacity-10 rounded-3xl">
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M40.3346 20.3241V22.0108C40.3324 25.9642 39.0522 29.8111 36.685 32.9774C34.318 36.1439 30.9907 38.4604 27.1995 39.5813C23.4082 40.7022 19.3563 40.5676 15.6478 39.1975C11.9394 37.8275 8.77316 35.2953 6.62139 31.9788C4.46963 28.6623 3.44758 24.739 3.70771 20.794C3.96782 16.8492 5.49618 13.0941 8.06481 10.0888C10.6334 7.08349 14.1047 4.98903 17.961 4.11776C21.8172 3.24648 25.8518 3.64511 29.463 5.25415M40.3346 7.33366L22.0013 25.6853L16.5013 20.1853" stroke="#4CAF50" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </template>
+      <template v-slot:TaskReportTitle>
+        {{ $t('Выполненные') }}
+      </template>
+      <template
+          v-if="!performingStat('completed')"
+          v-slot:TaskSceleton
+      >
+        <TheSceleton border-radius="20px" width="100px" height="20px"></TheSceleton>
+      </template>
+      <template v-else v-slot:TaskReportSubtitle>
+        {{ performingStat('completed')?.count + ' ' + $t('заданий') }}
       </template>
     </TasksReportBlock>
   </div>
@@ -147,4 +176,11 @@ const props = defineProps({
     default: null
   },
 })
+
+function performingStat(status: string) {
+  return Array.isArray(taskList.get_stats)
+      ? taskList.get_stats.find(stat => stat.status === status)
+      : null
+}
+
 </script>

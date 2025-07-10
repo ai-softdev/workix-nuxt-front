@@ -1,16 +1,21 @@
 <template>
-<div>
-  <div class="dark:shadow-gray-500 dark:border dark:border-gray-500 w-[250px] h-[250px] max-[400px]:w-400px transition-all hover:-translate-y-3 shadow-lg dark:shadow-md p-6 rounded-lg" :task="task">
-    <div class="dark:bg-gray-100 shadow-lg rounded-full w-[80px] h-[80px] mx-auto flex justify-center items-center" >
-      <slot name="TaskReportSvg"/>
+  <div
+      class="w-full h-fit flex gap-4 max-[400px]:w-400px transition-all hover:-translate-y-3 p-6 rounded-3xl shadow-objectDescription bg-white"
+      :task="task"
+  >
+    <slot name="TaskReportSvg"/>
+    <div class="flex flex-col gap-4">
+      <p class="font-bold text-lg">
+        <slot name="TaskReportTitle"/>
+      </p>
+      <p class="text-md rounded-full border px-3 py-1 w-fit">
+        <slot name="TaskReportSubtitle"/>
+      </p>
+      <div>
+        <slot name="TaskSceleton"/>
+      </div>
     </div>
-   <div class="flex flex-col">
-     <p class="mt-6 mb-12 font-bold text-lg text-blue-400 dark:text-white "><slot name="TaskReportTitle"/></p>
-     <p class="text-md dark:text-white text-blue-600"><slot name="TaskReportSubtitle"/></p>
-     <div><slot name="TaskSceleton"/></div>
-   </div>
   </div>
-</div>
 </template>
 
 <script lang="ts" setup>

@@ -1,30 +1,32 @@
 <template>
   <div>
-    <div class="flex items-center gap-4 justify-between max-[680px]:flex-col max-[680px]:items-start max-[680px]:gap-5">
-      <p
-          class="dark:text-white text-3xl font-bold"
-      >
-        {{ $t('Задания') }}
-      </p>
+    <p
+        class="dark:text-white text-3xl font-bold mb-8"
+    >
+      {{ $t('Страница с заданиями') }}
+    </p>
+    <div class="mt-8 flex max-[1170px]:flex-col max-lg:items-center justify-between gap-5">
+      <div class="flex flex-col w-8/12 max-[1170px]:w-full gap-y-10">
+        <TasksReport></TasksReport>
+      </div>
+      <div class="flex flex-col w-4/12 max-[1170px]:w-full gap-y-5" >
+        <div
+            v-if="chartData.datasets[0].data[0]!=undefined"
+            class="dark:border dark:border-gray-500 dark:shadow-md dark:shadow-gray-500 rounded-3xl p-4 w-full bg-white shadow-objectDescription"
+            :class="{'h-[400px]' : statsList.get_tasks.count > 0}"
+        >
+          <Pie class="cursor-pointer" v-if="statsList.get_tasks.count > 0" :data="chartData" :options="chartOptions"/>
+          <p v-else class="text-xl min-h-[200px] flex items-center justify-center dark:text-white text-center">
+            {{ $t('Статистика отсутствует') }}
+          </p>
+        </div>
+        <div class="dark:border dark:border-gray-500 dark:shadow-md dark:shadow-gray-500 rounded-3xl bg-white shadow-objectDescription px-6 py-5 w-full">
+          <TasksNotification/>
+        </div>
+      </div>
     </div>
-    <div class="mt-8 flex max-[1170px]:flex-col max-lg:items-center justify-between">
-      <div class="flex flex-col w-full max-xl:flex-wrap gap-y-10 max-xl:items-center">
-        <div class="w-full mx-auto">
-          <TasksReport></TasksReport>
-        </div>
-        <div class="w-full">
-          <TaskContent></TaskContent>
-        </div>
-      </div>
-      <div class="flex flex-col w-4/12 max-[1170px]:w-full gap-y-10" >
-        <div v-if="chartData.datasets[0].data[0]!=undefined" class="dark:border dark:border-gray-500 dark:shadow-md dark:shadow-gray-500 shadow-2xl rounded-lg p-4 w-full bg-blue-5" :class="{'h-[400px]' : statsList.get_tasks.count > 0}">
-          <Pie class="tracking-wider cursor-pointer" v-if="statsList.get_tasks.count > 0" :data="chartData" :options="chartOptions"/>
-          <p v-else class="text-2xl break-words dark:text-white tracking-widest text-center">{{$t('Статистика отсутствует')}}</p>
-        </div>
-        <div class="dark:border dark:border-gray-500 dark:shadow-md dark:shadow-gray-500 shadow-2xl rounded-lg p-4 w-full">
-          <TasksNotification class=""></TasksNotification>
-        </div>
-      </div>
+    <div class="w-full mt-10">
+      <TaskContent/>
     </div>
   </div>
 </template>
@@ -43,12 +45,12 @@ ChartJS.register(ArcElement, Tooltip, Legend)
 Chart.defaults.color = '#b6b6b6'
 
 const STATUS_CONFIG = {
-  completed: { label: 'Выполненые', color: '#41B883' },
-  performing: { label: 'В процессе', color: '#E46651' },
-  watching: { label: 'На рассмотрении', color: '#3b82f6' },
-  rejected: { label: 'Отмененные', color: '#DD1B16' },
-  returned: { label: 'Возвращенные', color: '#FFA500' },
-  expired: { label: 'Истёкшие', color: '#808080' },
+  completed: { label: 'Выполненные', color: '#4CAF50' },
+  performing: { label: 'В процессе', color: '#EAB70A' },
+  watching: { label: 'На проверке', color: '#8977EA' },
+  rejected: { label: 'Отклонённые', color: '#F44336' },
+  returned: { label: 'Возращенные на доработку', color: '#43B7AD' },
+  expired: { label: 'Истеченные по сроку', color: '#2A2A2A' },
 }
 
 const chartStats = computed(() => {
@@ -99,6 +101,7 @@ const chartOptions = ref({
 const router = useRouter()
 const loadAuthStore = useAuthStore()
 const company = useCompanies()
+const taskList = useTaskList()
 
 watch(() => loadAuthStore.user, (newValue) => {
   if(loadAuthStore?.user?.role?.name_en === 'admin'){
@@ -124,6 +127,12 @@ useSeoMeta({
   title: 'Задания',
   description: 'Страница с заданиями пользователей платформы'
 })
+
+function performingStat(status: string) {
+  return Array.isArray(taskList.get_stats)
+      ? taskList.get_stats.find(stat => stat.status === status)
+      : null
+}
 
 </script>
 

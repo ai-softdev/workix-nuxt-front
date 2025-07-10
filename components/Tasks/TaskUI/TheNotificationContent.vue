@@ -1,19 +1,21 @@
 <script setup lang="ts">
-
+defineProps({
+  item: {
+    type: Object,
+  },
+})
 </script>
 
 <template>
-  <div class="dark:bg-gray-400 dark:hover:bg-gray-300 border dark:border-none dark:shadow-none shadow-md hover:bg-gray-100 transition-all cursor-pointer w-full p-4 my-4 rounded-lg">
-    <NuxtLink to="/" class="flex justify-between tracking-widest">
-      <p class="text-sm font-bold">Наименование</p>
-      <div class="text-center">
-        <p>Дата</p>
-        <p>{{ new Date().toLocaleDateString() }}</p>
-      </div>
-    </NuxtLink>
-    <div class="mt-4">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur, id?
+  <div class="flex flex-col gap-2">
+    <div class="border hover:bg-gray-100 transition-all w-full px-6 py-5 rounded-2xl bg-whiteLilia">
+      <p class="text-md font-medium">
+        {{ item.text }}
+      </p>
     </div>
+    <p class="text-romance text-end">
+      {{ $t('Дата уведомления: ') + new Date(item.created_at).toLocaleDateString() }}
+    </p>
   </div>
 </template>
 

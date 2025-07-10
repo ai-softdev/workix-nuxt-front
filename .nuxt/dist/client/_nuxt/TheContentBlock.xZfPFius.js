@@ -1,0 +1,1 @@
+import{_ as o}from"./_plugin-vue_export-helper.DlAUqK2U.js";import{o as r,c as t,k as s}from"./entry.BZGj2_QE.js";const c={},n={class:"p-6 dark:text-white rounded-3xl border-[#8E959E] border-opacity-10 border shadow-[0_2px_20px_-16px_rgba(0,0,0,0.3)]"};function a(e,_){return r(),t("div",n,[s(e.$slots,"default")])}const l=o(c,[["render",a]]);export{l as T};

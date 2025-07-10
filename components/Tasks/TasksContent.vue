@@ -1,45 +1,64 @@
 <template>
   <div class="my-6">
     <form @submit.prevent>
-      <h3 class="dark:text-white mb-6 tracking-wider">{{ $t('Поиск по заданиям') }}</h3>
-      <div class="flex max-lg:flex-wrap max-md:justify-center max-md:gap-y-10">
-        <TheSearch class="w-8/12 max-lg:w-6/12 max-md:w-full" v-model:model-value="params.query"
-                   @search="tasksList.loadTasksLists({...params, query: params.query})"/>
-        <TasksContentSearch></TasksContentSearch>
+      <div class="flex items-center gap-3 max-[768px]:flex-col">
+        <div class="w-6/12 flex items-center gap-3 max-[768px]:w-full">
+          <TheSearch
+              class="w-full"
+              v-model:model-value="params.query"
+              @search="tasksList.loadTasksLists({...params, query: params.query})"
+          />
+          <TasksContentSearch
+              @setFilters="setFilters"
+          />
+        </div>
+        <button
+            class="w-3/12 max-[768px]:w-full flex items-center gap-2 justify-center ml-auto bg-golden px-10 py-2.5 rounded-full font-bold max-md:py-2 active:scale-95 transition-all duration-200"
+            @click="showCreate = true; loads()"
+        >
+          <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.5 1V15M1.5 8H15.5" stroke="black" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round"/>
+          </svg>
+          {{ $t('Создать задание') }}
+        </button>
       </div>
     </form>
     <div v-if="tasksList.get_tasks.results" id="content" class="mx-auto">
       <div
-          class="flex gap-x-10 my-10 ml-10 flex-wrap max-md:mx-auto max-md:justify-center gap-y-5 ">
-        <button class="p-2 rounded-xl text-black dark:text-white tracking-widest font-bold"
-                :class="{'bg-blueDarkSemiLight text-white' : taskChecked === 'task-list'}"
-                @click="taskChecked = 'task-list'; tasksList.loadTasksLists({page: 1, limit: params.limit}); console.log(taskChecked); tasksList.loadTasksStats({task_filter: `tasks_filter=${taskChecked}`})"
+          class="flex gap-x-2.5 my-10 flex-wrap max-md:mx-auto max-md:justify-center gap-y-5 "
+      >
+        <button class="p-2 border rounded-full dark:text-white px-4 py-2 font-bold text-mediumGray"
+                :class="{'bg-golden border-golden text-white' : taskChecked === 'all'}"
+                @click="taskChecked = 'all'; tasksList.loadTasksLists({page: 1, limit: params.limit, filter: `&filter=${taskChecked}`, query: params.query}); tasksList.loadTasksStats({task_filter: `filter=${taskChecked}`})"
         >
           {{ $t('Общее') }}
         </button>
-        <button class="p-2 rounded-xl text-black dark:text-white tracking-widest font-bold"
-                :class="{'bg-blueDarkSemiLight text-white' : taskChecked === 'to-me'}"
-                @click="taskChecked = 'to-me'; tasksList.loadTasksLists({page: 1, limit: params.limit}); console.log(taskChecked); tasksList.loadTasksStats({task_filter: `tasks_filter=${taskChecked}`})"
+        <button class="p-2 border rounded-full dark:text-white px-4 py-2 font-bold text-mediumGray"
+                :class="{'bg-golden border-golden text-white' : taskChecked === 'to-me'}"
+                @click="taskChecked = 'to-me'; tasksList.loadTasksLists({page: 1, limit: params.limit, filter: `&filter=${taskChecked}`, query: params.query}); tasksList.loadTasksStats({task_filter: `filter=${taskChecked}`})"
         >
           {{ $t('Для Меня') }}
         </button>
-        <button class="p-2 rounded-xl text-black dark:text-white tracking-widest font-bold"
-                :class="{'bg-blueDarkSemiLight text-white' : taskChecked === 'from-me'}"
-                @click="taskChecked = 'from-me'; tasksList.loadTasksLists({page: 1, limit: params.limit}); console.log(taskChecked); tasksList.loadTasksStats({task_filter: `tasks_filter=${taskChecked}`})"
+        <button class="p-2 border rounded-full dark:text-white px-4 py-2 font-bold text-mediumGray"
+                :class="{'bg-golden border-golden text-white' : taskChecked === 'from-me'}"
+                @click="taskChecked = 'from-me'; tasksList.loadTasksLists({page: 1, limit: params.limit, filter: `&filter=${taskChecked}`, query: params.query}); tasksList.loadTasksStats({task_filter: `filter=${taskChecked}`})"
         >
           {{ $t('От Меня') }}
         </button>
-        <button
-            class="bg-blue-400 px-4 rounded-full text-white font-bold tracking-widest max-md:py-2 active:scale-95 transition-all duration-200"
-            @click="showCreate = true; loads(); ">
-          {{ $t('Создать задание') }}
-        </button>
       </div>
-      <TasksContentBlock v-if="params.query === ''" v-for="task of tasksList?.get_tasks.results" :task="task"/>
-      <TasksContentBlock v-if="params.query !== ''" v-for="taskSearch in tasksList?.get_search_task.results"
-                         :task="taskSearch"/>
+      <TasksContentBlock
+          v-if="params.query === ''"
+          v-for="task of tasksList?.get_tasks.results"
+          :task="task"
+      />
+      <TasksContentBlock
+          v-if="params.query !== ''"
+          v-for="taskSearch in tasksList?.get_search_task.results"
+          :task="taskSearch"
+      />
     </div>
-    <div v-else class="">
+    <div v-else>
       <div v-if="loadCurrentUser.user.permissions?.find(value => value.name_en === 'task.create')"
            class="flex mt-10 items-center gap-x-10">
         <div class="flex gap-x-4">
@@ -52,63 +71,18 @@
       </div>
     </div>
     <div class="text-center mt-10 flex flex-col items-center gap-y-6 gap-x-10" v-if="tasksList?.get_tasks.count === 0">
-      <p class="text-2xl dark:text-white font-bold tracking-widest">{{ $t('Ничего не найдено') }}</p>
-      <div>
-        <svg width="100px" height="100px" viewBox="0 -3.66 65.015 65.015" xmlns="http://www.w3.org/2000/svg">
-          <g id="Group_99" data-name="Group 99" transform="translate(-107.858 -217.309)">
-            <g id="Group_97" data-name="Group 97">
-              <path id="Path_247" data-name="Path 247"
-                    d="M158.251,220.766H133.473l-5.725-3.457H114.226a2.911,2.911,0,0,0-2.912,2.912v30.934a2.911,2.911,0,0,0,2.912,2.912h44.025a2.911,2.911,0,0,0,2.911-2.912V223.676A2.911,2.911,0,0,0,158.251,220.766Z"
-                    fill="#48CAE4"/>
-              <path id="Path_248" data-name="Path 248"
-                    d="M161.162,242.6V227.133a2.914,2.914,0,0,0-2.911-2.914H114.226a2.914,2.914,0,0,0-2.912,2.914V242.6Z"
-                    fill="#dce2e9"/>
-              <path id="Path_249" data-name="Path 249"
-                    d="M158.251,220.766H133.473l-5.725-3.457H114.226a2.911,2.911,0,0,0-2.912,2.912V221.6a2.911,2.911,0,0,1,2.912-2.912h13.522l5.725,3.455h24.778a2.913,2.913,0,0,1,2.911,2.912v-1.383A2.911,2.911,0,0,0,158.251,220.766Z"
-                    fill="#ffc52f" opacity="0.5" style="mix-blend-mode: screen;isolation: isolate"/>
-              <path id="Path_250" data-name="Path 250"
-                    d="M161.707,226.293H110.771a2.913,2.913,0,0,0-2.913,2.913l3.456,30.933a2.911,2.911,0,0,0,2.912,2.912h44.025a2.911,2.911,0,0,0,2.911-2.912l3.455-30.933A2.912,2.912,0,0,0,161.707,226.293Z"
-                    fill="#48CAE4"/>
-              <path id="Path_251" data-name="Path 251"
-                    d="M110.771,227.676h50.936a2.911,2.911,0,0,1,2.83,2.254l.08-.724a2.912,2.912,0,0,0-2.91-2.913H110.771a2.913,2.913,0,0,0-2.913,2.913l.081.724A2.911,2.911,0,0,1,110.771,227.676Z"
-                    fill="#ffc52f" opacity="0.5" style="mix-blend-mode: screen;isolation: isolate"/>
-            </g>
-            <path id="Path_252" data-name="Path 252"
-                  d="M161.162,260.139l.592-5.3a14.7,14.7,0,1,0-27.687,8.211h24.184A2.911,2.911,0,0,0,161.162,260.139Z"
-                  fill="#8c93a1" opacity="0.6" style="mix-blend-mode: multiply;isolation: isolate"/>
-            <g class="transition-all duration-200 eye-block" id="Group_98" data-name="Group 98">
-              <rect id="Rectangle_36" data-name="Rectangle 36" width="4.156" height="12.401"
-                    transform="translate(157.7 262.706) rotate(-45)" fill="#dce2e9"/>
-              <path id="Path_253" data-name="Path 253"
-                    d="M165.421,252.721a14.7,14.7,0,1,1-14.7-14.7A14.7,14.7,0,0,1,165.421,252.721Z" fill="#dce2e9"/>
-              <path id="Path_254" data-name="Path 254"
-                    d="M161.682,252.721a10.964,10.964,0,1,1-10.964-10.965A10.965,10.965,0,0,1,161.682,252.721Z"
-                    fill="#8c93a1"/>
-              <path id="Path_255" data-name="Path 255"
-                    d="M150.718,262.616a9.895,9.895,0,1,1,9.894-9.9A9.9,9.9,0,0,1,150.718,262.616Z" fill="#5a6271"
-                    opacity="0.6"/>
-              <path class="eye" id="Path_256" data-name="Path 256"
-                    d="M141.833,253.735a9.895,9.895,0,0,1,16.368-7.484A9.892,9.892,0,1,0,144.247,260.2,9.843,9.843,0,0,1,141.833,253.735Z"
-                    fill="#5a6271" opacity="0.6"/>
-              <path class="eye" id="Path_257" data-name="Path 257"
-                    d="M150.718,257.606a4.885,4.885,0,1,1,4.885-4.885A4.888,4.888,0,0,1,150.718,257.606Z"
-                    fill="#5a6271"/>
-              <path class="eye" id="Path_259" data-name="Path 259"
-                    d="M157.45,251.192c-.937.937-2.879.517-4.336-.94s-1.879-3.4-.942-4.335,2.879-.516,4.337.941S158.385,250.256,157.45,251.192Z"
-                    fill="#f3f3f3" opacity="0.5"/>
-              <path id="Path_260" data-name="Path 260"
-                    d="M160.6,267.028l7.219,7.22a3.055,3.055,0,0,0,4.3-4.3l-7.219-7.219Z" fill="#5a6271"/>
-            </g>
-          </g>
-        </svg>
-      </div>
+      <p class="text-2xl dark:text-white">{{ $t('Ничего не найдено') }}</p>
     </div>
   </div>
   <div class="flex justify-center gap-x-4">
-    <div v-if="tasksList.get_tasks.count > 5" v-for="(page, id) in tasksList.get_tasks.links" :key="id"
-         class="px-4 py-2  rounded-full cursor-pointer"
-         :class="{'bg-blue-400 text-white' : page.active, 'bg-gray-200 text-black hover:bg-blue-400 hover:text-white transition-all' : !page.active}"
-         @click="loadPage(page.label); tasksList.loadTasksLists({page: params.page, limit: params.limit, query: params.query})">
+    <div
+        v-if="tasksList.get_tasks.count > 5"
+        v-for="(page, id) in tasksList.get_tasks.links"
+        :key="id"
+        class="px-4 py-2 rounded-full cursor-pointer"
+        :class="{'bg-blue-400 text-white' : page.active, 'bg-gray-200 text-black hover:bg-blue-400 hover:text-white transition-all' : !page.active}"
+        @click="loadPage(page.label); tasksList.loadTasksLists({page: params.page, limit: params.limit, query: params.query})"
+    >
       {{ page.label }}
     </div>
   </div>
@@ -251,6 +225,10 @@ function onDepartmentChange() {
   companies.loadDepartment({id: selectedDepartment.id})
 }
 
+function setFilters(status){
+  tasksList.loadTasksLists({page: 1, limit: params.limit, status: `&status=${status}`, query: params.query})
+}
+
 function loads() {
   companies.loadDepartmentList()
   createForm.value.department = companies.get_department
@@ -334,7 +312,7 @@ watchEffect(() => {
   const participants = companies.current_department.participants
   const currentUserId = loadCurrentUser.user?.id
 
-  if(participants && currentUserId){
+  if (participants && currentUserId) {
     filteredParticipants.value = participants.filter(
         participant => participant.id !== currentUserId
     )

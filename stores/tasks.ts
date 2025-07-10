@@ -37,8 +37,8 @@ export const useTaskList = defineStore('task-list', {
     get_search_task: (state) => state.searchList
   },
   actions: {
-    async loadTasksLists(params: { page: number, limit: number, query?: string | number}) {
-     await axios.get(`task/list?query=${params.query}&page=${params.page}&limit=${params.limit}`, {
+    async loadTasksLists(params: { page: number, limit: number, query?: string | number, filter?: string, status?: string}) {
+     await axios.get(`task/list?page=${params.page}&limit=${params.limit}${params.filter ? params.filter : ''}${params.status ? params.status : ''}${params.query ? `&query=${params.query}` : ''}`, {
         headers: {
           Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
         }

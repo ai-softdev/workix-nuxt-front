@@ -1,0 +1,1 @@
+import{_ as t}from"./_plugin-vue_export-helper.DlAUqK2U.js";import{o,c as s,k as r}from"./entry.BZGj2_QE.js";const a={},c={class:"flex max-lg:flex-wrap gap-y-4 justify-center gap-x-10 my-10 mx-auto w-full"};function n(e,l){return o(),s("div",c,[r(e.$slots,"default")])}const _=t(a,[["render",n]]);export{_ as T};
