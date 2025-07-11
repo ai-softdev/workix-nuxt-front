@@ -920,7 +920,7 @@ const _routes = [
     meta: {},
     alias: [],
     redirect: void 0 ,
-    component: () => import('./base-PWXFqhjZ.mjs').then((m) => m.default || m),
+    component: () => import('./base-HyaGlkd3.mjs').then((m) => m.default || m),
     children: [
       {
         name: "base-chat",
@@ -928,7 +928,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./chat-Be6qaF2B.mjs').then((m) => m.default || m),
+        component: () => import('./chat-D8Sq5q8o.mjs').then((m) => m.default || m),
         children: [
           {
             name: "base-chat-id",
@@ -962,7 +962,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./_id_-DGr56Qgv.mjs').then((m) => m.default || m)
+        component: () => import('./_id_-DR2VOuYC.mjs').then((m) => m.default || m)
       },
       {
         name: "base-companies-department",
@@ -1002,7 +1002,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./_slug_-BhUOenkQ.mjs').then((m) => m.default || m)
+        component: () => import('./_slug_-BxBWIFDG.mjs').then((m) => m.default || m)
       },
       {
         name: "base-documents",
@@ -1050,7 +1050,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./profile-BTM2HlPW.mjs').then((m) => m.default || m)
+        component: () => import('./profile-BAV-V33X.mjs').then((m) => m.default || m)
       },
       {
         name: "base-sales",
@@ -1100,7 +1100,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./_id_-Ju3olXl_.mjs').then((m) => m.default || m)
+        component: () => import('./_id_-CZdlXs2c.mjs').then((m) => m.default || m)
       },
       {
         name: "base-tasks",
@@ -1108,7 +1108,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-Bouerf4O.mjs').then((m) => m.default || m)
+        component: () => import('./index-BWOJjvlH.mjs').then((m) => m.default || m)
       },
       {
         name: "base-tests-exam",
@@ -1140,7 +1140,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./_slug_-JUNniu3l.mjs').then((m) => m.default || m)
+        component: () => import('./_slug_-B8vG0ZaM.mjs').then((m) => m.default || m)
       },
       {
         name: "base-users",
@@ -1148,7 +1148,7 @@ const _routes = [
         meta: {},
         alias: [],
         redirect: void 0 ,
-        component: () => import('./index-BhVrRbV5.mjs').then((m) => m.default || m)
+        component: () => import('./index-BZnR84Cx.mjs').then((m) => m.default || m)
       }
     ]
   },
@@ -1263,7 +1263,7 @@ const validate = /* @__PURE__ */ defineNuxtRouteMiddleware(async (to) => {
 });
 const inlineConfig = {
   "nuxt": {
-    "buildId": "dev"
+    "buildId": "1e578ca7-529d-4616-a783-b6d540d8de1c"
   },
   "ui": {
     "primary": "green",
@@ -3211,9 +3211,10 @@ const _gainsboro = "#DFDFDF";
 const _mercury = "#E5E5E5";
 const _darkJungle = "#1E1E1E";
 const _redOrange = "#F44336";
+const _romance = "#535862";
 const _primary = { "50": "rgb(var(--color-primary-50) / <alpha-value>)", "100": "rgb(var(--color-primary-100) / <alpha-value>)", "200": "rgb(var(--color-primary-200) / <alpha-value>)", "300": "rgb(var(--color-primary-300) / <alpha-value>)", "400": "rgb(var(--color-primary-400) / <alpha-value>)", "500": "rgb(var(--color-primary-500) / <alpha-value>)", "600": "rgb(var(--color-primary-600) / <alpha-value>)", "700": "rgb(var(--color-primary-700) / <alpha-value>)", "800": "rgb(var(--color-primary-800) / <alpha-value>)", "900": "rgb(var(--color-primary-900) / <alpha-value>)", "950": "rgb(var(--color-primary-950) / <alpha-value>)", "DEFAULT": "rgb(var(--color-primary-DEFAULT) / <alpha-value>)" };
 const _cool = { "50": "#f9fafb", "100": "#f3f4f6", "200": "#e5e7eb", "300": "#d1d5db", "400": "#9ca3af", "500": "#6b7280", "600": "#4b5563", "700": "#374151", "800": "#1f2937", "900": "#111827", "950": "#030712" };
-const config = { "inherit": _inherit, "current": _current, "transparent": _transparent, "black": _black, "white": _white, "slate": _slate, "gray": _gray, "zinc": _zinc, "neutral": _neutral, "stone": _stone, "red": _red, "orange": _orange, "amber": _amber, "yellow": _yellow, "lime": _lime, "green": _green, "emerald": _emerald, "teal": _teal, "cyan": _cyan, "sky": _sky, "blue": _blue, "indigo": _indigo, "violet": _violet, "purple": _purple, "fuchsia": _fuchsia, "pink": _pink, "rose": _rose, "bgWhite": _bgWhite, "blueDark": _blueDark, "blueDarkSemiLight": _blueDarkSemiLight, "blueSemiLight": _blueSemiLight, "semiCyan": _semiCyan, "bgPages": _bgPages, "porcelain": _porcelain, "golden": _golden, "sunset": _sunset, "mediumGray": _mediumGray, "whiteSmoke": _whiteSmoke, "whiteLilia": _whiteLilia, "azure": _azure, "gainsboro": _gainsboro, "mercury": _mercury, "darkJungle": _darkJungle, "redOrange": _redOrange, "primary": _primary, "cool": _cool };
+const config = { "inherit": _inherit, "current": _current, "transparent": _transparent, "black": _black, "white": _white, "slate": _slate, "gray": _gray, "zinc": _zinc, "neutral": _neutral, "stone": _stone, "red": _red, "orange": _orange, "amber": _amber, "yellow": _yellow, "lime": _lime, "green": _green, "emerald": _emerald, "teal": _teal, "cyan": _cyan, "sky": _sky, "blue": _blue, "indigo": _indigo, "violet": _violet, "purple": _purple, "fuchsia": _fuchsia, "pink": _pink, "rose": _rose, "bgWhite": _bgWhite, "blueDark": _blueDark, "blueDarkSemiLight": _blueDarkSemiLight, "blueSemiLight": _blueSemiLight, "semiCyan": _semiCyan, "bgPages": _bgPages, "porcelain": _porcelain, "golden": _golden, "sunset": _sunset, "mediumGray": _mediumGray, "whiteSmoke": _whiteSmoke, "whiteLilia": _whiteLilia, "azure": _azure, "gainsboro": _gainsboro, "mercury": _mercury, "darkJungle": _darkJungle, "redOrange": _redOrange, "romance": _romance, "primary": _primary, "cool": _cool };
 const colors_244lXBzhnM = /* @__PURE__ */ defineNuxtPlugin(() => {
   const appConfig2 = useAppConfig();
   const root = computed(() => {

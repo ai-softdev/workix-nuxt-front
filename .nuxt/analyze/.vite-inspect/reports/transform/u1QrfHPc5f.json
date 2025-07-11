@@ -1,0 +1,245 @@
+{
+  "resolvedId": "D:/projects/nuxt/workix-nuxt-front/components/documents/DocumentInfo.vue?vue&type=script&setup=true&lang.ts",
+  "transforms": [
+    {
+      "name": "vite:vue",
+      "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, unref as _unref, withCtx as _withCtx, createVNode as _createVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\"\nimport _imports_0 from '/icons/info.svg'\nimport _imports_1 from '/icons/tick.svg'\nimport _imports_2 from '/icons/processed.svg'\n\n\nconst _hoisted_1 = { class: \"w-full h-fit bg-white px-5 py-6 rounded-3xl shadow-cards\" }\nconst _hoisted_2 = { class: \"w-full p-2 flex items-center gap-2 justify-center border rounded-full mb-8\" }\nconst _hoisted_3 = /*#__PURE__*/_createElementVNode(\"img\", {\n  src: _imports_0,\n  alt: \"info\"\n}, null, -1)\nconst _hoisted_4 = { class: \"flex flex-col gap-y-4\" }\nconst _hoisted_5 = /*#__PURE__*/_createElementVNode(\"img\", {\n  src: _imports_1,\n  alt: \"tick\"\n}, null, -1)\nconst _hoisted_6 = /*#__PURE__*/_createElementVNode(\"img\", {\n  src: _imports_2,\n  alt: \"processed\"\n}, null, -1)\n\nimport DocumentInfoElem from \"~/components/documents/DocumentInfo/DocumentInfoElem.vue\";\r\nimport {useDocumentStore} from \"~/stores/documents\";\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'DocumentInfo',\n  setup(__props) {\n\r\n\r\nconst documentStore = useDocumentStore()\r\n\r\n\nreturn (_ctx: any,_cache: any) => {\n  return (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n    _createElementVNode(\"div\", _hoisted_2, [\n      _hoisted_3,\n      _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t('Информация')), 1)\n    ]),\n    _createElementVNode(\"div\", _hoisted_4, [\n      _createVNode(DocumentInfoElem, null, {\n        infoText: _withCtx(() => [\n          _createTextVNode(_toDisplayString(_ctx.$t('Количество')), 1)\n        ]),\n        infoCount: _withCtx(() => [\n          _createTextVNode(_toDisplayString(_unref(documentStore).documentList.count || 0), 1)\n        ]),\n        _: 1\n      }),\n      _createVNode(DocumentInfoElem, null, {\n        infoIcon: _withCtx(() => [\n          _hoisted_5\n        ]),\n        infoText: _withCtx(() => [\n          _createTextVNode(_toDisplayString(_ctx.$t('Одобренные')), 1)\n        ]),\n        infoCount: _withCtx(() => [\n          _createTextVNode(_toDisplayString(_unref(documentStore).documentList.approved_count || 0), 1)\n        ]),\n        _: 1\n      }),\n      _createVNode(DocumentInfoElem, null, {\n        infoIcon: _withCtx(() => [\n          _hoisted_6\n        ]),\n        infoText: _withCtx(() => [\n          _createTextVNode(_toDisplayString(_ctx.$t('На рассмотрении')), 1)\n        ]),\n        infoCount: _withCtx(() => [\n          _createTextVNode(_toDisplayString(_unref(documentStore).documentList.waiting_count || 0), 1)\n        ]),\n        _: 1\n      })\n    ])\n  ]))\n}\n}\n\n})",
+      "start": 1752216122224,
+      "end": 1752216122224
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1752216122225,
+      "end": 1752216122225,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1752216122225,
+      "end": 1752216122225,
+      "order": "pre"
+    },
+    {
+      "name": "unplugin-vue-i18n",
+      "start": 1752216122225,
+      "end": 1752216122225,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1752216122225,
+      "end": 1752216122225,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1752216122225,
+      "end": 1752216122225,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, unref as _unref, withCtx as _withCtx, createVNode as _createVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\";\nimport _imports_0 from \"/icons/info.svg\";\nimport _imports_1 from \"/icons/tick.svg\";\nimport _imports_2 from \"/icons/processed.svg\";\nconst _hoisted_1 = { class: \"w-full h-fit bg-white px-5 py-6 rounded-3xl shadow-cards\" };\nconst _hoisted_2 = { class: \"w-full p-2 flex items-center gap-2 justify-center border rounded-full mb-8\" };\nconst _hoisted_3 = /* @__PURE__ */ _createElementVNode(\"img\", {\n  src: _imports_0,\n  alt: \"info\"\n}, null, -1);\nconst _hoisted_4 = { class: \"flex flex-col gap-y-4\" };\nconst _hoisted_5 = /* @__PURE__ */ _createElementVNode(\"img\", {\n  src: _imports_1,\n  alt: \"tick\"\n}, null, -1);\nconst _hoisted_6 = /* @__PURE__ */ _createElementVNode(\"img\", {\n  src: _imports_2,\n  alt: \"processed\"\n}, null, -1);\nimport DocumentInfoElem from \"~/components/documents/DocumentInfo/DocumentInfoElem.vue\";\nimport { useDocumentStore } from \"~/stores/documents\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"DocumentInfo\",\n  setup(__props) {\n    const documentStore = useDocumentStore();\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n        _createElementVNode(\"div\", _hoisted_2, [\n          _hoisted_3,\n          _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t(\"Информация\")), 1)\n        ]),\n        _createElementVNode(\"div\", _hoisted_4, [\n          _createVNode(DocumentInfoElem, null, {\n            infoText: _withCtx(() => [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Количество\")), 1)\n            ]),\n            infoCount: _withCtx(() => [\n              _createTextVNode(_toDisplayString(_unref(documentStore).documentList.count || 0), 1)\n            ]),\n            _: 1\n          }),\n          _createVNode(DocumentInfoElem, null, {\n            infoIcon: _withCtx(() => [\n              _hoisted_5\n            ]),\n            infoText: _withCtx(() => [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"Одобренные\")), 1)\n            ]),\n            infoCount: _withCtx(() => [\n              _createTextVNode(_toDisplayString(_unref(documentStore).documentList.approved_count || 0), 1)\n            ]),\n            _: 1\n          }),\n          _createVNode(DocumentInfoElem, null, {\n            infoIcon: _withCtx(() => [\n              _hoisted_6\n            ]),\n            infoText: _withCtx(() => [\n              _createTextVNode(_toDisplayString(_ctx.$t(\"На рассмотрении\")), 1)\n            ]),\n            infoCount: _withCtx(() => [\n              _createTextVNode(_toDisplayString(_unref(documentStore).documentList.waiting_count || 0), 1)\n            ]),\n            _: 1\n          })\n        ])\n      ]);\n    };\n  }\n});\n",
+      "start": 1752216122225,
+      "end": 1752216122732,
+      "order": "normal",
+      "sourcemaps": {
+        "version": 3,
+        "sources": [
+          "D:/projects/nuxt/workix-nuxt-front/components/documents/DocumentInfo.vue?vue&type=script&setup=true&lang.ts"
+        ],
+        "sourcesContent": [
+          "import { defineComponent as _defineComponent } from 'vue'\nimport { createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, createTextVNode as _createTextVNode, unref as _unref, withCtx as _withCtx, createVNode as _createVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\"\nimport _imports_0 from '/icons/info.svg'\nimport _imports_1 from '/icons/tick.svg'\nimport _imports_2 from '/icons/processed.svg'\n\n\nconst _hoisted_1 = { class: \"w-full h-fit bg-white px-5 py-6 rounded-3xl shadow-cards\" }\nconst _hoisted_2 = { class: \"w-full p-2 flex items-center gap-2 justify-center border rounded-full mb-8\" }\nconst _hoisted_3 = /*#__PURE__*/_createElementVNode(\"img\", {\n  src: _imports_0,\n  alt: \"info\"\n}, null, -1)\nconst _hoisted_4 = { class: \"flex flex-col gap-y-4\" }\nconst _hoisted_5 = /*#__PURE__*/_createElementVNode(\"img\", {\n  src: _imports_1,\n  alt: \"tick\"\n}, null, -1)\nconst _hoisted_6 = /*#__PURE__*/_createElementVNode(\"img\", {\n  src: _imports_2,\n  alt: \"processed\"\n}, null, -1)\n\nimport DocumentInfoElem from \"~/components/documents/DocumentInfo/DocumentInfoElem.vue\";\r\nimport {useDocumentStore} from \"~/stores/documents\";\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'DocumentInfo',\n  setup(__props) {\n\r\n\r\nconst documentStore = useDocumentStore()\r\n\r\n\nreturn (_ctx: any,_cache: any) => {\n  return (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n    _createElementVNode(\"div\", _hoisted_2, [\n      _hoisted_3,\n      _createElementVNode(\"p\", null, _toDisplayString(_ctx.$t('Информация')), 1)\n    ]),\n    _createElementVNode(\"div\", _hoisted_4, [\n      _createVNode(DocumentInfoElem, null, {\n        infoText: _withCtx(() => [\n          _createTextVNode(_toDisplayString(_ctx.$t('Количество')), 1)\n        ]),\n        infoCount: _withCtx(() => [\n          _createTextVNode(_toDisplayString(_unref(documentStore).documentList.count || 0), 1)\n        ]),\n        _: 1\n      }),\n      _createVNode(DocumentInfoElem, null, {\n        infoIcon: _withCtx(() => [\n          _hoisted_5\n        ]),\n        infoText: _withCtx(() => [\n          _createTextVNode(_toDisplayString(_ctx.$t('Одобренные')), 1)\n        ]),\n        infoCount: _withCtx(() => [\n          _createTextVNode(_toDisplayString(_unref(documentStore).documentList.approved_count || 0), 1)\n        ]),\n        _: 1\n      }),\n      _createVNode(DocumentInfoElem, null, {\n        infoIcon: _withCtx(() => [\n          _hoisted_6\n        ]),\n        infoText: _withCtx(() => [\n          _createTextVNode(_toDisplayString(_ctx.$t('На рассмотрении')), 1)\n        ]),\n        infoCount: _withCtx(() => [\n          _createTextVNode(_toDisplayString(_unref(documentStore).documentList.waiting_count || 0), 1)\n        ]),\n        _: 1\n      })\n    ])\n  ]))\n}\n}\n\n})"
+        ],
+        "mappings": "AAAA,SAAS,mBAAmB,wBAAwB;AACpD,SAAS,sBAAsB,qBAAqB,mBAAmB,kBAAkB,mBAAmB,kBAAkB,SAAS,QAAQ,WAAW,UAAU,eAAe,cAAc,aAAa,YAAY,sBAAsB,2BAA2B;AAC3Q,OAAO,gBAAgB;AACvB,OAAO,gBAAgB;AACvB,OAAO,gBAAgB;AAGvB,MAAM,aAAa,EAAE,OAAO,2DAA2D;AACvF,MAAM,aAAa,EAAE,OAAO,6EAA6E;AACzG,MAAM,aAA0B,oCAAoB,OAAO;AAAA,EACzD,KAAK;AAAA,EACL,KAAK;AACP,GAAG,MAAM,EAAE;AACX,MAAM,aAAa,EAAE,OAAO,wBAAwB;AACpD,MAAM,aAA0B,oCAAoB,OAAO;AAAA,EACzD,KAAK;AAAA,EACL,KAAK;AACP,GAAG,MAAM,EAAE;AACX,MAAM,aAA0B,oCAAoB,OAAO;AAAA,EACzD,KAAK;AAAA,EACL,KAAK;AACP,GAAG,MAAM,EAAE;AAEX,OAAO,sBAAsB;AAC7B,SAAQ,wBAAuB;AAE/B,eAA4B,iCAAiB;AAAA,EAC3C,QAAQ;AAAA,EACR,MAAM,SAAS;AAGjB,UAAM,gBAAgB,iBAAiB;AAGvC,WAAO,CAAC,MAAU,WAAgB;AAChC,aAAQ,WAAW,GAAG,oBAAoB,OAAO,YAAY;AAAA,QAC3D,oBAAoB,OAAO,YAAY;AAAA,UACrC;AAAA,UACA,oBAAoB,KAAK,MAAM,iBAAiB,KAAK,GAAG,YAAY,CAAC,GAAG,CAAC;AAAA,QAC3E,CAAC;AAAA,QACD,oBAAoB,OAAO,YAAY;AAAA,UACrC,aAAa,kBAAkB,MAAM;AAAA,YACnC,UAAU,SAAS,MAAM;AAAA,cACvB,iBAAiB,iBAAiB,KAAK,GAAG,YAAY,CAAC,GAAG,CAAC;AAAA,YAC7D,CAAC;AAAA,YACD,WAAW,SAAS,MAAM;AAAA,cACxB,iBAAiB,iBAAiB,OAAO,aAAa,EAAE,aAAa,SAAS,CAAC,GAAG,CAAC;AAAA,YACrF,CAAC;AAAA,YACD,GAAG;AAAA,UACL,CAAC;AAAA,UACD,aAAa,kBAAkB,MAAM;AAAA,YACnC,UAAU,SAAS,MAAM;AAAA,cACvB;AAAA,YACF,CAAC;AAAA,YACD,UAAU,SAAS,MAAM;AAAA,cACvB,iBAAiB,iBAAiB,KAAK,GAAG,YAAY,CAAC,GAAG,CAAC;AAAA,YAC7D,CAAC;AAAA,YACD,WAAW,SAAS,MAAM;AAAA,cACxB,iBAAiB,iBAAiB,OAAO,aAAa,EAAE,aAAa,kBAAkB,CAAC,GAAG,CAAC;AAAA,YAC9F,CAAC;AAAA,YACD,GAAG;AAAA,UACL,CAAC;AAAA,UACD,aAAa,kBAAkB,MAAM;AAAA,YACnC,UAAU,SAAS,MAAM;AAAA,cACvB;AAAA,YACF,CAAC;AAAA,YACD,UAAU,SAAS,MAAM;AAAA,cACvB,iBAAiB,iBAAiB,KAAK,GAAG,iBAAiB,CAAC,GAAG,CAAC;AAAA,YAClE,CAAC;AAAA,YACD,WAAW,SAAS,MAAM;AAAA,cACxB,iBAAiB,iBAAiB,OAAO,aAAa,EAAE,aAAa,iBAAiB,CAAC,GAAG,CAAC;AAAA,YAC7F,CAAC;AAAA,YACD,GAAG;AAAA,UACL,CAAC;AAAA,QACH,CAAC;AAAA,MACH,CAAC;AAAA,IACH;AAAA,EACA;AAEA,CAAC;",
+        "names": []
+      }
+    },
+    {
+      "name": "vite:json",
+      "start": 1752216122732,
+      "end": 1752216122732,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1752216122732,
+      "end": 1752216122732,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "start": 1752216122733,
+      "end": 1752216122734,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1752216122734,
+      "end": 1752216122734,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1752216122734,
+      "end": 1752216122735,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1752216122735,
+      "end": 1752216122735,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:chunk-error",
+      "start": 1752216122735,
+      "end": 1752216122735,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1752216122735,
+      "end": 1752216122735,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1752216122736,
+      "end": 1752216122736,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1752216122736,
+      "end": 1752216122736,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1752216122736,
+      "end": 1752216122736,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1752216122736,
+      "end": 1752216122736,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1752216122736,
+      "end": 1752216122736,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1752216122736,
+      "end": 1752216122736,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1752216122737,
+      "end": 1752216122737,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1752216122737,
+      "end": 1752216122737,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1752216122737,
+      "end": 1752216122737,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1752216122737,
+      "end": 1752216122737,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1752216122737,
+      "end": 1752216122737,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-macros-transform",
+      "start": 1752216122738,
+      "end": 1752216122738,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-resource",
+      "start": 1752216122738,
+      "end": 1752216122739,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-meta-deprecation",
+      "start": 1752216122739,
+      "end": 1752216122739,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1752216122739,
+      "end": 1752216122746,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1752216122746,
+      "end": 1752216122746,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1752216122746,
+      "end": 1752216122746,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:runtime-paths-dep",
+      "start": 1752216122746,
+      "end": 1752216122746,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:route-injection-plugin",
+      "start": 1752216122747,
+      "end": 1752216122747,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1752216122747,
+      "end": 1752216122748,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1752216122748,
+      "end": 1752216122748,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1752216122749,
+      "end": 1752216122749,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1752216122749,
+      "end": 1752216122749,
+      "order": "normal"
+    }
+  ]
+}

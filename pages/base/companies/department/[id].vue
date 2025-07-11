@@ -12,11 +12,15 @@ import TheButton from "~/components/UI/TheButton.vue";
 import TheModal from "~/components/UI/TheModal.vue";
 import TheSceleton from "~/components/UI/TheSceleton.vue";
 import DocumentContentHeaderCreate from "~/components/documents/DocumentContent/DocumentContentHeaderCreate.vue";
+import {useUserStore} from "~/stores/users";
 
 const currentDepartment = useCompanies()
 const route = useRoute()
 const router = useRouter()
+const query = ref('')
+const department = ref({})
 
+const userStore = useUserStore();
 
 defineProps({
   showWarning: {
@@ -37,6 +41,26 @@ watchSyncEffect(() => {
     title: `${currentDepartment.current_department.name}`
   })
 })
+watch(
+    () => userStore.user,
+    (newVal) => {
+      if (newVal) {
+        department.value.participants = [...newVal.results]
+        console.log('User пришёл:', newVal)
+      }
+    },
+    { immediate: false }
+)
+watch(
+    () => currentDepartment.current_department,
+    (newVal) => {
+      if (newVal) {
+        department.value = newVal
+        console.log('department пришёл:', newVal)
+      }
+    },
+    { immediate: false }
+)
 </script>
 
 <template>
@@ -95,6 +119,8 @@ watchSyncEffect(() => {
       <div class="flex items-center w-11/12 max-sm:w-full gap-x-10">
         <TheSearch
             class="w-3/12 max-[900px]:w-full"
+            v-model:model-value="query"
+            @search="userStore.loadUserList({ query: query, page: 1, limit: 1e4, department_id: currentDepartment?.get_department?.id })"
         ></TheSearch>
       </div>
       <TheModal
@@ -144,9 +170,9 @@ watchSyncEffect(() => {
           v-else
           class="w-full max-[1200px]:order-1 flex flex-col items-center justify-center gap-4 p-6 rounded-3xl shadow-departmentInfo bg-white"
       >
-        <template v-if="currentDepartment.get_department?.participants?.length">
+        <template v-if="department?.participants?.length">
           <DepartmentUserList
-              v-for="userItem in currentDepartment.get_department.participants"
+              v-for="userItem in department.participants"
               :key="userItem.id"
               :user-item="userItem"
           />

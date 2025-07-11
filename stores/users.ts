@@ -63,8 +63,8 @@ export const useUserStore = defineStore('user-list', {
         this.user = response.data
       })
     },
-    async loadUserList(params: {page: number, limit: number, query?: any}) {
-      await axios.get(`user/list?query=${params.query}&page=${params.page}&limit=${params.limit}`, {
+    async loadUserList(params: {page: number, limit: number, query?: any, department_id?: any}) {
+      await axios.get(`user/list?query=${params.query}&page=${params.page}&limit=${params.limit}${params.department_id ? `&department_id=${params.department_id}` : ''}`, {
         headers: {
           Authorization: `Bearer ${nuxtStorage.localStorage.getData('token')}`
         }

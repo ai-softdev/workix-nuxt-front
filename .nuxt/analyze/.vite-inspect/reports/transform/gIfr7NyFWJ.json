@@ -1,0 +1,245 @@
+{
+  "resolvedId": "D:/projects/nuxt/workix-nuxt-front/components/Tasks/TaskUI/TasksReportBlock.vue?vue&type=script&setup=true&lang.ts",
+  "transforms": [
+    {
+      "name": "vite:vue",
+      "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { renderSlot as _renderSlot, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\"\n\nconst _hoisted_1 = [\"task\"]\nconst _hoisted_2 = { class: \"flex flex-col gap-4\" }\nconst _hoisted_3 = { class: \"font-bold text-lg\" }\nconst _hoisted_4 = { class: \"text-md rounded-full border px-3 py-1 w-fit\" }\n\nimport {useTaskList} from \"~/stores/tasks\";\r\nimport TheSceleton from \"~/components/UI/TheSceleton.vue\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'TasksReportBlock',\n  props: {\r\n  task: {\r\n    type: Number,\r\n    default: null,\r\n  }\r\n},\n  setup(__props) {\n\r\nconst taskList = useTaskList()\r\n\r\n\r\n\nreturn (_ctx: any,_cache: any) => {\n  return (_openBlock(), _createElementBlock(\"div\", {\n    class: \"w-full h-fit flex gap-4 max-[400px]:w-400px transition-all hover:-translate-y-3 p-6 rounded-3xl shadow-objectDescription bg-white\",\n    task: __props.task\n  }, [\n    _renderSlot(_ctx.$slots, \"TaskReportSvg\"),\n    _createElementVNode(\"div\", _hoisted_2, [\n      _createElementVNode(\"p\", _hoisted_3, [\n        _renderSlot(_ctx.$slots, \"TaskReportTitle\")\n      ]),\n      _createElementVNode(\"p\", _hoisted_4, [\n        _renderSlot(_ctx.$slots, \"TaskReportSubtitle\")\n      ]),\n      _createElementVNode(\"div\", null, [\n        _renderSlot(_ctx.$slots, \"TaskSceleton\")\n      ])\n    ])\n  ], 8, _hoisted_1))\n}\n}\n\n})",
+      "start": 1752216126363,
+      "end": 1752216126363
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1752216126363,
+      "end": 1752216126363,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1752216126363,
+      "end": 1752216126363,
+      "order": "pre"
+    },
+    {
+      "name": "unplugin-vue-i18n",
+      "start": 1752216126364,
+      "end": 1752216126364,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1752216126364,
+      "end": 1752216126364,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1752216126365,
+      "end": 1752216126365,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { renderSlot as _renderSlot, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\";\nconst _hoisted_1 = [\"task\"];\nconst _hoisted_2 = { class: \"flex flex-col gap-4\" };\nconst _hoisted_3 = { class: \"font-bold text-lg\" };\nconst _hoisted_4 = { class: \"text-md rounded-full border px-3 py-1 w-fit\" };\nimport { useTaskList } from \"~/stores/tasks\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"TasksReportBlock\",\n  props: {\n    task: {\n      type: Number,\n      default: null\n    }\n  },\n  setup(__props) {\n    const taskList = useTaskList();\n    return (_ctx, _cache) => {\n      return _openBlock(), _createElementBlock(\"div\", {\n        class: \"w-full h-fit flex gap-4 max-[400px]:w-400px transition-all hover:-translate-y-3 p-6 rounded-3xl shadow-objectDescription bg-white\",\n        task: __props.task\n      }, [\n        _renderSlot(_ctx.$slots, \"TaskReportSvg\"),\n        _createElementVNode(\"div\", _hoisted_2, [\n          _createElementVNode(\"p\", _hoisted_3, [\n            _renderSlot(_ctx.$slots, \"TaskReportTitle\")\n          ]),\n          _createElementVNode(\"p\", _hoisted_4, [\n            _renderSlot(_ctx.$slots, \"TaskReportSubtitle\")\n          ]),\n          _createElementVNode(\"div\", null, [\n            _renderSlot(_ctx.$slots, \"TaskSceleton\")\n          ])\n        ])\n      ], 8, _hoisted_1);\n    };\n  }\n});\n",
+      "start": 1752216126365,
+      "end": 1752216126509,
+      "order": "normal",
+      "sourcemaps": {
+        "version": 3,
+        "sources": [
+          "D:/projects/nuxt/workix-nuxt-front/components/Tasks/TaskUI/TasksReportBlock.vue?vue&type=script&setup=true&lang.ts"
+        ],
+        "sourcesContent": [
+          "import { defineComponent as _defineComponent } from 'vue'\nimport { renderSlot as _renderSlot, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\"\n\nconst _hoisted_1 = [\"task\"]\nconst _hoisted_2 = { class: \"flex flex-col gap-4\" }\nconst _hoisted_3 = { class: \"font-bold text-lg\" }\nconst _hoisted_4 = { class: \"text-md rounded-full border px-3 py-1 w-fit\" }\n\nimport {useTaskList} from \"~/stores/tasks\";\r\nimport TheSceleton from \"~/components/UI/TheSceleton.vue\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'TasksReportBlock',\n  props: {\r\n  task: {\r\n    type: Number,\r\n    default: null,\r\n  }\r\n},\n  setup(__props) {\n\r\nconst taskList = useTaskList()\r\n\r\n\r\n\nreturn (_ctx: any,_cache: any) => {\n  return (_openBlock(), _createElementBlock(\"div\", {\n    class: \"w-full h-fit flex gap-4 max-[400px]:w-400px transition-all hover:-translate-y-3 p-6 rounded-3xl shadow-objectDescription bg-white\",\n    task: __props.task\n  }, [\n    _renderSlot(_ctx.$slots, \"TaskReportSvg\"),\n    _createElementVNode(\"div\", _hoisted_2, [\n      _createElementVNode(\"p\", _hoisted_3, [\n        _renderSlot(_ctx.$slots, \"TaskReportTitle\")\n      ]),\n      _createElementVNode(\"p\", _hoisted_4, [\n        _renderSlot(_ctx.$slots, \"TaskReportSubtitle\")\n      ]),\n      _createElementVNode(\"div\", null, [\n        _renderSlot(_ctx.$slots, \"TaskSceleton\")\n      ])\n    ])\n  ], 8, _hoisted_1))\n}\n}\n\n})"
+        ],
+        "mappings": "AAAA,SAAS,mBAAmB,wBAAwB;AACpD,SAAS,cAAc,aAAa,sBAAsB,qBAAqB,aAAa,YAAY,sBAAsB,2BAA2B;AAEzJ,MAAM,aAAa,CAAC,MAAM;AAC1B,MAAM,aAAa,EAAE,OAAO,sBAAsB;AAClD,MAAM,aAAa,EAAE,OAAO,oBAAoB;AAChD,MAAM,aAAa,EAAE,OAAO,8CAA8C;AAE1E,SAAQ,mBAAkB;AAI1B,eAA4B,iCAAiB;AAAA,EAC3C,QAAQ;AAAA,EACR,OAAO;AAAA,IACP,MAAM;AAAA,MACJ,MAAM;AAAA,MACN,SAAS;AAAA,IACX;AAAA,EACF;AAAA,EACE,MAAM,SAAS;AAEjB,UAAM,WAAW,YAAY;AAI7B,WAAO,CAAC,MAAU,WAAgB;AAChC,aAAQ,WAAW,GAAG,oBAAoB,OAAO;AAAA,QAC/C,OAAO;AAAA,QACP,MAAM,QAAQ;AAAA,MAChB,GAAG;AAAA,QACD,YAAY,KAAK,QAAQ,eAAe;AAAA,QACxC,oBAAoB,OAAO,YAAY;AAAA,UACrC,oBAAoB,KAAK,YAAY;AAAA,YACnC,YAAY,KAAK,QAAQ,iBAAiB;AAAA,UAC5C,CAAC;AAAA,UACD,oBAAoB,KAAK,YAAY;AAAA,YACnC,YAAY,KAAK,QAAQ,oBAAoB;AAAA,UAC/C,CAAC;AAAA,UACD,oBAAoB,OAAO,MAAM;AAAA,YAC/B,YAAY,KAAK,QAAQ,cAAc;AAAA,UACzC,CAAC;AAAA,QACH,CAAC;AAAA,MACH,GAAG,GAAG,UAAU;AAAA,IAClB;AAAA,EACA;AAEA,CAAC;",
+        "names": []
+      }
+    },
+    {
+      "name": "vite:json",
+      "start": 1752216126510,
+      "end": 1752216126510,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1752216126510,
+      "end": 1752216126510,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "start": 1752216126510,
+      "end": 1752216126510,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1752216126510,
+      "end": 1752216126510,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1752216126510,
+      "end": 1752216126510,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1752216126510,
+      "end": 1752216126510,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:chunk-error",
+      "start": 1752216126510,
+      "end": 1752216126510,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1752216126510,
+      "end": 1752216126510,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1752216126510,
+      "end": 1752216126511,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1752216126511,
+      "end": 1752216126511,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1752216126511,
+      "end": 1752216126511,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1752216126511,
+      "end": 1752216126511,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1752216126511,
+      "end": 1752216126511,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1752216126511,
+      "end": 1752216126511,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1752216126511,
+      "end": 1752216126511,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1752216126511,
+      "end": 1752216126511,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1752216126511,
+      "end": 1752216126511,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1752216126511,
+      "end": 1752216126511,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1752216126511,
+      "end": 1752216126512,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-macros-transform",
+      "start": 1752216126512,
+      "end": 1752216126512,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-resource",
+      "start": 1752216126512,
+      "end": 1752216126512,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-meta-deprecation",
+      "start": 1752216126512,
+      "end": 1752216126512,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1752216126512,
+      "end": 1752216126519,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1752216126519,
+      "end": 1752216126519,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1752216126519,
+      "end": 1752216126519,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:runtime-paths-dep",
+      "start": 1752216126519,
+      "end": 1752216126519,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:route-injection-plugin",
+      "start": 1752216126519,
+      "end": 1752216126519,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1752216126519,
+      "end": 1752216126520,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1752216126520,
+      "end": 1752216126520,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1752216126520,
+      "end": 1752216126521,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1752216126521,
+      "end": 1752216126521,
+      "order": "normal"
+    }
+  ]
+}

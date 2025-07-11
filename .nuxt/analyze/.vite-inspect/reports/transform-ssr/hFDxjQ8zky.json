@@ -1,0 +1,300 @@
+{
+  "resolvedId": "D:/projects/nuxt/workix-nuxt-front/components/documents/DocumentItemInfo/DocumentItemInfoChain.vue",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "<script setup lang=\"ts\">\r\n\r\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\r\nimport TheButton from \"~/components/UI/TheButton.vue\";\r\nimport TheModal from \"~/components/UI/TheModal.vue\";\r\nimport DocumentItemInfoChainSchedule\r\n  from \"~/components/documents/DocumentItemInfo/DocumentIemInfoChain/DocumentItemInfoChainSchedule.vue\";\r\nimport {useDocumentStore} from \"~/stores/documents\";\r\nimport {useRoute, useRouter} from 'vue-router'\r\nimport DocumentItemInfoChainFile\r\n  from \"~/components/documents/DocumentItemInfo/DocumentIemInfoChain/DocumentItemInfoChainFile.vue\";\r\nimport {LinkedList} from \"~/hooks/Node\";\r\nimport {useAuthStore} from \"~/stores/auth\";\r\nimport { onMounted } from 'vue';\r\n\r\nconst route = useRoute()\r\nconst router = useRouter()\r\nconst documentStore = useDocumentStore()\r\nconst authStore = useAuthStore()\r\n\r\nconst isSigning = ref(false);\r\n\r\nfunction loadScript(src: string): Promise<void> {\r\n  return new Promise((resolve, reject) => {\r\n    if (document.querySelector(`script[src=\"${src}\"]`)) {\r\n      resolve();\r\n      return;\r\n    }\r\n\r\n    const script = document.createElement('script');\r\n    script.src = src;\r\n    script.async = true;\r\n    script.onload = () => resolve();\r\n    script.onerror = () => reject(new Error(`Ошибка загрузки скрипта ${src}`));\r\n\r\n    document.head.appendChild(script);\r\n  });\r\n}\r\n\r\nasync function loadEImzoScripts() {\r\n  try {\r\n    await loadScript('/e-imzo/e-imzo.js');\r\n    await loadScript('/e-imzo/e-imzo-client.js');\r\n    await loadScript('/e-imzo/micro-ajax.js');\r\n    await loadScript('/e-imzo/e-imzo-init.js');\r\n    console.log('✅ Все скрипты загружены');\r\n  } catch (error) {\r\n    console.error('❌ Ошибка загрузки скриптов E-IMZO', error);\r\n  }\r\n}\r\n\r\nonMounted(async () => {\r\n  await loadEImzoScripts();\r\n});\r\n\r\n\r\nasync function startAppLoad() {\r\n  try {\r\n    await loadScript(\"/e-imzo/e-imzo.js\");\r\n    await loadScript(\"/e-imzo/e-imzo-client.js\");\r\n    await loadScript(\"/e-imzo/micro-ajax.js\");\r\n    await loadScript(\"/e-imzo/e-imzo-init.js\");\r\n\r\n    if (window.EIMZOClient) {\r\n      console.log(\"✅ EIMZOClient загружен:\", window.EIMZOClient);\r\n      console.log(\"📜 Доступные методы EIMZOClient:\", Object.keys(window.EIMZOClient));\r\n\r\n      installKeys();\r\n    } else {\r\n      console.error(\"❌ EIMZOClient не найден после загрузки\");\r\n    }\r\n  } catch (error) {\r\n    console.error(\"❌ Ошибка при загрузке скриптов:\", error);\r\n  }\r\n}\r\n\r\nasync function installKeys() {\r\n  if (!window.EIMZOClient) {\r\n    console.error(\"EIMZOClient не загружен\");\r\n    return;\r\n  }\r\n\r\n  isSigning.value = true;\r\n  try {\r\n    EIMZOClient.checkVersion(function (major, minor) {\r\n      var newVersion = EIMZO_MAJOR * 100 + EIMZO_MINOR;\r\n      var installedVersion = parseInt(major) * 100 + parseInt(minor);\r\n      if (installedVersion < newVersion) {\r\n        console.log('installedVersion < newVersion');\r\n      } else {\r\n        EIMZOClient.installApiKeys(function () {\r\n          responseUsers()\r\n        }, function (e, r) {\r\n          if (r) {\r\n            console.log('da');\r\n          } else {\r\n            console.log('net');\r\n          }\r\n        });\r\n      }\r\n    }, function (e, r) {\r\n      if (r) {\r\n        console.log('da2');\r\n      } else {\r\n        console.log('net2');\r\n      }\r\n    });\r\n\r\n    // console.log(\"✅ Подписанные данные:\", signedData);\r\n\r\n    // await documentStore.updateDocument({ id: route.params.id, signedData });\r\n    console.log(\"📄 Документ успешно подписан и обновлён\");\r\n  } catch (error) {\r\n    console.error(\"❌ Ошибка при подписании документа:\", error);\r\n  } finally {\r\n    isSigning.value = false;\r\n  }\r\n}\r\n\r\nfunction responseUsers(){\r\n  EIMZOClient.listAllUserKeys(function(o, i){\r\n    var itemId = \"itm-\" + o.serialNumber + \"-\" + i;\r\n    return itemId;\r\n  },function(itemId, v){\r\n    return uiCreateItem(itemId, v);\r\n  },function(items, firstId){\r\n    console.log(items, 'ne putat');\r\n    //создать селект отобразить items\r\n    console.log(firstId);\r\n  },function(e, r){\r\n    if(e){\r\n      uiShowMessage(errorCAPIWS + \" : \" + e);\r\n    } else {\r\n      console.log(r);\r\n    }\r\n  });\r\n}\r\n\r\nvar uiCreateItem = function (itmkey, vo) {\r\n  var now = new Date();\r\n  vo.expired = dates.compare(now, vo.validTo) > 0;\r\n  var itm = document.createElement(\"option\");\r\n  itm.value = itmkey;\r\n  itm.text = vo.CN;\r\n  if (!vo.expired) {\r\n\r\n  } else {\r\n    itm.style.color = 'gray';\r\n    itm.text = itm.text + ' (срок истек)';\r\n  }\r\n  itm.setAttribute('vo',JSON.stringify(vo));\r\n  itm.setAttribute('id',itmkey);\r\n  return itm;\r\n}\r\n\r\nconst extractIds = (data: any[]): string[] => {\r\n  return data.flat().map(item => item.id).filter(id => id);\r\n};\r\n\r\nfunction startChain(){\r\n  let array = extractIds(documentStore.userList)\r\n  documentStore.setUsers({slug: route.params.slug, form: array}, router)\r\n}\r\n\r\n</script>\r\n\r\n<template>\r\n  <div class=\"overflow-x-hidden \">\r\n    <TheTextContent class=\"my-4\">{{ $t('Выстраивание цепочки для подписания документа') }}</TheTextContent>\r\n    <div class=\"\">\r\n      <DocumentItemInfoChainSchedule :item=\"documentStore.documentItem\"/>\r\n    </div>\r\n    <div class=\" justify-center gap-x-10 border-b border-l border-r p-4 rounded-b-xl rounded-t-sm \">\r\n      <div class=\"flex gap-x-6 justify-center items-center\">\r\n        <DocumentItemInfoChainFile :item=\"documentStore.documentItem\"></DocumentItemInfoChainFile>\r\n      </div>\r\n      <div class=\"flex justify-center gap-x-10 mt-4\">\r\n        <TheButton\r\n            v-if=\"documentStore.documentItem.status === 'created' && documentStore.documentItem.author_id === authStore.user.id\"\r\n            :type=\"'documentBtn'\"\r\n            @click=\"documentStore.showWarn = true\"\r\n        >\r\n          {{ $t('Удалить документ') }}\r\n        </TheButton>\r\n        <TheButton\r\n            v-if=\"documentStore.documentItem.status === 'created'\"\r\n            :type=\"'documentBtn'\"\r\n             @click=\"startChain\"\r\n         >\r\n<!--          @click=\"documentStore.docUpdate({users: documentStore.userList.map((innerArray: any) => innerArray.filter((item : any)=> item.id !== authStore.user.id).map(item => item.id)).filter(innerArray => innerArray.length > 0), id: route.params.id}).then(res=>documentStore.loadDocument({id: route.params.id}))\"-->\r\n          {{ $t('Запустить цепь') }}\r\n        </TheButton>\r\n        <TheButton\r\n            v-if=\"documentStore.documentItem.status === 'processing' && documentStore.documentItem.current_documentuser?.user_id === authStore.user.id\"\r\n            :type=\"'documentBtn'\"\r\n            @click=\"router.push(`/base/documents/signification/${route.params.slug}`)\"\r\n        >\r\n          <!--          @click=\"documentStore.docUpdate({users: documentStore.userList.map((innerArray: any) => innerArray.filter((item : any)=> item.id !== authStore.user.id).map(item => item.id)).filter(innerArray => innerArray.length > 0), id: route.params.id}).then(res=>documentStore.loadDocument({id: route.params.id}))\"-->\r\n          {{ $t('Перейти к подписанию') }}\r\n        </TheButton>\r\n      </div>\r\n    </div>\r\n    <div class=\"my-6\">\r\n      <p class=\"text-center tracking-widest text-lg\">{{$t('Описание:')}}</p>\r\n      <p>{{documentStore.documentItem.description}}</p>\r\n    </div>\r\n    <TheModal :type=\"'resize'\" v-if=\"documentStore.showWarn\" @showModal=\"documentStore.showWarn = false\">\r\n      <TheTextContent>{{ $t('Удалить данный документ?') }}</TheTextContent>\r\n      <p class=\"text-sm tracking-widest text-gray-300 my-6 \">\r\n        {{ $t('Содержимое данного документа пропадёт и черновик не будет сохранён') }}</p>\r\n      <div class=\"flex justify-center gap-x-10 \">\r\n        <TheButton :type=\"'chat'\" @click=\"documentStore.showWarn = false\">\r\n          {{ $t('Отмена') }}\r\n        </TheButton>\r\n        <TheButton :type=\"'chat'\"\r\n                   @click=\"documentStore.docDelete({slug: route.params.slug}).then(res=> {router.push('/base/documents'); documentStore.showWarn = false})\">\r\n          {{ $t('Удалить') }}\r\n        </TheButton>\r\n      </div>\r\n    </TheModal>\r\n  </div>\r\n</template>\r\n\r\n<style scoped lang=\"scss\">\r\n\r\n</style>",
+      "start": 1752216157290,
+      "end": 1752216157917,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1752216157917,
+      "end": 1752216157917,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1752216157917,
+      "end": 1752216157917,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1752216157917,
+      "end": 1752216157917,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1752216157917,
+      "end": 1752216157917,
+      "order": "pre"
+    },
+    {
+      "name": "unplugin-vue-i18n",
+      "start": 1752216157917,
+      "end": 1752216157917,
+      "order": "pre"
+    },
+    {
+      "name": "unplugin-vue-i18n",
+      "start": 1752216157917,
+      "end": 1752216157917,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1752216157917,
+      "end": 1752216157917,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1752216157917,
+      "end": 1752216157917,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1752216157917,
+      "end": 1752216157917,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1752216157917,
+      "end": 1752216157917,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1752216157917,
+      "end": 1752216157917,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "result": "import _sfc_main from \"D:/projects/nuxt/workix-nuxt-front/components/documents/DocumentItemInfo/DocumentItemInfoChain.vue?vue&type=script&setup=true&lang.ts\";\nexport * from \"D:/projects/nuxt/workix-nuxt-front/components/documents/DocumentItemInfo/DocumentItemInfoChain.vue?vue&type=script&setup=true&lang.ts\";\nimport { useSSRContext as __vite_useSSRContext } from \"vue\";\nconst _sfc_setup = _sfc_main.setup;\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext();\n  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(\"components/documents/DocumentItemInfo/DocumentItemInfoChain.vue\");\n  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;\n};\nexport default _sfc_main;\n",
+      "start": 1752216157917,
+      "end": 1752216158557,
+      "order": "normal",
+      "sourcemaps": {
+        "mappings": ""
+      }
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1752216158557,
+      "end": 1752216158557,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1752216158557,
+      "end": 1752216158558,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1752216158557,
+      "end": 1752216158558,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1752216158558,
+      "end": 1752216158558,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1752216158558,
+      "end": 1752216158558,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1752216158558,
+      "end": 1752216158558,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1752216158559,
+      "end": 1752216158559,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1752216158559,
+      "end": 1752216158559,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "result": "import _sfc_main from \"D:/projects/nuxt/workix-nuxt-front/components/documents/DocumentItemInfo/DocumentItemInfoChain.vue?vue&type=script&setup=true&lang.ts\";\nexport * from \"D:/projects/nuxt/workix-nuxt-front/components/documents/DocumentItemInfo/DocumentItemInfoChain.vue?vue&type=script&setup=true&lang.ts\";\nimport { useSSRContext as __vite_useSSRContext } from \"vue\";\nconst _sfc_setup = _sfc_main.setup;\n_sfc_main.setup = (props, ctx) => {\n  const ssrContext = __vite_useSSRContext();\n  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(\"components/documents/DocumentItemInfo/DocumentItemInfoChain.vue\");\n  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;\n};\nexport default _sfc_main;\n",
+      "start": 1752216158559,
+      "end": 1752216158866,
+      "order": "normal",
+      "sourcemaps": "{\n  \"version\": 3,\n  \"sources\": [\"D:/projects/nuxt/workix-nuxt-front/components/documents/DocumentItemInfo/DocumentItemInfoChain.vue\"],\n  \"sourcesContent\": [\"import _sfc_main from \\\"D:/projects/nuxt/workix-nuxt-front/components/documents/DocumentItemInfo/DocumentItemInfoChain.vue?vue&type=script&setup=true&lang.ts\\\";\\nexport * from \\\"D:/projects/nuxt/workix-nuxt-front/components/documents/DocumentItemInfo/DocumentItemInfoChain.vue?vue&type=script&setup=true&lang.ts\\\";\\nimport { useSSRContext as __vite_useSSRContext } from \\\"vue\\\";\\nconst _sfc_setup = _sfc_main.setup;\\n_sfc_main.setup = (props, ctx) => {\\n  const ssrContext = __vite_useSSRContext();\\n  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add(\\\"components/documents/DocumentItemInfo/DocumentItemInfoChain.vue\\\");\\n  return _sfc_setup ? _sfc_setup(props, ctx) : void 0;\\n};\\nexport default _sfc_main;\\n\"],\n  \"mappings\": \"AAAA,OAAO,eAAe;AACtB,cAAc;AACd,SAAS,iBAAiB,4BAA4B;AACtD,MAAM,aAAa,UAAU;AAC7B,UAAU,QAAQ,CAAC,OAAO,QAAQ;AAChC,QAAM,aAAa,qBAAqB;AACxC,GAAC,WAAW,YAAY,WAAW,UAA0B,oBAAI,IAAI,IAAI,IAAI,iEAAiE;AAC9I,SAAO,aAAa,WAAW,OAAO,GAAG,IAAI;AAC/C;AACA,eAAe;\",\n  \"names\": []\n}\n"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1752216158866,
+      "end": 1752216158866,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1752216158866,
+      "end": 1752216158866,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1752216158866,
+      "end": 1752216158866,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1752216158866,
+      "end": 1752216158866,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1752216158866,
+      "end": 1752216158866,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1752216158866,
+      "end": 1752216158866,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1752216158866,
+      "end": 1752216158866,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1752216158866,
+      "end": 1752216158866,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1752216158866,
+      "end": 1752216158866,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-macros-transform",
+      "start": 1752216158866,
+      "end": 1752216158866,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-macros-transform",
+      "start": 1752216158866,
+      "end": 1752216158866,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-resource",
+      "start": 1752216158866,
+      "end": 1752216158866,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-resource",
+      "start": 1752216158866,
+      "end": 1752216158866,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-meta-deprecation",
+      "start": 1752216158866,
+      "end": 1752216158866,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-meta-deprecation",
+      "start": 1752216158866,
+      "end": 1752216158866,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1752216158866,
+      "end": 1752216158867,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1752216158866,
+      "end": 1752216158867,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1752216158867,
+      "end": 1752216158867,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1752216158867,
+      "end": 1752216158867,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1752216158867,
+      "end": 1752216158867,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1752216158867,
+      "end": 1752216158867,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-template",
+      "start": 1752216158867,
+      "end": 1752216158867,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1752216158867,
+      "end": 1752216158867,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1752216158867,
+      "end": 1752216158867,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1752216158867,
+      "end": 1752216158867,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1752216158868,
+      "end": 1752216158868,
+      "order": "normal"
+    }
+  ]
+}

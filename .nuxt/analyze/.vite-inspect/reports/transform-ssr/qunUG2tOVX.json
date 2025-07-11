@@ -1,0 +1,316 @@
+{
+  "resolvedId": "D:/projects/nuxt/workix-nuxt-front/components/Objects/ObjectContent.vue?vue&type=script&setup=true&lang.ts",
+  "transforms": [
+    {
+      "name": "vite:vue",
+      "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { unref as _unref, mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\"\n\nimport ObjectList from \"~/components/Objects/ObjectList.vue\";\r\nimport {useObjects} from \"~/stores/objects\";\r\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'ObjectContent',\n  __ssrInlineRender: true,\n  setup(__props) {\n\r\nconst objects = useObjects()\r\nobjects.loadObjectList()\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"mt-8\" }, _attrs))}><div class=\"grid grid-cols-4 max-[1050px]:grid-cols-3 max-[786px]:grid-cols-2 max-[678px]:grid-cols-1 gap-5\"><!--[-->`)\n  _ssrRenderList(_unref(objects).get_objects.results, (object) => {\n    _push(_ssrRenderComponent(ObjectList, { object: object }, null, _parent))\n  })\n  _push(`<!--]--></div></div>`)\n}\n}\n\n})",
+      "start": 1752216155604,
+      "end": 1752216155604,
+      "sourcemaps": {
+        "version": 3,
+        "sources": [
+          "D:/projects/nuxt/workix-nuxt-front/components/Objects/ObjectContent.vue"
+        ],
+        "sourcesContent": [
+          "<script setup lang=\"ts\">\r\nimport ObjectList from \"~/components/Objects/ObjectList.vue\";\r\nimport {useObjects} from \"~/stores/objects\";\r\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\r\nconst objects = useObjects()\r\nobjects.loadObjectList()\r\n</script>\r\n\r\n<template>\r\n  <div class=\"mt-8\">\r\n    <div class=\"grid grid-cols-4 max-[1050px]:grid-cols-3 max-[786px]:grid-cols-2 max-[678px]:grid-cols-1 gap-5\">\r\n      <ObjectList v-for=\"object in objects.get_objects.results\" :object=\"object\" />\r\n    </div>\r\n  </div>\r\n</template>\r\n\r\n<style scoped lang=\"scss\">\r\n\r\n</style>"
+        ],
+        "names": [],
+        "mappings": ";;;;AACA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC9D,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC7C,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;;;;;;AAHzC,CAAC;AAIzB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC7B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;;;;;;;;;;;"
+      }
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1752216155604,
+      "end": 1752216155604,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1752216155604,
+      "end": 1752216155604,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1752216155604,
+      "end": 1752216155604,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1752216155604,
+      "end": 1752216155604,
+      "order": "pre"
+    },
+    {
+      "name": "unplugin-vue-i18n",
+      "start": 1752216155604,
+      "end": 1752216155604,
+      "order": "pre"
+    },
+    {
+      "name": "unplugin-vue-i18n",
+      "start": 1752216155604,
+      "end": 1752216155604,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1752216155604,
+      "end": 1752216155604,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1752216155604,
+      "end": 1752216155604,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { unref as _unref, mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\";\nimport ObjectList from \"~/components/Objects/ObjectList.vue\";\nimport { useObjects } from \"~/stores/objects\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"ObjectContent\",\n  __ssrInlineRender: true,\n  setup(__props) {\n    const objects = useObjects();\n    objects.loadObjectList();\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"mt-8\" }, _attrs))}><div class=\"grid grid-cols-4 max-[1050px]:grid-cols-3 max-[786px]:grid-cols-2 max-[678px]:grid-cols-1 gap-5\"><!--[-->`);\n      _ssrRenderList(_unref(objects).get_objects.results, (object) => {\n        _push(_ssrRenderComponent(ObjectList, { object }, null, _parent));\n      });\n      _push(`<!--]--></div></div>`);\n    };\n  }\n});\n",
+      "start": 1752216155604,
+      "end": 1752216156226,
+      "order": "normal",
+      "sourcemaps": {
+        "version": 3,
+        "sources": [
+          "D:/projects/nuxt/workix-nuxt-front/components/Objects/ObjectContent.vue?vue&type=script&setup=true&lang.ts"
+        ],
+        "sourcesContent": [
+          "import { defineComponent as _defineComponent } from 'vue'\nimport { unref as _unref, mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs, ssrRenderList as _ssrRenderList } from \"vue/server-renderer\"\n\nimport ObjectList from \"~/components/Objects/ObjectList.vue\";\r\nimport {useObjects} from \"~/stores/objects\";\r\nimport TheTextContent from \"~/components/UI/TheTextContent.vue\";\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'ObjectContent',\n  __ssrInlineRender: true,\n  setup(__props) {\n\r\nconst objects = useObjects()\r\nobjects.loadObjectList()\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"mt-8\" }, _attrs))}><div class=\"grid grid-cols-4 max-[1050px]:grid-cols-3 max-[786px]:grid-cols-2 max-[678px]:grid-cols-1 gap-5\"><!--[-->`)\n  _ssrRenderList(_unref(objects).get_objects.results, (object) => {\n    _push(_ssrRenderComponent(ObjectList, { object: object }, null, _parent))\n  })\n  _push(`<!--]--></div></div>`)\n}\n}\n\n})"
+        ],
+        "mappings": "AAAA,SAAS,mBAAmB,wBAAwB;AACpD,SAAS,SAAS,QAAQ,cAAc,mBAAmB;AAC3D,SAAS,sBAAsB,qBAAqB,kBAAkB,iBAAiB,iBAAiB,sBAAsB;AAE9H,OAAO,gBAAgB;AACvB,SAAQ,kBAAiB;AAGzB,eAA4B,iCAAiB;AAAA,EAC3C,QAAQ;AAAA,EACR,mBAAmB;AAAA,EACnB,MAAM,SAAS;AAEjB,UAAM,UAAU,WAAW;AAC3B,YAAQ,eAAe;AAEvB,WAAO,CAAC,MAAU,OAAW,SAAa,WAAgB;AACxD,YAAM,OAAO,gBAAgB,YAAY,EAAE,OAAO,OAAO,GAAG,MAAM,CAAC,CAAC,wHAAwH;AAC5L,qBAAe,OAAO,OAAO,EAAE,YAAY,SAAS,CAAC,WAAW;AAC9D,cAAM,oBAAoB,YAAY,EAAE,OAAe,GAAG,MAAM,OAAO,CAAC;AAAA,MAC1E,CAAC;AACD,YAAM,sBAAsB;AAAA,IAC9B;AAAA,EACA;AAEA,CAAC;",
+        "names": []
+      }
+    },
+    {
+      "name": "vite:json",
+      "start": 1752216156226,
+      "end": 1752216156226,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1752216156226,
+      "end": 1752216156226,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "start": 1752216156226,
+      "end": 1752216156226,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1752216156226,
+      "end": 1752216156226,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1752216156227,
+      "end": 1752216156227,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1752216156227,
+      "end": 1752216156227,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1752216156227,
+      "end": 1752216156227,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1752216156227,
+      "end": 1752216156227,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1752216156227,
+      "end": 1752216156227,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1752216156228,
+      "end": 1752216156228,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1752216156228,
+      "end": 1752216156230,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1752216156230,
+      "end": 1752216156230,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1752216156231,
+      "end": 1752216156231,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1752216156231,
+      "end": 1752216156231,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1752216156231,
+      "end": 1752216156231,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1752216156231,
+      "end": 1752216156231,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1752216156231,
+      "end": 1752216156231,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1752216156231,
+      "end": 1752216156231,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1752216156231,
+      "end": 1752216156231,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1752216156232,
+      "end": 1752216156232,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1752216156232,
+      "end": 1752216156232,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-macros-transform",
+      "start": 1752216156232,
+      "end": 1752216156232,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-macros-transform",
+      "start": 1752216156232,
+      "end": 1752216156232,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-resource",
+      "start": 1752216156233,
+      "end": 1752216156233,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-resource",
+      "start": 1752216156233,
+      "end": 1752216156233,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-meta-deprecation",
+      "start": 1752216156233,
+      "end": 1752216156233,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-meta-deprecation",
+      "start": 1752216156233,
+      "end": 1752216156233,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1752216156233,
+      "end": 1752216156238,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1752216156233,
+      "end": 1752216156239,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1752216156239,
+      "end": 1752216156239,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1752216156239,
+      "end": 1752216156239,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1752216156239,
+      "end": 1752216156239,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1752216156239,
+      "end": 1752216156239,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-template",
+      "start": 1752216156240,
+      "end": 1752216156240,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1752216156240,
+      "end": 1752216156241,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1752216156241,
+      "end": 1752216156242,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1752216156242,
+      "end": 1752216156242,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1752216156243,
+      "end": 1752216156243,
+      "order": "normal"
+    }
+  ]
+}

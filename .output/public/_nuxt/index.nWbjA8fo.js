@@ -1,0 +1,1 @@
+import{u as t}from"./storage.ZR020hr9.js";import{g as s,m as r,s as a,o as n,c as m}from"./entry.Dos5mvIN.js";import"./nuxt-storage.Df5leMsQ.js";const d=s({__name:"index",setup(u){const e=t(),o=r();return a(()=>{e.loadItem({itemSlug:o.params.slug})}),(c,p)=>(n(),m("div",null," Lorem, ipsum. "))}});export{d as default};

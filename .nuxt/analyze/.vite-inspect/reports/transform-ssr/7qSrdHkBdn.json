@@ -1,0 +1,336 @@
+{
+  "resolvedId": "D:/projects/nuxt/workix-nuxt-front/components/Storage/UI/ScanAnimation.vue?vue&type=style&index=0&scoped=d2e7296b&lang.postcss?inline&used",
+  "transforms": [
+    {
+      "name": "vite:vue",
+      "result": "\r\n  .laser {\r\n    animation: scanning 1.5s infinite alternate;\r\n    transition: .2s all ease;\r\n  }\r\n@keyframes scanning {\r\n  50% {\r\n    transform: translateY(10px);\r\n  }\r\n  100% {\r\n    transform: translateY(-10px);\r\n  }\r\n}\r\n",
+      "start": 1752216157333,
+      "end": 1752216157333,
+      "sourcemaps": {
+        "version": 3,
+        "sources": [
+          "D:/projects/nuxt/workix-nuxt-front/components/Storage/UI/ScanAnimation.vue"
+        ],
+        "names": [],
+        "mappings": ";EA2BE,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE;IACL,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;IAC3C,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC;EAC1B;AACF,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE;EAClB,CAAC,CAAC,EAAE;IACF,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;EAC7B;EACA,CAAC,CAAC,CAAC,EAAE;IACH,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;EAC9B;AACF",
+        "file": "D:/projects/nuxt/workix-nuxt-front/components/Storage/UI/ScanAnimation.vue",
+        "sourceRoot": "",
+        "sourcesContent": [
+          "<script setup lang=\"ts\">\r\ndefineProps({\r\n  mode: String\r\n})\r\n</script>\r\n\r\n<template>\r\n    <UTooltip class=\"text-lg tracking-wider\" :text=\"$t('Отсканируйте код')\" :popper=\"{arrow: true}\">\r\n      <button type=\"button\" class=\"relative border dark:border-gray-400 rounded-lg p-1 transition-all\" :class=\"{'dark:border-gray-200 border-gray-400' : mode === 'scan'}\" @click=\"$emit('onScan')\" >\r\n        <svg class=\"\" width=\"30px\" height=\"30px\" viewBox=\"0 -0.5 17 17\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">\r\n          <g stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\">\r\n            <g transform=\"translate(1.000000, 2.000000)\" class=\"dark:fill-gray-400 fill-gray-400\" :class=\"{'dark:!fill-gray-200 fill-gray-500' : mode === 'scan'}\">\r\n              <rect x=\"13\" y=\"0\" width=\"1.953\" height=\"10.914\" class=\"si-glyph-fill\"/>\r\n              <rect x=\"10\" y=\"0\" width=\"1.967\" height=\"10.914\" class=\"si-glyph-fill\"/>\r\n              <rect x=\"8\" y=\"0\" width=\"0.95\" height=\"10.914\" class=\"si-glyph-fill\"/>\r\n              <rect x=\"4\" y=\"0\" width=\"1.972\" height=\"10.914\" class=\"si-glyph-fill\"/>\r\n              <rect x=\"2\" y=\"0\" width=\"0.973\" height=\"10.914\" class=\"si-glyph-fill\"/>\r\n              <rect x=\"0\" y=\"0\" width=\"0.973\" height=\"10.914\" class=\"si-glyph-fill\"/>\r\n            </g>\r\n          </g>\r\n        </svg>\r\n        <div class=\" w-[39px] h-[1.2px] rounded-full shadow shadow-cyan dark:shadow-semiCyan dark:bg-semiCyan bg-blueSemiLight absolute top-4 left-0\" :class=\"{'laser' : mode === 'scan'}\"></div>\r\n      </button>\r\n    </UTooltip>\r\n</template>\r\n\r\n<style scoped lang=\"postcss\">\r\n  .laser {\r\n    animation: scanning 1.5s infinite alternate;\r\n    transition: .2s all ease;\r\n  }\r\n@keyframes scanning {\r\n  50% {\r\n    transform: translateY(10px);\r\n  }\r\n  100% {\r\n    transform: translateY(-10px);\r\n  }\r\n}\r\n</style>"
+        ]
+      }
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1752216157333,
+      "end": 1752216157333,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1752216157333,
+      "end": 1752216157333,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1752216157333,
+      "end": 1752216157333,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1752216157333,
+      "end": 1752216157333,
+      "order": "pre"
+    },
+    {
+      "name": "unplugin-vue-i18n",
+      "start": 1752216157333,
+      "end": 1752216157333,
+      "order": "pre"
+    },
+    {
+      "name": "unplugin-vue-i18n",
+      "start": 1752216157333,
+      "end": 1752216157333,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1752216157333,
+      "end": 1752216157334,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "result": ".laser{animation:scanning 1.5s infinite alternate;transition:all .2s ease}@keyframes scanning{50%{transform:translateY(10px)}to{transform:translateY(-10px)}}",
+      "start": 1752216157334,
+      "end": 1752216157373,
+      "order": "normal",
+      "sourcemaps": {
+        "file": "D:/projects/nuxt/workix-nuxt-front/components/Storage/UI/ScanAnimation.vue",
+        "mappings": "AACE,OACE,0CAA2C,CAC3C,uBACF,CACF,oBACE,IACE,0BACF,CACA,GACE,2BACF,CACF",
+        "names": [],
+        "sources": [
+          "D:/projects/nuxt/workix-nuxt-front/components/Storage/UI/ScanAnimation.vue"
+        ],
+        "sourcesContent": [
+          "\r\n  .laser {\r\n    animation: scanning 1.5s infinite alternate;\r\n    transition: .2s all ease;\r\n  }\r\n@keyframes scanning {\r\n  50% {\r\n    transform: translateY(10px);\r\n  }\r\n  100% {\r\n    transform: translateY(-10px);\r\n  }\r\n}\r\n"
+        ],
+        "version": 3
+      }
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1752216157374,
+      "end": 1752216157374,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1752216157374,
+      "end": 1752216157374,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1752216157374,
+      "end": 1752216157374,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "result": ".laser[data-v-d2e7296b]{animation:scanning-d2e7296b 1.5s infinite alternate;transition:all .2s ease}@keyframes scanning-d2e7296b{50%{transform:translateY(10px)}to{transform:translateY(-10px)}}",
+      "start": 1752216157375,
+      "end": 1752216157375,
+      "order": "normal",
+      "sourcemaps": {
+        "file": "D:/projects/nuxt/workix-nuxt-front/components/Storage/UI/ScanAnimation.vue",
+        "mappings": "AAAA,wBAAO,mDAA0C,CAAC,uBAAuB,CAAC,6BAAoB,IAAI,0BAA0B,CAAC,GAAG,2BAA2B,CAAC",
+        "names": [],
+        "sources": [
+          "D:/projects/nuxt/workix-nuxt-front/components/Storage/UI/ScanAnimation.vue"
+        ],
+        "sourcesContent": [
+          null
+        ],
+        "version": 3
+      }
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1752216157375,
+      "end": 1752216157375,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1752216157375,
+      "end": 1752216157375,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1752216157375,
+      "end": 1752216157375,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1752216157375,
+      "end": 1752216157375,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1752216157375,
+      "end": 1752216157375,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1752216157376,
+      "end": 1752216157376,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1752216157376,
+      "end": 1752216157376,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1752216157376,
+      "end": 1752216157376,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1752216157376,
+      "end": 1752216157376,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "result": "export default \".laser[data-v-d2e7296b]{animation:scanning-d2e7296b 1.5s infinite alternate;transition:all .2s ease}@keyframes scanning-d2e7296b{50%{transform:translateY(10px)}to{transform:translateY(-10px)}}\"",
+      "start": 1752216157376,
+      "end": 1752216157376,
+      "order": "normal",
+      "sourcemaps": {
+        "mappings": ""
+      }
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1752216157376,
+      "end": 1752216157376,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1752216157376,
+      "end": 1752216157376,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1752216157376,
+      "end": 1752216157376,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1752216157376,
+      "end": 1752216157376,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1752216157376,
+      "end": 1752216157376,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1752216157376,
+      "end": 1752216157376,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1752216157376,
+      "end": 1752216157376,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1752216157376,
+      "end": 1752216157376,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-macros-transform",
+      "start": 1752216157376,
+      "end": 1752216157376,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-macros-transform",
+      "start": 1752216157376,
+      "end": 1752216157376,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-resource",
+      "start": 1752216157376,
+      "end": 1752216157376,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-resource",
+      "start": 1752216157376,
+      "end": 1752216157376,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-meta-deprecation",
+      "start": 1752216157376,
+      "end": 1752216157376,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-meta-deprecation",
+      "start": 1752216157376,
+      "end": 1752216157376,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1752216157376,
+      "end": 1752216157376,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1752216157376,
+      "end": 1752216157376,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1752216157376,
+      "end": 1752216157376,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1752216157376,
+      "end": 1752216157376,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1752216157376,
+      "end": 1752216157376,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1752216157376,
+      "end": 1752216157376,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-template",
+      "start": 1752216157376,
+      "end": 1752216157376,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1752216157376,
+      "end": 1752216157376,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1752216157376,
+      "end": 1752216157376,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1752216157377,
+      "end": 1752216157377,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1752216157377,
+      "end": 1752216157377,
+      "order": "normal"
+    }
+  ]
+}

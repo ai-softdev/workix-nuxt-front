@@ -1,0 +1,318 @@
+{
+  "resolvedId": "D:/projects/nuxt/workix-nuxt-front/components/documents/DocumentItemInfo.vue?vue&type=script&setup=true&lang.ts",
+  "transforms": [
+    {
+      "name": "vite:vue",
+      "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\"\n\nimport DocumentItemInfoChain from \"~/components/documents/DocumentItemInfo/DocumentItemInfoChain.vue\";\r\nimport DocumentItemInfoContent from \"~/components/documents/DocumentItemInfo/DocumentItemInfoContent.vue\";\r\nimport TheButton from \"~/components/UI/TheButton.vue\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'DocumentItemInfo',\n  __ssrInlineRender: true,\n  props: {\r\n  item: {\r\n    type: Object,\r\n    default: ()=>{}\r\n  }\r\n},\n  setup(__props) {\n\r\n\r\n\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"\" }, _attrs))}>`)\n  if (__props.item.chain?.self) {\n    _push(`<div>`)\n    _push(_ssrRenderComponent(DocumentItemInfoContent, null, null, _parent))\n    _push(`</div>`)\n  } else {\n    _push(`<div class=\"overflow-x-hidden\">`)\n    _push(_ssrRenderComponent(DocumentItemInfoChain, null, null, _parent))\n    _push(`</div>`)\n  }\n  _push(`</div>`)\n}\n}\n\n})",
+      "start": 1752216155734,
+      "end": 1752216155734,
+      "sourcemaps": {
+        "version": 3,
+        "sources": [
+          "D:/projects/nuxt/workix-nuxt-front/components/documents/DocumentItemInfo.vue"
+        ],
+        "sourcesContent": [
+          "<script setup lang=\"ts\">\r\n\r\nimport DocumentItemInfoChain from \"~/components/documents/DocumentItemInfo/DocumentItemInfoChain.vue\";\r\nimport DocumentItemInfoContent from \"~/components/documents/DocumentItemInfo/DocumentItemInfoContent.vue\";\r\nimport TheButton from \"~/components/UI/TheButton.vue\";\r\n\r\ndefineProps({\r\n  item: {\r\n    type: Object,\r\n    default: ()=>{}\r\n  }\r\n})\r\n</script>\r\n\r\n<template>\r\n  <div class=\"\">\r\n    <div v-if=\"item.chain?.self\">\r\n      <DocumentItemInfoContent/>\r\n    </div>\r\n    <div class=\"overflow-x-hidden\" v-else >\r\n      <DocumentItemInfoChain/>\r\n    </div>\r\n  </div>\r\n</template>\r\n\r\n<style scoped lang=\"scss\">\r\n\r\n</style>"
+        ],
+        "names": [],
+        "mappings": ";;;;AAEA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACvG,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC3G,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACvD,CAAC;;;;;;;;;;;;AALuB,CAAC;AACzB,CAAC;AAUC,CAAC;;;;;;;;;;;;;;;;;"
+      }
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1752216155734,
+      "end": 1752216155734,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1752216155734,
+      "end": 1752216155734,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1752216155734,
+      "end": 1752216155734,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1752216155734,
+      "end": 1752216155734,
+      "order": "pre"
+    },
+    {
+      "name": "unplugin-vue-i18n",
+      "start": 1752216155734,
+      "end": 1752216155734,
+      "order": "pre"
+    },
+    {
+      "name": "unplugin-vue-i18n",
+      "start": 1752216155734,
+      "end": 1752216155734,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1752216155734,
+      "end": 1752216155734,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1752216155734,
+      "end": 1752216155734,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport DocumentItemInfoChain from \"~/components/documents/DocumentItemInfo/DocumentItemInfoChain.vue\";\nimport DocumentItemInfoContent from \"~/components/documents/DocumentItemInfo/DocumentItemInfoContent.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"DocumentItemInfo\",\n  __ssrInlineRender: true,\n  props: {\n    item: {\n      type: Object,\n      default: () => {\n      }\n    }\n  },\n  setup(__props) {\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"\" }, _attrs))}>`);\n      if (__props.item.chain?.self) {\n        _push(`<div>`);\n        _push(_ssrRenderComponent(DocumentItemInfoContent, null, null, _parent));\n        _push(`</div>`);\n      } else {\n        _push(`<div class=\"overflow-x-hidden\">`);\n        _push(_ssrRenderComponent(DocumentItemInfoChain, null, null, _parent));\n        _push(`</div>`);\n      }\n      _push(`</div>`);\n    };\n  }\n});\n",
+      "start": 1752216155734,
+      "end": 1752216156226,
+      "order": "normal",
+      "sourcemaps": {
+        "version": 3,
+        "sources": [
+          "D:/projects/nuxt/workix-nuxt-front/components/documents/DocumentItemInfo.vue?vue&type=script&setup=true&lang.ts"
+        ],
+        "sourcesContent": [
+          "import { defineComponent as _defineComponent } from 'vue'\nimport { mergeProps as _mergeProps } from \"vue\"\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\"\n\nimport DocumentItemInfoChain from \"~/components/documents/DocumentItemInfo/DocumentItemInfoChain.vue\";\r\nimport DocumentItemInfoContent from \"~/components/documents/DocumentItemInfo/DocumentItemInfoContent.vue\";\r\nimport TheButton from \"~/components/UI/TheButton.vue\";\r\n\r\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'DocumentItemInfo',\n  __ssrInlineRender: true,\n  props: {\r\n  item: {\r\n    type: Object,\r\n    default: ()=>{}\r\n  }\r\n},\n  setup(__props) {\n\r\n\r\n\r\n\nreturn (_ctx: any,_push: any,_parent: any,_attrs: any) => {\n  _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"\" }, _attrs))}>`)\n  if (__props.item.chain?.self) {\n    _push(`<div>`)\n    _push(_ssrRenderComponent(DocumentItemInfoContent, null, null, _parent))\n    _push(`</div>`)\n  } else {\n    _push(`<div class=\"overflow-x-hidden\">`)\n    _push(_ssrRenderComponent(DocumentItemInfoChain, null, null, _parent))\n    _push(`</div>`)\n  }\n  _push(`</div>`)\n}\n}\n\n})"
+        ],
+        "mappings": "AAAA,SAAS,mBAAmB,wBAAwB;AACpD,SAAS,cAAc,mBAAmB;AAC1C,SAAS,sBAAsB,qBAAqB,kBAAkB,uBAAuB;AAE7F,OAAO,2BAA2B;AAClC,OAAO,6BAA6B;AAIpC,eAA4B,iCAAiB;AAAA,EAC3C,QAAQ;AAAA,EACR,mBAAmB;AAAA,EACnB,OAAO;AAAA,IACP,MAAM;AAAA,MACJ,MAAM;AAAA,MACN,SAAS,MAAI;AAAA,MAAC;AAAA,IAChB;AAAA,EACF;AAAA,EACE,MAAM,SAAS;AAKjB,WAAO,CAAC,MAAU,OAAW,SAAa,WAAgB;AACxD,YAAM,OAAO,gBAAgB,YAAY,EAAE,OAAO,GAAG,GAAG,MAAM,CAAC,CAAC,GAAG;AACnE,UAAI,QAAQ,KAAK,OAAO,MAAM;AAC5B,cAAM,OAAO;AACb,cAAM,oBAAoB,yBAAyB,MAAM,MAAM,OAAO,CAAC;AACvE,cAAM,QAAQ;AAAA,MAChB,OAAO;AACL,cAAM,iCAAiC;AACvC,cAAM,oBAAoB,uBAAuB,MAAM,MAAM,OAAO,CAAC;AACrE,cAAM,QAAQ;AAAA,MAChB;AACA,YAAM,QAAQ;AAAA,IAChB;AAAA,EACA;AAEA,CAAC;",
+        "names": []
+      }
+    },
+    {
+      "name": "vite:json",
+      "start": 1752216156226,
+      "end": 1752216156226,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1752216156226,
+      "end": 1752216156226,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "start": 1752216156226,
+      "end": 1752216156226,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1752216156226,
+      "end": 1752216156226,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1752216156227,
+      "end": 1752216156227,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1752216156227,
+      "end": 1752216156227,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1752216156227,
+      "end": 1752216156227,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1752216156227,
+      "end": 1752216156227,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1752216156227,
+      "end": 1752216156227,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1752216156228,
+      "end": 1752216156228,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1752216156229,
+      "end": 1752216156230,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { mergeProps as _mergeProps } from \"vue\";\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \"vue/server-renderer\";\nimport DocumentItemInfoChain from \"~/components/documents/DocumentItemInfo/DocumentItemInfoChain.vue\";\nimport DocumentItemInfoContent from \"~/components/documents/DocumentItemInfo/DocumentItemInfoContent.vue\";\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"DocumentItemInfo\",\n  __ssrInlineRender: true,\n  props: {\n    item: {\n      type: Object,\n      default: () => {\n      }\n    }\n  },\n  setup(__props) {\n    return (_ctx, _push, _parent, _attrs) => {\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \"\" }, _attrs))}>`);\n      if (__props.item.chain?.self) {\n        _push(`<div>`);\n        _push(_ssrRenderComponent(DocumentItemInfoContent, null, null, _parent));\n        _push(`</div>`);\n      } else {\n        _push(`<div class=\"overflow-x-hidden\">`);\n        _push(_ssrRenderComponent(DocumentItemInfoChain, null, null, _parent));\n        _push(`</div>`);\n      }\n      _push(`</div>`);\n    };\n  }\n});\n",
+      "start": 1752216156230,
+      "end": 1752216156936,
+      "order": "normal",
+      "sourcemaps": "{\n  \"version\": 3,\n  \"sources\": [\"D:/projects/nuxt/workix-nuxt-front/components/documents/DocumentItemInfo.vue?vue&type=script&setup=true&lang.ts\"],\n  \"sourcesContent\": [\"import { defineComponent as _defineComponent } from \\\"vue\\\";\\nimport { mergeProps as _mergeProps } from \\\"vue\\\";\\nimport { ssrRenderComponent as _ssrRenderComponent, ssrRenderAttrs as _ssrRenderAttrs } from \\\"vue/server-renderer\\\";\\nimport DocumentItemInfoChain from \\\"~/components/documents/DocumentItemInfo/DocumentItemInfoChain.vue\\\";\\nimport DocumentItemInfoContent from \\\"~/components/documents/DocumentItemInfo/DocumentItemInfoContent.vue\\\";\\nexport default /* @__PURE__ */ _defineComponent({\\n  __name: \\\"DocumentItemInfo\\\",\\n  __ssrInlineRender: true,\\n  props: {\\n    item: {\\n      type: Object,\\n      default: () => {\\n      }\\n    }\\n  },\\n  setup(__props) {\\n    return (_ctx, _push, _parent, _attrs) => {\\n      _push(`<div${_ssrRenderAttrs(_mergeProps({ class: \\\"\\\" }, _attrs))}>`);\\n      if (__props.item.chain?.self) {\\n        _push(`<div>`);\\n        _push(_ssrRenderComponent(DocumentItemInfoContent, null, null, _parent));\\n        _push(`</div>`);\\n      } else {\\n        _push(`<div class=\\\"overflow-x-hidden\\\">`);\\n        _push(_ssrRenderComponent(DocumentItemInfoChain, null, null, _parent));\\n        _push(`</div>`);\\n      }\\n      _push(`</div>`);\\n    };\\n  }\\n});\\n\"],\n  \"mappings\": \"AAAA,SAAS,mBAAmB,wBAAwB;AACpD,SAAS,cAAc,mBAAmB;AAC1C,SAAS,sBAAsB,qBAAqB,kBAAkB,uBAAuB;AAC7F,OAAO,2BAA2B;AAClC,OAAO,6BAA6B;AACpC,eAA+B,iCAAiB;AAAA,EAC9C,QAAQ;AAAA,EACR,mBAAmB;AAAA,EACnB,OAAO;AAAA,IACL,MAAM;AAAA,MACJ,MAAM;AAAA,MACN,SAAS,MAAM;AAAA,MACf;AAAA,IACF;AAAA,EACF;AAAA,EACA,MAAM,SAAS;AACb,WAAO,CAAC,MAAM,OAAO,SAAS,WAAW;AACvC,YAAM,OAAO,gBAAgB,YAAY,EAAE,OAAO,GAAG,GAAG,MAAM,CAAC,CAAC,GAAG;AACnE,UAAI,QAAQ,KAAK,OAAO,MAAM;AAC5B,cAAM,OAAO;AACb,cAAM,oBAAoB,yBAAyB,MAAM,MAAM,OAAO,CAAC;AACvE,cAAM,QAAQ;AAAA,MAChB,OAAO;AACL,cAAM,iCAAiC;AACvC,cAAM,oBAAoB,uBAAuB,MAAM,MAAM,OAAO,CAAC;AACrE,cAAM,QAAQ;AAAA,MAChB;AACA,YAAM,QAAQ;AAAA,IAChB;AAAA,EACF;AACF,CAAC;\",\n  \"names\": []\n}\n"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1752216156937,
+      "end": 1752216156937,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1752216156937,
+      "end": 1752216156937,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1752216156937,
+      "end": 1752216156937,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1752216156937,
+      "end": 1752216156937,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1752216156938,
+      "end": 1752216156938,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1752216156938,
+      "end": 1752216156938,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1752216156938,
+      "end": 1752216156938,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1752216156938,
+      "end": 1752216156938,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1752216156938,
+      "end": 1752216156939,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-macros-transform",
+      "start": 1752216156939,
+      "end": 1752216156939,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-macros-transform",
+      "start": 1752216156939,
+      "end": 1752216156939,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-resource",
+      "start": 1752216156940,
+      "end": 1752216156940,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-resource",
+      "start": 1752216156940,
+      "end": 1752216156940,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-meta-deprecation",
+      "start": 1752216156941,
+      "end": 1752216156941,
+      "order": "post"
+    },
+    {
+      "name": "nuxtjs:i18n-meta-deprecation",
+      "start": 1752216156941,
+      "end": 1752216156941,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1752216156941,
+      "end": 1752216156945,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1752216156941,
+      "end": 1752216156945,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1752216156945,
+      "end": 1752216156945,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1752216156945,
+      "end": 1752216156945,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1752216156945,
+      "end": 1752216156945,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1752216156945,
+      "end": 1752216156945,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-template",
+      "start": 1752216156945,
+      "end": 1752216156946,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1752216156946,
+      "end": 1752216156946,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1752216156947,
+      "end": 1752216156947,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1752216156948,
+      "end": 1752216156949,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1752216156949,
+      "end": 1752216156949,
+      "order": "normal"
+    }
+  ]
+}
